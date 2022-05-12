@@ -1,0 +1,760 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.base — Basic, non-specific classes &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.containers — Containers" href="containers.html" />
+    <link rel="prev" title="epygram.moves — Moves" href="moves.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="containers.html" title="epygram.containers — Containers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="moves.html" title="epygram.moves — Moves"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="moves.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.moves</span></code> — Moves</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="containers.html"
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.containers</span></code> — Containers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/base.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-epygram.base">
+<span id="epygram-base-basic-non-specific-classes"></span><h1><a class="reference internal" href="#module-epygram.base" title="epygram.base: Basic, non-specific classes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.base</span></code></a> — Basic, non-specific classes<a class="headerlink" href="#module-epygram.base" title="Permalink to this headline">¶</a></h1>
+<p>Contains some base classes of <em>epygram</em>.</p>
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.base.Resource">
+<em class="property">class </em><code class="descclassname">epygram.base.</code><code class="descname">Resource</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<p>Generic abstract class implementing a Resource.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.<ul>
+<li>Values: set([‘w’, ‘a’, ‘append’, ‘write’, ‘read’, ‘r’])</li>
+<li>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="method">
+<dt id="epygram.base.Resource.find_fields_in_resource_by_generic_fid">
+<code class="descname">find_fields_in_resource_by_generic_fid</code><span class="sig-paren">(</span><em>handgrip</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Resource.find_fields_in_resource_by_generic_fid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Resource.find_fields_in_resource_by_generic_fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find in resource the fields whose generic fid (if the resource is able
+to give one) matches the <em>handgrip</em>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Resource.listfields">
+<code class="descname">listfields</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Resource.listfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Resource.listfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list containing the identifiers (in the resource format)
+of all the fields of the resource.</p>
+<p>(Generic wrapper with buffering if openmode == ‘r’.)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.base.Resource.openmode">
+<code class="descname">openmode</code><a class="headerlink" href="#epygram.base.Resource.openmode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening mode (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Resource.readfields">
+<code class="descname">readfields</code><span class="sig-paren">(</span><em>requestedfields</em>, <em>getdata=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Resource.readfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Resource.readfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldSet</span></code></a> containing requested fields read in the
+resource.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>requestedfields</strong> – a field identifier of the resource format, or a
+list of.</li>
+<li><strong>getdata</strong> – optional, if <em>False</em>, only metadata are read, the fields
+do not contain data. Default is <em>True</em>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Resource.writefields">
+<code class="descname">writefields</code><span class="sig-paren">(</span><em>fieldset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Resource.writefields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Resource.writefields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the fields of the ‘fieldset’ in the resource;
+<em>fieldset</em> must be a <a class="reference internal" href="#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldSet</span></code></a> instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.base.Field">
+<em class="property">class </em><code class="descclassname">epygram.base.</code><code class="descname">Field</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<p>Generic abstract class implementing a Field, composed of an identifier and
+a data.</p>
+<p>The field identifier <em>fid</em> identifies a field with a set of keys.
+Each key (named after the format name) identifies the field for a given format.
+A specific key ‘generic’ is a GRIB2-like description.
+E.g. <a href="#id1"><span class="problematic" id="id2">*</span></a>{‘FA’:’SURFTEMPERATURE’,</p>
+<blockquote>
+<div>‘generic’:{‘typeOfFirstFixedSurface’:1, ‘discipline’:2, ‘parameterCategory’:3, ‘parameterNumber’:18}}*.</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</li>
+<li><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is ‘’.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="method">
+<dt id="epygram.base.Field.absmean">
+<code class="descname">absmean</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.absmean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.absmean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean of absolute value of data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.clone">
+<code class="descname">clone</code><span class="sig-paren">(</span><em>fid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.clone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.clone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a cloned field, optionally with a new <strong>fid</strong> given as a dict.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.base.Field.comment">
+<code class="descname">comment</code><a class="headerlink" href="#epygram.base.Field.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.compare_to">
+<code class="descname">compare_to</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.compare_to"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.compare_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare a field to another one, with several criteria:</p>
+<ul class="simple">
+<li>bias: average of errors distribution</li>
+<li>std: standard deviation of errors distribution</li>
+<li>errmax: maximum absolute error</li>
+<li>common_mask: indicate whether fields have the same mask or not;
+beware that above statistics apply only to commonly unmasked data</li>
+</ul>
+<p>:return ({bias, std, errmax}, common_mask)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.correlation">
+<code class="descname">correlation</code><span class="sig-paren">(</span><em>other</em>, <em>commonmask=False</em>, <em>mask_outside=1e+19</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.correlation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.correlation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute a correlation coefficient R to another field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>commonmask</strong> – if True, compute distance on the subset of point that
+are not masked for any of the two fields.</li>
+<li><strong>mask_outside</strong> – if None, mask is empty;
+else, mask data outside +/- this value</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.base.Field.data">
+<code class="descname">data</code><a class="headerlink" href="#epygram.base.Field.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the field data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.deldata">
+<code class="descname">deldata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.deldata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.deldata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empties the data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.base.Field.fid">
+<code class="descname">fid</code><a class="headerlink" href="#epygram.base.Field.fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.getdata">
+<code class="descname">getdata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.getdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.getdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the field data.
+Generic, default method for inheriting classes that do not overwrite it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.max">
+<code class="descname">max</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum value of data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.mean">
+<code class="descname">mean</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean value of data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.min">
+<code class="descname">min</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum value of data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.base.Field.misc_metadata">
+<code class="descname">misc_metadata</code><a class="headerlink" href="#epygram.base.Field.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.nonzero">
+<code class="descname">nonzero</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.nonzero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.nonzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of non-zero values (whose absolute
+value &gt; config.epsilon).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.normalized_comparison">
+<code class="descname">normalized_comparison</code><span class="sig-paren">(</span><em>ref</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.normalized_comparison"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.normalized_comparison" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare field to a reference, with prior normalization (by reference
+magnitude) of both fields.
+Hence the figures of comparison can be interpretated as percentages.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.operation">
+<code class="descname">operation</code><span class="sig-paren">(</span><em>operation</em>, <em>operand=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.operation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the requested operation on the field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>operation</strong> – any of ‘+’, ‘-‘, ‘*’, ‘/’,
+or ‘normalize’, ‘ceil’, ‘exp’, ‘log’…
+and you can try with every other <strong>numpy</strong> function.</li>
+<li><strong>operand</strong> – operand for the 4 basic operations, may be a scalar or
+another field with according geometry.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.operation_with_other">
+<code class="descname">operation_with_other</code><span class="sig-paren">(</span><em>operation</em>, <em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.operation_with_other"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.operation_with_other" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes an in-place operation with another field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>operation</strong> – among (‘+’, ‘-‘, ‘*’, ‘/’)</li>
+<li><strong>other</strong> – another field, with according dimensions</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.quadmean">
+<code class="descname">quadmean</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.quadmean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.quadmean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the quadratic mean of data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.scalar_operation">
+<code class="descname">scalar_operation</code><span class="sig-paren">(</span><em>operation</em>, <em>scalar</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.scalar_operation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.scalar_operation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes an in-place scalar operation on field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>operation</strong> – among (‘+’, ‘-‘, ‘*’, ‘/’)</li>
+<li><strong>scalar</strong> – a float or int.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.setdata">
+<code class="descname">setdata</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.setdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.setdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets or overwrites the field data as a numpy array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.setfid">
+<code class="descname">setfid</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.setfid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.setfid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets or overwrites the field fid given as a dict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.sha256_checksum">
+<code class="descname">sha256_checksum</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.sha256_checksum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.sha256_checksum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a SHA256 checksum of the field data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.stats">
+<code class="descname">stats</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes some basic statistics on the field, as a dict containing:
+{‘min’, ‘max’, ‘mean’, ‘std’, ‘quadmean’, ‘nonzero’}.</p>
+<p>See each of these methods for details.</p>
+<p>Optional arguments can be passed, depending on the inheriting class,
+passed to getdata().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.Field.std">
+<code class="descname">std</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#Field.std"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.Field.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the standard deviation of data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.base.Field.units">
+<code class="descname">units</code><a class="headerlink" href="#epygram.base.Field.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.base.FieldSet">
+<em class="property">class </em><code class="descclassname">epygram.base.</code><code class="descname">FieldSet</code><span class="sig-paren">(</span><em>fields=()</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
+<p>Handles a set of Fields, in the manner of Python’s builtin list,
+with some extra features, especially ensuring its components all are Fields.</p>
+<p>Constructor optional argument <strong>fields</strong> has to be either a <a class="reference internal" href="#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a>
+or an iterable of.</p>
+<p>Constructor.
+Checks that optional ‘fields’ argument is actually iterable and
+contains Field instances, or is a single Field.</p>
+<dl class="method">
+<dt id="epygram.base.FieldSet.append">
+<code class="descname">append</code><span class="sig-paren">(</span><em>field</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.append"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that <em>field</em> is a <a class="reference internal" href="#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> instance before appending it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.extend">
+<code class="descname">extend</code><span class="sig-paren">(</span><em>fieldset</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.extend"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that <strong>fieldset</strong> is a <a class="reference internal" href="#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldSet</span></code></a> instance before extending
+with it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.filter">
+<code class="descname">filter</code><span class="sig-paren">(</span><em>by</em>, <em>criteria</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Not Implemented Yet.</p>
+<p>Returns a new FieldSet filtered according to criteria specified in
+argument.</p>
+<p>Args:</p>
+<ul class="simple">
+<li>by: the kind of filter; on what to filter ?</li>
+<li>criteria: how to filter on that ?</li>
+</ul>
+<p>Examples of filters:</p>
+<ul class="simple">
+<li>by=’id’, criteria={typefmt:identifier} will return only fields whose
+id[typefmt] match value…</li>
+</ul>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.index">
+<code class="descname">index</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.index"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of the first field of the FieldSet whose fid
+matches <strong>fid</strong>, <strong>fid</strong> being a dict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.insert">
+<code class="descname">insert</code><span class="sig-paren">(</span><em>position</em>, <em>field</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.insert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that <strong>field</strong> is a <a class="reference internal" href="#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a> instance before inserting it
+at the <strong>position</strong>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.listfields">
+<code class="descname">listfields</code><span class="sig-paren">(</span><em>fidkey=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.listfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.listfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the identifiers of the FieldSet.
+If <em>fidkey</em> is supplied, the list contains only <strong>fid[*fidkey*]</strong>,
+and not whole fid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>fid</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes from the FieldSet the first field whose fid matches <strong>fid</strong>,
+<strong>fid</strong> being a dict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldSet.sort">
+<code class="descname">sort</code><span class="sig-paren">(</span><em>attribute</em>, <em>key=None</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldSet.sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldSet.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts the fields of the FieldSet by the increasing criterion.</p>
+<p>If attribute is a string, sorting will be done according to
+<em>field.attribute[key]</em> or <em>field.attribute</em> (if <strong>key</strong> is <strong>None</strong>).</p>
+<p>If attribute is a list <em>[a1, a2…]</em>, sorting will be done according to
+<em>field.a1.a2[key]</em> or <em>field.a1.a2</em> (if <em>key==None</em>).</p>
+<p>If <em>reverse</em> is <em>True</em>, sorts by decreasing order.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.base.FieldValidity">
+<em class="property">class </em><code class="descclassname">epygram.base.</code><code class="descname">FieldValidity</code><span class="sig-paren">(</span><em>date_time=None</em>, <em>basis=None</em>, <em>term=None</em>, <em>cumulativeduration=None</em>, <em>statistical_process_on_duration=None</em>, <em>statistical_time_increment=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a></p>
+<p>This class handles a unique temporal validity for a meteorological field:
+its date and time of validity (<em>date_time</em>), as well as the validity of
+its origin (<em>basis</em>, i.e. for a forecast field for instance, the beginning
+of the forecast) and its <em>term</em>.</p>
+<p>An additional optional <em>cumulativeduration</em> parameter can define
+the duration for which cumulative fields (e.g. precipitation) are valid.</p>
+<p>If such, optional <em>statistical_process_on_duration</em> can be supplied as a
+string or an int (cf. GRIB2 table typeOfStatisticalProcessing) to describe
+the kind of statistical process that runs over the <em>cumulativeduration</em>.</p>
+<p>Constructor arguments: cf. <em>set()</em> method.</p>
+<p>Constructor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>date_time</strong> – has to be of type datetime.datetime;</li>
+<li><strong>basis</strong> – has to be of type datetime.datetime;</li>
+<li><strong>term</strong> – has to be of type datetime.timedelta;</li>
+<li><strong>cumulativeduration</strong> – has to be of type datetime.timedelta;</li>
+<li><strong>statistical_process_on_duration</strong> – kind of statistical process
+that runs over the cumulative duration.</li>
+<li><strong>statistical_time_increment</strong> – time step over used for statistical
+process.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="epygram.base.FieldValidity.cumulativeduration">
+<code class="descname">cumulativeduration</code><span class="sig-paren">(</span><em>fmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.cumulativeduration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.cumulativeduration" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the cumulative duration,
+i.e. the duration for which cumulative fields (e.g. precipitation) are
+valid.</p>
+<p>By default, it is returned as a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code>;
+otherwise, <em>fmt</em> argument can specify the desired return format.</p>
+<p>Coded versions of <em>fmt</em>: ‘IntHours’, ‘IntSeconds’, and that’s all for
+now…</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>fmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the date and time of validity.</p>
+<p>By default, as a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code>;
+otherwise, <em>fmt</em> argument can specify the desired return format.</p>
+<p>Coded versions of <em>fmt</em>:
+‘IntStr’ (e.g. ‘20140731104812’ = 2014 july 31th at 10h, 48m, 12s).
+And that’s all for now…</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.getbasis">
+<code class="descname">getbasis</code><span class="sig-paren">(</span><em>fmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.getbasis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.getbasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the date and time of origin (basis).</p>
+<p>By default, as a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code>;
+otherwise, <em>fmt</em> argument can specify the desired return format.</p>
+<p>Coded versions of <em>fmt</em>:
+‘IntStr’ (e.g. ‘20140731104812’ = 2014 july 31th at 10h, 48m, 12s).
+And that’s all for now…</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.is_valid">
+<code class="descname">is_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.is_valid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the validity is valid, i.e. not null.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>date_time=None</em>, <em>basis=None</em>, <em>term=None</em>, <em>cumulativeduration=None</em>, <em>statistical_process_on_duration=None</em>, <em>statistical_time_increment=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets validity and basis according to arguments.
+A consistency check is done if the three arguments are provided
+(which is useless anyway).</p>
+<p>Args:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>date_time</strong> – has to be of type <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></li>
+<li><strong>basis</strong> – has to be of type <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.datetime</span></code></li>
+<li><strong>term</strong> – has to be of type <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code></li>
+<li><strong>cumulativeduration</strong> – has to be of type <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code></li>
+<li><strong>statistical_process_on_duration</strong> – kind of statistical process
+that runs over the cumulative duration.
+Cf. GRIB2 typeOfStatisticalProcessing</li>
+<li><strong>statistical_time_increment</strong> – time step over used for statistical
+process.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.statistical_process_on_duration">
+<code class="descname">statistical_process_on_duration</code><span class="sig-paren">(</span><em>asGRIB2code=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.statistical_process_on_duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.statistical_process_on_duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the field describes a cumulative process over a cumulativeduration,
+returns the kind of statistical process that runs over the duration.</p>
+<p>If <em>asGRIB2code</em>, returned as a GRIB2 code (cf. GRIB2 table 4.10).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.statistical_time_increment">
+<code class="descname">statistical_time_increment</code><span class="sig-paren">(</span><em>fmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.statistical_time_increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.statistical_time_increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the statistical_time_increment,
+i.e. the time step used for statistical process over cumulative
+duration.</p>
+<p>By default, it is returned as a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code>;
+otherwise, <em>fmt</em> argument can specify the desired return format.</p>
+<p>Coded versions of <em>fmt</em>: ‘IntHours’, ‘IntSeconds’, and that’s all for
+now…</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidity.term">
+<code class="descname">term</code><span class="sig-paren">(</span><em>fmt=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidity.term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidity.term" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the term as the difference between date and time
+of validity and basis.</p>
+<p>By default, it is returned as a <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.timedelta</span></code>;
+otherwise, <em>fmt</em> argument can specify the desired return format.</p>
+<p>Coded versions of <em>fmt</em>: ‘IntHours’, ‘IntSeconds’, and that’s all for
+now…</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.base.FieldValidityList">
+<em class="property">class </em><code class="descclassname">epygram.base.</code><code class="descname">FieldValidityList</code><span class="sig-paren">(</span><em>validity_instance=None</em>, <em>length=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
+<p>This class handles a list of temporal validity.</p>
+<p>Constructor.</p>
+<ul class="simple">
+<li><em>validity_instance</em>, if given is an instance of FieldValidity</li>
+<li><em>length</em>, to build a series of validities from either the</li>
+</ul>
+<p><em>validity_instance</em> or from an uninitialized one.
+- other kwargs: same as <a class="reference internal" href="#epygram.base.FieldValidity" title="epygram.base.FieldValidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">FieldValidity</span></code></a> constructor.</p>
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.cumulativeduration">
+<code class="descname">cumulativeduration</code><span class="sig-paren">(</span><em>one=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.cumulativeduration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.cumulativeduration" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the cumulative duration of all the validities.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>one=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the date and time of all the validities.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.getbasis">
+<code class="descname">getbasis</code><span class="sig-paren">(</span><em>one=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.getbasis"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.getbasis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the date and time of origin (basis) of all the validities.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.is_valid">
+<code class="descname">is_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.is_valid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.is_valid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the validity is valid, i.e. not null.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.recursive_diff">
+<code class="descname">recursive_diff</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.recursive_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.recursive_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively list what differs from <strong>other</strong>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets validity objects</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.statistical_process_on_duration">
+<code class="descname">statistical_process_on_duration</code><span class="sig-paren">(</span><em>one=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.statistical_process_on_duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.statistical_process_on_duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the statistical process on duration of all the validities.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.statistical_time_increment">
+<code class="descname">statistical_time_increment</code><span class="sig-paren">(</span><em>one=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.statistical_time_increment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.statistical_time_increment" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the statistical_time_increment of all the validities.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.term">
+<code class="descname">term</code><span class="sig-paren">(</span><em>one=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.term"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.term" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method returns the terms of all the validities</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.base.FieldValidityList.what">
+<code class="descname">what</code><span class="sig-paren">(</span><em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;</em>, <em>cumulativeduration=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/base.html#FieldValidityList.what"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.base.FieldValidityList.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the validity.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out</strong> – the output open file-like object.</li>
+<li><strong>cumulativeduration</strong> – if False, not written.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="containers.html" title="epygram.containers — Containers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="moves.html" title="epygram.moves — Moves"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

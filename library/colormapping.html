@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.colormapping — Custom colormaps reading and tuning. &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.profiles — Functions on vertical profiles" href="profiles.html" />
+    <link rel="prev" title="epygram.containers — Containers" href="containers.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="profiles.html" title="epygram.profiles — Functions on vertical profiles"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="containers.html" title="epygram.containers — Containers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="containers.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.containers</span></code> — Containers</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="profiles.html"
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/colormapping.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-epygram.colormapping">
+<span id="epygram-colormapping-custom-colormaps-reading-and-tuning"></span><h1><a class="reference internal" href="#module-epygram.colormapping" title="epygram.colormapping: Custom colormaps reading and tuning."><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.colormapping</span></code></a> — Custom colormaps reading and tuning.<a class="headerlink" href="#module-epygram.colormapping" title="Permalink to this headline">¶</a></h1>
+<p>Custom colormaps reading and tuning.</p>
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.colormapping.ColormapHelper">
+<em class="property">class </em><code class="descclassname">epygram.colormapping.</code><code class="descname">ColormapHelper</code><span class="sig-paren">(</span><em>colormap</em>, <em>explicit_colorbounds=None</em>, <em>normalize=False</em>, <em>explicit_ticks=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#ColormapHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.ColormapHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>An integrated object helping for colormapping.</p>
+<p>A ColormapHelper is meant to help dealing with colormapping,
+especially mapping values to color changes, and prepares colormapping
+arguments for plotting functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>colormap</strong> – name of the colormap to be used</li>
+<li><strong>explicit_colorbounds</strong> – to specify explicitly the colorbounds,
+i.e. values where colors need to change.
+Includes min value as first item, and max value as last item.</li>
+<li><strong>normalize</strong> – if colors need to be normalized, i.e. that each color
+interval need to occupy the same space on the colorbar.</li>
+<li><strong>explicit_ticks</strong> – to specify the ticks values to be shown</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="epygram.colormapping.ColormapHelper.colorbounds">
+<code class="descname">colorbounds</code><span class="sig-paren">(</span><em>minmax=None</em>, <em>number=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#ColormapHelper.colorbounds"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.ColormapHelper.colorbounds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get color bounds, i.e. values where colors change.
+Arguments are needed for implicit colorbounds only.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>minmax</strong> – (min, max) values of the values to be plotted</li>
+<li><strong>number</strong> – number of different colors</li>
+<li><strong>step</strong> – step in values from min to max, where to change colors</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Arguments number and step are mutually exclusive.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.colormapping.ColormapHelper.kwargs_for_plot">
+<code class="descname">kwargs_for_plot</code><span class="sig-paren">(</span><em>plot_method</em>, <em>minmax=None</em>, <em>center_cmap_on_0=False</em>, <em>**colorbounds_kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#ColormapHelper.kwargs_for_plot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.ColormapHelper.kwargs_for_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get kwargs for plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>plot_method</strong> – because arguments depend on plotting method.</li>
+<li><strong>minmax</strong> – min and max values to be plot.</li>
+<li><strong>center_cmap_on_0</strong> – if the colormap is to be centered on 0
+(diff plots).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Other arguments are passed to colorbounds().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.colormapping.ColormapHelper.norm">
+<code class="descname">norm</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#ColormapHelper.norm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.ColormapHelper.norm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize colormap, for each color occupy the same space on colorbar.
+Return the Norm object to be used by matplotlib.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.colormapping.ColormapHelper.ticks_label">
+<code class="descname">ticks_label</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#ColormapHelper.ticks_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.ColormapHelper.ticks_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the labels of the ticks to be shown on colorbar.
+Arguments are passed to ticks_position(), in case of implicit ticks.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.colormapping.ColormapHelper.ticks_position">
+<code class="descname">ticks_position</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#ColormapHelper.ticks_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.ColormapHelper.ticks_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the position of the ticks to be shown on colorbar.
+Arguments are passed to colorbounds(), in case of implicit ticks.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="epygram.colormapping.CenteredColormapHelper">
+<em class="property">class </em><code class="descclassname">epygram.colormapping.</code><code class="descname">CenteredColormapHelper</code><span class="sig-paren">(</span><em>colormap</em>, <em>explicit_colorcenters</em>, <em>normalize=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#CenteredColormapHelper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.CenteredColormapHelper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.colormapping.ColormapHelper" title="epygram.colormapping.ColormapHelper"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.colormapping.ColormapHelper</span></code></a></p>
+<p>A specific ColormapHelper, where the values of ticks are explicitly
+defined, and colors must surround each tick.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>colormap</strong> – colormap: name of the colormap to be used</li>
+<li><strong>explicit_colorcenters</strong> – explicit values of the ticks and center
+values of each color.</li>
+<li><strong>normalize</strong> – if colors need to be normalized, i.e. that each color
+interval need to occupy the same space on the colorbar.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="epygram.colormapping.CenteredColormapHelper.ticks_label">
+<code class="descname">ticks_label</code><span class="sig-paren">(</span><em>*_</em>, <em>**__</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#CenteredColormapHelper.ticks_label"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.CenteredColormapHelper.ticks_label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the labels of the ticks to be shown on colorbar.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.colormapping.CenteredColormapHelper.ticks_position">
+<code class="descname">ticks_position</code><span class="sig-paren">(</span><em>*_</em>, <em>**__</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#CenteredColormapHelper.ticks_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.CenteredColormapHelper.ticks_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the position of the ticks to be shown on colorbar.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="function">
+<dt id="epygram.colormapping.register_colormap_from_json">
+<code class="descclassname">epygram.colormapping.</code><code class="descname">register_colormap_from_json</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#register_colormap_from_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.register_colormap_from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load colormap and metadata from file (json), register to matplotlib and
+return metadata.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epygram.colormapping.load_colormap">
+<code class="descclassname">epygram.colormapping.</code><code class="descname">load_colormap</code><span class="sig-paren">(</span><em>colormap</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/colormapping.html#load_colormap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.colormapping.load_colormap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load colormap from epygram colormaps if needed.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="profiles.html" title="epygram.profiles — Functions on vertical profiles"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="containers.html" title="epygram.containers — Containers"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

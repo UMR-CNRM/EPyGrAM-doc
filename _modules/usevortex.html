@@ -1,0 +1,712 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>usevortex &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for usevortex</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains proxies to reach resources using Vortex.</span>
+
+<span class="sd">Of course, this module need to have a proper Vortex installation !</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">uuid</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="k">import</span> <span class="n">contextmanager</span>
+
+<span class="kn">import</span> <span class="nn">footprints</span>
+<span class="kn">from</span> <span class="nn">bronx.system.mf</span> <span class="k">import</span> <span class="n">prestage</span>
+<span class="kn">from</span> <span class="nn">bronx.stdtypes.date</span> <span class="k">import</span> <span class="n">daterange</span>
+<span class="kn">import</span> <span class="nn">taylorism</span>
+
+<span class="kn">import</span> <span class="nn">vortex</span>
+<span class="kn">from</span> <span class="nn">vortex</span> <span class="k">import</span> <span class="n">toolbox</span>
+<span class="kn">import</span> <span class="nn">common</span>  <span class="c1"># @UnusedImport : for footprints to load classes</span>
+<span class="kn">import</span> <span class="nn">olive</span>  <span class="c1"># @UnusedImport : for footprints to load classes</span>
+
+
+<span class="k">def</span> <span class="nf">list_vortex_geometries</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for epyweb not to be vortex directly dependant.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">vortex</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">geometries</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+
+<div class="viewcode-block" id="set_defaults"><a class="viewcode-back" href="../site/usevortex.html#usevortex.set_defaults">[docs]</a><span class="k">def</span> <span class="nf">set_defaults</span><span class="p">(</span><span class="o">**</span><span class="n">defaults</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set defaults key/value pairs for get_resource().&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">defaults</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                        <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                        <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                        <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                        <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;franmgsp&#39;</span><span class="p">,</span>
+                        <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;hst&#39;</span><span class="p">)</span>
+    <span class="n">toolbox</span><span class="o">.</span><span class="n">defaults</span><span class="p">(</span><span class="o">**</span><span class="n">defaults</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="quiet_get"><a class="viewcode-back" href="../site/usevortex.html#usevortex.quiet_get">[docs]</a><span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">quiet_get</span><span class="p">(</span><span class="n">loggers</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vortex.data.stores&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;vortex.data.handlers&#39;</span><span class="p">,</span>
+                       <span class="s1">&#39;vortex.tools.net&#39;</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shut off some loggers (set level to ERROR) while executing action,</span>
+<span class="sd">    then restore initial level.</span>
+
+<span class="sd">    Example of use::</span>
+
+<span class="sd">        with quiet_get():</span>
+<span class="sd">            get_resources(...)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">old_levels</span> <span class="o">=</span> <span class="p">{</span><span class="n">l</span><span class="p">:</span><span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()</span>
+                  <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">loggers</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">loggers</span><span class="p">:</span>
+        <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>
+    <span class="k">yield</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">old_levels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">v</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_resources"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_resources">[docs]</a><span class="k">def</span> <span class="nf">get_resources</span><span class="p">(</span><span class="n">getmode</span><span class="o">=</span><span class="s1">&#39;epygram&#39;</span><span class="p">,</span>
+                  <span class="n">uselocalcache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="o">**</span><span class="n">description</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get resources, given their description.</span>
+
+<span class="sd">    :param getmode: controls the action and returned object:\n</span>
+<span class="sd">                    - &#39;check&#39; return True only if the description is complete</span>
+<span class="sd">                    - &#39;epygram&#39; return the epygram resources</span>
+<span class="sd">                    - &#39;locate&#39; return the physical resolved location of the</span>
+<span class="sd">                      resource</span>
+<span class="sd">                    - &#39;exist&#39; return the physical resolved location of the</span>
+<span class="sd">                      resource and its existence</span>
+<span class="sd">                    - &#39;fetch&#39; fetches the resource in local, as filename *local*</span>
+<span class="sd">                    - &#39;vortex&#39; return the vortex data handler of the resource</span>
+<span class="sd">                    - &#39;prestaging&#39; puts a prestaging request for the resolved</span>
+<span class="sd">                      resources, on the archive system</span>
+<span class="sd">    :param uselocalcache: if True, store resources in a local cache (not</span>
+<span class="sd">                     automatically cleaned, take care) defined either (and by</span>
+<span class="sd">                     priority order) in $MTOOL_STEP_CACHE, $MTOOLDIR, $FTDIR,</span>
+<span class="sd">                     $WORKDIR, $TMPDIR.</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    - for the analysis of AROME-france from experiment 864G on 2015/08/15/00,</span>
+<span class="sd">      description will look like:</span>
+
+<span class="sd">      + experiment=&#39;864G&#39;,  # the experiment id</span>
+<span class="sd">      + model=&#39;arome&#39;,</span>
+<span class="sd">      + block=&#39;analysis&#39;,  # the OLIVE block</span>
+<span class="sd">      + kind=&#39;analysis&#39;,  # the kind of resource</span>
+<span class="sd">      + date=&#39;2015081500&#39;,  # the initial date and time</span>
+<span class="sd">      + geometry=&#39;franmgsp&#39;,  # the name of the model domain</span>
+<span class="sd">      + local=&#39;analysis_[experiment]&#39;,  # the local filename of the resource, once fetched.</span>
+
+<span class="sd">    - for the model state at term 18h of ALADIN-reunion oper, production</span>
+<span class="sd">      cutoff, on 2015/08/15/00,</span>
+<span class="sd">      description will look like:</span>
+
+<span class="sd">      + suite=&#39;oper&#39;,  # the suite // &#39;dble&#39; = e-suite</span>
+<span class="sd">      + kind=&#39;historic&#39;,  # model state</span>
+<span class="sd">      + date=&#39;2015081500&#39;,  # the initial date and time</span>
+<span class="sd">      + term=18,  # the forecast term</span>
+<span class="sd">      + geometry=&#39;reunionsp&#39;,  # the name of the model domain</span>
+<span class="sd">      + local=&#39;ICMSHALAD_[term]&#39;,  # the local filename of the resource, once fetched.</span>
+<span class="sd">      + cutoff=&#39;prod&#39;,  # type of cutoff</span>
+<span class="sd">      + vapp=&#39;aladin&#39;,  # type of application in operations namespace</span>
+<span class="sd">      + vconf=&#39;reunion&#39;,  # name of config in operation namespace</span>
+<span class="sd">      + model=&#39;aladin&#39;,  # name of the model</span>
+
+<span class="sd">    - for the GRIB post-processed output on MASCA025 BDAP domain at terms</span>
+<span class="sd">      22-&gt;24h of ALADIN-reunion oper, production cutoff, on 2015/08/15/00,</span>
+<span class="sd">      description will look like:</span>
+
+<span class="sd">      + suite=&#39;oper&#39;,  # the suite // &#39;dble&#39; = e-suite</span>
+<span class="sd">      + kind=&#39;gridpoint&#39;,  # model state</span>
+<span class="sd">      + date=&#39;2015081500&#39;,  # the initial date and time</span>
+<span class="sd">      + term=[22,23,24],  # the forecast terms</span>
+<span class="sd">      + geometry=&#39;masca025&#39;,  # the name of the post-processing domain</span>
+<span class="sd">      + local=&#39;[geometry]_[term].grb&#39;,  # the local filename of the resource, once fetched.</span>
+<span class="sd">      + nativefmt=&#39;grib&#39;  # to fetch the gribs and not the FA post-processed files</span>
+<span class="sd">      + cutoff=&#39;prod&#39;,  # type of cutoff</span>
+<span class="sd">      + origin=&#39;hst&#39;,  # origin of post-processed files: historic</span>
+<span class="sd">      + vapp=&#39;aladin&#39;,  # type of application in operations namespace</span>
+<span class="sd">      + vconf=&#39;reunion&#39;,  # name of config in operation namespace</span>
+<span class="sd">      + model=&#39;aladin&#39;,  # name of the model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">common.util.usepygram</span>  <span class="c1"># @UnusedImport : to load Epygram FormatAdapters</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">vortex</span><span class="o">.</span><span class="n">ticket</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">uselocalcache</span><span class="p">:</span>
+        <span class="n">_domain</span> <span class="o">=</span> <span class="s1">&#39;multi&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_domain</span> <span class="o">=</span> <span class="s1">&#39;archive&#39;</span>
+
+    <span class="c1"># completion of description...</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;xp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xp</span><span class="p">:</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;experiment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">xp</span>
+    <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;experiment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span> <span class="s1">&#39;dble&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;suite&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">description</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;suite&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;experiment&#39;</span><span class="p">]</span>  <span class="c1"># for oper/dble, alias experiment to suite</span>
+    <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;experiment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;namespace&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">description</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;namespace&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;olive&#39;</span><span class="p">,</span> <span class="n">_domain</span><span class="p">,</span> <span class="s1">&#39;fr&#39;</span><span class="p">])</span>  <span class="c1"># set namespace if not given</span>
+    <span class="k">elif</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;suite&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span> <span class="s1">&#39;dble&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;namespace&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">description</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;namespace&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span> <span class="n">_domain</span><span class="p">,</span> <span class="s1">&#39;fr&#39;</span><span class="p">])</span>  <span class="c1"># set namespace if not given</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;local&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;shouldfly&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;kind&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;analysis&#39;</span><span class="p">,</span> <span class="s1">&#39;historic&#39;</span><span class="p">):</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;nativefmt&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;fa&#39;</span>  <span class="c1"># set nativefmt if recognized</span>
+    <span class="k">elif</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nativefmt&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;grib&#39;</span><span class="p">:</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;kind&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gridpoint&#39;</span>  <span class="c1"># set kind if recognized</span>
+    <span class="k">if</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;vapp&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;model&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">description</span><span class="p">[</span><span class="s1">&#39;vapp&#39;</span><span class="p">]</span>  <span class="c1"># set model (useless?) if not given</span>
+    <span class="k">if</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;prestaging&#39;</span><span class="p">:</span>
+        <span class="c1"># force namespace archive for prestaging</span>
+        <span class="n">description</span><span class="p">[</span><span class="s1">&#39;namespace&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">description</span><span class="p">[</span><span class="s1">&#39;namespace&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+                                             <span class="s1">&#39;archive&#39;</span><span class="p">,</span>
+                                             <span class="s1">&#39;fr&#39;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;check&#39;</span><span class="p">:</span>
+        <span class="c1"># just check completion of the resource</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">record_off</span><span class="p">()</span>  <span class="c1"># avoid overconsumption of memory</span>
+            <span class="n">toolbox</span><span class="o">.</span><span class="n">rload</span><span class="p">(</span><span class="o">**</span><span class="n">description</span><span class="p">)</span>
+            <span class="n">t</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">record_on</span><span class="p">()</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="p">(</span><span class="n">toolbox</span><span class="o">.</span><span class="n">VortexToolboxDescError</span><span class="p">,</span> <span class="n">footprints</span><span class="o">.</span><span class="n">FootprintException</span><span class="p">):</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># resolve resource description: raise an error if the description is not complete</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">record_off</span><span class="p">()</span>  <span class="c1"># avoid overconsumption of memory</span>
+        <span class="n">resolved</span> <span class="o">=</span> <span class="n">toolbox</span><span class="o">.</span><span class="n">rload</span><span class="p">(</span><span class="o">**</span><span class="n">description</span><span class="p">)</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">record_on</span><span class="p">()</span>
+        <span class="c1"># and complete reaching resource according to getmode</span>
+        <span class="k">if</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;vortex&#39;</span><span class="p">:</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="n">resolved</span>
+        <span class="k">elif</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;locate&#39;</span><span class="p">:</span>
+            <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">locate</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;exist&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">t</span><span class="o">.</span><span class="n">sh</span><span class="o">.</span><span class="n">ftppool</span><span class="p">():</span>  <span class="c1"># unique ftp connection for the whole request</span>
+                <span class="n">resources</span> <span class="o">=</span> <span class="p">[(</span><span class="n">r</span><span class="o">.</span><span class="n">locate</span><span class="p">(),</span> <span class="nb">bool</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">check</span><span class="p">()))</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;prestaging&#39;</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">t</span><span class="o">.</span><span class="n">sh</span><span class="o">.</span><span class="n">ftppool</span><span class="p">():</span>  <span class="c1"># unique ftp connection for the whole request</span>
+                <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">prestage</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">locate</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;hendrix.meteo.fr:&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                                       <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">],</span>
+                                      <span class="n">description</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;mail&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))]</span>
+        <span class="k">elif</span> <span class="n">getmode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;fetch&#39;</span><span class="p">,</span> <span class="s1">&#39;epygram&#39;</span><span class="p">):</span>
+            <span class="n">ok</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">with</span> <span class="n">t</span><span class="o">.</span><span class="n">sh</span><span class="o">.</span><span class="n">ftppool</span><span class="p">():</span>  <span class="c1"># unique ftp connection for the whole request</span>
+                <span class="n">ok</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">ok</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;fetch&#39;</span><span class="p">:</span>
+                    <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="n">getmode</span> <span class="o">==</span> <span class="s1">&#39;epygram&#39;</span><span class="p">:</span>
+                    <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">contents</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resolved</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;fetch failed, at least: &quot;</span> <span class="o">+</span> <span class="n">resolved</span><span class="p">[</span><span class="n">ok</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="kc">False</span><span class="p">)]</span><span class="o">.</span><span class="n">locate</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;*getmode* unknown: &#39;</span> <span class="o">+</span> <span class="n">getmode</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">resources</span></div>
+
+
+<span class="n">default_nc_global_attributes</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">institution</span><span class="o">=</span><span class="s1">&#39;Météo France&#39;</span><span class="p">,</span>
+    <span class="n">history</span><span class="o">=</span><span class="s1">&#39;Extracted on </span><span class="si">{}</span><span class="s1"> using epygram.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">date</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()))</span>
+
+
+<div class="viewcode-block" id="extractor"><a class="viewcode-back" href="../site/usevortex.html#usevortex.extractor">[docs]</a><span class="k">def</span> <span class="nf">extractor</span><span class="p">(</span><span class="n">vortex_description</span><span class="p">,</span>
+              <span class="n">coords</span><span class="p">,</span>
+              <span class="n">start_cutoff</span><span class="p">,</span>
+              <span class="n">end_cutoff</span><span class="p">,</span>
+              <span class="n">start_term</span><span class="p">,</span>
+              <span class="n">end_term</span><span class="p">,</span>
+              <span class="n">points_fields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">profiles_FAfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">everycutoff_in_hours</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+              <span class="n">everyterm_in_hours</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+              <span class="c1"># options</span>
+              <span class="n">vertical_coordinate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">extraction_options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">use_local_cache</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="n">prestaging</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="n">outdir</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
+              <span class="n">progressmode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">nc_global_attributes</span><span class="o">=</span><span class="n">default_nc_global_attributes</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract temporal series of points (and profiles for FA historical files) to</span>
+<span class="sd">    netCDF files.</span>
+
+<span class="sd">    Series are either:</span>
+<span class="sd">      - one series == one file per cutoff if **start_term* != **end_term**</span>
+<span class="sd">      - one series == one file containing all cutoffs if **start_term* == **end_term**</span>
+
+<span class="sd">    Shall be extended to series of profiles for other formats later on.</span>
+
+<span class="sd">    :param vortex_description: vortex description of the resources,</span>
+<span class="sd">                               incl. providers, excepted dates/terms</span>
+<span class="sd">                               Example:</span>
+<span class="sd">                               {&#39;model&#39;:&#39;arome&#39;,</span>
+<span class="sd">                                &#39;vapp&#39;:&#39;arome&#39;,</span>
+<span class="sd">                                &#39;vconf&#39;:&#39;3dvarfr&#39;,</span>
+<span class="sd">                                &#39;kind&#39;:&#39;historic&#39;,</span>
+<span class="sd">                                &#39;suite&#39;:&#39;oper&#39;,</span>
+<span class="sd">                                &#39;geometry&#39;:&#39;franmgsp&#39;,</span>
+<span class="sd">                                &#39;cutoff&#39;:&#39;prod&#39;,</span>
+<span class="sd">                                #&#39;namespace&#39;:&#39;oper.archive.fr&#39;,</span>
+<span class="sd">                                #&#39;experiment&#39;:&#39;86U8&#39;,</span>
+<span class="sd">                                #&#39;block&#39;:&#39;forecast&#39;,</span>
+<span class="sd">                                #&#39;nativefmt&#39;:&#39;fa&#39;,</span>
+<span class="sd">                                #&#39;member&#39;:8,}</span>
+<span class="sd">    :param coords: either a list of lon/lat coordinates or a dict of,</span>
+<span class="sd">                   in which case key would be a &quot;name of the point&quot;,</span>
+<span class="sd">                   used in output filename</span>
+<span class="sd">    :param start_cutoff: first cutoff of the series (datetime.datetime instance)</span>
+<span class="sd">    :param end_cutoff: last cutoff of the series</span>
+<span class="sd">    :param start_term: first term of the series (datetime.datetime instance)</span>
+<span class="sd">    :param end_term: last term of the series</span>
+<span class="sd">    :param points_fields: dictionnary of fields to extract with options, e.g.:\n</span>
+<span class="sd">                          {fid1:{&#39;nc_name&#39;:nc_fid1,</span>
+<span class="sd">                                 &#39;nc_attributes&#39;:{&#39;unit&#39;:...,</span>
+<span class="sd">                                                  &#39;comment&#39;:...,</span>
+<span class="sd">                                                  },</span>
+<span class="sd">                                 &#39;decumulate&#39;:True,</span>
+<span class="sd">                                 &#39;operation&#39;:(&#39;-&#39;,273.15) or (&#39;exp&#39;,),</span>
+<span class="sd">                                 &#39;reproject_wind_on_lonlat&#39;:False,</span>
+<span class="sd">                                 },</span>
+<span class="sd">                           fid2:...</span>
+<span class="sd">                           }\n</span>
+<span class="sd">                          - &#39;decumulate&#39; can be absent==False, True,</span>
+<span class="sd">                            or &#39;center&#39; for centered decumulation</span>
+<span class="sd">                            (cf. D3Field.decumulate for more details);</span>
+<span class="sd">                          - &#39;operation&#39; is done after decumulation, if both</span>
+<span class="sd">                            present</span>
+<span class="sd">                          - &#39;reproject_wind_on_lonlat: FA only: reproject winds</span>
+<span class="sd">                            on lonlat axes (True by default)</span>
+<span class="sd">    :param profiles_FAfields: like points_fields but for profiles,</span>
+<span class="sd">                              but only for FA historic resources !</span>
+<span class="sd">                              fids supposed to be &#39;S*PARAMETER&#39;</span>
+<span class="sd">    :param everycutoff_in_hours: step between 2 cutoffs</span>
+<span class="sd">    :param everyterm_in_hours: step between 2 terms</span>
+<span class="sd">    :param vertical_coordinate: vertical coordinate requested for profiles,</span>
+<span class="sd">                                among (&#39;pressure&#39;, &#39;height&#39;, &#39;altitude&#39;, None)</span>
+<span class="sd">    :param extraction_options: options to FA.extractprofile() and</span>
+<span class="sd">                               H2DField.extract_point()</span>
+<span class="sd">                               concerning interpolation, as dict...</span>
+<span class="sd">    :param use_local_cache: use a local Vortex cache, in which files are stored</span>
+<span class="sd">    :param prestaging: triggers prestaging for the requested resources (Hendrix)</span>
+<span class="sd">    :param outdir: directory in which to store output files</span>
+<span class="sd">    :param progressmode: sets the verbosity of the task among</span>
+<span class="sd">                         (None, &#39;percentage&#39;, &#39;verbose&#39;)</span>
+<span class="sd">    :param nc_global_attributes: given as a dict. Defaults are above in</span>
+<span class="sd">                                 module variable default_nc_global_attributes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">epygram</span>
+    <span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldValidity</span>
+    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">gimme_one_point</span>
+    <span class="n">vd</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pressure&#39;</span><span class="p">:</span><span class="n">epygram</span><span class="o">.</span><span class="n">geometries</span><span class="o">.</span><span class="n">Pressure</span><span class="p">,</span>
+          <span class="s1">&#39;altitude&#39;</span><span class="p">:</span><span class="n">epygram</span><span class="o">.</span><span class="n">geometries</span><span class="o">.</span><span class="n">Altitude</span><span class="p">,</span>
+          <span class="s1">&#39;height&#39;</span><span class="p">:</span><span class="n">epygram</span><span class="o">.</span><span class="n">geometries</span><span class="o">.</span><span class="n">Height</span><span class="p">}</span>
+    <span class="n">points_fields</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">ifNone_emptydict</span><span class="p">(</span><span class="n">points_fields</span><span class="p">)</span>
+    <span class="n">profiles_FAfields</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">ifNone_emptydict</span><span class="p">(</span><span class="n">profiles_FAfields</span><span class="p">)</span>
+    <span class="n">extraction_options</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">ifNone_emptydict</span><span class="p">(</span><span class="n">extraction_options</span><span class="p">)</span>
+
+    <span class="c1"># 1. Prepare stuff</span>
+    <span class="n">dt_cutoffs</span> <span class="o">=</span> <span class="n">daterange</span><span class="p">(</span><span class="n">start_cutoff</span><span class="p">,</span> <span class="n">end_cutoff</span><span class="p">,</span>
+                           <span class="s1">&#39;PT</span><span class="si">{}</span><span class="s1">H&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">everycutoff_in_hours</span><span class="p">))</span>
+    <span class="n">cutoffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">))</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+               <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">dt_cutoffs</span><span class="p">]</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_term</span><span class="p">,</span> <span class="n">end_term</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">everyterm_in_hours</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1">E,</span><span class="si">{}</span><span class="s1">N&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">):</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">}</span>
+    <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_attributes&#39;</span><span class="p">,</span> <span class="p">{})</span>
+                <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">points_fields</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">metadata</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_attributes&#39;</span><span class="p">,</span> <span class="p">{})</span>
+                     <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">profiles_FAfields</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+    <span class="n">decumulate</span> <span class="o">=</span> <span class="p">{</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;decumulate&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                  <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">points_fields</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">decumulate</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;decumulate&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">profiles_FAfields</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+    <span class="n">operations</span> <span class="o">=</span> <span class="p">{</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;operation&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                  <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">points_fields</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">operations</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">)):</span><span class="n">pf</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;operation&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                       <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">pf</span> <span class="ow">in</span> <span class="n">profiles_FAfields</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span>
+    <span class="n">vortex_description</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;getmode&#39;</span><span class="p">:</span><span class="s1">&#39;epygram&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;uselocalcache&#39;</span><span class="p">:</span><span class="n">use_local_cache</span><span class="p">})</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">outdir</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">outdir</span><span class="p">)</span>
+
+    <span class="c1"># 2. definition of functions</span>
+    <span class="c1"># extraction function from resource to a dict of extracted variables</span>
+    <span class="k">def</span> <span class="nf">get_from_to</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">dt_cutoff</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">points_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">progressmode</span> <span class="o">==</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">nc_name</span> <span class="o">=</span> <span class="n">points_fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">listfields</span><span class="p">():</span>
+                <span class="n">fld</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">fld</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+                    <span class="n">fld</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">points_fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;reproject_wind_on_lonlat&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">d</span><span class="p">,</span> <span class="n">other</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">fafields</span><span class="o">.</span><span class="n">find_wind_pair</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="n">epygram</span><span class="o">.</span><span class="n">epygramError</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">other</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>  <span class="c1"># other is v</span>
+                            <span class="n">wind</span> <span class="o">=</span> <span class="p">(</span><span class="n">fld</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">d</span> <span class="o">==</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span>  <span class="c1"># other is u</span>
+                            <span class="n">wind</span> <span class="o">=</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">fld</span><span class="p">)</span>
+                        <span class="n">wind</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">make_vector_field</span><span class="p">(</span><span class="o">*</span><span class="n">wind</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="s1">&#39;WIND.U.PHYS&#39;</span> <span class="ow">in</span> <span class="n">fld</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;FA&#39;</span><span class="p">]:</span>
+                            <span class="n">map_factor_correction</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">map_factor_correction</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">wind</span><span class="o">.</span><span class="n">reproject_wind_on_lonlat</span><span class="p">(</span><span class="n">map_factor_correction</span><span class="o">=</span><span class="n">map_factor_correction</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+                            <span class="n">fld</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">fld</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">cll</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">point</span> <span class="o">=</span> <span class="n">fld</span><span class="o">.</span><span class="n">extract_point</span><span class="p">(</span><span class="o">*</span><span class="n">cll</span><span class="p">)</span>
+                    <span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nc_name</span>
+                    <span class="k">if</span> <span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">point</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">term</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># exception for term 0, cumulated fields are not therein</span>
+                <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">cll</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="n">dt_cutoff</span><span class="p">,</span>
+                                        <span class="n">date_time</span><span class="o">=</span><span class="n">dt_cutoff</span><span class="p">)</span>
+                    <span class="n">point</span> <span class="o">=</span> <span class="n">gimme_one_point</span><span class="p">(</span><span class="o">*</span><span class="n">cll</span><span class="p">,</span>
+                                            <span class="n">field_args</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fid&#39;</span><span class="p">:{</span><span class="s1">&#39;netCDF&#39;</span><span class="p">:</span><span class="n">nc_name</span><span class="p">},</span>
+                                                        <span class="s1">&#39;validity&#39;</span><span class="p">:</span><span class="n">val</span><span class="p">})</span>
+                    <span class="k">if</span> <span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">point</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">point</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;field </span><span class="si">{}</span><span class="s1"> not found in resource at </span><span class="si">{}</span><span class="s1">, term=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">f</span><span class="p">,</span> <span class="n">cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">term</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">profiles_FAfields</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">progressmode</span> <span class="o">==</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">nc_name</span> <span class="o">=</span> <span class="n">profiles_FAfields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nc_name&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">loc</span><span class="p">,</span> <span class="n">cll</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">profile</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">extractprofile</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">cll</span><span class="p">,</span>
+                                             <span class="n">vertical_coordinate</span><span class="o">=</span><span class="n">vd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vertical_coordinate</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                                             <span class="o">**</span><span class="n">extraction_options</span><span class="p">)</span>
+                <span class="n">profile</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nc_name</span>
+                <span class="k">if</span> <span class="n">profile</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">profile</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">profile</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">profile</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
+
+    <span class="c1"># decumulation/operation</span>
+    <span class="k">def</span> <span class="nf">finalize_field</span><span class="p">(</span><span class="n">fld</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">decumulate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]):</span>
+            <span class="n">center</span> <span class="o">=</span> <span class="n">decumulate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="s1">&#39;center&#39;</span>
+            <span class="n">fld</span><span class="o">.</span><span class="n">decumulate</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="n">center</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">operations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]):</span>
+            <span class="n">fld</span><span class="o">.</span><span class="n">operation</span><span class="p">(</span><span class="o">*</span><span class="n">operations</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]))</span>
+
+    <span class="c1"># write to file</span>
+    <span class="k">def</span> <span class="nf">write_to</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">loc</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">fld</span> <span class="o">=</span> <span class="n">variables</span><span class="p">[</span><span class="n">loc</span><span class="p">][</span><span class="n">var</span><span class="p">]</span>
+            <span class="n">finalize_field</span><span class="p">(</span><span class="n">fld</span><span class="p">)</span>
+            <span class="n">nc</span><span class="o">.</span><span class="n">writefield</span><span class="p">(</span><span class="n">fld</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="n">metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fld</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]))</span>
+        <span class="n">nc</span><span class="o">.</span><span class="n">set_global_attributes</span><span class="p">(</span><span class="o">**</span><span class="n">nc_global_attributes</span><span class="p">)</span>
+        <span class="n">nc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># 3. process data</span>
+    <span class="k">if</span> <span class="n">prestaging</span><span class="p">:</span>
+        <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;getmode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;prestaging&#39;</span>
+        <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutoffs</span>
+        <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">terms</span>
+        <span class="n">to_return</span> <span class="o">=</span> <span class="n">get_resources</span><span class="p">(</span><span class="o">**</span><span class="n">vortex_description</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">to_return</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">terms</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cutoffs</span><span class="p">)):</span>
+                <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">variables</span> <span class="o">=</span> <span class="p">{</span><span class="n">loc</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+                <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">:</span>
+                    <span class="n">tmpfile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+                    <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">term</span>
+                    <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpfile</span>
+                    <span class="n">r</span> <span class="o">=</span> <span class="n">get_resources</span><span class="p">(</span><span class="o">**</span><span class="n">vortex_description</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">get_from_to</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">dt_cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">nc</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                            <span class="n">outdir</span><span class="p">,</span>
+                            <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">loc</span><span class="p">,</span> <span class="s1">&#39;T&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="mi">8</span><span class="p">],</span>
+                                                     <span class="n">cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">8</span><span class="p">:]])</span> <span class="o">+</span> <span class="s1">&#39;.nc&#39;</span><span class="p">])),</span>
+                        <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                        <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;netCDF&#39;</span><span class="p">)</span>
+                    <span class="n">write_to</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">loc</span><span class="p">)</span>
+                    <span class="n">to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nc</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># 1 term only: series of dates at frozen term</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="p">{</span><span class="n">loc</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cutoffs</span><span class="p">)):</span>
+                <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">tmpfile</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span>
+                <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;term&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">terms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">vortex_description</span><span class="p">[</span><span class="s1">&#39;local&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmpfile</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">get_resources</span><span class="p">(</span><span class="o">**</span><span class="n">vortex_description</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">get_from_to</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">terms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dt_cutoffs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">loc</span> <span class="ow">in</span> <span class="n">coords</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;T&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">cutoffs</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">8</span><span class="p">],</span> <span class="n">cutoffs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">8</span><span class="p">:]]),</span>
+                                <span class="s1">&#39;T&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">cutoffs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][:</span><span class="mi">8</span><span class="p">],</span> <span class="n">cutoffs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">8</span><span class="p">:]])])</span>
+                <span class="n">nc</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                        <span class="n">outdir</span><span class="p">,</span>
+                        <span class="s1">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">loc</span><span class="p">,</span> <span class="n">out</span> <span class="o">+</span> <span class="s1">&#39;.nc&#39;</span><span class="p">])),</span>
+                    <span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                    <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;netCDF&#39;</span><span class="p">)</span>
+                <span class="n">write_to</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">loc</span><span class="p">)</span>
+                <span class="n">to_return</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nc</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">to_return</span></div>
+<span class="c1"># End of extractor()</span>
+
+
+<div class="viewcode-block" id="Extractor"><a class="viewcode-back" href="../site/usevortex.html#usevortex.Extractor">[docs]</a><span class="k">class</span> <span class="nc">Extractor</span><span class="p">(</span><span class="n">taylorism</span><span class="o">.</span><span class="n">Worker</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Independant extractor.&quot;&quot;&quot;</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Run extractor().&quot;</span><span class="p">,</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">directives</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Contains all arguments to extractor(...).&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">footprints</span><span class="o">.</span><span class="n">FPDict</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">directives</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directives</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">extractor</span><span class="p">(</span><span class="n">directives</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;vortex_description&#39;</span><span class="p">),</span>
+                         <span class="n">directives</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;coords&#39;</span><span class="p">),</span>
+                         <span class="n">directives</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start_cutoff&#39;</span><span class="p">),</span>
+                         <span class="n">directives</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;end_cutoff&#39;</span><span class="p">),</span>
+                         <span class="n">directives</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;start_term&#39;</span><span class="p">),</span>
+                         <span class="n">directives</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;end_term&#39;</span><span class="p">),</span>
+                         <span class="o">**</span><span class="n">directives</span><span class="p">)</span></div>
+
+
+<span class="c1">#############</span>
+<span class="c1"># SHORTCUTS #</span>
+<span class="c1">#############</span>
+<span class="c1"># AROME</span>
+<div class="viewcode-block" id="get_gribfc_arome_oper"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_gribfc_arome_oper">[docs]</a><span class="k">def</span> <span class="nf">get_gribfc_arome_oper</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;FRANGP0025&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for AROME oper GRIBs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span>
+                   <span class="n">model</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;hst&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;gridpoint&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;grib&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_histfc_arome_oper"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_histfc_arome_oper">[docs]</a><span class="k">def</span> <span class="nf">get_histfc_arome_oper</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for AROME oper historic FAs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span>
+                   <span class="n">model</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;franmgsp&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;historic&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_gribfc_arome_xp"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_gribfc_arome_xp">[docs]</a><span class="k">def</span> <span class="nf">get_gribfc_arome_xp</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;FRANGP0025&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for AROME experiment GRIBs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">block</span><span class="o">=</span><span class="s1">&#39;forecast&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;hst&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;gridpoint&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;grib&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_histfc_arome_xp"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_histfc_arome_xp">[docs]</a><span class="k">def</span> <span class="nf">get_histfc_arome_xp</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for AROME experiment historic FAs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">block</span><span class="o">=</span><span class="s1">&#39;forecast&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arome&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;franmgsp&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;historic&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<span class="c1"># ARPEGE ######################################################################</span>
+<div class="viewcode-block" id="get_gribfc_arpege_oper"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_gribfc_arpege_oper">[docs]</a><span class="k">def</span> <span class="nf">get_gribfc_arpege_oper</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;FRANX01&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for ARPEGE oper GRIBs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span>
+                   <span class="n">model</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;hst&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;gridpoint&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;grib&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_histfc_arpege_oper"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_histfc_arpege_oper">[docs]</a><span class="k">def</span> <span class="nf">get_histfc_arpege_oper</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for ARPEGE oper historic FAs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">suite</span><span class="o">=</span><span class="s1">&#39;oper&#39;</span><span class="p">,</span>
+                   <span class="n">model</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;historic&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_gribfc_arpege_xp"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_gribfc_arpege_xp">[docs]</a><span class="k">def</span> <span class="nf">get_gribfc_arpege_xp</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;FRANX01&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for ARPEGE experiment GRIBs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">block</span><span class="o">=</span><span class="s1">&#39;forecast&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;hst&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;gridpoint&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;grib&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_histfc_arpege_xp"><a class="viewcode-back" href="../site/usevortex.html#usevortex.get_histfc_arpege_xp">[docs]</a><span class="k">def</span> <span class="nf">get_histfc_arpege_xp</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="o">**</span><span class="n">others</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy for ARPEGE experiment historic FAs.&quot;&quot;&quot;</span>
+
+    <span class="n">_others</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">cutoff</span><span class="o">=</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+                   <span class="n">block</span><span class="o">=</span><span class="s1">&#39;forecast&#39;</span><span class="p">,</span>
+                   <span class="n">vapp</span><span class="o">=</span><span class="s1">&#39;arpege&#39;</span><span class="p">,</span>
+                   <span class="n">vconf</span><span class="o">=</span><span class="s1">&#39;france&#39;</span><span class="p">,</span>
+                   <span class="n">geometry</span><span class="o">=</span><span class="s1">&#39;global&#39;</span><span class="p">,</span>
+                   <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;historic&#39;</span><span class="p">,</span>
+                   <span class="n">nativefmt</span><span class="o">=</span><span class="s1">&#39;fa&#39;</span><span class="p">)</span>
+    <span class="n">_others</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">others</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">get_resources</span><span class="p">(</span><span class="n">experiment</span><span class="o">=</span><span class="n">xp</span><span class="p">,</span> <span class="n">date</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="o">**</span><span class="n">_others</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

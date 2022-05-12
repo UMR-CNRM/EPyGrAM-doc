@@ -1,0 +1,189 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.resources &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.resources</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module contains:</span>
+
+<span class="sd">- resource for data contained in file (FileResource).</span>
+<span class="sd">- other resources built on top of FileResource:\n</span>
+<span class="sd">  - MultiValiditiesResource: join several resources to furnish fields with</span>
+<span class="sd">    temporal evolution;</span>
+<span class="sd">  - CombineLevelsResource: from a resource containing 2D fields on adjacent</span>
+<span class="sd">    levels, emulates a resource that provide 3D fields</span>
+<span class="sd">- a proxy function to build such meta resources</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">Resource</span>
+
+
+<div class="viewcode-block" id="open_and_close_resource"><a class="viewcode-back" href="../../library/resources.html#epygram.resources.open_and_close_resource">[docs]</a><span class="k">class</span> <span class="nc">open_and_close_resource</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Context manager for automatically open/close resources.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param r: resource to open</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">r</span>
+
+    <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">tbk</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<span class="kn">from</span> <span class="nn">.FileResource</span> <span class="k">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">.MultiValiditiesResource</span> <span class="k">import</span> <span class="n">MultiValiditiesResource</span>
+<span class="kn">from</span> <span class="nn">.CombineLevelsResource</span> <span class="k">import</span> <span class="n">CombineLevelsResource</span>
+<span class="kn">from</span> <span class="nn">.SubdomainResource</span> <span class="k">import</span> <span class="n">SubdomainResource</span>
+<span class="kn">from</span> <span class="nn">.DiagnosticsResource</span> <span class="k">import</span> <span class="n">DiagnosticsResource</span>
+
+
+<div class="viewcode-block" id="meta_resource"><a class="viewcode-back" href="../../library/resources.html#epygram.resources.meta_resource">[docs]</a><span class="k">def</span> <span class="nf">meta_resource</span><span class="p">(</span><span class="n">filenames_or_resources</span><span class="p">,</span> <span class="n">openmode</span><span class="p">,</span> <span class="n">rtype</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Factory for meta resources, such as MultiValiditiesResource or</span>
+<span class="sd">    CombineLevelsResource.</span>
+
+<span class="sd">    :param filenames_or_resources: can be either a filename or a list of,</span>
+<span class="sd">                                   or a resource or a list of.</span>
+<span class="sd">    :param openmode: among &#39;r&#39;, &#39;w&#39;, &#39;a&#39;</span>
+<span class="sd">    :param rtype: resource type, e.g.:\n</span>
+<span class="sd">                  - &#39;MV&#39; for a MultiValiditiesResource,</span>
+<span class="sd">                  - &#39;CL&#39; for a CombineLevelsResource</span>
+<span class="sd">                  - &#39;MV+CL&#39; for a composition of both (should be similar to CL+MV)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">epygram.formats</span> <span class="k">import</span> <span class="n">resource</span>
+
+    <span class="k">if</span> <span class="s1">&#39;+&#39;</span> <span class="ow">in</span> <span class="n">rtype</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">rtype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;more than one composition in *rtype*.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filenames_or_resources</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">filenames_or_resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">filenames_or_resources</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filenames_or_resources</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">resource</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">openmode</span><span class="p">,</span> <span class="n">fmtdelayedopen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filenames_or_resources</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filenames_or_resources</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Resource</span><span class="p">):</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="n">filenames_or_resources</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s1">&#39;unknown type for *filenames_or_resources*.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">rtype</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;MV&#39;</span><span class="p">):</span>
+        <span class="c1"># step 1</span>
+        <span class="n">resource</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">epyresource</span><span class="p">(</span><span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span>
+                                   <span class="n">openmode</span><span class="o">=</span><span class="n">openmode</span><span class="p">,</span>
+                                   <span class="n">name</span><span class="o">=</span><span class="s1">&#39;MultiValidities&#39;</span><span class="p">)</span>
+        <span class="c1"># step 2</span>
+        <span class="k">if</span> <span class="n">rtype</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;CL&#39;</span><span class="p">):</span>
+            <span class="n">meta_resource</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">epyresource</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">resource</span><span class="p">,</span>
+                                            <span class="n">openmode</span><span class="o">=</span><span class="n">openmode</span><span class="p">,</span>
+                                            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CombineLevels&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">meta_resource</span> <span class="o">=</span> <span class="n">resource</span>
+    <span class="k">elif</span> <span class="n">rtype</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;CL&#39;</span><span class="p">):</span>
+        <span class="c1"># step 1</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resources</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">rtype</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;MV&#39;</span><span class="p">),</span> \
+                <span class="s1">&#39;*filenames* should be unique with this *rtype*:&#39;</span> <span class="o">+</span> <span class="n">rtype</span>
+        <span class="n">resources</span> <span class="o">=</span> <span class="p">[</span><span class="n">fpx</span><span class="o">.</span><span class="n">epyresource</span><span class="p">(</span><span class="n">resource</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
+                                     <span class="n">openmode</span><span class="o">=</span><span class="n">openmode</span><span class="p">,</span>
+                                     <span class="n">name</span><span class="o">=</span><span class="s1">&#39;CombineLevels&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">]</span>
+        <span class="c1"># step 2</span>
+        <span class="k">if</span> <span class="n">rtype</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;MV&#39;</span><span class="p">):</span>
+            <span class="n">meta_resource</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">epyresource</span><span class="p">(</span><span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span>
+                                            <span class="n">openmode</span><span class="o">=</span><span class="n">openmode</span><span class="p">,</span>
+                                            <span class="n">name</span><span class="o">=</span><span class="s1">&#39;MultiValidities&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">meta_resource</span> <span class="o">=</span> <span class="n">resources</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">meta_resource</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

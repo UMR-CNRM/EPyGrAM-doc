@@ -1,0 +1,703 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.formats.FA — Interface-Class to the FA format &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.formats.LFA — Interface-Class to the LFA format" href="LFA.html" />
+    <link rel="prev" title="epygram.formats — Formats" href="formats.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="LFA.html" title="epygram.formats.LFA — Interface-Class to the LFA format"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="formats.html" title="epygram.formats — Formats"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="formats.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="LFA.html"
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code> — Interface-Class to the LFA format</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/FA.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-epygram.formats.FA">
+<span id="epygram-formats-fa-interface-class-to-the-fa-format"></span><h1><a class="reference internal" href="#module-epygram.formats.FA" title="epygram.formats.FA: Interface-Class to the FA format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code></a> — Interface-Class to the FA format<a class="headerlink" href="#module-epygram.formats.FA" title="Permalink to this headline">¶</a></h1>
+<p>Contains the class for FA format.</p>
+<hr class="docutils" />
+<dl class="function">
+<dt id="epygram.formats.FA.get_generic_fid">
+<code class="descclassname">epygram.formats.FA.</code><code class="descname">get_generic_fid</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#get_generic_fid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.get_generic_fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a generic fid from <strong>fieldname</strong> (via FaGribDef).</p>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.formats.FA.FaGribDef">
+<em class="property">class </em><code class="descclassname">epygram.formats.FA.</code><code class="descname">FaGribDef</code><span class="sig-paren">(</span><em>actual_init=True, concepts=['faFieldName', 'faModelName', 'faLevelName']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/fafields.html#FaGribDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FaGribDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../site/griberies.html#griberies.GribDef" title="griberies.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">griberies.GribDef</span></code></a></p>
+<p>Handle FA-related GRIB definition files.
+To add user files:
+a) use env vars GRIBAPI|ECCODES_DEFINITION_PATH or
+b) move it under {config.userlocaldir}/{FaGribDef.dirname}</p>
+<dl class="method">
+<dt id="epygram.formats.FA.FaGribDef.FA2GRIB">
+<code class="descname">FA2GRIB</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.FA2GRIB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert FA field name to GRIB fid, including vertical level identification.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</li>
+<li><strong>include_comments</strong> – if a comment is present if grib def, bring it in fid</li>
+<li><strong>fatal</strong> – if True and fieldname is not retrieved, raise a ValueError;
+else, return a default 255 fid</li>
+<li><strong>filter_non_GRIB_keys</strong> – filter out the non-GRIB keys that may be
+present in grib def of field</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FaGribDef.GRIB2FA">
+<code class="descname">GRIB2FA</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.GRIB2FA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for a unique matching field in tables.
+! WARNING ! the unicity might not be ensured depending on the version
+of grib definitions files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FaGribDef.lookup_FA">
+<code class="descname">lookup_FA</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.lookup_FA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for all the fields which FA name contain <strong>partial_fieldname</strong>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</li>
+<li><strong>include_comments</strong> – if a comment is present if grib def, bring it in fid</li>
+<li><strong>filter_non_GRIB_keys</strong> – filter out the non-GRIB keys that may be
+present in grib def of field</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FaGribDef.lookup_GRIB">
+<code class="descname">lookup_GRIB</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.lookup_GRIB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Look for all the fields which GRIB fid contain <strong>partial_fid</strong>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</li>
+<li><strong>include_comments</strong> – if a comment is present if grib def, bring it in fid</li>
+<li><strong>filter_non_GRIB_keys</strong> – filter out the non-GRIB keys that may be
+present in grib def of field</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.formats.FA.FA">
+<em class="property">class </em><code class="descclassname">epygram.formats.FA.</code><code class="descname">FA</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.resources.FileResource.FileResource</span></code></p>
+<p>Class implementing all specificities for FA resource format.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>cdiden</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - With openmode == ‘w’, identifies the FA by a keyword, usually the model abbreviation.<ul>
+<li>Optional. Default is ‘unknown’.</li>
+</ul>
+</li>
+<li><strong>default_compression</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Default compression for writing fields in resource.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</li>
+<li><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).<ul>
+<li>Optional. Default is False.</li>
+</ul>
+</li>
+<li><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.<ul>
+<li>Optional. Default is ‘FA’.</li>
+<li>Values: set([‘FA’])</li>
+</ul>
+</li>
+<li><strong>headername</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - With openmode == ‘w’, name of an existing header, for the new FA to use its geometry.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.<ul>
+<li>Values: set([‘w’, ‘a’, ‘append’, ‘write’, ‘read’, ‘r’])</li>
+<li>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</li>
+</ul>
+</li>
+<li><strong>processtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - With openmode == ‘w’, identifies the processus that produced the resource.<ul>
+<li>Optional. Default is ‘analysis’.</li>
+</ul>
+</li>
+<li><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - With openmode == ‘w’, describes the temporal validity of the resource.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.cdiden">
+<code class="descname">cdiden</code><a class="headerlink" href="#epygram.formats.FA.FA.cdiden" title="Permalink to this definition">¶</a></dt>
+<dd><p>With openmode == ‘w’, identifies the FA by a keyword, usually the model abbreviation (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a FA with ifsaux’ FAIRME.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.default_compression">
+<code class="descname">default_compression</code><a class="headerlink" href="#epygram.formats.FA.FA.default_compression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default compression for writing fields in resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.delfield">
+<code class="descname">delfield</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.delfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.delfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a field from file “in place”.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.extract_subdomain">
+<code class="descname">extract_subdomain</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.extract_subdomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a subdomain from the FA resource, given its fid
+and the geometry to use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pseudoname</strong> – must have syntax: ‘K*PARAMETER’,
+K being the kind of surface (S,P,H,V),
+* being a true star character,
+and PARAMETER being the name of the parameter requested, as named in
+FA.</li>
+<li><strong>geometry</strong> – is the geometry on which extract data.
+None to keep the geometry untouched.</li>
+<li><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
+V2DField (cf. <cite>epygram.geometries.vertical_coordinates</cite>
+possible values).</li>
+<li><strong>interpolation</strong> – <p>defines the interpolation function used to compute
+the profile points locations from the fields grid:</p>
+<ul>
+<li>if ‘nearest’, each horizontal point of the section is
+taken as the horizontal nearest neighboring gridpoint;</li>
+<li>if ‘linear’ (default), each horizontal point of the section is
+computed with linear spline interpolation;</li>
+<li>if ‘cubic’, each horizontal point of the section is
+computed with linear spline interpolation.</li>
+</ul>
+</li>
+<li><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
+(‘altitude’, ‘height’), the computation of heights is done without
+taking hydrometeors into account (in R computation) nor NH Pressure
+departure (Non-Hydrostatic data). Computation therefore faster.</li>
+<li><strong>global_shift_center</strong> – for global lon/lat grids, shift the center by the
+requested angle (in degrees). Enables a [0,360] grid
+to be shifted to a [-180,180] grid, for instance (with -180 argument).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.extractprofile">
+<code class="descname">extractprofile</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.extractprofile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a vertical profile from the FA resource, given its pseudoname
+and the geographic location (<em>lon</em>/<em>lat</em>) of the profile.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pseudoname</strong> – must have syntax: ‘K*PARAMETER’,
+K being the kind of surface (S,P,H,V),
+* being a true star character,
+and PARAMETER being the name of the parameter requested,
+as named in FA.</li>
+<li><strong>lon</strong> – the longitude of the desired point.</li>
+<li><strong>lat</strong> – the latitude of the desired point.
+If both None, extract a horizontally-averaged profile.</li>
+<li><strong>geometry</strong> – can replace <em>lon</em>/<em>lat</em>, geometry on which to extract
+data. If None, it is built from <em>lon</em>/<em>lat</em>.</li>
+<li><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
+V1DField, as number of GRIB2 norm:
+<a class="reference external" href="http://apps.ecmwf.int/codes/grib/format/grib2/ctables/4/5">http://apps.ecmwf.int/codes/grib/format/grib2/ctables/4/5</a>,
+(cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</li>
+<li><strong>interpolation</strong> – <p>defines the interpolation function used to compute
+the profile at requested lon/lat from the fields grid:</p>
+<ul>
+<li>if ‘nearest’ (default), extracts profile at the horizontal nearest neighboring gridpoint;</li>
+<li>if ‘linear’, computes profile with horizontal linear spline interpolation;</li>
+<li>if ‘cubic’, computes profile with horizontal cubic spline interpolation.</li>
+</ul>
+</li>
+<li><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
+(‘altitude’, ‘height’), the computation of heights is done without
+taking hydrometeors into account (in R computation) nor NH Pressure
+departure (Non-Hydrostatic data). Computation therefore faster.</li>
+<li><strong>external_distance</strong> – can be a dict containing the target point value
+and an external field on the same grid as self, to which the distance
+is computed within the 4 horizontally nearest points; e.g.
+{‘target_value’:4810, ‘external_field’:an_H2DField_with_same_geometry}.
+If so, the nearest point is selected with
+distance = abs(target_value - external_field.data)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.extractsection">
+<code class="descname">extractsection</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.extractsection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a vertical section from the FA resource, given its pseudoname
+and the geographic (lon/lat) coordinates of its ends.
+The section is returned as a V2DField.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>pseudoname</strong> – must have syntax: ‘K*PARAMETER’,
+K being the kind of surface (S,P,H,V),
+* being a true star character,
+and PARAMETER being the name of the parameter requested, as named in
+FA.</li>
+<li><strong>end1</strong> – must be a tuple (lon, lat).</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat).</li>
+<li><strong>geometry</strong> – can replace end1/end2, geometry on which to extract
+data. If None, defaults to
+linearily spaced positions computed from <em>points_number</em>.</li>
+<li><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</li>
+<li><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</li>
+<li><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of
+the V2DField aka typeOfFirstFixedSurface in GRIB2, (cf.
+<cite>epygram.geometries.vertical_coordinates</cite> possible values).</li>
+<li><strong>interpolation</strong> – <p>defines the interpolation function used to compute
+the profile points locations from the fields grid:</p>
+<ul>
+<li>if ‘nearest’, each horizontal point of the section is
+taken as the horizontal nearest neighboring gridpoint;</li>
+<li>if ‘linear’ (default), each horizontal point of the section is
+computed with linear spline interpolation;</li>
+<li>if ‘cubic’, each horizontal point of the section is
+computed with linear spline interpolation.</li>
+</ul>
+</li>
+<li><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
+(‘altitude’, ‘height’), the computation of heights is done without
+taking hydrometeors into account (in R computation) nor NH Pressure
+departure (Non-Hydrostatic data). Computation therefore faster.</li>
+<li><strong>global_shift_center</strong> – for global lon/lat grids, shift the center by the
+requested angle (in degrees). Enables a [0,360] grid
+to be shifted to a [-180,180] grid, for instance (with -180 argument).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="epygram.formats.FA.FA.field_type">
+<em class="property">classmethod </em><code class="descname">field_type</code><span class="sig-paren">(</span><em>fieldname</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.field_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.field_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get field type, either ‘H2D’ or the meta-data types registered in
+cls.sfxflddesc
+If field is unknown, supposed to be a H2D.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.fieldencoding">
+<code class="descname">fieldencoding</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.fieldencoding" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dict containing info about how the field <strong>fieldname</strong>
+is encoded: spectralness and compression. Interface to ifsaux’ FANION.
+If <strong>update_fieldscompression</strong>, store compression info in attribute
+fieldscompression.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.filename">
+<code class="descname">filename</code><a class="headerlink" href="#epygram.formats.FA.FA.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.find_fields_in_resource">
+<code class="descname">find_fields_in_resource</code><span class="sig-paren">(</span><em>seed=None</em>, <em>fieldtype=[]</em>, <em>generic=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.find_fields_in_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the fields from resource whose name match the given
+seed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>seed</strong> – might be a regular expression, a list of regular expressions
+or <em>None</em>. If <em>None</em> (default), returns the list of all fields in
+resource.</li>
+<li><strong>fieldtype</strong> – optional, among (‘H2D’, ‘Misc’) or a list of these strings.
+If provided, filters out the fields not of the given types.</li>
+<li><strong>generic</strong> – if True, returns complete fid’s,
+union of {‘FORMATname’:fieldname} and the according generic fid of
+the fields.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.fmtdelayedopen">
+<code class="descname">fmtdelayedopen</code><a class="headerlink" href="#epygram.formats.FA.FA.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.format">
+<code class="descname">format</code><a class="headerlink" href="#epygram.formats.FA.FA.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.headername">
+<code class="descname">headername</code><a class="headerlink" href="#epygram.formats.FA.FA.headername" title="Permalink to this definition">¶</a></dt>
+<dd><p>With openmode == ‘w’, name of an existing header, for the new FA to use its geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.listfields">
+<code class="descname">listfields</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.listfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.listfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list containing the FA identifiers of all the fields of the
+resource.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.modify_validity">
+<code class="descname">modify_validity</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.modify_validity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.modify_validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify the validity of the resource in place.</p>
+<p>All <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs to be passed to self.validity.set(<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.open">
+<code class="descname">open</code><span class="sig-paren">(</span><em>geometry=None</em>, <em>spectral_geometry=None</em>, <em>validity=None</em>, <em>openmode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a FA with ifsaux’ FAITOU, and initializes some attributes.</p>
+<p>Actually, as FAITOU needs an existing header with ‘w’ <em>openmode</em>,
+opening file in ‘w’ <em>openmode</em> will require else an existing header to
+which the resource is linked, or to create a header from a geometry via
+<em>_create_header_from_geometry()</em> function. This explains the eventual
+need for <em>geometry/spectral_geometry/validity</em> in <em>open()</em> method. If
+neither headername nor geometry are available, resource is not opened:
+the <em>open()</em> will be called again at first writing of a field in
+resource.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>geometry</strong> – optional, must be a
+<a class="reference internal" href="D3Geometry.html#module-epygram.geometries.D3Geometry" title="epygram.geometries.D3Geometry: 3-D Geometry class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code></a> (or heirs) instance.</li>
+<li><strong>spectral_geometry</strong> – optional, must be a
+<a class="reference internal" href="SpectralGeometry.html#module-epygram.geometries.SpectralGeometry" title="epygram.geometries.SpectralGeometry: Spectral Geometry class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code></a> instance.</li>
+<li><strong>validity</strong> – optional, must be a <a class="reference internal" href="base.html#epygram.base.FieldValidity" title="epygram.base.FieldValidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidity</span></code></a> or
+a <a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a> instance.</li>
+<li><strong>openmode</strong> – optional, to open with a specific openmode, eventually
+different from the one specified at initialization.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.openmode">
+<code class="descname">openmode</code><a class="headerlink" href="#epygram.formats.FA.FA.openmode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening mode (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.processtype">
+<code class="descname">processtype</code><a class="headerlink" href="#epygram.formats.FA.FA.processtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>With openmode == ‘w’, identifies the processus that produced the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.readfield">
+<code class="descname">readfield</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.readfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads one field, given its FA name, and returns a Field instance.
+Interface to Fortran routines from ‘ifsaux’.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fieldname</strong> – FA fieldname</li>
+<li><strong>getdata</strong> – if <em>False</em>, only metadata are read, the field do not
+contain data.</li>
+<li><strong>footprints_proxy_as_builder</strong> – if <em>True</em>, uses footprints.proxy
+to build fields.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.readfields">
+<code class="descname">readfields</code><span class="sig-paren">(</span><em>requestedfields=None</em>, <em>getdata=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.readfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.readfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> containing requested fields
+read in the resource.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>requestedfields</strong> – <p>might be:</p>
+<ul>
+<li>a regular expression (e.g. ‘S*WIND.[U,V].PHYS’)</li>
+<li>a list of FA fields identifiers with regular expressions (e.g.
+[‘SURFTEMPERATURE’, ‘S0[10-20]WIND.?.PHYS’])</li>
+<li>if not specified, interpretated as all fields that will be found in
+resource</li>
+</ul>
+</li>
+<li><strong>getdata</strong> – optional, if <em>False</em>, only metadata are read, the fields
+do not contain data. Default is <em>True</em>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.rename_field">
+<code class="descname">rename_field</code><span class="sig-paren">(</span><em>fieldname</em>, <em>new_name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.rename_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.rename_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames a field “in place”.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.sortfields">
+<code class="descname">sortfields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.sortfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.sortfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a sorted list of fields with regards to their name and nature,
+as a dict of lists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.split_UV">
+<code class="descname">split_UV</code><span class="sig-paren">(</span><em>fieldseed</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.split_UV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.split_UV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return two lists of fids corresponding respectively to U and V
+components of wind, given a <em>fieldseed</em>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.formats.FA.FA.validity">
+<code class="descname">validity</code><a class="headerlink" href="#epygram.formats.FA.FA.validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>With openmode == ‘w’, describes the temporal validity of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.what">
+<code class="descname">what</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the contents of the FA.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out</strong> – the output open file-like object.</li>
+<li><strong>details</strong> – ‘spectral’ if spectralness of fields is requested;
+‘compression’ if information about fields compression
+is requested.</li>
+<li><strong>sortfields</strong> – <strong>True</strong> if the fields have to be sorted by type.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.writefield">
+<code class="descname">writefield</code><span class="sig-paren">(</span><em>field</em>, <em>compression=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.writefield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.writefield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write a field in the resource.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>field</strong> – a <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a> instance or
+<a class="reference internal" href="H2DField.html#module-epygram.fields.H2DField" title="epygram.fields.H2DField: Horizontal 2-D Field class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code></a>.</li>
+<li><strong>compression</strong> – optional, a (possibly partial) dict containing
+parameters for field compression (in case of a
+<a class="reference internal" href="H2DField.html#module-epygram.fields.H2DField" title="epygram.fields.H2DField: Horizontal 2-D Field class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code></a>). Ex: {‘KNGRIB’: 2, ‘KDMOPL’: 5,
+‘KPUILA’: 1, ‘KSTRON’: 10, ‘KNBPDG’: 24, ‘KNBCSP’: 24}</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.formats.FA.FA.writefields">
+<code class="descname">writefields</code><span class="sig-paren">(</span><em>fieldset</em>, <em>compression=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.writefields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.FA.FA.writefields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write the fields of the <em>fieldset</em> in the resource.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fieldset</strong> – must be a <a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> instance.</li>
+<li><strong>compression</strong> – must be a list of compression dicts
+(cf. <em>writefield()</em> method), of length equal to the length of the
+<em>fieldset</em>, and with the same order.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="LFA.html" title="epygram.formats.LFA — Interface-Class to the LFA format"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="formats.html" title="epygram.formats — Formats"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,493 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram._plugins.with_vtk.D3VectorField &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram._plugins.with_vtk.D3VectorField</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Extend D3VectorField with vtk vector plotting.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">as_numpy_array</span>
+<span class="kn">from</span> <span class="nn">usevtk</span> <span class="k">import</span> <span class="n">modify_grid</span><span class="p">,</span> <span class="n">write_grid</span>
+
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">D3VirtualField</span>
+
+<span class="k">def</span> <span class="nf">activate</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Activate extension.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="vm">__name__</span> <span class="k">as</span> <span class="n">plugin_name</span>
+    <span class="kn">from</span> <span class="nn">epygram._plugins.util</span> <span class="k">import</span> <span class="n">notify_doc_requires_plugin</span>
+    <span class="n">notify_doc_requires_plugin</span><span class="p">([</span><span class="n">as_vtkGrid</span><span class="p">,</span> <span class="n">vtk_guess_param_from_field</span><span class="p">,</span>
+                                <span class="n">plot3DOutline</span><span class="p">,</span> <span class="n">plot3DVector</span><span class="p">,</span> <span class="n">plot3DStream</span><span class="p">,</span>
+                                <span class="n">_vtk_adjust_wind_to_proj</span><span class="p">],</span>
+                               <span class="n">plugin_name</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">D3VectorField</span>
+    <span class="n">D3VectorField</span><span class="o">.</span><span class="n">as_vtkGrid</span> <span class="o">=</span> <span class="n">as_vtkGrid</span>
+    <span class="n">D3VectorField</span><span class="o">.</span><span class="n">vtk_guess_param_from_field</span> <span class="o">=</span> <span class="n">vtk_guess_param_from_field</span>
+    <span class="n">D3VectorField</span><span class="o">.</span><span class="n">plot3DOutline</span> <span class="o">=</span> <span class="n">plot3DOutline</span>
+    <span class="n">D3VectorField</span><span class="o">.</span><span class="n">plot3DVector</span> <span class="o">=</span> <span class="n">plot3DVector</span>
+    <span class="n">D3VectorField</span><span class="o">.</span><span class="n">plot3DStream</span> <span class="o">=</span> <span class="n">plot3DStream</span>
+    <span class="n">D3VectorField</span><span class="o">.</span><span class="n">_vtk_adjust_wind_to_proj</span> <span class="o">=</span> <span class="n">_vtk_adjust_wind_to_proj</span>
+
+
+<span class="k">def</span> <span class="nf">as_vtkGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span> <span class="n">grid_type</span><span class="p">,</span>
+               <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">module_name</span><span class="o">=</span><span class="s1">&#39;module&#39;</span><span class="p">,</span> <span class="n">vector_name</span><span class="o">=</span><span class="s1">&#39;vector&#39;</span><span class="p">,</span>
+               <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">version</span><span class="o">=</span><span class="s1">&#39;XML&#39;</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;ZLib&#39;</span><span class="p">,</span>
+               <span class="n">compression_level</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+               <span class="n">transform_wind</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a vtkStructuredGrid filled with the field</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param grid_type: can be:</span>
+<span class="sd">        - sgrid_point: structured grid filled with points</span>
+<span class="sd">        - sgrid_cell: structured grid filled with hexahedron</span>
+<span class="sd">                      If the field is 2D, a zero thickness is used.</span>
+<span class="sd">                      If the field is 3D, thickness are approximately computed</span>
+<span class="sd">        - ugrid_point: unstructured grid filled with points</span>
+<span class="sd">        - ugrid_cell: unstructured grid build filled with cells</span>
+<span class="sd">                      If the field is 2D, a zero thickness is used.</span>
+<span class="sd">                      If the field is 3D, thickness are approximately computed</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param filename: if not None, resulting grid will be written into filename</span>
+<span class="sd">    :param module_name: name to give to the scalar field containing the module</span>
+<span class="sd">                        (useful with the grid option)</span>
+<span class="sd">    :param vector_name&#39;: name of the vector field (useful with the grid option)</span>
+<span class="sd">    :param grid: if grid is not None, the method will add the data to it.</span>
+<span class="sd">    :param version: must be &#39;legacy&#39; or &#39;XML&#39;, used with filename</span>
+<span class="sd">    :param binary: True (default) for a binary file, used with filename</span>
+<span class="sd">    :param compression: must be None, &#39;LZ4&#39; or &#39;ZLib&#39;</span>
+<span class="sd">                        only used for binary XML</span>
+<span class="sd">    :param compression_level: between 1 and 9, only used for binary XML Zlib-compressed</span>
+<span class="sd">    :param transform_wind: to rotate ans scale wind according to vtk coordinates:</span>
+<span class="sd">            0: do nothing</span>
+<span class="sd">            1: scale the w component to take into account the z axis expansion,</span>
+<span class="sd">               the total module is not preserved but the horizontal one is preserved.</span>
+<span class="sd">               The horizontal components must be oriented along the vtk axes.</span>
+<span class="sd">            2: same as option 1 but the total module is preserved whereas the horizontal</span>
+<span class="sd">               one is not preserved</span>
+<span class="sd">            3: same as option 1 but, in addition, all the components are rotated.</span>
+<span class="sd">               The horizontal components must be oriented along north-south and east-west axes.</span>
+<span class="sd">            4: same as option 3 but (as for option 2), the total module is preserved whereas</span>
+<span class="sd">               the horizontal one is not preserved</span>
+<span class="sd">    </span>
+<span class="sd">    If grid_type is &#39;sgrid_point&#39;, the result is the grid; otherwise</span>
+<span class="sd">    the result is the function is the last filter used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>  <span class="c1"># @UnresolvedImport</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;For now, animation are not possible, only one validity allowed.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Spectral field, please use sp2gp() before.&quot;</span><span class="p">)</span>
+
+    <span class="n">field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vtk_adjust_wind_to_proj</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="n">transform_wind</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>  <span class="c1"># We need 3 components to form a vtk vector</span>
+        <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">)</span>
+
+    <span class="c1"># CAUTION: this part is non trivial and is certainly due to C versus F order</span>
+    <span class="c1"># see: http://vtk.1045678.n5.nabble.com/Array-order-in-VTK-td5740413.html</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">as_numpy_array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">grid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">make_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">epygram</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">epygram</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="ow">and</span> <span class="n">grid</span><span class="o">.</span><span class="n">epygram</span><span class="p">[</span><span class="s1">&#39;subzone&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">subzone</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;To add a value to an existing grid, geometries must be the same&quot;</span><span class="p">)</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetArrayName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">())]</span>
+        <span class="k">if</span> <span class="n">module_name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;There already is an array with same name: &quot;</span> <span class="o">+</span> <span class="n">module_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">vector_name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;There already is an array with same name: &quot;</span> <span class="o">+</span> <span class="n">vector_name</span><span class="p">)</span>
+
+    <span class="n">module</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_module</span><span class="p">()</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">grid</span><span class="o">.</span><span class="n">BlankPoint</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">dsa</span><span class="o">.</span><span class="n">numpyTovtkDataArray</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">module_name</span><span class="p">))</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveScalars</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">numpyTovtkDataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vector_name</span><span class="p">)</span>
+    <span class="n">vector</span><span class="o">.</span><span class="n">SetNumberOfComponents</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveVectors</span><span class="p">(</span><span class="n">vector_name</span><span class="p">)</span>
+
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">modify_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid_type</span><span class="p">,</span> <span class="n">datamin</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">write_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="n">binary</span><span class="p">,</span>
+                   <span class="n">compression</span><span class="o">=</span><span class="n">compression</span><span class="p">,</span> <span class="n">compression_level</span><span class="o">=</span><span class="n">compression_level</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grid</span>
+
+
+<span class="k">def</span> <span class="nf">vtk_guess_param_from_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cf. D3Field.vtk_guess_param_from_field()&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vtk_guess_param_from_field</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DOutline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cf. D3Field.plot3DOutline()&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot3DOutline</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_vtk_adjust_wind_to_proj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span> <span class="n">transform_wind</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a new wind field with updated components</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param field: wind field to manipulate</span>
+<span class="sd">    :param transform_wind: to rotate ans scale wind according to vtk coordinates:</span>
+<span class="sd">            0: do nothing</span>
+<span class="sd">            1: scale the w component to take into account the z axis expansion,</span>
+<span class="sd">               the total module is not preserved but the horizontal one is preserved.</span>
+<span class="sd">               The horizontal components must be oriented along the vtk axes.</span>
+<span class="sd">            2: same as option 1 but the total module is preserved whereas the horizontal</span>
+<span class="sd">               one is not preserved</span>
+<span class="sd">            3: same as option 1 but, in addition, all the components are rotated.</span>
+<span class="sd">               The horizontal components must be oriented along north-south and east-west axes.</span>
+<span class="sd">            4: same as option 3 but (as for option 2), the total module is preserved whereas</span>
+<span class="sd">               the horizontal one is not preserved</span>
+<span class="sd">    :return: new wind field</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;field must have 3 components&#39;</span>
+    <span class="n">new_field</span> <span class="o">=</span> <span class="bp">self</span>
+
+    <span class="k">if</span> <span class="n">transform_wind</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">),</span> \
+               <span class="s2">&quot;vertical coordinates must be expressed in meters to adjust components to projection&quot;</span>
+        <span class="n">new_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">D3VirtualField</span><span class="p">):</span>
+            <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">as_real_field</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transform_wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">D3VirtualField</span><span class="p">):</span>
+                <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">as_real_field</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">D3VirtualField</span><span class="p">):</span>
+                <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">as_real_field</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+
+        <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">lons</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.</span>
+        
+        <span class="n">dv_llz</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="n">p0_llz</span> <span class="o">=</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span>
+        <span class="n">p0_vtk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rendering</span><span class="o">.</span><span class="n">proj3d</span><span class="p">(</span><span class="o">*</span><span class="n">p0_llz</span><span class="p">))</span>
+        <span class="n">p1_llz</span> <span class="o">=</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">60.</span> <span class="o">*</span> <span class="mi">1852</span><span class="p">),</span> <span class="n">z</span> <span class="c1">#1 meter on earth</span>
+        <span class="n">p1_vtk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rendering</span><span class="o">.</span><span class="n">proj3d</span><span class="p">(</span><span class="o">*</span><span class="n">p1_llz</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">transform_wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="n">p2_llz</span> <span class="o">=</span> <span class="n">lons</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">60.</span> <span class="o">*</span> <span class="mi">1852</span><span class="p">),</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span> <span class="c1">#1 meter on earth at the equator</span>
+            <span class="n">p2_vtk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rendering</span><span class="o">.</span><span class="n">proj3d</span><span class="p">(</span><span class="o">*</span><span class="n">p2_llz</span><span class="p">))</span>
+        <span class="n">p3_llz</span> <span class="o">=</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span> <span class="o">+</span> <span class="n">dv_llz</span>
+        <span class="n">p3_vtk</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">rendering</span><span class="o">.</span><span class="n">proj3d</span><span class="p">(</span><span class="o">*</span><span class="n">p3_llz</span><span class="p">))</span>
+        
+        <span class="n">dh1_llz</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">p0_llz</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">p1_llz</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span> <span class="c1">#to get the exact value depending on geoid choice</span>
+        <span class="k">if</span> <span class="n">transform_wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+            <span class="n">dh2_llz</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">distance</span><span class="p">(</span><span class="n">p0_llz</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">p2_llz</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="k">if</span> <span class="n">transform_wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span>
+        <span class="n">new_components</span> <span class="o">=</span> <span class="p">[(</span><span class="n">p1_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">v</span> <span class="o">/</span> <span class="n">dh1_llz</span> <span class="o">+</span> \
+                          <span class="p">(</span><span class="n">p2_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span> <span class="o">/</span> <span class="n">dh2_llz</span> <span class="o">+</span> \
+                          <span class="p">(</span><span class="n">p3_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">w</span> <span class="o">/</span> <span class="n">dv_llz</span>
+                          <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">new_components</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">elif</span> <span class="n">transform_wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">dh1_vtk</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">p1_vtk</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> \
+                             <span class="p">(</span><span class="n">p1_vtk</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> \
+                             <span class="p">(</span><span class="n">p1_vtk</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">dv_vtk</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">p3_vtk</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> \
+                            <span class="p">(</span><span class="n">p3_vtk</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> \
+                            <span class="p">(</span><span class="n">p3_vtk</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">p0_vtk</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">dv_vtk</span> <span class="o">/</span> <span class="n">dv_llz</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">dh1_llz</span> <span class="o">/</span> <span class="n">dh1_vtk</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">transform_wind</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">):</span>
+        <span class="n">temp_module</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">to_module</span><span class="p">()</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+        <span class="n">ratio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_module</span><span class="p">()</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span> <span class="o">/</span>  <span class="n">temp_module</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">new_field</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">temp_module</span> <span class="o">==</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">temp_module</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">temp_module</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">*</span> <span class="n">ratio</span><span class="p">[</span><span class="n">temp_module</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">]</span>
+            <span class="n">c</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">new_field</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DVector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                 <span class="n">samplerate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">arrowScaleFactor</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                 <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">transform_wind</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method adds contour lines and/or colorize the field. If</span>
+<span class="sd">    the field is 3D, contours appear as isosurface.</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param samplerate: if not None, must be a dictionary. Allowed keys are</span>
+<span class="sd">                    &#39;x&#39;, &#39;y&#39; and &#39;z&#39; and values are the sample rate in the given</span>
+<span class="sd">                    direction. For example {&#39;x&#39;:3} means take one over 3 points</span>
+<span class="sd">                    in the x direction</span>
+<span class="sd">    :param arrowScaleFactor: scale factor used to plot the vector</span>
+<span class="sd">    :param color: color name or lookup table or color transfer function</span>
+<span class="sd">                  to associate colors to the vector norms</span>
+<span class="sd">    :param opacity: opacity value</span>
+<span class="sd">    :param colorbar: True to plot a colorbar</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param transform_wind: to rotate ans scale wind according to vtk coordinates:</span>
+<span class="sd">            0: do nothing</span>
+<span class="sd">            1: scale the w component to take into account the z axis expansion,</span>
+<span class="sd">               the total module is not preserved but the horizontal one is preserved.</span>
+<span class="sd">               The horizontal components must be oriented along the vtk axes.</span>
+<span class="sd">            2: same as option 1 but the total module is preserved whereas the horizontal</span>
+<span class="sd">               one is not preserved</span>
+<span class="sd">            3: same as option 1 but, in addition, all the components are rotated.</span>
+<span class="sd">               The horizontal components must be oriented along north-south and east-west axes.</span>
+<span class="sd">            4: same as option 3 but (as for option 2), the total module is preserved whereas</span>
+<span class="sd">               the horizontal one is not preserved</span>
+<span class="sd">    :return: actor, mapper, colorbaractor</span>
+
+<span class="sd">    Note: the wind components, whatever is the transform_wind option, must contain</span>
+<span class="sd">          the map factor corrections.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+
+    <span class="c1"># generate grid and seed grid</span>
+    <span class="k">if</span> <span class="n">samplerate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">samplerate</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="s1">&#39;sgrid_point&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="p">,</span>
+                           <span class="n">transform_wind</span><span class="o">=</span><span class="n">transform_wind</span><span class="p">)</span>
+    <span class="n">seedGrid</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkExtractGrid</span><span class="p">()</span>
+    <span class="n">seedGrid</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">seedGrid</span><span class="o">.</span><span class="n">SetSampleRate</span><span class="p">(</span><span class="n">samplerate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                           <span class="n">samplerate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                           <span class="n">samplerate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">arrowSource</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkArrowSource</span><span class="p">()</span>
+    <span class="n">glyphMapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkGlyph3DMapper</span><span class="p">()</span>
+    <span class="n">glyphMapper</span><span class="o">.</span><span class="n">SetSourceConnection</span><span class="p">(</span><span class="n">arrowSource</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">glyphMapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">seedGrid</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">glyphMapper</span><span class="o">.</span><span class="n">SetScaleFactor</span><span class="p">(</span><span class="n">arrowScaleFactor</span><span class="p">)</span>
+    <span class="n">glyphActor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">glyphActor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">glyphMapper</span><span class="p">)</span>
+    <span class="n">scalarBar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkLookupTable</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkColorTransferFunction</span><span class="p">)):</span>
+        <span class="n">glyphMapper</span><span class="o">.</span><span class="n">SetColorModeToMapScalars</span><span class="p">()</span>
+        <span class="n">glyphMapper</span><span class="o">.</span><span class="n">UseLookupTableScalarRangeOn</span><span class="p">()</span>
+        <span class="n">glyphMapper</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
+            <span class="n">scalarBar</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkScalarBarActor</span><span class="p">()</span>
+            <span class="n">scalarBar</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor2D</span><span class="p">(</span><span class="n">scalarBar</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">glyphMapper</span><span class="o">.</span><span class="n">ScalarVisibilityOff</span><span class="p">()</span>
+        <span class="n">glyphActor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetColor</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkNamedColors</span><span class="p">()</span><span class="o">.</span><span class="n">GetColor3d</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
+    <span class="n">glyphActor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetOpacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">glyphActor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">glyphActor</span><span class="p">,</span> <span class="n">glyphMapper</span><span class="p">,</span> <span class="n">scalarBar</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DStream</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                 <span class="n">samplerate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">maxLength</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tubesRadius</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Blue&#39;</span><span class="p">,</span>
+                 <span class="n">opacity</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                 <span class="n">plot_tube</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">transform_wind</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method adds contour lines and/or colorize the field. If</span>
+<span class="sd">    the field is 3D, contours appear as isosurface.</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param samplerate: if not None, must be a dictionary. Allowed keys are</span>
+<span class="sd">                    &#39;x&#39;, &#39;y&#39; and &#39;z&#39; and values are the sample rate in the given</span>
+<span class="sd">                    direction. For example {&#39;x&#39;:3} means take one over 3 points</span>
+<span class="sd">                    in the x direction</span>
+<span class="sd">    :param maxLength: integration length to build the stream lines and tubes</span>
+<span class="sd">    :param tubesRadius: radius of the tubes</span>
+<span class="sd">    :param color: a color name, a vtk.vtkColorTransferFunction or a vtk.vtkLookupTable</span>
+<span class="sd">                  to associate colors to the stream lines or tubes</span>
+<span class="sd">    :param opacity: opacity value</span>
+<span class="sd">    :param plot_tube: True to plot the tubes instead of lines</span>
+<span class="sd">    :param colorbar: True to plot a colorbar</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param transform_wind: to rotate ans scale wind according to vtk coordinates:</span>
+<span class="sd">            0: do nothing</span>
+<span class="sd">            1: scale the w component to take into account the z axis expansion,</span>
+<span class="sd">               the total module is not preserved but the horizontal one is preserved.</span>
+<span class="sd">               The horizontal components must be oriented along the vtk axes.</span>
+<span class="sd">            2: same as option 1 but the total module is preserved whereas the horizontal</span>
+<span class="sd">               one is not preserved</span>
+<span class="sd">            3: same as option 1 but, in addition, all the components are rotated.</span>
+<span class="sd">               The horizontal components must be oriented along north-south and east-west axes.</span>
+<span class="sd">            4: same as option 3 but (as for option 2), the total module is preserved whereas</span>
+<span class="sd">               the horizontal one is not preserved</span>
+<span class="sd">    :return: actor, mapper, colorbaractor</span>
+<span class="sd">    </span>
+<span class="sd">    Note: the wind components, whatever is the transform_wind option, must contain</span>
+<span class="sd">          the map factor corrections.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+
+    <span class="c1"># generate grid and seed grid</span>
+    <span class="k">if</span> <span class="n">samplerate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">samplerate</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="s1">&#39;sgrid_point&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="p">,</span>
+                           <span class="n">transform_wind</span><span class="o">=</span><span class="n">transform_wind</span><span class="p">)</span>
+    <span class="n">seedGrid</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkExtractGrid</span><span class="p">()</span>
+    <span class="n">seedGrid</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">seedGrid</span><span class="o">.</span><span class="n">SetSampleRate</span><span class="p">(</span><span class="n">samplerate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                           <span class="n">samplerate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                           <span class="n">samplerate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c1"># Using directly seedGrid sometimes work</span>
+    <span class="c1"># But using a vtkStructuredGridGeometryFilter in between</span>
+    <span class="c1"># helps at suppressing some error messages about extent</span>
+    <span class="n">seedGeom</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStructuredGridGeometryFilter</span><span class="p">()</span>
+    <span class="n">seedGeom</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">seedGrid</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+
+    <span class="n">scalarRange</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetScalars</span><span class="p">()</span><span class="o">.</span><span class="n">GetRange</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">maxLength</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">maxVelocity</span> <span class="o">=</span> <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetVectors</span><span class="p">()</span><span class="o">.</span><span class="n">GetMaxNorm</span><span class="p">()</span>
+        <span class="n">maxLength</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">grid</span><span class="o">.</span><span class="n">GetLength</span><span class="p">()</span> <span class="o">/</span> <span class="n">maxVelocity</span>
+    <span class="n">streamers</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStreamTracer</span><span class="p">()</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">DebugOn</span><span class="p">()</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">SetSourceConnection</span><span class="p">(</span><span class="n">seedGeom</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">SetMaximumPropagation</span><span class="p">(</span><span class="n">maxLength</span><span class="p">)</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">SetInitialIntegrationStep</span><span class="p">(</span><span class="o">.</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">SetMinimumIntegrationStep</span><span class="p">(</span><span class="o">.</span><span class="mi">01</span><span class="p">)</span>
+    <span class="n">streamers</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">plot_tube</span><span class="p">:</span>
+        <span class="n">tubes</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkTubeFilter</span><span class="p">()</span>
+        <span class="n">tubes</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">streamers</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+        <span class="n">tubes</span><span class="o">.</span><span class="n">SetRadius</span><span class="p">(</span><span class="n">tubesRadius</span><span class="p">)</span>
+        <span class="n">tubes</span><span class="o">.</span><span class="n">SetNumberOfSides</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+        <span class="n">tubes</span><span class="o">.</span><span class="n">SetVaryRadius</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">mapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">((</span><span class="n">tubes</span> <span class="k">if</span> <span class="n">plot_tube</span> <span class="k">else</span> <span class="n">streamers</span><span class="p">)</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">mapper</span><span class="o">.</span><span class="n">SetScalarRange</span><span class="p">(</span><span class="n">scalarRange</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scalarRange</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">actor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">actor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">mapper</span><span class="p">)</span>
+    <span class="n">scalarBar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkLookupTable</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkColorTransferFunction</span><span class="p">):</span>
+        <span class="n">mapper</span><span class="o">.</span><span class="n">UseLookupTableScalarRangeOn</span><span class="p">()</span>
+        <span class="n">mapper</span><span class="o">.</span><span class="n">InterpolateScalarsBeforeMappingOn</span><span class="p">()</span>
+        <span class="n">mapper</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
+            <span class="n">scalarBar</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkScalarBarActor</span><span class="p">()</span>
+            <span class="n">scalarBar</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor2D</span><span class="p">(</span><span class="n">scalarBar</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mapper</span><span class="o">.</span><span class="n">ScalarVisibilityOff</span><span class="p">()</span>
+        <span class="n">actor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetColor</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkNamedColors</span><span class="p">()</span><span class="o">.</span><span class="n">GetColor3d</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
+    <span class="n">actor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetOpacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">actor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">actor</span><span class="p">,</span> <span class="n">mapper</span><span class="p">,</span> <span class="n">scalarBar</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

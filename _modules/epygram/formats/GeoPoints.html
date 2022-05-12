@@ -1,0 +1,625 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.formats.GeoPoints &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.formats.GeoPoints</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the class for GeoPoints format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">footprints</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FPList</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span>
+<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="k">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="k">import</span> <span class="n">PointGeometry</span><span class="p">,</span> <span class="n">VGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.H2DGeometry</span> <span class="k">import</span> <span class="n">H2DUnstructuredGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span><span class="p">,</span> <span class="n">PointField</span><span class="p">,</span> <span class="n">D3Field</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GeoPoints&#39;</span><span class="p">]</span>
+
+<span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="GeoPoints"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints">[docs]</a><span class="k">class</span> <span class="nc">GeoPoints</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class implementing all specificities for GeoPoints resource format.</span>
+
+<span class="sd">    Format:</span>
+
+<span class="sd">    &lt;beginning of file&gt;</span>
+<span class="sd">    #GEO</span>
+<span class="sd">    #PARAMETER = any name or character string</span>
+<span class="sd">    #LAT LON DATE TIME VALUE</span>
+<span class="sd">    #DATA</span>
+<span class="sd">    32.2671  -12.5501   20140417       21       2.269112E+02</span>
+<span class="sd">    ...</span>
+<span class="sd">    &lt;till end of file&gt;</span>
+<span class="sd">    The set of keys describing each point is defined in its &#39;columns&#39;</span>
+<span class="sd">    attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;GeoPoints&#39;</span><span class="p">]),</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;GeoPoints&#39;</span><span class="p">),</span>
+            <span class="n">parameter</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;The name of the parameter whose data is in the&quot;</span> <span class="o">+</span>
+                     <span class="s2">&quot; *value* field.&quot;</span><span class="p">),</span>
+            <span class="n">columns</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPList</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;The columns of the geopoints, i.e. the set of&quot;</span> <span class="o">+</span>
+                     <span class="s2">&quot; keys describing each point.&quot;</span><span class="p">),</span>
+            <span class="n">no_header</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;If True, do not write header (openmode=&#39;w&#39;).&quot;</span><span class="p">),</span>
+            <span class="n">other_attributes</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;other key:value pairs in header.&quot;</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">FPDict</span><span class="p">({})),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GeoPoints</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmtdelayedopen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+<div class="viewcode-block" id="GeoPoints.open"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+             <span class="n">parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">openmode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+             <span class="n">other_attributes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens a GeoPoint.</span>
+
+<span class="sd">        :param parameter: name of the parameter in header (openmode=&#39;w&#39;).</span>
+<span class="sd">        :param columns: list of all the items to be written for each point</span>
+<span class="sd">          (openmode=&#39;w&#39;).</span>
+<span class="sd">        :param openmode: optional, to open with a specific openmode, eventually</span>
+<span class="sd">          different from the one specified at initialization.</span>
+<span class="sd">        :param other_attributes: other key:value pairs to be written in header</span>
+<span class="sd">          (openmode=&#39;w&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GeoPoints</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">openmode</span><span class="o">=</span><span class="n">openmode</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="c1"># check format is GeoPoints</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">isgeo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">UnicodeDecodeError</span><span class="p">:</span>
+                <span class="n">isgeo</span> <span class="o">=</span> <span class="s1">&#39;False&#39;</span>
+            <span class="k">if</span> <span class="n">isgeo</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;#GEO&#39;</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;this resource is not a GeoPoints one.&quot;</span><span class="p">)</span>
+            <span class="c1"># read header</span>
+            <span class="n">header</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">headerlength</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">headerline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">while</span> <span class="n">headerline</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;#DATA&#39;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">headerlength</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="s1">&#39;=&#39;</span> <span class="ow">in</span> <span class="n">headerline</span><span class="p">:</span>
+                    <span class="n">metadata</span> <span class="o">=</span> <span class="n">headerline</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+                    <span class="n">header</span><span class="p">[</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">elif</span> <span class="s1">&#39;FORMAT&#39;</span> <span class="ow">in</span> <span class="n">headerline</span><span class="p">:</span>
+                    <span class="n">metadata</span> <span class="o">=</span> <span class="n">headerline</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                    <span class="n">header</span><span class="p">[</span><span class="n">metadata</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span> <span class="o">=</span> <span class="n">metadata</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># description of columns</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">headerline</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+                <span class="n">headerline</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">headerlength</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">for</span> <span class="n">meta</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">meta</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;PARAMETER&#39;</span><span class="p">,</span> <span class="p">]:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="n">meta</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="n">meta</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">other_attributes</span><span class="p">[</span><span class="n">meta</span><span class="p">]</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="n">meta</span><span class="p">]</span>
+            <span class="c1"># initializations</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">empty</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+            <span class="c1"># object initializations</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">empty</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">parameter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameter</span>
+            <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">columns</span>
+            <span class="k">if</span> <span class="n">other_attributes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_attributes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;other_attributes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">other_attributes</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">other_attributes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;FORMAT&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_attributes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Double specification: columns overwritten by FORMAT.&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_attributes</span><span class="p">[</span><span class="s1">&#39;FORMAT&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;XYV&#39;</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LON&#39;</span><span class="p">,</span> <span class="s1">&#39;LAT&#39;</span><span class="p">,</span> <span class="s1">&#39;VALUE&#39;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Not yet. Cf. https://software.ecmwf.int/wiki/display/METV/Geopoints for implementing.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_header</span><span class="p">:</span>
+                    <span class="c1"># header initializations</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#GEO</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">other_attributes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="s1">&#39; = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#PARAMETER = &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#DATA</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">epylog</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;cannot open GeoPoints in &#39;w&#39; mode without&quot;</span> <span class="o">+</span>
+                             <span class="s2">&quot; attributes *parameter* and *columns* set.&quot;</span> <span class="o">+</span>
+                             <span class="s2">&quot; Not open yet.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GeoPoints.close"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes a GeoPoints.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_file&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="GeoPoints.listfields"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.listfields">[docs]</a>    <span class="k">def</span> <span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list containing the LFI identifiers of all the fields of the resource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">GeoPoints</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">listfields</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actual listfields() method for GeoPoints.</span>
+
+<span class="sd">        :param complete: - if True method returns a list of {&#39;GeoPoints&#39;:GeoPoints_fid, &#39;generic&#39;:generic_fid}</span>
+<span class="sd">                         - if False method return a list of GeoPoints_fid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">complete</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[{</span><span class="s1">&#39;GeoPoints&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">,</span> <span class="s1">&#39;generic&#39;</span><span class="p">:{}}]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">]</span>
+
+<span class="c1">################</span>
+<span class="c1"># ABOUT POINTS #</span>
+<span class="c1">################</span>
+
+<div class="viewcode-block" id="GeoPoints.countpoints"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.countpoints">[docs]</a>    <span class="k">def</span> <span class="nf">countpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counts and returns the number of points in the resource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">wasopen</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">))</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">headerlength</span>
+        <span class="k">if</span> <span class="n">wasopen</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headerlength</span><span class="p">):</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">n</span></div>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
+                  <span class="n">footprints_builder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">as_points</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads the GeoPoints.</span>
+
+<span class="sd">        :param parameter: is the name of the parameter to read</span>
+<span class="sd">          (it exists only for compatibility with other formats)</span>
+<span class="sd">        :param footprints_builder: if *True*, uses footprints.proxy to build</span>
+<span class="sd">          fields. Defaults to False for performance reasons.</span>
+<span class="sd">        :param *as_points*: if *True*, returns a collection of points instead</span>
+<span class="sd">          of a single field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;cannot read fields in resource if with&quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot; openmode == &#39;w&#39; or &#39;a&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">parameter</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;This file does not contain the requested parameter.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Rewind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headerlength</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+        <span class="n">specialValues_list</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;DATE&#39;</span><span class="p">:[],</span> <span class="s1">&#39;TIME&#39;</span><span class="p">:[],</span> <span class="s1">&#39;LEVEL&#39;</span><span class="p">:[]}</span>  <span class="c1"># To contain the date, time and date values</span>
+        <span class="n">specialValues_cst</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;DATE&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;TIME&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;LEVEL&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">}</span>  <span class="c1"># To know if date, time and level are constant or not</span>
+        <span class="n">specialValues_prev</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Previous values of date, time and leve to detect changes in values</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">latitudes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">longitudes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">nb</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">):</span>
+            <span class="n">pointvals</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+            <span class="n">point</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">pointvals</span><span class="p">))</span>
+            <span class="c1"># We store date, time and levels as a list of one value if parameter is constant</span>
+            <span class="c1"># or as a multi-values list if the parameter varies</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;TIME&#39;</span><span class="p">,</span> <span class="s1">&#39;LEVEL&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">nb</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">specialValues_prev</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="n">item</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="ow">and</span> <span class="n">specialValues_prev</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">!=</span> <span class="n">point</span><span class="p">[</span><span class="n">item</span><span class="p">]:</span>
+                        <span class="n">specialValues_cst</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="n">specialValues_list</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb</span>
+                    <span class="k">if</span> <span class="n">nb</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="n">item</span><span class="p">]:</span>
+                        <span class="n">specialValues_list</span><span class="p">[</span><span class="n">item</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;VALUE&#39;</span><span class="p">]))</span>
+            <span class="n">latitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;LAT&#39;</span><span class="p">]))</span>
+            <span class="n">longitudes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;LON&#39;</span><span class="p">]))</span>
+            <span class="n">nb</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="n">field_structure</span> <span class="o">=</span> <span class="s1">&#39;Point&#39;</span> <span class="k">if</span> <span class="n">nb</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;H2D&#39;</span>
+
+        <span class="k">if</span> <span class="n">footprints_builder</span><span class="p">:</span>
+            <span class="n">field_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span>
+            <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
+            <span class="n">vcoord_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">field_structure</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">:</span>
+                <span class="n">field_builder</span> <span class="o">=</span> <span class="n">PointField</span>
+                <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">PointGeometry</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">field_builder</span> <span class="o">=</span> <span class="n">H2DField</span>
+                <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">H2DUnstructuredGeometry</span>
+            <span class="n">vcoord_builder</span> <span class="o">=</span> <span class="n">VGeometry</span>
+
+        <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+                                           <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">]]</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">vcoord_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+                                     <span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+                                     <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">])</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geom_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">field_structure</span><span class="p">,</span>
+                                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
+                                <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+                                <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
+                                <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:</span><span class="n">longitudes</span><span class="p">,</span>
+                                      <span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">latitudes</span><span class="p">},</span>
+                                <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+                                <span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]:</span>
+                <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb</span>
+            <span class="k">if</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]:</span>
+                <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">nb</span>
+        <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])):</span>
+                <span class="n">date</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]),</span>
+                                                                  <span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">]),</span>
+                                                                  <span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">])):</span>
+                <span class="n">time</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+                    <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">time</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]),</span>
+                                                                  <span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">dates</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">])):</span>
+                    <span class="n">delta</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">hour</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">+</span>
+                                                       <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">minute</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span>
+                                                       <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">second</span><span class="p">)</span>
+                    <span class="n">dates</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">dates</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">dates</span> <span class="o">=</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]:</span>
+                <span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="n">dates</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">()</span>
+
+        <span class="n">field</span> <span class="o">=</span> <span class="n">field_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">field_structure</span><span class="p">,</span>
+                              <span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">parameter</span><span class="p">},</span>
+                              <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
+                              <span class="n">validity</span><span class="o">=</span><span class="n">validity</span><span class="p">)</span>
+        <span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">as_points</span><span class="p">:</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">as_points</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">field</span>
+
+<div class="viewcode-block" id="GeoPoints.writefield"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.writefield">[docs]</a>    <span class="k">def</span> <span class="nf">writefield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span>
+                   <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;UNKNOWN&#39;</span><span class="p">,</span>
+                   <span class="n">fidkey_for_parameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span>
+                   <span class="n">llprecision</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_lonlat_precision</span><span class="p">,</span>
+                   <span class="n">precision</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_precision</span><span class="p">,</span>
+                   <span class="n">col_width</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_col_width</span><span class="p">,</span>
+                   <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write a field in the resource.</span>
+
+<span class="sd">        :param field: a :class:`epygram.fields.D3Field` or a</span>
+<span class="sd">          :class:`epygram.base.FieldSet` of :class:`epygram.fields.PointField`,</span>
+<span class="sd">          or a dict {&#39;lon&#39;:[...], &#39;lat&#39;:[...], &#39;value&#39;:[...], ...}. The keys</span>
+<span class="sd">          of field that are not in the *columns* are ignored. The keys of the</span>
+<span class="sd">          columns that are not in the field are filled by zeros.</span>
+<span class="sd">          At least &#39;lon&#39; and &#39;lat&#39; are necessary.</span>
+<span class="sd">        :param parameter: the name of the parameter, to be given if *field* is a</span>
+<span class="sd">          dict and if it has not been given at opening.</span>
+<span class="sd">        :param order: optional, for a rectangular D3Field, whether to flatten</span>
+<span class="sd">          2D arrays in &#39;C&#39; (row-major) or &#39;F&#39; (Fortran, column-major) order.</span>
+<span class="sd">        :param llprecision: precision (number of digits) in write for lon/lat.</span>
+<span class="sd">        :param precision: precision (number of digits) in write for other floats.</span>
+<span class="sd">        :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;).</span>
+<span class="sd">          Only if *field* is a LAM :class:`epygram.fields.H2DField`,</span>
+<span class="sd">          extracts the points of the</span>
+<span class="sd">          resp. C or C+I zone. Default is no subzone, i.e. the whole field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;cannot write field in a GeoPoints with openmode &#39;r&#39;.&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
+            <span class="n">open_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LAT&#39;</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">,</span> <span class="s1">&#39;LEVEL&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">D3Field</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">parameter</span> <span class="o">==</span> <span class="s1">&#39;UNKNOWN&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">fidkey_for_parameter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">open_kwargs</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">open_kwargs</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">fidkey_for_parameter</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">columns</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;TIME&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">FieldSet</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">PointField</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">PointField</span><span class="p">):</span>
+                    <span class="n">field</span> <span class="o">=</span> <span class="n">FieldSet</span><span class="p">([</span><span class="n">field</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">parameter</span> <span class="o">==</span> <span class="s1">&#39;UNKNOWN&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">fidkey_for_parameter</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">open_kwargs</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fid</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">open_kwargs</span><span class="p">[</span><span class="s1">&#39;parameter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">fidkey_for_parameter</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">field</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">columns</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;TIME&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;lat&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;&#39;lat&#39; must be in field.keys().&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;lon&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;&#39;lon&#39; must be in field.keys().&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;value&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;&#39;value&#39; must be in field.keys().&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">field</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;LAT&#39;</span><span class="p">,</span> <span class="s1">&#39;LON&#39;</span><span class="p">,</span> <span class="s1">&#39;VALUE&#39;</span><span class="p">):</span>
+                        <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;VALUE&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">open_kwargs</span><span class="p">[</span><span class="s1">&#39;columns&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">columns</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="o">**</span><span class="n">open_kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">D3Field</span><span class="p">):</span>
+            <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">nb_validities</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">),</span>
+                                                          <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span>
+                                                          <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">rectangular_grid</span><span class="p">:</span>
+                <span class="n">lons</span> <span class="o">=</span> <span class="n">lons</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+                <span class="n">lats</span> <span class="o">=</span> <span class="n">lats</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span> <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">levels</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_levels</span><span class="p">(</span><span class="n">nb_validities</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">),</span>
+                                                       <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span>
+                                                       <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lons</span> <span class="o">=</span> <span class="n">lons</span><span class="o">.</span><span class="n">compressed</span><span class="p">()</span>
+                <span class="n">lats</span> <span class="o">=</span> <span class="n">lats</span><span class="o">.</span><span class="n">compressed</span><span class="p">()</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span> <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">compressed</span><span class="p">()</span>
+                <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">levels</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_levels</span><span class="p">(</span><span class="n">nb_validities</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">),</span>
+                                                       <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span>
+                                                       <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="n">date</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntStr&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">hour</span> <span class="o">=</span> <span class="n">date</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
+                <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">date</span> <span class="o">=</span> <span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+            <span class="n">writebuffer</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LON&#39;</span><span class="p">:</span><span class="n">lons</span><span class="p">,</span> <span class="s1">&#39;LAT&#39;</span><span class="p">:</span><span class="n">lats</span><span class="p">,</span> <span class="s1">&#39;VALUE&#39;</span><span class="p">:</span><span class="n">values</span><span class="p">}</span>
+            <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="c1"># level = field.geometry.vcoordinate.get(&#39;level&#39;, 0)</span>
+                <span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">levels</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;DATE&#39;</span><span class="p">:</span>
+                    <span class="n">writebuffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">date</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">i</span> <span class="o">==</span> <span class="s1">&#39;TIME&#39;</span><span class="p">:</span>
+                    <span class="n">writebuffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">hour</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+                <span class="c1"># elif i == &#39;LEVEL&#39;:</span>
+                <span class="c1">#     writebuffer[i] = [level] * len(values)</span>
+                <span class="c1"># others to be implemented here</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">FieldSet</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">PointField</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">PointField</span><span class="p">):</span>
+                <span class="n">field</span> <span class="o">=</span> <span class="n">FieldSet</span><span class="p">([</span><span class="n">field</span><span class="p">])</span>
+            <span class="n">writebuffer</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LON&#39;</span><span class="p">:[],</span> <span class="s1">&#39;LAT&#39;</span><span class="p">:[],</span> <span class="s1">&#39;VALUE&#39;</span><span class="p">:[],</span> <span class="s1">&#39;DATE&#39;</span><span class="p">:[],</span> <span class="s1">&#39;TIME&#39;</span><span class="p">:[]}</span>
+            <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="n">PointField</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;write a FieldSet of fields&quot;</span> <span class="o">+</span>
+                                              <span class="s2">&quot; that are not PointField.&quot;</span><span class="p">)</span>
+                <span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;LON&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">hlocation</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;LAT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">hlocation</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;VALUE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">getdata</span><span class="p">()))</span>
+                <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">or</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                    <span class="n">date</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntStr&#39;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                        <span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+                        <span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>
+                    <span class="c1"># others to be implemented here</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">writebuffer</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">upper</span><span class="p">():</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">field</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;*field* of that type.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">writebuffer</span><span class="p">:</span>
+                <span class="n">writebuffer</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;VALUE&#39;</span><span class="p">])</span>
+
+        <span class="c1"># WRITE</span>
+        <span class="k">for</span> <span class="n">pt</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">writebuffer</span><span class="p">[</span><span class="s1">&#39;VALUE&#39;</span><span class="p">])):</span>
+            <span class="n">pointstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="n">pointstr</span> <span class="o">+=</span> <span class="s1">&#39; {: .</span><span class="si">{precision}{type}</span><span class="s1">} &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">writebuffer</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">pt</span><span class="p">],</span>
+                                                              <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span>
+                                                              <span class="n">precision</span><span class="o">=</span><span class="n">llprecision</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">writebuffer</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">pt</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">):</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39; {: .</span><span class="si">{precision}{type}</span><span class="s1">} &#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span>
+                                                          <span class="n">precision</span><span class="o">=</span><span class="n">precision</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;{:^</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">col_width</span><span class="p">)</span>
+                <span class="n">pointstr</span> <span class="o">+=</span> <span class="n">x</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pointstr</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">empty</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+
+<span class="c1">###########</span>
+<span class="c1"># pre-app #</span>
+<span class="c1">###########</span>
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes in file-like a summary of the contents of the GeoPoints.</span>
+
+<span class="sd">        :param out: the output open file-like object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">points_number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">countpoints</span><span class="p">()</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### FORMAT: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#####################&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# GeoPoints Summary #&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#####################&quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Parameter (described by VALUE): &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">parameter</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Number of points              : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">points_number</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Data/meta for each point      : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;structure&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">footprint_attributes</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Structure of Points as a Field: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

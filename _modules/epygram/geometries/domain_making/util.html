@@ -1,0 +1,134 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.geometries.domain_making.util &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.geometries.domain_making.util</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains utilities for building a LAM domain.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+
+<span class="c1"># parameters</span>
+<span class="c1">#: minimum width of Extension zone</span>
+<span class="n">Ezone_minimum_width</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="c1">#: threshold in degrees towards Equator for the domain center, to choose lambert/mercator</span>
+<span class="n">threshold_mercator_lambert</span> <span class="o">=</span> <span class="mf">5.</span>
+<span class="c1">#: threshold in degrees towards Pole for the min/max latitude, to choose lambert/polar_stereographic</span>
+<span class="n">threshold_pole_distance_lambert</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="c1">#: default width of Izone, to compute width in number of points according to resolution</span>
+<span class="n">default_Izone_width_in_m</span> <span class="o">=</span> <span class="mf">20000.</span>
+
+<span class="n">maxdims_security_barrier</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">vkw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+       <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">]}</span>
+<span class="n">vgeom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">vkw</span><span class="p">)</span>
+<span class="n">projections_s2g</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;L&#39;</span><span class="p">:</span><span class="s1">&#39;lambert&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">:</span><span class="s1">&#39;mercator&#39;</span><span class="p">,</span> <span class="s1">&#39;PS&#39;</span><span class="p">:</span><span class="s1">&#39;polar_stereographic&#39;</span><span class="p">}</span>
+<span class="n">projections_g2p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lambert&#39;</span><span class="p">:</span><span class="s1">&#39;Lambert (conformal conic)&#39;</span><span class="p">,</span> <span class="s1">&#39;mercator&#39;</span><span class="p">:</span><span class="s1">&#39;Mercator&#39;</span><span class="p">,</span> <span class="s1">&#39;polar_stereographic&#39;</span><span class="p">:</span><span class="s1">&#39;Polar Stereographic&#39;</span><span class="p">}</span>
+<span class="n">projections_s2p</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;L&#39;</span><span class="p">:</span><span class="s1">&#39;Lambert (conformal conic)&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">:</span><span class="s1">&#39;Mercator&#39;</span><span class="p">,</span> <span class="s1">&#39;PS&#39;</span><span class="p">:</span><span class="s1">&#39;Polar Stereographic&#39;</span><span class="p">}</span>
+<span class="n">projections_g2s</span> <span class="o">=</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">projections_s2g</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+
+<div class="viewcode-block" id="default_Iwidth"><a class="viewcode-back" href="../../../../library/domain_making/util.html#epygram.geometries.domain_making.util.default_Iwidth">[docs]</a><span class="k">def</span> <span class="nf">default_Iwidth</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">Izone_width_in_m</span><span class="o">=</span><span class="n">default_Izone_width_in_m</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return default Iwidth depending on the resolution.</span>
+
+<span class="sd">    Algo:</span>
+<span class="sd">    make it at least **Izone_width_in_m** wide, and not less than 8 points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">Izone_width_in_m</span><span class="p">)</span> <span class="o">/</span> <span class="n">resolution</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># make it even</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>  <span class="c1"># not less than 8 points</span>
+    <span class="k">return</span> <span class="n">n</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../geometries.html" >epygram.geometries</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

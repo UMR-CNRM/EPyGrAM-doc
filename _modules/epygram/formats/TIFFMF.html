@@ -1,0 +1,578 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.formats.TIFFMF &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.formats.TIFFMF</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the class to handle TIFFMF format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">footprints</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+
+<span class="kn">import</span> <span class="nn">pyexttiff</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">Angle</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="k">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span><span class="p">,</span> <span class="n">make_vector_field</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TIFFMF&#39;</span><span class="p">]</span>
+
+<span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="TIFFMF"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF">[docs]</a><span class="k">class</span> <span class="nc">TIFFMF</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class implementing all specificities for TIFFMF resource format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;TIFFMF&#39;</span><span class="p">]),</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;TIFFMF&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scan</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">TIFFMF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmtdelayedopen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TIFFMF.open"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Opens a TIFFMF, and initializes some attributes.&quot;&quot;&quot;</span>
+        <span class="c1"># Opening</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span> <span class="o">=</span> <span class="n">pyexttiff</span><span class="o">.</span><span class="n">TiffFile</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="p">[(</span><span class="mi">34974</span><span class="p">,)],</span> <span class="n">method</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">IFDs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">34974</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s1">&#39;Tiff file is not a tiffmf file&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;TIFFMF is only implmented for reading&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reading of metadata</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_sections</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="TIFFMF.close"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Closes a TIFFMF file.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="c1"># Cleanings</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span></div>
+
+<span class="c1">################</span>
+<span class="c1"># ABOUT FIELDS #</span>
+<span class="c1">################</span>
+<div class="viewcode-block" id="TIFFMF.find_fields_in_resource"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.find_fields_in_resource">[docs]</a>    <span class="k">def</span> <span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fieldtype</span><span class="o">=</span><span class="p">[],</span> <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of the fields from resource whose identifier match the given seed.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *seed*: might be a tuple of regular expressions, a list of regular expressions tuples or *None*.</span>
+<span class="sd">                  If *None* (default), returns the list of all fields in resource.</span>
+<span class="sd">        - *fieldtype*: optional, among (&#39;H2D&#39;, &#39;Misc&#39;) or a list of these strings.</span>
+<span class="sd">          If provided, filters out the fields not of the given types.</span>
+<span class="sd">        - *generic*: if True, returns a list of tuples (fieldname, generic fid) of</span>
+<span class="sd">          the fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fieldtype</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="nb">list</span><span class="p">()):</span>
+            <span class="n">fieldtypeslist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fieldtype</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fieldtypeslist</span> <span class="o">=</span> <span class="p">[</span><span class="n">fieldtype</span><span class="p">]</span>
+        <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fieldslist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">fieldslist</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">find_re_in_list</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seed</span><span class="p">:</span>
+                <span class="n">fieldslist</span> <span class="o">+=</span> <span class="n">util</span><span class="o">.</span><span class="n">find_re_in_list</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">fieldtypeslist</span> <span class="o">!=</span> <span class="p">[]</span> <span class="ow">and</span> <span class="s1">&#39;H2D&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
+            <span class="c1"># Only H2D fields are stored in TIFFMF format</span>
+            <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">fieldslist</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;no field matching &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39; was found in resource &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">generic</span><span class="p">:</span>
+            <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="p">{})</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fieldslist</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">fieldslist</span></div>
+
+<div class="viewcode-block" id="TIFFMF.listfields"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.listfields">[docs]</a>    <span class="k">def</span> <span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list containing the TIFFMF identifiers of all the fields of the resource.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">TIFFMF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">listfields</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Actual listfields() method for TIFFMF.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *complete*: if True method returns a list of {&#39;TIFFMF&#39;:TIFFMF_fid, &#39;generic&#39;:generic_fid}</span>
+<span class="sd">                      if False method return a list of TIFFMF_fid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[</span><span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">270</span><span class="p">)</span> <span class="k">for</span> <span class="n">IFD</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">IFDs</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">complete</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[{</span><span class="s1">&#39;TIFFMF&#39;</span><span class="p">:</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;generic&#39;</span><span class="p">:{}}</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fieldslist</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">fieldslist</span>
+
+<div class="viewcode-block" id="TIFFMF.sortfields"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.sortfields">[docs]</a>    <span class="k">def</span> <span class="nf">sortfields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a sorted list of fields with regards to their name,</span>
+<span class="sd">        as a dict of lists.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">mylist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span>
+
+        <span class="c1"># sort</span>
+        <span class="n">mylist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="n">outlists</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Fields&#39;</span><span class="p">:</span><span class="n">mylist</span><span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">outlists</span></div>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldidentifier</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads one field, given its identifier, and returns a Field instance.</span>
+<span class="sd">        Interface to Fortran routines from &#39;ifsaux&#39;.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *fieldidentifier*: name.</span>
+<span class="sd">        - *getdata*: optional, if *False*, only metadata are read, the field do not contain data.</span>
+<span class="sd">                     Default is *True*.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;w&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;cannot read fields in resource with openmode == &#39;w&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fieldidentifier</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;fieldidentifier of a TIFFMF field is a string.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fieldidentifier</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;fieldidentifier is not found in th TIFFMF file.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scan</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This scan mode is not implemented&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">IFD</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">IFDs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">270</span><span class="p">)</span> <span class="o">==</span> <span class="n">fieldidentifier</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_image</span><span class="p">()[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">IFD</span><span class="o">.</span><span class="n">has_tag</span><span class="p">(</span><span class="s1">&#39;PhotometricInterpretation&#39;</span><span class="p">)</span> <span class="ow">and</span> \
+                       <span class="n">IFD</span><span class="o">.</span><span class="n">get_entry</span><span class="p">(</span><span class="s1">&#39;PhotometricInterpretation&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+                        <span class="n">componentNames</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">:[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">],</span>
+                                          <span class="mi">5</span><span class="p">:[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">],</span>
+                                          <span class="mi">6</span><span class="p">:[</span><span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Cb&#39;</span><span class="p">,</span> <span class="s1">&#39;Cr&#39;</span><span class="p">],</span>
+                                          <span class="mi">8</span><span class="p">:[</span><span class="s1">&#39;L*&#39;</span><span class="p">,</span> <span class="s1">&#39;a*&#39;</span><span class="p">,</span> <span class="s1">&#39;b*&#39;</span><span class="p">]}[</span><span class="n">IFD</span><span class="o">.</span><span class="n">get_entry</span><span class="p">(</span><span class="s1">&#39;PhotometricInterpretation&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">get_value</span><span class="p">()]</span>
+                        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">componentNames</span><span class="p">)</span> <span class="o">==</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Data shape error&quot;</span>
+                        <span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">cname</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">componentNames</span><span class="p">):</span>
+                            <span class="n">field</span> <span class="o">=</span> <span class="n">H2DField</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span><span class="n">fieldidentifier</span><span class="p">,</span>
+                                                         <span class="s1">&#39;generic&#39;</span><span class="p">:</span><span class="n">FPDict</span><span class="p">(),</span>
+                                                         <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="n">cname</span><span class="p">}),</span>
+                                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                                             <span class="n">geometry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                             <span class="n">processtype</span><span class="o">=</span><span class="s1">&#39;observation&#39;</span><span class="p">,</span>
+                                             <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">getdata</span><span class="p">:</span>
+                                <span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+                            <span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+                        <span class="n">field</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="o">*</span><span class="n">fields</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This file certainly contains an image in true colors in a&quot;</span> <span class="o">+</span> \
+                                                  <span class="s2">&quot;color space not (yet) implemented&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">field</span> <span class="o">=</span> <span class="n">H2DField</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span><span class="n">fieldidentifier</span><span class="p">,</span> <span class="s1">&#39;generic&#39;</span><span class="p">:</span><span class="n">FPDict</span><span class="p">()}),</span>
+                                     <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                                     <span class="n">geometry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                     <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                     <span class="n">processtype</span><span class="o">=</span><span class="s1">&#39;observation&#39;</span><span class="p">,</span>
+                                     <span class="n">comment</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">getdata</span><span class="p">:</span>
+                        <span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">field</span>
+
+<div class="viewcode-block" id="TIFFMF.readfields"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.readfields">[docs]</a>    <span class="k">def</span> <span class="nf">readfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requestedfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a :class:`epygram.base.FieldSet` containing requested fields read in the resource.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *requestedfields*: might be \n</span>
+<span class="sd">          - an expressions with regular expressions (e.g. &#39;*CMS*&#39;)</span>
+<span class="sd">          - a list of TIFFMF fields identifiers with regular expressions (e.g. [&#39;*TIME*&#39;, &#39;*CMS*&#39;])</span>
+<span class="sd">          - if not specified, interpretated as all fields that will be found in resource</span>
+<span class="sd">        - *getdata*: optional, if *False*, only metadata are read, the fields do not contain data.</span>
+<span class="sd">                     Default is *True*.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">requestedfields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_fields_in_resource</span><span class="p">(</span><span class="n">requestedfields</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">requestedfields</span> <span class="o">==</span> <span class="p">[]:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;unable to find requested fields in resource.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">TIFFMF</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfields</span><span class="p">(</span><span class="n">requestedfields</span><span class="p">,</span> <span class="n">getdata</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TIFFMF.writefield"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.writefield">[docs]</a>    <span class="k">def</span> <span class="nf">writefield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write a field in the resource.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *field*: a :class:`epygram.base.Field` instance or :class:`epygram.H2DField`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">Field</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;*field* must be a Field instance.&quot;</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Writing of TIFFMF file is not implemented.&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="TIFFMF.writefields"><a class="viewcode-back" href="../../../library/TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.writefields">[docs]</a>    <span class="k">def</span> <span class="nf">writefields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldset</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write the fields of the *fieldset* in the resource.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *fieldset*: must be a :class:`epygram.base.FieldSet` instance.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fieldset</span><span class="p">,</span> <span class="n">FieldSet</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;&#39;fieldset&#39; argument must be of kind FieldSet.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;cannot write field in a TIFFMF with openmode &#39;r&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Writing of TIFFMF file is not implemented.&quot;</span><span class="p">)</span></div>
+
+<span class="c1">###########</span>
+<span class="c1"># pre-app #</span>
+<span class="c1">###########</span>
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+             <span class="n">details</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="n">sortfields</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+             <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes in file a summary of the contents of the TIFFMF.</span>
+
+<span class="sd">        Args: \n</span>
+<span class="sd">        - *out*: the output open file-like object (duck-typing: *out*.write()</span>
+<span class="sd">          only is needed).</span>
+<span class="sd">        - *sortfields*: **True** if the fields have to be sorted.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">firstcolumn_width</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="n">secondcolumn_width</span> <span class="o">=</span> <span class="mi">16</span>
+        <span class="n">sepline</span> <span class="o">=</span> <span class="s1">&#39;{:-^</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">firstcolumn_width</span> <span class="o">+</span> <span class="n">secondcolumn_width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### FORMAT: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">listfields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span>
+        <span class="n">first_H2DField</span> <span class="o">=</span> <span class="n">listfields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">firstfield</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">first_H2DField</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">write_formatted</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="n">dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;{:&lt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">firstcolumn_width</span><span class="p">)</span> \
+                    <span class="o">+</span> <span class="s1">&#39;:&#39;</span> \
+                    <span class="o">+</span> <span class="s1">&#39;{:&gt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">secondcolumn_width</span><span class="p">)</span> \
+                    <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">write_formatted_col</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="n">dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;{:&gt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">firstcolumn_width</span><span class="p">)</span> \
+                    <span class="o">+</span> <span class="s1">&#39;:&#39;</span> \
+                    <span class="o">+</span> <span class="s1">&#39;{:&gt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="n">secondcolumn_width</span><span class="p">)</span> \
+                    <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">write_formatted_fields</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+            <span class="n">dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;{:&lt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> \
+                    <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="n">firstfield</span><span class="o">.</span><span class="n">what</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">vertical_geometry</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;######################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### LIST OF FIELDS ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;######################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sortfields</span><span class="p">:</span>
+            <span class="n">sortedfields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sortfields</span><span class="p">()</span>
+            <span class="n">listoffields</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">sortedfields</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">listoffields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">listoffields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
+                <span class="n">listoffields</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">sortedfields</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                <span class="n">listoffields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--------------------&#39;</span><span class="p">)</span>
+            <span class="n">numfields</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">sortedfields</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">listoffields</span> <span class="o">=</span> <span class="n">listfields</span>
+            <span class="n">numfields</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">listfields</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Number: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">numfields</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">details</span><span class="p">:</span>
+            <span class="n">write_formatted_fields</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Field name&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">write_formatted_fields</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Field name&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sepline</span><span class="p">)</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listoffields</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">done</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">details</span><span class="p">:</span>
+                    <span class="n">write_formatted_fields</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">write_formatted_fields</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+                <span class="n">done</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sepline</span><span class="p">)</span>
+
+<span class="c1">##############</span>
+<span class="c1"># the TIFFMF WAY #</span>
+<span class="c1">##############</span>
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">_read_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads section 1 and section 2 in the TIIF tags.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># MF tags reading</span>
+        <span class="n">IFD</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">IFDs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">34974</span><span class="p">)</span>
+        <span class="n">typeImage</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">50002</span><span class="p">)</span>
+        <span class="n">subTypeImage</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">50003</span><span class="p">)</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">50006</span><span class="p">)</span>
+        <span class="n">projection</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">50066</span><span class="p">)</span>
+        <span class="n">section1</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">60000</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">headerSection2</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">60001</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+        <span class="n">bodySection2</span> <span class="o">=</span> <span class="n">IFD</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">60002</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+
+        <span class="c1"># section decoding</span>
+        <span class="p">(</span><span class="n">lengthS1</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">centre</span><span class="p">,</span> <span class="n">process</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span>
+         <span class="n">param</span><span class="p">,</span> <span class="n">satellite</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">,</span>
+         <span class="n">unit</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span><span class="p">,</span> <span class="n">timerange</span><span class="p">,</span> <span class="n">included</span><span class="p">,</span> <span class="n">missing</span><span class="p">,</span>
+         <span class="n">century</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span> <span class="o">=</span> <span class="n">section1</span>
+        <span class="p">(</span><span class="n">lengthS2</span><span class="p">,</span> <span class="n">NV</span><span class="p">,</span> <span class="n">PV_PL</span><span class="p">,</span> <span class="n">dataRepresenationType</span><span class="p">)</span> <span class="o">=</span> <span class="n">headerSection2</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+                         <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="s1">&#39;__unknown__&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">255</span><span class="p">,)}</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">projection</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># Polar streographic</span>
+            <span class="k">if</span> <span class="n">dataRepresenationType</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Projection does not match.&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">Nx</span><span class="p">,</span> <span class="n">Ny</span><span class="p">,</span> <span class="n">La1</span><span class="p">,</span> <span class="n">Lo1</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">LoV</span><span class="p">,</span> <span class="n">Dx</span><span class="p">,</span> <span class="n">Dy</span><span class="p">,</span> <span class="n">pole</span><span class="p">,</span> <span class="n">scan</span><span class="p">)</span> <span class="o">=</span> <span class="n">bodySection2</span>
+            <span class="k">if</span> <span class="n">typeImage</span> <span class="o">==</span> <span class="mi">7</span> <span class="ow">and</span> \
+               <span class="n">subTypeImage</span> <span class="o">==</span> <span class="mi">13</span> <span class="ow">and</span> \
+               <span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">centre</span><span class="p">,</span> <span class="n">process</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">211</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span> <span class="ow">and</span> \
+               <span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">satellite</span><span class="p">,</span> <span class="n">band</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">127</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">33792</span><span class="p">)</span> <span class="ow">and</span> \
+               <span class="p">(</span><span class="n">Nx</span><span class="p">,</span> <span class="n">Ny</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">8192</span><span class="p">,</span> <span class="mi">6144</span><span class="p">)</span> <span class="ow">and</span> \
+               <span class="p">(</span><span class="n">La1</span><span class="p">,</span> <span class="n">Lo1</span><span class="p">,</span> <span class="n">Dx</span><span class="p">,</span> <span class="n">Dy</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">43759</span><span class="p">,</span> <span class="o">-</span><span class="mi">76033</span><span class="p">,</span> <span class="mi">1093</span><span class="p">,</span> <span class="mi">1093</span><span class="p">)</span> <span class="ow">and</span> \
+               <span class="n">LoV</span> <span class="o">==</span> <span class="mi">180000</span><span class="p">:</span>
+                <span class="c1"># If tiffmf file is modified to put LoV=0. in the section 2,</span>
+                <span class="c1"># R2 is no more able to put the image at the good location.</span>
+                <span class="c1">#</span>
+                <span class="c1"># So, it seems there is an error somewhere in this module, so we need to</span>
+                <span class="c1"># reset LoV to 0. to have the good coordinates.</span>
+                <span class="c1"># This must be corrected</span>
+                <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;LoV reset to 0. for this file.&quot;</span><span class="p">)</span>
+                <span class="n">LoV</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Do we need to reset LoV to 0.? If you encounter this &quot;</span> <span class="o">+</span>
+                                   <span class="s2">&quot;error, please check if we need or not to reset &quot;</span> <span class="o">+</span>
+                                   <span class="s2">&quot;this parameter and modify the test above.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span> <span class="o">!=</span> <span class="mi">64</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Only res=64 is implemented&#39;</span><span class="p">)</span>
+            <span class="n">Nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Nx</span><span class="p">)</span>
+            <span class="n">Ny</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Ny</span><span class="p">)</span>
+            <span class="n">lat_0</span> <span class="o">=</span> <span class="mi">90</span> <span class="k">if</span> <span class="n">pole</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">90</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">copysign</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">lat_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat_0</span><span class="p">)))</span> <span class="o">/</span> \
+                <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">numpy</span><span class="o">.</span><span class="n">copysign</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">lat_0</span><span class="p">)</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">60</span><span class="p">)))</span>
+            <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="s1">&#39;X_resolution&#39;</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">Dx</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span><span class="p">,</span>
+                    <span class="s1">&#39;Y_resolution&#39;</span><span class="p">:</span><span class="nb">float</span><span class="p">(</span><span class="n">Dy</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span><span class="p">,</span>
+                    <span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">Lo1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                    <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">La1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                    <span class="s1">&#39;input_position&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ny</span><span class="p">),</span>
+                    <span class="p">}</span>
+            <span class="k">if</span> <span class="n">scan</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Polar stereographic projection with scan != 0 is not implemented.&quot;</span><span class="p">)</span>
+            <span class="n">projection</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">LoV</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                          <span class="s1">&#39;rotation&#39;</span><span class="p">:</span> <span class="n">Angle</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;radians&#39;</span><span class="p">),</span>
+                          <span class="s1">&#39;reference_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">lat_0</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)}</span>
+            <span class="n">dimensions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">Nx</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">Ny</span><span class="p">}</span>
+            <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;polar_stereographic&#39;</span>
+            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
+                               <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+                               <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span>
+                               <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">dimensions</span><span class="p">),</span>
+                               <span class="n">projection</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">projection</span><span class="p">),</span>
+                               <span class="n">geoid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">default_geoid</span><span class="p">),</span>
+                               <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                               <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span>
+                               <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">projection</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="c1"># Mercator</span>
+            <span class="k">if</span> <span class="n">dataRepresenationType</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span> <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Projection does not match.&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">Ni</span><span class="p">,</span> <span class="n">Nj</span><span class="p">,</span> <span class="n">La1</span><span class="p">,</span> <span class="n">Lo1</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">La2</span><span class="p">,</span> <span class="n">Lo2</span><span class="p">,</span> <span class="n">Latin</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">Di</span><span class="p">,</span> <span class="n">Dj</span><span class="p">)</span> <span class="o">=</span> <span class="n">bodySection2</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This projection is not implemented (mercator) but could easily be done.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">projection</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+            <span class="c1"># Space view</span>
+            <span class="k">if</span> <span class="n">dataRepresenationType</span> <span class="o">!=</span> <span class="mi">90</span><span class="p">:</span> <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Projection does not match.&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">Nx</span><span class="p">,</span> <span class="n">Ny</span><span class="p">,</span> <span class="n">Lap</span><span class="p">,</span> <span class="n">Lop</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">Xp</span><span class="p">,</span> <span class="n">Yp</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">ort</span><span class="p">,</span> <span class="n">nr</span><span class="p">,</span> <span class="n">Xo</span><span class="p">,</span> <span class="n">Yo</span><span class="p">)</span> <span class="o">=</span> <span class="n">bodySection2</span>
+            <span class="n">Lap</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Lap</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="n">Lop</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">Lop</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="n">Nx</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Nx</span><span class="p">)</span>
+            <span class="n">Ny</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">Ny</span><span class="p">)</span>
+            <span class="c1">#rmajor, rminor = 6378169.0, 6356583.8 #old values used by an old version of the ASPIC software</span>
+            <span class="n">rmajor</span><span class="p">,</span> <span class="n">rminor</span> <span class="o">=</span> <span class="mi">6378160</span><span class="p">,</span> <span class="mi">6356775</span> <span class="c1">#new version of ASPIC</span>
+            <span class="n">geoid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="n">rmajor</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="n">rminor</span><span class="p">}</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nr</span><span class="p">)</span> <span class="o">*</span> <span class="n">rmajor</span> <span class="o">/</span> <span class="mf">1E6</span> <span class="o">-</span> <span class="n">rmajor</span>
+            <span class="n">resolx</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="mf">1E6</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">nr</span><span class="p">))</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span>
+            <span class="n">resoly</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="mf">1E6</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">nr</span><span class="p">))</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span>
+            
+            <span class="c1">#Xp, Yp, Xo and YO are integers</span>
+            <span class="c1">#We guess the exact position of the satellite from the parity of the apparent diameter</span>
+            <span class="c1">#If the numbers of grid-cells is even, satellite is in between two pixels </span>
+            <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="s1">&#39;X_resolution&#39;</span><span class="p">:</span><span class="n">resolx</span><span class="p">,</span>
+                    <span class="s1">&#39;Y_resolution&#39;</span><span class="p">:</span><span class="n">resoly</span><span class="p">,</span>
+                    <span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Lop</span><span class="p">,</span> <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Lap</span><span class="p">,</span>
+                    <span class="s1">&#39;input_position&#39;</span><span class="p">:(</span><span class="nb">int</span><span class="p">(</span><span class="n">Xp</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">Xo</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">,</span>
+                                      <span class="nb">int</span><span class="p">(</span><span class="n">Yo</span><span class="p">)</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">Yp</span><span class="p">)</span> <span class="o">+</span> <span class="n">Ny</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">dy</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span>
+                    <span class="p">}</span>
+            <span class="k">if</span> <span class="n">scan</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Space view projection with scan != 0 is not implemented.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ort</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Must be checked for rotated geometry.&quot;</span><span class="p">)</span>
+            <span class="n">projection</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;satellite_lat&#39;</span><span class="p">:</span><span class="n">Lap</span><span class="p">,</span> <span class="s1">&#39;satellite_lon&#39;</span><span class="p">:</span><span class="n">Lop</span><span class="p">,</span> <span class="s1">&#39;satellite_height&#39;</span><span class="p">:</span><span class="n">h</span><span class="p">,</span>
+                          <span class="s1">&#39;reference_lon&#39;</span><span class="p">:</span><span class="n">Lop</span><span class="p">,</span>
+                          <span class="s1">&#39;rotation&#39;</span><span class="p">:</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">ort</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)}</span>
+            <span class="n">dimensions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">Nx</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">Ny</span><span class="p">}</span>
+            <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;space_view&#39;</span>
+            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
+                               <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+                               <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span>
+                               <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">dimensions</span><span class="p">),</span>
+                               <span class="n">projection</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">projection</span><span class="p">),</span>
+                               <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                               <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
+                               <span class="n">geoid</span><span class="o">=</span><span class="n">geoid</span><span class="p">,</span>
+                               <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">projection</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+            <span class="c1"># Cylindric ?</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Cylindric projection is not implemented&quot;</span><span class="p">)</span>
+            <span class="p">(</span><span class="n">Ni</span><span class="p">,</span> <span class="n">Nj</span><span class="p">,</span> <span class="n">La1</span><span class="p">,</span> <span class="n">Lo1</span><span class="p">,</span> <span class="n">res</span><span class="p">,</span> <span class="n">La2</span><span class="p">,</span> <span class="n">Lo2</span><span class="p">,</span> <span class="n">Di</span><span class="p">,</span> <span class="n">Dj</span><span class="p">,</span> <span class="n">scan</span><span class="p">)</span> <span class="o">=</span> <span class="n">bodySection2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># In case we need it: lambert would be (Nx, Ny, La1, Lo1, res, Lon0, Lat0, K0,</span>
+            <span class="c1">#                                       X0, Y0, Dx, Dy, pole, scan) = bodySection2</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This projection is not implemented&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">scan</span> <span class="o">=</span> <span class="n">scan</span>
+
+        <span class="c1"># Validity</span>
+        <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">date</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tiff</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">uint16</span><span class="p">)),</span>
+                                 <span class="n">date</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">date</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">date</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">date</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+        <span class="n">date2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">century</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="o">!=</span> <span class="n">date2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;The two dates encoded in the tiff file must be the same.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="n">date</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

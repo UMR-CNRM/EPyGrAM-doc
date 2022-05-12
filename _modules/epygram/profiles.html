@@ -1,0 +1,485 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.profiles &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.profiles</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains functions to:</span>
+
+<span class="sd">- to convert vertical coordinates systems from the one to another;</span>
+<span class="sd">- compute air specific gas constant R according to specific humidity</span>
+<span class="sd">  and hydrometeors.</span>
+<span class="sd">- to plot vertical profiles.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">bronx.meteo</span> <span class="k">import</span> <span class="n">constants</span>
+
+<span class="kn">from</span> <span class="nn">.config</span> <span class="k">import</span> <span class="n">default_Ptop</span>
+
+<span class="c1"># Constants</span>
+<span class="n">Cpd</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">Cpd</span>
+<span class="n">Rd</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">Rd</span>
+<span class="n">Rv</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">Rv</span>
+<span class="n">g0</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">g0</span>
+
+
+<span class="c1"># FORMULAS #</span>
+<span class="c1">############</span>
+<div class="viewcode-block" id="hybridP2fluxpressure"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.hybridP2fluxpressure">[docs]</a><span class="k">def</span> <span class="nf">hybridP2fluxpressure</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes and returns the pressure at flux levels defined by hybrid-pressure</span>
+<span class="sd">    coefficients. Coefficients are assumed to define flux levels.</span>
+
+<span class="sd">    :param A: table of A coefficients</span>
+<span class="sd">    :param B: table of B coefficients</span>
+<span class="sd">    :param Psurf: surface pressure in Pa.</span>
+
+<span class="sd">    A and B must not contain the first coefficient (A=B=0.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A, B must have the same size.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Psurf</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Psurf</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Psurf</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="n">Psurf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Psurf</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Psurf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Psurf</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Psurf</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">Psurf</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="n">pi_tilde</span><span class="o">.</span><span class="n">mask</span><span class="p">[:,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">Psurf</span><span class="o">.</span><span class="n">mask</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">Psurf</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+    <span class="c1"># computation</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+        <span class="n">pi_tilde</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">Psurf</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">pi_tilde</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;pi_tilde array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pi_tilde</span></div>
+
+
+<div class="viewcode-block" id="hybridP2masspressure"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.hybridP2masspressure">[docs]</a><span class="k">def</span> <span class="nf">hybridP2masspressure</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes and returns the pressure at mass levels defined by hybrid-pressure</span>
+<span class="sd">    coefficients. Coefficients are assumed to define flux levels.</span>
+
+<span class="sd">    :param A: table of A coefficients</span>
+<span class="sd">    :param B: table of B coefficients</span>
+<span class="sd">    :param Psurf: surface pressure in Pa.</span>
+<span class="sd">    :param vertical_mean: kind of vertical averaging</span>
+
+<span class="sd">    A and B must not contain the first coefficient (A=B=0.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">hybridP2fluxpressure</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">)</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">flux2masspressures</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">pi</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;pi array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pi</span></div>
+
+
+<div class="viewcode-block" id="hybridH2fluxheight"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.hybridH2fluxheight">[docs]</a><span class="k">def</span> <span class="nf">hybridH2fluxheight</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Zsurf</span><span class="p">,</span> <span class="n">conv2height</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes and returns the altitude at flux levels defined by hybrid-height</span>
+<span class="sd">    coefficients. Coefficients are assumed to define flux levels.</span>
+
+<span class="sd">    :param A: table of A coefficients</span>
+<span class="sd">    :param B: table of B coefficients</span>
+<span class="sd">    :param Zsurf: surface altitude in m.</span>
+<span class="sd">    :param conv2height: True to compute height instead of altitude</span>
+
+<span class="sd">    A and B must include the underground level</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A, B must have the same size.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Zsurf</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Zsurf</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Zsurf</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="n">Zsurf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Zsurf</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Zsurf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Zsurf</span><span class="p">)</span>
+
+    <span class="n">H_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">Zsurf</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+    <span class="c1"># computation</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+        <span class="n">H_tilde</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">B</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">Zsurf</span>
+
+    <span class="k">if</span> <span class="n">conv2height</span><span class="p">:</span>
+        <span class="n">H_tilde</span> <span class="o">-=</span> <span class="n">Zsurf</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">H_tilde</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">H_tilde</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;H_tilde array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">H_tilde</span></div>
+
+
+<div class="viewcode-block" id="hybridH2massheight"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.hybridH2massheight">[docs]</a><span class="k">def</span> <span class="nf">hybridH2massheight</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Zsurf</span><span class="p">,</span> <span class="n">conv2height</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes and returns the altitude at mass levels defined by hybrid-height</span>
+<span class="sd">    coefficients. Coefficients are assumed to define flux levels.</span>
+
+<span class="sd">    :param A: table of A coefficients</span>
+<span class="sd">    :param B: table of B coefficients</span>
+<span class="sd">    :param Zsurf: surface altitude in m.</span>
+<span class="sd">    :param conv2height: True to compute height instead of altitude</span>
+
+<span class="sd">    A and B must include the underground level</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A, B must have the same size.&quot;</span><span class="p">)</span>
+
+    <span class="n">H_tilde</span> <span class="o">=</span> <span class="n">hybridH2fluxheight</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Zsurf</span><span class="p">,</span> <span class="n">conv2height</span><span class="o">=</span><span class="n">conv2height</span><span class="p">)</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">flux2massheights</span><span class="p">(</span><span class="n">H_tilde</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">H</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">H</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;H array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">H</span></div>
+
+
+<div class="viewcode-block" id="flux2masspressures"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.flux2masspressures">[docs]</a><span class="k">def</span> <span class="nf">flux2masspressures</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span> <span class="n">Ptop</span><span class="o">=</span><span class="n">default_Ptop</span><span class="p">,</span>
+                       <span class="n">LAPRXPK</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                       <span class="n">LAPRXPK_for_first_level</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts pressures at flux levels to mass levels.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">pi_tilde</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;pi_tilde array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">LAPRXPK</span><span class="p">:</span>
+        <span class="n">LAPRXPK_for_first_level</span> <span class="o">=</span> <span class="n">LAPRXPK</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">pi_tilde</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">pi</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">pi_tilde</span><span class="o">.</span><span class="n">mask</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pi_tilde</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ik</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># python arranging</span>
+        <span class="k">if</span> <span class="n">vertical_mean</span> <span class="o">==</span> <span class="s1">&#39;geometric&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">LAPRXPK_for_first_level</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">-</span> <span class="n">Ptop</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">Cpd</span> <span class="o">/</span> <span class="n">Rd</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">LAPRXPK</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">*</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">])</span> <span class="o">-</span>
+                                        <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span> <span class="o">/</span>
+                                        <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">-</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">vertical_mean</span> <span class="o">==</span> <span class="s1">&#39;arithmetic&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">LAPRXPK_for_first_level</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ptop</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">LAPRXPK</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">])</span> <span class="o">-</span>
+                                        <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span> <span class="o">/</span>
+                                        <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">-</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">vertical_mean</span> <span class="o">==</span> <span class="s1">&#39;LAPRXPK=False&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">])</span> <span class="o">-</span>
+                                    <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span> <span class="o">/</span>
+                                   <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">-</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;vertical_mean not among&quot;</span> <span class="o">+</span>
+                                      <span class="s2">&quot; (&#39;geometric&#39;, &#39;arithmetic&#39;, &#39;LAPRXPK=False&#39;).&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pi</span></div>
+
+
+<div class="viewcode-block" id="mass2fluxpressures"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.mass2fluxpressures">[docs]</a><span class="k">def</span> <span class="nf">mass2fluxpressures</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span> <span class="n">Ptop</span><span class="o">=</span><span class="n">default_Ptop</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts pressures at mass levels to flux levels.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">pi</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;pi array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">pi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">pi_tilde</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">mask</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ik</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># python arranging</span>
+        <span class="k">if</span> <span class="n">vertical_mean</span> <span class="o">==</span> <span class="s1">&#39;geometric&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ptop</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">Cpd</span> <span class="o">/</span> <span class="n">Rd</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">vertical_mean</span> <span class="o">==</span> <span class="s1">&#39;arithmetic&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">Ptop</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">pi</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;vertical_mean not among&quot;</span> <span class="o">+</span>
+                                      <span class="s2">&quot; (&#39;geometric&#39;, &#39;arithmetic&#39;).&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pi_tilde</span></div>
+
+
+<div class="viewcode-block" id="flux2massheights"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.flux2massheights">[docs]</a><span class="k">def</span> <span class="nf">flux2massheights</span><span class="p">(</span><span class="n">H_tilde</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts altitudes at flux levels to mass levels.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">H_tilde</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&gt;=</span> <span class="n">H_tilde</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;H_tilde array must be in ascending order.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">H_tilde</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">H_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">H_tilde</span><span class="p">)</span>
+
+    <span class="n">H</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">H_tilde</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">H</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">H_tilde</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">H_tilde</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mf">2.</span>
+    <span class="n">H</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">H_tilde</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">H_tilde</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">H</span></div>
+
+
+<div class="viewcode-block" id="mass2fluxheights"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.mass2fluxheights">[docs]</a><span class="k">def</span> <span class="nf">mass2fluxheights</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Converts altitudes at mass levels to flux levels.&quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;mass2fluxheights is not yet implemented.&#39;</span><span class="p">)</span></div>
+<span class="c1">#    if not numpy.all(H[1:] &gt;= H[:-1]):</span>
+<span class="c1">#        raise ValueError(&#39;H array must be in ascending order.&#39;)</span>
+    <span class="c1"># L = len(H)</span>
+<span class="c1">#    if not isinstance(H, numpy.ndarray):</span>
+<span class="c1">#        H = numpy.array(H)</span>
+<span class="c1">#    H_tilde = numpy.zeros(H.shape)</span>
+<span class="c1">#    for k in range(1, L+1):</span>
+<span class="c1">#        ik = k-1 # python arranging</span>
+<span class="c1">#        if k == 1:</span>
+<span class="c1">#            pi_tilde[ik] = (pi[ik] + Ptop) * (1. + Cpd/Rd)</span>
+<span class="c1">#        else:</span>
+<span class="c1">#            pi_tilde[ik] = pi[ik]**2 / pi_tilde[ik-1]</span>
+<span class="c1">#    return H_tilde</span>
+
+
+<div class="viewcode-block" id="pressure2altitude"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.pressure2altitude">[docs]</a><span class="k">def</span> <span class="nf">pressure2altitude</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
+                      <span class="n">pi</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pi_tilde</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Pdep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Phi_surf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a pressure profile to mass-levels altitude (= height above ground</span>
+<span class="sd">    if *Phi_surf == 0*).</span>
+
+<span class="sd">    The pressure can be given at mass levels (*pi*) or flux levels (*pi_tilde*),</span>
+<span class="sd">    or both (assuming they are consistent), with unit: Pa.</span>
+
+<span class="sd">    :param pi: mass levels pressure</span>
+<span class="sd">    :param pi_tilde: flux levels pressure</span>
+<span class="sd">    :param R: table of R = specific gas constant (J/kg/K)</span>
+<span class="sd">    :param T: table of Temperature (K)</span>
+<span class="sd">    :param vertical_mean: kind of vertical averaging</span>
+<span class="sd">    :param Pdep: table of Pressure departure: P-Pi, where P is the hydrostatic</span>
+<span class="sd">                 pressure and Pi the Non-Hydrostatic pressure (Pa).</span>
+<span class="sd">                 0. if Hydrostatic (default)</span>
+<span class="sd">    :param Phi_surf: surface geopotential (J/kg)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># get full pressures</span>
+    <span class="k">if</span> <span class="n">pi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">flux2masspressures</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pi_tilde</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">mass2fluxpressures</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">pi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">)</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;R, T, pi, pi_tilde must have the same size.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Phi_surf</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">myPhi_surf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Phi_surf</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">myPhi_surf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Phi_surf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">myPhi_surf</span> <span class="o">=</span> <span class="n">Phi_surf</span>
+    <span class="k">if</span> <span class="n">Pdep</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">myPdep</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Pdep</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">myPdep</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Pdep</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">myPdep</span> <span class="o">=</span> <span class="n">Pdep</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pi</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">pi_tilde</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;pi and pi_tilde must have the same shape.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">R</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">T</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">myPdep</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;R, T, and Pdep must have the same shape.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">myPhi_surf</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">myPhi_surf</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Phi_surf shape must be compatible with other shapes.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Pre-computation</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">pi</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ik</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># python arranging</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">delta</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">Cpd</span> <span class="o">/</span> <span class="n">Rd</span>
+            <span class="n">alpha</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">delta</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">-</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span>
+            <span class="n">alpha</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">/</span> <span class="n">pi_tilde</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span>
+
+    <span class="c1"># Geopotential</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">Phi</span><span class="o">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">pi</span><span class="o">.</span><span class="n">mask</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">partialsum</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">L</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="n">ik</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># python arranging</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">L</span><span class="p">:</span>
+            <span class="n">partialsum</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">partialsum</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">partialsum</span><span class="p">[</span><span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span>
+                              <span class="n">R</span><span class="p">[</span><span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta</span><span class="p">[</span><span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span>
+                              <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">myPdep</span><span class="p">[</span><span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">pi</span><span class="p">[</span><span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="n">Phi</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">=</span> <span class="n">myPhi_surf</span> <span class="o">+</span> <span class="n">partialsum</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">+</span> <span class="n">R</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">*</span> <span class="n">alpha</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">/</span> \
+                  <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">myPdep</span><span class="p">[</span><span class="n">ik</span><span class="p">]</span> <span class="o">/</span> <span class="n">pi</span><span class="p">[</span><span class="n">ik</span><span class="p">])</span>
+    <span class="c1"># Altitude</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">/</span> <span class="n">g0</span>
+
+    <span class="k">return</span> <span class="n">z</span></div>
+
+
+<div class="viewcode-block" id="hybridP2altitude"><a class="viewcode-back" href="../../library/profiles.html#epygram.profiles.hybridP2altitude">[docs]</a><span class="k">def</span> <span class="nf">hybridP2altitude</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
+                     <span class="n">Pdep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Phi_surf</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Ptop</span><span class="o">=</span><span class="n">default_Ptop</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes the altitude of mass levels defined by hybrid-pressure</span>
+<span class="sd">    coefficients. (= height above ground if *Phi_surf == 0*).</span>
+
+<span class="sd">    :param A: table of A coefficients</span>
+<span class="sd">    :param B: table of B coefficients</span>
+<span class="sd">    :param Psurf: surface pressure in Pa.</span>
+<span class="sd">    :param R: table of R = specific gas constant (J/kg/K)</span>
+<span class="sd">    :param T: table of Temperature (K)</span>
+<span class="sd">    :param vertical_mean: kind of vertical averaging</span>
+<span class="sd">    :param Pdep: table of Pressure departure: P-Pi, where P is the hydrostatic</span>
+<span class="sd">                 pressure and Pi the Non-Hydrostatic pressure (Pa).</span>
+<span class="sd">                 0. if Hydrostatic (default)</span>
+<span class="sd">    :param Phi_surf: surface geopotential (J/kg)</span>
+
+<span class="sd">    A and B must not contain the first coefficient (A=B=0.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">R</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;A, B, R, T must have the same size.&quot;</span><span class="p">)</span>
+
+    <span class="n">pi_tilde</span> <span class="o">=</span> <span class="n">hybridP2fluxpressure</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">)</span>
+    <span class="n">pi</span> <span class="o">=</span> <span class="n">flux2masspressures</span><span class="p">(</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span> <span class="n">Ptop</span><span class="o">=</span><span class="n">Ptop</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">pressure2altitude</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
+                          <span class="n">pi</span><span class="o">=</span><span class="n">pi</span><span class="p">,</span> <span class="n">pi_tilde</span><span class="o">=</span><span class="n">pi_tilde</span><span class="p">,</span> <span class="n">Pdep</span><span class="o">=</span><span class="n">Pdep</span><span class="p">,</span>
+                          <span class="n">Phi_surf</span><span class="o">=</span><span class="n">Phi_surf</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">z</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

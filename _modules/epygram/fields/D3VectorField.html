@@ -1,0 +1,749 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.fields.D3VectorField &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.fields.D3VectorField</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the class for a 3D field.</span>
+
+<span class="sd">Plus a function to create a Vector field from 2 scalar fields.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span><span class="p">,</span> <span class="n">FPList</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">Field</span><span class="p">,</span> <span class="n">FieldValidityList</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">D3Field</span><span class="p">,</span> <span class="n">D3VirtualField</span>
+
+<div class="viewcode-block" id="make_vector_field"><a class="viewcode-back" href="../../../library/fields.html#epygram.fields.D3VectorField.make_vector_field">[docs]</a><span class="k">def</span> <span class="nf">make_vector_field</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates a new :class:`epygram.D3VectorField` or subclass from</span>
+<span class="sd">    several :class:`epygram.D3Field` or subclass representing</span>
+<span class="sd">    the components of the vector in the field geometry.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;One need at least two components to make a vector&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="p">(</span><span class="n">D3Field</span><span class="p">,</span> <span class="n">D3VirtualField</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;All components must be (subclass of) D3Field.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span> <span class="o">!=</span> <span class="n">c</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;All components must be share their gridpoint&quot;</span> <span class="o">+</span>
+                           <span class="s2">&quot; dimensions.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="o">!=</span> <span class="n">c</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;All components must be share their spectral&quot;</span> <span class="o">+</span>
+                           <span class="s2">&quot; geometry.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">structure</span> <span class="o">!=</span> <span class="n">c</span><span class="o">.</span><span class="n">structure</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;&#39;fX&#39;, &#39;fY&#39; must share their structure.&quot;</span><span class="p">)</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;make_vector()&#39;</span><span class="p">},</span>
+                  <span class="n">structure</span><span class="o">=</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                  <span class="n">validity</span><span class="o">=</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                  <span class="n">processtype</span><span class="o">=</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                  <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">components</span><span class="o">=</span><span class="n">components</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span></div>
+
+
+<div class="viewcode-block" id="psikhi2uv"><a class="viewcode-back" href="../../../library/fields.html#epygram.fields.D3VectorField.psikhi2uv">[docs]</a><span class="k">def</span> <span class="nf">psikhi2uv</span><span class="p">(</span><span class="n">psi</span><span class="p">,</span> <span class="n">khi</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute wind (on the grid) as a D3VectorField (or subclass)</span>
+<span class="sd">    from streamfunction **psi** and velocity potential **khi**.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="p">(</span><span class="n">dpsidx</span><span class="p">,</span> <span class="n">dpsidy</span><span class="p">)</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">compute_xy_spderivatives</span><span class="p">()</span>
+    <span class="p">(</span><span class="n">dkhidx</span><span class="p">,</span> <span class="n">dkhidy</span><span class="p">)</span> <span class="o">=</span> <span class="n">khi</span><span class="o">.</span><span class="n">compute_xy_spderivatives</span><span class="p">()</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">dkhidx</span> <span class="o">-</span> <span class="n">dpsidy</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">dkhidy</span> <span class="o">+</span> <span class="n">dpsidx</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">fid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;derivative&#39;</span><span class="p">:</span><span class="s1">&#39;u-wind&#39;</span><span class="p">}</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">fid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;derivative&#39;</span><span class="p">:</span><span class="s1">&#39;v-wind&#39;</span><span class="p">}</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">processtype</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">processtype</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">processtype</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">processtype</span>
+    <span class="n">u</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">validity</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">validity</span>
+    <span class="k">return</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="D3VectorField"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField">[docs]</a><span class="k">class</span> <span class="nc">D3VectorField</span><span class="p">(</span><span class="n">Field</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    3-Dimensions Vector field class.</span>
+
+<span class="sd">    This is a wrapper to a list of D3Field(s), representing the components</span>
+<span class="sd">    of a vector projected on its geometry (the grid axes).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_collector</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;field&#39;</span><span class="p">,)</span>
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Type of Field geometry.&quot;</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;3D&#39;</span><span class="p">])),</span>
+            <span class="n">vector</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Intrinsic vectorial nature of the field.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="kc">True</span><span class="p">])),</span>
+            <span class="n">validity</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Validity of the field.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FieldValidityList</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">FieldValidityList</span><span class="p">()),</span>
+            <span class="n">components</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;List of Fields that each compose a component of the vector.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPList</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">FPList</span><span class="p">([])),</span>
+            <span class="n">processtype</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Generating process.&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="c1">##############</span>
+<span class="c1"># ABOUT DATA #</span>
+<span class="c1">##############</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spectral_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">spectral_geometry</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">spectral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns True if the field is spectral.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">components_are_projected_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">misc_metadata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;uvRelativeToGrid&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span>
+        <span class="n">proj</span> <span class="o">=</span> <span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">components</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">proj</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">proj</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">proj</span> <span class="o">=</span> <span class="s1">&#39;lonlat&#39;</span>
+        <span class="k">elif</span> <span class="n">proj</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">proj</span> <span class="o">=</span> <span class="s1">&#39;grid&#39;</span>
+        <span class="k">return</span> <span class="n">proj</span>
+
+<div class="viewcode-block" id="D3VectorField.attach_components"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.attach_components">[docs]</a>    <span class="k">def</span> <span class="nf">attach_components</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">components</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attach components of the vector to the VectorField.</span>
+<span class="sd">        *components* must be a series of D3Field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">D3Field</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;*components* must inherit from D3Field(s).&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">structure</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;*components* must share the same strucuture.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.sp2gp"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.sp2gp">[docs]</a>    <span class="k">def</span> <span class="nf">sp2gp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transforms the spectral field into gridpoint, according to its spectral</span>
+<span class="sd">        geometry. Replaces data in place.</span>
+
+<span class="sd">        The spectral transform subroutine is actually included in the spectral</span>
+<span class="sd">        geometry&#39;s *sp2gp()* method.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="D3VectorField.gp2sp"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.gp2sp">[docs]</a>    <span class="k">def</span> <span class="nf">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Transforms the gridpoint field into spectral space, according to the</span>
+<span class="sd">        *spectral_geometry* mandatorily passed as argument. Replaces data in</span>
+<span class="sd">        place.</span>
+
+<span class="sd">        :param spectral_geometry: instance of SpectralGeometry, actually</span>
+<span class="sd">                                  containing spectral transform subroutine (in</span>
+<span class="sd">                                  in its own *gp2sp()* method).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">spectral_geometry</span><span class="o">=</span><span class="n">spectral_geometry</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.getdata"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getdata">[docs]</a>    <span class="k">def</span> <span class="nf">getdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the field data, with 2D shape if the field is not spectral,</span>
+<span class="sd">        1D if spectral, as a tuple with data for each component.</span>
+
+<span class="sd">        :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM fields only, returns</span>
+<span class="sd">          the data resp. on the C or C+I zone.</span>
+<span class="sd">          Default is no subzone, i.e. the whole field.</span>
+
+<span class="sd">        Shape of 2D data: (x (0) being the X component, y (1) the Y one) \n</span>
+<span class="sd">        - Rectangular grids:\n</span>
+<span class="sd">          grid[0,0,x] is SW, grid[-1,-1,x] is NE \n</span>
+<span class="sd">          grid[0,-1,x] is SE, grid[-1,0,x] is NW</span>
+<span class="sd">        - Gauss grids:\n</span>
+<span class="sd">          grid[0,:Nj,x] is first (Northern) band of latitude, masked</span>
+<span class="sd">          after Nj = number of longitudes for latitude j \n</span>
+<span class="sd">          grid[-1,:Nj,x] is last (Southern) band of latitude (idem).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.setdata"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.setdata">[docs]</a>    <span class="k">def</span> <span class="nf">setdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets data to its components.</span>
+
+<span class="sd">        :param data: [data_i for i components]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;data must have as many components as VectorField.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="D3VectorField.deldata"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.deldata">[docs]</a>    <span class="k">def</span> <span class="nf">deldata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Empties the data.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">deldata</span><span class="p">()</span></div>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getdata</span><span class="p">,</span> <span class="n">setdata</span><span class="p">,</span> <span class="n">deldata</span><span class="p">,</span> <span class="s2">&quot;Accessor to the field data.&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="D3VectorField.getlevel"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getlevel">[docs]</a>    <span class="k">def</span> <span class="nf">getlevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a level of the field as a new field.</span>
+
+<span class="sd">        :param level: the requested level expressed in coordinate value (Pa, m...)</span>
+<span class="sd">        :param k: the index of the requested level</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">comp</span><span class="o">.</span><span class="n">getlevel</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;getlevel()&#39;</span><span class="p">},</span>
+                         <span class="n">structure</span><span class="o">=</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                         <span class="n">validity</span><span class="o">=</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                         <span class="n">processtype</span><span class="o">=</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                         <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">components</span><span class="o">=</span><span class="n">components</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.to_module"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.to_module">[docs]</a>    <span class="k">def</span> <span class="nf">to_module</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a :class:`epygram.D3Field` (or subclass) whose data</span>
+<span class="sd">        is the module of the Vector field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+            <span class="n">fieldcopy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+            <span class="n">fieldcopy</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+            <span class="n">datagp</span> <span class="o">=</span> <span class="n">fieldcopy</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">datagp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datagp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+            <span class="n">loc_sqrt</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">sqrt</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loc_sqrt</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">)):</span>
+            <span class="n">module</span> <span class="o">+=</span> <span class="n">datagp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">loc_sqrt</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                      <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                      <span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;VectorField.to_module()&#39;</span><span class="p">},</span>
+                      <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                      <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="D3VectorField.compute_direction"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.compute_direction">[docs]</a>    <span class="k">def</span> <span class="nf">compute_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a :class:`epygram.D3Field` or subclass whose data</span>
+<span class="sd">        is the direction of the horizontal part of the Vector field</span>
+<span class="sd">        (the two firsts components), in degrees.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+            <span class="n">fieldcopy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+            <span class="n">fieldcopy</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+            <span class="n">datagp</span> <span class="o">=</span> <span class="n">fieldcopy</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">datagp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datagp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">):</span>
+            <span class="n">loc_sqrt</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">sqrt</span>
+            <span class="n">loc_arccos</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">arccos</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">loc_sqrt</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span>
+            <span class="n">loc_arccos</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arccos</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">loc_sqrt</span><span class="p">(</span><span class="n">datagp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">datagp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">module_cal</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">module</span> <span class="o">&lt;</span> <span class="mf">1.E-15</span><span class="p">,</span> <span class="mf">1.E-15</span><span class="p">,</span> <span class="n">module</span><span class="p">)</span>
+        <span class="n">u_norm</span> <span class="o">=</span> <span class="o">-</span><span class="n">datagp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">module_cal</span>
+        <span class="n">v_norm</span> <span class="o">=</span> <span class="o">-</span><span class="n">datagp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">module_cal</span>
+        <span class="n">numpy</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">v_norm</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">v_norm</span><span class="p">)</span>
+        <span class="n">dd1</span> <span class="o">=</span> <span class="n">loc_arccos</span><span class="p">(</span><span class="n">v_norm</span><span class="p">)</span>
+        <span class="n">dd2</span> <span class="o">=</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">-</span> <span class="n">dd1</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">u_norm</span> <span class="o">&gt;=</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">dd1</span><span class="p">,</span> <span class="n">dd2</span><span class="p">))</span>
+        <span class="n">direction</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">module</span> <span class="o">&lt;</span> <span class="mf">1.E-15</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                      <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                      <span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;VectorField.compute_direction()&#39;</span><span class="p">},</span>
+                      <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+                      <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">direction</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f</span></div>
+
+<div class="viewcode-block" id="D3VectorField.reproject_wind_on_lonlat"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.reproject_wind_on_lonlat">[docs]</a>    <span class="k">def</span> <span class="nf">reproject_wind_on_lonlat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                 <span class="n">map_factor_correction</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reprojects a wind vector (u, v) from the grid axes onto real</span>
+<span class="sd">        sphere, i.e. with components on true zonal/meridian axes.</span>
+<span class="sd">        Other components are kept untouched.</span>
+
+<span class="sd">        :param map_factor_correction: if True, apply a correction of magnitude</span>
+<span class="sd">                                      due to map factor.</span>
+<span class="sd">        :param reverse: if True, apply the reverse reprojection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
+        <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;rotated_reduced_gauss&#39;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="p">(</span><span class="n">newu</span><span class="p">,</span> <span class="n">newv</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">reproject_wind_on_lonlat</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span>
+                                                                          <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span>
+                                                                          <span class="n">lon</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span>
+                                                                          <span class="n">lat</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span>
+                                                                          <span class="n">map_factor_correction</span><span class="o">=</span><span class="n">map_factor_correction</span><span class="p">,</span>
+                                                                          <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">][</span><span class="o">~</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">newu</span>
+                    <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">][</span><span class="o">~</span><span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">newv</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">reshape_data</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="n">first_dimension</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">reshape_data</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="n">first_dimension</span><span class="o">=</span><span class="s1">&#39;T&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">reproject_wind_on_lonlat</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+                                                                                          <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span>
+                                                                                          <span class="n">map_factor_correction</span><span class="o">=</span><span class="n">map_factor_correction</span><span class="p">,</span>
+                                                                                          <span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">([</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">c</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]])</span></div>
+
+<div class="viewcode-block" id="D3VectorField.map_factorize"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.map_factorize">[docs]</a>    <span class="k">def</span> <span class="nf">map_factorize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Multiply the field by its map factor.</span>
+<span class="sd">        Only the first two components are affected.</span>
+
+<span class="sd">        :param reverse: if True, divide.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+            <span class="n">spgeom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+            <span class="n">was_spectral</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">was_spectral</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">map_factor_field</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">reverse</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">op</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">operation_with_other</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">operation_with_other</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">was_spectral</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">spgeom</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.compute_vordiv"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.compute_vordiv">[docs]</a>    <span class="k">def</span> <span class="nf">compute_vordiv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">divide_by_m</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute vorticity and divergence fields from the vector field.</span>
+
+<span class="sd">        :param divide_by_m: if True, apply f = f/m beforehand, where m is the</span>
+<span class="sd">                            map factor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">divide_by_m</span><span class="p">:</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">map_factorize</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="p">(</span><span class="n">dudx</span><span class="p">,</span> <span class="n">dudy</span><span class="p">)</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">compute_xy_spderivatives</span><span class="p">()</span>
+        <span class="p">(</span><span class="n">dvdx</span><span class="p">,</span> <span class="n">dvdy</span><span class="p">)</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">compute_xy_spderivatives</span><span class="p">()</span>
+        <span class="n">vor</span> <span class="o">=</span> <span class="n">dvdx</span> <span class="o">-</span> <span class="n">dudy</span>
+        <span class="n">div</span> <span class="o">=</span> <span class="n">dudx</span> <span class="o">+</span> <span class="n">dvdy</span>
+        <span class="n">vor</span><span class="o">.</span><span class="n">fid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;derivative&#39;</span><span class="p">:</span><span class="s1">&#39;vorticity&#39;</span><span class="p">}</span>
+        <span class="n">div</span><span class="o">.</span><span class="n">fid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;derivative&#39;</span><span class="p">:</span><span class="s1">&#39;divergence&#39;</span><span class="p">}</span>
+        <span class="n">vor</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">dudx</span><span class="o">.</span><span class="n">validity</span>
+        <span class="n">div</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">dudx</span><span class="o">.</span><span class="n">validity</span>
+
+        <span class="k">return</span> <span class="p">(</span><span class="n">vor</span><span class="p">,</span> <span class="n">div</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.remove_level"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.remove_level">[docs]</a>    <span class="k">def</span> <span class="nf">remove_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.remove_level()&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">remove_level</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.extract_subdomain"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_subdomain">[docs]</a>    <span class="k">def</span> <span class="nf">extract_subdomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.extract_subdomain()&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">extract_subdomain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">extract_subdomain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">attach_components</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">extract_subdomain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="D3VectorField.extract_zoom"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_zoom">[docs]</a>    <span class="k">def</span> <span class="nf">extract_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.extract_zoom()&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">extract_zoom</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">extract_zoom</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">attach_components</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">extract_zoom</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="D3VectorField.extract_subarray"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_subarray">[docs]</a>    <span class="k">def</span> <span class="nf">extract_subarray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.extract_subarray()&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">extract_subarray</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">extract_subarray</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">attach_components</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">extract_subarray</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="D3VectorField.extract_subsample"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_subsample">[docs]</a>    <span class="k">def</span> <span class="nf">extract_subsample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.extract_subsample&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">extract_subsample</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">extract_subsample</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">attach_components</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">extract_subsample</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="D3VectorField.resample"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.resample">[docs]</a>    <span class="k">def</span> <span class="nf">resample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.resample()&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">attach_components</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="D3VectorField.resample_on_regularll"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.resample_on_regularll">[docs]</a>    <span class="k">def</span> <span class="nf">resample_on_regularll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.resample_on_regularll()&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">resample_on_regularll</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">),</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">resample_on_regularll</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">attach_components</span><span class="p">(</span><span class="n">component</span><span class="o">.</span><span class="n">resample_on_regularll</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="D3VectorField.center"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.center()&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">center</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.select_subzone"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.select_subzone">[docs]</a>    <span class="k">def</span> <span class="nf">select_subzone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.select_subzone()&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">select_subzone</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.use_field_as_vcoord"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.use_field_as_vcoord">[docs]</a>    <span class="k">def</span> <span class="nf">use_field_as_vcoord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cf. D3Field.use_field_as_vcoord()&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">component</span><span class="o">.</span><span class="n">use_field_as_vcoord</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<span class="c1">###################</span>
+<span class="c1"># PRE-APPLICATIVE #</span>
+<span class="c1">###################</span>
+<span class="c1"># (but useful and rather standard) !</span>
+<span class="c1"># [so that, subject to continuation through updated versions,</span>
+<span class="c1">#  including suggestions/developments by users...]</span>
+
+<div class="viewcode-block" id="D3VectorField.getvalue_ij"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getvalue_ij">[docs]</a>    <span class="k">def</span> <span class="nf">getvalue_ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of the different components of the field from indexes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">getvalue_ij</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.getvalue_ll"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getvalue_ll">[docs]</a>    <span class="k">def</span> <span class="nf">getvalue_ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value of the different components of the field from coordinates.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">getvalue_ll</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.min"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.min">[docs]</a>    <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the minimum value of data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.max"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.max">[docs]</a>    <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the maximum value of data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.mean"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.mean">[docs]</a>    <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the mean value of data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.std"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.std">[docs]</a>    <span class="k">def</span> <span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the standard deviation of data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.quadmean"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.quadmean">[docs]</a>    <span class="k">def</span> <span class="nf">quadmean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the quadratic mean of data.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">quadmean</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.nonzero"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.nonzero">[docs]</a>    <span class="k">def</span> <span class="nf">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the number of non-zero values (whose absolute</span>
+<span class="sd">        value &gt; config.epsilon).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="D3VectorField.global_shift_center"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.global_shift_center">[docs]</a>    <span class="k">def</span> <span class="nf">global_shift_center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">longitude_shift</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shifts the center of the geometry (and the data accordingly) by</span>
+<span class="sd">        *longitude_shift* (in degrees). *longitude_shift* has to be a multiple</span>
+<span class="sd">        of the grid&#39;s resolution in longitude.</span>
+
+<span class="sd">        For global RegLLGeometry grids only.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;regular_lonlat&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;only for regular lonlat geometries.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">global_shift_center</span><span class="p">(</span><span class="n">longitude_shift</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="D3VectorField.what"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.what">[docs]</a>    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
+             <span class="n">vertical_geometry</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">cumulativeduration</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes in file a summary of the field.</span>
+
+<span class="sd">        :param out: the output open file-like object (duck-typing: *out*.write()</span>
+<span class="sd">          only is needed).</span>
+<span class="sd">        :param vertical_geometry: if True, writes the vertical geometry of the</span>
+<span class="sd">          field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">what</span><span class="p">(</span><span class="n">out</span><span class="p">,</span>
+                   <span class="n">vertical_geometry</span><span class="o">=</span><span class="n">vertical_geometry</span><span class="p">,</span>
+                   <span class="n">cumulativeduration</span><span class="o">=</span><span class="n">cumulativeduration</span><span class="p">)</span></div>
+
+<span class="c1">#############</span>
+<span class="c1"># OPERATORS #</span>
+<span class="c1">#############</span>
+
+    <span class="k">def</span> <span class="nf">_check_operands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Internal method to check compatibility of terms in operations on fields.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;vector&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">_attributes</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;cannot operate a Vector field with a&quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot; non-Vector one.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;vector fields must have the same&quot;</span> <span class="o">+</span>
+                                       <span class="s2">&quot; number of components.&quot;</span><span class="p">)</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">D3VectorField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_check_operands</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Definition of addition, &#39;other&#39; being:</span>
+<span class="sd">        - a scalar (integer/float)</span>
+<span class="sd">        - another Field of the same subclass.</span>
+<span class="sd">        Returns a new Field whose data is the resulting operation,</span>
+<span class="sd">        with &#39;fid&#39; = {&#39;op&#39;:&#39;+&#39;} and null validity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">other</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+
+        <span class="n">newid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;+&#39;</span><span class="p">}</span>
+        <span class="n">newfield</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">newid</span><span class="p">,</span>
+                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">,</span>
+                             <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                             <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">components</span><span class="o">=</span><span class="n">newcomponents</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">newfield</span>
+
+    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Definition of multiplication, &#39;other&#39; being:</span>
+<span class="sd">        - a scalar (integer/float)</span>
+<span class="sd">        - another Field of the same subclass.</span>
+<span class="sd">        Returns a new Field whose data is the resulting operation,</span>
+<span class="sd">        with &#39;fid&#39; = {&#39;op&#39;:&#39;*&#39;} and null validity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">other</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="n">newid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;*&#39;</span><span class="p">}</span>
+        <span class="n">newfield</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">newid</span><span class="p">,</span>
+                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">,</span>
+                             <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                             <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">components</span><span class="o">=</span><span class="n">newcomponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newfield</span>
+
+    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Definition of substraction, &#39;other&#39; being:</span>
+<span class="sd">        - a scalar (integer/float)</span>
+<span class="sd">        - another Field of the same subclass.</span>
+<span class="sd">        Returns a new Field whose data is the resulting operation,</span>
+<span class="sd">        with &#39;fid&#39; = {&#39;op&#39;:&#39;-&#39;} and null validity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">other</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="n">newid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">}</span>
+        <span class="n">newfield</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">newid</span><span class="p">,</span>
+                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">,</span>
+                             <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                             <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">components</span><span class="o">=</span><span class="n">newcomponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newfield</span>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Definition of division, &#39;other&#39; being:</span>
+<span class="sd">        - a scalar (integer/float)</span>
+<span class="sd">        - another Field of the same subclass.</span>
+<span class="sd">        Returns a new Field whose data is the resulting operation,</span>
+<span class="sd">        with &#39;fid&#39; = {&#39;op&#39;:&#39;/&#39;} and null validity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">other</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="n">newid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;/&#39;</span><span class="p">}</span>
+        <span class="n">newfield</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">newid</span><span class="p">,</span>
+                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">,</span>
+                             <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                             <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">components</span><span class="o">=</span><span class="n">newcomponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newfield</span>
+
+    <span class="fm">__radd__</span> <span class="o">=</span> <span class="fm">__add__</span>
+    <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
+
+    <span class="k">def</span> <span class="nf">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Definition of substraction, &#39;other&#39; being:</span>
+<span class="sd">        - a scalar (integer/float)</span>
+<span class="sd">        - another Field of the same subclass.</span>
+<span class="sd">        Returns a new Field whose data is the resulting operation,</span>
+<span class="sd">        with &#39;fid&#39; = {&#39;op&#39;:&#39;-&#39;} and null validity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="n">newid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;-&#39;</span><span class="p">}</span>
+        <span class="n">newfield</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">newid</span><span class="p">,</span>
+                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">,</span>
+                             <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                             <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">components</span><span class="o">=</span><span class="n">newcomponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newfield</span>
+
+    <span class="k">def</span> <span class="nf">__rdiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Definition of division, &#39;other&#39; being:</span>
+<span class="sd">        - a scalar (integer/float)</span>
+<span class="sd">        - another Field of the same subclass.</span>
+<span class="sd">        Returns a new Field whose data is the resulting operation,</span>
+<span class="sd">        with &#39;fid&#39; = {&#39;op&#39;:&#39;/&#39;} and null validity.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newcomponents</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">))]</span>
+        <span class="n">newid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;op&#39;</span><span class="p">:</span><span class="s1">&#39;/&#39;</span><span class="p">}</span>
+        <span class="n">newfield</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">newid</span><span class="p">,</span>
+                             <span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
+                             <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">,</span>
+                             <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
+                             <span class="n">vector</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                             <span class="n">components</span><span class="o">=</span><span class="n">newcomponents</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">newfield</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

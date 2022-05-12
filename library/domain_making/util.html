@@ -1,0 +1,165 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.geometries.domain_making.util — Tools &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="epygram.fields — Fields" href="../fields.html" />
+    <link rel="prev" title="epygram.geometries.domain_making.output — Output" href="output.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../fields.html" title="epygram.fields — Fields"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="output.html" title="epygram.geometries.domain_making.output — Output"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../geometries_lib.html" ><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../domain_making.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a><ul>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="output.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../fields.html"
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/library/domain_making/util.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-epygram.geometries.domain_making.util">
+<span id="epygram-geometries-domain-making-util-tools"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making.util" title="epygram.geometries.domain_making.util: Domain creation - Tools"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code></a> — Tools<a class="headerlink" href="#module-epygram.geometries.domain_making.util" title="Permalink to this headline">¶</a></h1>
+<p>Contains utilities for building a LAM domain.</p>
+<hr class="docutils" />
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<dl class="data">
+<dt id="epygram.geometries.domain_making.util.Ezone_minimum_width">
+<code class="descclassname">epygram.geometries.domain_making.util.</code><code class="descname">Ezone_minimum_width</code><em class="property"> = 11</em><a class="headerlink" href="#epygram.geometries.domain_making.util.Ezone_minimum_width" title="Permalink to this definition">¶</a></dt>
+<dd><p>minimum width of Extension zone</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="epygram.geometries.domain_making.util.threshold_mercator_lambert">
+<code class="descclassname">epygram.geometries.domain_making.util.</code><code class="descname">threshold_mercator_lambert</code><em class="property"> = 5.0</em><a class="headerlink" href="#epygram.geometries.domain_making.util.threshold_mercator_lambert" title="Permalink to this definition">¶</a></dt>
+<dd><p>threshold in degrees towards Equator for the domain center, to choose lambert/mercator</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="epygram.geometries.domain_making.util.threshold_pole_distance_lambert">
+<code class="descclassname">epygram.geometries.domain_making.util.</code><code class="descname">threshold_pole_distance_lambert</code><em class="property"> = 1.0</em><a class="headerlink" href="#epygram.geometries.domain_making.util.threshold_pole_distance_lambert" title="Permalink to this definition">¶</a></dt>
+<dd><p>threshold in degrees towards Pole for the min/max latitude, to choose lambert/polar_stereographic</p>
+</dd></dl>
+
+<dl class="data">
+<dt id="epygram.geometries.domain_making.util.default_Izone_width_in_m">
+<code class="descclassname">epygram.geometries.domain_making.util.</code><code class="descname">default_Izone_width_in_m</code><em class="property"> = 20000.0</em><a class="headerlink" href="#epygram.geometries.domain_making.util.default_Izone_width_in_m" title="Permalink to this definition">¶</a></dt>
+<dd><p>default width of Izone, to compute width in number of points according to resolution</p>
+</dd></dl>
+
+</div>
+<hr class="docutils" />
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="epygram.geometries.domain_making.util.default_Iwidth">
+<code class="descclassname">epygram.geometries.domain_making.util.</code><code class="descname">default_Iwidth</code><span class="sig-paren">(</span><em>resolution</em>, <em>Izone_width_in_m=20000.0</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/util.html#default_Iwidth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.domain_making.util.default_Iwidth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return default Iwidth depending on the resolution.</p>
+<p>Algo:
+make it at least <strong>Izone_width_in_m</strong> wide, and not less than 8 points.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../fields.html" title="epygram.fields — Fields"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="output.html" title="epygram.geometries.domain_making.output — Output"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../geometries_lib.html" ><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../domain_making.html" ><code class="docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

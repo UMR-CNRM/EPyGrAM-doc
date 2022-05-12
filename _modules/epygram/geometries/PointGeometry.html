@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.geometries.PointGeometry &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.geometries.PointGeometry</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the classes for Point geometry of fields.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.V1DGeometry</span> <span class="k">import</span> <span class="n">V1DGeometry</span>
+<span class="kn">from</span> <span class="nn">.H2DGeometry</span> <span class="k">import</span> <span class="n">H2DUnstructuredGeometry</span>
+
+
+<div class="viewcode-block" id="PointGeometry"><a class="viewcode-back" href="../../../library/PointGeometry.html#epygram.geometries.PointGeometry.PointGeometry">[docs]</a><span class="k">class</span> <span class="nc">PointGeometry</span><span class="p">(</span><span class="n">V1DGeometry</span><span class="p">,</span> <span class="n">H2DUnstructuredGeometry</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles the geometry for a Geographical Point Field.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_collector</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,)</span>
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">structure</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;Point&#39;</span><span class="p">])),</span>
+            <span class="n">name</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;DDH:point&#39;</span><span class="p">,</span> <span class="s1">&#39;DDH:ij_point&#39;</span><span class="p">,</span> <span class="s1">&#39;DDH:quadrilateral&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;DDH:rectangle&#39;</span><span class="p">,</span> <span class="s1">&#39;DDH:globe&#39;</span><span class="p">,</span> <span class="s1">&#39;DDH:zonal_bands&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;unstructured&#39;</span><span class="p">]),</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+            <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;center&#39;</span><span class="p">],</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

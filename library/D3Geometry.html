@@ -1,0 +1,3085 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.geometries.D3Geometry — 3-D Geometry class &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.geometries.H2DGeometry — Horizontal 2-D Geometry classes" href="H2DGeometry.html" />
+    <link rel="prev" title="epygram.geometries — Geometries" href="geometries_lib.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="H2DGeometry.html" title="epygram.geometries.H2DGeometry — Horizontal 2-D Geometry classes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="geometries_lib.html" title="epygram.geometries — Geometries"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="geometries_lib.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="H2DGeometry.html"
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry</span></code> — Horizontal 2-D Geometry classes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/D3Geometry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-epygram.geometries.D3Geometry">
+<span id="epygram-geometries-d3geometry-3-d-geometry-class"></span><h1><a class="reference internal" href="#module-epygram.geometries.D3Geometry" title="epygram.geometries.D3Geometry: 3-D Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code></a> — 3-D Geometry class<a class="headerlink" href="#module-epygram.geometries.D3Geometry" title="Permalink to this headline">¶</a></h1>
+<p>Contains the classes for 3D geometries of fields.</p>
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3Geometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3Geometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<p>Handles the geometry for a 3-Dimensions Field.
+Abstract mother class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘unstructured’, ‘regular_gauss’, ‘reduced_gauss’, ‘polar_stereographic’, ‘mercator’, ‘lambert’, ‘regular_lonlat’, ‘rotated_lonlat’, ‘rotated_reduced_gauss’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘__unknown__’.</li>
+<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.azimuth">
+<code class="descname">azimuth</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.azimuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points following a Great Circle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Warning: requires the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.cartoplot_geometry">
+<code class="descname">cartoplot_geometry</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.cartoplot_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.cartoplot_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a simple plot of the geometry, using cartopy.
+For kwargs please refer to epygram.geometries.domain_making.output.cartoplot_rect_geometry</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.cartopy_CRS_reproject">
+<code class="descname">cartopy_CRS_reproject</code><span class="sig-paren">(</span><em>lons</em>, <em>lats</em>, <em>projection=None</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.cartopy_CRS_reproject" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Reproject lons/lats onto a cartopy CRS projection coordinates.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.datashape">
+<code class="descname">datashape</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.datashape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data shape requested by this geometry.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points along a Great Circle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – first point, must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – second point, must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If one of (end1, end2) is a tuple of arrays (like (&lt;array of lon&gt;, &lt;array of lat&gt;))
+the other one must be a scalar tuple or a tuple of arrays with same dimensions.</p>
+<p>Warning: requires the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.eq_Hgeom">
+<code class="descname">eq_Hgeom</code><span class="sig-paren">(</span><em>other</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.eq_Hgeom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.eq_Hgeom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests if the horizontal part of the geometry is equal to
+the horizontal part of another geometry.
+:param: other: other geometry to use in the comparison</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.get_levels">
+<code class="descname">get_levels</code><span class="sig-paren">(</span><em>d4=False</em>, <em>nb_validities=0</em>, <em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.get_levels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.get_levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array containing the level for each data point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>d4</strong> – <ul>
+<li>if True,  returned values are shaped in a 4 dimensions array</li>
+<li>if False, shape of returned values is determined with respect to geometry
+d4=True requires nb_validities &gt; 0</li>
+</ul>
+</li>
+<li><strong>nb_validities</strong> – the number of validities represented in data values</li>
+<li><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM grids only, extracts
+the levels resp. from the C or C+I zone off the C+I(+E) zone.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Levels are internally stored with the vertical dimension first whereas this
+method puts the time in first dimension.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.linspace">
+<code class="descname">linspace</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.linspace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.linspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns evenly spaced points over the specified interval.
+Points are lined up along a Great Circle.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>num</strong> – the number of points, including point1 and point2.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Warning: requires the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_field">
+<code class="descname">make_field</code><span class="sig-paren">(</span><em>fid=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a field out of the geometry.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_physicallevels_geometry">
+<code class="descname">make_physicallevels_geometry</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_physicallevels_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_physicallevels_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new geometry excluding levels with no physical meaning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>getdata</strong> – if False returns a field without data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_point_geometry">
+<code class="descname">make_point_geometry</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_point_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_point_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a PointGeometry at coordinates <em>(lon,lat)</em> in degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_profile_geometry">
+<code class="descname">make_profile_geometry</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_profile_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_profile_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a V1DGeometry at coordinates <em>(lon,lat)</em> in degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_section_geometry">
+<code class="descname">make_section_geometry</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em>, <em>points_number=None</em>, <em>resolution=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_section_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_section_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a V2DGeometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</li>
+<li><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</li>
+<li><strong>position</strong> – defines the position of data in the grid (for projected grids only)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_vtkGrid">
+<code class="descname">make_vtkGrid</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_vtkGrid" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>Makes an empty grid to use with vtk</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rendering</strong> – a usevtk.Usevtk instance</li>
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.make_zoom_geometry">
+<code class="descname">make_zoom_geometry</code><span class="sig-paren">(</span><em>zoom</em>, <em>extra_10th=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_zoom_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_zoom_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an unstructured geometry with the points contained in <em>zoom</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>zoom</strong> – a dict(lonmin=, lonmax=, latmin=, latmax=).</li>
+<li><strong>extra_10th</strong> – if True, add 1/10th of the X/Y extension of the zoom
+(only usefull for the regular_lonlat grid implementation).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.plot3DBluemarble">
+<code class="descname">plot3DBluemarble</code><span class="sig-paren">(</span><em>rendering</em>, <em>subzone=None</em>, <em>interpolation='nearest'</em>, <em>color_transform=None</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plot3DBluemarble" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>This method adds the NOAA’s bluemarble image to the vtk rendering system. The image
+is projected on the vertical coordinate of this geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rendering</strong> – a usevtk.Usevtk instance</li>
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+<li><strong>interpolation</strong> – interpolation method to use to compute levels at each pixel</li>
+<li><strong>color_transform</strong> – <dl class="docutils">
+<dt>if not None, must be a user-defined function with parameters</dt>
+<dd>(rgb, alpha, (lons, lats)) with rgb an array representing
+the rgb values on each of the image points, alpha the alpha
+values on the same points and (lons, lats) a turple of the
+points coordinate. The function must return (rgb, alpha). This
+enables the color modification of the image.
+For example, the following function transforms the color
+into grey levels:</dd>
+<dt>def grey(rgb, alpha, ll):</dt>
+<dd>rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]
+return rgb, alpha</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Image can be found here:</dt>
+<dd><a class="reference external" href="https://sos.noaa.gov/datasets/blue-marble-without-clouds/">https://sos.noaa.gov/datasets/blue-marble-without-clouds/</a>
+<a class="reference external" href="ftp://public.sos.noaa.gov/land/blue_marble/earth_vegetation/4096.jpg">ftp://public.sos.noaa.gov/land/blue_marble/earth_vegetation/4096.jpg</a></dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.plot3DMaptiles">
+<code class="descname">plot3DMaptiles</code><span class="sig-paren">(</span><em>rendering</em>, <em>url</em>, <em>resol_factor</em>, <em>minzoom=1</em>, <em>maxzoom=18</em>, <em>subzone=None</em>, <em>interpolation='nearest'</em>, <em>color_transform=None</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plot3DMaptiles" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>This method adds tiles image to the vtk rendering system. The image
+is projected on the vertical coordinate of this geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rendering</strong> – a usevtk.Usevtk instance</li>
+<li><strong>url</strong> – url to get the map tiles to use
+ex: <a class="reference external" href="https://a.tile.openstreetmap.org">https://a.tile.openstreetmap.org</a>/${z}/${x}/${y}.png
+where ${z}, ${x} and ${y} are place holders for
+zoom, x and y position of the tile</li>
+<li><strong>resol_factor</strong> – how many times the tile resolution must be approximately
+better than the geometry resolution. A factor of 2 (resp. 1/2.)
+induce using the next (resp. preceding) zoom level.</li>
+<li><strong>minzoom/maxzoom</strong> – minimum and maximum zoom levels to use</li>
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+<li><strong>interpolation</strong> – interpolation method to use to compute levels at each pixel</li>
+<li><strong>color_transform</strong> – <dl class="docutils">
+<dt>if not None, must be a user-defined function with parameters</dt>
+<dd>(rgb, alpha, (lons, lats)) with rgb an array representing
+the rgb values on each of the image points, alpha the alpha
+values on the same points and (lons, lats) a turple of the
+points coordinate. The function must return (rgb, alpha). This
+enables the color modification of the image.
+For example, the following function transforms the color
+into grey levels:</dd>
+<dt>def grey(rgb, alpha, ll):</dt>
+<dd>rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]
+return rgb, alpha</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Zoom computation is done supposing that each tile is made of 256 * 256 pixels.</p>
+<p>URL examples (these URLs have been found on internet but some are protected with
+copyrights and must not be used with this tool or kept in cache; please check
+before use):</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="first docutils">
+<dt>osm: a (full?) list can be found on <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tile_servers">https://wiki.openstreetmap.org/wiki/Tile_servers</a></dt>
+<dd>or <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tiles">https://wiki.openstreetmap.org/wiki/Tiles</a>
+The most common one is certainly: <a class="reference external" href="https://a.tile.openstreetmap.org">https://a.tile.openstreetmap.org</a>/${z}/${x}/${y}.png</dd>
+</dl>
+</li>
+<li>google maps: it seems to be forbidden to use this tiles outside of google products.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.plot3DProjImage">
+<code class="descname">plot3DProjImage</code><span class="sig-paren">(</span><em>rendering</em>, <em>filename</em>, <em>geometry</em>, <em>subzone=None</em>, <em>interpolation='nearest'</em>, <em>color_transform=None</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plot3DProjImage" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>This method adds an image to the vtk rendering system. The image is projected
+on the vertical coordinate of this geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rendering</strong> – a usevtk.Usevtk instance</li>
+<li><strong>filename</strong> – path to an image file</li>
+<li><strong>geometry</strong> – projection associated to the geometry</li>
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+<li><strong>interpolation</strong> – interpolation method to use to compute levels at each pixel</li>
+<li><strong>color_transform</strong> – <dl class="docutils">
+<dt>if not None, must be a user-defined function with parameters</dt>
+<dd>(rgb, alpha, (lons, lats)) with rgb an array representing
+the rgb values on each of the image points, alpha the alpha
+values on the same points and (lons, lats) a turple of the
+points coordinate. The function must return (rgb, alpha). This
+enables the color modification of the image.
+For example, the following function transforms the color
+into grey levels:</dd>
+<dt>def grey(rgb, alpha, ll):</dt>
+<dd>rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]
+return rgb, alpha</dd>
+</dl>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>first_corner and last_corner describe the coverage of the image from the left edge
+of the leftmost pixel to the right edge of the rightmost pixel.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.plotgeometry">
+<code class="descname">plotgeometry</code><span class="sig-paren">(</span><em>plotlib='cartopy'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.plotgeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plotgeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a simple plot of the geometry, with a number of options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>plotlib</strong> – library to be used for plotting: ‘basemap’ is DEPRECATED;
+‘cartopy’ (default) is recommended !</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.projected_geometry">
+<code class="descname">projected_geometry</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.projected_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the geometry a projection ?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.rectangular_grid">
+<code class="descname">rectangular_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.rectangular_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the grid rectangular ?</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.vcoord_as_field">
+<code class="descname">vcoord_as_field</code><span class="sig-paren">(</span><em>surface_type</em>, <em>validity=None</em>, <em>levels=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.vcoord_as_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.vcoord_as_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a field filled with the level values associated to a fake geometry
+:param validity: validities to associate with the returned field</p>
+<blockquote>
+<div>if None, we try without setting validity</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>surface_type</strong> – typeOfFirstFixedSurface to associate to the fake geometry</li>
+<li><strong>levels</strong> – list of values to use as the levels of the fake geometry
+if None, levels will be replaced by a range</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3Geometry.what">
+<code class="descname">what</code><span class="sig-paren">(</span><em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;</em>, <em>vertical_geometry=True</em>, <em>arpifs_var_names=False</em>, <em>spectral_geometry=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.what"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out</strong> – the output open file-like object (duck-typing: <em>out</em>.write()
+only is needed).</li>
+<li><strong>vertical_geometry</strong> – if True, writes the vertical geometry of the
+field.</li>
+<li><strong>arpifs_var_names</strong> – if True, prints the equivalent ‘arpifs’ variable
+names.</li>
+<li><strong>spectral_geometry</strong> – an optional dict containing the spectral
+truncatures {‘in_X’:, ‘in_Y’:}  (LAM) or {‘max’:} (global).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3RectangularGridGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.D3Geometry.D3Geometry" title="epygram.geometries.D3Geometry.D3Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3Geometry</span></code></a></p>
+<p>Handles the geometry for a rectangular 3-Dimensions Field.
+Abstract.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘mercator’, ‘unstructured’, ‘lambert’, ‘regular_lonlat’, ‘rotated_lonlat’, ‘academic’, ‘polar_stereographic’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘__unknown__’.</li>
+<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.default_cartopy_CRS">
+<code class="descname">default_cartopy_CRS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Create a cartopy.crs appropriate to the Geometry.</p>
+<p>By default, a PlateCarree (if the domain gets close to a pole)
+or a Miller projection is returned.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.extract_subzone">
+<code class="descname">extract_subzone</code><span class="sig-paren">(</span><em>data</em>, <em>subzone</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.extract_subzone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.extract_subzone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the subzone C or CI from a LAM field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> – the data values with shape concording with geometry.</li>
+<li><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM grids only,
+extracts the data resp. from the C or C+I zone off the C+I(+E) zone.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.fill_maskedvalues">
+<code class="descname">fill_maskedvalues</code><span class="sig-paren">(</span><em>data</em>, <em>fill_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.fill_maskedvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.fill_maskedvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <em>data</em> with masked values filled with <em>fill_value</em>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.get_datashape">
+<code class="descname">get_datashape</code><span class="sig-paren">(</span><em>dimT=1</em>, <em>force_dimZ=None</em>, <em>d4=False</em>, <em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.get_datashape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.get_datashape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data shape according to the geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force_dimZ</strong> – if supplied, force the Z dimension instead of that
+of the vertical geometry</li>
+<li><strong>dimT</strong> – if supplied, is the time dimension to be added to the
+data shape</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  shape is 4D</li>
+<li>if False, shape has only those &gt; 1</li>
+</ul>
+</li>
+<li><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM grids only, informes that
+data is resp. on the C or C+I zone off the C+I(+E) zone.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.get_lonlat_grid">
+<code class="descname">get_lonlat_grid</code><span class="sig-paren">(</span><em>subzone=None</em>, <em>position=None</em>, <em>d4=False</em>, <em>nb_validities=0</em>, <em>force_longitudes=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.get_lonlat_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.get_lonlat_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of two tables containing one the longitude of each
+point, the other the latitude, with 2D shape.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+<li><strong>position</strong> – position of lonlat grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  returned values are shaped in a 4 dimensions array</li>
+<li>if False, shape of returned values is determined with
+respect to geometry. d4=True requires nb_validities &gt; 0</li>
+</ul>
+</li>
+<li><strong>nb_validities</strong> – number of validities represented in data values</li>
+<li><strong>force_longitudes</strong> – if ‘positive’, the longitudes will be forced positive
+if ‘]-180,180]’, the longitudes will be in the ]-180, 180] interval</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Shape of 2D data on Rectangular grids:</p>
+<blockquote>
+<div><ul class="simple">
+<li>grid[0,0] is SW, grid[-1,-1] is NE</li>
+<li>grid[0,-1] is SE, grid[-1,0] is NW</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.gimme_corners_ij">
+<code class="descname">gimme_corners_ij</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.gimme_corners_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.gimme_corners_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the indices (i, j) of the four corners of a rectangular grid,
+as a dict(corner=(i, j)) with corner in:</p>
+<p>ll = lower-left / lr = lower-right / ur = upper-right / ul = upper-left.</p>
+<p>(0, 0) is always the lower-left corner of the grid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subzone</strong> – for LAM fields, returns the corners of the subzone.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.gimme_corners_ll">
+<code class="descname">gimme_corners_ll</code><span class="sig-paren">(</span><em>subzone=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.gimme_corners_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.gimme_corners_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lon/lat of the four corners of a rectangular grid,
+as a dict(corner=(lon, lat)) with corner in:</p>
+<p>ll = lower-left / lr = lower-right / ur = upper-right / ul = upper-left.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subzone</strong> – for LAM grids, returns the corners of the subzone.</li>
+<li><strong>position</strong> – position of corners with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.gridpoints_number">
+<code class="descname">gridpoints_number</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.gridpoints_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of gridpoints of the grid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.horizontally_flattened">
+<code class="descname">horizontally_flattened</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.horizontally_flattened"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.horizontally_flattened" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <em>data</em> with horizontal dimensions flattened.
+<em>data</em> must be 4D for simplicity reasons.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.isglobal">
+<code class="descname">isglobal</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.isglobal" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if geometry is global</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.make_subarray_geometry">
+<code class="descname">make_subarray_geometry</code><span class="sig-paren">(</span><em>first_i</em>, <em>last_i</em>, <em>first_j</em>, <em>last_j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.make_subarray_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.make_subarray_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a modified geometry consisting in a subarray of the grid, defined
+by the indexes given as argument.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.make_subsample_geometry">
+<code class="descname">make_subsample_geometry</code><span class="sig-paren">(</span><em>sample_x</em>, <em>sample_y</em>, <em>sample_z</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.make_subsample_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.make_subsample_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a sample geometry by decreasing resolution.
+:param sample_x: take one over &lt;sample_x&gt; points in the x direction
+:param sample_y: same for the y direction
+:param sample_z: same for the z direction</p>
+<p>CAUTION: if your grid contains non physical point, these points can be
+retain in subsample. Use select_zone beforehand to suppress these points.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.minmax_ll">
+<code class="descname">minmax_ll</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.minmax_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.minmax_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return min/max of lon/lat.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.nearest_points">
+<code class="descname">nearest_points</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>request</em>, <em>position=None</em>, <em>external_distance=None</em>, <em>squeeze=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.nearest_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.nearest_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the (i, j) positions of the nearest points.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lon</strong> – longitude of point in degrees.</li>
+<li><strong>lat</strong> – latitude of point in degrees.</li>
+<li><strong>request</strong> – <p>criteria for selecting the points, among:
+* {‘n’:’1’} - the nearest point
+* {‘n’:’2*2’} - the 2*2 square points around the position
+* {‘n’:’4*4’} - the 4*4 square points around the position
+* {‘n’:’N*N’} - the N*N square points around the position: N must be even
+* {‘radius’:xxxx, ‘shape’:’square’} - the points which are xxxx metres</p>
+<blockquote>
+<div>around the position in X or Y direction</div></blockquote>
+<ul>
+<li>{‘radius’:xxxx, ‘shape’:’circle’} - the points within xxxx metres
+around the position. (default shape == circle)</li>
+</ul>
+</li>
+<li><strong>position</strong> – position in the model cell of the lat lon position.
+Defaults to self.position_on_horizontal_grid.</li>
+<li><strong>external_distance</strong> – can be a dict containing the target point value
+and an external field on the same grid as self, to which the distance
+is computed within the 4 horizontally nearest points; e.g.
+{‘target_value’:4810, ‘external_field’:a_3DField_with_same_geometry}.
+If so, the nearest point is selected with
+distance = <a href="#id1"><span class="problematic" id="id2">|target_value - external_field.data|</span></a>
+Only valid with request={‘n’:’1’}</li>
+<li><strong>squeeze</strong> – True to suppress useless dimensions</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><p>general output form is [list, list, …, list]
+with as many list items as the length of lon/lat.
+Each list item is of the form [tuple, tuple, …, tuple]
+with as many tuples as the request implies. A tuple
+represents one of the nearest points associated with one
+value taken from lon/lat. Each tuple as the form
+(i, j).</p>
+<p>Dimensions with a length of one are removed except if
+squeeze is False. If squeeze is True and if request
+implies only one nearest point, the list item of the general
+output form is replaced by the tuple item; if length of
+lon/lat is one, the output is directly the list item of
+the general output form. Hence, if length of lon/lat is
+one and the request implies only one point, the output is
+a tuple.</p>
+<p>In case of a simple square request, output is actually
+an array. Otherwise, the output is as described (it cannot
+be an array because the number of nearest points can vary
+with the entry point).</p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>In case of a {‘n’:’2*2’} request, order of points obtained on a rectangular grid is
+(and must be) such that first and second point share the i position (hence
+third and forth point also share the i position) and first and third share the j
+position (hence the second and forth also share the j position).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.point_is_inside_domain_ij">
+<code class="descname">point_is_inside_domain_ij</code><span class="sig-paren">(</span><em>i=None</em>, <em>j=None</em>, <em>margin=-0.1</em>, <em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.point_is_inside_domain_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.point_is_inside_domain_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the point(s) of i/j coordinates is(are) inside the
+field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point</li>
+<li><strong>j</strong> – Y index of point.</li>
+<li><strong>margin</strong> – considers the point inside if at least ‘margin’ points far
+from the border. The -0.1 default is a safety for precision errors.</li>
+<li><strong>subzone</strong> – considers only a subzone among (‘C’, ‘CI’) of the domain.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.point_is_inside_domain_ll">
+<code class="descname">point_is_inside_domain_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>margin=-0.1</em>, <em>subzone=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.point_is_inside_domain_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.point_is_inside_domain_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the point(s) of lon/lat coordinates is(are) inside the
+field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point(s) in degrees.</li>
+<li><strong>lat</strong> – latitude of point(s) in degrees.</li>
+<li><strong>margin</strong> – considers the point inside if at least ‘margin’ points far
+from the border. The -0.1 default is a safety for precision errors.</li>
+<li><strong>subzone</strong> – considers only a subzone among (‘C’, ‘CI’) of the domain.</li>
+<li><strong>position</strong> – position of the grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.reshape_data">
+<code class="descname">reshape_data</code><span class="sig-paren">(</span><em>data</em>, <em>first_dimension=None</em>, <em>d4=False</em>, <em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RectangularGridGeometry.reshape_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.reshape_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 2D data (horizontal dimensions) reshaped from 1D,
+according to geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> – the 1D data (or 3D with a T and Z dimensions,
+or 2D with either a T/Z dimension, to be specified),
+of dimension concording with geometry. In case data is 3D, T must be
+first dimension and Z the second.</li>
+<li><strong>first_dimension</strong> – in case data is 2D, specify what is the first
+dimension of data among (‘T’, ‘Z’)</li>
+<li><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM grids only, informes that
+data is resp. on the C or C+I zone off the C+I(+E) zone.</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  returned values are shaped in a 4 dimensions array</li>
+<li>if False, shape of returned values is determined with respect to geometry</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3UnstructuredGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="epygram.geometries.D3Geometry.D3RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for an unstructured 3-Dimensions Field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘unstructured’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘center’.</li>
+<li>Values: set([‘center’])</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.get_lonlat_grid">
+<code class="descname">get_lonlat_grid</code><span class="sig-paren">(</span><em>subzone=None</em>, <em>position=None</em>, <em>d4=False</em>, <em>nb_validities=0</em>, <em>force_longitudes=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.get_lonlat_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.get_lonlat_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of two tables containing one the longitude of each
+point, the other the latitude, with 2D shape.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+<li><strong>position</strong> – position of lonlat grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  returned values are shaped in a 4 dimensions array</li>
+<li><dl class="first docutils">
+<dt>if False, shape of returned values is determined with respect to geometry.</dt>
+<dd>d4=True requires nb_validities &gt; 0</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><strong>nb_validities</strong> – number of validities represented in data values</li>
+<li><strong>force_longitudes</strong> – if ‘positive’, the longitudes will be forced positive
+if ‘]-180,180]’, the longitudes will be in the ]-180, 180] interval</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Shape of 2D data on Rectangular grids:</p>
+<blockquote>
+<div><ul class="simple">
+<li>grid[0,0] is SW, grid[-1,-1] is NE</li>
+<li>grid[0,-1] is SE, grid[-1,0] is NW</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.getcenter">
+<code class="descname">getcenter</code><span class="sig-paren">(</span><em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.getcenter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coordinate of the grid center as a tuple of Angles
+(center_lon, center_lat).</p>
+<p>Caution: this is computed as the raw average of all grid points.
+A barycentric computation would be more adequate.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.ij2ll">
+<code class="descname">ij2ll</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.ij2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.ll2ij">
+<code class="descname">ll2ij</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.ll2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: the returned (<em>i,j</em>) are float.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.nearest_points">
+<code class="descname">nearest_points</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>request</em>, <em>position=None</em>, <em>external_distance=None</em>, <em>squeeze=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.nearest_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.nearest_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the (i, j) position of the points needed to perform an
+interpolation. This is a list of (lon, lat) tuples.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lon</strong> – longitude of point in degrees.</li>
+<li><strong>lat</strong> – latitude of point in degrees.</li>
+<li><strong>request</strong> – criteria for selecting the points, among:
+* {‘n’:’1’} - the nearest point</li>
+<li><strong>position</strong> – position in the model cell of the lat lon position.
+Defaults to self.position_on_horizontal_grid.</li>
+<li><strong>external_distance</strong> – can be a dict containing the target point value
+and an external field on the same grid as self, to which the distance
+is computed within the 4 horizontally nearest points; e.g.
+{‘target_value’:4810, ‘external_field’:a_3DField_with_same_geometry}.
+If so, the nearest point is selected with
+distance = <a href="#id3"><span class="problematic" id="id4">|target_value - external_field.data|</span></a></li>
+<li><strong>squeeze</strong> – True to suppress useless dimensions</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><p>general output form is [list, list, …, list]
+with as many list items as the length of lon/lat.
+Each list item is of the form [tuple, tuple, …, tuple]
+with as many tuples as the request implies. A tuple
+represents one of the nearest points associated with one
+value taken from lon/lat. Each tuple as the form
+(i, j).</p>
+<p>Dimensions with a length of one are removed except if
+squeeze is False. If squeeze is True and if request
+implies only one nearest point, the list item of the general
+output form is replaced by the tuple item; if length of
+lon/lat is one, the output is directly the list item of
+the general output form. Hence, if length of lon/lat is
+one and the request implies only one point, the output is
+a tuple.</p>
+<p>In case of a simple square request, output is actually
+an array. Otherwise, the output is as described (it cannot
+be an array because the number of nearest points can vary
+with the entry point).</p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.resolution_ij">
+<code class="descname">resolution_ij</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.resolution_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance to the nearest point of (i,j) point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.resolution_ll">
+<code class="descname">resolution_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3UnstructuredGeometry.resolution_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the local resolution at the nearest point of lon/lat.
+It’s the distance between this point and its closest neighbour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees.</li>
+<li><strong>lat</strong> – latitude of point in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3UnstructuredGeometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3UnstructuredGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3AcademicGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="epygram.geometries.D3Geometry.D3RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for an academic 3-Dimensions Field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Of no meaning in this geometry.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘academic’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘__unknown__’.</li>
+<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+</ul>
+</li>
+<li><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.azimuth">
+<code class="descname">azimuth</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.azimuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as plane_azimuth in this geometry.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.default_cartopy_CRS">
+<code class="descname">default_cartopy_CRS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Create a cartopy.crs appropriate to the Geometry.</p>
+<p>In this case, cartopy is not used but raw matplotlib,
+so returned CRS is None.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points along a straight line in the
+geometry.
+:param end1: must be a tuple (lon, lat) in degrees.
+:param end2: must be a tuple (lon, lat) in degrees.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Of no meaning in this geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.getcenter">
+<code class="descname">getcenter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.getcenter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coordinate of the grid center as a tuple
+(center_lon, center_lat).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.ij2ll">
+<code class="descname">ij2ll</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.ij2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>This routine has a special meaning for this geometry. It returns the (i, j)
+position in the original grid (especially after a section extraction) with
+an offset of one (for old tools compatibility).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.ij2xy">
+<code class="descname">ij2xy</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.ij2xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.ij2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(i,j)</em>, in the projection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.linspace">
+<code class="descname">linspace</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em>, <em>num</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.linspace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.linspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns evenly spaced points over the specified interval.
+Points are lined up in the geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>num</strong> – number of points, including point1 and point2.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.ll2ij">
+<code class="descname">ll2ij</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.ll2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: the returned (<em>i,j</em>) are float.</p>
+<p>This routine has a special meaning for this geometry. It returns the (lon, lat)
+position in the original grid (especially after a section extraction) with
+an offset of one (for old tools compatibility).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.ll2xy">
+<code class="descname">ll2xy</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.ll2xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.ll2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(lon, lat)</em> in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.make_section_geometry">
+<code class="descname">make_section_geometry</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em>, <em>points_number=None</em>, <em>resolution=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.make_section_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.make_section_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a academic V2DGeometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</li>
+<li><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</li>
+<li><strong>position</strong> – defines the position of data in the grid (defaults to ‘center’)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.plane_azimuth">
+<code class="descname">plane_azimuth</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.plane_azimuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.plane_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points in plane local referential
+geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.projection">
+<code class="descname">projection</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles projection information (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.resolution_ij">
+<code class="descname">resolution_ij</code><span class="sig-paren">(</span><em>*_</em>, <em>**__</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.resolution_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum of X and Y resolution.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.resolution_ll">
+<code class="descname">resolution_ll</code><span class="sig-paren">(</span><em>*_</em>, <em>**__</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.resolution_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum of X and Y resolution.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.tolerant_equal">
+<code class="descname">tolerant_equal</code><span class="sig-paren">(</span><em>other</em>, <em>tolerance=2.220446049250313e-16</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.tolerant_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test of equality by recursion on the object’s attributes,
+with a <strong>tolerance</strong>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.xy2ij">
+<code class="descname">xy2ij</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.xy2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.xy2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(x, y)</em>,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – X coordinate of point in the academic projection</li>
+<li><strong>y</strong> – Y coordinate of point in the academic projection</li>
+<li><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: (<em>i,j</em>) are float (the nearest grid point is the nearest
+integer).</p>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3AcademicGeometry.xy2ll">
+<code class="descname">xy2ll</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.xy2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.xy2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(x, y)</em> in the 2D matrix
+of gridpoints*(i,j)*, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – X coordinate of point in the academic projection</li>
+<li><strong>y</strong> – Y coordinate of point in the academic projection</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3RegLLGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="epygram.geometries.D3Geometry.D3RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for a Regular Lon/Lat 3-Dimensions Field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘regular_lonlat’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘__unknown__’.</li>
+<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points along a straight line in the
+geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Warning: requires the <code class="xref py py-mod docutils literal notranslate"><span class="pre">pyproj</span></code> module.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.getcenter">
+<code class="descname">getcenter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.getcenter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coordinate of the grid center as a tuple of Angles
+(center_lon, center_lat).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.global_shift_center">
+<code class="descname">global_shift_center</code><span class="sig-paren">(</span><em>longitude_shift</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.global_shift_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.global_shift_center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shifts the center of the geometry by <em>longitude_shift</em> (in degrees).
+<em>longitude_shift</em> has to be a multiple of the grid’s resolution in
+longitude.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.ij2ll">
+<code class="descname">ij2ll</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.ij2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.ij2xy">
+<code class="descname">ij2xy</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.ij2xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.ij2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(i,j)</em>, in the projection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.isglobal">
+<code class="descname">isglobal</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.isglobal" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if geometry is global</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.linspace">
+<code class="descname">linspace</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em>, <em>num</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.linspace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.linspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns evenly spaced points over the specified interval.
+Points are lined up in the geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>num</strong> – number of points, including point1 and point2.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.ll2ij">
+<code class="descname">ll2ij</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.ll2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: (<em>i,j</em>) are float.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.ll2xy">
+<code class="descname">ll2xy</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.ll2xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.ll2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(lon, lat)</em> in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.make_zoom_geometry">
+<code class="descname">make_zoom_geometry</code><span class="sig-paren">(</span><em>zoom</em>, <em>extra_10th=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.make_zoom_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.make_zoom_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new geometry with the points contained in <em>zoom</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>zoom</strong> – a dict(lonmin=, lonmax=, latmin=, latmax=).</li>
+<li><strong>extra_10th</strong> – if True, add 1/10th of the X/Y extension of the zoom
+(only usefull for the regular_lonlat grid implementation).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.plane_azimuth">
+<code class="descname">plane_azimuth</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.plane_azimuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.plane_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points in plane local referential
+geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.resolution_ij">
+<code class="descname">resolution_ij</code><span class="sig-paren">(</span><em>i</em>, <em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.resolution_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance to the nearest point of (i,j) point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.resolution_ll">
+<code class="descname">resolution_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.resolution_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the local resolution at the nearest point of lon/lat.
+It’s the distance between this point and its closest neighbour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of the point in degrees</li>
+<li><strong>lat</strong> – latitude of the point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.tolerant_equal">
+<code class="descname">tolerant_equal</code><span class="sig-paren">(</span><em>other</em>, <em>tolerance=2.220446049250313e-16</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.tolerant_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test of equality by recursion on the object’s attributes,
+with a <strong>tolerance</strong>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.xy2ij">
+<code class="descname">xy2ij</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.xy2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.xy2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(x, y)</em>,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – X coordinate of point in the projection</li>
+<li><strong>y</strong> – Y coordinate of point in the projection</li>
+<li><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: (<em>i,j</em>) are float (the nearest grid point is the nearest
+integer).</p>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3RegLLGeometry.xy2ll">
+<code class="descname">xy2ll</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3RegLLGeometry.xy2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RegLLGeometry.xy2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(x, y)</em> in the 2D matrix
+of gridpoints*(i,j)*, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – X coordinate of point in the projection</li>
+<li><strong>y</strong> – Y coordinate of point in the projection</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3ProjectedGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="epygram.geometries.D3Geometry.D3RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for a Projected 3-Dimensions Field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘mercator’, ‘space_view’, ‘lambert’, ‘polar_stereographic’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘__unknown__’.</li>
+<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+</ul>
+</li>
+<li><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.compass_grid">
+<code class="descname">compass_grid</code><span class="sig-paren">(</span><em>subzone=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.compass_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.compass_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the compass grid, i.e. the angle between Y-axis and North for each
+gridpoint.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</li>
+<li><strong>position</strong> – position of lonlat grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.default_cartopy_CRS">
+<code class="descname">default_cartopy_CRS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Create a cartopy.crs appropriate to the Geometry.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.distance">
+<code class="descname">distance</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points along a straight line in the
+geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.get_cartopy_extent">
+<code class="descname">get_cartopy_extent</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.get_cartopy_extent" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Gets the extension of the geometry in the default crs
+:param subzone: defines the LAM subzone to be included, in LAM case,</p>
+<blockquote>
+<div>among: ‘C’, ‘CI’.</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">(xmin, xmax, ymin, ymax) as expected by matplotlib’s ax.set_extent</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.getcenter">
+<code class="descname">getcenter</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.getcenter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coordinate of the grid center as a tuple of Angles
+(center_lon, center_lat).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.ij2ll">
+<code class="descname">ij2ll</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.ij2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.ij2xy">
+<code class="descname">ij2xy</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.ij2xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.ij2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(i,j)</em>, in the projection.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.linspace">
+<code class="descname">linspace</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em>, <em>num</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.linspace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.linspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns evenly spaced points over the specified interval.
+Points are lined up in the geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>num</strong> – number of points, including point1 and point2.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.ll2ij">
+<code class="descname">ll2ij</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.ll2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: (<em>i,j</em>) are float.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.ll2xy">
+<code class="descname">ll2xy</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.ll2xy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.ll2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(lon, lat)</em> in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.make_section_geometry">
+<code class="descname">make_section_geometry</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em>, <em>points_number=None</em>, <em>resolution=None</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.make_section_geometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.make_section_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a projected V2DGeometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</li>
+<li><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</li>
+<li><strong>position</strong> – defines the position of data in the grid (defaults to ‘center’)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.map_factor">
+<code class="descname">map_factor</code><span class="sig-paren">(</span><em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.map_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.map_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the map factor at the given latitude(s) <em>lat</em> in degrees.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.map_factor_field">
+<code class="descname">map_factor_field</code><span class="sig-paren">(</span><em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.map_factor_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.map_factor_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new field whose data is the map factor over the field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> – grid position with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.mesh_area">
+<code class="descname">mesh_area</code><span class="sig-paren">(</span><em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.mesh_area"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.mesh_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the area of a mesh/gridpoint, given its latitude.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.mesh_area_field">
+<code class="descname">mesh_area_field</code><span class="sig-paren">(</span><em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.mesh_area_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.mesh_area_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new field whose data is the mesh area of gridpoints,
+i.e. X_resolution x Y_resolution / m^2, where m is the local map factor.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> – grid position with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.plane_azimuth">
+<code class="descname">plane_azimuth</code><span class="sig-paren">(</span><em>end1</em>, <em>end2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.plane_azimuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.plane_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points in plane local referential
+geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</li>
+<li><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.projection">
+<code class="descname">projection</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles projection information (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.reproject_wind_on_lonlat">
+<code class="descname">reproject_wind_on_lonlat</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>lon=None</em>, <em>lat=None</em>, <em>map_factor_correction=True</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.reproject_wind_on_lonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.reproject_wind_on_lonlat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reprojects a wind vector (u, v) on the grid onto real
+axes, i.e. with components on true zonal/meridian axes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>u</strong> – the u == zonal-on-the-grid component of wind</li>
+<li><strong>v</strong> – the v == meridian-on-the-grid component of wind</li>
+<li><strong>lon</strong> – longitudes of points in degrees, if u/v are not vectors
+on the whole grid</li>
+<li><strong>lat</strong> – latitudes of points in degrees, if u/v are not vectors
+on the whole grid</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>:param map_factor_correction:, applies a correction of magnitude due</dt>
+<dd>to map factor.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reverse</strong> – if True, apply the reverse reprojection.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.resolution_ij">
+<code class="descname">resolution_ij</code><span class="sig-paren">(</span><em>i</em>, <em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.resolution_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance to the nearest point of (i,j) point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.resolution_ll">
+<code class="descname">resolution_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.resolution_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the local resolution at the nearest point of lon/lat.
+It’s the distance between this point and its closest neighbour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of the point in degrees</li>
+<li><strong>lat</strong> – latitude of the point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.secant_projection">
+<code class="descname">secant_projection</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.secant_projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the projection secant to the sphere ? (or tangent)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.select_subzone">
+<code class="descname">select_subzone</code><span class="sig-paren">(</span><em>subzone</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.select_subzone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.select_subzone" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a LAMzone defines the geometry, select only the <em>subzone</em> from it
+and return a new geometry object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subzone</strong> – among (‘C’, ‘CI’).</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.tolerant_equal">
+<code class="descname">tolerant_equal</code><span class="sig-paren">(</span><em>other</em>, <em>tolerance=2.220446049250313e-16</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.tolerant_equal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test of equality by recursion on the object’s attributes,
+with a <strong>tolerance</strong>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.xy2ij">
+<code class="descname">xy2ij</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.xy2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.xy2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(x, y)</em>,
+in the 2D matrix of gridpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – X coordinate of point in the projection</li>
+<li><strong>y</strong> – Y coordinate of point in the projection</li>
+<li><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Caution: (<em>i,j</em>) are float (the nearest grid point is the nearest
+integer).</p>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3ProjectedGeometry.xy2ll">
+<code class="descname">xy2ll</code><span class="sig-paren">(</span><em>x</em>, <em>y</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3ProjectedGeometry.xy2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.xy2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(x, y)</em> in the 2D matrix
+of gridpoints*(i,j)*, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> – X coordinate of point in the projection</li>
+<li><strong>y</strong> – Y coordinate of point in the projection</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Note that origin of coordinates in projection is the center of the
+C+I domain.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry">
+<em class="property">class </em><code class="descclassname">epygram.geometries.D3Geometry.</code><code class="descname">D3GaussGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.D3Geometry.D3Geometry" title="epygram.geometries.D3Geometry.D3Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3Geometry</span></code></a></p>
+<p>Handles the geometry for a Global Gauss grid 3-Dimensions Field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
+<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
+<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
+<li>Values: set([‘reduced_gauss’, ‘regular_gauss’, ‘rotated_reduced_gauss’])</li>
+</ul>
+</li>
+<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
+<li>Optional. Default is ‘__unknown__’.</li>
+<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
+<li>Values: set([‘3D’])</li>
+</ul>
+</li>
+<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.default_cartopy_CRS">
+<code class="descname">default_cartopy_CRS</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Create a cartopy.crs appropriate to the Geometry.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.dimensions">
+<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.distance_to_nearest_neighbour_ij">
+<code class="descname">distance_to_nearest_neighbour_ij</code><span class="sig-paren">(</span><em>i</em>, <em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.distance_to_nearest_neighbour_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.distance_to_nearest_neighbour_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance to the nearest point of (i,j) point</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.distance_to_nearest_neighbour_ll">
+<code class="descname">distance_to_nearest_neighbour_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.distance_to_nearest_neighbour_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.distance_to_nearest_neighbour_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the local resolution at the nearest point of lon/lat.
+It’s the distance between this point and its closest neighbour.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of the point in degrees</li>
+<li><strong>lat</strong> – latitude of the point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.fill_maskedvalues">
+<code class="descname">fill_maskedvalues</code><span class="sig-paren">(</span><em>data</em>, <em>fill_value=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.fill_maskedvalues"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.fill_maskedvalues" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <em>data</em> with ‘real’ masked values (i.e. not those
+linked to reduced Gauss) filled with <em>fill_value</em>.
+<em>data</em> must be already 4D for simplicity reasons.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.geoid">
+<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.get_datashape">
+<code class="descname">get_datashape</code><span class="sig-paren">(</span><em>force_dimZ=None</em>, <em>dimT=None</em>, <em>d4=False</em>, <em>**_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.get_datashape"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.get_datashape" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the data shape according to the geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>force_dimZ</strong> – if supplied, force the Z dimension instead of that
+of the vertical geometry</li>
+<li><strong>dimT</strong> – if supplied, is the time dimension to be added to the
+data shape</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  shape is 4D (need to specify <em>dimT</em>)</li>
+<li>if False, shape is 3D if dimZ &gt; 1 else 2D</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.get_lonlat_grid">
+<code class="descname">get_lonlat_grid</code><span class="sig-paren">(</span><em>position=None</em>, <em>d4=False</em>, <em>nb_validities=0</em>, <em>force_longitudes=None</em>, <em>**_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.get_lonlat_grid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.get_lonlat_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a tuple of two tables containing one the longitude of each
+point, the other the latitude, with 2D shape.</p>
+<p>Shape of 2D data in Gauss grids:</p>
+<blockquote>
+<div><ul class="simple">
+<li>grid[0, 0:Nj] is first (Northern) band of latitude, masked after
+Nj = number of longitudes for latitude j</li>
+<li>grid[-1, 0:Nj] is last (Southern) band of latitude (idem).</li>
+</ul>
+</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>position</strong> – position of lonlat grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  returned values are shaped in a 4 dimensions array</li>
+<li><dl class="first docutils">
+<dt>if False, shape of returned values is determined with respect to geometry.</dt>
+<dd>d4=True requires nb_validities &gt; 0</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li><strong>nb_validities</strong> – number of validities represented in data values</li>
+<li><strong>force_longitudes</strong> – if ‘positive’, the longitudes will be forced positive
+if ‘]-180,180]’, the longitudes will be in the ]-180, 180] interval</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.grid">
+<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.gridpoints_number">
+<code class="descname">gridpoints_number</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.gridpoints_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of gridpoints of the grid.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.horizontally_flattened">
+<code class="descname">horizontally_flattened</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.horizontally_flattened"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.horizontally_flattened" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of <em>data</em> with horizontal dimensions flattened and
+compressed (cf. numpy.ma.masked_array.compressed).
+<em>data</em> must be 4D for simplicity reasons.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.ij2ll">
+<code class="descname">ij2ll</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.ij2ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.isglobal">
+<code class="descname">isglobal</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.isglobal" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">True if geometry is global</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.ll2ij">
+<code class="descname">ll2ij</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.ll2ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (<em>i, j</em>) coordinates in the 2D matrix of gridpoints,
+of the gridpoint nearest to (<em>lon</em>, <em>lat</em>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of point in degrees</li>
+<li><strong>lat</strong> – latitude of point in degrees</li>
+<li><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.map_factor">
+<code class="descname">map_factor</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.map_factor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.map_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the map factor at the given longitude/latitude(s)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude in degrees</li>
+<li><strong>lat</strong> – latitude in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.map_factor_field">
+<code class="descname">map_factor_field</code><span class="sig-paren">(</span><em>position=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.map_factor_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.map_factor_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new field whose data is the map factor over the field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> – grid position with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.meridian_resolution_j">
+<code class="descname">meridian_resolution_j</code><span class="sig-paren">(</span><em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.meridian_resolution_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.meridian_resolution_j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average meridian resolution at longitude circle number <em>j</em>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.name">
+<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.nearest_points">
+<code class="descname">nearest_points</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em>, <em>request</em>, <em>position=None</em>, <em>external_distance=None</em>, <em>squeeze=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.nearest_points"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.nearest_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the (i, j) position of the points needed to perform
+an interpolation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>lon</strong> – longitude of point in degrees.</li>
+<li><strong>lat</strong> – latitude of point in degrees.</li>
+<li><strong>request</strong> – <p>criteria for selecting the points, among:
+* {‘n’:’1’} - the nearest point
+* {‘n’:’2*2’} - the 2*2 square points around the position
+* {‘n’:’4*4’} - the 4*4 square points around the position
+* {‘n’:’N*N’} - the N*N square points around the position: N must be even
+* {‘radius’:xxxx, ‘shape’:’square’} - the points which are xxxx metres</p>
+<blockquote>
+<div>around the position in X or Y direction</div></blockquote>
+<ul>
+<li>{‘radius’:xxxx, ‘shape’:’circle’} - the points within xxxx metres
+around the position. (default shape == circle)</li>
+</ul>
+</li>
+<li><strong>position</strong> – position in the model cell of the lat lon position.
+Defaults to self.position_on_horizontal_grid.</li>
+<li><strong>external_distance</strong> – can be a dict containing the target point value
+and an external field on the same grid as self, to which the distance
+is computed within the 4 horizontally nearest points; e.g.
+{‘target_value’:4810, ‘external_field’:a_3DField_with_same_geometry}.
+If so, the nearest point is selected with
+distance = <a href="#id5"><span class="problematic" id="id6">|target_value - external_field.data|</span></a></li>
+<li><strong>squeeze</strong> – True to suppress useless dimensions</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><p>general output form is [list, list, …, list]
+with as many list items as the length of lon/lat.
+Each list item is of the form [tuple, tuple, …, tuple]
+with as many tuples as the request implies. A tuple
+represents one of the nearest points associated with one
+value taken from lon/lat. Each tuple as the form
+(i, j).</p>
+<p>Dimensions with a length of one are removed except if
+squeeze is False. If squeeze is True and if request
+implies only one nearest point, the list item of the general
+output form is replaced by the tuple item; if length of
+lon/lat is one, the output is directly the list item of
+the general output form. Hence, if length of lon/lat is
+one and the request implies only one point, the output is
+a tuple.</p>
+<p>In case of a simple square request, output is actually
+an array. Otherwise, the output is as described (it cannot
+be an array because the number of nearest points can vary
+with the entry point).</p>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.point_is_inside_domain_ij">
+<code class="descname">point_is_inside_domain_ij</code><span class="sig-paren">(</span><em>i</em>, <em>j</em>, <em>margin=-0.1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.point_is_inside_domain_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.point_is_inside_domain_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the point(s) of lon/lat coordinates is(are) inside the
+field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>i</strong> – X index of point in the 2D matrix of gridpoints</li>
+<li><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</li>
+<li><strong>margin</strong> – DEPRECATED</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.point_is_inside_domain_ll">
+<code class="descname">point_is_inside_domain_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>*_</em>, <em>**__</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.point_is_inside_domain_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.point_is_inside_domain_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the point(s) of lon/lat coordinates is(are) inside the
+field.
+This is always the case in Gauss grids, no real meaning.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of the point in degrees</li>
+<li><strong>lat</strong> – latitude of the point in degrees</li>
+<li><strong>margin</strong> – considers the point inside if at least ‘margin’ points far
+from the border. The -0.1 default is a safety for precision errors.</li>
+<li><strong>position</strong> – position of the grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.position_on_horizontal_grid">
+<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.reproject_wind_on_lonlat">
+<code class="descname">reproject_wind_on_lonlat</code><span class="sig-paren">(</span><em>u</em>, <em>v</em>, <em>lon</em>, <em>lat</em>, <em>map_factor_correction=True</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.reproject_wind_on_lonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.reproject_wind_on_lonlat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reprojects a wind vector (u, v) on rotated/stretched sphere onto real
+sphere, i.e. with components on true zonal/meridian axes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>u</strong> – the u == zonal-on-the-grid component of wind</li>
+<li><strong>v</strong> – the v == meridian-on-the-grid component of wind</li>
+<li><strong>lon</strong> – longitudes of points in degrees</li>
+<li><strong>lat</strong> – latitudes of points in degrees</li>
+<li><strong>map_factor_correction</strong> – applies a correction of magnitude due
+to map factor.</li>
+<li><strong>reverse</strong> – if True, apply the reverse reprojection.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>lon/lat are coordinates on real sphere.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.reshape_data">
+<code class="descname">reshape_data</code><span class="sig-paren">(</span><em>data</em>, <em>first_dimension=None</em>, <em>d4=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.reshape_data"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.reshape_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a 2D data (horizontal dimensions) reshaped from 1D,
+according to geometry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> – the 1D data (or 3D with a T and Z dimensions,
+or 2D with either a T/Z dimension, to be specified),
+of dimension concording with geometry. In case data is 3D, T must be
+first dimension and Z the second.</li>
+<li><strong>first_dimension</strong> – in case data is 2D, specify what is the first
+dimension of data among (‘T’, ‘Z’)</li>
+<li><strong>d4</strong> – <ul>
+<li>if True,  returned values are shaped in a 4 dimensions array</li>
+<li>if False, shape of returned values is determined with respect to geometry</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.resolution_field">
+<code class="descname">resolution_field</code><span class="sig-paren">(</span><em>direction='meridian'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.resolution_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.resolution_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a field whose values are the local resolution in m.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>direction</strong> – among (‘zonal’, ‘meridian’), direction in which
+the resolution is computed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.resolution_field_from_stretching">
+<code class="descname">resolution_field_from_stretching</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.resolution_field_from_stretching"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.resolution_field_from_stretching" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a field which values are the local resolution computed as the
+nominal resolution stretched locally by the map factor.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.resolution_j">
+<code class="descname">resolution_j</code><span class="sig-paren">(</span><em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.resolution_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.resolution_j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average meridian resolution at longitude circle number j.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.resolution_ll">
+<code class="descname">resolution_ll</code><span class="sig-paren">(</span><em>lon</em>, <em>lat</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.resolution_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average meridian resolution (worst directional resolution)
+at point position.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>lon</strong> – longitude of the point in degrees</li>
+<li><strong>lat</strong> – latitude of the point in degrees</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.vcoordinate">
+<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.geometries.D3Geometry.D3GaussGeometry.zonal_resolution_j">
+<code class="descname">zonal_resolution_j</code><span class="sig-paren">(</span><em>j</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3GaussGeometry.zonal_resolution_j"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.zonal_resolution_j" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average zonal resolution at longitude circle number j.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="H2DGeometry.html" title="epygram.geometries.H2DGeometry — Horizontal 2-D Geometry classes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="geometries_lib.html" title="epygram.geometries — Geometries"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,571 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.fields.V1DField — Vertical 1-D Field &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.fields.PointField — Point 0-D Field class" href="PointField.html" />
+    <link rel="prev" title="epygram.fields.V2DField — Vertical 2-D Field class" href="V2DField.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="PointField.html" title="epygram.fields.PointField — Point 0-D Field class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="V2DField.html" title="epygram.fields.V2DField — Vertical 2-D Field class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="fields.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code> — Vertical 1-D Field</a><ul>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="V2DField.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.fields.V2DField</span></code> — Vertical 2-D Field class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="PointField.html"
+                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.fields.PointField</span></code> — Point 0-D Field class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/V1DField.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-epygram.fields.V1DField">
+<span id="epygram-fields-v1dfield-vertical-1-d-field"></span><h1><a class="reference internal" href="#module-epygram.fields.V1DField" title="epygram.fields.V1DField: Vertical 1-D Field"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code></a> — Vertical 1-D Field<a class="headerlink" href="#module-epygram.fields.V1DField" title="Permalink to this headline">¶</a></h1>
+<p>Contains the class that handle a Vertical 1D field.</p>
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.fields.V1DField.V1DCommonField">
+<em class="property">class </em><code class="descclassname">epygram.fields.V1DField.</code><code class="descname">V1DCommonField</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DCommonField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField" title="epygram.fields.D3Field._D3CommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.D3Field._D3CommonField</span></code></a></p>
+<p>Vertical 1-Dimension (column) virtual or not field class.
+A field is defined by its identifier ‘fid’,
+its data, its geometry, and its validity.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</li>
+<li><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of Field geometry.<ul>
+<li>Values: set([‘V1D’])</li>
+</ul>
+</li>
+<li><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is ‘’.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DCommonField.comment">
+<code class="descname">comment</code><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DCommonField.fid">
+<code class="descname">fid</code><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DCommonField.misc_metadata">
+<code class="descname">misc_metadata</code><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.fields.V1DField.V1DCommonField.plotanimation">
+<code class="descname">plotanimation</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DCommonField.plotanimation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.plotanimation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. eponymous function of module for arguments.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.fields.V1DField.V1DCommonField.plotfield">
+<code class="descname">plotfield</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DCommonField.plotfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.plotfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface method to methods plotprofiles() and plotverticalhovmoller(),
+depending on time dimension (or not).</p>
+<p>Cf. these functions for arguments.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.fields.V1DField.V1DCommonField.plotprofiles">
+<code class="descname">plotprofiles</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DCommonField.plotprofiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.plotprofiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. eponymous function of module for arguments.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="epygram.fields.V1DField.V1DCommonField.plotverticalhovmoller">
+<code class="descname">plotverticalhovmoller</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DCommonField.plotverticalhovmoller"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.plotverticalhovmoller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. eponymous function of module for arguments.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DCommonField.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of Field geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DCommonField.units">
+<code class="descname">units</code><a class="headerlink" href="#epygram.fields.V1DField.V1DCommonField.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.fields.V1DField.V1DField">
+<em class="property">class </em><code class="descclassname">epygram.fields.V1DField.</code><code class="descname">V1DField</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.fields.V1DField.V1DCommonField" title="epygram.fields.V1DField.V1DCommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.V1DField.V1DCommonField</span></code></a>, <a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.D3Field.D3Field</span></code></a></p>
+<p>Vertical 1-Dimension (column) real field class.
+A field is defined by its identifier ‘fid’,
+its data, its geometry, and its validity.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</li>
+<li><strong>geometry</strong> (<a class="reference internal" href="V1DGeometry.html#epygram.geometries.V1DGeometry.V1DGeometry" title="epygram.geometries.V1DGeometry.V1DGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry.V1DGeometry</span></code></a>) - rwx - Geometry defining the position of the field gridpoints.</li>
+<li><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>processtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Generating process.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>spectral_geometry</strong> (<a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry" title="epygram.geometries.SpectralGeometry.SpectralGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry.SpectralGeometry</span></code></a>) - rxx - For a spectral field, its spectral geometry handles                       spectral transforms and dimensions.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of Field geometry.<ul>
+<li>Values: set([‘V1D’])</li>
+</ul>
+</li>
+<li><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is ‘’.</li>
+</ul>
+</li>
+<li><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.<ul>
+<li>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7f254feed400&gt;]&gt;&gt;.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.comment">
+<code class="descname">comment</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.fid">
+<code class="descname">fid</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.geometry">
+<code class="descname">geometry</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geometry defining the position of the field gridpoints (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.misc_metadata">
+<code class="descname">misc_metadata</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.processtype">
+<code class="descname">processtype</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.processtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generating process (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.spectral_geometry">
+<code class="descname">spectral_geometry</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.spectral_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a spectral field, its spectral geometry handles                       spectral transforms and dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of Field geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.units">
+<code class="descname">units</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DField.validity">
+<code class="descname">validity</code><a class="headerlink" href="#epygram.fields.V1DField.V1DField.validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validity of the field (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="class">
+<dt id="epygram.fields.V1DField.V1DVirtualField">
+<em class="property">class </em><code class="descclassname">epygram.fields.V1DField.</code><code class="descname">V1DVirtualField</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#V1DVirtualField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.fields.V1DField.V1DCommonField" title="epygram.fields.V1DField.V1DCommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.V1DField.V1DCommonField</span></code></a>, <a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField" title="epygram.fields.D3Field.D3VirtualField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.D3Field.D3VirtualField</span></code></a></p>
+<p>Vertical 1-Dimension (column) virtual field class.
+A field is defined by its identifier ‘fid’,
+its data, its geometry, and its validity.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li>info: Not documented</li>
+<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</li>
+<li><strong>fieldset</strong> (<a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a>) - rxx - Set of real fields that can compose the Virtual Field.<ul>
+<li>Optional. Default is FieldSet::&lt;&lt;as_list:: []&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>resource</strong> (<a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Resource</span></code></a>) - rxx - Resource in which is stored the fields defined by                       resource_fids.<ul>
+<li>Optional. Default is None.</li>
+</ul>
+</li>
+<li><strong>resource_fids</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - Definition of the fields in resource that compose the                       virtual field.<ul>
+<li>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</li>
+</ul>
+</li>
+<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of Field geometry.<ul>
+<li>Values: set([‘V1D’])</li>
+</ul>
+</li>
+<li><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
+<li>Optional. Default is ‘’.</li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.comment">
+<code class="descname">comment</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.fid">
+<code class="descname">fid</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.fieldset">
+<code class="descname">fieldset</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.fieldset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set of real fields that can compose the Virtual Field (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.misc_metadata">
+<code class="descname">misc_metadata</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.resource">
+<code class="descname">resource</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource in which is stored the fields defined by                       resource_fids (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.resource_fids">
+<code class="descname">resource_fids</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.resource_fids" title="Permalink to this definition">¶</a></dt>
+<dd><p>Definition of the fields in resource that compose the                       virtual field (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.structure">
+<code class="descname">structure</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of Field geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="epygram.fields.V1DField.V1DVirtualField.units">
+<code class="descname">units</code><a class="headerlink" href="#epygram.fields.V1DField.V1DVirtualField.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="epygram.fields.V1DField.plotprofiles">
+<code class="descclassname">epygram.fields.V1DField.</code><code class="descname">plotprofiles</code><span class="sig-paren">(</span><em>profiles</em>, <em>over=(None</em>, <em>None)</em>, <em>labels=None</em>, <em>fidkey=None</em>, <em>Ycoordinate=None</em>, <em>unit='SI'</em>, <em>title=None</em>, <em>logscale=False</em>, <em>ema=False</em>, <em>zoom=None</em>, <em>figsize=(6.0</em>, <em>9.0)</em>, <em>rcparams=None</em>, <em>colors=None</em>, <em>legend_kwargs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#plotprofiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.plotprofiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>To plot a series of profiles. Returns a tuple of <code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib</span></code>
+(<em>Figure</em>, <em>ax</em>).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>profiles</strong> – a <a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> of
+<a class="reference internal" href="#module-epygram.fields.V1DField" title="epygram.fields.V1DField: Vertical 1-D Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code></a>, or a single
+<a class="reference internal" href="#module-epygram.fields.V1DField" title="epygram.fields.V1DField: Vertical 1-D Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code></a>.
+All profiles are supposed to have the same unit, and the same vertical
+coordinate.</li>
+<li><strong>over</strong> – any existing figure and/or ax to be used for the
+plot, given as a tuple (fig, ax), with None for
+missing objects. <em>fig</em> is the frame of the
+matplotlib figure, containing eventually several
+subplots (axes); <em>ax</em> is the matplotlib axes on
+which the drawing is done. When given (is not None),
+these objects must be coherent, e.g. ax being one of
+the fig axes.</li>
+<li><strong>labels</strong> – a list of labels for the profiles (same length and same order).</li>
+<li><strong>fidkey</strong> – key of fid for labelling the curve with <em>fid[fidkey]</em>;
+if <em>None</em>, labels with raw fid.</li>
+<li><strong>Ycoordinate</strong> – label for the Y coordinate.</li>
+<li><strong>unit</strong> – label for X coordinate.</li>
+<li><strong>title</strong> – title for the plot.</li>
+<li><strong>logscale</strong> – to set Y logarithmic scale</li>
+<li><strong>ema</strong> – to make emagram-like plots of Temperature</li>
+<li><strong>zoom</strong> – <p>a dict containing optional limits to zoom on the plot.</p>
+<p>Syntax: e.g. {‘ymax’:500, …}.</p>
+</li>
+<li><strong>figsize</strong> – figure sizes in inches, e.g. (5, 8.5).
+If None, get the default figsize in config.plotsizes.</li>
+<li><strong>rcparams</strong> – <p>list of (<a href="#id1"><span class="problematic" id="id2">*</span></a>args, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs) to be passed to pyplot.rc()
+defaults to [((‘font’,), dict(family=’serif’)),</p>
+<blockquote>
+<div>((‘figure’,), dict(autolayout=True))]</div></blockquote>
+</li>
+<li><strong>colors</strong> – list of matplotlib colors on which to iterate to plot each
+profile. Cyclic (with varying linestyle) if shorter than the
+number of profiles.</li>
+<li><strong>legend_kwargs</strong> – kwargs to be passed to matplotlib’s legend()</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="epygram.fields.V1DField.plotverticalhovmoller">
+<code class="descclassname">epygram.fields.V1DField.</code><code class="descname">plotverticalhovmoller</code><span class="sig-paren">(</span><em>profile</em>, <em>over=(None</em>, <em>None)</em>, <em>fidkey=None</em>, <em>Ycoordinate=None</em>, <em>title=None</em>, <em>logscale=False</em>, <em>zoom=None</em>, <em>colorbar='vertical'</em>, <em>graphicmode='colorshades'</em>, <em>minmax=None</em>, <em>levelsnumber=21</em>, <em>center_cmap_on_0=False</em>, <em>colormap='jet'</em>, <em>minmax_in_title=True</em>, <em>contourcolor='k'</em>, <em>contourwidth=1</em>, <em>contourlabel=True</em>, <em>datefmt=None</em>, <em>showgrid=True</em>, <em>figsize=(6.0</em>, <em>9.0)</em>, <em>rcparams=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#plotverticalhovmoller"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.plotverticalhovmoller" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a simple vertical Hovmöller plot of the field.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>profile</strong> – being a <a class="reference internal" href="#module-epygram.fields.V1DField" title="epygram.fields.V1DField: Vertical 1-D Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code></a></li>
+<li><strong>over</strong> – any existing figure and/or ax to be used for the
+plot, given as a tuple (fig, ax), with None for
+missing objects. <em>fig</em> is the frame of the
+matplotlib figure, containing eventually several
+subplots (axes); <em>ax</em> is the matplotlib axes on
+which the drawing is done. When given (is not None),
+these objects must be coherent, i.e. ax being one of
+the fig axes.</li>
+<li><strong>fidkey</strong> – type of fid for entitling the plot with <em>fid[fidkey]</em>,
+if title is <em>None</em>;
+if <em>None</em>, labels with raw fid.</li>
+<li><strong>Ycoordinate</strong> – label for the Y coordinate.</li>
+<li><strong>title</strong> – title for the plot.</li>
+<li><strong>logscale</strong> – to set Y logarithmic scale</li>
+<li><strong>zoom</strong> – <p>a dict containing optional limits to zoom on the plot.</p>
+<p>Syntax: e.g. {‘ymax’:500, …}.</p>
+</li>
+<li><strong>colorbar</strong> – if <em>False</em>, hide colorbar the plot; else, befines the
+colorbar orientation, among (‘horizontal’, ‘vertical’).
+Defaults to ‘vertical’.</li>
+<li><strong>graphicmode</strong> – among (‘colorshades’, ‘contourlines’).</li>
+<li><strong>minmax</strong> – <p>defines the min and max values for the plot colorbar.</p>
+<p>Syntax: [min, max]. [0.0, max] also works. Default is min/max of the
+field.</p>
+</li>
+<li><strong>levelsnumber</strong> – number of levels for contours and colorbar.</li>
+<li><strong>center_cmap_on_0</strong> – aligns the colormap center on the value 0.</li>
+<li><strong>colormap</strong> – name of the <strong>matplotlib</strong> colormap to use.</li>
+<li><strong>minmax_in_title</strong> – if True and minmax is not None, adds min and max
+values in title</li>
+<li><strong>contourcolor</strong> – color or colormap to be used for ‘contourlines’
+graphicmode. It can be either a legal html color name, or a colormap
+name.</li>
+<li><strong>contourwidth</strong> – width of contours for ‘contourlines’ graphicmode.</li>
+<li><strong>contourlabel</strong> – displays labels on contours.</li>
+<li><strong>datefmt</strong> – date format to use, e.g. “%Y-%m-%d %H:%M:%S %Z”</li>
+<li><strong>showgrid</strong> – True/False to show grid or not</li>
+<li><strong>figsize</strong> – figure sizes in inches, e.g. (5, 8.5).
+If None, get the default figsize in config.plotsizes.</li>
+<li><strong>rcparams</strong> – list of (<a href="#id5"><span class="problematic" id="id6">*</span></a>args, <a href="#id7"><span class="problematic" id="id8">**</span></a>kwargs) to be passed to pyplot.rc()
+defaults to [((‘font’,), dict(family=’serif’)),]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Warning: requires <strong>matplotlib</strong>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="epygram.fields.V1DField.plotanimation">
+<code class="descclassname">epygram.fields.V1DField.</code><code class="descname">plotanimation</code><span class="sig-paren">(</span><em>profile</em>, <em>title='__auto__'</em>, <em>repeat=False</em>, <em>interval=1000</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/V1DField.html#plotanimation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.V1DField.plotanimation" title="Permalink to this definition">¶</a></dt>
+<dd><p>To plot a time-dependent profile as an animation.
+Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">matplotlib.animation.FuncAnimation</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>profile</strong> – the <a class="reference internal" href="#module-epygram.fields.V1DField" title="epygram.fields.V1DField: Vertical 1-D Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code></a> to plot.</li>
+<li><strong>title</strong> – title for the plot. ‘__auto__’ (default) will print
+the current validity of the time frame.</li>
+<li><strong>repeat</strong> – to repeat animation</li>
+<li><strong>interval</strong> – number of milliseconds between two validities</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Other kwargs passed to plotprofiles().</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="PointField.html" title="epygram.fields.PointField — Point 0-D Field class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="V2DField.html" title="epygram.fields.V2DField — Vertical 2-D Field class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="fields.html" ><code class="docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

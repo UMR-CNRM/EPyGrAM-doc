@@ -1,0 +1,422 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>3. Fields &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Geometries" href="geometries_tuto.html" />
+    <link rel="prev" title="2. Resources" href="resources.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="geometries_tuto.html" title="4. Geometries"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="2. Resources"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorial</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3. Fields</a><ul>
+<li><a class="reference internal" href="#field-identifier-fid">3.1. Field identifier (fid)</a></li>
+<li><a class="reference internal" href="#validity">3.2. Validity</a></li>
+<li><a class="reference internal" href="#fields-useful-methods">3.3. Fields useful methods</a><ul>
+<li><a class="reference internal" href="#spectralness">3.3.1. Spectralness</a></li>
+<li><a class="reference internal" href="#data">3.3.2. Data</a></li>
+<li><a class="reference internal" href="#operations-between-fields">3.3.3. Operations between fields</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#building-vector-fields">3.4. Building Vector Fields</a></li>
+<li><a class="reference internal" href="#plots">3.5. Plots</a></li>
+<li><a class="reference internal" href="#d-plots">3.6. 3D Plots</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="resources.html"
+                        title="previous chapter">2. Resources</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="geometries_tuto.html"
+                        title="next chapter">4. Geometries</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorial/fields.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fields">
+<h1>3. Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S058WIND.U.PHYS&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Components of a meteorological field</strong></p>
+<p>A meteorological field has (mainly):</p>
+<ul class="simple">
+<li>a <a class="reference internal" href="#tuto-fid"><span class="std std-ref">fid</span></a>, that identifies the field nature</li>
+<li>a <a class="reference internal" href="geometries_tuto.html#tuto-geometry"><span class="std std-ref">geometry</span></a>, that defines the position of the of the
+field’s data; detailed in <a class="reference internal" href="../library/geometries_lib.html"><span class="doc">epygram.geometries — Geometries</span></a></li>
+<li>a <a class="reference internal" href="#tuto-validity"><span class="std std-ref">validity</span></a>, that defines the temporal validity of the
+field’s data</li>
+<li>a <a class="reference internal" href="#tuto-spectral"><span class="std std-ref">spectral geometry</span></a>, if the field is spectral.</li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">structure</span>
+<span class="go">&#39;H2D&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
+<span class="go">&lt;class &#39;epygram.geometries.H2DGeometry.H2DProjectedGeometry&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">)</span>
+<span class="go">&lt;class &#39;epygram.base.FieldValidityList&#39;&gt;</span>
+</pre></div>
+</div>
+<p>In the following, we focus on H2DField, but all kind of fields behave similarly.</p>
+<hr class="docutils" />
+<div class="section" id="field-identifier-fid">
+<span id="tuto-fid"></span><h2>3.1. Field identifier (fid)<a class="headerlink" href="#field-identifier-fid" title="Permalink to this headline">¶</a></h2>
+<p>The fid of a field handle its <em>nature</em>, i.e. the physical parameter and the
+material (surface, soil, atmosphere) it represents (often with a detailed
+vertical location).
+It is handled as a dict() which keys are formats names, because fields in files
+are stored under different fid depending on the format, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">fid</span>
+<span class="go">{&#39;FA&#39;:&#39;S058WIND.U.PHYS&#39;,</span>
+<span class="go"> &#39;GRIB1&#39;:{&#39;indicatorOfParameter&#39;:33,</span>
+<span class="go">          &#39;indicatorOfTypeOfLevel&#39;:109,</span>
+<span class="go">          &#39;level&#39;:58,</span>
+<span class="go">          &#39;table2Version&#39;:1,}</span>
+<span class="go"> &#39;GRIB2&#39;:{&#39;discipline&#39;:0,</span>
+<span class="go">          &#39;parameterCategory&#39;:3,</span>
+<span class="go">          &#39;parameterNumber&#39;:2,</span>
+<span class="go">          &#39;typeofFirstFixedSurface&#39;:119,</span>
+<span class="go">          &#39;level&#39;:58,}</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>Take care that for a field to be written in a resource, the only-but-mandatory
+required field characteristics is that its fid in the resource format must be
+present!</p>
+<p>In other words, a field whose fid is <code class="docutils literal notranslate"><span class="pre">{'FA':'SURFTEMPERATURE',</span> <span class="pre">'GRIB':{...}}</span></code>
+will be writeable either in a GRIB or a FA file, but not in a LFI or any other
+format…</p>
+<hr class="docutils" />
+</div>
+<div class="section" id="validity">
+<span id="tuto-validity"></span><h2>3.2. Validity<a class="headerlink" href="#validity" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">validity</span></code> attribute of a field is a list of
+<a class="reference internal" href="../library/base.html#epygram.base.FieldValidity" title="epygram.base.FieldValidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidity</span></code></a>, because a field can have a temporal dimension.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getbasis</span><span class="p">()</span>
+<span class="go">datetime.datetime(2014, 12, 1, 0, 0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getbasis</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntStr&#39;</span><span class="p">)</span>
+<span class="go">20141201000000</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">term</span><span class="p">()</span>
+<span class="go">datetime.timedelta(1, 64800)</span>
+</pre></div>
+</div>
+<p>Some fields may have a cumulative duration, e.g. precipitation fields are accumulated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;SURFACCGRAUPEL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">statistical_process_on_duration</span><span class="p">()</span>
+<span class="go">&#39;accumulation&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cumulativeduration</span><span class="p">()</span>
+<span class="go">datetime.timedelta(0, 10800)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">statistical_process_on_duration</span></code>, among which one can find min, max,
+average and so on, is coded as GRIB2 norm
+(<a class="reference external" href="http://apps.ecmwf.int/codes/grib/format/grib2/ctables/4/10">http://apps.ecmwf.int/codes/grib/format/grib2/ctables/4/10</a>), if available.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="fields-useful-methods">
+<h2>3.3. Fields useful methods<a class="headerlink" href="#fields-useful-methods" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em>Autocompletion, in interactive (i)Python session or smart editors,
+may be an even better (than doc/tuto) way to explore the available methods
+of objects.</em></p>
+</div>
+<div class="section" id="spectralness">
+<span id="tuto-spectral"></span><h3>3.3.1. Spectralness<a class="headerlink" href="#spectralness" title="Permalink to this headline">¶</a></h3>
+<p>Spectral transforms are done (“in place”) through the two methods
+<a class="reference internal" href="../library/D3Field.html#epygram.fields.D3Field.D3Field.sp2gp" title="epygram.fields.D3Field.D3Field.sp2gp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.sp2gp()</span></code></a> and
+<a class="reference internal" href="../library/D3Field.html#epygram.fields.D3Field.D3Field.gp2sp" title="epygram.fields.D3Field.D3Field.gp2sp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.gp2sp(a_sp_geom)</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S090TEMPERATURE&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">spectral</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../library/SpectralGeometry.html#module-epygram.geometries.SpectralGeometry" title="epygram.geometries.SpectralGeometry: Spectral Geometry class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code></a> contains the kind of spectral
+space (bi-Fourier//LAM or Legendre//global), the truncation(s), and the actual
+spectral transforms routines.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">spgeom</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral_geometry</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">spectral</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">spectral_geometry</span>
+<span class="go">None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">spgeom</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">spectral</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="data">
+<h3>3.3.2. Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<p>Some methods have been implemented to ease a comprehensive access to the data:</p>
+<ul>
+<li><p class="first">basic statistics:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">stats</span><span class="p">()</span>
+<span class="go">{&#39;std&#39;: 6.1556479204416092, &#39;nonzero&#39;: 2211840, &#39;quadmean&#39;: 280.99889135008499, &#39;min&#39;: 259.33480158698774, &#39;max&#39;: 293.21439026360537, &#39;mean&#39;: 280.93145950331785}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">field value at some lon/lat point:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">getvalue_ll</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">45.6</span><span class="p">)</span> <span class="c1"># default interpolation = &#39;nearest&#39;</span>
+<span class="go">274.278588481978</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">getvalue_ll</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">45.6</span><span class="p">,</span> <span class="n">neighborinfo</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># get info about the nearest neighbor gridpoint used</span>
+<span class="go">(274.278588481978, (1.4988145157970028, 45.60001936720281))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">getvalue_ll</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">45.6</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
+<span class="go">274.25775674717687</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Also, although the field’s data is accessible through its attribute <code class="docutils literal notranslate"><span class="pre">data</span></code>,
+it is strongly advised to access the data through the method <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.getdata()</span></code>,
+because the internal storage of the data may differ from expected by the user.</p>
+<ul>
+<li><p class="first">modifying the field data should resemble:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">&lt;type &#39;numpy.ndarray&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(1536, 1440)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="mi">100</span><span class="p">:</span><span class="mi">800</span><span class="p">,</span><span class="mi">500</span><span class="p">:</span><span class="mi">600</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">10</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">700</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>after what the field can of course be re-written in a resource.</p>
+</li>
+<li><p class="first">some patterned operations on fields are facilitated through
+the <a class="reference internal" href="../library/base.html#epygram.base.Field.operation" title="epygram.base.Field.operation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.operation()</span></code></a> method: any of the four basic operations (+,*,-,/)
+with scalars or any <code class="xref py py-mod docutils literal notranslate"><span class="pre">numpy</span></code> function (exp, sin, log…):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">operation</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="mf">273.15</span><span class="p">)</span>  <span class="c1"># e.g. go from K to °C</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">operation</span><span class="p">(</span><span class="s1">&#39;sin&#39;</span><span class="p">)</span>  <span class="c1"># does field.data = numpy.sin(field.data)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">of spectral fields can also be computed horizontal derivatives:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S045TEMPERATURE&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">spectral</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">)</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">compute_xy_spderivatives</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">dx</span><span class="p">)</span>
+<span class="go">&lt;class &#39;epygram.fields.H2DField.H2DField&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dx</span><span class="o">.</span><span class="n">spectral</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dx</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="go">0.0051387105385038408</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">of 2D fields can be computed spectra (<a class="reference internal" href="../library/spectra.html#epygram.spectra.Spectrum" title="epygram.spectra.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.spectra.Spectrum</span></code></a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">dctspectrum</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="go">&lt;class &#39;epygram.spectra.Spectrum&#39;&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="operations-between-fields">
+<h3>3.3.3. Operations between fields<a class="headerlink" href="#operations-between-fields" title="Permalink to this headline">¶</a></h3>
+<p>Operations between fields can be done in two ways:</p>
+<ul>
+<li><p class="first">standard Python syntax; in case a new Field object is created,
+with uninitialized <code class="docutils literal notranslate"><span class="pre">validity</span></code> (what is the validity of an operation between
+two fields of potential different validity ?) and <code class="docutils literal notranslate"><span class="pre">fid</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field90</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S090TEMPERATURE&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field89</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S089TEMPERATURE&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field_diff</span> <span class="o">=</span> <span class="n">field90</span> <span class="o">-</span> <span class="n">field89</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">the <a class="reference internal" href="../library/base.html#epygram.base.Field.operation" title="epygram.base.Field.operation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.operation()</span></code></a> method;
+in case the field values are modified “in place”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field90</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S090WIND.U.PHYS&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field89</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S089WIND.U.PHYS&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">field90</span><span class="o">.</span><span class="n">operation</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">field89</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>In any case, a simple consistency check is done on the fields’ geometry,
+basically on their dimensions.</p>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="building-vector-fields">
+<h2>3.4. Building Vector Fields<a class="headerlink" href="#building-vector-fields" title="Permalink to this headline">¶</a></h2>
+<p>Wind fields (for instance) can be re-assembled from their U/V components
+into <a class="reference internal" href="../library/H2DVectorField.html"><span class="doc">H2DVectorField</span></a> or
+<a class="reference internal" href="../library/D3VectorField.html"><span class="doc">D3VectorField</span></a> for more integrated functionalities
+(re-projection, computation of derivatives or direction/module, plotting and
+so on…).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S090WIND.U.PHYS&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S090WIND.V.PHYS&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">make_vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">reprojection: FA wind fields are projected on the grid axes (here, a Lambert
+projection); let’s get the wind components on true zonal/meridian axes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span><span class="o">.</span><span class="n">getvalue_ij</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">[0.5525041298918116, -2.8212975453933336]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span><span class="o">.</span><span class="n">reproject_wind_on_lonlat</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span><span class="o">.</span><span class="n">getvalue_ij</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">[0.9307448483516318, -2.759376908801778]</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">derivatives: just as the <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.compute_xy_spderivatives()</span></code> method
+enable to compute derivatives of spectral fields, the
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">H2DVectorField.compute_vordiv()</span></code>
+method enable to compute vorticity and divergence of a spectral wind field:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">vor</span><span class="p">,</span> <span class="n">div</span><span class="p">)</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">compute_vordiv</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">vor</span><span class="p">)</span>
+<span class="go">&lt;class &#39;epygram.fields.H2DField.H2DField&#39;&gt;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">direction/module: to compute a wind direction or wind module field from
+vectors:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wind</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ff</span> <span class="o">=</span> <span class="n">wind</span><span class="o">.</span><span class="n">to_module</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">ff</span><span class="p">)</span>
+<span class="go">&lt;class &#39;epygram.fields.H2DField.H2DField&#39;&gt;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<div class="section" id="plots">
+<h2>3.5. Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h2>
+<p>Cf. <em>Plots</em> sections of the <a class="reference internal" href="../gallery/index.html"><span class="doc">Gallery</span></a>.</p>
+</div>
+<hr class="docutils" />
+<div class="section" id="d-plots">
+<h2>3.6. 3D Plots<a class="headerlink" href="#d-plots" title="Permalink to this headline">¶</a></h2>
+<p>Fields can be plotted in a 3D view in three ways:</p>
+<ul class="simple">
+<li>contour with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DContour()</span></code> method (which becomes a
+classical contour plot if field is 2D, vertical or horizontal)</li>
+<li>volume with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DVolume()</span></code></li>
+<li>color with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DColor()</span></code> (corresponding to the matplotlib contourf method)</li>
+</ul>
+<p>A vector field can be plotted using <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DVector()</span></code> (to plot arrows)
+or <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DStream()</span></code> to plot (stream lines or tubes).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">vtk</span> <span class="c1">#We need to import vtk before epygram even if do not use it directly in the script</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span> <span class="c1">#initialisation of environment, for FA/LFI and spectrals transforms sub-libraries</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">true3d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CF</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S---CLOUD_FRACTI&#39;</span><span class="p">)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#Set-up of the view</span>
+<span class="gp">... </span><span class="n">offset</span> <span class="o">=</span> <span class="n">CF</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()[</span><span class="s1">&#39;ll&#39;</span><span class="p">]</span> <span class="c1">#We translate the domain</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">hCoord</span> <span class="o">=</span> <span class="s1">&#39;ll&#39;</span> <span class="c1">#We use lat/lon on the horizontal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z_factor</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1">#0.1 horizontal degree of lat/lon is represented by the same length as one model level on the vertical</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ren</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">vtk_set_window</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">))</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CF</span><span class="o">.</span><span class="n">plot3DContour</span><span class="p">(</span><span class="n">ren</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;White&#39;</span><span class="p">,</span> <span class="n">hCoord</span><span class="o">=</span><span class="n">hCoord</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">z_factor</span><span class="o">=</span><span class="n">z_factor</span><span class="p">)</span>
+<span class="go">((vtkRenderingOpenGL2Python.vtkOpenGLActor)0x7f899c230390, (vtkRenderingOpenGL2Python.vtkOpenGLPolyDataMapper)0x7f89b8750a78)</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ren</span><span class="p">[</span><span class="s1">&#39;interactor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Start</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="geometries_tuto.html" title="4. Geometries"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="2. Resources"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Tutorial</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

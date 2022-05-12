@@ -1,0 +1,182 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Introduction &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="About the package" href="library/about.html" />
+    <link rel="prev" title="epygram-1.4.14 documentation" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="library/about.html" title="About the package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="epygram-1.4.14 documentation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.14 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a><ul>
+<li><a class="reference internal" href="#for-who-for-what">For who, for what ?</a></li>
+<li><a class="reference internal" href="#general-design">General design</a></li>
+<li><a class="reference internal" href="#genesis">Genesis</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><em>epygram</em>-1.4.14 documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="library/about.html"
+                        title="next chapter">About the package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/introduction.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">epygram</span></code> library package is a set of Python classes and functions
+designed to handle meteorological fields in Python, as well as interfacing
+their storage in various usual (or not) data formats.</p>
+<div class="section" id="for-who-for-what">
+<h2>For who, for what ?<a class="headerlink" href="#for-who-for-what" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of the library is to provide user-friendly interfaces to formats
+of data resources as FA, LFI, LFA (Météo France historical formats), GRIB/1-2
+(…) and handy classes for manipulating meteorological fields, whatever their
+geometry is.</p>
+<p>Therefore, it has been conceived basically for people who need to process data
+from Numerical Weather Prediction (NWP) or Climate Modelisation, whatever they
+need to do with, as soon as they build their application in Python.</p>
+<p>One strong will during package development was to give the most simple access
+to data and meta-data (its description in time and space, basically). The
+object-oriented design seemed to be the most appropriate manner to reach this
+goal. Thus, a set of features has been developped within the <code class="docutils literal notranslate"><span class="pre">epygram</span></code> classes,
+so that the user should:</p>
+<ul class="simple">
+<li>1/ not really need to dig into the objects, only their methods;</li>
+<li>2/ wonder (and hence search the doc) if there is not already a
+functionality dealing with the data/meta-data processing he faces;</li>
+<li>3/ print the object to have a recursively indented overview of its components.</li>
+</ul>
+</div>
+<div class="section" id="general-design">
+<span id="id1"></span><h2>General design<a class="headerlink" href="#general-design" title="Permalink to this headline">¶</a></h2>
+<p>There are 3 basic concepts used in <code class="docutils literal notranslate"><span class="pre">epygram</span></code>: <strong>fields, geometries, resources</strong>.</p>
+<ul>
+<li><p class="first">a <strong>field</strong> is the union of a data and its meta-data: its identification, its
+temporal validity and geographical description, and eventually further
+documentation. There is no <em>a priori</em> about the geometry of the field,
+it can be either a horizontal surface, a vertical profile, a transect, a
+vertical section, a single point, or a 3D cloud of points.</p>
+<p>The field can even be represented in spectral space.</p>
+<p>In any case, a set of basic features has been intimately attached to the
+field, providing it handy manipulation.</p>
+</li>
+<li><p class="first">the <strong>geometry</strong> of a field is a set of parameters and methods that enables,
+basically, to know precisely what is the 3D-earth-round localization of any
+point of the field it describes. As listed above, a geometry can be of
+several natures and dimensions.</p>
+</li>
+<li><p class="first">a <strong>resource</strong> is an aggregation of fields, stored in a given data and meta-data
+format. The resource is dissociated with its container, <em>i.e.</em> the
+system and physical support is it written on (<em>e.g.</em> a file on disk, a memory
+address, remote database…).</p>
+</li>
+</ul>
+<p>A 4th important element is the <strong>fid</strong> (field identifier) of a field,
+which identifies its nature and can index it inside resources.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">epygram</span></code> package hence provides as much as possible easy read/write of
+fields from/to resources, as well as basic features on fields and geometries,
+described further in the documentation.</p>
+</div>
+<div class="section" id="genesis">
+<h2>Genesis<a class="headerlink" href="#genesis" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">epygram</span></code> conception comes from the observation that more and more people
+in Météo France / CNRM-GAME were coming to Python in order to process NWP/CM
+data. Rather than letting everyone face the same obstacles with geometries and
+historical data formats, raised the good idea to develop a Python package once
+for all, releasing time for scientific activities rather than technical common
+problems…</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="library/about.html" title="About the package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="epygram-1.4.14 documentation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.14 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

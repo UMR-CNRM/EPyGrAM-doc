@@ -1,0 +1,503 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram._plugins.with_vtk.D3Geometry &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram._plugins.with_vtk.D3Geometry</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the classes that handle the vtk plotting on geometries.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">get_file</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="k">import</span> <span class="n">D3AcademicGeometry</span>
+
+
+<span class="k">def</span> <span class="nf">activate</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Activate extension.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="vm">__name__</span> <span class="k">as</span> <span class="n">plugin_name</span>
+    <span class="kn">from</span> <span class="nn">epygram._plugins.util</span> <span class="k">import</span> <span class="n">notify_doc_requires_plugin</span>
+    <span class="n">notify_doc_requires_plugin</span><span class="p">([</span><span class="n">make_vtkGrid</span><span class="p">,</span> <span class="n">plot3DProjImage</span><span class="p">,</span> <span class="n">plot3DBluemarble</span><span class="p">,</span>
+                                <span class="n">plot3DMaptiles</span><span class="p">],</span>
+                               <span class="n">plugin_name</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="k">import</span> <span class="n">D3Geometry</span><span class="p">,</span> <span class="n">_need_pyproj_geod</span>
+    <span class="n">D3Geometry</span><span class="o">.</span><span class="n">make_vtkGrid</span> <span class="o">=</span> <span class="n">_need_pyproj_geod</span><span class="p">(</span><span class="n">make_vtkGrid</span><span class="p">)</span>
+    <span class="n">D3Geometry</span><span class="o">.</span><span class="n">plot3DProjImage</span> <span class="o">=</span> <span class="n">plot3DProjImage</span>
+    <span class="n">D3Geometry</span><span class="o">.</span><span class="n">plot3DBluemarble</span> <span class="o">=</span> <span class="n">plot3DBluemarble</span>
+    <span class="n">D3Geometry</span><span class="o">.</span><span class="n">plot3DMaptiles</span> <span class="o">=</span> <span class="n">plot3DMaptiles</span>
+
+
+<span class="k">def</span> <span class="nf">make_vtkGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Makes an empty grid to use with vtk</span>
+
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span>  <span class="c1"># @UnresolvedImport</span>
+    <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>  <span class="c1"># @UnresolvedImport</span>
+    <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">algorithms</span> <span class="k">as</span> <span class="n">algs</span>  <span class="c1"># @UnresolvedImport</span>
+
+    <span class="k">if</span> <span class="n">rendering</span><span class="o">.</span><span class="n">hCoord</span> <span class="o">==</span> <span class="s1">&#39;geoid&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">102</span><span class="p">,</span> <span class="mi">103</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The &#39;geoid&#39; option is only meaningful with &quot;</span> <span class="o">+</span> \
+                         <span class="s2">&quot;vertical coordinate expressed in meters!&quot;</span><span class="p">)</span>
+        
+    <span class="c1"># Compute x, y, z</span>
+    <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_levels</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">total_mask</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">)</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span><span class="p">)]):</span>
+        <span class="n">total_mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="p">(</span><span class="n">lats</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+            <span class="n">total_mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">total_mask</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
+    <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">filled</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">)</span> <span class="k">else</span> <span class="n">arr</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span><span class="p">))</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">rendering</span><span class="o">.</span><span class="n">proj3d</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+
+    <span class="c1"># sgrid_point</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStructuredGrid</span><span class="p">()</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">SetDimensions</span><span class="p">(</span><span class="o">*</span><span class="n">shape</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPoints</span><span class="p">()</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)]</span>
+    <span class="n">coordinates</span> <span class="o">=</span> <span class="n">algs</span><span class="o">.</span><span class="n">make_vector</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+    <span class="n">points</span><span class="o">.</span><span class="n">SetData</span><span class="p">(</span><span class="n">dsa</span><span class="o">.</span><span class="n">numpyTovtkDataArray</span><span class="p">(</span><span class="n">coordinates</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_FLOAT</span><span class="p">))</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">SetPoints</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">total_mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">total_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">grid</span><span class="o">.</span><span class="n">BlankPoint</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grid</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DProjImage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">color_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method adds an image to the vtk rendering system. The image is projected</span>
+<span class="sd">    on the vertical coordinate of this geometry.</span>
+
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param filename: path to an image file</span>
+<span class="sd">    :param geometry: projection associated to the geometry</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param interpolation: interpolation method to use to compute levels at each pixel</span>
+<span class="sd">    :param color_transform: if not None, must be a user-defined function with parameters</span>
+<span class="sd">                            (rgb, alpha, (lons, lats)) with rgb an array representing</span>
+<span class="sd">                            the rgb values on each of the image points, alpha the alpha</span>
+<span class="sd">                            values on the same points and (lons, lats) a turple of the</span>
+<span class="sd">                            points coordinate. The function must return (rgb, alpha). This</span>
+<span class="sd">                            enables the color modification of the image.</span>
+<span class="sd">                            For example, the following function transforms the color</span>
+<span class="sd">                            into grey levels:</span>
+<span class="sd">        def grey(rgb, alpha, ll):</span>
+<span class="sd">            rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]</span>
+<span class="sd">            return rgb, alpha</span>
+<span class="sd">    first_corner and last_corner describe the coverage of the image from the left edge</span>
+<span class="sd">    of the leftmost pixel to the right edge of the rightmost pixel.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+    <span class="kn">import</span> <span class="nn">vtk</span>  <span class="c1"># @UnresolvedImport</span>
+    <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>  <span class="c1"># @UnresolvedImport</span>
+
+    <span class="c1"># Image reading</span>
+    <span class="k">with</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">rgb</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># not visible by default</span>
+
+    <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
+
+    <span class="c1"># We hide non-visible parts</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">interpolation</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">inside</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">point_is_inside_domain_ll</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                                                        <span class="n">lats</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span>
+                                                        <span class="n">margin</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
+                                                        <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>  <span class="c1"># image is completely out of the domain</span>
+    <span class="n">alpha</span><span class="p">[</span><span class="n">inside</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span>  <span class="c1"># Points inside domain are set visible</span>
+
+    <span class="c1"># color transformation</span>
+    <span class="k">if</span> <span class="n">color_transform</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">rgb</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">color_transform</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">))</span>
+
+    <span class="c1"># Projection of levels on the image geometry</span>
+    <span class="n">level_field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoord_as_field</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">z_inside</span> <span class="o">=</span> <span class="n">level_field</span><span class="o">.</span><span class="n">getvalue_ll</span><span class="p">(</span><span class="n">lons</span><span class="p">[</span><span class="n">inside</span><span class="p">],</span> <span class="n">lats</span><span class="p">[</span><span class="n">inside</span><span class="p">],</span>
+                                       <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="n">interpolation</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z_inside</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">z_inside</span><span class="o">.</span><span class="n">fill_value</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">z</span><span class="p">[</span><span class="n">inside</span><span class="p">]</span> <span class="o">=</span> <span class="n">z_inside</span>
+    <span class="k">del</span> <span class="n">z_inside</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="n">alpha</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">z</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">inside</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">z</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Extrapolation to suppress vtk artifacts due to interpolation between</span>
+    <span class="c1"># invisible and visible parts of the domain</span>
+    <span class="n">inside_extrapolation</span> <span class="o">=</span> <span class="n">inside</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>  <span class="c1"># currently only one point but code is ready to extrapolate on more points</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]))</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]))</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_not</span><span class="p">(</span><span class="n">inside_extrapolation</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]))</span>
+        <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">inside_extrapolation</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+    <span class="k">del</span> <span class="n">inside_extrapolation</span>
+
+    <span class="c1"># We cut the useless part to reduce the grid size to render</span>
+    <span class="n">j</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">inside</span><span class="p">)</span>
+    <span class="n">imin</span><span class="p">,</span> <span class="n">imax</span><span class="p">,</span> <span class="n">jmin</span><span class="p">,</span> <span class="n">jmax</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">i</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">j</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">j</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span><span class="p">[</span><span class="n">jmin</span><span class="p">:</span><span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">imin</span><span class="p">:</span><span class="n">imax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="n">jmin</span><span class="p">:</span><span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">imin</span><span class="p">:</span><span class="n">imax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">jmin</span><span class="p">:</span><span class="n">jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">imin</span><span class="p">:</span><span class="n">imax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># VTK grid</span>
+    <span class="n">new_geometry</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">make_subarray_geometry</span><span class="p">(</span><span class="n">imin</span><span class="p">,</span> <span class="n">imax</span><span class="p">,</span> <span class="n">jmin</span><span class="p">,</span> <span class="n">jmax</span><span class="p">)</span>
+    <span class="n">new_geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span>
+    
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">new_geometry</span><span class="o">.</span><span class="n">make_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">)</span>
+
+    <span class="c1"># Filling grid</span>
+    <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">alpha</span> <span class="o">==</span> <span class="mi">255</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">rgb</span>
+        <span class="n">num_components</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># use alpha-channel only when really needed</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">alpha</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">num_components</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">dsa</span><span class="o">.</span><span class="n">numpyTovtkDataArray</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;CellID&quot;</span><span class="p">)</span>
+    <span class="n">arr</span><span class="o">.</span><span class="n">SetNumberOfComponents</span><span class="p">(</span><span class="n">num_components</span><span class="p">)</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetScalars</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
+
+    <span class="c1"># Render image</span>
+    <span class="n">sgridGeom</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStructuredGridGeometryFilter</span><span class="p">()</span>
+    <span class="n">sgridGeom</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">sgridGeomMap</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">sgridGeomMap</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">sgridGeom</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">sgridGeomMapActor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">sgridGeomMapActor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">sgridGeomMap</span><span class="p">)</span>
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">sgridGeomMapActor</span><span class="p">)</span>
+    <span class="c1"># sgridGeomMapActor.GetProperty().SetAmbient(1);</span>
+    <span class="c1"># sgridGeomMapActor.GetProperty().SetDiffuse(0);</span>
+    <span class="c1"># sgridGeomMapActor.GetProperty().SetSpecular(0)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sgridGeomMapActor</span><span class="p">,</span> <span class="n">sgridGeomMap</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DBluemarble</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                     <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">color_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method adds the NOAA&#39;s bluemarble image to the vtk rendering system. The image</span>
+<span class="sd">    is projected on the vertical coordinate of this geometry.</span>
+
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param interpolation: interpolation method to use to compute levels at each pixel</span>
+<span class="sd">    :param color_transform: if not None, must be a user-defined function with parameters</span>
+<span class="sd">                            (rgb, alpha, (lons, lats)) with rgb an array representing</span>
+<span class="sd">                            the rgb values on each of the image points, alpha the alpha</span>
+<span class="sd">                            values on the same points and (lons, lats) a turple of the</span>
+<span class="sd">                            points coordinate. The function must return (rgb, alpha). This</span>
+<span class="sd">                            enables the color modification of the image.</span>
+<span class="sd">                            For example, the following function transforms the color</span>
+<span class="sd">                            into grey levels:</span>
+<span class="sd">        def grey(rgb, alpha, ll):</span>
+<span class="sd">            rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]</span>
+<span class="sd">            return rgb, alpha</span>
+
+<span class="sd">    Image can be found here:</span>
+<span class="sd">        https://sos.noaa.gov/datasets/blue-marble-without-clouds/</span>
+<span class="sd">        ftp://public.sos.noaa.gov/land/blue_marble/earth_vegetation/4096.jpg</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">D3AcademicGeometry</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;We cannot plot lon-lat images in an academic projection&quot;</span><span class="p">)</span>
+
+    <span class="n">path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">get_file</span><span class="p">(</span><span class="s2">&quot;ftp://public.sos.noaa.gov/land/blue_marble/earth_vegetation/4096.jpg&quot;</span><span class="p">,</span>
+             <span class="n">path</span><span class="p">,</span> <span class="n">authorize_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subst</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># Compute the geometry</span>
+    <span class="k">with</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">image</span><span class="p">:</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">resol</span> <span class="o">=</span> <span class="mf">360.</span> <span class="o">/</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">180.</span> <span class="o">/</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="o">-</span><span class="mf">180.</span> <span class="o">+</span> <span class="n">resol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="o">-</span><span class="mf">90.</span> <span class="o">+</span> <span class="n">resol</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;input_position&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="s1">&#39;X_resolution&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">resol</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;Y_resolution&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">resol</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)}</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
+                     <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
+                     <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span>
+                     <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                     <span class="p">}</span>
+    <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
+                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;regular_lonlat&#39;</span><span class="p">,</span>
+                       <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                       <span class="n">dimensions</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="o">=</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">vcoordinate</span><span class="o">=</span><span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">),</span>
+                       <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                       <span class="n">geoid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot3DProjImage</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">subzone</span><span class="p">,</span>
+                                  <span class="n">interpolation</span><span class="p">,</span> <span class="n">color_transform</span><span class="o">=</span><span class="n">color_transform</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DMaptiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">resol_factor</span><span class="p">,</span>
+                   <span class="n">minzoom</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">maxzoom</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+                   <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                   <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
+                   <span class="n">color_transform</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method adds tiles image to the vtk rendering system. The image</span>
+<span class="sd">    is projected on the vertical coordinate of this geometry.</span>
+
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param url: url to get the map tiles to use</span>
+<span class="sd">                ex: https://a.tile.openstreetmap.org/${z}/${x}/${y}.png</span>
+<span class="sd">                where ${z}, ${x} and ${y} are place holders for</span>
+<span class="sd">                zoom, x and y position of the tile</span>
+<span class="sd">    :param resol_factor: how many times the tile resolution must be approximately</span>
+<span class="sd">                         better than the geometry resolution. A factor of 2 (resp. 1/2.)</span>
+<span class="sd">                         induce using the next (resp. preceding) zoom level.</span>
+<span class="sd">    :param minzoom/maxzoom: minimum and maximum zoom levels to use</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param interpolation: interpolation method to use to compute levels at each pixel</span>
+<span class="sd">    :param color_transform: if not None, must be a user-defined function with parameters</span>
+<span class="sd">                            (rgb, alpha, (lons, lats)) with rgb an array representing</span>
+<span class="sd">                            the rgb values on each of the image points, alpha the alpha</span>
+<span class="sd">                            values on the same points and (lons, lats) a turple of the</span>
+<span class="sd">                            points coordinate. The function must return (rgb, alpha). This</span>
+<span class="sd">                            enables the color modification of the image.</span>
+<span class="sd">                            For example, the following function transforms the color</span>
+<span class="sd">                            into grey levels:</span>
+<span class="sd">        def grey(rgb, alpha, ll):</span>
+<span class="sd">            rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]</span>
+<span class="sd">            return rgb, alpha</span>
+
+<span class="sd">    Zoom computation is done supposing that each tile is made of 256 * 256 pixels.</span>
+
+<span class="sd">    URL examples (these URLs have been found on internet but some are protected with</span>
+<span class="sd">    copyrights and must not be used with this tool or kept in cache; please check</span>
+<span class="sd">    before use):</span>
+<span class="sd">        - osm: a (full?) list can be found on https://wiki.openstreetmap.org/wiki/Tile_servers</span>
+<span class="sd">               or https://wiki.openstreetmap.org/wiki/Tiles</span>
+<span class="sd">               The most common one is certainly: https://a.tile.openstreetmap.org/${z}/${x}/${y}.png</span>
+<span class="sd">        - google maps: it seems to be forbidden to use this tiles outside of google products.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">PIL</span> <span class="k">import</span> <span class="n">Image</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">D3AcademicGeometry</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;We cannot plot lon-lat images in an academic projection&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">deg2num</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">zoom</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns x and y of the tile containing the point (lon, lat) in degrees</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lat_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">**</span> <span class="n">zoom</span>
+        <span class="n">xtile</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">lon</span> <span class="o">+</span> <span class="mf">180.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">360.0</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">ytile</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">)))</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">xtile</span><span class="p">,</span> <span class="n">ytile</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">num2deg</span><span class="p">(</span><span class="n">xtile</span><span class="p">,</span> <span class="n">ytile</span><span class="p">,</span> <span class="n">zoom</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the upper left corner coordinates (in degrees)</span>
+<span class="sd">        corresponding to the (x, y) tile</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">**</span> <span class="n">zoom</span>
+        <span class="n">lon_deg</span> <span class="o">=</span> <span class="n">xtile</span> <span class="o">/</span> <span class="n">n</span> <span class="o">*</span> <span class="mf">360.0</span> <span class="o">-</span> <span class="mf">180.0</span>
+        <span class="n">lat_rad</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">ytile</span> <span class="o">/</span> <span class="n">n</span><span class="p">)))</span>
+        <span class="n">lat_deg</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">lat_rad</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">lon_deg</span><span class="p">,</span> <span class="n">lat_deg</span><span class="p">)</span>
+
+    <span class="n">radius</span> <span class="o">=</span> <span class="mf">6378137.</span>   <span class="c1"># found on the web but with (normally) no impact</span>
+                        <span class="c1"># as long as we use the same for the geoid</span>
+    <span class="k">def</span> <span class="nf">zoom2resol</span><span class="p">(</span><span class="n">zoom</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns width of a tile at equator (from zoom)</span>
+<span class="sd">        To be divided by the number of pixel to obtain the resolution</span>
+<span class="sd">        of the pixel</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">radius</span> <span class="o">/</span> <span class="mi">2</span><span class="o">**</span><span class="n">zoom</span>
+    
+    <span class="c1"># Looking for bounds</span>
+    <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="n">lonmin</span><span class="p">,</span> <span class="n">lonmax</span><span class="p">,</span> <span class="n">latmin</span><span class="p">,</span> <span class="n">latmax</span> <span class="o">=</span> <span class="n">lons</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lons</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">lats</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">lats</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="p">(</span><span class="n">latmax</span> <span class="o">-</span> <span class="n">latmin</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">lonmax</span> <span class="o">-</span> <span class="n">lonmin</span><span class="p">)</span> <span class="o">/</span> <span class="n">lons</span><span class="o">.</span><span class="n">size</span>  <span class="c1"># mean pixel surface in geometry</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">surface</span> <span class="o">/</span> <span class="n">resol_factor</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># mean pixel surface wanted for the tile</span>
+    <span class="n">surface</span> <span class="o">=</span> <span class="n">surface</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">*</span> <span class="mi">256</span>  <span class="c1"># mean tile surface wanted</span>
+    <span class="n">zoom</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">minzoom</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">maxzoom</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">360</span> <span class="o">*</span> <span class="mi">180</span> <span class="o">/</span> <span class="n">surface</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)))))</span>  <span class="c1"># zoom level</span>
+    <span class="k">del</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span>
+    <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span> <span class="o">=</span> <span class="n">deg2num</span><span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="n">latmax</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span>
+    <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">deg2num</span><span class="p">(</span><span class="n">lonmax</span><span class="p">,</span> <span class="n">latmin</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span>
+
+    <span class="c1"># Building complete image from tiles</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">get_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">authorize_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                     <span class="n">subst</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;$</span><span class="si">{z}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">zoom</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="si">{x}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;$</span><span class="si">{y}</span><span class="s1">&#39;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span>
+            <span class="n">small_img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">size</span> <span class="o">=</span> <span class="n">small_img</span><span class="o">.</span><span class="n">size</span>
+                <span class="n">new_im</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;RGB&#39;</span><span class="p">,</span> <span class="p">((</span><span class="n">xmax</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">size</span> <span class="o">==</span> <span class="n">small_img</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="s2">&quot;All tiles must share the same size&quot;</span>
+            <span class="n">new_im</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">small_img</span><span class="p">,</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">+=</span> <span class="s1">&#39;.png&#39;</span>
+    <span class="n">new_im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">new_im</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="c1"># Building geometry corresponding to the image</span>
+    <span class="n">inputpos</span> <span class="o">=</span> <span class="n">num2deg</span><span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span> <span class="c1">#position of the North-West image corner</span>
+    <span class="n">resol</span> <span class="o">=</span> <span class="n">zoom2resol</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">zoom2resol</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># an offset is needed to go from the image corner to the pixel center</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">inputpos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">inputpos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;input_position&#39;</span><span class="p">:(</span><span class="mi">0</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="p">(</span><span class="n">ymax</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="o">.</span><span class="mi">5</span><span class="p">),</span>
+            <span class="s1">&#39;X_resolution&#39;</span><span class="p">:</span><span class="n">resol</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s1">&#39;Y_resolution&#39;</span><span class="p">:</span><span class="n">resol</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
+                     <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
+                     <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span>
+                     <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                     <span class="p">}</span>
+    <span class="n">projection</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;radians&#39;</span><span class="p">),</span>
+                  <span class="s1">&#39;reference_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;radians&#39;</span><span class="p">),</span>
+                  <span class="s1">&#39;rotation&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;radians&#39;</span><span class="p">)}</span>
+    <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
+                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mercator&#39;</span><span class="p">,</span>
+                       <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                       <span class="n">dimensions</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="p">(</span><span class="n">xmax</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">xmin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="o">=</span><span class="p">(</span><span class="n">ymax</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">ymin</span><span class="p">)</span> <span class="o">*</span> <span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+                       <span class="n">vcoordinate</span><span class="o">=</span><span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">),</span>
+                       <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                       <span class="n">geoid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="n">radius</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="n">radius</span><span class="p">})</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+
+    <span class="c1"># Rendering</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">plot3DProjImage</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">subzone</span><span class="p">,</span>
+                                <span class="n">interpolation</span><span class="p">,</span> <span class="n">color_transform</span><span class="o">=</span><span class="n">color_transform</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">result</span>
+
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

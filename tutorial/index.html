@@ -1,0 +1,142 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tutorial &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Introduction" href="introduction_tuto.html" />
+    <link rel="prev" title="Some examples" href="../examples.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="introduction_tuto.html" title="1. Introduction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../examples.html" title="Some examples"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../examples.html"
+                        title="previous chapter">Some examples</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="introduction_tuto.html"
+                        title="next chapter">1. Introduction</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutorial/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p id="tuto-index">Don’t forget to read the <a class="reference internal" href="../introduction.html#general-design"><span class="std std-ref">General design</span></a> of the package, at first !</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="introduction_tuto.html">1. Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="introduction_tuto.html#create-objects">1.1. Create objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="introduction_tuto.html#explore-objects">1.2. Explore objects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="resources.html">2. Resources</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#explore-resources">2.1. Explore resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#field-identifier-fid">2.2. Field identifier (<strong>fid</strong>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#juggling-with-resources">2.3. Juggling with resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="resources.html#resource-modifiers">2.4. Resource modifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fields.html">3. Fields</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#field-identifier-fid">3.1. Field identifier (fid)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#validity">3.2. Validity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#fields-useful-methods">3.3. Fields useful methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#building-vector-fields">3.4. Building Vector Fields</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#plots">3.5. Plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fields.html#d-plots">3.6. 3D Plots</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="geometries_tuto.html">4. Geometries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="geometries_tuto.html#horizontal-geometries">4.1. Horizontal geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometries_tuto.html#vertical-geometries">4.2. Vertical geometries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometries_tuto.html#d-plot">4.3. 3D plot</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Then refer to the <a class="reference internal" href="../gallery/index.html#gallery-index"><span class="std std-ref">Gallery</span></a> for more examples of use.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="introduction_tuto.html" title="1. Introduction"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../examples.html" title="Some examples"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

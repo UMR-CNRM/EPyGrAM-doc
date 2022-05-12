@@ -1,0 +1,888 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram._plugins.with_cartopy.H2DField &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram._plugins.with_cartopy.H2DField</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Extend H2DField with plotting methods using cartopy.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+
+<span class="kn">import</span> <span class="nn">footprints</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">colormapping</span>
+
+<span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">activate</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Activate extension.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="vm">__name__</span> <span class="k">as</span> <span class="n">plugin_name</span>
+    <span class="kn">from</span> <span class="nn">epygram._plugins.util</span> <span class="k">import</span> <span class="n">notify_doc_requires_plugin</span>
+    <span class="n">notify_doc_requires_plugin</span><span class="p">([</span><span class="n">cartoplot</span><span class="p">,</span> <span class="n">cartoplot_fig_init</span><span class="p">,</span>
+                                <span class="n">cartoplot_background</span><span class="p">],</span>
+                               <span class="n">plugin_name</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span>
+    <span class="c1"># defaults arguments for cartopy plots</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_NEfeatures</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;cultural&#39;</span><span class="p">,</span>
+                                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;admin_0_countries&#39;</span><span class="p">,</span>
+                                        <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+                                        <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">),]</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_scatter_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;s&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span>
+                                   <span class="s1">&#39;marker&#39;</span><span class="p">:</span><span class="s1">&#39;,&#39;</span><span class="p">,</span>
+                                   <span class="s1">&#39;linewidths&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_contour_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;linewidths&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_contourf_kw</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_pcolormesh_kw</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_clabel_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fmt&#39;</span><span class="p">:</span><span class="s1">&#39;</span><span class="si">%0i</span><span class="s1">&#39;</span><span class="p">}</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">default_gridlines_kw</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;draw_labels&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span>
+                                     <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+                                     <span class="s1">&#39;color&#39;</span><span class="p">:</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                                     <span class="s1">&#39;linestyle&#39;</span><span class="p">:</span><span class="s1">&#39;--&#39;</span><span class="p">}</span>
+    <span class="c1"># methods</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">cartoplot_fig_init</span> <span class="o">=</span> <span class="n">cartoplot_fig_init</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">cartoplot_background</span> <span class="o">=</span> <span class="n">cartoplot_background</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_treat_minmax</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">_cartoplot_treat_minmax</span><span class="p">)</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_mesh_coords</span> <span class="o">=</span> <span class="n">_cartoplot_mesh_coords</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_get_coords</span> <span class="o">=</span> <span class="n">_cartoplot_get_coords</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_shape</span> <span class="o">=</span> <span class="n">_cartoplot_shape</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_get_ColormapHelper</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">_cartoplot_get_ColormapHelper</span><span class="p">)</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_colormap_kwargs</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">_cartoplot_colormap_kwargs</span><span class="p">)</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_actualplot</span> <span class="o">=</span> <span class="n">_cartoplot_actualplot</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_colorbar</span> <span class="o">=</span> <span class="nb">classmethod</span><span class="p">(</span><span class="n">_cartoplot_colorbar</span><span class="p">)</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">_cartoplot_text</span> <span class="o">=</span> <span class="n">_cartoplot_text</span>
+    <span class="n">H2DField</span><span class="o">.</span><span class="n">cartoplot</span> <span class="o">=</span> <span class="n">cartoplot</span>
+
+
+<span class="k">def</span> <span class="nf">meshable_geometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns True is the geometry is meshable (rectangularly).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">geometry</span><span class="o">.</span><span class="n">rectangular_grid</span> <span class="ow">and</span> <span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;unstructured&#39;</span>
+
+
+<span class="k">def</span> <span class="nf">cartoplot_fig_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                       <span class="n">fig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">projection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                       <span class="n">figsize</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">plotsizes</span><span class="p">,</span>
+                       <span class="n">rcparams</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">default_rcparams</span><span class="p">,</span>
+                       <span class="n">set_global</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Consistently set figure, ax and projection.&quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">rcparams</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="c1"># fig, ax, proj</span>
+    <span class="k">if</span> <span class="n">fig</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;Cannot specify an **ax** without a **fig**.&quot;</span>
+        <span class="k">if</span> <span class="n">projection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">projection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">default_cartopy_CRS</span><span class="p">()</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">projection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">projection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">default_cartopy_CRS</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="s1">&#39;projection&#39;</span><span class="p">),</span> <span class="s2">&quot;Cannot provide an **ax** which does not hold a projection.&quot;</span>
+            <span class="k">if</span> <span class="n">projection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">ax</span><span class="o">.</span><span class="n">projection</span> <span class="o">==</span> <span class="n">projection</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">projection</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">projection</span>
+    <span class="c1"># enlarge ?</span>
+    <span class="k">if</span> <span class="n">set_global</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_global</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">projection</span>
+
+
+<span class="k">def</span> <span class="nf">cartoplot_background</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                         <span class="n">ax</span><span class="p">,</span>
+                         <span class="n">projection</span><span class="p">,</span>
+                         <span class="n">cartopy_features</span><span class="o">=</span><span class="p">[],</span>
+                         <span class="n">natural_earth_features</span><span class="o">=</span><span class="s1">&#39;__default__&#39;</span><span class="p">,</span>
+                         <span class="n">meridians</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+                         <span class="n">parallels</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+                         <span class="n">gridlines_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">epygram_departments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                         <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">extent</span><span class="o">=</span><span class="s1">&#39;focus&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set cartography features, such as borders, coastlines, meridians and parallels...&quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">cartopy</span>
+    <span class="kn">from</span> <span class="nn">cartopy.mpl.gridliner</span> <span class="k">import</span> <span class="p">(</span><span class="n">LATITUDE_FORMATTER</span><span class="p">,</span>
+                                       <span class="n">LONGITUDE_FORMATTER</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">mticker</span>
+    <span class="k">if</span> <span class="n">natural_earth_features</span> <span class="o">==</span> <span class="s1">&#39;__default__&#39;</span><span class="p">:</span>
+        <span class="n">natural_earth_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_NEfeatures</span><span class="p">,</span>
+    <span class="k">if</span> <span class="s1">&#39;gauss&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+        <span class="n">default_scale</span> <span class="o">=</span> <span class="s1">&#39;110m&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">default_scale</span> <span class="o">=</span> <span class="s1">&#39;50m&#39;</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">cartopy_features</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cfeature</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">with_scale</span><span class="p">(</span><span class="n">default_scale</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">natural_earth_features</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;scale&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="p">[</span><span class="s1">&#39;scale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_scale</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">NaturalEarthFeature</span><span class="p">(</span><span class="o">**</span><span class="n">f</span><span class="p">))</span>
+    <span class="c1"># meridians and parallels</span>
+    <span class="n">meridians</span><span class="p">,</span> <span class="n">parallels</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">auto_meridians_parallels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span>
+                                                         <span class="n">meridians</span><span class="p">,</span>
+                                                         <span class="n">parallels</span><span class="p">,</span>
+                                                         <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">gridlines_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gridlines_kw</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_gridlines_kw</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">meridians</span><span class="p">,</span> <span class="n">parallels</span><span class="p">)</span> <span class="o">!=</span> <span class="p">([],</span> <span class="p">[]):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">projection</span><span class="p">,</span> <span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">,</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Mercator</span><span class="p">)):</span>
+            <span class="c1"># only these projections have labels available in cartopy</span>
+            <span class="n">gridlines_kw</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;draw_labels&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="c1"># home-made workaround for Lambert</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">projection</span><span class="p">,</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">LambertConformal</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="s1">&#39;gauss&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">cartopy_plus</span> <span class="k">import</span> <span class="n">lambert_parallels_meridians_labels</span>
+                <span class="n">lambert_parallels_meridians_labels</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">projection</span><span class="p">,</span>
+                                                   <span class="n">meridians</span><span class="p">,</span> <span class="n">parallels</span><span class="p">,</span>
+                                                   <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span>  <span class="c1"># TODO: workarounds for other geometries ?</span>
+        <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">xlocs</span><span class="o">=</span><span class="n">meridians</span><span class="p">,</span>
+                          <span class="n">ylocs</span><span class="o">=</span><span class="n">parallels</span><span class="p">,</span>
+                          <span class="o">**</span><span class="n">gridlines_kw</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">cartopy</span><span class="o">.</span><span class="n">__version__</span> <span class="o">&lt;=</span> <span class="s1">&#39;0.17.0&#39;</span><span class="p">:</span>
+            <span class="n">gl</span><span class="o">.</span><span class="n">xlabels_top</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">gl</span><span class="o">.</span><span class="n">ylabels_right</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">gl</span><span class="o">.</span><span class="n">top_labels</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">gl</span><span class="o">.</span><span class="n">right_labels</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">gl</span><span class="o">.</span><span class="n">xformatter</span> <span class="o">=</span> <span class="n">LONGITUDE_FORMATTER</span>
+        <span class="n">gl</span><span class="o">.</span><span class="n">yformatter</span> <span class="o">=</span> <span class="n">LATITUDE_FORMATTER</span>
+        <span class="c1"># stereo-polar, get more round circles</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">projection</span><span class="p">,</span> <span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Stereographic</span><span class="p">,</span>
+                                   <span class="n">ccrs</span><span class="o">.</span><span class="n">NorthPolarStereo</span><span class="p">,</span>
+                                   <span class="n">ccrs</span><span class="o">.</span><span class="n">SouthPolarStereo</span><span class="p">,</span>
+                                   <span class="n">ccrs</span><span class="o">.</span><span class="n">NearsidePerspective</span><span class="p">)):</span>
+            <span class="n">gl</span><span class="o">.</span><span class="n">n_steps</span> <span class="o">=</span> <span class="mi">360</span>
+    <span class="k">if</span> <span class="n">epygram_departments</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">epygram_departments</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">epygram_departments</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">json</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">installdir</span> <span class="o">+</span> <span class="s1">&#39;/data/french_departments.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">dp</span><span class="p">:</span>
+            <span class="n">depts</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">dp</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">depts</span><span class="p">)))[:]:</span>
+            <span class="k">for</span> <span class="n">part</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">depts</span><span class="p">[</span><span class="n">d</span><span class="p">])):</span>
+                <span class="n">dlon</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">depts</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">part</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">dlat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">depts</span><span class="p">[</span><span class="n">d</span><span class="p">][</span><span class="n">part</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">xyz</span> <span class="o">=</span> <span class="n">projection</span><span class="o">.</span><span class="n">transform_points</span><span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">dlon</span><span class="p">,</span> <span class="n">dlat</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">epygram_departments</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_treat_minmax</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                            <span class="n">data</span><span class="p">,</span>
+                            <span class="n">mask_threshold</span><span class="p">,</span>
+                            <span class="n">minmax</span><span class="p">,</span>
+                            <span class="n">colormap_helper</span><span class="p">,</span>
+                            <span class="n">minmax_along_colorbar</span><span class="p">,</span>
+                            <span class="n">mask_outside_minmax</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mask according to threshold, get min/max, mask according to colormap.&quot;&quot;&quot;</span>
+    <span class="c1"># 1/ mask values or explicit thresholding</span>
+    <span class="n">mask_outside</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="n">config</span><span class="o">.</span><span class="n">mask_outside</span><span class="p">,</span>
+                    <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">config</span><span class="o">.</span><span class="n">mask_outside</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">mask_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mask_outside</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mask_threshold</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_outside</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+                                   <span class="n">mask_outside</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>
+                                   <span class="n">mask_outside</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span>
+    <span class="c1"># 2/ get min/max for plot</span>
+    <span class="n">pmin</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+    <span class="n">pmax</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">minmax_along_colorbar</span> <span class="ow">and</span> <span class="p">(</span><span class="n">minmax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span>
+                                  <span class="n">colormap_helper</span><span class="o">.</span><span class="n">explicit_colorbounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">minmax_along_colorbar</span> <span class="o">=</span> <span class="s1">&#39;(min: {: .</span><span class="si">{precision}{type}</span><span class="s1">} // max: {: .</span><span class="si">{precision}{type}</span><span class="s1">})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">minmax_along_colorbar</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">minmax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">minmax</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">pmax</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">minmax</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">if</span> <span class="n">colormap_helper</span><span class="o">.</span><span class="n">explicit_colorbounds</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">minmax</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;**minmax** overwritten by **colormap_helper.explicit_colorbounds**&#39;</span><span class="p">)</span>
+        <span class="n">pmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">colormap_helper</span><span class="o">.</span><span class="n">explicit_colorbounds</span><span class="p">)</span>
+        <span class="n">pmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">colormap_helper</span><span class="o">.</span><span class="n">explicit_colorbounds</span><span class="p">)</span>
+    <span class="c1"># 3/ mask outside colorbounds/minmax</span>
+    <span class="k">if</span> <span class="n">mask_outside_minmax</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_outside</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="n">minmax_along_colorbar</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_mesh_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get coordinates of mesh corners.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">meshable_geometry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">):</span>
+        <span class="c1"># In this case we need the coordinates of mesh borders</span>
+        <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span>
+                                                   <span class="n">position</span><span class="o">=</span><span class="s1">&#39;lower-left&#39;</span><span class="p">)</span>
+        <span class="n">corners_ij</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">gimme_corners_ij</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+        <span class="n">Imax</span><span class="p">,</span> <span class="n">Jmax</span> <span class="o">=</span> <span class="n">corners_ij</span><span class="p">[</span><span class="s1">&#39;ur&#39;</span><span class="p">]</span>
+        <span class="n">Imin</span><span class="p">,</span> <span class="n">Jmin</span> <span class="o">=</span> <span class="n">corners_ij</span><span class="p">[</span><span class="s1">&#39;ll&#39;</span><span class="p">]</span>
+        <span class="n">ii</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Imin</span><span class="p">,</span> <span class="n">Imax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">jj</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Jmin</span><span class="p">,</span> <span class="n">Jmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># compute upper line, upper border</span>
+        <span class="n">up_lon</span><span class="p">,</span> <span class="n">up_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span>
+                                             <span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">ii</span><span class="p">),),</span> <span class="n">Jmax</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">int</span><span class="p">),</span>
+                                             <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper-right&#39;</span><span class="p">)</span>
+        <span class="n">ul</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">Imin</span><span class="p">,</span> <span class="n">Jmax</span><span class="p">,</span>
+                                 <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper-left&#39;</span><span class="p">)</span>
+        <span class="n">up_lon</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">ul</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">up_lon</span><span class="p">))</span>
+        <span class="n">up_lat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">ul</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">up_lat</span><span class="p">))</span>
+        <span class="n">up_lon</span> <span class="o">=</span> <span class="n">up_lon</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">up_lon</span><span class="p">)))</span>
+        <span class="n">up_lat</span> <span class="o">=</span> <span class="n">up_lat</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">up_lat</span><span class="p">)))</span>
+        <span class="c1"># compute right line, right border</span>
+        <span class="n">right_lon</span><span class="p">,</span> <span class="n">right_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">jj</span><span class="p">),),</span> <span class="n">Imax</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">int</span><span class="p">),</span>
+                                                   <span class="n">jj</span><span class="p">,</span>
+                                                   <span class="n">position</span><span class="o">=</span><span class="s1">&#39;upper-right&#39;</span><span class="p">)</span>
+        <span class="n">lr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">Imax</span><span class="p">,</span> <span class="n">Jmin</span><span class="p">,</span>
+                                 <span class="n">position</span><span class="o">=</span><span class="s1">&#39;lower-right&#39;</span><span class="p">)</span>
+        <span class="n">right_lon</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">lr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">right_lon</span><span class="p">))</span>
+        <span class="n">right_lat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">lr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">right_lat</span><span class="p">))</span>
+        <span class="n">right_lon</span> <span class="o">=</span> <span class="n">right_lon</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">right_lon</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">right_lat</span> <span class="o">=</span> <span class="n">right_lat</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">right_lat</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="c1"># augment numpy array</span>
+        <span class="n">lons</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">lons</span><span class="p">,</span> <span class="n">up_lon</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">lats</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">lats</span><span class="p">,</span> <span class="n">up_lat</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">lons</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">lons</span><span class="p">,</span> <span class="n">right_lon</span><span class="p">))</span>
+        <span class="n">lats</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">lats</span><span class="p">,</span> <span class="n">right_lat</span><span class="p">))</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lats</span> <span class="o">&gt;</span> <span class="mf">90.</span><span class="p">)</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># don&#39;t replace value where masked</span>
+        <span class="n">lats</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">90.</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lats</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">90.</span><span class="p">)</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># don&#39;t replace value where masked</span>
+        <span class="n">lats</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mf">90.</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;plot_method=&#39;pcolormesh&#39; for Gauss or unstructured grids. Any idea ?&quot;</span><span class="p">)</span>  <span class="c1"># TODO: ?</span>
+    <span class="k">return</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_get_coords</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">plot_method</span><span class="p">,</span>
+                          <span class="n">subzone</span><span class="p">,</span>
+                          <span class="n">projection</span><span class="p">):</span>
+    <span class="c1"># 1/ coordinates</span>
+    <span class="k">if</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;pcolormesh&#39;</span><span class="p">:</span>
+        <span class="c1"># In this case we need the coordinates of mesh borders</span>
+        <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_mesh_coords</span><span class="p">(</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># else the center</span>
+        <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;academic&#39;</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">lons</span> <span class="o">-</span> <span class="n">lons</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">lats</span> <span class="o">-</span> <span class="n">lats</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+            <span class="n">lons</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">lons</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+            <span class="n">lats</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">lats</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="n">xyz</span> <span class="o">=</span> <span class="n">projection</span><span class="o">.</span><span class="n">transform_points</span><span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">masked</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">y</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+        <span class="n">x</span><span class="p">[</span><span class="n">masked</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">masked</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">lons</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                     <span class="n">data</span><span class="p">,</span>
+                     <span class="n">plot_method</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Shape according to plot_method.&quot;&quot;&quot;</span>
+    <span class="n">xf</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">yf</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">zf</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">if</span> <span class="n">plot_method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;contourf&#39;</span><span class="p">,</span> <span class="s1">&#39;contour&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">rectangular_grid</span><span class="p">:</span>
+            <span class="c1"># gauss grid</span>
+            <span class="n">_fill_value</span> <span class="o">=</span> <span class="mf">1e20</span>
+            <span class="n">_shp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">zf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">fill_maskedvalues</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">_shp</span><span class="p">),</span>  <span class="c1"># protect actually masked values</span>
+                                                 <span class="n">_fill_value</span><span class="p">)</span>
+            <span class="n">zf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="n">_fill_value</span><span class="p">)</span>  <span class="c1"># flatten and re-masked</span>
+            <span class="n">xf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+            <span class="n">yf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># unstructured grid</span>
+            <span class="n">xf</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">yf</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">zf</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;scatter&#39;</span><span class="p">:</span>
+        <span class="c1"># flatten data for scatter</span>
+        <span class="n">xf</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">yf</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        <span class="n">zf</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">xf</span><span class="p">,</span> <span class="n">yf</span><span class="p">,</span> <span class="n">zf</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_get_ColormapHelper</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                                  <span class="n">colormap</span><span class="p">,</span>
+                                  <span class="n">colorbounds</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Build ColormapHelper object.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">colormap</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">colormaps</span><span class="p">:</span>
+        <span class="n">cmapfile</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">colormaps</span><span class="p">[</span><span class="n">colormap</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">cmapfile</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.json&#39;</span><span class="p">):</span>
+            <span class="n">colormaphelper</span> <span class="o">=</span> <span class="n">colormapping</span><span class="o">.</span><span class="n">get_ColormapHelper_fromfile</span><span class="p">(</span><span class="n">cmapfile</span><span class="p">)</span>  <span class="c1"># potentially already loaded</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;colormaps taken from config must be .json files (and be suffixed so)&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">colormaphelper</span> <span class="o">=</span> <span class="n">colormapping</span><span class="o">.</span><span class="n">ColormapHelper</span><span class="p">(</span><span class="n">colormap</span><span class="p">,</span>
+                                                     <span class="n">explicit_colorbounds</span><span class="o">=</span><span class="n">colorbounds</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">colormaphelper</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_colormap_kwargs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                               <span class="n">colormaphelper</span><span class="p">,</span>
+                               <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span>
+                               <span class="n">plot_method</span><span class="p">,</span>
+                               <span class="n">colorsnumber</span><span class="p">,</span>
+                               <span class="n">colorstep</span><span class="p">,</span>
+                               <span class="n">center_cmap_on_0</span><span class="p">,</span>
+                               <span class="n">contourcolor</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get colors kwargs.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <span class="n">cnames</span>
+    <span class="n">plot_kwargs</span> <span class="o">=</span> <span class="n">colormaphelper</span><span class="o">.</span><span class="n">kwargs_for_plot</span><span class="p">(</span><span class="n">plot_method</span><span class="p">,</span>
+                                                 <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span>
+                                                 <span class="n">center_cmap_on_0</span><span class="p">,</span>
+                                                 <span class="n">number</span><span class="o">=</span><span class="n">colorsnumber</span><span class="p">,</span>
+                                                 <span class="n">step</span><span class="o">=</span><span class="n">colorstep</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;contour&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">contourcolor</span> <span class="ow">in</span> <span class="n">cnames</span> <span class="ow">or</span> <span class="n">contourcolor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span><span class="p">:</span>
+            <span class="n">colormap</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">util</span><span class="o">.</span><span class="n">load_cmap</span><span class="p">(</span><span class="n">contourcolor</span><span class="p">)</span>
+            <span class="n">colormap</span> <span class="o">=</span> <span class="n">contourcolor</span>
+            <span class="n">contourcolor</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">plot_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">colors</span><span class="o">=</span><span class="n">contourcolor</span><span class="p">,</span>
+                           <span class="n">cmap</span><span class="o">=</span><span class="n">colormap</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">plot_kwargs</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_actualplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                          <span class="n">ax</span><span class="p">,</span>
+                          <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                          <span class="n">data</span><span class="p">,</span>
+                          <span class="n">plot_method</span><span class="p">,</span>
+                          <span class="n">plot_kwargs</span><span class="p">,</span>
+                          <span class="n">uniform</span><span class="p">,</span>
+                          <span class="n">colormap_helper</span><span class="p">,</span>
+                          <span class="n">scatter_kw</span><span class="p">,</span>
+                          <span class="n">contour_kw</span><span class="p">,</span>
+                          <span class="n">contourf_kw</span><span class="p">,</span>
+                          <span class="n">pcolormesh_kw</span><span class="p">,</span>
+                          <span class="n">contourlabel</span><span class="p">,</span>
+                          <span class="n">clabel_kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Actual call to matplotlib plotting functions.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <span class="n">cnames</span>
+    <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">tri</span>
+    <span class="k">if</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;contourf&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">contourf_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">contourf_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_contourf_kw</span>
+        <span class="n">plot_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">contourf_kw</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">rectangular_grid</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1"># triangulate for plotting</span>
+            <span class="n">triangulation</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>  <span class="c1"># masked values</span>
+                <span class="n">triangles_summits_mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">mask</span><span class="p">[</span><span class="n">triangulation</span><span class="o">.</span><span class="n">triangles</span><span class="p">],</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">triangles_summits_mask</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># any masked summit masks triangle</span>
+                <span class="n">triangulation</span><span class="o">.</span><span class="n">set_mask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">tricontourf</span><span class="p">(</span><span class="n">triangulation</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">plot_kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+                             <span class="o">**</span><span class="n">plot_kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;scatter&#39;</span><span class="p">:</span>
+        <span class="c1"># treat uniform field case</span>
+        <span class="k">if</span> <span class="n">uniform</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">colormap_helper</span><span class="o">.</span><span class="n">colormap</span> <span class="ow">in</span> <span class="n">cnames</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">colormap_helper</span><span class="o">.</span><span class="n">colormap</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="n">colormap_helper</span><span class="o">.</span><span class="n">colormap</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">colors</span> <span class="o">=</span> <span class="s1">&#39;silver&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">colors</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="c1"># plot</span>
+        <span class="k">if</span> <span class="n">scatter_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">scatter_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_scatter_kw</span>
+        <span class="n">plot_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">scatter_kw</span><span class="p">)</span>
+        <span class="n">pf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+                        <span class="o">**</span><span class="n">plot_kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;pcolormesh&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pcolormesh_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pcolormesh_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_pcolormesh_kw</span>
+        <span class="n">plot_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pcolormesh_kw</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">)</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]]):</span>
+            <span class="c1"># pcolormesh cannot plot if x or y contain masked values</span>
+            <span class="c1"># We mask data values instead of x or y</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+                                 <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">m</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                                                  <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span>
+                                 <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">m</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">:],</span>
+                                                  <span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]))</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">filled</span><span class="p">()</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">filled</span><span class="p">()</span>
+        <span class="n">pf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+                           <span class="o">**</span><span class="n">plot_kwargs</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;contour&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">contour_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">contour_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_contour_kw</span>
+        <span class="n">plot_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">contour_kw</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">rectangular_grid</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">tricontour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+                               <span class="o">**</span><span class="n">plot_kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pf</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span>
+                            <span class="o">**</span><span class="n">plot_kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">contourlabel</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">clabel_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">clabel_kw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_clabel_kw</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">pf</span><span class="p">,</span>
+                      <span class="n">colors</span><span class="o">=</span><span class="n">plot_kwargs</span><span class="p">[</span><span class="s1">&#39;colors&#39;</span><span class="p">],</span>
+                      <span class="n">cmap</span><span class="o">=</span><span class="n">plot_kwargs</span><span class="p">[</span><span class="s1">&#39;cmap&#39;</span><span class="p">],</span>
+                      <span class="o">**</span><span class="n">clabel_kw</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;plot_method==&quot;</span><span class="si">{}</span><span class="s1">&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">plot_method</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pf</span>
+
+
+<span class="k">def</span> <span class="nf">_cartoplot_colorbar</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span>
+                        <span class="n">ax</span><span class="p">,</span>
+                        <span class="n">pf</span><span class="p">,</span>
+                        <span class="n">colorbar</span><span class="p">,</span>
+                        <span class="n">colorbar_over</span><span class="p">,</span>
+                        <span class="n">colorbar_ax_kw</span><span class="p">,</span>
+                        <span class="n">colormap_helper</span><span class="p">,</span>
+                        <span class="n">minmax_along_colorbar</span><span class="p">,</span>
+                        <span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span>
+                        <span class="n">colorsnumber</span><span class="p">,</span>
+                        <span class="n">colorstep</span><span class="p">,</span>
+                        <span class="n">colorbar_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add colorbar.&quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">from</span> <span class="nn">mpl_toolkits.axes_grid1</span> <span class="k">import</span> <span class="n">make_axes_locatable</span>
+    <span class="c1"># position of colorbar</span>
+    <span class="k">if</span> <span class="n">colorbar_over</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colorbar_ax_kw</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">colorbar_ax_kw</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="s2">&quot;5%&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="n">colorbar</span><span class="p">,</span>
+                                                  <span class="n">axes_class</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Axes</span><span class="p">,</span>
+                                                  <span class="o">**</span><span class="n">colorbar_ax_kw</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">colorbar_over</span>
+    <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;vertical&#39;</span> <span class="k">if</span> <span class="n">colorbar</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="s1">&#39;left&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;horizontal&#39;</span>
+    <span class="c1"># ticks</span>
+    <span class="n">ticks_label</span> <span class="o">=</span> <span class="n">colormap_helper</span><span class="o">.</span><span class="n">ticks_label</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span>
+                                              <span class="n">number</span><span class="o">=</span><span class="n">colorsnumber</span><span class="p">,</span>
+                                              <span class="n">step</span><span class="o">=</span><span class="n">colorstep</span><span class="p">)</span>
+    <span class="n">ticks_position</span> <span class="o">=</span> <span class="n">colormap_helper</span><span class="o">.</span><span class="n">ticks_position</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">M</span><span class="p">),</span>
+                                                    <span class="n">number</span><span class="o">=</span><span class="n">colorsnumber</span><span class="p">,</span>
+                                                    <span class="n">step</span><span class="o">=</span><span class="n">colorstep</span><span class="p">)</span>
+    <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">pf</span><span class="p">,</span>
+                      <span class="n">orientation</span><span class="o">=</span><span class="n">orientation</span><span class="p">,</span>
+                      <span class="n">ticks</span><span class="o">=</span><span class="n">ticks_position</span><span class="p">,</span>
+                      <span class="n">cax</span><span class="o">=</span><span class="n">cax</span><span class="p">,</span>
+                      <span class="o">**</span><span class="n">colorbar_kwargs</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">ticks_label</span> <span class="o">==</span> <span class="n">ticks_position</span><span class="p">):</span>
+        <span class="n">cax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">ticks_label</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">minmax_along_colorbar</span><span class="p">:</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">minmax_along_colorbar</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cb</span>
+
+<span class="k">def</span> <span class="nf">_cartoplot_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span>
+                    <span class="n">title</span><span class="p">,</span>
+                    <span class="n">uniform</span><span class="p">,</span>
+                    <span class="n">uniformvalue</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set legend text: title and others.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">title</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;short&#39;</span><span class="p">,</span>
+                           <span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">),</span>
+                           <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">())])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">uniform</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;(uniform field: value=</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">uniformvalue</span><span class="p">),</span>
+                <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="mf">90.</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">cartoplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+              <span class="c1"># figure</span>
+              <span class="n">fig</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">figsize</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">plotsizes</span><span class="p">,</span>
+              <span class="n">rcparams</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">default_rcparams</span><span class="p">,</span>
+              <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="c1"># geometry</span>
+              <span class="n">projection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">extent</span><span class="o">=</span><span class="s1">&#39;__default__&#39;</span><span class="p">,</span>
+              <span class="c1"># graphical settings</span>
+              <span class="n">plot_method</span><span class="o">=</span><span class="s1">&#39;__default__&#39;</span><span class="p">,</span>
+              <span class="n">minmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">mask_threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">scatter_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">contour_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">contourf_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">pcolormesh_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">contourlabel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="n">clabel_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="c1"># cartography</span>
+              <span class="n">meridians</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+              <span class="n">parallels</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
+              <span class="n">gridlines_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">cartopy_features</span><span class="o">=</span><span class="p">[],</span>
+              <span class="n">natural_earth_features</span><span class="o">=</span><span class="s1">&#39;__default__&#39;</span><span class="p">,</span>
+              <span class="n">epygram_departments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="c1"># colormapping</span>
+              <span class="n">colormap_helper</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;plasma&#39;</span><span class="p">,</span>
+              <span class="n">colorbounds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">colorsnumber</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">colorstep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">center_cmap_on_0</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+              <span class="n">contourcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+              <span class="c1"># colorbar</span>
+              <span class="n">colorbar</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span>
+              <span class="n">colorbar_over</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">colorbar_ax_kw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+              <span class="n">colorbar_kw</span><span class="o">=</span><span class="p">{},</span>
+              <span class="n">minmax_along_colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+              <span class="c1"># takeover</span>
+              <span class="n">takeover</span><span class="o">=</span><span class="kc">False</span>
+              <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot field with **cartopy**. Returns (figure, axis).</span>
+<span class="sd">    </span>
+<span class="sd">    Figure settings:</span>
+
+<span class="sd">    :param fig: any existing figure to be used for the plot.</span>
+<span class="sd">        A matplotlib *figure* is a frame containing eventually several</span>
+<span class="sd">        subplots (axes).</span>
+<span class="sd">    :param ax: any existing axis to be used to plot on.</span>
+<span class="sd">        A matplotlib *axis* is the subplot on which the drawing is done.</span>
+<span class="sd">        If given, **fig** and **ax** must be consistent, i.e. **ax** being</span>
+<span class="sd">        one of the **fig** axes.</span>
+<span class="sd">    :param figsize: figure sizes in inches, e.g. (5, 8.5).</span>
+<span class="sd">        Default figsize is config.plotsizes.</span>
+<span class="sd">    :param rcparams: list of (*args, **kwargs) to be passed to pyplot.rc()</span>
+<span class="sd">        defaults to [((&#39;font&#39;,), dict(family=&#39;serif&#39;)),]</span>
+<span class="sd">    :param title: title for the plot. Default is field identifier and validity.</span>
+
+<span class="sd">    Geometry settings:</span>
+
+<span class="sd">    :param projection: a cartopy.crs projection to be used for plot.</span>
+<span class="sd">        Defaults to the field.geometry.default_cartopy_CRS()</span>
+<span class="sd">    :param subzone: [LAM fields only] among (&#39;C&#39;, &#39;CI&#39;), plots the data</span>
+<span class="sd">        resp. on the C or C+I zone.</span>
+<span class="sd">        Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param extent: tune the extent of the map.</span>
+<span class="sd">        Among (&#39;focus&#39;, &#39;global&#39;, &#39;__default__&#39;).</span>
+<span class="sd">        &#39;focus&#39; will focus on the field geometry extent.</span>
+<span class="sd">        &#39;global&#39; will de-zoom to have the whole globe, if possible</span>
+<span class="sd">        (call cartopy GeoAxes.set_global()).</span>
+<span class="sd">        &#39;__default__&#39; will choose one of these depending on the geometry.</span>
+
+<span class="sd">    Graphical settings:</span>
+
+<span class="sd">    :param plot_method: choice of the matplotlib plotting function to be</span>
+<span class="sd">        used, among (&#39;contourf&#39;, &#39;contour&#39;, &#39;scatter&#39;, &#39;pcolormesh&#39;, None).</span>
+<span class="sd">        If None, prepare the blank figure, but skip actual plot.</span>
+<span class="sd">        Default is &#39;pcolormesh&#39; if the geometry is &quot;meshable&quot;,</span>
+<span class="sd">        else &#39;contourf&#39;.</span>
+<span class="sd">    :param minmax: defines the min and max values for the plot colorbar.</span>
+<span class="sd">        Syntax: [min, max]. Strings &#39;min&#39; and &#39;max&#39; (default)</span>
+<span class="sd">        will take the min and max of the field.</span>
+<span class="sd">    :param mask_threshold: dict with min and/or max value(s) to mask outside.</span>
+<span class="sd">    :param scatter_kw: kwargs to be passed to matplotlib&#39;s ax.scatter().</span>
+<span class="sd">        Only for plot_method = &#39;scatter&#39;.</span>
+<span class="sd">    :param contour_kw: kwargs to be passed to matplotlib&#39;s ax.contour().</span>
+<span class="sd">        Only for plot_method = &#39;contour&#39;.</span>
+<span class="sd">    :param contourf_kw: kwargs to be passed to matplotlib&#39;s ax.contourf().</span>
+<span class="sd">        Only for plot_method = &#39;contourf&#39;.</span>
+<span class="sd">    :param pcolormesh_kw: kwargs to be passed to matplotlib&#39;s ax.pcolormesh().</span>
+<span class="sd">        Only for plot_method = &#39;pcolormesh&#39;.</span>
+<span class="sd">    :param contourlabel: displays labels on contours.</span>
+<span class="sd">        Only for plot_method = &#39;contour&#39;.</span>
+<span class="sd">    :param clabel_kw: kwargs to be passed to matplotlib&#39;s ax.clabel().</span>
+<span class="sd">        Only for plot_method = &#39;contour&#39;.</span>
+
+<span class="sd">    Cartography settings:</span>
+
+<span class="sd">    :param meridians: enable to fine-tune the choice of lines to</span>
+<span class="sd">        plot, with either:</span>
+<span class="sd">          - &#39;auto&#39;: automatic scaling to the map extents</span>
+<span class="sd">          - &#39;default&#39;: every 10 degree</span>
+<span class="sd">          - a list of values</span>
+<span class="sd">          - a grid step, e.g. 5 to plot each 5 degree.</span>
+<span class="sd">          - None: no one is plot</span>
+<span class="sd">    :param parallels: cf. **meridians**</span>
+<span class="sd">    :param gridlines_kw: graphical characteristics of meridians/parallels,</span>
+<span class="sd">        arguments to be passed to cartopy&#39;s ax.gridlines(...)</span>
+<span class="sd">    :param cartopy_features: list of cartopy.feature.??? features.</span>
+<span class="sd">    :param natural_earth_features: list of dicts, each of them containing</span>
+<span class="sd">        arguments to instanciate a cartopy.feature.NaturalEarthFeature(...).</span>
+<span class="sd">        E.g. [dict(category=&#39;cultural&#39;, name=&#39;admin_1_states_provinces&#39;, facecolor=&#39;none&#39;, linestyle=&#39;:&#39;),]</span>
+<span class="sd">        will add states/departments/provinces.</span>
+<span class="sd">        Cf. https://scitools.org.uk/cartopy/docs/latest/matplotlib/feature_interface.html#cartopy.feature.NaturalEarthFeature</span>
+<span class="sd">        for details.</span>
+<span class="sd">    :param epygram_departments: add high-resolution french departments</span>
+<span class="sd">        limits stored in epygram. May be a dict containing lines plotting</span>
+<span class="sd">        arguments, such as linewidth etc...</span>
+<span class="sd">        Warning: not consistent with natural_earth_features !</span>
+
+<span class="sd">    Colormap settings:</span>
+
+<span class="sd">    :param colormap_helper: an instance of the class</span>
+<span class="sd">        epygram.colormapping.ColormapHelper.</span>
+<span class="sd">        Has priority on the following arguments.</span>
+<span class="sd">    :param colormap: name of the ``matplotlib`` colormap to use (or an</span>
+<span class="sd">        ``epygram`` one, or a user-defined one, cf.</span>
+<span class="sd">        config.usercolormaps).</span>
+<span class="sd">    :param colorbounds: levels on which to shift color.</span>
+<span class="sd">    :param colorsnumber: number of levels for contours and colorbar.</span>
+<span class="sd">    :param colorstep: step in value between two color shift.</span>
+<span class="sd">    :param center_cmap_on_0: aligns the colormap center on the value 0.</span>
+<span class="sd">    :param contourcolor: color or colormap to be used for &#39;contourlines&#39;</span>
+<span class="sd">        plot_method. It can be either a legal html color name, or a</span>
+<span class="sd">        colormap name.</span>
+
+<span class="sd">    Colorbar settings:</span>
+
+<span class="sd">    :param colorbar: if *False*, hide colorbar the plot; else, defines the</span>
+<span class="sd">        colorbar position, among (&#39;bottom&#39;, &#39;right&#39;). Defaults to &#39;right&#39;.</span>
+<span class="sd">    :param colorbar_over: an optional existing ax to plot the colorbar on.</span>
+<span class="sd">    :param colorbar_ax_kw: kwargs to be passed to</span>
+<span class="sd">        make_axes_locatable(ax).append_axes(colorbar, **kwargs)</span>
+<span class="sd">    :param colorbar_kw: kwargs to be passed to matpltolib&#39;s colorbar()</span>
+<span class="sd">    :param minmax_along_colorbar: if True and minmax is not None,</span>
+<span class="sd">        adds min and max values along colorbar.</span>
+<span class="sd">        </span>
+<span class="sd">    Takeover:</span>
+<span class="sd">    </span>
+<span class="sd">    :param takeover: give the user more access to the objects used in the</span>
+<span class="sd">        plot, by returning a dict containing them instead of only fig/ax</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># 0/ defaults pre-sets</span>
+    <span class="k">if</span> <span class="n">plot_method</span> <span class="o">==</span> <span class="s1">&#39;__default__&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">meshable_geometry</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">):</span>
+            <span class="n">plot_method</span> <span class="o">=</span> <span class="s1">&#39;pcolormesh&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">plot_method</span> <span class="o">=</span> <span class="s1">&#39;contourf&#39;</span>
+    <span class="k">if</span> <span class="n">natural_earth_features</span> <span class="o">==</span> <span class="s1">&#39;__default__&#39;</span><span class="p">:</span>
+        <span class="n">natural_earth_features</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_NEfeatures</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">subzone</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">extent</span> <span class="o">==</span> <span class="s1">&#39;__default__&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">isglobal</span><span class="p">:</span>
+            <span class="n">extent</span> <span class="o">=</span> <span class="s1">&#39;global&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">extent</span> <span class="o">=</span> <span class="s1">&#39;focus&#39;</span>
+    <span class="c1"># 1/ geometry and figure</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cartoplot_fig_init</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span>
+                                                  <span class="n">ax</span><span class="p">,</span>
+                                                  <span class="n">projection</span><span class="p">,</span>
+                                                  <span class="n">figsize</span><span class="p">,</span>
+                                                  <span class="n">rcparams</span><span class="p">,</span>
+                                                  <span class="n">set_global</span><span class="o">=</span><span class="p">(</span><span class="n">extent</span> <span class="o">==</span> <span class="s1">&#39;global&#39;</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+    <span class="c1"># 2/ background</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">cartoplot_background</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span>
+                              <span class="n">projection</span><span class="p">,</span>
+                              <span class="n">cartopy_features</span><span class="p">,</span>
+                              <span class="n">natural_earth_features</span><span class="p">,</span>
+                              <span class="n">meridians</span><span class="p">,</span>
+                              <span class="n">parallels</span><span class="p">,</span>
+                              <span class="n">gridlines_kw</span><span class="p">,</span>
+                              <span class="n">epygram_departments</span><span class="p">,</span>
+                              <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span>
+                              <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">)</span>
+    <span class="c1"># 3/ get data to plot</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="c1"># 4/ handle min/max values</span>
+    <span class="k">if</span> <span class="n">colormap_helper</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">colormap_helper</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_get_ColormapHelper</span><span class="p">(</span><span class="n">colormap</span><span class="p">,</span>
+                                                             <span class="n">colorbounds</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">,</span> <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span> <span class="n">minmax_along_colorbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_treat_minmax</span><span class="p">(</span><span class="n">data</span><span class="p">,</span>
+                                                                           <span class="n">mask_threshold</span><span class="p">,</span>
+                                                                           <span class="n">minmax</span><span class="p">,</span>
+                                                                           <span class="n">colormap_helper</span><span class="p">,</span>
+                                                                           <span class="n">minmax_along_colorbar</span><span class="p">,</span>
+                                                                           <span class="n">plot_method</span> <span class="o">!=</span> <span class="s1">&#39;contourf&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">pmin</span><span class="p">)</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">pmax</span><span class="p">))</span> <span class="o">&lt;</span> <span class="n">config</span><span class="o">.</span><span class="n">epsilon</span> <span class="ow">and</span> <span class="n">plot_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;uniform field: plot as &#39;points&#39;.&quot;</span><span class="p">)</span>
+        <span class="n">plot_method</span> <span class="o">=</span> <span class="s1">&#39;scatter&#39;</span>
+        <span class="n">uniform</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">uniformvalue</span> <span class="o">=</span> <span class="n">pmin</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">uniform</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">uniformvalue</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># 5/ get coordinates</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_get_coords</span><span class="p">(</span><span class="n">plot_method</span><span class="p">,</span>
+                                      <span class="n">subzone</span><span class="p">,</span>
+                                      <span class="n">projection</span><span class="p">)</span>
+    <span class="c1"># FIXME: (CLEANME) fixed by Sebastien ?</span>
+    <span class="k">assert</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> \
+        <span class="s2">&quot;Domain is too large to be plotted on space view&quot;</span>
+    <span class="k">assert</span> <span class="o">-</span><span class="n">numpy</span><span class="o">.</span><span class="n">inf</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> \
+        <span class="s2">&quot;Domain is too large to be plotted on space view&quot;</span>
+    <span class="c1"># 6/ shape data/lons/lats</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_shape</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                                       <span class="n">data</span><span class="p">,</span>
+                                       <span class="n">plot_method</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">extent</span> <span class="o">==</span> <span class="s1">&#39;focus&#39;</span><span class="p">:</span>
+        <span class="n">xyz</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">transform_points</span><span class="p">(</span><span class="n">projection</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">xyz</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xyz</span><span class="p">)</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">xyz</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">((</span><span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+        <span class="k">del</span> <span class="n">xyz</span>
+    <span class="c1"># 7/ colormapping</span>
+    <span class="n">plot_kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_colormap_kwargs</span><span class="p">(</span><span class="n">colormap_helper</span><span class="p">,</span>
+                                                  <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span>
+                                                  <span class="n">plot_method</span><span class="p">,</span>
+                                                  <span class="n">colorsnumber</span><span class="p">,</span>
+                                                  <span class="n">colorstep</span><span class="p">,</span>
+                                                  <span class="n">center_cmap_on_0</span><span class="p">,</span>
+                                                  <span class="n">contourcolor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">plot_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># 8/ plot</span>
+        <span class="n">elements</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_actualplot</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span>
+                                              <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span>
+                                              <span class="n">data</span><span class="p">,</span>
+                                              <span class="n">plot_method</span><span class="p">,</span>
+                                              <span class="n">plot_kwargs</span><span class="p">,</span>
+                                              <span class="n">uniform</span><span class="p">,</span>
+                                              <span class="n">colormap_helper</span><span class="p">,</span>
+                                              <span class="n">scatter_kw</span><span class="p">,</span>
+                                              <span class="n">contour_kw</span><span class="p">,</span>
+                                              <span class="n">contourf_kw</span><span class="p">,</span>
+                                              <span class="n">pcolormesh_kw</span><span class="p">,</span>
+                                              <span class="n">contourlabel</span><span class="p">,</span>
+                                              <span class="n">clabel_kw</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;plot_elements&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">elements</span>
+        <span class="c1"># 9/ colorbar</span>
+        <span class="k">if</span> <span class="n">colorbar</span> <span class="ow">and</span> <span class="n">plot_method</span> <span class="o">!=</span> <span class="s1">&#39;contour&#39;</span><span class="p">:</span>
+            <span class="n">cb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_colorbar</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span>
+                                          <span class="n">elements</span><span class="p">,</span>
+                                          <span class="n">colorbar</span><span class="p">,</span>
+                                          <span class="n">colorbar_over</span><span class="p">,</span>
+                                          <span class="n">colorbar_ax_kw</span><span class="p">,</span>
+                                          <span class="n">colormap_helper</span><span class="p">,</span>
+                                          <span class="n">minmax_along_colorbar</span><span class="p">,</span>
+                                          <span class="n">pmin</span><span class="p">,</span> <span class="n">pmax</span><span class="p">,</span>
+                                          <span class="n">colorsnumber</span><span class="p">,</span>
+                                          <span class="n">colorstep</span><span class="p">,</span>
+                                          <span class="n">colorbar_kw</span><span class="p">)</span>
+            <span class="n">result</span><span class="p">[</span><span class="s1">&#39;colorbar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cb</span>
+    <span class="c1"># 10/ texts</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_cartoplot_text</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">uniform</span><span class="p">,</span> <span class="n">uniformvalue</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">takeover</span> <span class="k">else</span> <span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

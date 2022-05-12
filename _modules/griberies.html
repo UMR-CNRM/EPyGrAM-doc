@@ -1,0 +1,504 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>griberies &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for griberies</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains utilities around GRIB format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+
+<span class="kn">from</span> <span class="nn">bronx.syntax.parsing</span> <span class="k">import</span> <span class="n">str2dict</span>
+<span class="kn">from</span> <span class="nn">bronx.syntax.decorators</span> <span class="k">import</span> <span class="n">nicedeco</span>
+
+<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">tables</span><span class="p">,</span> <span class="n">defaults</span>
+
+
+<span class="k">def</span> <span class="nf">get_eccodes_from_ldconfig</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get eccodes install directory from ldconfig.&quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s1">&#39;/sbin/ldconfig&#39;</span><span class="p">,</span> <span class="s1">&#39;-p&#39;</span><span class="p">]))</span>
+    <span class="n">out_split</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\n&#39;</span> <span class="k">if</span> <span class="n">six</span><span class="o">.</span><span class="n">PY3</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
+    <span class="n">libs_eccodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">lib</span> <span class="k">for</span> <span class="n">lib</span> <span class="ow">in</span> <span class="n">out_split</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;libeccodes.so&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="n">lib</span><span class="p">]</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">lib</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;=&gt;&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">lib</span> <span class="ow">in</span> <span class="n">libs_eccodes</span><span class="p">]</span>
+    <span class="n">dirs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span><span class="p">)[:</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">lib</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">])</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dirs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;More than one &#39;libeccodes.so&#39; has been found&quot;</span>
+    <span class="k">return</span> <span class="n">dirs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+
+
+<span class="nd">@nicedeco</span>
+<span class="k">def</span> <span class="nf">init_before</span><span class="p">(</span><span class="n">mtd</span><span class="p">):</span>  <span class="c1"># TODO: move to bronx decorators ?</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decorator for methods: call method self._actual_init()</span>
+<span class="sd">    before actually calling method if not self.initialized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">initialized</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actual_init</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">mtd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">initialized</span>
+
+
+<div class="viewcode-block" id="complete_grib_paths"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.complete_grib_paths">[docs]</a><span class="k">def</span> <span class="nf">complete_grib_paths</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete [GRIB|ECCODES]_SAMPLES_PATH and [GRIB|ECCODES]_DEFINITION_PATH</span>
+<span class="sd">    according to **rootdir** installation path of GRIB API **api_name**.</span>
+
+<span class="sd">    :param rootdir: the directory in which is installed the API</span>
+<span class="sd">    :param api_name: the name of the GRIB API, among (&#39;eccodes&#39;, &#39;grib_api&#39;)</span>
+<span class="sd">    :param reset: ignore predefined values of the variables</span>
+
+<span class="sd">    Reconstructed path are ``$rootdir$/share/$api_name$/samples``</span>
+<span class="sd">    and ``$rootdir$/share/$api_name$/definitions``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">complete_grib_samples_paths</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
+    <span class="n">complete_grib_definition_paths</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="complete_grib_samples_paths"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.complete_grib_samples_paths">[docs]</a><span class="k">def</span> <span class="nf">complete_grib_samples_paths</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete [GRIB|ECCODES]_SAMPLES_PATH according to **rootdir**</span>
+<span class="sd">    installation path of GRIB API **api_name**.</span>
+
+<span class="sd">    :param rootdir: the directory in which is installed the API</span>
+<span class="sd">    :param api_name: the name of the GRIB API, among (&#39;eccodes&#39;, &#39;grib_api&#39;)</span>
+<span class="sd">    :param reset: ignore predefined values of the variables</span>
+
+<span class="sd">    Reconstructed path is ``$rootdir$/share/$api_name$/samples``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">api_name</span> <span class="o">==</span> <span class="s1">&#39;grib_api&#39;</span><span class="p">:</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="s1">&#39;GRIB_SAMPLES_PATH&#39;</span>
+    <span class="k">elif</span> <span class="n">api_name</span> <span class="o">==</span> <span class="s1">&#39;eccodes&#39;</span><span class="p">:</span>
+        <span class="n">sp</span> <span class="o">=</span> <span class="s1">&#39;ECCODES_SAMPLES_PATH&#39;</span>
+    <span class="n">loc_samples</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="s1">&#39;samples&#39;</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reset</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">loc_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sp</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">sp</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">loc_samples</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="complete_grib_definition_paths"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.complete_grib_definition_paths">[docs]</a><span class="k">def</span> <span class="nf">complete_grib_definition_paths</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Complete [GRIB|ECCODES]_DEFINITION_PATH according to **rootdir**</span>
+<span class="sd">    installation path of GRIB API **api_name**.</span>
+
+<span class="sd">    :param rootdir: the directory in which is installed the API</span>
+<span class="sd">    :param api_name: the name of the GRIB API, among (&#39;eccodes&#39;, &#39;grib_api&#39;)</span>
+<span class="sd">    :param reset: ignore predefined values of the variables</span>
+
+<span class="sd">    Reconstructed path are ``$rootdir$/share/$api_name$/definitions``</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">api_name</span> <span class="o">==</span> <span class="s1">&#39;grib_api&#39;</span><span class="p">:</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="s1">&#39;GRIB_DEFINITION_PATH&#39;</span>
+    <span class="k">elif</span> <span class="n">api_name</span> <span class="o">==</span> <span class="s1">&#39;eccodes&#39;</span><span class="p">:</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="s1">&#39;ECCODES_DEFINITION_PATH&#39;</span>
+    <span class="n">loc_defs</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rootdir</span><span class="p">,</span> <span class="s1">&#39;share&#39;</span><span class="p">,</span> <span class="n">api_name</span><span class="p">,</span> <span class="s1">&#39;definitions&#39;</span><span class="p">)]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reset</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">loc_defs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dp</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">dp</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">loc_defs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="set_definition_path"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.set_definition_path">[docs]</a><span class="k">def</span> <span class="nf">set_definition_path</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">api_name</span><span class="o">=</span><span class="s1">&#39;eccodes&#39;</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set path to GRIB|ECCODES_DEFINITION_PATH.</span>
+
+<span class="sd">    :param api_name: the name of the GRIB API, among (&#39;eccodes&#39;, &#39;grib_api&#39;)</span>
+<span class="sd">    :param reset: ignore predefined values of the variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">path</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">api_name</span> <span class="o">==</span> <span class="s1">&#39;grib_api&#39;</span><span class="p">:</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="s1">&#39;GRIB_DEFINITION_PATH&#39;</span>
+    <span class="k">elif</span> <span class="n">api_name</span> <span class="o">==</span> <span class="s1">&#39;eccodes&#39;</span><span class="p">:</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="s1">&#39;ECCODES_DEFINITION_PATH&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">reset</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dp</span><span class="p">))</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">dp</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_paths</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">pathsep</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ECCODES_</span><span class="si">{}</span><span class="s1">_PATH&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">),</span>
+                             <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;GRIB_</span><span class="si">{}</span><span class="s1">_PATH&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="p">),</span> <span class="s1">&#39;&#39;</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">paths</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">pathsep</span><span class="p">)</span> <span class="k">if</span> <span class="n">p</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)]</span>
+
+
+<div class="viewcode-block" id="get_samples_paths"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.get_samples_paths">[docs]</a><span class="k">def</span> <span class="nf">get_samples_paths</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get the environment-variable-set path to samples&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_paths</span><span class="p">(</span><span class="s1">&#39;SAMPLES&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_definition_paths"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.get_definition_paths">[docs]</a><span class="k">def</span> <span class="nf">get_definition_paths</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Get the environment-variable-set path to definitions&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_get_paths</span><span class="p">(</span><span class="s1">&#39;DEFINITION&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="parse_GRIBstr_todict"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.parse_GRIBstr_todict">[docs]</a><span class="k">def</span> <span class="nf">parse_GRIBstr_todict</span><span class="p">(</span><span class="n">strfid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parse and return a dict GRIB fid from a string.&quot;&quot;&quot;</span>
+    <span class="n">fid</span> <span class="o">=</span> <span class="n">str2dict</span><span class="p">(</span><span class="n">strfid</span><span class="p">,</span> <span class="n">try_convert</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fid</span></div>
+
+
+<div class="viewcode-block" id="read_gribdef"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.read_gribdef">[docs]</a><span class="k">def</span> <span class="nf">read_gribdef</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Read a grib definition file and return it as a dict.&quot;&quot;&quot;</span>
+    <span class="n">re_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(&quot;|</span><span class="se">\&#39;</span><span class="s1">)(?P&lt;name&gt;[\w\.\-\_ ]+)(&quot;|</span><span class="se">\&#39;</span><span class="s1">)\s*=&#39;</span><span class="p">)</span>
+    <span class="n">re_real</span> <span class="o">=</span> <span class="s1">&#39;\+|-?\d*\.\d*e\+|-?\d*&#39;</span>
+    <span class="n">re_real_g</span> <span class="o">=</span> <span class="s1">&#39;(?P&lt;real&gt;&#39;</span> <span class="o">+</span> <span class="n">re_real</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+    <span class="n">re_int</span> <span class="o">=</span> <span class="s1">&#39;\+|-?\d+&#39;</span>
+    <span class="n">re_int_g</span> <span class="o">=</span> <span class="s1">&#39;(?P&lt;int&gt;&#39;</span> <span class="o">+</span> <span class="n">re_int</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+    <span class="c1"># re_num = &#39;(&#39; + re_real + &#39;)|(&#39; + re_int + &#39;)&#39;</span>
+    <span class="n">re_num_g</span> <span class="o">=</span> <span class="n">re_int_g</span> <span class="o">+</span> <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">re_real_g</span>
+    <span class="n">re_keyvalue</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(?P&lt;key&gt;\w+)\s*=\s*&#39;</span> <span class="o">+</span> <span class="n">re_num_g</span> <span class="o">+</span> <span class="s1">&#39;\s*;&#39;</span><span class="p">)</span>
+    <span class="c1"># read file</span>
+    <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">lines_unfold</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()]</span>
+        <span class="n">lines</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines_unfold</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">,</span><span class="s1">&#39;;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;{ &#39;</span><span class="p">,</span><span class="s1">&#39;{</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">line_split</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)]</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">line_split</span><span class="p">)</span>
+    <span class="c1"># find fields declaration</span>
+    <span class="n">dico</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">indexes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
+        <span class="n">fmatch</span> <span class="o">=</span> <span class="n">re_name</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fmatch</span><span class="p">:</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="n">fmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+            <span class="n">indexes</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">field</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+            <span class="n">dico</span><span class="p">[</span><span class="n">field</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># loop on fields</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">istart</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indexes</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">indexes</span><span class="p">):</span>  <span class="c1"># last one</span>
+            <span class="n">iend</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">iend</span> <span class="o">=</span> <span class="n">indexes</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">istart</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">lines</span><span class="p">[</span><span class="n">istart</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;#&quot;</span><span class="p">):</span>  <span class="c1"># this is a comment</span>
+            <span class="n">dico</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="s1">&#39;#comment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="n">istart</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">istart</span><span class="p">,</span> <span class="n">iend</span><span class="p">):</span>
+            <span class="n">kvmatch</span> <span class="o">=</span> <span class="n">re_keyvalue</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">lines</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">kvmatch</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">kvmatch</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">):</span>
+                    <span class="n">dico</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">kvmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kvmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">kvmatch</span><span class="o">.</span><span class="n">groupdict</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;real&#39;</span><span class="p">):</span>
+                    <span class="n">dico</span><span class="p">[</span><span class="n">field</span><span class="p">][</span><span class="n">kvmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">kvmatch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;real&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">dico</span></div>
+
+
+<div class="viewcode-block" id="GribDef"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.GribDef">[docs]</a><span class="k">class</span> <span class="nc">GribDef</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="n">_default_grib_edition</span> <span class="o">=</span> <span class="s1">&#39;grib2&#39;</span>
+    <span class="n">_non_GRIB_keys</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">concepts</span><span class="o">=</span><span class="p">[]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_concepts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">concepts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tables</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grib1&#39;</span><span class="p">:{</span><span class="n">c</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">concepts</span><span class="p">},</span>
+                       <span class="s1">&#39;grib2&#39;</span><span class="p">:{</span><span class="n">c</span><span class="p">:{}</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">concepts</span><span class="p">}}</span>
+        <span class="k">if</span> <span class="n">actual_init</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_actual_init</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_actual_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read necessary definition files.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="GribDef.read"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.GribDef.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">grib_edition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Read a grib def concept file, and update or register it.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">grib_edition</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;grib1&#39;</span><span class="p">,</span> <span class="s1">&#39;grib2&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">filename</span><span class="p">:</span>
+                    <span class="n">grib_edition</span> <span class="o">=</span> <span class="n">g</span>
+        <span class="n">concept</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.def&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">concept</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">read_gribdef</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">]</span> <span class="o">=</span> <span class="n">read_gribdef</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span></div>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_filter_non_GRIB_keys</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Some keys are to be filtered out from gribdef.&quot;&quot;&quot;</span>
+        <span class="n">filtered_out</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_non_GRIB_keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">fid</span><span class="p">:</span>
+                <span class="n">filtered_out</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">filtered_out</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">_lookup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Concept equivalence lookup:</span>
+<span class="sd">          - if **fid** is a **concept** value, get the associated GRIB key/value pairs</span>
+<span class="sd">          - if **fid is a set of GRIB key/value pairs, get the associated **concept** value(s)</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        :param exact: when **fid** is a concept value,</span>
+<span class="sd">            - if exact=True, return only the grib def which concept value</span>
+<span class="sd">            matches exactly **fid**</span>
+<span class="sd">            - if exact=False, return all the grib def which concept value</span>
+<span class="sd">            contains **fid**</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+                <span class="n">fid</span> <span class="o">=</span> <span class="n">parse_GRIBstr_todict</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>  <span class="c1"># fid is a concept value</span>
+            <span class="n">retrieved</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_from_conceptvalue</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                                                       <span class="n">grib_edition</span><span class="o">=</span><span class="n">grib_edition</span><span class="p">,</span>
+                                                       <span class="n">include_comments</span><span class="o">=</span><span class="n">include_comments</span><span class="p">,</span>
+                                                       <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="n">filter_non_GRIB_keys</span><span class="p">,</span>
+                                                       <span class="n">exact</span><span class="o">=</span><span class="n">exact</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># fid is a GRIB fid</span>
+            <span class="n">retrieved</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_from_kv</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                                             <span class="n">grib_edition</span><span class="o">=</span><span class="n">grib_edition</span><span class="p">,</span>
+                                             <span class="n">include_comments</span><span class="o">=</span><span class="n">include_comments</span><span class="p">,</span>
+                                             <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="n">filter_non_GRIB_keys</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">retrieved</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">_get_def</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                 <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                 <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Direct access to a grib definition</span>
+
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param fatal: if True and fieldname is not retrieved, raise a ValueError;</span>
+<span class="sd">            else, get &#39;default&#39; instead of fieldname</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">fid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">]:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">][</span><span class="n">fid</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fatal</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> not found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fid</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fid</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">include_comments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;#comment&#39;</span> <span class="ow">in</span> <span class="n">fid</span><span class="p">:</span>
+                <span class="n">fid</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;#comment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filter_non_GRIB_keys</span><span class="p">:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_non_GRIB_keys</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fid</span>
+
+    <span class="k">def</span> <span class="nf">_lookup_from_conceptvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                                  <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                                  <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                  <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Look for all the fields which **concept** value contain **fid**.</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        :param exact: when **fid** is a concept value,</span>
+<span class="sd">            - if exact=True, return only the grib def which concept value</span>
+<span class="sd">            matches exactly **fid**</span>
+<span class="sd">            - if exact=False, return all the grib def which concept value</span>
+<span class="sd">            contains **fid**</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">try</span><span class="p">:</span>  <span class="c1"># first try to get it as exact</span>
+            <span class="n">gribfid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                                    <span class="n">grib_edition</span><span class="o">=</span><span class="n">grib_edition</span><span class="p">,</span>
+                                    <span class="n">include_comments</span><span class="o">=</span><span class="n">include_comments</span><span class="p">,</span>
+                                    <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                    <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="n">filter_non_GRIB_keys</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c1"># field was not found as such; might be partial =&gt; finally</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fields</span><span class="p">[</span><span class="n">fid</span><span class="p">]</span> <span class="o">=</span> <span class="n">gribfid</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">exact</span><span class="p">:</span>  <span class="c1"># complete with all that contains fid</span>
+                <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">gribfid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">gribfid</span>
+                <span class="k">for</span> <span class="n">gribfid</span> <span class="ow">in</span> <span class="n">fields</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">include_comments</span><span class="p">:</span>
+                        <span class="n">gribfid</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;#comment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">filter_non_GRIB_keys</span><span class="p">:</span>
+                        <span class="n">gribfid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_non_GRIB_keys</span><span class="p">(</span><span class="n">gribfid</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">fields</span> <span class="o">=</span> <span class="n">fields</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">fields</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">_lookup_from_kv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">handgrip</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                        <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                        <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Look for all the fields which GRIB def contain **handgrip**,</span>
+<span class="sd">        returning them identified by their **concept**.</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">handgrip</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+            <span class="n">handgrip</span> <span class="o">=</span> <span class="n">parse_GRIBstr_todict</span><span class="p">(</span><span class="n">handgrip</span><span class="p">)</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">gribfid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">handgrip</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">gribfid</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+                <span class="n">ok</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">handgrip</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">gribfid</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">!=</span> <span class="n">v</span><span class="p">:</span>
+                        <span class="n">ok</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+                <span class="k">if</span> <span class="n">ok</span><span class="p">:</span>
+                    <span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">gribfid</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">include_comments</span><span class="p">:</span>
+                <span class="n">fid</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;#comment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">filter_non_GRIB_keys</span><span class="p">:</span>
+                <span class="n">fields</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_non_GRIB_keys</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fields</span>
+
+<div class="viewcode-block" id="GribDef.known_names_for_concept"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.GribDef.known_names_for_concept">[docs]</a>    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">known_names_for_concept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span>
+                                <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get sorted list of names for **concept**.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">concept</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="GribDef.known_names"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.GribDef.known_names">[docs]</a>    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">known_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get sorted list of names for all concepts.&quot;&quot;&quot;</span>
+        <span class="n">all_names</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">concepts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">concepts</span><span class="p">:</span>
+            <span class="n">all_names</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">known_names_for_concept</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">grib_edition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">all_names</span></div>
+
+<div class="viewcode-block" id="GribDef.known_values_for"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.GribDef.known_values_for">[docs]</a>    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">known_values_for</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span>
+                         <span class="n">concept</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                         <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get list of all values present throughout the GribDef for **key**.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">concept</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">concepts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">concepts</span> <span class="o">=</span> <span class="p">[</span><span class="n">concept</span><span class="p">]</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">concepts</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">gribfid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">gribfid</span><span class="p">:</span>
+                    <span class="n">values</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">gribfid</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GribDef.known_values"><a class="viewcode-back" href="../site/griberies.html#epygram.formats.FA.GribDef.known_values">[docs]</a>    <span class="k">def</span> <span class="nf">known_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                     <span class="n">concept</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get list of all values present throughout the GribDef for all keys.&quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allkeys</span><span class="p">(</span><span class="n">grib_edition</span><span class="p">):</span>
+            <span class="n">values</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">known_values_for</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span> <span class="n">grib_edition</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">values</span></div>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span> <span class="nf">_allkeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grib_edition</span><span class="o">=</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get set of all keys present throughout the GribDef.&quot;&quot;&quot;</span>
+        <span class="n">all_keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">concepts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">concepts</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">gribfid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+                <span class="n">all_keys</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">gribfid</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+        <span class="k">if</span> <span class="s1">&#39;#comment&#39;</span> <span class="ow">in</span> <span class="n">all_keys</span><span class="p">:</span>
+            <span class="n">all_keys</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;#comment&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">all_keys</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

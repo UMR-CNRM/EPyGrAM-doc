@@ -1,0 +1,206 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>FAQ — Frequently Asked Questions &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Applicative tools" href="apptools.html" />
+    <link rel="prev" title="Gallery" href="gallery/index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apptools.html" title="Applicative tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gallery/index.html" title="Gallery"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.14 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="gallery/index.html"
+                        title="previous chapter">Gallery</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="apptools.html"
+                        title="next chapter">Applicative tools</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/FAQ.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="faq-frequently-asked-questions">
+<h1>FAQ — Frequently Asked Questions<a class="headerlink" href="#faq-frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>ecCodes does not seem to be found by Python</strong></p>
+<blockquote>
+<div><p>=&gt; (re-)install eccodes support for Python : <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">eccodes</span></code></p>
+<p>if that is not enough, reinstall epygram:</p>
+<ul class="simple">
+<li>clean any reference to <code class="docutils literal notranslate"><span class="pre">epygram</span></code> in your environment</li>
+<li><code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">PYTHONPATH</span></code></li>
+<li>&#64; CNRM, reinstall epygram running <code class="docutils literal notranslate"><span class="pre">$EPYGRAM_INSTALL_DIR/_install/install_epygram.py</span> <span class="pre">-e</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>I have rather esoterical errors when I try to read a FA file…</strong></p>
+<blockquote>
+<div><p>=&gt; the <a class="reference internal" href="library/epygram.html#epygram.init_env" title="epygram.init_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">epygram.init_env()</span></code></a> may be initialized at the beginning of your
+script(s), to be sure the <a class="reference internal" href="site/arpifs4py.html#module-arpifs4py" title="arpifs4py: Interface functions to some **Arpege/IFS** functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arpifs4py</span></code></a> library do not use MPI, or uses
+OpenMP with an initialized environment.</p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>There is a field in my Surfex FA file, recognized as MiscField by</strong> <code class="docutils literal notranslate"><span class="pre">epygram</span></code>
+<strong>whereas it is H2D, or vice-versa; how can I manage to read it ?</strong></p>
+<blockquote>
+<div><p>=&gt; edit <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/sfxflddesc_mod.F90</span></code>, and add your field in the
+manner of the examples given therein or in <code class="docutils literal notranslate"><span class="pre">$EPYGRAM_INSTALL_DIR/epygram/data/sfxflddesc_mod.F90</span></code>.
+And warn the <code class="docutils literal notranslate"><span class="pre">epygram</span></code> team about it, so that it will enter next version
+default <code class="docutils literal notranslate"><span class="pre">sfxflddesc_mod.F90</span></code>.</p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>I need to overwrite the faFieldName.def ecCodes definition file for FA fieldnames conversion to GRIB2 parameters:</strong></p>
+<blockquote>
+<div><p>=&gt; copy <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.0/</span></code> as <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.99/</span></code>,
+then edit <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.99/grib2/localConcepts/lfpw/faFieldName.def</span></code>
+and set any field therein.</p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>My PC does not have enough memory to deal with these global spectral fields…</strong></p>
+<blockquote>
+<div><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt;&gt;&gt; Legendre spectral transforms need XX.XX MB
+&gt;&gt;&gt; memory, while only YY.YY MB is available:
+&gt;&gt;&gt; SWAPPING prevented !
+</pre></div>
+</div>
+<p>=&gt; either:</p>
+<ul class="simple">
+<li>run your script on supercomputers using the alias
+<code class="docutils literal notranslate"><span class="pre">s1batch='sbatch</span> <span class="pre">-N</span> <span class="pre">1</span> <span class="pre">-p</span> <span class="pre">normal256</span> <span class="pre">--mem</span> <span class="pre">250000</span> <span class="pre">-t</span> <span class="pre">00:30:00'</span></code>
+e.g.: <code class="docutils literal notranslate"><span class="pre">s1batch</span> <span class="pre">myscript.py</span> <span class="pre">options</span> <span class="pre">-of</span> <span class="pre">-my</span> <span class="pre">--script</span></code></li>
+<li>use the <code class="docutils literal notranslate"><span class="pre">fa_sp2gp.py</span></code> tool on Bull (using the above alias) to convert your
+file to all-gridpoint then work in gridpoint space</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>I have a brutal crash (e.g. SegFault) while working with some large size fields…</strong></p>
+<blockquote>
+<div><p>=&gt; before running Python, you need to raise the stack size limit: <code class="docutils literal notranslate"><span class="pre">ulimit</span> <span class="pre">-s</span> <span class="pre">unlimited</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>How to hide LFI/FA messages ?</strong></p>
+<blockquote>
+<div><p>=&gt; either:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">FA4PY_MUTE=1</span></code></li>
+<li>edit <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/userconfig.py</span></code> and set <code class="docutils literal notranslate"><span class="pre">FA_mute_FA4py</span> <span class="pre">=</span> <span class="pre">True</span></code></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p class="first"><strong>How to modify values of parameters or options of ``epygram`` *configuration* ?</strong></p>
+<blockquote>
+<div><p>=&gt; values of <a class="reference internal" href="library/config.html#module-epygram.config" title="epygram.config: Configuration: parameters, options used throughout the package."><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code></a> can be modified in
+<code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/userconfig.py</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<p><strong>(to be continued…)</strong></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="apptools.html" title="Applicative tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gallery/index.html" title="Gallery"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.14 documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,618 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.formats.DDHLFA &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.formats.DDHLFA</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the class for DDH-in-LFA format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">footprints</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span>
+<span class="kn">from</span> <span class="nn">bronx.meteo.constants</span> <span class="k">import</span> <span class="n">g0</span>
+
+<span class="kn">from</span> <span class="nn">arpifs4py</span> <span class="k">import</span> <span class="n">wlfa</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">write_formatted</span><span class="p">,</span> <span class="n">separation_line</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">FieldValidityList</span><span class="p">,</span> <span class="n">FieldSet</span>
+<span class="kn">from</span> <span class="nn">.LFA</span> <span class="k">import</span> <span class="n">LFA</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="k">import</span> <span class="n">PointGeometry</span><span class="p">,</span> <span class="n">VGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.V1DGeometry</span> <span class="k">import</span> <span class="n">V1D_DDHGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">V1DField</span><span class="p">,</span> <span class="n">PointField</span><span class="p">,</span> <span class="n">MiscField</span>
+<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="k">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">profiles</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DDHLFA&#39;</span><span class="p">]</span>
+
+<span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="DDHLFA"><a class="viewcode-back" href="../../../library/DDHLFA.html#epygram.formats.DDHLFA.DDHLFA">[docs]</a><span class="k">class</span> <span class="nc">DDHLFA</span><span class="p">(</span><span class="n">LFA</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class implementing all specificities for DDHLFA resource format.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">format</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;DDHLFA&#39;</span><span class="p">]),</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;DDHLFA&#39;</span><span class="p">),</span>
+            <span class="n">validity</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FieldValidityList</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Describes the temporal validity of the resource.&quot;</span><span class="p">),</span>
+            <span class="n">domains</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Describes the domains covered by the resource.&quot;</span><span class="p">),</span>
+            <span class="n">levels</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Number of levels for variables/tendencies (&#39;VT&#39;) and</span><span class="se">\</span>
+<span class="s2">                      fluxes (&#39;F&#39;).&quot;</span><span class="p">),</span>
+            <span class="n">xpid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Experiment identifier.&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">wlfa</span><span class="o">.</span><span class="n">wlfatest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;This resource is not a LFA one.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">):</span>
+            <span class="n">guess</span> <span class="o">=</span> <span class="n">LFA</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">openmode</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">v</span> <span class="ow">in</span> <span class="n">guess</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ECHEANCE&#39;</span><span class="p">,</span> <span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;DOCFICHIER&#39;</span><span class="p">,</span>
+                                                          <span class="s1">&#39;VPP0&#39;</span><span class="p">,</span> <span class="s1">&#39;VPP1&#39;</span><span class="p">]]):</span>
+                <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;this resource is not a DDHLFA one.&quot;</span><span class="p">)</span>
+            <span class="n">guess</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">!=</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;openmode != &#39;r&#39; for DDHLFA.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">validity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span> <span class="o">+</span>
+                               <span class="s2">&quot;: DDHLFA.__init__(): domains/validity&quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot; argument will be ignored with&quot;</span> <span class="o">+</span>
+                               <span class="s2">&quot; this openmode (&#39;r&#39;).&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmtdelayedopen</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DDHLFA.open"><a class="viewcode-back" href="../../../library/DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens the DDHLFA in Fortran sense, and initializes domains, validity</span>
+<span class="sd">        and vertical geometry.</span>
+
+<span class="sd">        :param openmode: optional, to open with a specific openmode, eventually</span>
+<span class="sd">                         different from the one specified at initialization.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DDHLFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">openmode</span><span class="o">=</span><span class="n">openmode</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">openmode</span> <span class="o">==</span> <span class="s1">&#39;r&#39;</span><span class="p">:</span>
+            <span class="c1"># read info</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;xpid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DDHLFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;INDICE EXPERIENCE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_geometry</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_validity</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;openmode != &#39;r&#39; for DDHLFA.&quot;</span><span class="p">)</span></div>
+
+<span class="c1">################</span>
+<span class="c1"># ABOUT FIELDS #</span>
+<span class="c1">################</span>
+
+<div class="viewcode-block" id="DDHLFA.find_fields_in_resource"><a class="viewcode-back" href="../../../library/DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.find_fields_in_resource">[docs]</a>    <span class="k">def</span> <span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">fieldtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a list of the fields from resource whose name match the given</span>
+<span class="sd">        *seed*.</span>
+
+<span class="sd">        :param seed: might be a regular expression, a list of regular expressions</span>
+<span class="sd">          or *None*. If *None* (default), returns the list of all fields in</span>
+<span class="sd">          resource.</span>
+<span class="sd">        :param fieldtype: optional, among (&#39;V1D&#39;, &#39;Point&#39;, &#39;Misc&#39;). If provided,</span>
+<span class="sd">          filters out the fields not of the given type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fieldslist</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DDHLFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">find_fields_in_resource</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">generic</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;not yet.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fieldtype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fs</span> <span class="o">=</span> <span class="n">FieldSet</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fieldslist</span><span class="p">:</span>
+                <span class="n">fld</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fld</span><span class="p">,</span> <span class="n">FieldSet</span><span class="p">):</span>
+                    <span class="n">fs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fld</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fld</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fieldtype</span> <span class="o">==</span> <span class="s1">&#39;V1D&#39;</span><span class="p">:</span>
+                <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span>
+                              <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">V1DField</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="n">fieldtype</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">:</span>
+                <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span>
+                              <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">PointField</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="n">fieldtype</span> <span class="o">==</span> <span class="s1">&#39;Misc&#39;</span><span class="p">:</span>
+                <span class="n">fieldslist</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fs</span>
+                              <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">MiscField</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;unknown fieldtype for DDHLFA: &quot;</span> <span class="o">+</span> <span class="n">fieldtype</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fieldslist</span></div>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
+                  <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads a field in resource.</span>
+
+<span class="sd">        - Documentation fields (&#39;INDICE EXPERIENCE&#39;, &#39;DATE&#39;, &#39;DOCFICHIER&#39;,</span>
+<span class="sd">          &#39;ECHEANCE&#39;, &#39;DOCDnnn&#39;) are returned as :class:`epygram.formats.LFA`</span>
+<span class="sd">          returns.</span>
+<span class="sd">        - Profile/surface fields are returned as a</span>
+<span class="sd">          :class:`epygram.base.FieldSet` of 1D/Point fields, one for each</span>
+<span class="sd">          domain.</span>
+
+<span class="sd">        :param getdata: if False, do not read data but only metadata</span>
+<span class="sd">        :param footprints_proxy_as_builder: if *True*, uses footprints.proxy</span>
+<span class="sd">               to build fields and geometry.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">footprints_proxy_as_builder</span><span class="p">:</span>
+            <span class="n">field_builder</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">proxy</span><span class="o">.</span><span class="n">field</span>
+            <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">proxy</span><span class="o">.</span><span class="n">geometry</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">):</span>
+                <span class="n">field_builder</span> <span class="o">=</span> <span class="n">PointField</span>
+                <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">PointGeometry</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">field_builder</span> <span class="o">=</span> <span class="n">V1DField</span>
+                <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">V1D_DDHGeometry</span>
+        <span class="n">field_from_LFA</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DDHLFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span>
+                                                       <span class="n">getdata</span><span class="o">=</span><span class="n">getdata</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;INDICE EXPERIENCE&#39;</span><span class="p">,</span> <span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;DOCFICHIER&#39;</span><span class="p">,</span> <span class="s1">&#39;ECHEANCE&#39;</span><span class="p">)</span>\
+           <span class="ow">or</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;DOCD&#39;</span><span class="p">:</span>
+            <span class="c1"># documentation</span>
+            <span class="n">field_from_LFA</span><span class="o">.</span><span class="n">setfid</span><span class="p">({</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span><span class="n">field_from_LFA</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;LFA&#39;</span><span class="p">]})</span>
+            <span class="n">toreturn</span> <span class="o">=</span> <span class="n">field_from_LFA</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># true field</span>
+            <span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">getbasis</span><span class="p">())</span>
+            <span class="c1"># distinction between initial, final and integrated fields</span>
+            <span class="k">if</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;SV&#39;</span><span class="p">:</span>
+                <span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;SF&#39;</span><span class="p">:</span>
+                <span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                             <span class="n">cumulativeduration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">cumulativeduration</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">fieldname</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;0&#39;</span><span class="p">:</span>
+                    <span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">getbasis</span><span class="p">())</span>
+                <span class="k">elif</span> <span class="n">fieldname</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span>
+                    <span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;T&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">fieldname</span> <span class="o">==</span> <span class="s1">&#39;PPP&#39;</span><span class="p">:</span>
+                <span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">date_time</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+                             <span class="n">cumulativeduration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">cumulativeduration</span><span class="p">())</span>
+            <span class="n">toreturn</span> <span class="o">=</span> <span class="n">FieldSet</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">):</span>
+                <span class="c1"># surface fields</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]):</span>
+                    <span class="k">if</span> <span class="n">getdata</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="n">field_from_LFA</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="n">d</span><span class="p">]</span>
+                    <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]</span>
+                    <span class="n">pgeometry</span> <span class="o">=</span> <span class="n">geom_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
+                                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDH:&#39;</span> <span class="o">+</span> <span class="n">domain</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>
+                                             <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DDH_domain&#39;</span><span class="p">:</span><span class="n">domain</span><span class="p">},</span>
+                                             <span class="n">vcoordinate</span><span class="o">=</span><span class="n">VGeometry</span><span class="p">(</span>
+                                                 <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+                                                 <span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                                 <span class="n">levels</span><span class="o">=</span><span class="n">FPList</span><span class="p">([</span><span class="mi">1</span><span class="p">])),</span>
+                                             <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+                    <span class="n">field</span> <span class="o">=</span> <span class="n">field_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
+                                          <span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span><span class="n">fieldname</span><span class="p">},</span>
+                                          <span class="n">geometry</span><span class="o">=</span><span class="n">pgeometry</span><span class="p">,</span>
+                                          <span class="n">validity</span><span class="o">=</span><span class="n">validity</span><span class="p">,</span>
+                                          <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">getdata</span><span class="p">:</span>
+                        <span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                    <span class="n">toreturn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># profile fields</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">getdata</span><span class="p">:</span>
+                    <span class="n">fieldlevels</span> <span class="o">=</span> <span class="p">(</span><span class="n">wlfa</span><span class="o">.</span><span class="n">wlfacas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fieldlevels</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">field_from_LFA</span><span class="o">.</span><span class="n">getdata</span><span class="p">())</span> <span class="o">//</span>
+                                   <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">fieldlevels</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;VT&#39;</span><span class="p">]:</span>
+                    <span class="n">position_on_grid</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
+                    <span class="c1"># gridposition = &#39;mass&#39;</span>
+                    <span class="c1"># gridsize = self.levels[&#39;VT&#39;]</span>
+                <span class="k">elif</span> <span class="n">fieldlevels</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]:</span>
+                    <span class="n">position_on_grid</span> <span class="o">=</span> <span class="s1">&#39;flux&#39;</span>
+                    <span class="c1"># gridposition = &#39;flux&#39;</span>
+                    <span class="c1"># gridsize = self.levels[&#39;F&#39;]</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]):</span>
+                    <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">fieldlevels</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;VT&#39;</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">validity</span><span class="o">.</span><span class="n">term</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntHours&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">pressure_vertical_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vertical_grid&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="s1">&#39;masslevels_pressure_init&#39;</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">pressure_vertical_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vertical_grid&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="s1">&#39;masslevels_pressure_term&#39;</span><span class="p">]</span>
+                    <span class="k">elif</span> <span class="n">fieldlevels</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">validity</span><span class="o">.</span><span class="n">term</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntHours&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">pressure_vertical_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vertical_grid&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="s1">&#39;fluxlevels_pressure_init&#39;</span><span class="p">]</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">pressure_vertical_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vertical_grid&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">][</span><span class="s1">&#39;fluxlevels_pressure_term&#39;</span><span class="p">]</span>
+                    <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
+                                            <span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                                            <span class="n">levels</span><span class="o">=</span><span class="n">FPList</span><span class="p">(</span><span class="n">pressure_vertical_grid</span> <span class="o">/</span> <span class="mf">100.</span><span class="p">),</span>
+                                            <span class="c1"># grid={&#39;gridposition&#39;:gridposition,  # TODO: ?</span>
+                                            <span class="c1">#       &#39;gridlevels&#39;:pressure_vertical_grid},  # TODO: ?</span>
+                                            <span class="n">position_on_grid</span><span class="o">=</span><span class="n">position_on_grid</span><span class="p">)</span>
+                    <span class="n">vgeometry</span> <span class="o">=</span> <span class="n">geom_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V1D&#39;</span><span class="p">,</span>
+                                             <span class="n">name</span><span class="o">=</span><span class="s1">&#39;DDH:&#39;</span> <span class="o">+</span> <span class="n">domain</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">],</span>
+                                             <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;DDH_domain&#39;</span><span class="p">:</span><span class="n">domain</span><span class="p">},</span>
+                                             <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
+                                             <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span>
+                    <span class="k">if</span> <span class="n">getdata</span><span class="p">:</span>
+                        <span class="n">profile</span> <span class="o">=</span> <span class="n">field_from_LFA</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="n">d</span> <span class="o">*</span> <span class="n">fieldlevels</span><span class="p">:(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">fieldlevels</span><span class="p">]</span>
+                    <span class="n">field</span> <span class="o">=</span> <span class="n">field_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V1D&#39;</span><span class="p">,</span>
+                                          <span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">:</span><span class="n">fieldname</span><span class="p">,</span> <span class="s1">&#39;generic&#39;</span><span class="p">:</span><span class="n">FPDict</span><span class="p">()},</span>
+                                          <span class="n">geometry</span><span class="o">=</span><span class="n">vgeometry</span><span class="p">,</span>
+                                          <span class="n">validity</span><span class="o">=</span><span class="n">validity</span><span class="p">,</span>
+                                          <span class="n">processtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">getdata</span><span class="p">:</span>
+                        <span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
+                    <span class="n">toreturn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">toreturn</span>
+
+<div class="viewcode-block" id="DDHLFA.readfields"><a class="viewcode-back" href="../../../library/DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.readfields">[docs]</a>    <span class="k">def</span> <span class="nf">readfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requestedfields</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Inactivation of readfields because readfield already returns a FieldSet.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;readfields() method disabled for DDHLFA.&quot;</span><span class="p">)</span></div>
+
+<span class="c1">#################</span>
+<span class="c1"># DDH interface #</span>
+<span class="c1">#################</span>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">sortfields</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes in file a summary of the contents of the DDHLFA.</span>
+
+<span class="sd">        :param out: the output open file-like object (duck-typing: *out*.write()</span>
+<span class="sd">          only is needed).</span>
+<span class="sd">        :param sortfields: **True** if the fields have to be sorted by type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">domains</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domains</span>
+        <span class="n">mass_vertical_levels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;VPP0&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span>
+        <span class="n">listoffields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span>
+        <span class="n">validity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validity</span>
+
+        <span class="c1"># Write out</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### FORMAT: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### IDENTIFIER (INDICE EXPERIENCE): &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpid</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### VALIDITY ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Validity&quot;</span><span class="p">,</span> <span class="n">validity</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Basis&quot;</span><span class="p">,</span> <span class="n">validity</span><span class="o">.</span><span class="n">getbasis</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Term&quot;</span><span class="p">,</span> <span class="n">validity</span><span class="o">.</span><span class="n">term</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Duration for cumulative quantities&quot;</span><span class="p">,</span>
+                        <span class="n">validity</span><span class="o">.</span><span class="n">cumulativeduration</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Kind of producting process&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;###############</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### DOMAINS ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;###############</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Domain(s): &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span>
+                  <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]):</span>
+            <span class="n">geom</span> <span class="o">=</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">][</span><span class="n">d</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;globe&#39;</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;# &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">d</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;ij_point&#39;</span><span class="p">:</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Latitude&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Point index (X)&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jlon&#39;</span><span class="p">])</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Point index (Y)&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jgl&#39;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;point&#39;</span><span class="p">:</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Longitude&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Latitude&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Point index (X)&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jlon&#39;</span><span class="p">])</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Point index (Y)&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jgl&#39;</span><span class="p">])</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;User Longitude&quot;</span><span class="p">,</span>
+                                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;user_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;User Latitude&quot;</span><span class="p">,</span>
+                                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;user_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;quadrilateral&#39;</span><span class="p">,</span> <span class="s1">&#39;rectangle&#39;</span><span class="p">):</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Longitude 1&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Latitude 1&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Longitude 2&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Latitude 2&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Longitude 3&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon3&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Latitude 3&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat3&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Longitude 4&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon4&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Latitude 4&quot;</span><span class="p">,</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat4&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;zonal_bands&#39;</span><span class="p">:</span>
+                <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Center Latitude&quot;</span><span class="p">,</span>
+                                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#########################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### VERTICAL GEOMETRY ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;#########################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Number of vertical levels for variables&quot;</span><span class="p">,</span>
+                        <span class="n">mass_vertical_levels</span><span class="p">)</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Number of vertical levels for fluxes&quot;</span><span class="p">,</span>
+                        <span class="n">mass_vertical_levels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;######################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### LIST OF FIELDS ###</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;######################</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">numfields</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">listoffields</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Number: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">numfields</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sortfields</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Documentation:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;-------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">docfields</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listoffields</span> <span class="k">if</span>
+                         <span class="n">f</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;INDICE EXPERIENCE&#39;</span><span class="p">,</span> <span class="s1">&#39;DATE&#39;</span><span class="p">,</span> <span class="s1">&#39;DOCFICHIER&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;ECHEANCE&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;DOCD&#39;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">docfields</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;-----------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Vertical profiles:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;-----------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">profilefields</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listoffields</span>
+                             <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">docfields</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">profilefields</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;--------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Surface fields:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;--------------</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">surfacefields</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listoffields</span>
+                             <span class="k">if</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">docfields</span> <span class="ow">and</span> <span class="n">f</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">profilefields</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">surfacefields</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listoffields</span><span class="p">:</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">_read_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads DOCFICHIER and DOCDnnn fields, to fill-in domains and levels</span>
+<span class="sd">        attributes. Cf. J.M. Piriou&#39;s documentation about DDH.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">domains</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">DOCFICHIER</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;DOCFICHIER&#39;</span><span class="p">)</span>
+        <span class="n">vpp_init</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DDHLFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;VPP0&#39;</span><span class="p">)</span>
+        <span class="n">vpp_term</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">DDHLFA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;VPP1&#39;</span><span class="p">)</span>
+
+        <span class="n">NFLEV</span> <span class="o">=</span> <span class="n">DOCFICHIER</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;VT&#39;</span><span class="p">:</span><span class="n">NFLEV</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span><span class="n">NFLEV</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">DOCFICHIER</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;limited_area_domains&#39;</span>
+        <span class="k">elif</span> <span class="n">DOCFICHIER</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;global_domain&#39;</span>
+        <span class="k">elif</span> <span class="n">DOCFICHIER</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zonal_bands&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;DOCFICHIER[0] not among (1,5,6).&quot;</span><span class="p">)</span>
+        <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DOCFICHIER</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">14</span><span class="p">]</span>
+        <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vertical_grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">xpid</span> <span class="o">==</span> <span class="s1">&#39;ARPE&#39;</span><span class="p">:</span>
+            <span class="n">vertical_mean</span> <span class="o">=</span> <span class="s1">&#39;arithmetic&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vertical_mean</span> <span class="o">=</span> <span class="s1">&#39;geometric&#39;</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">DOCD</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;DOCD&#39;</span> <span class="o">+</span> <span class="s1">&#39;{:0&gt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">),</span>
+                                                                 <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+            <span class="n">DOCD_data</span> <span class="o">=</span> <span class="n">DOCD</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+            <span class="n">geom</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">if</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;ij_point&#39;</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jlon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jlgl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="mf">4.</span><span class="p">:</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;point&#39;</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jlon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;jgl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;user_lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;user_lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">7</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="mf">2.</span><span class="p">:</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;quadrilateral&#39;</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">7</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="mf">3.</span><span class="p">:</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rectangle&#39;</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">7</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lon4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">9</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="mf">5.</span><span class="p">:</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;globe&#39;</span>
+            <span class="k">elif</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="mf">6.</span><span class="p">:</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;zonal_bands&#39;</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;band&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">geom</span><span class="p">[</span><span class="s1">&#39;bands_number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DOCD_data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;unknown value: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">DOCD_data</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span> <span class="o">+</span>
+                                 <span class="s1">&#39; for DOCD&#39;</span> <span class="o">+</span> <span class="s1">&#39;{:0&gt;</span><span class="si">{width}</span><span class="s1">}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">d</span><span class="p">),</span>
+                                                                     <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+            <span class="c1"># vertical grid</span>
+            <span class="n">dm1</span> <span class="o">=</span> <span class="n">d</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">vgrid</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">fluxlevels_pressure_init</span> <span class="o">=</span> <span class="n">vpp_init</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="n">dm1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;VT&#39;</span><span class="p">]:(</span><span class="n">dm1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;VT&#39;</span><span class="p">]</span>
+                                                          <span class="p">]</span> <span class="o">*</span> <span class="n">g0</span>
+            <span class="n">fluxlevels_pressure_init</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">fluxlevels_pressure_init</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+                                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fluxlevels_pressure_init</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="n">vgrid</span><span class="p">[</span><span class="s1">&#39;fluxlevels_pressure_init&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">]</span> <span class="o">+</span> <span class="n">fluxlevels_pressure_init</span><span class="p">)</span>
+            <span class="n">vgrid</span><span class="p">[</span><span class="s1">&#39;masslevels_pressure_init&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">profiles</span><span class="o">.</span><span class="n">flux2masspressures</span><span class="p">(</span><span class="n">fluxlevels_pressure_init</span><span class="p">,</span>
+                                                                            <span class="n">vertical_mean</span><span class="p">)</span>
+            <span class="n">fluxlevels_pressure_term</span> <span class="o">=</span> <span class="n">vpp_term</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="n">dm1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;VT&#39;</span><span class="p">]:(</span><span class="n">dm1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="s1">&#39;VT&#39;</span><span class="p">]</span>
+                                                          <span class="p">]</span> <span class="o">*</span> <span class="n">g0</span>
+            <span class="n">fluxlevels_pressure_term</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">fluxlevels_pressure_term</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+                                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">fluxlevels_pressure_term</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+            <span class="n">vgrid</span><span class="p">[</span><span class="s1">&#39;fluxlevels_pressure_term&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span><span class="p">]</span> <span class="o">+</span> <span class="n">fluxlevels_pressure_term</span><span class="p">)</span>
+            <span class="n">vgrid</span><span class="p">[</span><span class="s1">&#39;masslevels_pressure_term&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">profiles</span><span class="o">.</span><span class="n">flux2masspressures</span><span class="p">(</span><span class="n">fluxlevels_pressure_term</span><span class="p">,</span>
+                                                                            <span class="n">vertical_mean</span><span class="p">)</span>
+            <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+            <span class="n">domains</span><span class="p">[</span><span class="s1">&#39;vertical_grid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vgrid</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;domains&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">domains</span>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span> <span class="nf">_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads DATE and ECHEANCE fields, to fill-in a FieldValidity object.</span>
+<span class="sd">        Cf. J.M. Piriou&#39;s documentation about DDH.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">DATE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;DATE&#39;</span><span class="p">)</span>
+        <span class="n">DATE_data</span> <span class="o">=</span> <span class="n">DATE</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+        <span class="n">year</span> <span class="o">=</span> <span class="n">DATE_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">month</span> <span class="o">=</span> <span class="n">DATE_data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">day</span> <span class="o">=</span> <span class="n">DATE_data</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">hour</span> <span class="o">=</span> <span class="n">DATE_data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="n">minute</span> <span class="o">=</span> <span class="n">DATE_data</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">processtype</span> <span class="o">=</span> <span class="n">DATE_data</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">processtype</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processtype</span> <span class="o">=</span> <span class="s1">&#39;analysis&#39;</span>
+        <span class="k">elif</span> <span class="n">processtype</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processtype</span> <span class="o">=</span> <span class="s1">&#39;initialization&#39;</span>
+        <span class="k">elif</span> <span class="n">processtype</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">processtype</span> <span class="o">=</span> <span class="s1">&#39;forecast&#39;</span>
+        <span class="c1"># cumulated_timesteps = DATE_data[9]</span>
+
+        <span class="n">basis</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="p">,</span> <span class="n">hour</span><span class="p">,</span> <span class="n">minute</span><span class="p">)</span>
+
+        <span class="n">ECHEANCE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;ECHEANCE&#39;</span><span class="p">)</span>
+        <span class="n">term</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">ECHEANCE</span><span class="o">.</span><span class="n">getdata</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">cumulativeduration</span> <span class="o">=</span> <span class="n">term</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span>
+                                      <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span>
+                                      <span class="n">cumulativeduration</span><span class="o">=</span><span class="n">cumulativeduration</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

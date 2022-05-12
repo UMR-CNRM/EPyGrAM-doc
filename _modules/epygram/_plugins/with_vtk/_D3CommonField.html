@@ -1,0 +1,490 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram._plugins.with_vtk._D3CommonField &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram._plugins.with_vtk._D3CommonField</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Extend _D3CommonField with plotting methods using &#39;vtk&#39;.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">usevtk</span> <span class="k">import</span> <span class="n">proj</span><span class="p">,</span> <span class="n">modify_grid</span><span class="p">,</span> <span class="n">write_grid</span>
+
+
+<span class="k">def</span> <span class="nf">activate</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Activate extension.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="vm">__name__</span> <span class="k">as</span> <span class="n">plugin_name</span>
+    <span class="kn">from</span> <span class="nn">epygram._plugins.util</span> <span class="k">import</span> <span class="n">notify_doc_requires_plugin</span>
+    <span class="n">notify_doc_requires_plugin</span><span class="p">([</span><span class="n">as_vtkGrid</span><span class="p">,</span> <span class="n">plot3DOutline</span><span class="p">,</span> <span class="n">plot3DContour</span><span class="p">,</span>
+                                <span class="n">plot3DColor</span><span class="p">,</span> <span class="n">plot3DVolume</span><span class="p">,</span>
+                                <span class="n">vtk_guess_param_from_field</span><span class="p">],</span>
+                               <span class="n">plugin_name</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">_D3CommonField</span>
+    <span class="n">_D3CommonField</span><span class="o">.</span><span class="n">as_vtkGrid</span> <span class="o">=</span> <span class="n">as_vtkGrid</span>
+    <span class="n">_D3CommonField</span><span class="o">.</span><span class="n">plot3DOutline</span> <span class="o">=</span> <span class="n">plot3DOutline</span>
+    <span class="n">_D3CommonField</span><span class="o">.</span><span class="n">plot3DContour</span> <span class="o">=</span> <span class="n">plot3DContour</span>
+    <span class="n">_D3CommonField</span><span class="o">.</span><span class="n">plot3DColor</span> <span class="o">=</span> <span class="n">plot3DColor</span>
+    <span class="n">_D3CommonField</span><span class="o">.</span><span class="n">plot3DVolume</span> <span class="o">=</span> <span class="n">plot3DVolume</span>
+    <span class="n">_D3CommonField</span><span class="o">.</span><span class="n">vtk_guess_param_from_field</span> <span class="o">=</span> <span class="n">vtk_guess_param_from_field</span>
+
+
+<span class="k">def</span> <span class="nf">as_vtkGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span> <span class="n">grid_type</span><span class="p">,</span>
+               <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">filename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;scalar&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">version</span><span class="o">=</span><span class="s1">&#39;XML&#39;</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;ZLib&#39;</span><span class="p">,</span>
+               <span class="n">compression_level</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a vtkStructuredGrid filled with the field</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param grid_type: can be:</span>
+<span class="sd">        - sgrid_point: structured grid filled with points</span>
+<span class="sd">        - sgrid_cell: structured grid filled with hexahedron</span>
+<span class="sd">                      If the field is 2D, a zero thickness is used.</span>
+<span class="sd">                      If the field is 3D, thickness are approximately computed</span>
+<span class="sd">        - ugrid_point: unstructured grid filled with points</span>
+<span class="sd">        - ugrid_cell: unstructured grid build filled with cells</span>
+<span class="sd">                      If the field is 2D, a zero thickness is used.</span>
+<span class="sd">                      If the field is 3D, thickness are approximately computed</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :param filename: if not None, resulting grid will be written into filename</span>
+<span class="sd">    :param name: name to give to the scalar array (useful with the grid option)</span>
+<span class="sd">    :param grid: if grid is not None, the method will add the data to it.</span>
+<span class="sd">    :param version: must be &#39;legacy&#39; or &#39;XML&#39;, used with filename</span>
+<span class="sd">    :param binary: True (default) for a binary file, used with filename</span>
+<span class="sd">    :param compression: must be None, &#39;LZ4&#39; or &#39;ZLib&#39;</span>
+<span class="sd">                        only used for binary XML</span>
+<span class="sd">    :param compression_level: between 1 and 9, only used for binary XML Zlib-compressed</span>
+
+<span class="sd">    If grid_type is &#39;sgrid_point&#39;, the result is the grid; otherwise</span>
+<span class="sd">    the result is the function is the last filter used.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+    <span class="kn">from</span> <span class="nn">vtk.numpy_interface</span> <span class="k">import</span> <span class="n">dataset_adapter</span> <span class="k">as</span> <span class="n">dsa</span>  <span class="c1"># @UnresolvedImport</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;For now, animation are not possible, only one validity allowed.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Spectral field, please use sp2gp() before.&quot;</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">grid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">make_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+        <span class="n">grid</span><span class="o">.</span><span class="n">epygram</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">geometry</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">grid</span><span class="o">.</span><span class="n">epygram</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="ow">or</span> <span class="n">grid</span><span class="o">.</span><span class="n">epygram</span><span class="p">[</span><span class="s1">&#39;subzone&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="n">subzone</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;To add a value to an existing grid, geometries must be the same&quot;</span><span class="p">)</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetArrayName</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">GetNumberOfArrays</span><span class="p">())]</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;There already is an array with same name: &quot;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">AddArray</span><span class="p">(</span><span class="n">dsa</span><span class="o">.</span><span class="n">numpyTovtkDataArray</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">array_type</span><span class="o">=</span><span class="n">vtk</span><span class="o">.</span><span class="n">VTK_FLOAT</span><span class="p">))</span>
+    <span class="n">grid</span><span class="o">.</span><span class="n">GetPointData</span><span class="p">()</span><span class="o">.</span><span class="n">SetActiveScalars</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">getmaskarray</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="n">grid</span><span class="o">.</span><span class="n">BlankPoint</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">modify_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">grid_type</span><span class="p">,</span> <span class="n">datamin</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+    <span class="k">if</span> <span class="n">filename</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">write_grid</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">version</span><span class="p">,</span> <span class="n">binary</span><span class="o">=</span><span class="n">binary</span><span class="p">,</span>
+                   <span class="n">compression</span><span class="o">=</span><span class="n">compression</span><span class="p">,</span> <span class="n">compression_level</span><span class="o">=</span><span class="n">compression_level</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grid</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DOutline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Black&#39;</span><span class="p">,</span>
+                  <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plots the outline of the data</span>
+<span class="sd">    :param rendering:  a usevtk.Usevtk instance</span>
+<span class="sd">    :param color: color name to use for the outline</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :return: actor, mapper, None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+
+    <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="s1">&#39;sgrid_point&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="p">)</span>
+
+    <span class="c1"># outline = vtk.vtkStructuredGridOutlineFilter()</span>
+    <span class="n">outline</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkOutlineFilter</span><span class="p">()</span>
+    <span class="n">outline</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+    <span class="n">outlineMapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">outlineMapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">outline</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+
+    <span class="n">outlineActor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">outlineActor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">outlineMapper</span><span class="p">)</span>
+    <span class="n">outlineActor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetColor</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkNamedColors</span><span class="p">()</span><span class="o">.</span><span class="n">GetColor3d</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
+
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">outlineActor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">outlineActor</span><span class="p">,</span> <span class="n">outlineMapper</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DContour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                  <span class="n">levels</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;Black&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                  <span class="n">smoothing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method adds contour lines. If the field is 3D, contours appear as isosurface.</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param levels: list of values to use to compute the contour lines</span>
+<span class="sd">    :param color: color name or lookup table or color transfer function</span>
+<span class="sd">                  for coloring the contour lines</span>
+<span class="sd">    :param opacity: opacity value for the contour lines</span>
+<span class="sd">    :param smoothing: None to prevent smoothing</span>
+<span class="sd">                      otherwise a dictionary with optional keys</span>
+<span class="sd">                      (cf. vtkWindowedSincPolyDataFilter doc on internet):</span>
+<span class="sd">                        - nonManifoldSmoothing (boolean)</span>
+<span class="sd">                        - numberOfIterations (integer)</span>
+<span class="sd">                        - featureEdgeSmoothing (boolean)</span>
+<span class="sd">                        - boundarySmoothing (boolean)</span>
+<span class="sd">                        - featureAngle (float)</span>
+<span class="sd">                        - edgeAngle (float)</span>
+<span class="sd">                        - passBand (float)</span>
+<span class="sd">    :param colorbar: True to plot a colorbar</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :return: actor, mapper, colorbaractor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+
+    <span class="n">ugrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="s1">&#39;ugrid_point&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="p">)</span>
+    <span class="n">iso</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkContourFilter</span><span class="p">()</span>
+    <span class="c1"># iso.GenerateTrianglesOff()</span>
+    <span class="n">iso</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">ugrid</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">iso</span><span class="o">.</span><span class="n">ComputeScalarsOn</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">levels</span><span class="p">):</span>
+        <span class="n">iso</span><span class="o">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">smoothing</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">smooth</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkWindowedSincPolyDataFilter</span><span class="p">()</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetNumberOfIterations</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">smooth</span><span class="o">.</span><span class="n">GetNumberOfIterationsMinValue</span><span class="p">(),</span>
+                                             <span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;numberOfIterations&#39;</span><span class="p">,</span>
+                                                           <span class="n">smooth</span><span class="o">.</span><span class="n">GetNumberOfIterations</span><span class="p">())),</span>
+                                         <span class="n">smooth</span><span class="o">.</span><span class="n">GetNumberOfIterationsMaxValue</span><span class="p">()))</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetFeatureEdgeSmoothing</span><span class="p">(</span><span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;featureEdgeSmoothing&#39;</span><span class="p">,</span>
+                                                     <span class="n">smooth</span><span class="o">.</span><span class="n">GetFeatureEdgeSmoothing</span><span class="p">()))</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetBoundarySmoothing</span><span class="p">(</span><span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;boundarySmoothing&#39;</span><span class="p">,</span>
+                                                  <span class="n">smooth</span><span class="o">.</span><span class="n">GetBoundarySmoothing</span><span class="p">()))</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetNonManifoldSmoothing</span><span class="p">(</span><span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;nonManifoldSmoothing&#39;</span><span class="p">,</span>
+                                                     <span class="n">smooth</span><span class="o">.</span><span class="n">GetNonManifoldSmoothing</span><span class="p">()))</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetFeatureAngle</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">smooth</span><span class="o">.</span><span class="n">GetFeatureAngleMinValue</span><span class="p">(),</span>
+                                       <span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;featureAngle&#39;</span><span class="p">,</span>
+                                                     <span class="n">smooth</span><span class="o">.</span><span class="n">GetFeatureAngle</span><span class="p">())),</span>
+                                   <span class="n">smooth</span><span class="o">.</span><span class="n">GetFeatureAngleMaxValue</span><span class="p">()))</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetEdgeAngle</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">smooth</span><span class="o">.</span><span class="n">GetEdgeAngleMinValue</span><span class="p">(),</span>
+                                    <span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;edgeAngle&#39;</span><span class="p">,</span>
+                                                  <span class="n">smooth</span><span class="o">.</span><span class="n">GetEdgeAngle</span><span class="p">())),</span>
+                                <span class="n">smooth</span><span class="o">.</span><span class="n">GetEdgeAngleMaxValue</span><span class="p">()))</span>
+        <span class="n">smooth</span><span class="o">.</span><span class="n">SetPassBand</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">smooth</span><span class="o">.</span><span class="n">GetPassBandMinValue</span><span class="p">(),</span>
+                                   <span class="n">smoothing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;passBand&#39;</span><span class="p">,</span>
+                                                 <span class="n">smooth</span><span class="o">.</span><span class="n">GetPassBand</span><span class="p">())),</span>
+                               <span class="n">smooth</span><span class="o">.</span><span class="n">GetPassBandMaxValue</span><span class="p">()))</span>
+        <span class="n">iso</span> <span class="o">=</span> <span class="n">smooth</span>
+
+    <span class="n">isoMapper</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">isoMapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">iso</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    
+    <span class="n">isoActor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">isoActor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">isoMapper</span><span class="p">)</span>
+
+    <span class="n">scalarBar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkLookupTable</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkColorTransferFunction</span><span class="p">):</span>
+        <span class="n">isoMapper</span><span class="o">.</span><span class="n">ScalarVisibilityOn</span><span class="p">()</span>
+        <span class="n">isoMapper</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">isoMapper</span><span class="o">.</span><span class="n">UseLookupTableScalarRangeOn</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
+            <span class="n">scalarBar</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkScalarBarActor</span><span class="p">()</span>
+            <span class="n">scalarBar</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor2D</span><span class="p">(</span><span class="n">scalarBar</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">isoMapper</span><span class="o">.</span><span class="n">ScalarVisibilityOff</span><span class="p">()</span>
+        <span class="n">isoActor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetColor</span><span class="p">(</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkNamedColors</span><span class="p">()</span><span class="o">.</span><span class="n">GetColor3d</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
+    <span class="n">isoActor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetOpacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">isoActor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">isoActor</span><span class="p">,</span> <span class="n">isoMapper</span><span class="p">,</span> <span class="n">scalarBar</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DColor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                <span class="n">color</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+                <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method color the field.</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param color: look up table or color transfer function to color the contour lines</span>
+<span class="sd">    :param opacity: opacity value</span>
+<span class="sd">    :param colorbar: True to plot a colorbar</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :return: actor, mapper, colorbaractor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+
+    <span class="n">sgrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="s1">&#39;sgrid_point&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="p">)</span>
+    <span class="n">sgridGeom</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkStructuredGridGeometryFilter</span><span class="p">()</span>
+    <span class="n">sgridGeom</span><span class="o">.</span><span class="n">SetInputData</span><span class="p">(</span><span class="n">sgrid</span><span class="p">)</span>
+
+    <span class="n">sgridGeomMap</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkPolyDataMapper</span><span class="p">()</span>
+    <span class="n">sgridGeomMap</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">sgridGeom</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="n">sgridGeomMap</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">sgridGeomMap</span><span class="o">.</span><span class="n">UseLookupTableScalarRangeOn</span><span class="p">()</span>
+    <span class="n">sgridGeomMap</span><span class="o">.</span><span class="n">InterpolateScalarsBeforeMappingOn</span><span class="p">()</span>
+
+    <span class="n">sgridGeomMapActor</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkActor</span><span class="p">()</span>
+    <span class="n">sgridGeomMapActor</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">sgridGeomMap</span><span class="p">)</span>
+    <span class="n">sgridGeomMapActor</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">()</span><span class="o">.</span><span class="n">SetOpacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
+        <span class="n">scalarBar</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkScalarBarActor</span><span class="p">()</span>
+        <span class="n">scalarBar</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor2D</span><span class="p">(</span><span class="n">scalarBar</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">scalarBar</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor</span><span class="p">(</span><span class="n">sgridGeomMapActor</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">sgridGeomMapActor</span><span class="p">,</span> <span class="n">sgridGeomMap</span><span class="p">,</span> <span class="n">scalarBar</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">plot3DVolume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rendering</span><span class="p">,</span>
+                 <span class="n">threshold</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">opacity</span><span class="p">,</span>
+                 <span class="n">algo</span><span class="o">=</span><span class="s1">&#39;OpenGLProjectedTetrahedra&#39;</span><span class="p">,</span>
+                 <span class="n">colorbar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds a volume to the vtk rendering system</span>
+<span class="sd">    :param rendering: a usevtk.Usevtk instance</span>
+<span class="sd">    :param threshold: a tuple (minval, maxval) used to discard values outside of the interval</span>
+<span class="sd">                      minval and/or maxval can be replace by None value</span>
+<span class="sd">    :param color: a vtk.vtkColorTransferFunction object or None to describe the color</span>
+<span class="sd">    :param opacity: a vtk.vtkPiecewiseFunction object or None to describe the alpha channel</span>
+<span class="sd">    :param algo: among &#39;RayCast&#39;, &#39;ZSweep&#39;, &#39;ProjectedTetrahedra&#39;, &#39;OpenGLProjectedTetrahedra&#39;</span>
+<span class="sd">    :param colorbar: True to plot a colorbar</span>
+<span class="sd">    :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM grids only, returns</span>
+<span class="sd">                    the grid resp. for the C or C+I zone off the C+I+E zone. \n</span>
+<span class="sd">                    Default is no subzone, i.e. the whole field.</span>
+<span class="sd">    :return: actor, mapper, colorbaractor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">vtk</span> <span class="c1"># @UnresolvedImport</span>
+
+    <span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span> <span class="o">=</span> <span class="n">threshold</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_vtkGrid</span><span class="p">(</span><span class="n">rendering</span><span class="p">,</span> <span class="s1">&#39;ugrid_cell&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="p">)</span>
+
+    <span class="n">fil</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkThreshold</span><span class="p">()</span>
+    <span class="n">fil</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">maxval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fil</span><span class="o">.</span><span class="n">ThresholdByUpper</span><span class="p">(</span><span class="n">minval</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">minval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fil</span><span class="o">.</span><span class="n">ThresholdByLower</span><span class="p">(</span><span class="n">maxval</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">minval</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">maxval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fil</span><span class="o">.</span><span class="n">ThresholdBetween</span><span class="p">(</span><span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">)</span>
+
+    <span class="n">tri</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkDataSetTriangleFilter</span><span class="p">()</span>
+    <span class="n">tri</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">fil</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+
+    <span class="n">volumeMapper</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;RayCast&#39;</span><span class="p">:</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkUnstructuredGridVolumeRayCastMapper</span><span class="p">,</span>
+                    <span class="s1">&#39;ZSweep&#39;</span><span class="p">:</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkUnstructuredGridVolumeZSweepMapper</span><span class="p">,</span>
+                    <span class="s1">&#39;ProjectedTetrahedra&#39;</span><span class="p">:</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkProjectedTetrahedraMapper</span><span class="p">,</span>
+                    <span class="s1">&#39;OpenGLProjectedTetrahedra&#39;</span><span class="p">:</span><span class="n">vtk</span><span class="o">.</span><span class="n">vtkOpenGLProjectedTetrahedraMapper</span><span class="p">}[</span><span class="n">algo</span><span class="p">]()</span>
+    <span class="n">volumeMapper</span><span class="o">.</span><span class="n">SetInputConnection</span><span class="p">(</span><span class="n">tri</span><span class="o">.</span><span class="n">GetOutputPort</span><span class="p">())</span>
+
+    <span class="n">volumeProperty</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkVolumeProperty</span><span class="p">()</span>
+    <span class="n">scalarBar</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">volumeProperty</span><span class="o">.</span><span class="n">SetColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">colorbar</span><span class="p">:</span>
+            <span class="n">scalarBar</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkScalarBarActor</span><span class="p">()</span>
+            <span class="n">scalarBar</span><span class="o">.</span><span class="n">SetLookupTable</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddActor2D</span><span class="p">(</span><span class="n">scalarBar</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">opacity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">volumeProperty</span><span class="o">.</span><span class="n">SetScalarOpacity</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span>
+    <span class="n">volumeProperty</span><span class="o">.</span><span class="n">ShadeOff</span><span class="p">()</span>
+    <span class="n">volumeProperty</span><span class="o">.</span><span class="n">SetInterpolationTypeToLinear</span><span class="p">()</span>
+
+    <span class="n">volume</span> <span class="o">=</span> <span class="n">vtk</span><span class="o">.</span><span class="n">vtkVolume</span><span class="p">()</span>
+    <span class="n">volume</span><span class="o">.</span><span class="n">SetMapper</span><span class="p">(</span><span class="n">volumeMapper</span><span class="p">)</span>
+    <span class="n">volume</span><span class="o">.</span><span class="n">SetProperty</span><span class="p">(</span><span class="n">volumeProperty</span><span class="p">)</span>
+
+    <span class="n">rendering</span><span class="o">.</span><span class="n">renderer</span><span class="o">.</span><span class="n">AddVolume</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">volume</span><span class="p">,</span> <span class="n">volumeMapper</span><span class="p">,</span> <span class="n">scalarBar</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">vtk_guess_param_from_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                               <span class="n">reverseZ</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">z_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">hCoord</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">geoid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Guess suitable values for setting up a usevtk.Usevtk instance:</span>
+<span class="sd">      - hCoord</span>
+<span class="sd">      - z_factor</span>
+<span class="sd">      - offset</span>
+<span class="sd">      - reverseZ</span>
+<span class="sd">      - geoid</span>
+<span class="sd">    :param reverseZ, z_factor, hCoord, offset, geoid: if set, \</span>
+<span class="sd">          this value are not guessed</span>
+<span class="sd">    :return: dictionary holding all the values</span>
+<span class="sd">    </span>
+<span class="sd">    hCoord can be:</span>
+<span class="sd">      - &#39;geoid&#39;</span>
+<span class="sd">      - &#39;ll&#39;</span>
+<span class="sd">      - None to use the field projection</span>
+<span class="sd">      - a basemap/pyproj-like object</span>
+<span class="sd">      - a cratopy.crs object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">reverseZ</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">reverseZ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">119</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">hCoord</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;geoid&#39;</span><span class="p">,</span> <span class="s1">&#39;ll&#39;</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="n">hCoord</span><span class="p">):</span>
+        <span class="c1">#Should be a basemap/pyproj-like object or a cartopy.crs object</span>
+        <span class="c1">#but we do not test it explicitly to not</span>
+        <span class="c1">#introduce unnecessary dependency</span>
+        <span class="k">pass</span>
+    <span class="k">elif</span> <span class="n">hCoord</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1">#hCoord = self.geometry.default_cartopy_CRS()</span>
+        <span class="k">def</span> <span class="nf">hCoord</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">xy2ll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">inverse</span> <span class="k">else</span>  <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ll2xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;hCoord must be &#39;geoid&#39;, &#39;ll&#39;, None, a basemap/pyproj-like object or a cartopy.crs&quot;</span><span class="p">)</span>
+    
+    <span class="c1">#Guess z_factor</span>
+    <span class="k">if</span> <span class="n">z_factor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">isglobal</span> <span class="ow">and</span> <span class="n">hCoord</span> <span class="o">==</span> <span class="s1">&#39;geoid&#39;</span><span class="p">:</span>
+            <span class="n">z_factor</span> <span class="o">=</span> <span class="mf">500.</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">proj3d</span> <span class="o">=</span> <span class="n">proj</span><span class="p">(</span><span class="n">hCoord</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">),</span> <span class="n">reverseZ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="s1">&#39;gimme_corners_ll&#39;</span><span class="p">):</span>
+                <span class="n">pos</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">proj3d</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">0.</span><span class="p">))</span> <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
+                <span class="n">xpos</span><span class="p">,</span> <span class="n">ypos</span> <span class="o">=</span> <span class="n">pos</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pos</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+                <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="n">xpos</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">xpos</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">ypos</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">ypos</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+                <span class="n">dxy</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">lons</span><span class="p">)</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">proj3d</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+                <span class="n">dxy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">z</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+            <span class="n">dz</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="n">z_factor</span> <span class="o">=</span> <span class="n">dxy</span> <span class="o">/</span> <span class="n">dz</span>
+    
+    <span class="c1">#Guess offset</span>
+    <span class="k">if</span> <span class="n">offset</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="s1">&#39;gimme_corners_ll&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">isglobal</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">hCoord</span> <span class="o">==</span> <span class="s1">&#39;geoid&#39;</span><span class="p">:</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">z_factor</span><span class="p">)</span> <span class="c1"># divided by z_factor because earth internal is not expanded</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()[</span><span class="s1">&#39;ll&#39;</span><span class="p">]</span>
+                <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">offset</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">z_factor</span><span class="p">)</span> <span class="c1"># divided by z_factor because earth internal is not expanded</span>
+    
+    <span class="k">if</span> <span class="n">geoid</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;academic&#39;</span><span class="p">:</span>
+        <span class="n">geoid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span>
+    
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">hCoord</span><span class="o">=</span><span class="n">hCoord</span><span class="p">,</span> <span class="n">z_factor</span><span class="o">=</span><span class="n">z_factor</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
+                <span class="n">reverseZ</span><span class="o">=</span><span class="n">reverseZ</span><span class="p">,</span> <span class="n">geoid</span><span class="o">=</span><span class="n">geoid</span><span class="p">)</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>

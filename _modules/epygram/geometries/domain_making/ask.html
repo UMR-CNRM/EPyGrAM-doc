@@ -1,0 +1,264 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>epygram.geometries.domain_making.ask &#8212; epygram 1.4.14 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.geometries.domain_making.ask</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains functions for interactive build of a LAM domain.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">input</span>
+
+<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="n">default_Iwidth</span>
+<span class="kn">from</span> <span class="nn">.build</span> <span class="k">import</span> <span class="n">build_geometry</span><span class="p">,</span> <span class="n">build_geometry_fromlonlat</span>
+
+
+<div class="viewcode-block" id="ask_and_build_geometry"><a class="viewcode-back" href="../../../../library/domain_making/ask.html#epygram.geometries.domain_making.ask.ask_and_build_geometry">[docs]</a><span class="k">def</span> <span class="nf">ask_and_build_geometry</span><span class="p">(</span><span class="n">defaults</span><span class="p">,</span>
+                           <span class="n">maximize_CI_in_E</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for geometry params,</span>
+<span class="sd">    then builds a proposal geometry.</span>
+
+<span class="sd">    :param defaults: a dict() containing default values.</span>
+<span class="sd">    :param maximize_CI_in_E: boolean deciding to force the E-zone to be at its</span>
+<span class="sd">                             minimum.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ask for geometry</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">resolution</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Resolution in m [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">resolution</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid resolution.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">center_lon</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Center of domain / longitude in degrees [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;center_lon&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;center_lon&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">center_lon</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;center_lon&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid longitude.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">center_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Center of domain / latitude in degrees [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;center_lat&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;center_lat&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">center_lat</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;center_lat&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid latitude.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">tilting</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Optional counterclockwise tilting in degrees (lon0-lonC) [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;tilting&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">tilting</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;tilting&#39;</span><span class="p">]</span>
+
+    <span class="c1"># and dimensions</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Xpoints_CI</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;C+I zonal (X) dimension in pts [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Xpoints_CI&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Xpoints_CI&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">Xpoints_CI</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Xpoints_CI&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid dimension.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Ypoints_CI</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;C+I meridian (Y) dimension in pts [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Ypoints_CI&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Ypoints_CI&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">Ypoints_CI</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Ypoints_CI&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid dimension.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_Iwidth</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Iwidth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;I-zone width in pts [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">Iwidth</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">]</span>
+
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">build_geometry</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span>
+                              <span class="n">Xpoints_CI</span><span class="p">,</span> <span class="n">Ypoints_CI</span><span class="p">,</span>
+                              <span class="n">resolution</span><span class="p">,</span>
+                              <span class="n">Iwidth</span><span class="o">=</span><span class="n">Iwidth</span><span class="p">,</span>
+                              <span class="n">tilting</span><span class="o">=</span><span class="n">tilting</span><span class="p">,</span>
+                              <span class="n">maximize_CI_in_E</span><span class="o">=</span><span class="n">maximize_CI_in_E</span><span class="p">,</span>
+                              <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X_Iwidth&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;tilting&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">-</span>
+                          <span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;resolution&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;center_lon&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;center_lat&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;Xpoints_CI&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;Ypoints_CI&#39;</span><span class="p">:</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">]}</span>
+
+    <span class="k">return</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">defaults</span></div>
+
+
+<div class="viewcode-block" id="ask_lonlat"><a class="viewcode-back" href="../../../../library/domain_making/ask.html#epygram.geometries.domain_making.ask.ask_lonlat">[docs]</a><span class="k">def</span> <span class="nf">ask_lonlat</span><span class="p">(</span><span class="n">defaults</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Ask a lon/lat geometry.&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lonmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Minimum (Western) longitude in degrees [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;lonmin&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;lonmin&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">lonmin</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;lonmin&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid longitude.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">lonmax</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Maximum (Eastern) longitude in degrees [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;lonmax&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;lonmax&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">lonmax</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;lonmax&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid longitude.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">latmin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Minimum (Southern) latitude in degrees [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;latmin&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;latmin&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">latmin</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;latmin&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid latitude.&quot;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">latmax</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Maximum (Northern) latitude in degrees [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;latmax&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;latmax&#39;</span><span class="p">])</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">latmax</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;latmax&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid latitude.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;lonmin&#39;</span><span class="p">:</span><span class="n">lonmin</span><span class="p">,</span> <span class="s1">&#39;lonmax&#39;</span><span class="p">:</span><span class="n">lonmax</span><span class="p">,</span> <span class="s1">&#39;latmin&#39;</span><span class="p">:</span><span class="n">latmin</span><span class="p">,</span> <span class="s1">&#39;latmax&#39;</span><span class="p">:</span><span class="n">latmax</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="ask_lonlat_and_build_geometry"><a class="viewcode-back" href="../../../../library/domain_making/ask.html#epygram.geometries.domain_making.ask.ask_lonlat_and_build_geometry">[docs]</a><span class="k">def</span> <span class="nf">ask_lonlat_and_build_geometry</span><span class="p">(</span><span class="n">defaults</span><span class="p">,</span>
+                                  <span class="n">maximize_CI_in_E</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Ask the user for lonlat-included geometry params,</span>
+<span class="sd">    then builds a proposal geometry.</span>
+
+<span class="sd">    :param defaults: a dict() containing default values.</span>
+<span class="sd">    :param maximize_CI_in_E: boolean deciding to force the E-zone to be at its</span>
+<span class="sd">                             minimum.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># ask for geometry</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">resolution</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Model resolution in m [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="n">resolution</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;resolution&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid resolution.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min/Max longitudes &amp; latitudes that must be included in domain:&quot;</span><span class="p">)</span>
+    <span class="n">ll_boundaries</span> <span class="o">=</span> <span class="n">ask_lonlat</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
+    <span class="n">lonmin</span> <span class="o">=</span> <span class="n">ll_boundaries</span><span class="p">[</span><span class="s1">&#39;lonmin&#39;</span><span class="p">]</span>
+    <span class="n">lonmax</span> <span class="o">=</span> <span class="n">ll_boundaries</span><span class="p">[</span><span class="s1">&#39;lonmax&#39;</span><span class="p">]</span>
+    <span class="n">latmin</span> <span class="o">=</span> <span class="n">ll_boundaries</span><span class="p">[</span><span class="s1">&#39;latmin&#39;</span><span class="p">]</span>
+    <span class="n">latmax</span> <span class="o">=</span> <span class="n">ll_boundaries</span><span class="p">[</span><span class="s1">&#39;latmax&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">default_Iwidth</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Iwidth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;I-zone width in pts [&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;]: &quot;</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">Iwidth</span> <span class="o">=</span> <span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">]</span>
+
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">build_geometry_fromlonlat</span><span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="n">lonmax</span><span class="p">,</span>
+                                         <span class="n">latmin</span><span class="p">,</span> <span class="n">latmax</span><span class="p">,</span>
+                                         <span class="n">resolution</span><span class="p">,</span>
+                                         <span class="n">Iwidth</span><span class="o">=</span><span class="n">Iwidth</span><span class="p">,</span>
+                                         <span class="n">force_projection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                         <span class="n">maximize_CI_in_E</span><span class="o">=</span><span class="n">maximize_CI_in_E</span><span class="p">,</span>
+                                         <span class="n">interactive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--------------------------------------------------&quot;</span><span class="p">)</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Iwidth&#39;</span><span class="p">:</span><span class="n">Iwidth</span><span class="p">,</span>
+                <span class="s1">&#39;lonmax&#39;</span><span class="p">:</span><span class="n">lonmax</span><span class="p">,</span>
+                <span class="s1">&#39;lonmin&#39;</span><span class="p">:</span><span class="n">lonmin</span><span class="p">,</span>
+                <span class="s1">&#39;latmax&#39;</span><span class="p">:</span><span class="n">latmax</span><span class="p">,</span>
+                <span class="s1">&#39;latmin&#39;</span><span class="p">:</span><span class="n">latmin</span><span class="p">,</span>
+                <span class="s1">&#39;resolution&#39;</span><span class="p">:</span><span class="n">resolution</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">defaults</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.14 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../geometries.html" >epygram.geometries</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    </div>
+  </body>
+</html>
