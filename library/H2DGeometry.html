@@ -107,12 +107,12 @@ Abstract.</p>
 </li>
 <li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
 <li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘mercator’, ‘unstructured’, ‘lambert’, ‘regular_lonlat’, ‘academic’, ‘polar_stereographic’])</li>
+<li>Values: set([‘lambert’, ‘regular_lonlat’, ‘polar_stereographic’, ‘mercator’, ‘academic’, ‘unstructured’])</li>
 </ul>
 </li>
 <li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
 <li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+<li>Values: set([‘lower-right’, ‘center’, ‘lower-left’, ‘upper-center’, ‘lower-center’, ‘upper-left’, ‘center-right’, ‘__unknown__’, ‘upper-right’, ‘center-left’])</li>
 </ul>
 </li>
 <li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
@@ -197,7 +197,7 @@ Abstract.</p>
 </li>
 <li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
 <li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+<li>Values: set([‘lower-right’, ‘center’, ‘lower-left’, ‘upper-center’, ‘lower-center’, ‘upper-left’, ‘center-right’, ‘__unknown__’, ‘upper-right’, ‘center-left’])</li>
 </ul>
 </li>
 <li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
@@ -282,7 +282,7 @@ Abstract.</p>
 </li>
 <li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
 <li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+<li>Values: set([‘lower-right’, ‘center’, ‘lower-left’, ‘upper-center’, ‘lower-center’, ‘upper-left’, ‘center-right’, ‘__unknown__’, ‘upper-right’, ‘center-left’])</li>
 </ul>
 </li>
 <li><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</li>
@@ -374,7 +374,7 @@ Abstract.</p>
 </li>
 <li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
 <li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+<li>Values: set([‘lower-right’, ‘center’, ‘lower-left’, ‘upper-center’, ‘lower-center’, ‘upper-left’, ‘center-right’, ‘__unknown__’, ‘upper-right’, ‘center-left’])</li>
 </ul>
 </li>
 <li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
@@ -454,12 +454,12 @@ Abstract.</p>
 </li>
 <li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
 <li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘mercator’, ‘space_view’, ‘lambert’, ‘polar_stereographic’])</li>
+<li>Values: set([‘lambert’, ‘polar_stereographic’, ‘space_view’, ‘mercator’])</li>
 </ul>
 </li>
 <li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
 <li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+<li>Values: set([‘lower-right’, ‘center’, ‘lower-left’, ‘upper-center’, ‘lower-center’, ‘upper-left’, ‘center-right’, ‘__unknown__’, ‘upper-right’, ‘center-left’])</li>
 </ul>
 </li>
 <li><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</li>
@@ -546,12 +546,12 @@ Abstract.</p>
 </li>
 <li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
 <li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘reduced_gauss’, ‘regular_gauss’, ‘rotated_reduced_gauss’])</li>
+<li>Values: set([‘rotated_reduced_gauss’, ‘regular_gauss’, ‘reduced_gauss’])</li>
 </ul>
 </li>
 <li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
 <li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘upper-right’, ‘lower-right’, ‘upper-center’, ‘center-right’, ‘upper-left’, ‘center’, ‘lower-left’, ‘center-left’, ‘lower-center’, ‘__unknown__’])</li>
+<li>Values: set([‘lower-right’, ‘center’, ‘lower-left’, ‘upper-center’, ‘lower-center’, ‘upper-left’, ‘center-right’, ‘__unknown__’, ‘upper-right’, ‘center-left’])</li>
 </ul>
 </li>
 <li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
@@ -635,7 +635,7 @@ Abstract.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>

@@ -841,12 +841,13 @@
                 <span class="n">data</span> <span class="o">=</span> <span class="n">dataOut</span>
             <span class="k">elif</span> <span class="n">ftype</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">spectral_coeff_order</span> <span class="o">==</span> <span class="s1">&#39;model&#39;</span><span class="p">:</span>
-                    <span class="n">data</span><span class="p">,</span> <span class="n">masked</span><span class="p">,</span> <span class="n">masked_value</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">wfa</span><span class="o">.</span><span class="n">wfacilo</span><span class="p">(</span><span class="n">datasize</span><span class="p">,</span>
+                    <span class="n">data</span><span class="p">,</span> <span class="n">masked</span><span class="p">,</span> <span class="n">masked_value</span> <span class="o">=</span> <span class="n">wfa</span><span class="o">.</span><span class="n">wfacilo</span><span class="p">(</span><span class="n">datasize</span><span class="p">,</span>
                                                              <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span>
                                                              <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span>
                                                              <span class="mi">0</span><span class="p">,</span>
                                                              <span class="n">fieldname</span><span class="p">[</span><span class="mi">4</span><span class="p">:],</span>
-                                                             <span class="n">spectral</span><span class="p">))</span>
+                                                             <span class="n">spectral</span><span class="p">)</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">masked</span><span class="p">:</span>
                         <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">masked_value</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -1944,7 +1945,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>

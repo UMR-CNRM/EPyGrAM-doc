@@ -129,7 +129,7 @@ in case it is spectral.</p>
 </ul>
 </li>
 <li><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.<ul>
-<li>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7f254fede1c0&gt;]&gt;&gt;.</li>
+<li>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7f6c501ecd00&gt;]&gt;&gt;.</li>
 </ul>
 </li>
 </ul>
@@ -138,7 +138,7 @@ in case it is spectral.</p>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="method">
 <dt id="epygram.fields.H2DField.H2DField.cartoplot">
-<code class="descname">cartoplot</code><span class="sig-paren">(</span><em>fig=None, ax=None, figsize=(16.0, 12.0), rcparams=[(('font',), {'family': 'serif'})], title=None, projection=None, subzone=None, extent='__default__', plot_method='__default__', minmax=None, mask_threshold=None, scatter_kw=None, contour_kw=None, contourf_kw=None, pcolormesh_kw=None, contourlabel=False, clabel_kw=None, meridians='auto', parallels='auto', gridlines_kw=None, cartopy_features=[], natural_earth_features='__default__', epygram_departments=False, colormap_helper=None, colormap='plasma', colorbounds=None, colorsnumber=None, colorstep=None, center_cmap_on_0=False, contourcolor='blue', colorbar='right', colorbar_over=None, colorbar_ax_kw=None, colorbar_kw={}, minmax_along_colorbar=True, takeover=False</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.H2DField.H2DField.cartoplot" title="Permalink to this definition">¶</a></dt>
+<code class="descname">cartoplot</code><span class="sig-paren">(</span><em>fig=None, ax=None, figsize=(16.0, 12.0), rcparams=[(('font',), {'family': 'serif'})], title=None, projection=None, subzone=None, extent='__default__', plot_method='__default__', minmax=None, mask_threshold=None, scatter_kw=None, contour_kw=None, contourf_kw=None, pcolormesh_kw=None, contourlabel=False, clabel_kw=None, meridians='auto', parallels='auto', gridlines_kw=None, cartopy_features=[], natural_earth_features='__default__', epygram_departments=False, colormap_helper=None, colormap='plasma', colorbounds=None, colorsnumber=None, colorstep=None, center_cmap_on_0=False, contourcolor='blue', colorbar='right', colorbar_over=None, colorbar_ax_kw=None, colorbar_kw={}, colorbar_legend=None, minmax_along_colorbar=True, takeover=False</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.H2DField.H2DField.cartoplot" title="Permalink to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
@@ -294,6 +294,7 @@ colorbar position, among (‘bottom’, ‘right’). Defaults to ‘right’.</
 <li><strong>colorbar_ax_kw</strong> – kwargs to be passed to
 make_axes_locatable(ax).append_axes(colorbar, <a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs)</li>
 <li><strong>colorbar_kw</strong> – kwargs to be passed to matpltolib’s colorbar()</li>
+<li><strong>colorbar_legend</strong> – legend for the colorbar; mutually exclusive with arg ‘minmax_along_colorbar’</li>
 <li><strong>minmax_along_colorbar</strong> – if True and minmax is not None,
 adds min and max values along colorbar.</li>
 </ul>
@@ -465,7 +466,7 @@ original_field.value + point.value</li>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2021, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     </div>
   </body>
