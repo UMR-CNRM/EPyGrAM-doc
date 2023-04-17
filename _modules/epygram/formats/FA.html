@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.FA &#8212; epygram 1.4.15 documentation</title>
+    <title>epygram.formats.FA &#8212; epygram 1.4.16 documentation</title>
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
@@ -1609,6 +1609,31 @@
             <span class="n">ftype</span> <span class="o">=</span> <span class="s1">&#39;H2D&#39;</span>  <span class="c1"># because fanion fails or answers False for meta-fields</span>
         <span class="k">return</span> <span class="n">ftype</span>
 
+    <span class="k">def</span> <span class="nf">_raw_header_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">vars_from_facies</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;KTYPTR&#39;</span><span class="p">,</span> <span class="s1">&#39;PSLAPO&#39;</span><span class="p">,</span> <span class="s1">&#39;PCLOPO&#39;</span><span class="p">,</span> <span class="s1">&#39;PSLOPO&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;PCODIL&#39;</span><span class="p">,</span> <span class="s1">&#39;KTRONC&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;KNLATI&#39;</span><span class="p">,</span> <span class="s1">&#39;KNXLON&#39;</span><span class="p">,</span> <span class="s1">&#39;KNLOPA&#39;</span><span class="p">,</span> <span class="s1">&#39;KNOZPA&#39;</span><span class="p">,</span> <span class="s1">&#39;PSINLA&#39;</span><span class="p">,</span>
+                            <span class="s1">&#39;KNIVER&#39;</span><span class="p">,</span> <span class="s1">&#39;PREFER&#39;</span><span class="p">,</span> <span class="s1">&#39;PAHYBR&#39;</span><span class="p">,</span> <span class="s1">&#39;PBHYBR&#39;</span><span class="p">)</span>
+        <span class="n">zvars</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">vars_from_facies</span><span class="p">,</span>
+                         <span class="n">wfa</span><span class="o">.</span><span class="n">wfacies</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_FAsoftware_cst</span><span class="p">[</span><span class="s1">&#39;JPXPAH&#39;</span><span class="p">],</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">_FAsoftware_cst</span><span class="p">[</span><span class="s1">&#39;JPXIND&#39;</span><span class="p">],</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">_FAsoftware_cst</span><span class="p">[</span><span class="s1">&#39;JPXGEO&#39;</span><span class="p">],</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">_FAsoftware_cst</span><span class="p">[</span><span class="s1">&#39;JPXNIV&#39;</span><span class="p">],</span>
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">headername</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">zvars</span>
+
+    <span class="k">def</span> <span class="nf">_raw_header_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header_vars</span><span class="p">):</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">header_vars</span>
+        <span class="n">wfa</span><span class="o">.</span><span class="n">wfacade</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headername</span><span class="p">,</span>
+                <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KTYPTR&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PSLAPO&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PCLOPO&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PSLOPO&#39;</span><span class="p">],</span>
+                <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PCODIL&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KTRONC&#39;</span><span class="p">],</span>
+                <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNLATI&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNXLON&#39;</span><span class="p">],</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNLOPA&#39;</span><span class="p">]),</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNLOPA&#39;</span><span class="p">],</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNOZPA&#39;</span><span class="p">]),</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNOZPA&#39;</span><span class="p">],</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">h</span><span class="p">[</span><span class="s1">&#39;PSINLA&#39;</span><span class="p">]),</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PSINLA&#39;</span><span class="p">],</span>
+                <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNIVER&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PREFER&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PAHYBR&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PBHYBR&#39;</span><span class="p">],</span>
+                <span class="kc">True</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">_read_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the geometry in the FA header.</span>
@@ -1938,7 +1963,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 

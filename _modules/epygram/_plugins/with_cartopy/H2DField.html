@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram._plugins.with_cartopy.H2DField &#8212; epygram 1.4.15 documentation</title>
+    <title>epygram._plugins.with_cartopy.H2DField &#8212; epygram 1.4.16 documentation</title>
     <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
       </ul>
@@ -372,13 +372,21 @@
     <span class="k">if</span> <span class="n">plot_method</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;contourf&#39;</span><span class="p">,</span> <span class="s1">&#39;contour&#39;</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">rectangular_grid</span><span class="p">:</span>
             <span class="c1"># gauss grid</span>
+            <span class="c1"># There are three kinds of masked data:</span>
+            <span class="c1">#  - due to the shape of the gaussian grid (already masked in data, x and y):</span>
+            <span class="c1">#      =&gt; must be suppressed from the output arrays</span>
+            <span class="c1">#  - due to the projection (already masked in x and y):</span>
+            <span class="c1">#      =&gt; must be suppressed from the output arrays</span>
+            <span class="c1">#  - due to undefined values (masked in data, eg: SST over continents):</span>
+            <span class="c1">#      =&gt; must be kept as missing in the output arrays (to actually have a hole on the plot)</span>
             <span class="n">_fill_value</span> <span class="o">=</span> <span class="mf">1e20</span>
-            <span class="n">_shp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">_shp</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
             <span class="n">zf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">fill_maskedvalues</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">_shp</span><span class="p">),</span>  <span class="c1"># protect actually masked values</span>
-                                                 <span class="n">_fill_value</span><span class="p">)</span>
+<span class="o">-</span>                                                <span class="n">_fill_value</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">zf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">xf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">yf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">zf</span><span class="p">))</span> <span class="c1"># zf masked if xf or yf is masked</span>
+            <span class="n">xf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span> <span class="c1"># xf masked where zf is masked, then compressed</span>
+            <span class="n">yf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span> <span class="c1"># yf masked where zf is masked, then compressed</span>
             <span class="n">zf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">compressed</span><span class="p">(),</span> <span class="n">_fill_value</span><span class="p">)</span>  <span class="c1"># flatten and re-masked</span>
-            <span class="n">xf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
-            <span class="n">yf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">zf</span><span class="o">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">compressed</span><span class="p">())</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># unstructured grid</span>
             <span class="n">xf</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
@@ -881,7 +889,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li> 
       </ul>

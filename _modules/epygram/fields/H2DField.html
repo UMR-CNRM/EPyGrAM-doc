@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.fields.H2DField &#8212; epygram 1.4.15 documentation</title>
+    <title>epygram.fields.H2DField &#8212; epygram 1.4.16 documentation</title>
     <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
@@ -27,7 +27,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
       </ul>
@@ -161,6 +161,28 @@
         <span class="n">pt</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pt</span></div>
 
+<div class="viewcode-block" id="H2DField.extract_contour"><a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.extract_contour">[docs]</a>    <span class="k">def</span> <span class="nf">extract_contour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">level</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the intersection of the plan **level** and the H2Dfield: the result is a list of (lon,lat) point list.</span>
+<span class="sd">        The length of the first list is the number of disjoint lines.</span>
+<span class="sd">        This function relies on the contourpy library which is expected to be installed by the user.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">contourpy</span> <span class="k">import</span> <span class="n">contour_generator</span>
+        <span class="k">except</span> <span class="n">ModuleNotFoundError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ModuleNotFoundError</span><span class="p">(</span><span class="s1">&#39;To use *extract_contour* method, you must have `contourpy` installed: &#39;</span> <span class="o">+</span>
+                                      <span class="s1">&#39;pip3 install --user contourpy&#39;</span><span class="p">)</span>
+        <span class="n">cont_gen</span><span class="o">=</span><span class="n">contour_generator</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">())</span> 
+        <span class="n">contour</span><span class="o">=</span><span class="n">cont_gen</span><span class="o">.</span><span class="n">lines</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+        <span class="n">lines</span><span class="o">=</span><span class="p">[]</span>
+        <span class="k">for</span> <span class="n">ijlist</span> <span class="ow">in</span> <span class="n">contour</span><span class="p">:</span>
+            <span class="n">line</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">ijlist</span><span class="p">:</span>
+                <span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                <span class="n">line</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">))</span>
+            <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lines</span></div>
+
 <span class="c1">###################</span>
 <span class="c1"># PRE-APPLICATIVE #</span>
 <span class="c1">###################</span>
@@ -243,7 +265,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.15 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li> 
       </ul>
