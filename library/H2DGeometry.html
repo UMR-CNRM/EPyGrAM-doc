@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.geometries.H2DGeometry — Horizontal 2-D Geometry classes &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.geometries.H2DGeometry — Horizontal 2-D Geometry classes &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.H1DGeometry — Horizontal 1-D Geometry class" href="H1DGeometry.html" />
@@ -35,19 +34,588 @@
         <li class="right" >
           <a href="D3Geometry.html" title="epygram.geometries.D3Geometry — 3-D Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry</span></code> — Horizontal 2-D Geometry classes</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.geometries.H2DGeometry">
+<span id="epygram-geometries-h2dgeometry-horizontal-2-d-geometry-classes"></span><h1><a class="reference internal" href="#module-epygram.geometries.H2DGeometry" title="epygram.geometries.H2DGeometry: Horizontal 2-D Geometry classes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry</span></code></a> — Horizontal 2-D Geometry classes<a class="headerlink" href="#module-epygram.geometries.H2DGeometry" title="Permalink to this headline">¶</a></h1>
+<p>Contains the classes for Horizontal 2D geometries of fields.</p>
+<hr class="docutils" />
+<p><strong>These classes have many methods defined in their parent classes,
+one shall navigate through inheritance to explore the available methods !</strong></p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.H2DGeometry.</span></span><span class="sig-name descname"><span class="pre">H2DRectangularGridGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DRectangularGridGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DGeometry</span></code>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="epygram.geometries.D3Geometry.D3RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for a rectangular Horizontal 2-Dimensions Field.
+Abstract.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
+<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
+<ul>
+<li><p>Values: set([‘lambert’, ‘polar_stereographic’, ‘academic’, ‘regular_lonlat’, ‘unstructured’, ‘mercator’])</p></li>
+</ul>
+</li>
+<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+</ul>
+</li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
+<ul>
+<li><p>Values: set([‘H2D’])</p></li>
+</ul>
+</li>
+<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.geoid">
+<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.position_on_horizontal_grid">
+<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.vcoordinate">
+<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.H2DGeometry.</span></span><span class="sig-name descname"><span class="pre">H2DUnstructuredGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DUnstructuredGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3UnstructuredGeometry" title="epygram.geometries.D3Geometry.D3UnstructuredGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3UnstructuredGeometry</span></code></a></p>
+<p>Handles the geometry for an unstructured Horizontal 2-Dimensions Field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
+<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
+<ul>
+<li><p>Values: set([‘unstructured’])</p></li>
+</ul>
+</li>
+<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+</ul>
+</li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
+<ul>
+<li><p>Values: set([‘H2D’])</p></li>
+</ul>
+</li>
+<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.geoid">
+<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.position_on_horizontal_grid">
+<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.vcoordinate">
+<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.H2DGeometry.</span></span><span class="sig-name descname"><span class="pre">H2DAcademicGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DAcademicGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3AcademicGeometry" title="epygram.geometries.D3Geometry.D3AcademicGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3AcademicGeometry</span></code></a></p>
+<p>Handles the geometry for an academic Horizontal 2-Dimensions Field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
+<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
+<ul>
+<li><p>Values: set([‘academic’])</p></li>
+</ul>
+</li>
+<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+</ul>
+</li>
+<li><p><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</p></li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
+<ul>
+<li><p>Values: set([‘H2D’])</p></li>
+</ul>
+</li>
+<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.geoid">
+<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.position_on_horizontal_grid">
+<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.projection">
+<span class="sig-name descname"><span class="pre">projection</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles projection information (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.vcoordinate">
+<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.H2DGeometry.</span></span><span class="sig-name descname"><span class="pre">H2DRegLLGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DRegLLGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3RegLLGeometry" title="epygram.geometries.D3Geometry.D3RegLLGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RegLLGeometry</span></code></a></p>
+<p>Handles the geometry for a Regular Lon/Lat Horizontal 2-Dimensions Field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
+<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
+<ul>
+<li><p>Values: set([‘regular_lonlat’])</p></li>
+</ul>
+</li>
+<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+</ul>
+</li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
+<ul>
+<li><p>Values: set([‘H2D’])</p></li>
+</ul>
+</li>
+<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.geoid">
+<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.position_on_horizontal_grid">
+<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.vcoordinate">
+<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.H2DGeometry.</span></span><span class="sig-name descname"><span class="pre">H2DProjectedGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DProjectedGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3ProjectedGeometry" title="epygram.geometries.D3Geometry.D3ProjectedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3ProjectedGeometry</span></code></a></p>
+<p>Handles the geometry for a Projected Horizontal 2-Dimensions Field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
+<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
+<ul>
+<li><p>Values: set([‘lambert’, ‘space_view’, ‘polar_stereographic’, ‘mercator’])</p></li>
+</ul>
+</li>
+<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+</ul>
+</li>
+<li><p><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</p></li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
+<ul>
+<li><p>Values: set([‘H2D’])</p></li>
+</ul>
+</li>
+<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.geoid">
+<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.position_on_horizontal_grid">
+<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.projection">
+<span class="sig-name descname"><span class="pre">projection</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles projection information (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.vcoordinate">
+<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.H2DGeometry.</span></span><span class="sig-name descname"><span class="pre">H2DGaussGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DGaussGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DGeometry</span></code>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3GaussGeometry" title="epygram.geometries.D3Geometry.D3GaussGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3GaussGeometry</span></code></a></p>
+<p>Handles the geometry for a Global Gauss grid Horizontal 2-Dimensions Field.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
+<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
+<ul>
+<li><p>Values: set([‘reduced_gauss’, ‘rotated_reduced_gauss’, ‘regular_gauss’])</p></li>
+</ul>
+</li>
+<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+</ul>
+</li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
+<ul>
+<li><p>Values: set([‘H2D’])</p></li>
+</ul>
+</li>
+<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.dimensions">
+<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.geoid">
+<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.geoid" title="Permalink to this definition">¶</a></dt>
+<dd><p>To specify geoid shape (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.position_on_horizontal_grid">
+<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.H2DGeometry.H2DGaussGeometry.vcoordinate">
+<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="D3Geometry.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code> — 3-D Geometry class</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code> — 3-D Geometry class</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="H1DGeometry.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.H1DGeometry</span></code> — Horizontal 1-D Geometry class</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H1DGeometry</span></code> — Horizontal 1-D Geometry class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -56,560 +624,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.geometries.H2DGeometry">
-<span id="epygram-geometries-h2dgeometry-horizontal-2-d-geometry-classes"></span><h1><a class="reference internal" href="#module-epygram.geometries.H2DGeometry" title="epygram.geometries.H2DGeometry: Horizontal 2-D Geometry classes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry</span></code></a> — Horizontal 2-D Geometry classes<a class="headerlink" href="#module-epygram.geometries.H2DGeometry" title="Permalink to this headline">¶</a></h1>
-<p>Contains the classes for Horizontal 2D geometries of fields.</p>
-<hr class="docutils" />
-<p><strong>These classes have many methods defined in their parent classes,
-one shall navigate through inheritance to explore the available methods !</strong></p>
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.H2DGeometry.</code><code class="descname">H2DRectangularGridGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DRectangularGridGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DGeometry</span></code>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3RectangularGridGeometry" title="epygram.geometries.D3Geometry.D3RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RectangularGridGeometry</span></code></a></p>
-<p>Handles the geometry for a rectangular Horizontal 2-Dimensions Field.
-Abstract.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
-<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
-<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘lambert’, ‘mercator’, ‘regular_lonlat’, ‘unstructured’, ‘academic’, ‘polar_stereographic’])</li>
-</ul>
-</li>
-<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘lower-center’, ‘__unknown__’, ‘center-right’, ‘center’, ‘upper-left’, ‘lower-left’, ‘lower-right’, ‘center-left’, ‘upper-right’, ‘upper-center’])</li>
-</ul>
-</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
-<li>Values: set([‘H2D’])</li>
-</ul>
-</li>
-<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.geoid">
-<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.name">
-<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.position_on_horizontal_grid">
-<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.vcoordinate">
-<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.H2DGeometry.</code><code class="descname">H2DUnstructuredGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DUnstructuredGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3UnstructuredGeometry" title="epygram.geometries.D3Geometry.D3UnstructuredGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3UnstructuredGeometry</span></code></a></p>
-<p>Handles the geometry for an unstructured Horizontal 2-Dimensions Field.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
-<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
-<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘unstructured’])</li>
-</ul>
-</li>
-<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘lower-center’, ‘__unknown__’, ‘center-right’, ‘center’, ‘upper-left’, ‘lower-left’, ‘lower-right’, ‘center-left’, ‘upper-right’, ‘upper-center’])</li>
-</ul>
-</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
-<li>Values: set([‘H2D’])</li>
-</ul>
-</li>
-<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.geoid">
-<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.name">
-<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.position_on_horizontal_grid">
-<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.vcoordinate">
-<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.H2DGeometry.</code><code class="descname">H2DAcademicGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DAcademicGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3AcademicGeometry" title="epygram.geometries.D3Geometry.D3AcademicGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3AcademicGeometry</span></code></a></p>
-<p>Handles the geometry for an academic Horizontal 2-Dimensions Field.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
-<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
-<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘academic’])</li>
-</ul>
-</li>
-<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘lower-center’, ‘__unknown__’, ‘center-right’, ‘center’, ‘upper-left’, ‘lower-left’, ‘lower-right’, ‘center-left’, ‘upper-right’, ‘upper-center’])</li>
-</ul>
-</li>
-<li><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
-<li>Values: set([‘H2D’])</li>
-</ul>
-</li>
-<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.geoid">
-<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.name">
-<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.position_on_horizontal_grid">
-<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.projection">
-<code class="descname">projection</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.projection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles projection information (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DAcademicGeometry.vcoordinate">
-<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DAcademicGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.H2DGeometry.</code><code class="descname">H2DRegLLGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DRegLLGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3RegLLGeometry" title="epygram.geometries.D3Geometry.D3RegLLGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3RegLLGeometry</span></code></a></p>
-<p>Handles the geometry for a Regular Lon/Lat Horizontal 2-Dimensions Field.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
-<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
-<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘regular_lonlat’])</li>
-</ul>
-</li>
-<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘lower-center’, ‘__unknown__’, ‘center-right’, ‘center’, ‘upper-left’, ‘lower-left’, ‘lower-right’, ‘center-left’, ‘upper-right’, ‘upper-center’])</li>
-</ul>
-</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
-<li>Values: set([‘H2D’])</li>
-</ul>
-</li>
-<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.geoid">
-<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.name">
-<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.position_on_horizontal_grid">
-<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DRegLLGeometry.vcoordinate">
-<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DRegLLGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.H2DGeometry.</code><code class="descname">H2DProjectedGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DProjectedGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.H2DGeometry.H2DRectangularGridGeometry" title="epygram.geometries.H2DGeometry.H2DRectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DRectangularGridGeometry</span></code></a>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3ProjectedGeometry" title="epygram.geometries.D3Geometry.D3ProjectedGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3ProjectedGeometry</span></code></a></p>
-<p>Handles the geometry for a Projected Horizontal 2-Dimensions Field.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
-<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
-<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘lambert’, ‘space_view’, ‘mercator’, ‘polar_stereographic’])</li>
-</ul>
-</li>
-<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘lower-center’, ‘__unknown__’, ‘center-right’, ‘center’, ‘upper-left’, ‘lower-left’, ‘lower-right’, ‘center-left’, ‘upper-right’, ‘upper-center’])</li>
-</ul>
-</li>
-<li><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
-<li>Values: set([‘H2D’])</li>
-</ul>
-</li>
-<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.geoid">
-<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.name">
-<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.position_on_horizontal_grid">
-<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.projection">
-<code class="descname">projection</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.projection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles projection information (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DProjectedGeometry.vcoordinate">
-<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DProjectedGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.H2DGeometry.</code><code class="descname">H2DGaussGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/H2DGeometry.html#H2DGaussGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DGeometry</span></code>, <a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3GaussGeometry" title="epygram.geometries.D3Geometry.D3GaussGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3GaussGeometry</span></code></a></p>
-<p>Handles the geometry for a Global Gauss grid Horizontal 2-Dimensions Field.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</li>
-<li><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</li>
-<li><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.<ul>
-<li>Values: set([‘reduced_gauss’, ‘rotated_reduced_gauss’, ‘regular_gauss’])</li>
-</ul>
-</li>
-<li><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘lower-center’, ‘__unknown__’, ‘center-right’, ‘center’, ‘upper-left’, ‘lower-left’, ‘lower-right’, ‘center-left’, ‘upper-right’, ‘upper-center’])</li>
-</ul>
-</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.<ul>
-<li>Values: set([‘H2D’])</li>
-</ul>
-</li>
-<li><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.dimensions">
-<code class="descname">dimensions</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.geoid">
-<code class="descname">geoid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.name">
-<code class="descname">name</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.position_on_horizontal_grid">
-<code class="descname">position_on_horizontal_grid</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.H2DGeometry.H2DGaussGeometry.vcoordinate">
-<code class="descname">vcoordinate</code><a class="headerlink" href="#epygram.geometries.H2DGeometry.H2DGaussGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -629,14 +652,15 @@ Abstract.</p>
         <li class="right" >
           <a href="D3Geometry.html" title="epygram.geometries.D3Geometry — 3-D Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry</span></code> — Horizontal 2-D Geometry classes</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

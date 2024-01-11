@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.LFA — Interface-Class to the LFA format &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.formats.LFA — Interface-Class to the LFA format &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.formats.DDHLFA — Interface-Class to the DDHLFA format" href="DDHLFA.html" />
@@ -35,19 +34,174 @@
         <li class="right" >
           <a href="FA.html" title="epygram.formats.FA — Interface-Class to the FA format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code> — Interface-Class to the LFA format</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.formats.LFA">
+<span id="epygram-formats-lfa-interface-class-to-the-lfa-format"></span><h1><a class="reference internal" href="#module-epygram.formats.LFA" title="epygram.formats.LFA: Interface-Class to the LFA format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code></a> — Interface-Class to the LFA format<a class="headerlink" href="#module-epygram.formats.LFA" title="Permalink to this headline">¶</a></h1>
+<p>Contains the class to handle LFA format.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.LFA.</span></span><span class="sig-name descname"><span class="pre">LFA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.LFA.LFA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="resources.html#epygram.resources.FileResource" title="epygram.resources.FileResource.FileResource"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.resources.FileResource.FileResource</span></code></a></p>
+<p>Class implementing all specificities for LFA resource format.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</p></li>
+<li><p><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.</p>
+<ul>
+<li><p>Optional. Default is ‘LFA’.</p></li>
+<li><p>Values: set([‘LFA’])</p></li>
+</ul>
+</li>
+<li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
+<ul>
+<li><p>Values: set([‘read’, ‘a’, ‘write’, ‘r’, ‘append’, ‘w’])</p></li>
+<li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a LFA properly.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.LFA.LFA.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.find_fields_in_resource">
+<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the fields from resource whose name match the given
+<em>seed</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>seed</strong> – might be a regular expression, a list of regular expressions
+or <em>None</em>. If <em>None</em> (default), returns the list of all fields in
+resource.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.fmtdelayedopen">
+<span class="sig-name descname"><span class="pre">fmtdelayedopen</span></span><a class="headerlink" href="#epygram.formats.LFA.LFA.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.format">
+<span class="sig-name descname"><span class="pre">format</span></span><a class="headerlink" href="#epygram.formats.LFA.LFA.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.listfields">
+<span class="sig-name descname"><span class="pre">listfields</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.listfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.listfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list containing the LFA identifiers of all the fields of
+the resource.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the LFA in Fortran sense.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>openmode</strong> – optional, to open with a specific openmode, eventually
+different from the one specified at initialization.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.openmode">
+<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.formats.LFA.LFA.openmode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening mode (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.readfield">
+<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.LFA.LFA.readfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a field in resource.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fieldname</strong> – name of the field to be read</p></li>
+<li><p><strong>getdata</strong> – if False, do not read the field data, only metadata.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.what">
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.LFA.LFA.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the contents of the LFA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – the output open file-like object</p></li>
+<li><p><strong>sortfields</strong> – <strong>True</strong> if the fields have to be sorted by type.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.LFA.LFA.writefield">
+<span class="sig-name descname"><span class="pre">writefield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.LFA.LFA.writefield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a Field in resource.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="FA.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="DDHLFA.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code> — Interface-Class to the DDHLFA format</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code> — Interface-Class to the DDHLFA format</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -56,180 +210,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.formats.LFA">
-<span id="epygram-formats-lfa-interface-class-to-the-lfa-format"></span><h1><a class="reference internal" href="#module-epygram.formats.LFA" title="epygram.formats.LFA: Interface-Class to the LFA format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code></a> — Interface-Class to the LFA format<a class="headerlink" href="#module-epygram.formats.LFA" title="Permalink to this headline">¶</a></h1>
-<p>Contains the class to handle LFA format.</p>
-<dl class="class">
-<dt id="epygram.formats.LFA.LFA">
-<em class="property">class </em><code class="descclassname">epygram.formats.LFA.</code><code class="descname">LFA</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.LFA.LFA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.resources.FileResource.FileResource</span></code></p>
-<p>Class implementing all specificities for LFA resource format.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</li>
-<li><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).<ul>
-<li>Optional. Default is False.</li>
-</ul>
-</li>
-<li><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.<ul>
-<li>Optional. Default is ‘LFA’.</li>
-<li>Values: set([‘LFA’])</li>
-</ul>
-</li>
-<li><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.<ul>
-<li>Values: set([‘append’, ‘read’, ‘write’, ‘a’, ‘w’, ‘r’])</li>
-<li>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Closes a LFA properly.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.LFA.LFA.filename">
-<code class="descname">filename</code><a class="headerlink" href="#epygram.formats.LFA.LFA.filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.find_fields_in_resource">
-<code class="descname">find_fields_in_resource</code><span class="sig-paren">(</span><em>seed=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.find_fields_in_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of the fields from resource whose name match the given
-<em>seed</em>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>seed</strong> – might be a regular expression, a list of regular expressions
-or <em>None</em>. If <em>None</em> (default), returns the list of all fields in
-resource.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.LFA.LFA.fmtdelayedopen">
-<code class="descname">fmtdelayedopen</code><a class="headerlink" href="#epygram.formats.LFA.LFA.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.LFA.LFA.format">
-<code class="descname">format</code><a class="headerlink" href="#epygram.formats.LFA.LFA.format" title="Permalink to this definition">¶</a></dt>
-<dd><p>Format of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.listfields">
-<code class="descname">listfields</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.listfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.listfields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list containing the LFA identifiers of all the fields of
-the resource.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.open">
-<code class="descname">open</code><span class="sig-paren">(</span><em>openmode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/LFA.html#LFA.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.LFA.LFA.open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opens the LFA in Fortran sense.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>openmode</strong> – optional, to open with a specific openmode, eventually
-different from the one specified at initialization.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.LFA.LFA.openmode">
-<code class="descname">openmode</code><a class="headerlink" href="#epygram.formats.LFA.LFA.openmode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opening mode (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.readfield">
-<code class="descname">readfield</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.LFA.LFA.readfield" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a field in resource.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>fieldname</strong> – name of the field to be read</li>
-<li><strong>getdata</strong> – if False, do not read the field data, only metadata.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.what">
-<code class="descname">what</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.LFA.LFA.what" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes in file a summary of the contents of the LFA.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>out</strong> – the output open file-like object</li>
-<li><strong>sortfields</strong> – <strong>True</strong> if the fields have to be sorted by type.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.LFA.LFA.writefield">
-<code class="descname">writefield</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.LFA.LFA.writefield" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes a Field in resource.</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -249,14 +238,15 @@ different from the one specified at initialization.</td>
         <li class="right" >
           <a href="FA.html" title="epygram.formats.FA — Interface-Class to the FA format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code> — Interface-Class to the LFA format</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

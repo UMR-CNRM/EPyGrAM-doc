@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.containers — Containers &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.containers — Containers &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.colormapping — Custom colormaps reading and tuning." href="colormapping.html" />
@@ -35,18 +34,89 @@
         <li class="right" >
           <a href="base.html" title="epygram.base — Basic, non-specific classes"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.containers</span></code> — Containers</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.containers">
+<span id="epygram-containers-containers"></span><h1><a class="reference internal" href="#module-epygram.containers" title="epygram.containers: Containers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.containers</span></code></a> — Containers<a class="headerlink" href="#module-epygram.containers" title="Permalink to this headline">¶</a></h1>
+<p>Contains the containers for a Resource.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.containers.File">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.containers.</span></span><span class="sig-name descname"><span class="pre">File</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/containers.html#File"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.containers.File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<p>Generic class implementing a File.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Relative or absolute pathname.</p></li>
+</ul>
+</div></blockquote>
+<p>Aliases of some parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>f</strong> is an alias of filename.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.containers.File.absdir">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">absdir</span></span><a class="headerlink" href="#epygram.containers.File.absdir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute path of the directory of the file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.containers.File.abspath">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">abspath</span></span><a class="headerlink" href="#epygram.containers.File.abspath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the absolute path of the file.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.containers.File.basename">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">basename</span></span><a class="headerlink" href="#epygram.containers.File.basename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the basename of the file.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.containers.File.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.containers.File.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative or absolute pathname (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="base.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.base</span></code> — Basic, non-specific classes</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.base</span></code> — Basic, non-specific classes</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="colormapping.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.colormapping</span></code> — Custom colormaps reading and tuning.</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.colormapping</span></code> — Custom colormaps reading and tuning.</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -55,86 +125,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.containers">
-<span id="epygram-containers-containers"></span><h1><a class="reference internal" href="#module-epygram.containers" title="epygram.containers: Containers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.containers</span></code></a> — Containers<a class="headerlink" href="#module-epygram.containers" title="Permalink to this headline">¶</a></h1>
-<p>Contains the containers for a Resource.</p>
-<dl class="class">
-<dt id="epygram.containers.File">
-<em class="property">class </em><code class="descclassname">epygram.containers.</code><code class="descname">File</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/containers.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.containers.File" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
-<p>Generic class implementing a File.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote>
-<div><ul class="simple">
-<li><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Relative or absolute pathname.</li>
-</ul>
-</div></blockquote>
-<p>Aliases of some parameters:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>f</strong> is an alias of filename.</li>
-</ul>
-</div></blockquote>
-</div>
-<p>Constructor. See its footprint for arguments.</p>
-<dl class="attribute">
-<dt id="epygram.containers.File.absdir">
-<code class="descname">absdir</code><a class="headerlink" href="#epygram.containers.File.absdir" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the absolute path of the directory of the file.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.containers.File.abspath">
-<code class="descname">abspath</code><a class="headerlink" href="#epygram.containers.File.abspath" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the absolute path of the file.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.containers.File.basename">
-<code class="descname">basename</code><a class="headerlink" href="#epygram.containers.File.basename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the basename of the file.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.containers.File.filename">
-<code class="descname">filename</code><a class="headerlink" href="#epygram.containers.File.filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Relative or absolute pathname (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -154,13 +153,14 @@
         <li class="right" >
           <a href="base.html" title="epygram.base — Basic, non-specific classes"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.containers</span></code> — Containers</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

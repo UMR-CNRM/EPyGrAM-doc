@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.spectra — Class and functions for spectra &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.spectra — Class and functions for spectra &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.args_catalog — Catalog of command-line arguments" href="args_catalog.html" />
@@ -35,69 +34,32 @@
         <li class="right" >
           <a href="profiles.html" title="epygram.profiles — Functions on vertical profiles"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a><ul>
-<li><a class="reference internal" href="#classes">Classes</a></li>
-<li><a class="reference internal" href="#functions">Functions</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="profiles.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="args_catalog.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.args_catalog</span></code> — Catalog of command-line arguments</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/library/spectra.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-epygram.spectra">
+  <section id="module-epygram.spectra">
 <span id="epygram-spectra-class-and-functions-for-spectra"></span><h1><a class="reference internal" href="#module-epygram.spectra" title="epygram.spectra: Class and functions for spectra"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.spectra</span></code></a> — Class and functions for spectra<a class="headerlink" href="#module-epygram.spectra" title="Permalink to this headline">¶</a></h1>
 <p>This module contains:</p>
 <ul class="simple">
-<li>a class to handle variance spectrum;</li>
-<li>a function to compute DCT spectrum from a 2D field;</li>
-<li>a function to sort spectra with regards to their name;</li>
-<li>a function to plot a series of spectra.</li>
-<li>a function to read a dumped spectrum.</li>
+<li><p>a class to handle variance spectrum;</p></li>
+<li><p>a function to compute DCT spectrum from a 2D field;</p></li>
+<li><p>a function to sort spectra with regards to their name;</p></li>
+<li><p>a function to plot a series of spectra.</p></li>
+<li><p>a function to read a dumped spectrum.</p></li>
 </ul>
-<div class="section" id="classes">
+<section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="epygram.spectra.Spectrum">
-<em class="property">class </em><code class="descclassname">epygram.spectra.</code><code class="descname">Spectrum</code><span class="sig-paren">(</span><em>variances</em>, <em>name=None</em>, <em>resolution=None</em>, <em>mean2=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.Spectrum" title="Permalink to this definition">¶</a></dt>
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.spectra.Spectrum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.spectra.</span></span><span class="sig-name descname"><span class="pre">Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variances</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.Spectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a></p>
 <p>A spectrum can be seen as a quantification of a signal’s variance with
 regards to scale.
@@ -106,164 +68,185 @@ representation will be a squared mean value (wavenumber 0) and variances for
 N-1 wavenumbers.
 For details and documentation, see</p>
 <blockquote>
-<div>Denis et al. (2002) : ‘Spectral Decomposition of Two-Dimensional
+<div><p>Denis et al. (2002) : ‘Spectral Decomposition of Two-Dimensional
 Atmospheric Fields on Limited-Area Domains
-Using the Discrete Cosine Transform (DCT)’</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>variances</strong> – variances of the spectrum, from wavenumber 1 to N-1.</li>
-<li><strong>name</strong> – an optional name for the spectrum.</li>
-<li><strong>resolution</strong> – an optional resolution for the field represented by
+Using the Discrete Cosine Transform (DCT)’</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variances</strong> – variances of the spectrum, from wavenumber 1 to N-1.</p></li>
+<li><p><strong>name</strong> – an optional name for the spectrum.</p></li>
+<li><p><strong>resolution</strong> – an optional resolution for the field represented by
 the spectrum. It is used to compute the according
 wavelengths.
 Resolution unit is arbitrary, to the will of the
-user.</li>
-<li><strong>mean2</strong> – the optional mean^2 of the field, i.e. variance of
-wavenumber 0 of the spectrum.</li>
+user.</p></li>
+<li><p><strong>mean2</strong> – the optional mean^2 of the field, i.e. variance of
+wavenumber 0 of the spectrum.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="epygram.spectra.Spectrum.dump">
-<code class="descname">dump</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum.dump"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.Spectrum.dump" title="Permalink to this definition">¶</a></dt>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.spectra.Spectrum.dump">
+<span class="sig-name descname"><span class="pre">dump</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum.dump"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.Spectrum.dump" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the spectrum with formatted output in <em>filename</em>.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="epygram.spectra.Spectrum.plotspectrum">
-<code class="descname">plotspectrum</code><span class="sig-paren">(</span><em>together_with=[], over=(None, None), slopes=[{'exp': -3, 'offset': 1, 'label': '-3'}, {'exp': -1.6666666666666667, 'offset': 1, 'label': '-5/3'}], zoom=None, unit='SI', title=None, figsize=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum.plotspectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.Spectrum.plotspectrum" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.spectra.Spectrum.plotspectrum">
+<span class="sig-name descname"><span class="pre">plotspectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">together_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'exp':</span> <span class="pre">-</span> <span class="pre">3,</span> <span class="pre">'offset':</span> <span class="pre">1,</span> <span class="pre">'label':</span> <span class="pre">'-3'},</span> <span class="pre">{'exp':</span> <span class="pre">-</span> <span class="pre">1.6666666666666667,</span> <span class="pre">'offset':</span> <span class="pre">1,</span> <span class="pre">'label':</span> <span class="pre">'-5/3'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SI'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum.plotspectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.Spectrum.plotspectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the spectrum.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>together_with</strong> – another spectrum or list of spectra to plot on the
-same ax.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>together_with</strong> – another spectrum or list of spectra to plot on the
+same ax.</p>
+</dd>
+</dl>
 <p>Cf. function plotspectra() of this module for other arguments.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="epygram.spectra.Spectrum.wavelengths">
-<code class="descname">wavelengths</code><a class="headerlink" href="#epygram.spectra.Spectrum.wavelengths" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.spectra.Spectrum.wavelengths">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wavelengths</span></span><a class="headerlink" href="#epygram.spectra.Spectrum.wavelengths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the wavelengths of the spectrum.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="epygram.spectra.Spectrum.wavenumbers">
-<code class="descname">wavenumbers</code><a class="headerlink" href="#epygram.spectra.Spectrum.wavenumbers" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.spectra.Spectrum.wavenumbers">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wavenumbers</span></span><a class="headerlink" href="#epygram.spectra.Spectrum.wavenumbers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets the wavenumbers of the spectrum.</p>
 </dd></dl>
 
-<dl class="method">
-<dt id="epygram.spectra.Spectrum.write">
-<code class="descname">write</code><span class="sig-paren">(</span><em>out</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum.write"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.Spectrum.write" title="Permalink to this definition">¶</a></dt>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.spectra.Spectrum.write">
+<span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#Spectrum.write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.Spectrum.write" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes the spectrum with formatted output in <em>out</em>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>out</strong> – must be an output open file-like object.</td>
-</tr>
-</tbody>
-</table>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>out</strong> – must be an output open file-like object.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="functions">
+<section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="epygram.spectra.read_Spectrum">
-<code class="descclassname">epygram.spectra.</code><code class="descname">read_Spectrum</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#read_Spectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.read_Spectrum" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.spectra.read_Spectrum">
+<span class="sig-prename descclassname"><span class="pre">epygram.spectra.</span></span><span class="sig-name descname"><span class="pre">read_Spectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#read_Spectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.read_Spectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Read a Spectrum written in file and return it.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="epygram.spectra.dctspectrum">
-<code class="descclassname">epygram.spectra.</code><code class="descname">dctspectrum</code><span class="sig-paren">(</span><em>x</em>, <em>verbose=False</em>, <em>log=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#dctspectrum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.dctspectrum" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.spectra.dctspectrum">
+<span class="sig-prename descclassname"><span class="pre">epygram.spectra.</span></span><span class="sig-name descname"><span class="pre">dctspectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#dctspectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.dctspectrum" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function <em>dctspectrum</em> takes a 2D-array as argument and returns its 1D
 DCT ellipse spectrum.</p>
-<dl class="docutils">
-<dt>For details and documentation, see</dt>
-<dd>Denis et al. (2002) : ‘Spectral Decomposition of Two-Dimensional
+<dl class="simple">
+<dt>For details and documentation, see</dt><dd><p>Denis et al. (2002) : ‘Spectral Decomposition of Two-Dimensional
 Atmospheric Fields on Limited-Area Domains Using
-the Discrete Cosine Transform (DCT).’</dd>
+the Discrete Cosine Transform (DCT).’</p>
+</dd>
 </dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>verbose</strong> – verbose mode</li>
-<li><strong>log</strong> – an optional logging.Logger instance to which print info
-in <em>verbose</em> case.</li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>verbose</strong> – verbose mode</p></li>
+<li><p><strong>log</strong> – an optional logging.Logger instance to which print info
+in <em>verbose</em> case.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="epygram.spectra.sort">
-<code class="descclassname">epygram.spectra.</code><code class="descname">sort</code><span class="sig-paren">(</span><em>spectra</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#sort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.sort" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.spectra.sort">
+<span class="sig-prename descclassname"><span class="pre">epygram.spectra.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectra</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.sort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort a list of spectra with regards to their name.</p>
 </dd></dl>
 
-<dl class="function">
-<dt id="epygram.spectra.plotspectra">
-<code class="descclassname">epygram.spectra.</code><code class="descname">plotspectra</code><span class="sig-paren">(</span><em>spectra, over=(None, None), slopes=[{'exp': -3, 'offset': 1, 'label': '-3'}, {'exp': -1.6666666666666667, 'offset': 1, 'label': '-5/3'}], zoom=None, unit='SI', title=None, figsize=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#plotspectra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.spectra.plotspectra" title="Permalink to this definition">¶</a></dt>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.spectra.plotspectra">
+<span class="sig-prename descclassname"><span class="pre">epygram.spectra.</span></span><span class="sig-name descname"><span class="pre">plotspectra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectra</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">slopes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[{'exp':</span> <span class="pre">-</span> <span class="pre">3,</span> <span class="pre">'offset':</span> <span class="pre">1,</span> <span class="pre">'label':</span> <span class="pre">'-3'},</span> <span class="pre">{'exp':</span> <span class="pre">-</span> <span class="pre">1.6666666666666667,</span> <span class="pre">'offset':</span> <span class="pre">1,</span> <span class="pre">'label':</span> <span class="pre">'-5/3'}]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'SI'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/spectra.html#plotspectra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.spectra.plotspectra" title="Permalink to this definition">¶</a></dt>
 <dd><p>To plot a series of spectra.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>over</strong> – any existing figure and/or ax to be used for the
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>over</strong> – any existing figure and/or ax to be used for the
 plot, given as a tuple (fig, ax), with None for
 missing objects. <em>fig</em> is the frame of the
 matplotlib figure, containing eventually several
 subplots (axes); <em>ax</em> is the matplotlib axes on
 which the drawing is done. When given (is not None),
 these objects must be coherent, i.e. ax being one of
-the fig axes.</li>
-<li><strong>spectra</strong> – a Spectrum instance or a list of.</li>
-<li><strong>unit</strong> – string accepting LaTeX-mathematical syntaxes</li>
-<li><strong>slopes</strong> – <p>list of dict(
+the fig axes.</p></li>
+<li><p><strong>spectra</strong> – a Spectrum instance or a list of.</p></li>
+<li><p><strong>unit</strong> – string accepting LaTeX-mathematical syntaxes</p></li>
+<li><p><strong>slopes</strong> – <p>list of dict(
 - exp=x where x is exposant of a A*k**-x slope
 - offset=A where A is logscale offset in a A*k**-x slope;</p>
 <blockquote>
-<div>a offset=1 is fitted to intercept the first spectra at wavenumber = 2</div></blockquote>
+<div><p>a offset=1 is fitted to intercept the first spectra at wavenumber = 2</p>
+</div></blockquote>
 <ul>
-<li>label=(optional label) appearing ‘k = label’ in legend)</li>
+<li><p>label=(optional label) appearing ‘k = label’ in legend)</p></li>
 </ul>
-</li>
-<li><strong>zoom</strong> – dict(xmin=,xmax=,ymin=,ymax=)</li>
-<li><strong>title</strong> – title for the plot</li>
-<li><strong>figsize</strong> – figure sizes in inches, e.g. (5, 8.5).
-Default figsize is config.plotsizes.</li>
+</p></li>
+<li><p><strong>zoom</strong> – dict(xmin=,xmax=,ymin=,ymax=)</p></li>
+<li><p><strong>title</strong> – title for the plot</p></li>
+<li><p><strong>figsize</strong> – figure sizes in inches, e.g. (5, 8.5).
+Default figsize is config.plotsizes.</p></li>
 </ul>
-</td>
-</tr>
-</tbody>
-</table>
+</dd>
+</dl>
 </dd></dl>
 
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="profiles.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="args_catalog.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.args_catalog</span></code> — Catalog of command-line arguments</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/spectra.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -283,13 +266,14 @@ Default figsize is config.plotsizes.</li>
         <li class="right" >
           <a href="profiles.html" title="epygram.profiles — Functions on vertical profiles"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

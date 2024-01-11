@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.GRIB &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.formats.GRIB &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,28 +25,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.GRIB</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -66,7 +49,7 @@
 <span class="sd">editions 1 and 2.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GRIB&#39;</span><span class="p">]</span>
 
@@ -82,20 +65,20 @@
 <span class="kn">import</span> <span class="nn">json</span>
 
 <span class="kn">import</span> <span class="nn">footprints</span>
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span>
-<span class="kn">from</span> <span class="nn">bronx.meteo.conversion</span> <span class="k">import</span> <span class="n">q2R</span>
-<span class="kn">from</span> <span class="nn">bronx.meteo</span> <span class="k">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span>
+<span class="kn">from</span> <span class="nn">bronx.meteo.conversion</span> <span class="kn">import</span> <span class="n">q2R</span>
+<span class="kn">from</span> <span class="nn">bronx.meteo</span> <span class="kn">import</span> <span class="n">constants</span>
 <span class="kn">import</span> <span class="nn">griberies</span>
 
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span>
-<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="k">import</span> <span class="n">FileResource</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="p">(</span><span class="n">Angle</span><span class="p">,</span> <span class="n">RecursiveObject</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span>
+<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="kn">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Angle</span><span class="p">,</span> <span class="n">RecursiveObject</span><span class="p">,</span>
                           <span class="n">separation_line</span><span class="p">,</span> <span class="n">write_formatted_dict</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.H2DGeometry</span> <span class="k">import</span> <span class="n">gauss_latitudes</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="k">import</span> <span class="n">pressure2altitude</span><span class="p">,</span> <span class="n">altitude2height</span><span class="p">,</span> <span class="n">height2altitude</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.SpectralGeometry</span> <span class="k">import</span> <span class="p">(</span><span class="n">SpectralGeometry</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">H2DField</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.H2DGeometry</span> <span class="kn">import</span> <span class="n">gauss_latitudes</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="kn">import</span> <span class="n">pressure2altitude</span><span class="p">,</span> <span class="n">altitude2height</span><span class="p">,</span> <span class="n">height2altitude</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.SpectralGeometry</span> <span class="kn">import</span> <span class="p">(</span><span class="n">SpectralGeometry</span><span class="p">,</span>
                                                  <span class="n">gridpoint_dims_from_truncation</span><span class="p">,</span>
                                                  <span class="n">nearest_greater_FFT992compliant_int</span><span class="p">)</span>
 
@@ -103,7 +86,7 @@
 
 
 <span class="k">class</span> <span class="nc">LowLevelGRIB</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">GRIB_lowlevel_api</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">GRIB_lowlevel_api</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">api_name</span> <span class="o">=</span> <span class="n">GRIB_lowlevel_api</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;gribapi&#39;</span><span class="p">,</span> <span class="s1">&#39;grib_api&#39;</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">api_name</span> <span class="o">=</span> <span class="s1">&#39;grib_api&#39;</span>
@@ -222,7 +205,7 @@
 
     <span class="n">_non_GRIB_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;is_uerra&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">concepts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;shortName&#39;</span><span class="p">,</span> <span class="s1">&#39;cfName&#39;</span><span class="p">,</span> <span class="s1">&#39;cfVarName&#39;</span><span class="p">]):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">NamesGribDef</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">actual_init</span><span class="p">,</span> <span class="n">concepts</span><span class="p">)</span>
 
@@ -478,7 +461,7 @@
 
     <span class="c1"># Special methods ----------------------------------------------------------</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span>
                  <span class="n">ordering</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB1_ordering</span><span class="p">,</span>
                  <span class="n">packing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">sample</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -548,26 +531,26 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;source=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">)))</span>
 
-    <span class="k">def</span> <span class="nf">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gid</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">InternalError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
             <span class="k">pass</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_readattribute</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
                 <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">item</span> <span class="o">+</span> <span class="s2">&quot; not in GRIBmessage keys.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">GRIBmessage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">version</span> <span class="o">&lt;=</span> <span class="s1">&#39;1.10.4&#39;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">]]):</span>
                     <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int</span><span class="p">):</span>
+                <span class="k">elif</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">]]):</span>
                     <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>  <span class="c1"># gribapi str/unicode incompatibility</span>
                 <span class="n">v</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -2293,7 +2276,7 @@
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GRIB</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_open_through</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>  <span class="c1"># gribapi str/unicode incompatibility</span>
@@ -2310,7 +2293,7 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmtdelayedopen</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)):</span>
@@ -3107,7 +3090,22 @@
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3121,15 +3119,16 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.GRIB</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

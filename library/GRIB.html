@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.GRIB — Interface-Class to the GRIB format &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.formats.GRIB — Interface-Class to the GRIB format &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.formats.fafields — Utilities around FA fields" href="fafields.html" />
@@ -35,19 +34,721 @@
         <li class="right" >
           <a href="netCDF.html" title="epygram.formats.netCDF — Interface-Class to the netCDF format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.formats.GRIB">
+<span id="epygram-formats-grib-interface-class-to-the-grib-format"></span><h1><a class="reference internal" href="#module-epygram.formats.GRIB" title="epygram.formats.GRIB: Interface-Class to the GRIB format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code></a> — Interface-Class to the GRIB format<a class="headerlink" href="#module-epygram.formats.GRIB" title="Permalink to this headline">¶</a></h1>
+<p>Contains classes for GRIB resource and GRIB individual message,
+editions 1 and 2.</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.GRIB.</span></span><span class="sig-name descname"><span class="pre">NamesGribDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concepts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['name',</span> <span class="pre">'shortName',</span> <span class="pre">'cfName',</span> <span class="pre">'cfVarName']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../site/griberies.html#griberies.GribDef" title="griberies.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">griberies.GribDef</span></code></a></p>
+<p>Handle <em>name</em> and <em>shortName</em> GRIB definitions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef.cfName">
+<span class="sig-name descname"><span class="pre">cfName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grib2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_non_GRIB_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.cfName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.cfName" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>‘name’ equivalence lookup:</dt><dd><ul class="simple">
+<li><p>if <strong>fid</strong> is a cfName, get the associated GRIB key/value pairs</p></li>
+<li><p>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated cfName(s)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Cf. method _lookup() for other optional arguments.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef.cfVarName">
+<span class="sig-name descname"><span class="pre">cfVarName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grib2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_non_GRIB_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.cfVarName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.cfVarName" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>‘name’ equivalence lookup:</dt><dd><ul class="simple">
+<li><p>if <strong>fid</strong> is a cfVarName, get the associated GRIB key/value pairs</p></li>
+<li><p>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated cfVarName(s)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Cf. method _lookup() for other optional arguments.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef.name">
+<span class="sig-name descname"><span class="pre">name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grib2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_non_GRIB_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.name" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>‘name’ equivalence lookup:</dt><dd><ul class="simple">
+<li><p>if <strong>fid</strong> is a name, get the associated GRIB key/value pairs</p></li>
+<li><p>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated name(s)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Cf. method _lookup() for other optional arguments.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef.shortName">
+<span class="sig-name descname"><span class="pre">shortName</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grib2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">include_comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_non_GRIB_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.shortName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.shortName" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>‘name’ equivalence lookup:</dt><dd><ul class="simple">
+<li><p>if <strong>fid</strong> is a shortName, get the associated GRIB key/value pairs</p></li>
+<li><p>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated shortName(s)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Cf. method _lookup() for other optional arguments.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.GRIB.</span></span><span class="sig-name descname"><span class="pre">GRIB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="resources.html#epygram.resources.FileResource" title="epygram.resources.FileResource.FileResource"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.resources.FileResource.FileResource</span></code></a></p>
+<p>Class implementing all specificities for GRIB resource format.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</p></li>
+<li><p><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.</p>
+<ul>
+<li><p>Optional. Default is ‘GRIB’.</p></li>
+<li><p>Values: set([‘GRIB’])</p></li>
+</ul>
+</li>
+<li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
+<ul>
+<li><p>Values: set([‘read’, ‘a’, ‘write’, ‘r’, ‘append’, ‘w’])</p></li>
+<li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes a GRIB.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.extract_subdomain">
+<span class="sig-name descname"><span class="pre">extract_subdomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_coordinate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field3d</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.extract_subdomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.extract_subdomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a subdomain from the GRIB resource, given its handgrip
+and the geometry to use.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handgrip</strong> – MUST define the parameter and the type of levels</p></li>
+<li><p><strong>geometry</strong> – is the geometry on which extract data.
+None to keep the geometry untouched.</p></li>
+<li><p><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
+V2DField (cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</p></li>
+<li><p><strong>interpolation</strong> – <p>defines the interpolation function used to compute
+the profile points locations from the fields grid:</p>
+<ul>
+<li><p>if ‘nearest’, each horizontal point of the section is
+taken as the horizontal nearest neighboring gridpoint;</p></li>
+<li><p>if ‘linear’ (default), each horizontal point of the section is
+computed with linear spline interpolation;</p></li>
+<li><p>if ‘cubic’, each horizontal point of the section is
+computed with linear spline interpolation.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.extractprofile">
+<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_coordinate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cheap_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.extractprofile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a vertical profile from the GRIB resource, given a handgrip
+and the geographic location (<em>lon</em>/<em>lat</em>) of the profile.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handgrip</strong> – MUST define the parameter and the type of levels</p></li>
+<li><p><strong>lon</strong> – the longitude of the desired point.</p></li>
+<li><p><strong>lat</strong> – the latitude of the desired point.</p></li>
+<li><p><strong>geometry</strong> – the geometry on which extract data. If None, it is built from
+lon/lat.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>:param vertical_coordinate defines the requested vertical coordinate of the</dt><dd><p>V1DField (cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interpolation</strong> – <p>defines the interpolation function used to compute
+the profile at requested lon/lat from the fields grid:</p>
+<ul>
+<li><p>if ‘nearest’ (default), extracts profile at the horizontal nearest neighboring gridpoint;</p></li>
+<li><p>if ‘linear’, computes profile with horizontal linear spline interpolation;</p></li>
+<li><p>if ‘cubic’, computes profile with horizontal cubic spline interpolation.</p></li>
+</ul>
+</p></li>
+<li><p><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
+(‘altitude’, ‘height’), the computation of heights is done without
+taking hydrometeors into account (in R computation) nor NH Pressure
+departure (Non-Hydrostatic data). Computation therefore faster.</p></li>
+<li><p><strong>external_distance</strong> – can be a dict containing the target point value
+and an external field on the same grid as self, to which the distance
+is computed within the 4 horizontally nearest points; e.g.
+{‘target_value’:4810, ‘external_field’:an_H2DField_with_same_geometry}.
+If so, the nearest point is selected with
+distance = <a href="#id1"><span class="problematic" id="id2">|target_value - external_field.data|</span></a></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.extractsection">
+<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_coordinate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cheap_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_shift_center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.extractsection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts a vertical section from the GRIB resource, given its handgrip
+and the geographic (lon/lat) coordinates of its ends.
+The section is returned as a V2DField.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handgrip</strong> – MUST define the parameter and the type of levels</p></li>
+<li><p><strong>end1</strong> – must be a tuple (lon, lat).</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat).</p></li>
+<li><p><strong>geometry</strong> – is the geometry on which extract data. If None, defaults to
+linearily spaced positions computed from  <em>points_number</em>.</p></li>
+<li><p><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</p></li>
+<li><p><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</p></li>
+<li><p><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
+V2DField (cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</p></li>
+<li><p><strong>interpolation</strong> – <p>defines the interpolation function used to compute
+the profile points locations from the fields grid:</p>
+<ul>
+<li><p>if ‘nearest’, each horizontal point of the section is
+taken as the horizontal nearest neighboring gridpoint;</p></li>
+<li><p>if ‘linear’ (default), each horizontal point of the section is
+computed with linear spline interpolation;</p></li>
+<li><p>if ‘cubic’, each horizontal point of the section is
+computed with linear spline interpolation.</p></li>
+</ul>
+</p></li>
+<li><p><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
+(‘altitude’, ‘height’), the computation of heights is done without
+taking hydrometeors into account (in R computation) nor NH Pressure
+departure (Non-Hydrostatic data). Computation therefore faster.</p></li>
+<li><p><strong>global_shift_center</strong> – for global lon/lat grids, shift the center by the
+requested angle (in degrees). Enables a [0,360] grid
+to be shifted to a [-180,180] grid, for instance (with -180 argument).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.find_fields_in_resource">
+<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the fields from resource whose name match the given
+seed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed</strong> – <p>might be:</p>
+<ul>
+<li><p>a ‘handgrip’, i.e. a dict where you can store all requested GRIB
+keys, e.g. {‘shortName’:’t’, ‘indicatorOfTypeOfLevel’:’pl’,</p>
+<blockquote>
+<div><p>’level’:850},</p>
+</div></blockquote>
+</li>
+<li><p>a list of handgrips</p></li>
+<li><p>a string like “{‘shortName’:’t’, ‘level’:850}”, that would be
+converted to a dict handgrip</p></li>
+<li><p><em>None</em>. If <em>None</em> (default), returns the list of all fields in
+resource.</p></li>
+</ul>
+</p></li>
+<li><p><strong>generic</strong> – if True, returns complete fid’s,
+union of {‘FORMATname’:fieldname} and the according generic fid of
+the fields.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.fmtdelayedopen">
+<span class="sig-name descname"><span class="pre">fmtdelayedopen</span></span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.format">
+<span class="sig-name descname"><span class="pre">format</span></span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.get_message_at_position">
+<span class="sig-name descname"><span class="pre">get_message_at_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.get_message_at_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the message at position <em>position</em>, from 0 (first message)
+to messages_number-1 (last message).
+Negative position starts from the end: -1 is last message.</p>
+<p>Should not be used sequentially, probably very inefficient.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.iter_fields">
+<span class="sig-name descname"><span class="pre">iter_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.iter_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.iter_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates sequentially on messages, returning fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>getdata</strong> – if False, do not read data from the messages.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.iter_messages">
+<span class="sig-name descname"><span class="pre">iter_messages</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.iter_messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterates sequentially on messages, returning messages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>headers_only</strong> – if False, read data from messages.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.listfields">
+<span class="sig-name descname"><span class="pre">listfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">onlykey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.listfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.listfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list containing the GRIB identifiers of all the fields of the
+resource.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>onlykey</strong> – can be specified as a string or a tuple of strings,
+so that only specified keys of the fid will returned.</p></li>
+<li><p><strong>select</strong> – can be specified as a dict(key=value) to restrain
+the list of fields to those that match the key:value pairs.</p></li>
+<li><p><strong>complete</strong> – list fields with their natural fid + generic one.</p></li>
+<li><p><strong>additional_keys</strong> – add given keys in fids</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.messages_number">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">messages_number</span></span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.messages_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of messages in file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a GRIB and initializes some attributes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>openmode</strong> – optional, to open with a specific openmode, eventually
+different from the one specified at initialization.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.openmode">
+<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.openmode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening mode (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.readfield">
+<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">footprints_proxy_as_builder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_info_as_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_misc_metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['typeOfGeneratingProcess',</span> <span class="pre">'productionStatusOfProcessedData',</span> <span class="pre">'typeOfProcessedData',</span> <span class="pre">'generatingProcessIdentifier',</span> <span class="pre">'typeOfTimeIncrement',</span> <span class="pre">'indicatorOfUnitOfTimeRange',</span> <span class="pre">'indicatorOfUnitForTimeRange',</span> <span class="pre">'indicatorOfUnitForTimeIncrement',</span> <span class="pre">'hoursAfterDataCutoff',</span> <span class="pre">'minutesAfterDataCutoff',</span> <span class="pre">'timeIncrement',</span> <span class="pre">'bitsPerValue',</span> <span class="pre">'dataRepresentationTemplateNumber',</span> <span class="pre">'uvRelativeToGrid']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.readfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.readfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds in GRIB the message that correspond to the <em>handgrip</em>,
+and returns it as a <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a>.
+If several messages meet the requirements, raises error (use
+readfields() method instead).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handgrip</strong> (<em>dict</em>) – a dict where you can store all requested GRIB
+keys for discrimination…
+E.g. {‘shortName’:’t’, ‘typeOfFirstFixedSurface’:100, ‘level’:850}
+will return the Temperature at 850hPa field.</p></li>
+<li><p><strong>getdata</strong> – if False, the data is not read, the field consist
+in the meta-data only.</p></li>
+<li><p><strong>footprints_proxy_as_builder</strong> – if True, uses footprints.proxy
+to build fields. True decreases performance.
+.. deprecated:: 1.3.9</p></li>
+<li><p><strong>get_info_as_json</strong> – if not None, writes the keys given in
+<em>get_info_as_json</em> as json in field.comment.
+.. deprecated:: 1.3.9</p></li>
+<li><p><strong>read_misc_metadata</strong> – read the specified keys, and store it in
+field.misc_metadata</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.readfields">
+<span class="sig-name descname"><span class="pre">readfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.readfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds in GRIB the message(s) that correspond to the <em>handgrip</em>,
+and returns it as a <a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> of
+<a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handgrip</strong> (<em>dict</em>) – a dict where you can store all requested GRIB
+keys for discrimination…
+E.g. {‘shortName’:’t’, ‘typeOfFirstFixedSurface’:100}
+will return all the Temperature fields on Pressure levels.</p></li>
+<li><p><strong>getdata</strong> – if False, the data is not read, the field consist
+in the meta-data only.</p></li>
+<li><p><strong>footprints_proxy_as_builder</strong> – if True, uses footprints.proxy
+to build fields. True decreases performance.
+.. deprecated:: 1.3.9</p></li>
+<li><p><strong>get_info_as_json</strong> – if not None, writes the keys given in
+<em>get_info_as_json</em> as json in field.comment.
+.. deprecated:: 1.3.9</p></li>
+<li><p><strong>read_misc_metadata</strong> – read the specified keys, and store it in
+field.misc_metadata</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.sortfields">
+<span class="sig-name descname"><span class="pre">sortfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sortingkey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onlykey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.sortfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.sortfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a sorted list of fields with regards to the given <em>sortingkey</em>
+of their fid, as a dict of lists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sortingkey</strong> – key on which to sort out fields</p></li>
+<li><p><strong>onlykey</strong> – specified as a string or a tuple of strings,
+so that only specified keys of the fid will returned.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.split_UV">
+<span class="sig-name descname"><span class="pre">split_UV</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldseed</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.split_UV"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.split_UV" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return two lists of fids corresponding respectively to U and V
+components of wind, given a <em>fieldseed</em>.
+Syntax example: ‘shortName’:’u+v’, or ‘indicatorOfParameter’:’33+34’</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.what">
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode='one+list'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sortfields=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">details=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the contents of the GRIB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – the output open file-like object</p></li>
+<li><p><strong>mode</strong> – <p>among (‘one+list’, ‘fid_list’, ‘what’, ‘ls’, ‘mars’),</p>
+<ul>
+<li><p>’one+list’ = gives the validity/geometry of the first field in
+GRIB, plus the list of fid.</p></li>
+<li><p>’fid_list’ = gives only the fid of each field in GRIB.</p></li>
+<li><p>’what’ = gives the values of the keys from each GRIB message that
+are used to generate an <strong>epygram</strong> field from the message (slower).</p></li>
+<li><p>’ls’ = gives the values of the ‘ls’ keys from each GRIB message.</p></li>
+<li><p>’mars’ = gives the values of the ‘mars’ keys from each GRIB message.</p></li>
+</ul>
+</p></li>
+<li><p><strong>sortfields</strong> – name of the fid key used to sort fields; e.g. ‘typeOfLevel’;
+only for <em>mode</em> = ‘one+list’ or ‘fid_list’.</p></li>
+<li><p><strong>details</strong> – if ‘compression’, gives the ‘packingType’ and ‘bitsPerValue’
+parameters of field packing. Only with ‘what’ mode.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIB.writefield">
+<span class="sig-name descname"><span class="pre">writefield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.writefield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a Field as a GRIBmessage into the GRIB resource.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>field</strong> – a <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a> instance</p></li>
+<li><p><strong>ordering</strong> – way of ordering data in GRIB, dict of GRIB keys.</p></li>
+<li><p><strong>packing</strong> – options of packing and compression in GRIB (dict).</p></li>
+<li><p><strong>sample</strong> – to use a specific sample GRIB</p></li>
+<li><p><strong>grib_edition</strong> – to force a GRIB edition number (1, 2).</p></li>
+<li><p><strong>other_GRIB_options</strong> – other options to be specified in GRIB,
+as a dict(GRIBkey=value).
+From v1.3.9, any GRIB2 key should be given through this rather than
+packing/ordering.</p></li>
+<li><p><strong>interpret_comment</strong> – set additional key/values taken from
+field.comment (interpreted as json)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.GRIB.</span></span><span class="sig-name descname"><span class="pre">GRIBmessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordering</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'iScansNegatively':</span> <span class="pre">0,</span> <span class="pre">'jPointsAreConsecutive':</span> <span class="pre">0,</span> <span class="pre">'jScansPositively':</span> <span class="pre">0}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">other_GRIB_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpret_comment</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_misc_metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Class implementing a GRIB message as an object.</p>
+<p>Initialize a GRIBmessage from either sources.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>source</strong> – <p>being a tuple of either form:</p>
+<ul class="simple">
+<li><p>(‘file’, ‘<em>filename</em>’ [, <em>offset_position</em>])
+<em>filename</em> being a relative or absolute path to the file it is read
+in. n = <em>offset_position</em>, if given, enables to read the n+1’th GRIB
+message in file. Defaults to 0. Negative value counts from the end.</p></li>
+<li><p>(‘field’, <a class="reference internal" href="H2DField.html#module-epygram.fields.H2DField" title="epygram.fields.H2DField: Horizontal 2-D Field class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code></a>)</p></li>
+<li><p>(‘gribid’, <em>gribid</em>)
+<em>gribid</em> being an integer, refering to the <em>gribid</em> of a GRIB_API
+message in memory.</p></li>
+<li><p>(‘sample’, ‘<em>samplename</em>’)
+<em>samplename</em> being the name of the sample from which to be
+generated.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p>In case <strong>source</strong> is a field, some options can be forced:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sample</strong> – to use a specific sample GRIB.
+Specific syntax ‘file:$filename$’ takes the first message
+in $filename$ as sample.</p></li>
+<li><p><strong>grib_edition</strong> – to force a GRIB edition number (1, 2).</p></li>
+<li><p><strong>other_GRIB_options</strong> – other options to be specified in GRIB,
+as a dict(GRIBkey=value).
+From v1.3.9, any GRIB2 key should be given through this rather than
+packing/ordering.</p></li>
+</ul>
+</dd>
+</dl>
+<p>GRIB1</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ordering</strong> – flattening of 2D data</p></li>
+<li><p><strong>packing</strong> – options of packing and compression in GRIB (dict).</p></li>
+</ul>
+</dd>
+</dl>
+<p>GRIB2 (new way)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interpret_comment</strong> – set additional key/values taken from
+field.comment (interpreted as json)</p></li>
+<li><p><strong>set_misc_metadata</strong> – set additional key/values taken from
+field.misc_metadata</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.actual_fid_keys">
+<span class="sig-name descname"><span class="pre">actual_fid_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.actual_fid_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.actual_fid_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adjust fid keys to specific grib edition and templates.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.as_field">
+<span class="sig-name descname"><span class="pre">as_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">read_misc_metadata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['typeOfGeneratingProcess',</span> <span class="pre">'productionStatusOfProcessedData',</span> <span class="pre">'typeOfProcessedData',</span> <span class="pre">'generatingProcessIdentifier',</span> <span class="pre">'typeOfTimeIncrement',</span> <span class="pre">'indicatorOfUnitOfTimeRange',</span> <span class="pre">'indicatorOfUnitForTimeRange',</span> <span class="pre">'indicatorOfUnitForTimeIncrement',</span> <span class="pre">'hoursAfterDataCutoff',</span> <span class="pre">'minutesAfterDataCutoff',</span> <span class="pre">'timeIncrement',</span> <span class="pre">'bitsPerValue',</span> <span class="pre">'dataRepresentationTemplateNumber',</span> <span class="pre">'uvRelativeToGrid']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.as_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.as_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make an epygram H2DField from message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>getdata</strong> – if <em>False</em>, only metadata are read, the field do not
+contain data.</p></li>
+<li><p><strong>read_misc_metadata</strong> – read the specified keys, and store it in
+field.misc_metadata</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.asfield">
+<span class="sig-name descname"><span class="pre">asfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">footprints_proxy_as_builder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_info_as_json</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.asfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.asfield" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 1.3.9.</span></p>
+</div>
+<p>Returns an <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a> made out from the GRIB message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>getdata</strong> – if <em>False</em>, only metadata are read, the field do not
+contain data.</p></li>
+<li><p><strong>footprints_proxy_as_builder</strong> – if <strong>True</strong>, uses footprints.proxy
+to build fields.</p></li>
+<li><p><strong>get_info_as_json</strong> – if not <strong>None</strong>, writes the keys given in
+<em>get_info_as_json</em> as json in field.comment.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.fid_keys_for">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fid_keys_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">editionNumber</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">productDefinitionTemplateNumber</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaleFactorOfFirstFixedSurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaleFactorOfSecondFixedSurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.fid_keys_for"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.fid_keys_for" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get fid keys according to
+<strong>editionNumber</strong> and <strong>productDefinitionTemplateNumber</strong>,
+<strong>scaleFactorOfFirstFixedSurface</strong>
+and <strong>scaleFactorOfSecondFixedSurface</strong>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.genfid">
+<span class="sig-name descname"><span class="pre">genfid</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.genfid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.genfid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates and returns a GRIB-type epygram fid from the message.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as dict.get(), but try to read attribute first.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.readkeys">
+<span class="sig-name descname"><span class="pre">readkeys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.readkeys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.readkeys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads and returns the available keys of the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>namespace</strong> – <p>the namespace of keys to be read, among:</p>
+<ul class="simple">
+<li><p><strong>None</strong>: to get all keys present in message,</p></li>
+<li><p>’ls’: to get the same default keys as the grib_ls,</p></li>
+<li><p>’mars’: to get the keys used by MARS.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.readmessage">
+<span class="sig-name descname"><span class="pre">readmessage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fatal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.readmessage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.readmessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads the meta-data of the message.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>namespace</strong> – <p>the namespace of keys to be read, among:</p>
+<ul>
+<li><p><strong>None</strong>: to get all keys present in message,</p></li>
+<li><p>[‘myKey1’, ‘myKey2’, …] for any custom namespace,</p></li>
+<li><p>’ls’: to get the same default keys as the grib_ls,</p></li>
+<li><p>’mars’: to get the keys used by MARS.</p></li>
+</ul>
+</p></li>
+<li><p><strong>fatal</strong> – raise errors or ignore failed keys</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.set_from">
+<span class="sig-name descname"><span class="pre">set_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">series_of_dicts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fatal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.set_from"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.set_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set key k from its value first found in one of <strong>series_of_dicts</strong>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.set_values">
+<span class="sig-name descname"><span class="pre">set_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.set_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.set_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper to set <strong>values</strong> as a 1D if spectral, or 2D array if gridpoint,
+with consistency with ordering parameters already set beforehand.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.specific_fid_keys_for">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">specific_fid_keys_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">productDefinitionTemplateNumber</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaleFactorOfFirstFixedSurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scaleFactorOfSecondFixedSurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.specific_fid_keys_for"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.specific_fid_keys_for" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get specific fid keys according to <strong>productDefinitionTemplateNumber</strong>
+and <strong>scaleFactorOfFirstFixedSurface</strong>
+and <strong>scaleFactorOfSecondFixedSurface</strong>.</p>
+<p>(GRIB2 only).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="n"><span class="pre">E</span></span></em>, <span class="optional">]</span><em class="sig-param"><span class="n"><span class="pre">**F</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None.</span> <span class="pre">Update</span> <span class="pre">D</span> <span class="pre">from</span> <span class="pre">dict/iterable</span> <span class="pre">E</span> <span class="pre">and</span> <span class="pre">F.</span></span></span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>If E present and has a .keys() method, does: for k in E: D[k] = E[k]
+If E present and lacks .keys() method, does: for (k, v) in E: D[k] = v
+In either case, this is followed by: for k in F: D[k] = F[k]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.GRIB.GRIBmessage.write_to_file">
+<span class="sig-name descname"><span class="pre">write_to_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ofile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.write_to_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.write_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>ofile</em> being an open file-like object designing the physical GRIB
+file to be written to.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="netCDF.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.netCDF</span></code> — Interface-Class to the netCDF format</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.netCDF</span></code> — Interface-Class to the netCDF format</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="fafields.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -56,798 +757,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.formats.GRIB">
-<span id="epygram-formats-grib-interface-class-to-the-grib-format"></span><h1><a class="reference internal" href="#module-epygram.formats.GRIB" title="epygram.formats.GRIB: Interface-Class to the GRIB format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code></a> — Interface-Class to the GRIB format<a class="headerlink" href="#module-epygram.formats.GRIB" title="Permalink to this headline">¶</a></h1>
-<p>Contains classes for GRIB resource and GRIB individual message,
-editions 1 and 2.</p>
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.formats.GRIB.NamesGribDef">
-<em class="property">class </em><code class="descclassname">epygram.formats.GRIB.</code><code class="descname">NamesGribDef</code><span class="sig-paren">(</span><em>actual_init=True, concepts=['name', 'shortName', 'cfName', 'cfVarName']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../site/griberies.html#griberies.GribDef" title="griberies.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">griberies.GribDef</span></code></a></p>
-<p>Handle <em>name</em> and <em>shortName</em> GRIB definitions.</p>
-<dl class="method">
-<dt id="epygram.formats.GRIB.NamesGribDef.cfName">
-<code class="descname">cfName</code><span class="sig-paren">(</span><em>fid</em>, <em>grib_edition='grib2'</em>, <em>include_comments=False</em>, <em>filter_non_GRIB_keys=True</em>, <em>exact=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.cfName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.cfName" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>‘name’ equivalence lookup:</dt>
-<dd><ul class="first last simple">
-<li>if <strong>fid</strong> is a cfName, get the associated GRIB key/value pairs</li>
-<li>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated cfName(s)</li>
-</ul>
-</dd>
-</dl>
-<p>Cf. method _lookup() for other optional arguments.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.NamesGribDef.cfVarName">
-<code class="descname">cfVarName</code><span class="sig-paren">(</span><em>fid</em>, <em>grib_edition='grib2'</em>, <em>include_comments=False</em>, <em>filter_non_GRIB_keys=True</em>, <em>exact=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.cfVarName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.cfVarName" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>‘name’ equivalence lookup:</dt>
-<dd><ul class="first last simple">
-<li>if <strong>fid</strong> is a cfVarName, get the associated GRIB key/value pairs</li>
-<li>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated cfVarName(s)</li>
-</ul>
-</dd>
-</dl>
-<p>Cf. method _lookup() for other optional arguments.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.NamesGribDef.name">
-<code class="descname">name</code><span class="sig-paren">(</span><em>fid</em>, <em>grib_edition='grib2'</em>, <em>include_comments=False</em>, <em>filter_non_GRIB_keys=True</em>, <em>exact=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.name" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>‘name’ equivalence lookup:</dt>
-<dd><ul class="first last simple">
-<li>if <strong>fid</strong> is a name, get the associated GRIB key/value pairs</li>
-<li>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated name(s)</li>
-</ul>
-</dd>
-</dl>
-<p>Cf. method _lookup() for other optional arguments.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.NamesGribDef.shortName">
-<code class="descname">shortName</code><span class="sig-paren">(</span><em>fid</em>, <em>grib_edition='grib2'</em>, <em>include_comments=False</em>, <em>filter_non_GRIB_keys=True</em>, <em>exact=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef.shortName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef.shortName" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="docutils">
-<dt>‘name’ equivalence lookup:</dt>
-<dd><ul class="first last simple">
-<li>if <strong>fid</strong> is a shortName, get the associated GRIB key/value pairs</li>
-<li>if <strong>fid</strong> is a set of GRIB key/value pairs, get the associated shortName(s)</li>
-</ul>
-</dd>
-</dl>
-<p>Cf. method _lookup() for other optional arguments.</p>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.formats.GRIB.GRIB">
-<em class="property">class </em><code class="descclassname">epygram.formats.GRIB.</code><code class="descname">GRIB</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.resources.FileResource.FileResource</span></code></p>
-<p>Class implementing all specificities for GRIB resource format.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</li>
-<li><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).<ul>
-<li>Optional. Default is False.</li>
-</ul>
-</li>
-<li><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.<ul>
-<li>Optional. Default is ‘GRIB’.</li>
-<li>Values: set([‘GRIB’])</li>
-</ul>
-</li>
-<li><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.<ul>
-<li>Values: set([‘append’, ‘read’, ‘write’, ‘a’, ‘w’, ‘r’])</li>
-<li>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Closes a GRIB.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.extract_subdomain">
-<code class="descname">extract_subdomain</code><span class="sig-paren">(</span><em>handgrip</em>, <em>geometry</em>, <em>vertical_coordinate=None</em>, <em>interpolation='linear'</em>, <em>external_distance=None</em>, <em>field3d=None</em>, <em>**_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.extract_subdomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.extract_subdomain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extracts a subdomain from the GRIB resource, given its handgrip
-and the geometry to use.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>handgrip</strong> – MUST define the parameter and the type of levels</li>
-<li><strong>geometry</strong> – is the geometry on which extract data.
-None to keep the geometry untouched.</li>
-<li><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
-V2DField (cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</li>
-<li><strong>interpolation</strong> – <p>defines the interpolation function used to compute
-the profile points locations from the fields grid:</p>
-<ul>
-<li>if ‘nearest’, each horizontal point of the section is
-taken as the horizontal nearest neighboring gridpoint;</li>
-<li>if ‘linear’ (default), each horizontal point of the section is
-computed with linear spline interpolation;</li>
-<li>if ‘cubic’, each horizontal point of the section is
-computed with linear spline interpolation.</li>
-</ul>
-</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.extractprofile">
-<code class="descname">extractprofile</code><span class="sig-paren">(</span><em>handgrip</em>, <em>lon=None</em>, <em>lat=None</em>, <em>geometry=None</em>, <em>vertical_coordinate=None</em>, <em>interpolation='nearest'</em>, <em>cheap_height=True</em>, <em>external_distance=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.extractprofile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.extractprofile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extracts a vertical profile from the GRIB resource, given a handgrip
-and the geographic location (<em>lon</em>/<em>lat</em>) of the profile.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>handgrip</strong> – MUST define the parameter and the type of levels</li>
-<li><strong>lon</strong> – the longitude of the desired point.</li>
-<li><strong>lat</strong> – the latitude of the desired point.</li>
-<li><strong>geometry</strong> – the geometry on which extract data. If None, it is built from
-lon/lat.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>:param vertical_coordinate defines the requested vertical coordinate of the</dt>
-<dd>V1DField (cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</dd>
-</dl>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>interpolation</strong> – <p>defines the interpolation function used to compute
-the profile at requested lon/lat from the fields grid:</p>
-<ul>
-<li>if ‘nearest’ (default), extracts profile at the horizontal nearest neighboring gridpoint;</li>
-<li>if ‘linear’, computes profile with horizontal linear spline interpolation;</li>
-<li>if ‘cubic’, computes profile with horizontal cubic spline interpolation.</li>
-</ul>
-</li>
-<li><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
-(‘altitude’, ‘height’), the computation of heights is done without
-taking hydrometeors into account (in R computation) nor NH Pressure
-departure (Non-Hydrostatic data). Computation therefore faster.</li>
-<li><strong>external_distance</strong> – can be a dict containing the target point value
-and an external field on the same grid as self, to which the distance
-is computed within the 4 horizontally nearest points; e.g.
-{‘target_value’:4810, ‘external_field’:an_H2DField_with_same_geometry}.
-If so, the nearest point is selected with
-distance = <a href="#id1"><span class="problematic" id="id2">|target_value - external_field.data|</span></a></li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.extractsection">
-<code class="descname">extractsection</code><span class="sig-paren">(</span><em>handgrip</em>, <em>end1=None</em>, <em>end2=None</em>, <em>geometry=None</em>, <em>points_number=None</em>, <em>resolution=None</em>, <em>vertical_coordinate=None</em>, <em>interpolation='linear'</em>, <em>cheap_height=True</em>, <em>global_shift_center=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.extractsection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.extractsection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extracts a vertical section from the GRIB resource, given its handgrip
-and the geographic (lon/lat) coordinates of its ends.
-The section is returned as a V2DField.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>handgrip</strong> – MUST define the parameter and the type of levels</li>
-<li><strong>end1</strong> – must be a tuple (lon, lat).</li>
-<li><strong>end2</strong> – must be a tuple (lon, lat).</li>
-<li><strong>geometry</strong> – is the geometry on which extract data. If None, defaults to
-linearily spaced positions computed from  <em>points_number</em>.</li>
-<li><strong>points_number</strong> – defines the total number of horizontal points of the
-section (including ends). If None, defaults to a number computed from
-the <em>ends</em> and the <em>resolution</em>.</li>
-<li><strong>resolution</strong> – defines the horizontal resolution to be given to the
-field. If None, defaults to the horizontal resolution of the field.</li>
-<li><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
-V2DField (cf. <cite>epygram.geometries.vertical_coordinates</cite> possible values).</li>
-<li><strong>interpolation</strong> – <p>defines the interpolation function used to compute
-the profile points locations from the fields grid:</p>
-<ul>
-<li>if ‘nearest’, each horizontal point of the section is
-taken as the horizontal nearest neighboring gridpoint;</li>
-<li>if ‘linear’ (default), each horizontal point of the section is
-computed with linear spline interpolation;</li>
-<li>if ‘cubic’, each horizontal point of the section is
-computed with linear spline interpolation.</li>
-</ul>
-</li>
-<li><strong>cheap_height</strong> – if True and <em>vertical_coordinate</em> among
-(‘altitude’, ‘height’), the computation of heights is done without
-taking hydrometeors into account (in R computation) nor NH Pressure
-departure (Non-Hydrostatic data). Computation therefore faster.</li>
-<li><strong>global_shift_center</strong> – for global lon/lat grids, shift the center by the
-requested angle (in degrees). Enables a [0,360] grid
-to be shifted to a [-180,180] grid, for instance (with -180 argument).</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.GRIB.GRIB.filename">
-<code class="descname">filename</code><a class="headerlink" href="#epygram.formats.GRIB.GRIB.filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.find_fields_in_resource">
-<code class="descname">find_fields_in_resource</code><span class="sig-paren">(</span><em>seed=None</em>, <em>generic=False</em>, <em>**_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.find_fields_in_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of the fields from resource whose name match the given
-seed.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>seed</strong> – <p>might be:</p>
-<ul>
-<li>a ‘handgrip’, i.e. a dict where you can store all requested GRIB
-keys, e.g. {‘shortName’:’t’, ‘indicatorOfTypeOfLevel’:’pl’,<blockquote>
-<div>’level’:850},</div></blockquote>
-</li>
-<li>a list of handgrips</li>
-<li>a string like “{‘shortName’:’t’, ‘level’:850}”, that would be
-converted to a dict handgrip</li>
-<li><em>None</em>. If <em>None</em> (default), returns the list of all fields in
-resource.</li>
-</ul>
-</li>
-<li><strong>generic</strong> – if True, returns complete fid’s,
-union of {‘FORMATname’:fieldname} and the according generic fid of
-the fields.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.GRIB.GRIB.fmtdelayedopen">
-<code class="descname">fmtdelayedopen</code><a class="headerlink" href="#epygram.formats.GRIB.GRIB.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.GRIB.GRIB.format">
-<code class="descname">format</code><a class="headerlink" href="#epygram.formats.GRIB.GRIB.format" title="Permalink to this definition">¶</a></dt>
-<dd><p>Format of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.get_message_at_position">
-<code class="descname">get_message_at_position</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.get_message_at_position" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the message at position <em>position</em>, from 0 (first message)
-to messages_number-1 (last message).
-Negative position starts from the end: -1 is last message.</p>
-<p>Should not be used sequentially, probably very inefficient.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.iter_fields">
-<code class="descname">iter_fields</code><span class="sig-paren">(</span><em>getdata=True</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.iter_fields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.iter_fields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterates sequentially on messages, returning fields.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>getdata</strong> – if False, do not read data from the messages.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.iter_messages">
-<code class="descname">iter_messages</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.iter_messages" title="Permalink to this definition">¶</a></dt>
-<dd><p>Iterates sequentially on messages, returning messages.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>headers_only</strong> – if False, read data from messages.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.listfields">
-<code class="descname">listfields</code><span class="sig-paren">(</span><em>onlykey=None</em>, <em>select=None</em>, <em>complete=False</em>, <em>additional_keys=[]</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.listfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.listfields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list containing the GRIB identifiers of all the fields of the
-resource.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>onlykey</strong> – can be specified as a string or a tuple of strings,
-so that only specified keys of the fid will returned.</li>
-<li><strong>select</strong> – can be specified as a dict(key=value) to restrain
-the list of fields to those that match the key:value pairs.</li>
-<li><strong>complete</strong> – list fields with their natural fid + generic one.</li>
-<li><strong>additional_keys</strong> – add given keys in fids</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.GRIB.GRIB.messages_number">
-<code class="descname">messages_number</code><a class="headerlink" href="#epygram.formats.GRIB.GRIB.messages_number" title="Permalink to this definition">¶</a></dt>
-<dd><p>Counts the number of messages in file.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.open">
-<code class="descname">open</code><span class="sig-paren">(</span><em>openmode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opens a GRIB and initializes some attributes.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>openmode</strong> – optional, to open with a specific openmode, eventually
-different from the one specified at initialization.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.GRIB.GRIB.openmode">
-<code class="descname">openmode</code><a class="headerlink" href="#epygram.formats.GRIB.GRIB.openmode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opening mode (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.readfield">
-<code class="descname">readfield</code><span class="sig-paren">(</span><em>handgrip, getdata=True, footprints_proxy_as_builder=False, get_info_as_json=None, read_misc_metadata=['typeOfGeneratingProcess', 'productionStatusOfProcessedData', 'typeOfProcessedData', 'generatingProcessIdentifier', 'typeOfTimeIncrement', 'indicatorOfUnitOfTimeRange', 'indicatorOfUnitForTimeRange', 'indicatorOfUnitForTimeIncrement', 'hoursAfterDataCutoff', 'minutesAfterDataCutoff', 'timeIncrement', 'bitsPerValue', 'dataRepresentationTemplateNumber', 'uvRelativeToGrid']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.readfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.readfield" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds in GRIB the message that correspond to the <em>handgrip</em>,
-and returns it as a <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a>.
-If several messages meet the requirements, raises error (use
-readfields() method instead).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>handgrip</strong> (<em>dict</em>) – a dict where you can store all requested GRIB
-keys for discrimination…
-E.g. {‘shortName’:’t’, ‘typeOfFirstFixedSurface’:100, ‘level’:850}
-will return the Temperature at 850hPa field.</li>
-<li><strong>getdata</strong> – if False, the data is not read, the field consist
-in the meta-data only.</li>
-<li><strong>footprints_proxy_as_builder</strong> – if True, uses footprints.proxy
-to build fields. True decreases performance.
-.. deprecated:: 1.3.9</li>
-<li><strong>get_info_as_json</strong> – if not None, writes the keys given in
-<em>get_info_as_json</em> as json in field.comment.
-.. deprecated:: 1.3.9</li>
-<li><strong>read_misc_metadata</strong> – read the specified keys, and store it in
-field.misc_metadata</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.readfields">
-<code class="descname">readfields</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.readfields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds in GRIB the message(s) that correspond to the <em>handgrip</em>,
-and returns it as a <a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> of
-<a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>handgrip</strong> (<em>dict</em>) – a dict where you can store all requested GRIB
-keys for discrimination…
-E.g. {‘shortName’:’t’, ‘typeOfFirstFixedSurface’:100}
-will return all the Temperature fields on Pressure levels.</li>
-<li><strong>getdata</strong> – if False, the data is not read, the field consist
-in the meta-data only.</li>
-<li><strong>footprints_proxy_as_builder</strong> – if True, uses footprints.proxy
-to build fields. True decreases performance.
-.. deprecated:: 1.3.9</li>
-<li><strong>get_info_as_json</strong> – if not None, writes the keys given in
-<em>get_info_as_json</em> as json in field.comment.
-.. deprecated:: 1.3.9</li>
-<li><strong>read_misc_metadata</strong> – read the specified keys, and store it in
-field.misc_metadata</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.sortfields">
-<code class="descname">sortfields</code><span class="sig-paren">(</span><em>sortingkey</em>, <em>onlykey=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.sortfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.sortfields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a sorted list of fields with regards to the given <em>sortingkey</em>
-of their fid, as a dict of lists.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sortingkey</strong> – key on which to sort out fields</li>
-<li><strong>onlykey</strong> – specified as a string or a tuple of strings,
-so that only specified keys of the fid will returned.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.split_UV">
-<code class="descname">split_UV</code><span class="sig-paren">(</span><em>fieldseed</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.split_UV"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.split_UV" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return two lists of fids corresponding respectively to U and V
-components of wind, given a <em>fieldseed</em>.
-Syntax example: ‘shortName’:’u+v’, or ‘indicatorOfParameter’:’33+34’</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.what">
-<code class="descname">what</code><span class="sig-paren">(</span><em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;</em>, <em>mode='one+list'</em>, <em>sortfields=None</em>, <em>details=None</em>, <em>**_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIB.what"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIB.what" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes in file a summary of the contents of the GRIB.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>out</strong> – the output open file-like object</li>
-<li><strong>mode</strong> – <p>among (‘one+list’, ‘fid_list’, ‘what’, ‘ls’, ‘mars’),</p>
-<ul>
-<li>’one+list’ = gives the validity/geometry of the first field in
-GRIB, plus the list of fid.</li>
-<li>’fid_list’ = gives only the fid of each field in GRIB.</li>
-<li>’what’ = gives the values of the keys from each GRIB message that
-are used to generate an <strong>epygram</strong> field from the message (slower).</li>
-<li>’ls’ = gives the values of the ‘ls’ keys from each GRIB message.</li>
-<li>’mars’ = gives the values of the ‘mars’ keys from each GRIB message.</li>
-</ul>
-</li>
-<li><strong>sortfields</strong> – name of the fid key used to sort fields; e.g. ‘typeOfLevel’;
-only for <em>mode</em> = ‘one+list’ or ‘fid_list’.</li>
-<li><strong>details</strong> – if ‘compression’, gives the ‘packingType’ and ‘bitsPerValue’
-parameters of field packing. Only with ‘what’ mode.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIB.writefield">
-<code class="descname">writefield</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.GRIB.GRIB.writefield" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes a Field as a GRIBmessage into the GRIB resource.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>field</strong> – a <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a> instance</li>
-<li><strong>ordering</strong> – way of ordering data in GRIB, dict of GRIB keys.</li>
-<li><strong>packing</strong> – options of packing and compression in GRIB (dict).</li>
-<li><strong>sample</strong> – to use a specific sample GRIB</li>
-<li><strong>grib_edition</strong> – to force a GRIB edition number (1, 2).</li>
-<li><strong>other_GRIB_options</strong> – other options to be specified in GRIB,
-as a dict(GRIBkey=value).
-From v1.3.9, any GRIB2 key should be given through this rather than
-packing/ordering.</li>
-<li><strong>interpret_comment</strong> – set additional key/values taken from
-field.comment (interpreted as json)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.formats.GRIB.GRIBmessage">
-<em class="property">class </em><code class="descclassname">epygram.formats.GRIB.</code><code class="descname">GRIBmessage</code><span class="sig-paren">(</span><em>source</em>, <em>ordering={'iScansNegatively': 0</em>, <em>'jPointsAreConsecutive': 0</em>, <em>'jScansPositively': 0}</em>, <em>packing=None</em>, <em>sample=None</em>, <em>grib_edition=None</em>, <em>other_GRIB_options={}</em>, <em>interpret_comment=False</em>, <em>set_misc_metadata=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
-<p>Class implementing a GRIB message as an object.</p>
-<p>Initialize a GRIBmessage from either sources.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>source</strong> – <p>being a tuple of either form:</p>
-<ul class="simple">
-<li>(‘file’, ‘<em>filename</em>’ [, <em>offset_position</em>])
-<em>filename</em> being a relative or absolute path to the file it is read
-in. n = <em>offset_position</em>, if given, enables to read the n+1’th GRIB
-message in file. Defaults to 0. Negative value counts from the end.</li>
-<li>(‘field’, <a class="reference internal" href="H2DField.html#module-epygram.fields.H2DField" title="epygram.fields.H2DField: Horizontal 2-D Field class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code></a>)</li>
-<li>(‘gribid’, <em>gribid</em>)
-<em>gribid</em> being an integer, refering to the <em>gribid</em> of a GRIB_API
-message in memory.</li>
-<li>(‘sample’, ‘<em>samplename</em>’)
-<em>samplename</em> being the name of the sample from which to be
-generated.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>In case <strong>source</strong> is a field, some options can be forced:</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>sample</strong> – to use a specific sample GRIB.
-Specific syntax ‘file:$filename$’ takes the first message
-in $filename$ as sample.</li>
-<li><strong>grib_edition</strong> – to force a GRIB edition number (1, 2).</li>
-<li><strong>other_GRIB_options</strong> – other options to be specified in GRIB,
-as a dict(GRIBkey=value).
-From v1.3.9, any GRIB2 key should be given through this rather than
-packing/ordering.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>GRIB1</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>ordering</strong> – flattening of 2D data</li>
-<li><strong>packing</strong> – options of packing and compression in GRIB (dict).</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>GRIB2 (new way)</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>interpret_comment</strong> – set additional key/values taken from
-field.comment (interpreted as json)</li>
-<li><strong>set_misc_metadata</strong> – set additional key/values taken from
-field.misc_metadata</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.actual_fid_keys">
-<code class="descname">actual_fid_keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.actual_fid_keys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.actual_fid_keys" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adjust fid keys to specific grib edition and templates.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.as_field">
-<code class="descname">as_field</code><span class="sig-paren">(</span><em>getdata=True, read_misc_metadata=['typeOfGeneratingProcess', 'productionStatusOfProcessedData', 'typeOfProcessedData', 'generatingProcessIdentifier', 'typeOfTimeIncrement', 'indicatorOfUnitOfTimeRange', 'indicatorOfUnitForTimeRange', 'indicatorOfUnitForTimeIncrement', 'hoursAfterDataCutoff', 'minutesAfterDataCutoff', 'timeIncrement', 'bitsPerValue', 'dataRepresentationTemplateNumber', 'uvRelativeToGrid']</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.as_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.as_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Make an epygram H2DField from message.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>getdata</strong> – if <em>False</em>, only metadata are read, the field do not
-contain data.</li>
-<li><strong>read_misc_metadata</strong> – read the specified keys, and store it in
-field.misc_metadata</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.asfield">
-<code class="descname">asfield</code><span class="sig-paren">(</span><em>getdata=True</em>, <em>footprints_proxy_as_builder=False</em>, <em>get_info_as_json=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.asfield"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.asfield" title="Permalink to this definition">¶</a></dt>
-<dd><div class="deprecated">
-<p><span class="versionmodified">Deprecated since version 1.3.9.</span></p>
-</div>
-<p>Returns an <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a> made out from the GRIB message.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>getdata</strong> – if <em>False</em>, only metadata are read, the field do not
-contain data.</li>
-<li><strong>footprints_proxy_as_builder</strong> – if <strong>True</strong>, uses footprints.proxy
-to build fields.</li>
-<li><strong>get_info_as_json</strong> – if not <strong>None</strong>, writes the keys given in
-<em>get_info_as_json</em> as json in field.comment.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="epygram.formats.GRIB.GRIBmessage.fid_keys_for">
-<em class="property">classmethod </em><code class="descname">fid_keys_for</code><span class="sig-paren">(</span><em>editionNumber</em>, <em>productDefinitionTemplateNumber=0</em>, <em>scaleFactorOfFirstFixedSurface=0</em>, <em>scaleFactorOfSecondFixedSurface=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.fid_keys_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.fid_keys_for" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get fid keys according to
-<strong>editionNumber</strong> and <strong>productDefinitionTemplateNumber</strong>,
-<strong>scaleFactorOfFirstFixedSurface</strong>
-and <strong>scaleFactorOfSecondFixedSurface</strong>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.genfid">
-<code class="descname">genfid</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.genfid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.genfid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates and returns a GRIB-type epygram fid from the message.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>key</em>, <em>default=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Same as dict.get(), but try to read attribute first.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.readkeys">
-<code class="descname">readkeys</code><span class="sig-paren">(</span><em>namespace=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.readkeys"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.readkeys" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads and returns the available keys of the message.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>namespace</strong> – <p>the namespace of keys to be read, among:</p>
-<ul class="simple">
-<li><strong>None</strong>: to get all keys present in message,</li>
-<li>’ls’: to get the same default keys as the grib_ls,</li>
-<li>’mars’: to get the keys used by MARS.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.readmessage">
-<code class="descname">readmessage</code><span class="sig-paren">(</span><em>namespace=None</em>, <em>fatal=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.readmessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.readmessage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads the meta-data of the message.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>namespace</strong> – <p>the namespace of keys to be read, among:</p>
-<ul>
-<li><strong>None</strong>: to get all keys present in message,</li>
-<li>[‘myKey1’, ‘myKey2’, …] for any custom namespace,</li>
-<li>’ls’: to get the same default keys as the grib_ls,</li>
-<li>’mars’: to get the keys used by MARS.</li>
-</ul>
-</li>
-<li><strong>fatal</strong> – raise errors or ignore failed keys</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.set_from">
-<code class="descname">set_from</code><span class="sig-paren">(</span><em>k</em>, <em>series_of_dicts</em>, <em>fatal=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.set_from"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.set_from" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set key k from its value first found in one of <strong>series_of_dicts</strong>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.set_values">
-<code class="descname">set_values</code><span class="sig-paren">(</span><em>values</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.set_values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.set_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrapper to set <strong>values</strong> as a 1D if spectral, or 2D array if gridpoint,
-with consistency with ordering parameters already set beforehand.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="epygram.formats.GRIB.GRIBmessage.specific_fid_keys_for">
-<em class="property">classmethod </em><code class="descname">specific_fid_keys_for</code><span class="sig-paren">(</span><em>productDefinitionTemplateNumber=0</em>, <em>scaleFactorOfFirstFixedSurface=0</em>, <em>scaleFactorOfSecondFixedSurface=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.specific_fid_keys_for"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.specific_fid_keys_for" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get specific fid keys according to <strong>productDefinitionTemplateNumber</strong>
-and <strong>scaleFactorOfFirstFixedSurface</strong>
-and <strong>scaleFactorOfSecondFixedSurface</strong>.</p>
-<p>(GRIB2 only).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.update">
-<code class="descname">update</code><span class="sig-paren">(</span><span class="optional">[</span><em>E</em>, <span class="optional">]</span><em>**F</em><span class="sig-paren">)</span> &#x2192; None. Update D from dict/iterable E and F.<a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.update" title="Permalink to this definition">¶</a></dt>
-<dd><p>If E present and has a .keys() method, does: for k in E: D[k] = E[k]
-If E present and lacks .keys() method, does: for (k, v) in E: D[k] = v
-In either case, this is followed by: for k in F: D[k] = F[k]</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.GRIB.GRIBmessage.write_to_file">
-<code class="descname">write_to_file</code><span class="sig-paren">(</span><em>ofile</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#GRIBmessage.write_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.GRIB.GRIBmessage.write_to_file" title="Permalink to this definition">¶</a></dt>
-<dd><p><em>ofile</em> being an open file-like object designing the physical GRIB
-file to be written to.</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -867,14 +785,15 @@ file to be written to.</p>
         <li class="right" >
           <a href="netCDF.html" title="epygram.formats.netCDF — Interface-Class to the netCDF format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.geometries.VGeometry — Vertical Geometry class &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.geometries.VGeometry — Vertical Geometry class &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.V2DGeometry — Vertical 2-D Geometry class" href="V2DGeometry.html" />
@@ -35,16 +34,316 @@
         <li class="right" >
           <a href="H1DGeometry.html" title="epygram.geometries.H1DGeometry — Horizontal 1-D Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.geometries.VGeometry">
+<span id="epygram-geometries-vgeometry-vertical-geometry-class"></span><h1><a class="reference internal" href="#module-epygram.geometries.VGeometry" title="epygram.geometries.VGeometry: Vertical Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code></a> — Vertical Geometry class<a class="headerlink" href="#module-epygram.geometries.VGeometry" title="Permalink to this headline">¶</a></h1>
+<p>Contains the class for Vertical geometry of fields.</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">VGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<p>Handles the vertical geometry for fields.</p>
+<p>Here, the grid defines the vertical position of each level
+between a bottom and a top positions.</p>
+<p>The position of points w/r to the vertical grid (mass or flux points),
+is interpreted as:</p>
+<ul class="simple">
+<li><p>mass: points are located on same levels as the grid points.</p></li>
+<li><p>flux: points are located on half-levels, hence are N+1.</p></li>
+</ul>
+<p>levels is a list with one item for each level represented in data.
+Each item can be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>a scalar (constant value for all the data point),</p></li>
+<li><p>an array with the horizontal geographic shape (level constant in time
+but varying on the horizontal),</p></li>
+<li><p>an array with the first dimension corresponding to the validity
+lengthy and other dimensions to represent the horizotal.</p></li>
+</ul>
+</div></blockquote>
+<p>It is not allowed to have a level varying in time and constant on the geographic domain.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the vertical grid.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>levels</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - Effective levels on which data is available.</p></li>
+<li><p><strong>position_on_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the vertical grid.</p>
+<ul>
+<li><p>Optional. Default is ‘__unknown__’.</p></li>
+<li><p>Values: set([‘__unknown__’, ‘flux’, ‘mass’])</p></li>
+</ul>
+</li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.</p>
+<ul>
+<li><p>Values: set([‘V’])</p></li>
+</ul>
+</li>
+<li><p><strong>typeoffirstfixedsurface</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - Type of horizontal level, as of GRIB2 norm                       (inspired from GRIB_API).</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles description of the vertical grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.levels">
+<span class="sig-name descname"><span class="pre">levels</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Effective levels on which data is available (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.position_on_grid">
+<span class="sig-name descname"><span class="pre">position_on_grid</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.position_on_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Position of points w/r to the vertical grid (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.to_vgrid">
+<span class="sig-name descname"><span class="pre">to_vgrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry.to_vgrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.to_vgrid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the VGeometry object to a <code class="xref py py-mod docutils literal notranslate"><span class="pre">vgrid</span></code> one.</p>
+<p>Other kwargs passed to HybridPressureVGrid() constructor.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.typeoffirstfixedsurface">
+<span class="sig-name descname"><span class="pre">typeoffirstfixedsurface</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.typeoffirstfixedsurface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of horizontal level, as of GRIB2 norm                       (inspired from GRIB_API) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.what">
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – the output open file-like object</p></li>
+<li><p><strong>levels</strong> – if True, writes the levels of the geometry</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridP2pressure">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridP2pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridP_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridposition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP2pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP2pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a ‘hybrid_pressure’ VGeometry to a ‘pressure’ (in hPa) VGeometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the initial vertical coordinate</p></li>
+<li><p><strong>Psurf</strong> (<em>float</em>) – the surface pressure in Pa, needed for integration of Ai and Bi.</p></li>
+<li><p><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
+to compute half-levels from full-levels, or inverse: ‘geometric’ or
+‘arithmetic’.</p></li>
+<li><p><strong>gridposition</strong> (<em>str</em>) – (= ‘mass’ or ‘flux’) is the target grid position. By
+default the data position in the origin geometry is taken.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridH2pressure">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridH2pressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridH_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">P</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridH2pressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridH2pressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a hybrid_height coordinate grid into pressure (in hPa).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>P</strong> – the vertical profile of pressure to use</p></li>
+<li><p><strong>position</strong> – the position of P values on the grid (‘mass’ or ‘flux’)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridP2altitude">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridP2altitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridP_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pdep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi_surf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP2altitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP2altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a hybrid_pressure coordinate grid into altitude of mass levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the initial vertical coordinate</p></li>
+<li><p><strong>R</strong> (<em>list</em><em>,</em><em>numpy.ndarray</em>) – the profile of specific gas constant (J/kg/K).</p></li>
+<li><p><strong>T</strong> (<em>list</em><em>,</em><em>numpy.ndarray</em>) – the profile of temperature (K).</p></li>
+<li><p><strong>Psurf</strong> (<em>float</em>) – the surface pressure, needed for integration of Ai and Bi.</p></li>
+<li><p><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
+to compute half-levels from full-levels, or inverse: ‘geometric’ or
+‘arithmetic’.</p></li>
+<li><p><strong>Pdep</strong> (<em>list</em><em>,</em><em>numpy.ndarray</em>) – the optional profile of NH pressure departures.</p></li>
+<li><p><strong>Phi_surf</strong> (<em>float</em>) – the optional surface geopotential.
+If given, the final coordinate is altitude above sea level,
+else height above ground surface.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridH2altitude">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridH2altitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridH_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zsurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridposition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv2height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridH2altitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridH2altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a hybrid_height coordinate grid into altitude.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Zsurf</strong> – the surface height, needed for integration of Ai and Bi.</p></li>
+<li><p><strong>gridposition</strong> – if given (‘mass’ or ‘flux’), the target grid is
+computed accordingly.
+By default the data position in the origin geometry is taken.</p></li>
+<li><p><strong>conv2height</strong> – if True, conversion into height is performed instead of
+altitude.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.pressure2altitude">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">pressure2altitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pressure_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pdep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi_surf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#pressure2altitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.pressure2altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a pressure coordinate grid (on mass or flux levels) to
+altitude on mass levels).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>R</strong> – the profile of specific gas constant (J/kg/K).</p></li>
+<li><p><strong>T</strong> – the profile of temperature (K).</p></li>
+<li><p><strong>Pdep</strong> – the optional profile of NH pressure departures.</p></li>
+<li><p><strong>Phi_surf</strong> – the optional surface geopotential.
+If given, the final coordinate is altitude above sea level,
+else height above ground surface.</p></li>
+<li><p><strong>vertical_mean</strong> – defines the kind of averaging done on the vertical
+to compute half-levels from full-levels, or inverse: ‘geometric’ or
+‘arithmetic’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridP_coord_and_surfpressure_to_3D_pressure_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridP_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridposition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP_coord_and_surfpressure_to_3D_pressure_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a hybridP Vgeometry and a surface pressure (in Pa) H2D field,
+compute a 3D field containing the pressure (in hPa) at each hybridP level
+for each gridpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the hybridP VGeometry</p></li>
+<li><p><strong>Psurf</strong> (<a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField" title="epygram.fields.H2DField.H2DField"><em>H2DField</em></a>) – the surface pressure H2DField in Pa, needed for
+integration of Ai and Bi.</p></li>
+<li><p><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
+to compute half-levels from full-levels, or inverse: ‘geometric’ or
+‘arithmetic’.</p></li>
+<li><p><strong>gridposition</strong> (<em>str</em>) – (= ‘mass’ or ‘flux’) is the target grid position. By
+default the data position in the origin geometry is taken.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field">D3Field</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field">
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridP_coord_to_3D_altitude_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridP_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t3D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q3D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ql3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qi3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qr3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qs3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qg3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pdep3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi_surf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP_coord_to_3D_altitude_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>From a hybridP Vgeometry, a surface pressure (in Pa) H2D field,
+and temperature and specific humidity 3D fields,
+compute a 3D field containing the altitude (in m) at each hybridP level
+for each gridpoint.</p>
+<p>Hydrometeors 3D fields can be provided for more accurate R computation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the hybridP VGeometry</p></li>
+<li><p><strong>Psurf</strong> (<a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField" title="epygram.fields.H2DField.H2DField"><em>H2DField</em></a>) – the surface pressure H2DField in Pa, needed for
+integration of Ai and Bi.</p></li>
+<li><p><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
+to compute half-levels from full-levels, or inverse: ‘geometric’ or
+‘arithmetic’.</p></li>
+<li><p><strong>t3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – temperature D3Field</p></li>
+<li><p><strong>q3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – specific humidity D3Field</p></li>
+<li><p><strong>ql3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – liquid water content D3Field</p></li>
+<li><p><strong>qi3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – ice water content D3Field</p></li>
+<li><p><strong>qr3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – rain water content D3Field</p></li>
+<li><p><strong>qs3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – snow water content D3Field</p></li>
+<li><p><strong>qg3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – graupel water content D3Field</p></li>
+<li><p><strong>Pdep3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – non-hydrostatic pressure departure D3Field</p></li>
+<li><p><strong>Phi_surf</strong> (<a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField" title="epygram.fields.H2DField.H2DField"><em>H2DField</em></a>) – surface geopotential H2DField (for altitude vs. height)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field">D3Field</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a><ul>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 </ul>
 </li>
@@ -52,10 +351,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="H1DGeometry.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.H1DGeometry</span></code> — Horizontal 1-D Geometry class</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H1DGeometry</span></code> — Horizontal 1-D Geometry class</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="V2DGeometry.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.geometries.V2DGeometry</span></code> — Vertical 2-D Geometry class</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.V2DGeometry</span></code> — Vertical 2-D Geometry class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -64,344 +363,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.geometries.VGeometry">
-<span id="epygram-geometries-vgeometry-vertical-geometry-class"></span><h1><a class="reference internal" href="#module-epygram.geometries.VGeometry" title="epygram.geometries.VGeometry: Vertical Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code></a> — Vertical Geometry class<a class="headerlink" href="#module-epygram.geometries.VGeometry" title="Permalink to this headline">¶</a></h1>
-<p>Contains the class for Vertical geometry of fields.</p>
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.geometries.VGeometry.VGeometry">
-<em class="property">class </em><code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">VGeometry</code><span class="sig-paren">(</span><em>*args</em>, <em>**kw</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
-<p>Handles the vertical geometry for fields.</p>
-<p>Here, the grid defines the vertical position of each level
-between a bottom and a top positions.</p>
-<p>The position of points w/r to the vertical grid (mass or flux points),
-is interpreted as:</p>
-<ul class="simple">
-<li>mass: points are located on same levels as the grid points.</li>
-<li>flux: points are located on half-levels, hence are N+1.</li>
-</ul>
-<p>levels is a list with one item for each level represented in data.
-Each item can be:</p>
-<blockquote>
-<div><ul class="simple">
-<li>a scalar (constant value for all the data point),</li>
-<li>an array with the horizontal geographic shape (level constant in time
-but varying on the horizontal),</li>
-<li>an array with the first dimension corresponding to the validity
-lengthy and other dimensions to represent the horizotal.</li>
-</ul>
-</div></blockquote>
-<p>It is not allowed to have a level varying in time and constant on the geographic domain.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the vertical grid.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>levels</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - Effective levels on which data is available.</li>
-<li><strong>position_on_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the vertical grid.<ul>
-<li>Optional. Default is ‘__unknown__’.</li>
-<li>Values: set([‘__unknown__’, ‘flux’, ‘mass’])</li>
-</ul>
-</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.<ul>
-<li>Values: set([‘V’])</li>
-</ul>
-</li>
-<li><strong>typeoffirstfixedsurface</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - Type of horizontal level, as of GRIB2 norm                       (inspired from GRIB_API).</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.geometries.VGeometry.VGeometry.grid">
-<code class="descname">grid</code><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the vertical grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.VGeometry.VGeometry.levels">
-<code class="descname">levels</code><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.levels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Effective levels on which data is available (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.VGeometry.VGeometry.position_on_grid">
-<code class="descname">position_on_grid</code><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.position_on_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the vertical grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.VGeometry.VGeometry.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>(see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.geometries.VGeometry.VGeometry.to_vgrid">
-<code class="descname">to_vgrid</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry.to_vgrid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.to_vgrid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convert the VGeometry object to a <code class="xref py py-mod docutils literal notranslate"><span class="pre">vgrid</span></code> one.</p>
-<p>Other kwargs passed to HybridPressureVGrid() constructor.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.geometries.VGeometry.VGeometry.typeoffirstfixedsurface">
-<code class="descname">typeoffirstfixedsurface</code><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.typeoffirstfixedsurface" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of horizontal level, as of GRIB2 norm                       (inspired from GRIB_API) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.geometries.VGeometry.VGeometry.what">
-<code class="descname">what</code><span class="sig-paren">(</span><em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;</em>, <em>levels=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry.what"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.what" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes in file a summary of the geometry.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>out</strong> – the output open file-like object</li>
-<li><strong>levels</strong> – if True, writes the levels of the geometry</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-<hr class="docutils" />
-<div class="section" id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.hybridP2pressure">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">hybridP2pressure</code><span class="sig-paren">(</span><em>hybridP_geometry</em>, <em>Psurf</em>, <em>vertical_mean</em>, <em>gridposition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP2pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP2pressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a ‘hybrid_pressure’ VGeometry to a ‘pressure’ (in hPa) VGeometry.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the initial vertical coordinate</li>
-<li><strong>Psurf</strong> (<em>float</em>) – the surface pressure in Pa, needed for integration of Ai and Bi.</li>
-<li><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
-to compute half-levels from full-levels, or inverse: ‘geometric’ or
-‘arithmetic’.</li>
-<li><strong>gridposition</strong> (<em>str</em>) – (= ‘mass’ or ‘flux’) is the target grid position. By
-default the data position in the origin geometry is taken.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.hybridH2pressure">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">hybridH2pressure</code><span class="sig-paren">(</span><em>hybridH_geometry</em>, <em>P</em>, <em>position</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridH2pressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridH2pressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a hybrid_height coordinate grid into pressure (in hPa).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>P</strong> – the vertical profile of pressure to use</li>
-<li><strong>position</strong> – the position of P values on the grid (‘mass’ or ‘flux’)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.hybridP2altitude">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">hybridP2altitude</code><span class="sig-paren">(</span><em>hybridP_geometry</em>, <em>R</em>, <em>T</em>, <em>Psurf</em>, <em>vertical_mean</em>, <em>Pdep=None</em>, <em>Phi_surf=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP2altitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP2altitude" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a hybrid_pressure coordinate grid into altitude of mass levels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the initial vertical coordinate</li>
-<li><strong>R</strong> (<em>list</em><em>,</em><em>numpy.ndarray</em>) – the profile of specific gas constant (J/kg/K).</li>
-<li><strong>T</strong> (<em>list</em><em>,</em><em>numpy.ndarray</em>) – the profile of temperature (K).</li>
-<li><strong>Psurf</strong> (<em>float</em>) – the surface pressure, needed for integration of Ai and Bi.</li>
-<li><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
-to compute half-levels from full-levels, or inverse: ‘geometric’ or
-‘arithmetic’.</li>
-<li><strong>Pdep</strong> (<em>list</em><em>,</em><em>numpy.ndarray</em>) – the optional profile of NH pressure departures.</li>
-<li><strong>Phi_surf</strong> (<em>float</em>) – the optional surface geopotential.
-If given, the final coordinate is altitude above sea level,
-else height above ground surface.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.hybridH2altitude">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">hybridH2altitude</code><span class="sig-paren">(</span><em>hybridH_geometry</em>, <em>Zsurf</em>, <em>gridposition=None</em>, <em>conv2height=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridH2altitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridH2altitude" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a hybrid_height coordinate grid into altitude.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Zsurf</strong> – the surface height, needed for integration of Ai and Bi.</li>
-<li><strong>gridposition</strong> – if given (‘mass’ or ‘flux’), the target grid is
-computed accordingly.
-By default the data position in the origin geometry is taken.</li>
-<li><strong>conv2height</strong> – if True, conversion into height is performed instead of
-altitude.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry">VGeometry</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.pressure2altitude">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">pressure2altitude</code><span class="sig-paren">(</span><em>pressure_geometry</em>, <em>R</em>, <em>T</em>, <em>vertical_mean</em>, <em>Pdep=0.0</em>, <em>Phi_surf=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#pressure2altitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.pressure2altitude" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a pressure coordinate grid (on mass or flux levels) to
-altitude on mass levels).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>R</strong> – the profile of specific gas constant (J/kg/K).</li>
-<li><strong>T</strong> – the profile of temperature (K).</li>
-<li><strong>Pdep</strong> – the optional profile of NH pressure departures.</li>
-<li><strong>Phi_surf</strong> – the optional surface geopotential.
-If given, the final coordinate is altitude above sea level,
-else height above ground surface.</li>
-<li><strong>vertical_mean</strong> – defines the kind of averaging done on the vertical
-to compute half-levels from full-levels, or inverse: ‘geometric’ or
-‘arithmetic’.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">hybridP_coord_and_surfpressure_to_3D_pressure_field</code><span class="sig-paren">(</span><em>hybridP_geometry</em>, <em>Psurf</em>, <em>vertical_mean</em>, <em>gridposition=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP_coord_and_surfpressure_to_3D_pressure_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>From a hybridP Vgeometry and a surface pressure (in Pa) H2D field,
-compute a 3D field containing the pressure (in hPa) at each hybridP level
-for each gridpoint.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the hybridP VGeometry</li>
-<li><strong>Psurf</strong> (<a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField" title="epygram.fields.H2DField.H2DField"><em>H2DField</em></a>) – the surface pressure H2DField in Pa, needed for
-integration of Ai and Bi.</li>
-<li><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
-to compute half-levels from full-levels, or inverse: ‘geometric’ or
-‘arithmetic’.</li>
-<li><strong>gridposition</strong> (<em>str</em>) – (= ‘mass’ or ‘flux’) is the target grid position. By
-default the data position in the origin geometry is taken.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field">D3Field</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field">
-<code class="descclassname">epygram.geometries.VGeometry.</code><code class="descname">hybridP_coord_to_3D_altitude_field</code><span class="sig-paren">(</span><em>hybridP_geometry</em>, <em>Psurf</em>, <em>vertical_mean</em>, <em>t3D</em>, <em>q3D</em>, <em>ql3D=None</em>, <em>qi3D=None</em>, <em>qr3D=None</em>, <em>qs3D=None</em>, <em>qg3D=None</em>, <em>Pdep3D=None</em>, <em>Phi_surf=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP_coord_to_3D_altitude_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>From a hybridP Vgeometry, a surface pressure (in Pa) H2D field,
-and temperature and specific humidity 3D fields,
-compute a 3D field containing the altitude (in m) at each hybridP level
-for each gridpoint.</p>
-<p>Hydrometeors 3D fields can be provided for more accurate R computation.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>hybridP_geometry</strong> (<a class="reference internal" href="#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><em>VGeometry</em></a>) – the hybridP VGeometry</li>
-<li><strong>Psurf</strong> (<a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField" title="epygram.fields.H2DField.H2DField"><em>H2DField</em></a>) – the surface pressure H2DField in Pa, needed for
-integration of Ai and Bi.</li>
-<li><strong>vertical_mean</strong> (<em>str</em>) – defines the kind of averaging done on the vertical
-to compute half-levels from full-levels, or inverse: ‘geometric’ or
-‘arithmetic’.</li>
-<li><strong>t3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – temperature D3Field</li>
-<li><strong>q3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – specific humidity D3Field</li>
-<li><strong>ql3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – liquid water content D3Field</li>
-<li><strong>qi3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – ice water content D3Field</li>
-<li><strong>qr3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – rain water content D3Field</li>
-<li><strong>qs3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – snow water content D3Field</li>
-<li><strong>qg3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – graupel water content D3Field</li>
-<li><strong>Pdep3D</strong> (<a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field"><em>D3Field</em></a>) – non-hydrostatic pressure departure D3Field</li>
-<li><strong>Phi_surf</strong> (<a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField" title="epygram.fields.H2DField.H2DField"><em>H2DField</em></a>) – surface geopotential H2DField (for altitude vs. height)</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field" title="epygram.fields.D3Field.D3Field">D3Field</a></p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</div>
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -421,14 +391,15 @@ to compute half-levels from full-levels, or inverse: ‘geometric’ or
         <li class="right" >
           <a href="H1DGeometry.html" title="epygram.geometries.H1DGeometry — Horizontal 1-D Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

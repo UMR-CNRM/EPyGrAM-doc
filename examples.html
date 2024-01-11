@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Some examples &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Some examples &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial" href="tutorial/index.html" />
@@ -35,68 +34,27 @@
         <li class="right" >
           <a href="site/griberies.html" title="griberies — utilities around GRIB"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Some examples</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Some examples</a><ul>
-<li><a class="reference internal" href="#about-resources">About Resources</a><ul>
-<li><a class="reference internal" href="#fa-some-specific-features">FA: Some specific features</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#about-fields">About Fields</a></li>
-<li><a class="reference internal" href="#about-geometry">About Geometry</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="site/griberies.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="tutorial/index.html"
-                        title="next chapter">Tutorial</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/examples.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="some-examples">
+  <section id="some-examples">
 <h1>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">¶</a></h1>
 <p><em>These examples are meant to illustrate the relative simplicity of
 handling and use of the library, as well as a quick glance at its
 possibilities.</em></p>
 <p>For a more comprehensive introduction to the package, please refer to the <a class="reference internal" href="tutorial/index.html#tuto-index"><span class="std std-ref">Tutorial</span></a>.</p>
 <p>For more advanced examples, please refer to the <a class="reference internal" href="tutorial/index.html#tuto-index"><span class="std std-ref">Gallery</span></a>.</p>
-<div class="section" id="about-resources">
+<section id="about-resources">
 <h2>About Resources<a class="headerlink" href="#about-resources" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Open a resource and list its contents:</p>
+<li><p>Open a resource and list its contents:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
@@ -108,9 +66,9 @@ possibilities.</em></p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Read a field in a resource:</p>
+<li><p>Read a field in a resource:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">surftemp</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;SURFTEMPERATURE&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">surftemp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span> <span class="n">surftemp</span>
 <span class="go">H2DField containing:</span>
 <span class="go">    comment: __unknown__</span>
 <span class="go">    fid:</span>
@@ -129,10 +87,10 @@ possibilities.</em></p>
 </ul>
 <p>And many other features depending on the format…</p>
 <hr class="docutils" />
-<div class="section" id="fa-some-specific-features">
+<section id="fa-some-specific-features">
 <h3>FA: Some specific features<a class="headerlink" href="#fa-some-specific-features" title="Permalink to this headline">¶</a></h3>
 <ul>
-<li><p class="first">Open a new FA sharing its geometry and validity with an existing one:</p>
+<li><p>Open a new FA sharing its geometry and validity with an existing one:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">)</span>
@@ -142,7 +100,7 @@ possibilities.</em></p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If you want it to be even more similar, also add arguments:</p>
+<li><p>If you want it to be even more similar, also add arguments:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005_bis&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
 <span class="go">                                         fmt=&#39;FA&#39;,</span>
 <span class="go">                                         headername=fcst5.headername, validity=fcst5.validity,</span>
@@ -153,13 +111,13 @@ possibilities.</em></p>
 </div>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="about-fields">
+<section id="about-fields">
 <h2>About Fields<a class="headerlink" href="#about-fields" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Read a spectral field, convert it to gridpoint, modify values, and get back
+<li><p>Read a spectral field, convert it to gridpoint, modify values, and get back
 to spectral space:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">s30temp</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S030TEMPERATURE&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s30temp</span><span class="o">.</span><span class="n">spectral</span>
@@ -183,7 +141,7 @@ to spectral space:</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Compute the magnitude of wind rotation between two levels (it’s just an
+<li><p>Compute the magnitude of wind rotation between two levels (it’s just an
 example…):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">wfields</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfields</span><span class="p">(</span><span class="s1">&#39;S03[0-1]WIND.?.PHYS&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">wfields</span><span class="p">)</span>
@@ -202,8 +160,8 @@ example…):</p>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Compute the windspeed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<li><p>Compute the windspeed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S030WIND.U.PHYS&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S030WIND.V.PHYS&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectwind</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">make_vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
@@ -213,12 +171,12 @@ example…):</p>
 </div>
 </li>
 </ul>
-</div>
+</section>
 <hr class="docutils" />
-<div class="section" id="about-geometry">
+<section id="about-geometry">
 <h2>About Geometry<a class="headerlink" href="#about-geometry" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">Get the lon/lat coordinates of the whole grid of a field, the corresponding
+<li><p>Get the lon/lat coordinates of the whole grid of a field, the corresponding
 max map factor, ask for the lower-right corner and checks whether a point is inside grid:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span> <span class="o">=</span> <span class="n">s30temp</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
 <span class="go">(array([[ -8.3539362, ..., 12.6589942],</span>
@@ -237,11 +195,52 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
 </div>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Some examples</a><ul>
+<li><a class="reference internal" href="#about-resources">About Resources</a><ul>
+<li><a class="reference internal" href="#fa-some-specific-features">FA: Some specific features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#about-fields">About Fields</a></li>
+<li><a class="reference internal" href="#about-geometry">About Geometry</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="site/griberies.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial/index.html"
+                        title="next chapter">Tutorial</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/examples.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -261,12 +260,13 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
         <li class="right" >
           <a href="site/griberies.html" title="griberies — utilities around GRIB"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Some examples</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

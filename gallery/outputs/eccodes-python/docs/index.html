@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>CF-GRIB &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>CF-GRIB &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -27,9 +26,52 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CF-GRIB</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cf-grib">
+<h1>CF-GRIB<a class="headerlink" href="#cf-grib" title="Permalink to this headline">¶</a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Version</dt>
+<dd class="field-odd"><p>1.4.17</p>
+</dd>
+<dt class="field-even">Date</dt>
+<dd class="field-even"><p>Jan 11, 2024</p>
+</dd>
+</dl>
+<p>Python 3 interface to encode and decode GRIB and BUFR files via the
+<a class="reference external" href="https://confluence.ecmwf.int/display/ECC/">ECMWF ecCodes library</a>.</p>
+<p>Features:</p>
+<ul class="simple">
+<li><p>reads and writes GRIB 1 and 2 files,</p></li>
+<li><p>reads and writes BUFR 3 and 4 files,</p></li>
+<li><p>supports all modern versions of Python 3.9, 3.8, 3.7 and PyPy3,</p></li>
+<li><p>works on most <em>Linux</em> distributions and <em>MacOS</em>, the <em>ecCodes</em> C-library is the only system dependency,</p></li>
+<li><p>PyPI package can be installed without compiling,
+at the cost of being twice as slow as the original <em>ecCodes</em> module,</p></li>
+<li><p>an optional compile step makes the code as fast as the original module
+but it needs the recommended (the most up-to-date) version of <em>ecCodes</em>.</p></li>
+</ul>
+<p>Limitations:</p>
+<ul class="simple">
+<li><p>Microsoft Windows support is untested.</p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div role="note" aria-label="source link">
@@ -40,60 +82,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="cf-grib">
-<h1>CF-GRIB<a class="headerlink" href="#cf-grib" title="Permalink to this headline">¶</a></h1>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Version:</th><td class="field-body">1.4.16</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Date:</th><td class="field-body">Apr 17, 2023</td>
-</tr>
-</tbody>
-</table>
-<p>Python 3 interface to encode and decode GRIB and BUFR files via the
-<a class="reference external" href="https://confluence.ecmwf.int/display/ECC/">ECMWF ecCodes library</a>.</p>
-<p>Features:</p>
-<ul class="simple">
-<li>reads and writes GRIB 1 and 2 files,</li>
-<li>reads and writes BUFR 3 and 4 files,</li>
-<li>supports all modern versions of Python 3.9, 3.8, 3.7 and PyPy3,</li>
-<li>works on most <em>Linux</em> distributions and <em>MacOS</em>, the <em>ecCodes</em> C-library is the only system dependency,</li>
-<li>PyPI package can be installed without compiling,
-at the cost of being twice as slow as the original <em>ecCodes</em> module,</li>
-<li>an optional compile step makes the code as fast as the original module
-but it needs the recommended (the most up-to-date) version of <em>ecCodes</em>.</li>
-</ul>
-<p>Limitations:</p>
-<ul class="simple">
-<li>Microsoft Windows support is untested.</li>
-</ul>
-<div class="toctree-wrapper compound">
-</div>
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -107,12 +104,13 @@ but it needs the recommended (the most up-to-date) version of <em>ecCodes</em>.<
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">CF-GRIB</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

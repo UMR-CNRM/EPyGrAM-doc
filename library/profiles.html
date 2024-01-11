@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.profiles — Functions on vertical profiles &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.profiles — Functions on vertical profiles &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.spectra — Class and functions for spectra" href="spectra.html" />
@@ -35,15 +34,184 @@
         <li class="right" >
           <a href="colormapping.html" title="epygram.colormapping — Custom colormaps reading and tuning."
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.profiles">
+<span id="epygram-profiles-functions-on-vertical-profiles"></span><h1><a class="reference internal" href="#module-epygram.profiles" title="epygram.profiles: Functions on vertical profiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.profiles</span></code></a> — Functions on vertical profiles<a class="headerlink" href="#module-epygram.profiles" title="Permalink to this headline">¶</a></h1>
+<p>This module contains functions to:</p>
+<ul class="simple">
+<li><p>to convert vertical coordinates systems from the one to another;</p></li>
+<li><p>compute air specific gas constant R according to specific humidity
+and hydrometeors.</p></li>
+<li><p>to plot vertical profiles.</p></li>
+</ul>
+<section id="conversion">
+<h2>Conversion<a class="headerlink" href="#conversion" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.hybridP2fluxpressure">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">hybridP2fluxpressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridP2fluxpressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.hybridP2fluxpressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and returns the pressure at flux levels defined by hybrid-pressure
+coefficients. Coefficients are assumed to define flux levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – table of A coefficients</p></li>
+<li><p><strong>B</strong> – table of B coefficients</p></li>
+<li><p><strong>Psurf</strong> – surface pressure in Pa.</p></li>
+</ul>
+</dd>
+</dl>
+<p>A and B must not contain the first coefficient (A=B=0.)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.hybridP2masspressure">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">hybridP2masspressure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridP2masspressure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.hybridP2masspressure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and returns the pressure at mass levels defined by hybrid-pressure
+coefficients. Coefficients are assumed to define flux levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – table of A coefficients</p></li>
+<li><p><strong>B</strong> – table of B coefficients</p></li>
+<li><p><strong>Psurf</strong> – surface pressure in Pa.</p></li>
+<li><p><strong>vertical_mean</strong> – kind of vertical averaging</p></li>
+</ul>
+</dd>
+</dl>
+<p>A and B must not contain the first coefficient (A=B=0.)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.hybridH2fluxheight">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">hybridH2fluxheight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zsurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv2height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridH2fluxheight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.hybridH2fluxheight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and returns the altitude at flux levels defined by hybrid-height
+coefficients. Coefficients are assumed to define flux levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – table of A coefficients</p></li>
+<li><p><strong>B</strong> – table of B coefficients</p></li>
+<li><p><strong>Zsurf</strong> – surface altitude in m.</p></li>
+<li><p><strong>conv2height</strong> – True to compute height instead of altitude</p></li>
+</ul>
+</dd>
+</dl>
+<p>A and B must include the underground level</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.hybridH2massheight">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">hybridH2massheight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zsurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">conv2height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridH2massheight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.hybridH2massheight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes and returns the altitude at mass levels defined by hybrid-height
+coefficients. Coefficients are assumed to define flux levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – table of A coefficients</p></li>
+<li><p><strong>B</strong> – table of B coefficients</p></li>
+<li><p><strong>Zsurf</strong> – surface altitude in m.</p></li>
+<li><p><strong>conv2height</strong> – True to compute height instead of altitude</p></li>
+</ul>
+</dd>
+</dl>
+<p>A and B must include the underground level</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.flux2masspressures">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">flux2masspressures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pi_tilde</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ptop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LAPRXPK</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LAPRXPK_for_first_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#flux2masspressures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.flux2masspressures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts pressures at flux levels to mass levels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.mass2fluxpressures">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">mass2fluxpressures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ptop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#mass2fluxpressures"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.mass2fluxpressures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts pressures at mass levels to flux levels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.flux2massheights">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">flux2massheights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H_tilde</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#flux2massheights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.flux2massheights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts altitudes at flux levels to mass levels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.mass2fluxheights">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">mass2fluxheights</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">H</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#mass2fluxheights"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.mass2fluxheights" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts altitudes at mass levels to flux levels.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.pressure2altitude">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">pressure2altitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pi_tilde</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pdep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi_surf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#pressure2altitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.pressure2altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a pressure profile to mass-levels altitude (= height above ground
+if <em>Phi_surf == 0</em>).</p>
+<p>The pressure can be given at mass levels (<em>pi</em>) or flux levels (<em>pi_tilde</em>),
+or both (assuming they are consistent), with unit: Pa.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pi</strong> – mass levels pressure</p></li>
+<li><p><strong>pi_tilde</strong> – flux levels pressure</p></li>
+<li><p><strong>R</strong> – table of R = specific gas constant (J/kg/K)</p></li>
+<li><p><strong>T</strong> – table of Temperature (K)</p></li>
+<li><p><strong>vertical_mean</strong> – kind of vertical averaging</p></li>
+<li><p><strong>Pdep</strong> – table of Pressure departure: P-Pi, where P is the hydrostatic
+pressure and Pi the Non-Hydrostatic pressure (Pa).
+0. if Hydrostatic (default)</p></li>
+<li><p><strong>Phi_surf</strong> – surface geopotential (J/kg)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.profiles.hybridP2altitude">
+<span class="sig-prename descclassname"><span class="pre">epygram.profiles.</span></span><span class="sig-name descname"><span class="pre">hybridP2altitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">R</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pdep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi_surf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ptop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridP2altitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.profiles.hybridP2altitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the altitude of mass levels defined by hybrid-pressure
+coefficients. (= height above ground if <em>Phi_surf == 0</em>).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>A</strong> – table of A coefficients</p></li>
+<li><p><strong>B</strong> – table of B coefficients</p></li>
+<li><p><strong>Psurf</strong> – surface pressure in Pa.</p></li>
+<li><p><strong>R</strong> – table of R = specific gas constant (J/kg/K)</p></li>
+<li><p><strong>T</strong> – table of Temperature (K)</p></li>
+<li><p><strong>vertical_mean</strong> – kind of vertical averaging</p></li>
+<li><p><strong>Pdep</strong> – table of Pressure departure: P-Pi, where P is the hydrostatic
+pressure and Pi the Non-Hydrostatic pressure (Pa).
+0. if Hydrostatic (default)</p></li>
+<li><p><strong>Phi_surf</strong> – surface geopotential (J/kg)</p></li>
+</ul>
+</dd>
+</dl>
+<p>A and B must not contain the first coefficient (A=B=0.)</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a><ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a><ul>
 <li><a class="reference internal" href="#conversion">Conversion</a></li>
 </ul>
 </li>
@@ -51,10 +219,10 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="colormapping.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.colormapping</span></code> — Custom colormaps reading and tuning.</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.colormapping</span></code> — Custom colormaps reading and tuning.</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="spectra.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -63,208 +231,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.profiles">
-<span id="epygram-profiles-functions-on-vertical-profiles"></span><h1><a class="reference internal" href="#module-epygram.profiles" title="epygram.profiles: Functions on vertical profiles"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.profiles</span></code></a> — Functions on vertical profiles<a class="headerlink" href="#module-epygram.profiles" title="Permalink to this headline">¶</a></h1>
-<p>This module contains functions to:</p>
-<ul class="simple">
-<li>to convert vertical coordinates systems from the one to another;</li>
-<li>compute air specific gas constant R according to specific humidity
-and hydrometeors.</li>
-<li>to plot vertical profiles.</li>
-</ul>
-<div class="section" id="conversion">
-<h2>Conversion<a class="headerlink" href="#conversion" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="epygram.profiles.hybridP2fluxpressure">
-<code class="descclassname">epygram.profiles.</code><code class="descname">hybridP2fluxpressure</code><span class="sig-paren">(</span><em>A</em>, <em>B</em>, <em>Psurf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridP2fluxpressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.hybridP2fluxpressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes and returns the pressure at flux levels defined by hybrid-pressure
-coefficients. Coefficients are assumed to define flux levels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>A</strong> – table of A coefficients</li>
-<li><strong>B</strong> – table of B coefficients</li>
-<li><strong>Psurf</strong> – surface pressure in Pa.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>A and B must not contain the first coefficient (A=B=0.)</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.hybridP2masspressure">
-<code class="descclassname">epygram.profiles.</code><code class="descname">hybridP2masspressure</code><span class="sig-paren">(</span><em>A</em>, <em>B</em>, <em>Psurf</em>, <em>vertical_mean</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridP2masspressure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.hybridP2masspressure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes and returns the pressure at mass levels defined by hybrid-pressure
-coefficients. Coefficients are assumed to define flux levels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>A</strong> – table of A coefficients</li>
-<li><strong>B</strong> – table of B coefficients</li>
-<li><strong>Psurf</strong> – surface pressure in Pa.</li>
-<li><strong>vertical_mean</strong> – kind of vertical averaging</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>A and B must not contain the first coefficient (A=B=0.)</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.hybridH2fluxheight">
-<code class="descclassname">epygram.profiles.</code><code class="descname">hybridH2fluxheight</code><span class="sig-paren">(</span><em>A</em>, <em>B</em>, <em>Zsurf</em>, <em>conv2height=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridH2fluxheight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.hybridH2fluxheight" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes and returns the altitude at flux levels defined by hybrid-height
-coefficients. Coefficients are assumed to define flux levels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>A</strong> – table of A coefficients</li>
-<li><strong>B</strong> – table of B coefficients</li>
-<li><strong>Zsurf</strong> – surface altitude in m.</li>
-<li><strong>conv2height</strong> – True to compute height instead of altitude</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>A and B must include the underground level</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.hybridH2massheight">
-<code class="descclassname">epygram.profiles.</code><code class="descname">hybridH2massheight</code><span class="sig-paren">(</span><em>A</em>, <em>B</em>, <em>Zsurf</em>, <em>conv2height=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridH2massheight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.hybridH2massheight" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes and returns the altitude at mass levels defined by hybrid-height
-coefficients. Coefficients are assumed to define flux levels.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>A</strong> – table of A coefficients</li>
-<li><strong>B</strong> – table of B coefficients</li>
-<li><strong>Zsurf</strong> – surface altitude in m.</li>
-<li><strong>conv2height</strong> – True to compute height instead of altitude</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>A and B must include the underground level</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.flux2masspressures">
-<code class="descclassname">epygram.profiles.</code><code class="descname">flux2masspressures</code><span class="sig-paren">(</span><em>pi_tilde</em>, <em>vertical_mean</em>, <em>Ptop=0.0</em>, <em>LAPRXPK=True</em>, <em>LAPRXPK_for_first_level=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#flux2masspressures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.flux2masspressures" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts pressures at flux levels to mass levels.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.mass2fluxpressures">
-<code class="descclassname">epygram.profiles.</code><code class="descname">mass2fluxpressures</code><span class="sig-paren">(</span><em>pi</em>, <em>vertical_mean</em>, <em>Ptop=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#mass2fluxpressures"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.mass2fluxpressures" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts pressures at mass levels to flux levels.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.flux2massheights">
-<code class="descclassname">epygram.profiles.</code><code class="descname">flux2massheights</code><span class="sig-paren">(</span><em>H_tilde</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#flux2massheights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.flux2massheights" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts altitudes at flux levels to mass levels.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.mass2fluxheights">
-<code class="descclassname">epygram.profiles.</code><code class="descname">mass2fluxheights</code><span class="sig-paren">(</span><em>H</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#mass2fluxheights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.mass2fluxheights" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts altitudes at mass levels to flux levels.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.pressure2altitude">
-<code class="descclassname">epygram.profiles.</code><code class="descname">pressure2altitude</code><span class="sig-paren">(</span><em>R</em>, <em>T</em>, <em>vertical_mean</em>, <em>pi=None</em>, <em>pi_tilde=None</em>, <em>Pdep=None</em>, <em>Phi_surf=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#pressure2altitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.pressure2altitude" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts a pressure profile to mass-levels altitude (= height above ground
-if <em>Phi_surf == 0</em>).</p>
-<p>The pressure can be given at mass levels (<em>pi</em>) or flux levels (<em>pi_tilde</em>),
-or both (assuming they are consistent), with unit: Pa.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>pi</strong> – mass levels pressure</li>
-<li><strong>pi_tilde</strong> – flux levels pressure</li>
-<li><strong>R</strong> – table of R = specific gas constant (J/kg/K)</li>
-<li><strong>T</strong> – table of Temperature (K)</li>
-<li><strong>vertical_mean</strong> – kind of vertical averaging</li>
-<li><strong>Pdep</strong> – table of Pressure departure: P-Pi, where P is the hydrostatic
-pressure and Pi the Non-Hydrostatic pressure (Pa).
-0. if Hydrostatic (default)</li>
-<li><strong>Phi_surf</strong> – surface geopotential (J/kg)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="epygram.profiles.hybridP2altitude">
-<code class="descclassname">epygram.profiles.</code><code class="descname">hybridP2altitude</code><span class="sig-paren">(</span><em>A</em>, <em>B</em>, <em>R</em>, <em>T</em>, <em>Psurf</em>, <em>vertical_mean</em>, <em>Pdep=None</em>, <em>Phi_surf=None</em>, <em>Ptop=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/profiles.html#hybridP2altitude"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.profiles.hybridP2altitude" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the altitude of mass levels defined by hybrid-pressure
-coefficients. (= height above ground if <em>Phi_surf == 0</em>).</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>A</strong> – table of A coefficients</li>
-<li><strong>B</strong> – table of B coefficients</li>
-<li><strong>Psurf</strong> – surface pressure in Pa.</li>
-<li><strong>R</strong> – table of R = specific gas constant (J/kg/K)</li>
-<li><strong>T</strong> – table of Temperature (K)</li>
-<li><strong>vertical_mean</strong> – kind of vertical averaging</li>
-<li><strong>Pdep</strong> – table of Pressure departure: P-Pi, where P is the hydrostatic
-pressure and Pi the Non-Hydrostatic pressure (Pa).
-0. if Hydrostatic (default)</li>
-<li><strong>Phi_surf</strong> – surface geopotential (J/kg)</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>A and B must not contain the first coefficient (A=B=0.)</p>
-</dd></dl>
-
-</div>
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -284,13 +259,14 @@ pressure and Pi the Non-Hydrostatic pressure (Pa).
         <li class="right" >
           <a href="colormapping.html" title="epygram.colormapping — Custom colormaps reading and tuning."
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.profiles</span></code> — Functions on vertical profiles</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

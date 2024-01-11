@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.DDHLFA — Interface-Class to the DDHLFA format &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.formats.DDHLFA — Interface-Class to the DDHLFA format &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.formats.LFI — Interface-Class to the LFI format" href="LFI.html" />
@@ -35,19 +34,220 @@
         <li class="right" >
           <a href="LFA.html" title="epygram.formats.LFA — Interface-Class to the LFA format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code> — Interface-Class to the DDHLFA format</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.formats.DDHLFA">
+<span id="epygram-formats-ddhlfa-interface-class-to-the-ddhlfa-format"></span><h1><a class="reference internal" href="#module-epygram.formats.DDHLFA" title="epygram.formats.DDHLFA: Interface-Class to the DDHLFA format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code></a> — Interface-Class to the DDHLFA format<a class="headerlink" href="#module-epygram.formats.DDHLFA" title="Permalink to this headline">¶</a></h1>
+<p>Contains the class for DDH-in-LFA format.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.DDHLFA.</span></span><span class="sig-name descname"><span class="pre">DDHLFA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA" title="epygram.formats.LFA.LFA"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.formats.LFA.LFA</span></code></a></p>
+<p>Class implementing all specificities for DDHLFA resource format.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>domains</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Describes the domains covered by the resource.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</p></li>
+<li><p><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.</p>
+<ul>
+<li><p>Optional. Default is ‘DDHLFA’.</p></li>
+<li><p>Values: set([‘DDHLFA’])</p></li>
+</ul>
+</li>
+<li><p><strong>levels</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Number of levels for variables/tendencies (‘VT’) and                      fluxes (‘F’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
+<ul>
+<li><p>Values: set([‘read’, ‘a’, ‘write’, ‘r’, ‘append’, ‘w’])</p></li>
+<li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
+</ul>
+</li>
+<li><p><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Describes the temporal validity of the resource.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>xpid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Experiment identifier.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.domains">
+<span class="sig-name descname"><span class="pre">domains</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.domains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the domains covered by the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.find_fields_in_resource">
+<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the fields from resource whose name match the given
+<em>seed</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>seed</strong> – might be a regular expression, a list of regular expressions
+or <em>None</em>. If <em>None</em> (default), returns the list of all fields in
+resource.</p></li>
+<li><p><strong>fieldtype</strong> – optional, among (‘V1D’, ‘Point’, ‘Misc’). If provided,
+filters out the fields not of the given type.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.fmtdelayedopen">
+<span class="sig-name descname"><span class="pre">fmtdelayedopen</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.format">
+<span class="sig-name descname"><span class="pre">format</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Format of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.levels">
+<span class="sig-name descname"><span class="pre">levels</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.levels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of levels for variables/tendencies (‘VT’) and                      fluxes (‘F’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.open">
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the DDHLFA in Fortran sense, and initializes domains, validity
+and vertical geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>openmode</strong> – optional, to open with a specific openmode, eventually
+different from the one specified at initialization.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.openmode">
+<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.openmode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opening mode (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.readfield">
+<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.readfield" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a field in resource.</p>
+<ul class="simple">
+<li><p>Documentation fields (‘INDICE EXPERIENCE’, ‘DATE’, ‘DOCFICHIER’,
+‘ECHEANCE’, ‘DOCDnnn’) are returned as <a class="reference internal" href="LFA.html#module-epygram.formats.LFA" title="epygram.formats.LFA: Interface-Class to the LFA format"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code></a>
+returns.</p></li>
+<li><p>Profile/surface fields are returned as a
+<a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> of 1D/Point fields, one for each
+domain.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>getdata</strong> – if False, do not read data but only metadata</p></li>
+<li><p><strong>footprints_proxy_as_builder</strong> – if <em>True</em>, uses footprints.proxy
+to build fields and geometry.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.readfields">
+<span class="sig-name descname"><span class="pre">readfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">requestedfields</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA.readfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.readfields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inactivation of readfields because readfield already returns a FieldSet.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.validity">
+<span class="sig-name descname"><span class="pre">validity</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Describes the temporal validity of the resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.what">
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the contents of the DDHLFA.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – the output open file-like object (duck-typing: <em>out</em>.write()
+only is needed).</p></li>
+<li><p><strong>sortfields</strong> – <strong>True</strong> if the fields have to be sorted by type.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.DDHLFA.DDHLFA.xpid">
+<span class="sig-name descname"><span class="pre">xpid</span></span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.xpid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Experiment identifier (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="LFA.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code> — Interface-Class to the LFA format</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code> — Interface-Class to the LFA format</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="LFI.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats.LFI</span></code> — Interface-Class to the LFI format</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFI</span></code> — Interface-Class to the LFI format</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -56,223 +256,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.formats.DDHLFA">
-<span id="epygram-formats-ddhlfa-interface-class-to-the-ddhlfa-format"></span><h1><a class="reference internal" href="#module-epygram.formats.DDHLFA" title="epygram.formats.DDHLFA: Interface-Class to the DDHLFA format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code></a> — Interface-Class to the DDHLFA format<a class="headerlink" href="#module-epygram.formats.DDHLFA" title="Permalink to this headline">¶</a></h1>
-<p>Contains the class for DDH-in-LFA format.</p>
-<dl class="class">
-<dt id="epygram.formats.DDHLFA.DDHLFA">
-<em class="property">class </em><code class="descclassname">epygram.formats.DDHLFA.</code><code class="descname">DDHLFA</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA" title="epygram.formats.LFA.LFA"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.formats.LFA.LFA</span></code></a></p>
-<p>Class implementing all specificities for DDHLFA resource format.</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>domains</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Describes the domains covered by the resource.<ul>
-<li>Optional. Default is None.</li>
-</ul>
-</li>
-<li><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - File name (absolute or relative) of the resource.</li>
-<li><strong>fmtdelayedopen</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Opening of the resource delayed (not at time of construction).<ul>
-<li>Optional. Default is False.</li>
-</ul>
-</li>
-<li><strong>format</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Format of the resource.<ul>
-<li>Optional. Default is ‘DDHLFA’.</li>
-<li>Values: set([‘DDHLFA’])</li>
-</ul>
-</li>
-<li><strong>levels</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Number of levels for variables/tendencies (‘VT’) and                      fluxes (‘F’).<ul>
-<li>Optional. Default is None.</li>
-</ul>
-</li>
-<li><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.<ul>
-<li>Values: set([‘append’, ‘read’, ‘write’, ‘a’, ‘w’, ‘r’])</li>
-<li>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</li>
-</ul>
-</li>
-<li><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Describes the temporal validity of the resource.<ul>
-<li>Optional. Default is None.</li>
-</ul>
-</li>
-<li><strong>xpid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Experiment identifier.<ul>
-<li>Optional. Default is None.</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.domains">
-<code class="descname">domains</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.domains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes the domains covered by the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.filename">
-<code class="descname">filename</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.filename" title="Permalink to this definition">¶</a></dt>
-<dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.DDHLFA.DDHLFA.find_fields_in_resource">
-<code class="descname">find_fields_in_resource</code><span class="sig-paren">(</span><em>seed=None</em>, <em>fieldtype=None</em>, <em>generic=False</em>, <em>**_</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA.find_fields_in_resource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a list of the fields from resource whose name match the given
-<em>seed</em>.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>seed</strong> – might be a regular expression, a list of regular expressions
-or <em>None</em>. If <em>None</em> (default), returns the list of all fields in
-resource.</li>
-<li><strong>fieldtype</strong> – optional, among (‘V1D’, ‘Point’, ‘Misc’). If provided,
-filters out the fields not of the given type.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.fmtdelayedopen">
-<code class="descname">fmtdelayedopen</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.format">
-<code class="descname">format</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.format" title="Permalink to this definition">¶</a></dt>
-<dd><p>Format of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.levels">
-<code class="descname">levels</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.levels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Number of levels for variables/tendencies (‘VT’) and                      fluxes (‘F’) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.DDHLFA.DDHLFA.open">
-<code class="descname">open</code><span class="sig-paren">(</span><em>openmode=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA.open"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.open" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opens the DDHLFA in Fortran sense, and initializes domains, validity
-and vertical geometry.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>openmode</strong> – optional, to open with a specific openmode, eventually
-different from the one specified at initialization.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.openmode">
-<code class="descname">openmode</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.openmode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Opening mode (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.DDHLFA.DDHLFA.readfield">
-<code class="descname">readfield</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.readfield" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads a field in resource.</p>
-<ul class="simple">
-<li>Documentation fields (‘INDICE EXPERIENCE’, ‘DATE’, ‘DOCFICHIER’,
-‘ECHEANCE’, ‘DOCDnnn’) are returned as <a class="reference internal" href="LFA.html#module-epygram.formats.LFA" title="epygram.formats.LFA: Interface-Class to the LFA format"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code></a>
-returns.</li>
-<li>Profile/surface fields are returned as a
-<a class="reference internal" href="base.html#epygram.base.FieldSet" title="epygram.base.FieldSet"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldSet</span></code></a> of 1D/Point fields, one for each
-domain.</li>
-</ul>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>getdata</strong> – if False, do not read data but only metadata</li>
-<li><strong>footprints_proxy_as_builder</strong> – if <em>True</em>, uses footprints.proxy
-to build fields and geometry.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.DDHLFA.DDHLFA.readfields">
-<code class="descname">readfields</code><span class="sig-paren">(</span><em>requestedfields</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/DDHLFA.html#DDHLFA.readfields"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.readfields" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inactivation of readfields because readfield already returns a FieldSet.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.validity">
-<code class="descname">validity</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.validity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Describes the temporal validity of the resource (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.formats.DDHLFA.DDHLFA.what">
-<code class="descname">what</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.what" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes in file a summary of the contents of the DDHLFA.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>out</strong> – the output open file-like object (duck-typing: <em>out</em>.write()
-only is needed).</li>
-<li><strong>sortfields</strong> – <strong>True</strong> if the fields have to be sorted by type.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.formats.DDHLFA.DDHLFA.xpid">
-<code class="descname">xpid</code><a class="headerlink" href="#epygram.formats.DDHLFA.DDHLFA.xpid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Experiment identifier (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -292,14 +284,15 @@ only is needed).</li>
         <li class="right" >
           <a href="LFA.html" title="epygram.formats.LFA — Interface-Class to the LFA format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code> — Interface-Class to the DDHLFA format</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

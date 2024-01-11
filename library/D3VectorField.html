@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.fields.D3VectorField — 3-D Vector Field class &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.fields.D3VectorField — 3-D Vector Field class &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.formats — Formats" href="formats.html" />
@@ -35,19 +34,659 @@
         <li class="right" >
           <a href="H2DVectorField.html" title="epygram.fields.H2DVectorField — Horizontal 2-D Vector Field class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="fields.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="fields.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code> — 3-D Vector Field class</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.fields.D3VectorField">
+<span id="epygram-fields-d3vectorfield-3-d-vector-field-class"></span><h1><a class="reference internal" href="#module-epygram.fields.D3VectorField" title="epygram.fields.D3VectorField: 3-D Vector Field class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code></a> — 3-D Vector Field class<a class="headerlink" href="#module-epygram.fields.D3VectorField" title="Permalink to this headline">¶</a></h1>
+<p>Contains the class for a 3D field.</p>
+<p>Plus a function to create a Vector field from 2 scalar fields.</p>
+<hr class="docutils" />
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.make_vector_field">
+<span class="sig-prename descclassname"><span class="pre">epygram.fields.D3VectorField.</span></span><span class="sig-name descname"><span class="pre">make_vector_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">components</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#make_vector_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.make_vector_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3VectorField</span></code> or subclass from
+several <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> or subclass representing
+the components of the vector in the field geometry.</p>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3VectorField.</span></span><span class="sig-name descname"><span class="pre">D3VectorField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a></p>
+<p>3-Dimensions Vector field class.</p>
+<p>This is a wrapper to a list of D3Field(s), representing the components
+of a vector projected on its geometry (the grid axes).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Not documented</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>components</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of Fields that each compose a component of the vector.</p>
+<ul>
+<li><p>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</p></li>
+<li><p><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>processtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Generating process.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of Field geometry.</p>
+<ul>
+<li><p>Values: set([‘3D’])</p></li>
+</ul>
+</li>
+<li><p><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.</p>
+<ul>
+<li><p>Optional. Default is ‘’.</p></li>
+</ul>
+</li>
+<li><p><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.</p>
+<ul>
+<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7ff17c4096f0&gt;]&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>vector</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Intrinsic vectorial nature of the field.</p>
+<ul>
+<li><p>Values: set([True])</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<p>Constructor. See its footprint for arguments.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.as_vtkGrid">
+<span class="sig-name descname"><span class="pre">as_vtkGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'module'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vector'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'XML'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ZLib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform_wind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.as_vtkGrid" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>Returns a vtkStructuredGrid filled with the field
+:param rendering: a usevtk.Usevtk instance
+:param grid_type: can be:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>sgrid_point: structured grid filled with points</p></li>
+<li><dl class="simple">
+<dt>sgrid_cell: structured grid filled with hexahedron</dt><dd><p>If the field is 2D, a zero thickness is used.
+If the field is 3D, thickness are approximately computed</p>
+</dd>
+</dl>
+</li>
+<li><p>ugrid_point: unstructured grid filled with points</p></li>
+<li><dl class="simple">
+<dt>ugrid_cell: unstructured grid build filled with cells</dt><dd><p>If the field is 2D, a zero thickness is used.
+If the field is 3D, thickness are approximately computed</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</p></li>
+<li><p><strong>filename</strong> – if not None, resulting grid will be written into filename</p></li>
+<li><p><strong>module_name</strong> – name to give to the scalar field containing the module
+(useful with the grid option)</p></li>
+<li><p><strong>vector_name'</strong> – name of the vector field (useful with the grid option)</p></li>
+<li><p><strong>grid</strong> – if grid is not None, the method will add the data to it.</p></li>
+<li><p><strong>version</strong> – must be ‘legacy’ or ‘XML’, used with filename</p></li>
+<li><p><strong>binary</strong> – True (default) for a binary file, used with filename</p></li>
+<li><p><strong>compression</strong> – must be None, ‘LZ4’ or ‘ZLib’
+only used for binary XML</p></li>
+<li><p><strong>compression_level</strong> – between 1 and 9, only used for binary XML Zlib-compressed</p></li>
+<li><p><strong>transform_wind</strong> – <p>to rotate ans scale wind according to vtk coordinates:
+0: do nothing
+1: scale the w component to take into account the z axis expansion,</p>
+<blockquote>
+<div><p>the total module is not preserved but the horizontal one is preserved.
+The horizontal components must be oriented along the vtk axes.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>2: same as option 1 but the total module is preserved whereas the horizontal</dt><dd><p>one is not preserved</p>
+</dd>
+<dt>3: same as option 1 but, in addition, all the components are rotated.</dt><dd><p>The horizontal components must be oriented along north-south and east-west axes.</p>
+</dd>
+<dt>4: same as option 3 but (as for option 2), the total module is preserved whereas</dt><dd><p>the horizontal one is not preserved</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+<p>If grid_type is ‘sgrid_point’, the result is the grid; otherwise
+the result is the function is the last filter used.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.attach_components">
+<span class="sig-name descname"><span class="pre">attach_components</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">components</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.attach_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.attach_components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attach components of the vector to the VectorField.
+<em>components</em> must be a series of D3Field.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.center">
+<span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.center()</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.comment">
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.comment" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.components">
+<span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.components" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of Fields that each compose a component of the vector (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.compute_direction">
+<span class="sig-name descname"><span class="pre">compute_direction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.compute_direction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.compute_direction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> or subclass whose data
+is the direction of the horizontal part of the Vector field
+(the two firsts components), in degrees.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.compute_vordiv">
+<span class="sig-name descname"><span class="pre">compute_vordiv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">divide_by_m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.compute_vordiv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.compute_vordiv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute vorticity and divergence fields from the vector field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>divide_by_m</strong> – if True, apply f = f/m beforehand, where m is the
+map factor.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the field data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.deldata">
+<span class="sig-name descname"><span class="pre">deldata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.deldata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.deldata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Empties the data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.extract_subarray">
+<span class="sig-name descname"><span class="pre">extract_subarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_subarray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_subarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.extract_subarray()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.extract_subdomain">
+<span class="sig-name descname"><span class="pre">extract_subdomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_subdomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_subdomain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.extract_subdomain()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.extract_subsample">
+<span class="sig-name descname"><span class="pre">extract_subsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_subsample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_subsample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.extract_subsample</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.extract_zoom">
+<span class="sig-name descname"><span class="pre">extract_zoom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_zoom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_zoom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.extract_zoom()</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.fid">
+<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.fid" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.getdata">
+<span class="sig-name descname"><span class="pre">getdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the field data, with 2D shape if the field is not spectral,
+1D if spectral, as a tuple with data for each component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM fields only, returns
+the data resp. on the C or C+I zone.
+Default is no subzone, i.e. the whole field.</p>
+</dd>
+</dl>
+<p>Shape of 2D data: (x (0) being the X component, y (1) the Y one)</p>
+<ul>
+<li><p>Rectangular grids:</p>
+<p>grid[0,0,x] is SW, grid[-1,-1,x] is NE</p>
+<p>grid[0,-1,x] is SE, grid[-1,0,x] is NW</p>
+</li>
+<li><p>Gauss grids:</p>
+<p>grid[0,:Nj,x] is first (Northern) band of latitude, masked
+after Nj = number of longitudes for latitude j</p>
+<p>grid[-1,:Nj,x] is last (Southern) band of latitude (idem).</p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.getlevel">
+<span class="sig-name descname"><span class="pre">getlevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getlevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getlevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a level of the field as a new field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>level</strong> – the requested level expressed in coordinate value (Pa, m…)</p></li>
+<li><p><strong>k</strong> – the index of the requested level</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.getvalue_ij">
+<span class="sig-name descname"><span class="pre">getvalue_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getvalue_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getvalue_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of the different components of the field from indexes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.getvalue_ll">
+<span class="sig-name descname"><span class="pre">getvalue_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getvalue_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getvalue_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of the different components of the field from coordinates.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.global_shift_center">
+<span class="sig-name descname"><span class="pre">global_shift_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude_shift</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.global_shift_center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.global_shift_center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shifts the center of the geometry (and the data accordingly) by
+<em>longitude_shift</em> (in degrees). <em>longitude_shift</em> has to be a multiple
+of the grid’s resolution in longitude.</p>
+<p>For global RegLLGeometry grids only.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.gp2sp">
+<span class="sig-name descname"><span class="pre">gp2sp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectral_geometry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.gp2sp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.gp2sp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the gridpoint field into spectral space, according to the
+<em>spectral_geometry</em> mandatorily passed as argument. Replaces data in
+place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>spectral_geometry</strong> – instance of SpectralGeometry, actually
+containing spectral transform subroutine (in
+in its own <em>gp2sp()</em> method).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.map_factorize">
+<span class="sig-name descname"><span class="pre">map_factorize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.map_factorize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.map_factorize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiply the field by its map factor.
+Only the first two components are affected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reverse</strong> – if True, divide.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.max">
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the maximum value of data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.mean">
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean value of data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.min">
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum value of data.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.misc_metadata">
+<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.nonzero">
+<span class="sig-name descname"><span class="pre">nonzero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.nonzero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.nonzero" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the number of non-zero values (whose absolute
+value &gt; config.epsilon).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.plot3DOutline">
+<span class="sig-name descname"><span class="pre">plot3DOutline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.plot3DOutline" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>Cf. D3Field.plot3DOutline()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.plot3DStream">
+<span class="sig-name descname"><span class="pre">plot3DStream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplerate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxLength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tubesRadius</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_tube</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform_wind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.plot3DStream" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>This method adds contour lines and/or colorize the field. If
+the field is 3D, contours appear as isosurface.
+:param rendering: a usevtk.Usevtk instance
+:param samplerate: if not None, must be a dictionary. Allowed keys are</p>
+<blockquote>
+<div><p>‘x’, ‘y’ and ‘z’ and values are the sample rate in the given
+direction. For example {‘x’:3} means take one over 3 points
+in the x direction</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maxLength</strong> – integration length to build the stream lines and tubes</p></li>
+<li><p><strong>tubesRadius</strong> – radius of the tubes</p></li>
+<li><p><strong>color</strong> – a color name, a vtk.vtkColorTransferFunction or a vtk.vtkLookupTable
+to associate colors to the stream lines or tubes</p></li>
+<li><p><strong>opacity</strong> – opacity value</p></li>
+<li><p><strong>plot_tube</strong> – True to plot the tubes instead of lines</p></li>
+<li><p><strong>colorbar</strong> – True to plot a colorbar</p></li>
+<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</p></li>
+<li><p><strong>transform_wind</strong> – <p>to rotate ans scale wind according to vtk coordinates:
+0: do nothing
+1: scale the w component to take into account the z axis expansion,</p>
+<blockquote>
+<div><p>the total module is not preserved but the horizontal one is preserved.
+The horizontal components must be oriented along the vtk axes.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>2: same as option 1 but the total module is preserved whereas the horizontal</dt><dd><p>one is not preserved</p>
+</dd>
+<dt>3: same as option 1 but, in addition, all the components are rotated.</dt><dd><p>The horizontal components must be oriented along north-south and east-west axes.</p>
+</dd>
+<dt>4: same as option 3 but (as for option 2), the total module is preserved whereas</dt><dd><p>the horizontal one is not preserved</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>actor, mapper, colorbaractor</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Note: the wind components, whatever is the transform_wind option, must contain</dt><dd><p>the map factor corrections.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.plot3DVector">
+<span class="sig-name descname"><span class="pre">plot3DVector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samplerate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arrowScaleFactor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Blue'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform_wind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.plot3DVector" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>This method adds contour lines and/or colorize the field. If
+the field is 3D, contours appear as isosurface.
+:param rendering: a usevtk.Usevtk instance
+:param samplerate: if not None, must be a dictionary. Allowed keys are</p>
+<blockquote>
+<div><p>‘x’, ‘y’ and ‘z’ and values are the sample rate in the given
+direction. For example {‘x’:3} means take one over 3 points
+in the x direction</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arrowScaleFactor</strong> – scale factor used to plot the vector</p></li>
+<li><p><strong>color</strong> – color name or lookup table or color transfer function
+to associate colors to the vector norms</p></li>
+<li><p><strong>opacity</strong> – opacity value</p></li>
+<li><p><strong>colorbar</strong> – True to plot a colorbar</p></li>
+<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</p></li>
+<li><p><strong>transform_wind</strong> – <p>to rotate ans scale wind according to vtk coordinates:
+0: do nothing
+1: scale the w component to take into account the z axis expansion,</p>
+<blockquote>
+<div><p>the total module is not preserved but the horizontal one is preserved.
+The horizontal components must be oriented along the vtk axes.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>2: same as option 1 but the total module is preserved whereas the horizontal</dt><dd><p>one is not preserved</p>
+</dd>
+<dt>3: same as option 1 but, in addition, all the components are rotated.</dt><dd><p>The horizontal components must be oriented along north-south and east-west axes.</p>
+</dd>
+<dt>4: same as option 3 but (as for option 2), the total module is preserved whereas</dt><dd><p>the horizontal one is not preserved</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>actor, mapper, colorbaractor</p>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Note: the wind components, whatever is the transform_wind option, must contain</dt><dd><p>the map factor corrections.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.processtype">
+<span class="sig-name descname"><span class="pre">processtype</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.processtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generating process (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.quadmean">
+<span class="sig-name descname"><span class="pre">quadmean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.quadmean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.quadmean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the quadratic mean of data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.remove_level">
+<span class="sig-name descname"><span class="pre">remove_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.remove_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.remove_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.remove_level()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.reproject_wind_on_lonlat">
+<span class="sig-name descname"><span class="pre">reproject_wind_on_lonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_factor_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.reproject_wind_on_lonlat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.reproject_wind_on_lonlat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reprojects a wind vector (u, v) from the grid axes onto real
+sphere, i.e. with components on true zonal/meridian axes.
+Other components are kept untouched.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map_factor_correction</strong> – if True, apply a correction of magnitude
+due to map factor.</p></li>
+<li><p><strong>reverse</strong> – if True, apply the reverse reprojection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.resample">
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.resample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.resample()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.resample_on_regularll">
+<span class="sig-name descname"><span class="pre">resample_on_regularll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.resample_on_regularll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.resample_on_regularll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.resample_on_regularll()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.select_subzone">
+<span class="sig-name descname"><span class="pre">select_subzone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.select_subzone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.select_subzone" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.select_subzone()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.setdata">
+<span class="sig-name descname"><span class="pre">setdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.setdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.setdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets data to its components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> – [data_i for i components]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.sp2gp">
+<span class="sig-name descname"><span class="pre">sp2gp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.sp2gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.sp2gp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms the spectral field into gridpoint, according to its spectral
+geometry. Replaces data in place.</p>
+<p>The spectral transform subroutine is actually included in the spectral
+geometry’s <em>sp2gp()</em> method.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.spectral">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.spectral" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if the field is spectral.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.std">
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.std" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the standard deviation of data.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.structure">
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.structure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type of Field geometry (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.to_module">
+<span class="sig-name descname"><span class="pre">to_module</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.to_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.to_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> (or subclass) whose data
+is the module of the Vector field.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.units">
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.use_field_as_vcoord">
+<span class="sig-name descname"><span class="pre">use_field_as_vcoord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.use_field_as_vcoord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.use_field_as_vcoord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cf. D3Field.use_field_as_vcoord()</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.validity">
+<span class="sig-name descname"><span class="pre">validity</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.validity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validity of the field (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.vector">
+<span class="sig-name descname"><span class="pre">vector</span></span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.vector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Intrinsic vectorial nature of the field (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.vtk_guess_param_from_field">
+<span class="sig-name descname"><span class="pre">vtk_guess_param_from_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.vtk_guess_param_from_field" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
+</div>
+<p>Cf. D3Field.vtk_guess_param_from_field()</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3VectorField.D3VectorField.what">
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulativeduration=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.what" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes in file a summary of the field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> – the output open file-like object (duck-typing: <em>out</em>.write()
+only is needed).</p></li>
+<li><p><strong>vertical_geometry</strong> – if True, writes the vertical geometry of the
+field.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="H2DVectorField.html"
-                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a></p>
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="formats.html"
-                        title="next chapter"><code class="docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a></p>
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -56,681 +695,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="module-epygram.fields.D3VectorField">
-<span id="epygram-fields-d3vectorfield-3-d-vector-field-class"></span><h1><a class="reference internal" href="#module-epygram.fields.D3VectorField" title="epygram.fields.D3VectorField: 3-D Vector Field class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code></a> — 3-D Vector Field class<a class="headerlink" href="#module-epygram.fields.D3VectorField" title="Permalink to this headline">¶</a></h1>
-<p>Contains the class for a 3D field.</p>
-<p>Plus a function to create a Vector field from 2 scalar fields.</p>
-<hr class="docutils" />
-<dl class="function">
-<dt id="epygram.fields.D3VectorField.make_vector_field">
-<code class="descclassname">epygram.fields.D3VectorField.</code><code class="descname">make_vector_field</code><span class="sig-paren">(</span><em>*components</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#make_vector_field"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.make_vector_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3VectorField</span></code> or subclass from
-several <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> or subclass representing
-the components of the vector in the field geometry.</p>
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="class">
-<dt id="epygram.fields.D3VectorField.D3VectorField">
-<em class="property">class </em><code class="descclassname">epygram.fields.D3VectorField.</code><code class="descname">D3VectorField</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a></p>
-<p>3-Dimensions Vector field class.</p>
-<p>This is a wrapper to a list of D3Field(s), representing the components
-of a vector projected on its geometry (the grid axes).</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li>info: Not documented</li>
-<li>priority: PriorityLevel::DEFAULT (rank=1)</li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote class="last">
-<div><ul class="simple">
-<li><strong>comment</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
-<li>Optional. Default is None.</li>
-</ul>
-</li>
-<li><strong>components</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of Fields that each compose a component of the vector.<ul>
-<li>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</li>
-<li><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.<ul>
-<li>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>processtype</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Generating process.<ul>
-<li>Optional. Default is None.</li>
-</ul>
-</li>
-<li><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of Field geometry.<ul>
-<li>Values: set([‘3D’])</li>
-</ul>
-</li>
-<li><strong>units</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwd - Not documented, sorry.<ul>
-<li>Optional. Default is ‘’.</li>
-</ul>
-</li>
-<li><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.<ul>
-<li>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7f0fbbd61520&gt;]&gt;&gt;.</li>
-</ul>
-</li>
-<li><strong>vector</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Intrinsic vectorial nature of the field.<ul>
-<li>Values: set([True])</li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-</div>
-<p>Constructor. See its footprint for arguments.</p>
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.as_vtkGrid">
-<code class="descname">as_vtkGrid</code><span class="sig-paren">(</span><em>rendering</em>, <em>grid_type</em>, <em>subzone=None</em>, <em>filename=None</em>, <em>module_name='module'</em>, <em>vector_name='vector'</em>, <em>grid=None</em>, <em>version='XML'</em>, <em>binary=True</em>, <em>compression='ZLib'</em>, <em>compression_level=5</em>, <em>transform_wind=0</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.as_vtkGrid" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>Returns a vtkStructuredGrid filled with the field
-:param rendering: a usevtk.Usevtk instance
-:param grid_type: can be:</p>
-<blockquote>
-<div><ul class="simple">
-<li>sgrid_point: structured grid filled with points</li>
-<li><dl class="first docutils">
-<dt>sgrid_cell: structured grid filled with hexahedron</dt>
-<dd>If the field is 2D, a zero thickness is used.
-If the field is 3D, thickness are approximately computed</dd>
-</dl>
-</li>
-<li>ugrid_point: unstructured grid filled with points</li>
-<li><dl class="first docutils">
-<dt>ugrid_cell: unstructured grid build filled with cells</dt>
-<dd>If the field is 2D, a zero thickness is used.
-If the field is 3D, thickness are approximately computed</dd>
-</dl>
-</li>
-</ul>
-</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</li>
-<li><strong>filename</strong> – if not None, resulting grid will be written into filename</li>
-<li><strong>module_name</strong> – name to give to the scalar field containing the module
-(useful with the grid option)</li>
-<li><strong>vector_name'</strong> – name of the vector field (useful with the grid option)</li>
-<li><strong>grid</strong> – if grid is not None, the method will add the data to it.</li>
-<li><strong>version</strong> – must be ‘legacy’ or ‘XML’, used with filename</li>
-<li><strong>binary</strong> – True (default) for a binary file, used with filename</li>
-<li><strong>compression</strong> – must be None, ‘LZ4’ or ‘ZLib’
-only used for binary XML</li>
-<li><strong>compression_level</strong> – between 1 and 9, only used for binary XML Zlib-compressed</li>
-<li><strong>transform_wind</strong> – <p>to rotate ans scale wind according to vtk coordinates:
-0: do nothing
-1: scale the w component to take into account the z axis expansion,</p>
-<blockquote>
-<div>the total module is not preserved but the horizontal one is preserved.
-The horizontal components must be oriented along the vtk axes.</div></blockquote>
-<dl class="docutils">
-<dt>2: same as option 1 but the total module is preserved whereas the horizontal</dt>
-<dd>one is not preserved</dd>
-<dt>3: same as option 1 but, in addition, all the components are rotated.</dt>
-<dd>The horizontal components must be oriented along north-south and east-west axes.</dd>
-<dt>4: same as option 3 but (as for option 2), the total module is preserved whereas</dt>
-<dd>the horizontal one is not preserved</dd>
-</dl>
-</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-<p>If grid_type is ‘sgrid_point’, the result is the grid; otherwise
-the result is the function is the last filter used.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.attach_components">
-<code class="descname">attach_components</code><span class="sig-paren">(</span><em>*components</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.attach_components"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.attach_components" title="Permalink to this definition">¶</a></dt>
-<dd><p>Attach components of the vector to the VectorField.
-<em>components</em> must be a series of D3Field.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.center">
-<code class="descname">center</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.center" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.center()</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.comment">
-<code class="descname">comment</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.comment" title="Permalink to this definition">¶</a></dt>
-<dd><p>(see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.components">
-<code class="descname">components</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.components" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of Fields that each compose a component of the vector (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.compute_direction">
-<code class="descname">compute_direction</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.compute_direction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.compute_direction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> or subclass whose data
-is the direction of the horizontal part of the Vector field
-(the two firsts components), in degrees.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.compute_vordiv">
-<code class="descname">compute_vordiv</code><span class="sig-paren">(</span><em>divide_by_m=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.compute_vordiv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.compute_vordiv" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute vorticity and divergence fields from the vector field.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>divide_by_m</strong> – if True, apply f = f/m beforehand, where m is the
-map factor.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.data">
-<code class="descname">data</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Accessor to the field data.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.deldata">
-<code class="descname">deldata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.deldata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.deldata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Empties the data.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.extract_subarray">
-<code class="descname">extract_subarray</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_subarray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_subarray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.extract_subarray()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.extract_subdomain">
-<code class="descname">extract_subdomain</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_subdomain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_subdomain" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.extract_subdomain()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.extract_subsample">
-<code class="descname">extract_subsample</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_subsample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_subsample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.extract_subsample</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.extract_zoom">
-<code class="descname">extract_zoom</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.extract_zoom"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.extract_zoom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.extract_zoom()</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.fid">
-<code class="descname">fid</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.fid" title="Permalink to this definition">¶</a></dt>
-<dd><p>(see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.getdata">
-<code class="descname">getdata</code><span class="sig-paren">(</span><em>subzone=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getdata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the field data, with 2D shape if the field is not spectral,
-1D if spectral, as a tuple with data for each component.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM fields only, returns
-the data resp. on the C or C+I zone.
-Default is no subzone, i.e. the whole field.</td>
-</tr>
-</tbody>
-</table>
-<p>Shape of 2D data: (x (0) being the X component, y (1) the Y one)</p>
-<ul>
-<li><p class="first">Rectangular grids:</p>
-<p>grid[0,0,x] is SW, grid[-1,-1,x] is NE</p>
-<p>grid[0,-1,x] is SE, grid[-1,0,x] is NW</p>
-</li>
-<li><p class="first">Gauss grids:</p>
-<p>grid[0,:Nj,x] is first (Northern) band of latitude, masked
-after Nj = number of longitudes for latitude j</p>
-<p>grid[-1,:Nj,x] is last (Southern) band of latitude (idem).</p>
-</li>
-</ul>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.getlevel">
-<code class="descname">getlevel</code><span class="sig-paren">(</span><em>level=None</em>, <em>k=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getlevel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getlevel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a level of the field as a new field.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>level</strong> – the requested level expressed in coordinate value (Pa, m…)</li>
-<li><strong>k</strong> – the index of the requested level</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.getvalue_ij">
-<code class="descname">getvalue_ij</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getvalue_ij"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getvalue_ij" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value of the different components of the field from indexes.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.getvalue_ll">
-<code class="descname">getvalue_ll</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.getvalue_ll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.getvalue_ll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value of the different components of the field from coordinates.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.global_shift_center">
-<code class="descname">global_shift_center</code><span class="sig-paren">(</span><em>longitude_shift</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.global_shift_center"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.global_shift_center" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shifts the center of the geometry (and the data accordingly) by
-<em>longitude_shift</em> (in degrees). <em>longitude_shift</em> has to be a multiple
-of the grid’s resolution in longitude.</p>
-<p>For global RegLLGeometry grids only.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.gp2sp">
-<code class="descname">gp2sp</code><span class="sig-paren">(</span><em>spectral_geometry=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.gp2sp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.gp2sp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transforms the gridpoint field into spectral space, according to the
-<em>spectral_geometry</em> mandatorily passed as argument. Replaces data in
-place.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>spectral_geometry</strong> – instance of SpectralGeometry, actually
-containing spectral transform subroutine (in
-in its own <em>gp2sp()</em> method).</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.map_factorize">
-<code class="descname">map_factorize</code><span class="sig-paren">(</span><em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.map_factorize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.map_factorize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Multiply the field by its map factor.
-Only the first two components are affected.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>reverse</strong> – if True, divide.</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.max">
-<code class="descname">max</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.max"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.max" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the maximum value of data.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.mean">
-<code class="descname">mean</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.mean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.mean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the mean value of data.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.min">
-<code class="descname">min</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.min"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.min" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the minimum value of data.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.misc_metadata">
-<code class="descname">misc_metadata</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.misc_metadata" title="Permalink to this definition">¶</a></dt>
-<dd><p>(see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.nonzero">
-<code class="descname">nonzero</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.nonzero"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.nonzero" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the number of non-zero values (whose absolute
-value &gt; config.epsilon).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.plot3DOutline">
-<code class="descname">plot3DOutline</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.plot3DOutline" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>Cf. D3Field.plot3DOutline()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.plot3DStream">
-<code class="descname">plot3DStream</code><span class="sig-paren">(</span><em>rendering</em>, <em>samplerate=None</em>, <em>maxLength=None</em>, <em>tubesRadius=0.1</em>, <em>color='Blue'</em>, <em>opacity=1.0</em>, <em>plot_tube=False</em>, <em>colorbar=True</em>, <em>subzone=None</em>, <em>transform_wind=0</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.plot3DStream" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>This method adds contour lines and/or colorize the field. If
-the field is 3D, contours appear as isosurface.
-:param rendering: a usevtk.Usevtk instance
-:param samplerate: if not None, must be a dictionary. Allowed keys are</p>
-<blockquote>
-<div>‘x’, ‘y’ and ‘z’ and values are the sample rate in the given
-direction. For example {‘x’:3} means take one over 3 points
-in the x direction</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>maxLength</strong> – integration length to build the stream lines and tubes</li>
-<li><strong>tubesRadius</strong> – radius of the tubes</li>
-<li><strong>color</strong> – a color name, a vtk.vtkColorTransferFunction or a vtk.vtkLookupTable
-to associate colors to the stream lines or tubes</li>
-<li><strong>opacity</strong> – opacity value</li>
-<li><strong>plot_tube</strong> – True to plot the tubes instead of lines</li>
-<li><strong>colorbar</strong> – True to plot a colorbar</li>
-<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</li>
-<li><strong>transform_wind</strong> – <p>to rotate ans scale wind according to vtk coordinates:
-0: do nothing
-1: scale the w component to take into account the z axis expansion,</p>
-<blockquote>
-<div>the total module is not preserved but the horizontal one is preserved.
-The horizontal components must be oriented along the vtk axes.</div></blockquote>
-<dl class="docutils">
-<dt>2: same as option 1 but the total module is preserved whereas the horizontal</dt>
-<dd>one is not preserved</dd>
-<dt>3: same as option 1 but, in addition, all the components are rotated.</dt>
-<dd>The horizontal components must be oriented along north-south and east-west axes.</dd>
-<dt>4: same as option 3 but (as for option 2), the total module is preserved whereas</dt>
-<dd>the horizontal one is not preserved</dd>
-</dl>
-</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">actor, mapper, colorbaractor</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Note: the wind components, whatever is the transform_wind option, must contain</dt>
-<dd>the map factor corrections.</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.plot3DVector">
-<code class="descname">plot3DVector</code><span class="sig-paren">(</span><em>rendering</em>, <em>samplerate=None</em>, <em>arrowScaleFactor=1.0</em>, <em>color='Blue'</em>, <em>opacity=1.0</em>, <em>colorbar=True</em>, <em>subzone=None</em>, <em>transform_wind=0</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.plot3DVector" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>This method adds contour lines and/or colorize the field. If
-the field is 3D, contours appear as isosurface.
-:param rendering: a usevtk.Usevtk instance
-:param samplerate: if not None, must be a dictionary. Allowed keys are</p>
-<blockquote>
-<div>‘x’, ‘y’ and ‘z’ and values are the sample rate in the given
-direction. For example {‘x’:3} means take one over 3 points
-in the x direction</div></blockquote>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>arrowScaleFactor</strong> – scale factor used to plot the vector</li>
-<li><strong>color</strong> – color name or lookup table or color transfer function
-to associate colors to the vector norms</li>
-<li><strong>opacity</strong> – opacity value</li>
-<li><strong>colorbar</strong> – True to plot a colorbar</li>
-<li><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</li>
-<li><strong>transform_wind</strong> – <p>to rotate ans scale wind according to vtk coordinates:
-0: do nothing
-1: scale the w component to take into account the z axis expansion,</p>
-<blockquote>
-<div>the total module is not preserved but the horizontal one is preserved.
-The horizontal components must be oriented along the vtk axes.</div></blockquote>
-<dl class="docutils">
-<dt>2: same as option 1 but the total module is preserved whereas the horizontal</dt>
-<dd>one is not preserved</dd>
-<dt>3: same as option 1 but, in addition, all the components are rotated.</dt>
-<dd>The horizontal components must be oriented along north-south and east-west axes.</dd>
-<dt>4: same as option 3 but (as for option 2), the total module is preserved whereas</dt>
-<dd>the horizontal one is not preserved</dd>
-</dl>
-</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">actor, mapper, colorbaractor</p>
-</td>
-</tr>
-</tbody>
-</table>
-<dl class="docutils">
-<dt>Note: the wind components, whatever is the transform_wind option, must contain</dt>
-<dd>the map factor corrections.</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.processtype">
-<code class="descname">processtype</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.processtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generating process (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.quadmean">
-<code class="descname">quadmean</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.quadmean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.quadmean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the quadratic mean of data.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.remove_level">
-<code class="descname">remove_level</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.remove_level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.remove_level" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.remove_level()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.reproject_wind_on_lonlat">
-<code class="descname">reproject_wind_on_lonlat</code><span class="sig-paren">(</span><em>map_factor_correction=True</em>, <em>reverse=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.reproject_wind_on_lonlat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.reproject_wind_on_lonlat" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reprojects a wind vector (u, v) from the grid axes onto real
-sphere, i.e. with components on true zonal/meridian axes.
-Other components are kept untouched.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>map_factor_correction</strong> – if True, apply a correction of magnitude
-due to map factor.</li>
-<li><strong>reverse</strong> – if True, apply the reverse reprojection.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.resample">
-<code class="descname">resample</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.resample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.resample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.resample()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.resample_on_regularll">
-<code class="descname">resample_on_regularll</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.resample_on_regularll"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.resample_on_regularll" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.resample_on_regularll()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.select_subzone">
-<code class="descname">select_subzone</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.select_subzone"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.select_subzone" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.select_subzone()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.setdata">
-<code class="descname">setdata</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.setdata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.setdata" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets data to its components.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> – [data_i for i components]</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.sp2gp">
-<code class="descname">sp2gp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.sp2gp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.sp2gp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Transforms the spectral field into gridpoint, according to its spectral
-geometry. Replaces data in place.</p>
-<p>The spectral transform subroutine is actually included in the spectral
-geometry’s <em>sp2gp()</em> method.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.spectral">
-<code class="descname">spectral</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.spectral" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if the field is spectral.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.std">
-<code class="descname">std</code><span class="sig-paren">(</span><em>subzone=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.std"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.std" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the standard deviation of data.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.structure">
-<code class="descname">structure</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of Field geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.to_module">
-<code class="descname">to_module</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.to_module"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.to_module" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> (or subclass) whose data
-is the module of the Vector field.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.units">
-<code class="descname">units</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.units" title="Permalink to this definition">¶</a></dt>
-<dd><p>(see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.use_field_as_vcoord">
-<code class="descname">use_field_as_vcoord</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.use_field_as_vcoord"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.use_field_as_vcoord" title="Permalink to this definition">¶</a></dt>
-<dd><p>Cf. D3Field.use_field_as_vcoord()</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.validity">
-<code class="descname">validity</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.validity" title="Permalink to this definition">¶</a></dt>
-<dd><p>Validity of the field (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="epygram.fields.D3VectorField.D3VectorField.vector">
-<code class="descname">vector</code><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.vector" title="Permalink to this definition">¶</a></dt>
-<dd><p>Intrinsic vectorial nature of the field (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.vtk_guess_param_from_field">
-<code class="descname">vtk_guess_param_from_field</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.vtk_guess_param_from_field" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>Cf. D3Field.vtk_guess_param_from_field()</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="epygram.fields.D3VectorField.D3VectorField.what">
-<code class="descname">what</code><span class="sig-paren">(</span><em>out=&lt;_io.TextIOWrapper name='&lt;stdout&gt;' mode='w' encoding='utf-8'&gt;</em>, <em>vertical_geometry=True</em>, <em>cumulativeduration=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#D3VectorField.what"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#epygram.fields.D3VectorField.D3VectorField.what" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes in file a summary of the field.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>out</strong> – the output open file-like object (duck-typing: <em>out</em>.write()
-only is needed).</li>
-<li><strong>vertical_geometry</strong> – if True, writes the vertical geometry of the
-field.</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -750,14 +723,15 @@ field.</li>
         <li class="right" >
           <a href="H2DVectorField.html" title="epygram.fields.H2DVectorField — Horizontal 2-D Vector Field class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.16 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="fields.html" ><code class="docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="fields.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code> — 3-D Vector Field class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

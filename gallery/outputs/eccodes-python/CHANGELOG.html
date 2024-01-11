@@ -1,20 +1,19 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Changelog for eccodes-python &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Changelog for eccodes-python &#8212; epygram 1.4.17 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,9 +26,219 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Changelog for eccodes-python</a></li> 
       </ul>
-    </div>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="changelog-for-eccodes-python">
+<h1>Changelog for eccodes-python<a class="headerlink" href="#changelog-for-eccodes-python" title="Permalink to this headline">¶</a></h1>
+<section id="mm-dd">
+<h2>1.5.2 (2023-mm-dd)<a class="headerlink" href="#mm-dd" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add support for Python version 3.10</p></li>
+<li><p>ECC-1524: Check values in High-level Message.set function should retrieve based on value type</p></li>
+<li><p>ECC-1527: Handle floats in high-level Message.set function check values</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2>1.5.1 (2023-01-25)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1446: Data file era5-levels-members.grib not included in released tar file</p></li>
+<li><p>ECC-1460: Cannot import eccodes on M1 MacBook Pro</p></li>
+<li><p>ECC-1505: High-level Message.set function should allow dictionary and check result</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>1.5.0 (2022-08-25)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1404: Add the grib_get_gaussian_latitudes() function</p></li>
+<li><p>ECC-1405: Add new function: codes_any_new_from_samples</p></li>
+<li><p>ECC-1415: Implement a higher-level Python interface (still experimental)</p></li>
+<li><p>ECC-1429: Remove the file ‘eccodes/messages.py’</p></li>
+<li><p>GitHub pull request #62: add pypi badge</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>1.4.2 (2022-05-20)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1389: Drop Python version 3.5 and 3.6</p></li>
+<li><p>ECC-1390: NameError: name ‘GribInternalError’ is not defined</p></li>
+<li><p>Add test for GRIB bitmap</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>1.4.1 (2022-03-03)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1351: Support numpy.int64 in codes_set() and codes_set_long()</p></li>
+<li><p>ECC-1317: Data file tiggelam_cnmc_sfc.grib2 not included in released tar file</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>1.4.0 (2021-12-03)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1234: Remove the experimental high-level interface</p></li>
+<li><p>ECC-1282: Add codes_dump()</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>1.3.4 (2021-08-27)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Update documentation</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>1.3.3 (2021-06-21)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1246: UnicodeDecodeError when parsing BUFR file</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>1.3.2 (2021-04-16)<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Restore the experimental high-level interface</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>1.3.1 (2021-04-16)<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fix the recommended version</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>1.3.0 (2021-04-09)<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1231: Remove the experimental high-level interface</p></li>
+<li><p>Added the “findlibs” module</p></li>
+<li><p>Fix tests/test_high_level_api.py when MEMFS enabled</p></li>
+<li><p>ECC-1226: Python3 bindings: Typo causes AttributeError when calling codes_index_get_double</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>1.2.0 (2021-03-23)<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added test for multi-field GRIBs</p></li>
+<li><p>Fix deprecation warning: <cite>np.float</cite> is a deprecated alias for the builtin <cite>float</cite></p></li>
+<li><p>Experimental feature: grib_nearest_find</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>1.1.0 (2021-01-20)<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1171: Performance: Python bindings: remove assert statements</p></li>
+<li><p>ECC-1161: Python3 bindings: Do not raise exception on first failed attempt</p></li>
+<li><p>ECC-1176: Python3 bindings: float32 recognised as int instead of float</p></li>
+<li><p>GitHub pull request #41: Remove the apparent support for Python 2</p></li>
+<li><p>GitHub pull request #44: Fix CFFI crash on windows</p></li>
+<li><p>GitHub pull request #42: Add unit testing with GitHub actions (linux, macos and windows)</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>1.0.0 (2020-10-14)<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1143: CMake: Migration to ecbuild v3.4</p></li>
+<li><p>ECC-1133: C API: Propagate const char* for codes_index_new_from_file and codes_index_select_string</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>0.9.9 (2020-08-04)<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Support for ecmwflibs. An additional way to find ECMWF libraries (if available)</p></li>
+<li><p>ECC-1140: Segfault from invalid pointer reference in grib_set_double_array()</p></li>
+</ul>
+</section>
+<section id="id15">
+<h2>0.9.8 (2020-06-26)<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>ECC-1110: Removed obsolete function codes_close_file()</p></li>
+<li><p>Provide missing argument to exceptions</p></li>
+<li><p>Fix codes_set_definitions_path() typo</p></li>
+<li><p>Fix grib_get_double_element(). Missing last argument</p></li>
+<li><p>Add more tests to increase coverage</p></li>
+<li><p>GitHub pull request #15: Add .__next__() method to eccodes.CodesFile class</p></li>
+<li><p>ECC-1113: Python3 bindings under Windows: codes_get_long_array returns incorrect values</p></li>
+<li><p>ECC-1108: Python3 bindings under Windows: use of handle causes crash</p></li>
+<li><p>ECC-1121: Segfault when closing GribFile if messages are closed manually</p></li>
+</ul>
+</section>
+<section id="id16">
+<h2>0.9.6 (2020-03-10)<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Update Copyright notices</p></li>
+<li><p>Function-argument type checks: Improve error message</p></li>
+<li><p>Fix C function calls for codes_gribex_mode_on/codes_gribex_mode_off</p></li>
+</ul>
+</section>
+<section id="id17">
+<h2>0.9.5 (2020-01-15)<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>ECC-1029: Function-argument type-checking should be disabled by default.</dt><dd><p>To enable these checks, export ECCODES_PYTHON_ENABLE_TYPE_CHECKS=1</p>
+</dd>
+</dl>
+</li>
+<li><p>ECC-1032: Added codes_samples_path() and codes_definition_path()</p></li>
+<li><p>ECC-1042: Python3 interface writes integer arrays incorrectly</p></li>
+<li><p>ECC-794: Python3 interface: Expose the grib_get_data function</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2>0.9.4 (2019-11-27)<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Added new function: codes_get_version_info</p></li>
+<li><p>ECC-753: Expose the codes_grib_nearest_find_multiple function in Python</p></li>
+<li><p>ECC-1007: Python3 interface for eccodes cannot write large arrays</p></li>
+</ul>
+</section>
+<section id="id19">
+<h2>0.9.3 (2019-10-04)<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>New exception added: FunctionalityNotEnabledError</p></li>
+<li><p>BUFR decoding: support for multi-element constant arrays (ECC-428)</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2>0.9.2 (2019-07-09)<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>All ecCodes tests now pass</p></li>
+<li><p>Simplify the xx_new_from_file calls</p></li>
+<li><p>Fix for grib_set_string_array</p></li>
+<li><p>Use ECCODES_DIR to locate the library</p></li>
+<li><p>Remove the new-style high-level interface. It is still available in
+<a class="reference external" href="https://github.com/ecmwf/cfgrib">cfgrib</a>.</p></li>
+</ul>
+</section>
+<section id="id21">
+<h2>0.9.1 (2019-06-06)<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">codes_get_long_array</span></code> and <code class="docutils literal notranslate"><span class="pre">codes_get_double_array</span></code> now return a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.
+See: <a class="reference external" href="https://github.com/ecmwf/eccodes-python/issues/3">#3</a>.</p></li>
+</ul>
+</section>
+<section id="id23">
+<h2>0.9.0 (2019-05-07)<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Declare the project as <strong>Beta</strong>.</p></li>
+</ul>
+</section>
+<section id="id24">
+<h2>0.8.0 (2019-04-08)<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>First public release.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="../../../index.html">Table of Contents</a></h3>
@@ -71,225 +280,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
-            
-  <div class="section" id="changelog-for-eccodes-python">
-<h1>Changelog for eccodes-python<a class="headerlink" href="#changelog-for-eccodes-python" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="mm-dd">
-<h2>1.5.2 (2023-mm-dd)<a class="headerlink" href="#mm-dd" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Add support for Python version 3.10</li>
-<li>ECC-1524: Check values in High-level Message.set function should retrieve based on value type</li>
-<li>ECC-1527: Handle floats in high-level Message.set function check values</li>
-</ul>
-</div>
-<div class="section" id="id1">
-<h2>1.5.1 (2023-01-25)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1446: Data file era5-levels-members.grib not included in released tar file</li>
-<li>ECC-1460: Cannot import eccodes on M1 MacBook Pro</li>
-<li>ECC-1505: High-level Message.set function should allow dictionary and check result</li>
-</ul>
-</div>
-<div class="section" id="id2">
-<h2>1.5.0 (2022-08-25)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1404: Add the grib_get_gaussian_latitudes() function</li>
-<li>ECC-1405: Add new function: codes_any_new_from_samples</li>
-<li>ECC-1415: Implement a higher-level Python interface (still experimental)</li>
-<li>ECC-1429: Remove the file ‘eccodes/messages.py’</li>
-<li>GitHub pull request #62: add pypi badge</li>
-</ul>
-</div>
-<div class="section" id="id3">
-<h2>1.4.2 (2022-05-20)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1389: Drop Python version 3.5 and 3.6</li>
-<li>ECC-1390: NameError: name ‘GribInternalError’ is not defined</li>
-<li>Add test for GRIB bitmap</li>
-</ul>
-</div>
-<div class="section" id="id4">
-<h2>1.4.1 (2022-03-03)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1351: Support numpy.int64 in codes_set() and codes_set_long()</li>
-<li>ECC-1317: Data file tiggelam_cnmc_sfc.grib2 not included in released tar file</li>
-</ul>
-</div>
-<div class="section" id="id5">
-<h2>1.4.0 (2021-12-03)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1234: Remove the experimental high-level interface</li>
-<li>ECC-1282: Add codes_dump()</li>
-</ul>
-</div>
-<div class="section" id="id6">
-<h2>1.3.4 (2021-08-27)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Update documentation</li>
-</ul>
-</div>
-<div class="section" id="id7">
-<h2>1.3.3 (2021-06-21)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1246: UnicodeDecodeError when parsing BUFR file</li>
-</ul>
-</div>
-<div class="section" id="id8">
-<h2>1.3.2 (2021-04-16)<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Restore the experimental high-level interface</li>
-</ul>
-</div>
-<div class="section" id="id9">
-<h2>1.3.1 (2021-04-16)<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Fix the recommended version</li>
-</ul>
-</div>
-<div class="section" id="id10">
-<h2>1.3.0 (2021-04-09)<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1231: Remove the experimental high-level interface</li>
-<li>Added the “findlibs” module</li>
-<li>Fix tests/test_high_level_api.py when MEMFS enabled</li>
-<li>ECC-1226: Python3 bindings: Typo causes AttributeError when calling codes_index_get_double</li>
-</ul>
-</div>
-<div class="section" id="id11">
-<h2>1.2.0 (2021-03-23)<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Added test for multi-field GRIBs</li>
-<li>Fix deprecation warning: <cite>np.float</cite> is a deprecated alias for the builtin <cite>float</cite></li>
-<li>Experimental feature: grib_nearest_find</li>
-</ul>
-</div>
-<div class="section" id="id12">
-<h2>1.1.0 (2021-01-20)<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1171: Performance: Python bindings: remove assert statements</li>
-<li>ECC-1161: Python3 bindings: Do not raise exception on first failed attempt</li>
-<li>ECC-1176: Python3 bindings: float32 recognised as int instead of float</li>
-<li>GitHub pull request #41: Remove the apparent support for Python 2</li>
-<li>GitHub pull request #44: Fix CFFI crash on windows</li>
-<li>GitHub pull request #42: Add unit testing with GitHub actions (linux, macos and windows)</li>
-</ul>
-</div>
-<div class="section" id="id13">
-<h2>1.0.0 (2020-10-14)<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1143: CMake: Migration to ecbuild v3.4</li>
-<li>ECC-1133: C API: Propagate const char* for codes_index_new_from_file and codes_index_select_string</li>
-</ul>
-</div>
-<div class="section" id="id14">
-<h2>0.9.9 (2020-08-04)<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Support for ecmwflibs. An additional way to find ECMWF libraries (if available)</li>
-<li>ECC-1140: Segfault from invalid pointer reference in grib_set_double_array()</li>
-</ul>
-</div>
-<div class="section" id="id15">
-<h2>0.9.8 (2020-06-26)<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>ECC-1110: Removed obsolete function codes_close_file()</li>
-<li>Provide missing argument to exceptions</li>
-<li>Fix codes_set_definitions_path() typo</li>
-<li>Fix grib_get_double_element(). Missing last argument</li>
-<li>Add more tests to increase coverage</li>
-<li>GitHub pull request #15: Add .__next__() method to eccodes.CodesFile class</li>
-<li>ECC-1113: Python3 bindings under Windows: codes_get_long_array returns incorrect values</li>
-<li>ECC-1108: Python3 bindings under Windows: use of handle causes crash</li>
-<li>ECC-1121: Segfault when closing GribFile if messages are closed manually</li>
-</ul>
-</div>
-<div class="section" id="id16">
-<h2>0.9.6 (2020-03-10)<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Update Copyright notices</li>
-<li>Function-argument type checks: Improve error message</li>
-<li>Fix C function calls for codes_gribex_mode_on/codes_gribex_mode_off</li>
-</ul>
-</div>
-<div class="section" id="id17">
-<h2>0.9.5 (2020-01-15)<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><dl class="first docutils">
-<dt>ECC-1029: Function-argument type-checking should be disabled by default.</dt>
-<dd>To enable these checks, export ECCODES_PYTHON_ENABLE_TYPE_CHECKS=1</dd>
-</dl>
-</li>
-<li>ECC-1032: Added codes_samples_path() and codes_definition_path()</li>
-<li>ECC-1042: Python3 interface writes integer arrays incorrectly</li>
-<li>ECC-794: Python3 interface: Expose the grib_get_data function</li>
-</ul>
-</div>
-<div class="section" id="id18">
-<h2>0.9.4 (2019-11-27)<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Added new function: codes_get_version_info</li>
-<li>ECC-753: Expose the codes_grib_nearest_find_multiple function in Python</li>
-<li>ECC-1007: Python3 interface for eccodes cannot write large arrays</li>
-</ul>
-</div>
-<div class="section" id="id19">
-<h2>0.9.3 (2019-10-04)<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>New exception added: FunctionalityNotEnabledError</li>
-<li>BUFR decoding: support for multi-element constant arrays (ECC-428)</li>
-</ul>
-</div>
-<div class="section" id="id20">
-<h2>0.9.2 (2019-07-09)<a class="headerlink" href="#id20" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>All ecCodes tests now pass</li>
-<li>Simplify the xx_new_from_file calls</li>
-<li>Fix for grib_set_string_array</li>
-<li>Use ECCODES_DIR to locate the library</li>
-<li>Remove the new-style high-level interface. It is still available in
-<a class="reference external" href="https://github.com/ecmwf/cfgrib">cfgrib</a>.</li>
-</ul>
-</div>
-<div class="section" id="id21">
-<h2>0.9.1 (2019-06-06)<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">codes_get_long_array</span></code> and <code class="docutils literal notranslate"><span class="pre">codes_get_double_array</span></code> now return a <code class="docutils literal notranslate"><span class="pre">np.ndarray</span></code>.
-See: <a class="reference external" href="https://github.com/ecmwf/eccodes-python/issues/3">#3</a>.</li>
-</ul>
-</div>
-<div class="section" id="id23">
-<h2>0.9.0 (2019-05-07)<a class="headerlink" href="#id23" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Declare the project as <strong>Beta</strong>.</li>
-</ul>
-</div>
-<div class="section" id="id24">
-<h2>0.8.0 (2019-04-08)<a class="headerlink" href="#id24" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>First public release.</li>
-</ul>
-</div>
-</div>
-
-
-          </div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -303,12 +302,13 @@ See: <a class="reference external" href="https://github.com/ecmwf/eccodes-python
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Changelog for eccodes-python</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>
