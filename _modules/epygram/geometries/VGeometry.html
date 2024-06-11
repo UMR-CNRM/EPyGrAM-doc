@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.geometries.VGeometry &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.geometries.VGeometry &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,28 +25,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.geometries.VGeometry</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -65,19 +48,21 @@
 <span class="sd">Contains the class for Vertical geometry of fields.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FootprintBase</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
 
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">profiles</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">RecursiveObject</span><span class="p">,</span> <span class="n">write_formatted</span><span class="p">,</span> <span class="n">separation_line</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">profiles</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">RecursiveObject</span><span class="p">,</span> <span class="n">write_formatted</span><span class="p">,</span> <span class="n">separation_line</span><span class="p">,</span>
+                          <span class="n">ifNone_emptydict</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">VGeometry</span>
 
 
-<div class="viewcode-block" id="VGeometry"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.VGeometry">[docs]</a><span class="k">class</span> <span class="nc">VGeometry</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">,</span> <span class="n">FootprintBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="VGeometry"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.VGeometry">[docs]</a><span class="k">class</span> <span class="nc">VGeometry</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handles the vertical geometry for fields.</span>
 
 <span class="sd">    Here, the grid defines the vertical position of each level</span>
@@ -98,34 +83,34 @@
 <span class="sd">    It is not allowed to have a level varying in time and constant on the geographic domain.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_collector</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;geometry&#39;</span><span class="p">,)</span>
-    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-            <span class="n">structure</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;V&#39;</span><span class="p">])),</span>
-            <span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Type of horizontal level, as of GRIB2 norm </span><span class="se">\</span>
-<span class="s2">                      (inspired from GRIB_API).&quot;</span><span class="p">,</span>
-                <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
-            <span class="n">levels</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="n">FPList</span><span class="p">,</span>
-                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Effective levels on which data is available.&quot;</span><span class="p">),</span>
-            <span class="n">grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
-                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">default</span><span class="o">=</span><span class="n">FPDict</span><span class="p">({}),</span>
-                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Handles description of the vertical grid.&quot;</span><span class="p">),</span>
-            <span class="n">position_on_grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">,</span>
-                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Position of points w/r to the vertical grid.&quot;</span><span class="p">,</span>
-                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;flux&#39;</span><span class="p">,</span> <span class="s1">&#39;__unknown__&#39;</span><span class="p">]),</span>
-                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;__unknown__&#39;</span><span class="p">)</span>
-        <span class="p">)</span>
-    <span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typeoffirstfixedsurface</span><span class="p">,</span> <span class="n">levels</span><span class="p">,</span>
+                 <span class="n">typeofsecondfixedsurface</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">toplevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bottomlevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">position_on_grid</span><span class="o">=</span><span class="s1">&#39;__unknown__&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param str structure: must be &#39;V&#39;</span>
+<span class="sd">        :param int typeoffirstfixedsurface: Type of horizontal level, as of GRIB2 norm</span>
+<span class="sd">                                            (inspired from GRIB_API).</span>
+<span class="sd">        :param list levels: Effective levels on which data is available.</span>
+<span class="sd">        :param dict grid: Handles description of the vertical grid.</span>
+<span class="sd">        :param str position_on_grid: Position of points w/r to the vertical grid.</span>
+<span class="sd">                                     (among [&#39;mass&#39;, &#39;flux&#39;, &#39;__unknown__&#39;])</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_int</span><span class="p">(</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_int</span><span class="p">(</span><span class="s1">&#39;typeofsecondfixedsurface&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_list</span><span class="p">(</span><span class="s1">&#39;levels&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_dict</span><span class="p">(</span><span class="s1">&#39;grid&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_inlist</span><span class="p">(</span><span class="s1">&#39;position_on_grid&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span> <span class="s1">&#39;flux&#39;</span><span class="p">,</span> <span class="s1">&#39;__unknown__&#39;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="o">=</span> <span class="n">typeoffirstfixedsurface</span>
+        <span class="k">if</span> <span class="n">typeofsecondfixedsurface</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">typeofsecondfixedsurface</span> <span class="o">=</span> <span class="n">typeofsecondfixedsurface</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">ifNone_emptydict</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_on_grid</span> <span class="o">=</span> <span class="n">position_on_grid</span>
 
 <div class="viewcode-block" id="VGeometry.what"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.VGeometry.what">[docs]</a>    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes in file a summary of the geometry.</span>
 
 <span class="sd">        :param out: the output open file-like object</span>
@@ -169,12 +154,12 @@
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="VGeometry.to_vgrid"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.VGeometry.to_vgrid">[docs]</a>    <span class="k">def</span> <span class="nf">to_vgrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert the VGeometry object to a :mod:`vgrid` one.</span>
 
 <span class="sd">        Other kwargs passed to HybridPressureVGrid() constructor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">pyvgrid</span> <span class="k">import</span> <span class="n">HybridPressureVGrid</span>
+        <span class="kn">from</span> <span class="nn">pyvgrid</span> <span class="kn">import</span> <span class="n">HybridPressureVGrid</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="o">==</span> <span class="mi">119</span><span class="p">:</span>
             <span class="n">vg</span> <span class="o">=</span> <span class="n">HybridPressureVGrid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -187,7 +172,7 @@
 <span class="c1">########################</span>
 <div class="viewcode-block" id="hybridP2pressure"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.hybridP2pressure">[docs]</a><span class="k">def</span> <span class="nf">hybridP2pressure</span><span class="p">(</span><span class="n">hybridP_geometry</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
                      <span class="n">gridposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a &#39;hybrid_pressure&#39; VGeometry to a &#39;pressure&#39; (in hPa) VGeometry.</span>
 
 <span class="sd">    :param VGeometry hybridP_geometry: the initial vertical coordinate</span>
@@ -218,17 +203,16 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;gridposition != &#39;mass&#39; or &#39;flux&#39;.&quot;</span><span class="p">)</span>
     <span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="o">/</span> <span class="mf">100.</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">levels</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()]</span>
-    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
                      <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="n">hybridP_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                      <span class="c1"># &#39;grid&#39;: {&#39;gridlevels&#39;:levels},</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="n">levels</span>
                      <span class="p">}</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="hybridH2pressure"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.hybridH2pressure">[docs]</a><span class="k">def</span> <span class="nf">hybridH2pressure</span><span class="p">(</span><span class="n">hybridH_geometry</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a hybrid_height coordinate grid into pressure (in hPa).</span>
 
 <span class="sd">    :param P: the vertical profile of pressure to use</span>
@@ -256,18 +240,17 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;grid positions can only be &#39;mass&#39; or &#39;flux&#39;.&quot;</span><span class="p">)</span>
     <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hybridH_geometry</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
     <span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="n">l</span> <span class="o">/</span> <span class="mi">100</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">levels</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()]</span>
-    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
                      <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="n">hybridH_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                      <span class="c1"># &#39;grid&#39;:{&#39;gridlevels&#39;:levels},</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="n">levels</span>
                      <span class="p">}</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="hybridP2altitude"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.hybridP2altitude">[docs]</a><span class="k">def</span> <span class="nf">hybridP2altitude</span><span class="p">(</span><span class="n">hybridP_geometry</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
                      <span class="n">Pdep</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Phi_surf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a hybrid_pressure coordinate grid into altitude of mass levels.</span>
 
 <span class="sd">    :param VGeometry hybridP_geometry: the initial vertical coordinate</span>
@@ -305,18 +288,17 @@
     <span class="k">elif</span> <span class="n">hybridP_geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;ABgrid_position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;mass&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;hybrid-pressure grid at mass-levels.&quot;</span><span class="p">)</span>
     <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hybridP_geometry</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="n">coordinate</span><span class="p">,</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="n">coordinate</span><span class="p">,</span>
                      <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="n">hybridP_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                      <span class="c1"># &#39;grid&#39;:{&#39;gridlevels&#39;:list(levels)},</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels</span><span class="p">)</span>
                      <span class="p">}</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="hybridH2altitude"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.hybridH2altitude">[docs]</a><span class="k">def</span> <span class="nf">hybridH2altitude</span><span class="p">(</span><span class="n">hybridH_geometry</span><span class="p">,</span> <span class="n">Zsurf</span><span class="p">,</span>
                      <span class="n">gridposition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conv2height</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a hybrid_height coordinate grid into altitude.</span>
 
 <span class="sd">    :param Zsurf: the surface height, needed for integration of Ai and Bi.</span>
@@ -350,17 +332,16 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;gridposition != &#39;mass&#39; or &#39;flux&#39;.&quot;</span><span class="p">)</span>
     <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">hybridH_geometry</span><span class="o">.</span><span class="n">levels</span><span class="p">)]</span>
-    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">103</span> <span class="k">if</span> <span class="n">conv2height</span> <span class="k">else</span> <span class="mi">102</span><span class="p">,</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">103</span> <span class="k">if</span> <span class="n">conv2height</span> <span class="k">else</span> <span class="mi">102</span><span class="p">,</span>
                      <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="n">hybridH_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                      <span class="c1"># &#39;grid&#39;:{&#39;gridlevels&#39;:list(levels)},</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels</span><span class="p">)</span>
                      <span class="p">}</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
 
 
 <span class="k">def</span> <span class="nf">height2altitude</span><span class="p">(</span><span class="n">height_geometry</span><span class="p">,</span> <span class="n">Zsurf</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a height coordinate grid into altitude.</span>
 
 <span class="sd">    :param Zsurf: the surface height.</span>
@@ -373,16 +354,15 @@
     <span class="n">levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">height_geometry</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">levels</span><span class="p">)):</span>
         <span class="n">levels</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">Zsurf</span>
-    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">102</span><span class="p">,</span>
                      <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="n">height_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="n">levels</span>
                      <span class="p">}</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">altitude2height</span><span class="p">(</span><span class="n">altitude_geometry</span><span class="p">,</span> <span class="n">Zsurf</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts an altitude coordinate grid into height.</span>
 
 <span class="sd">    :param Zsurf: the surface height.</span>
@@ -395,17 +375,16 @@
     <span class="n">levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">altitude_geometry</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">levels</span><span class="p">)):</span>
         <span class="n">levels</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">Zsurf</span>
-    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                     <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
+    <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">103</span><span class="p">,</span>
                      <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="n">altitude_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="n">levels</span>
                      <span class="p">}</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="pressure2altitude"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.pressure2altitude">[docs]</a><span class="k">def</span> <span class="nf">pressure2altitude</span><span class="p">(</span><span class="n">pressure_geometry</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
                       <span class="n">Pdep</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">Phi_surf</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a pressure coordinate grid (on mass or flux levels) to</span>
 <span class="sd">    altitude on mass levels).</span>
 
@@ -442,21 +421,18 @@
         <span class="n">coordinate</span> <span class="o">=</span> <span class="mi">103</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">coordinate</span> <span class="o">=</span> <span class="mi">102</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">pressure_geometry</span><span class="o">.</span><span class="n">deppcopy</span><span class="p">()</span>
     <span class="n">grid</span> <span class="o">=</span> <span class="n">pressure_geometry</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     <span class="n">grid</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;gridposition&#39;</span><span class="p">:</span><span class="n">pressure_geometry</span><span class="o">.</span><span class="n">gridposition</span><span class="p">,</span>
                  <span class="s1">&#39;levels&#39;</span><span class="p">:</span><span class="nb">list</span><span class="p">(</span><span class="n">levels</span><span class="p">)})</span>
-    <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V1D&#39;</span><span class="p">,</span>
-                        <span class="n">coordinate</span><span class="o">=</span><span class="n">coordinate</span><span class="p">,</span>
-                        <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
-                        <span class="n">hlocation</span><span class="o">=</span><span class="n">pressure_geometry</span><span class="o">.</span><span class="n">hlocation</span><span class="p">,</span>
-                        <span class="n">position_on_grid</span><span class="o">=</span><span class="n">pressure_geometry</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">geom</span></div>
 
 
 <div class="viewcode-block" id="hybridP_coord_and_surfpressure_to_3D_pressure_field"><a class="viewcode-back" href="../../../library/VGeometry.html#epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field">[docs]</a><span class="k">def</span> <span class="nf">hybridP_coord_and_surfpressure_to_3D_pressure_field</span><span class="p">(</span>
         <span class="n">hybridP_geometry</span><span class="p">,</span> <span class="n">Psurf</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
         <span class="n">gridposition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    From a hybridP Vgeometry and a surface pressure (in Pa) H2D field,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    From a hybridP VGeometry and a surface pressure (in Pa) H2D field,</span>
 <span class="sd">    compute a 3D field containing the pressure (in hPa) at each hybridP level</span>
 <span class="sd">    for each gridpoint.</span>
 
@@ -471,17 +447,16 @@
 
 <span class="sd">    :rtype: D3Field</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span>
+    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">H2DField</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">Psurf</span><span class="p">,</span> <span class="n">H2DField</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Psurf</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
         <span class="n">Psurf</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
     <span class="n">pressures</span> <span class="o">=</span> <span class="n">hybridP2pressure</span><span class="p">(</span><span class="n">hybridP_geometry</span><span class="p">,</span> <span class="n">Psurf</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">vertical_mean</span><span class="p">,</span>
                                  <span class="n">gridposition</span><span class="o">=</span><span class="n">gridposition</span><span class="p">)</span><span class="o">.</span><span class="n">levels</span>
-    <span class="n">vgeom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometrys</span><span class="o">.</span><span class="n">almost_clone</span><span class="p">(</span><span class="n">hybridP_geometry</span><span class="p">,</span>
-                                       <span class="n">levels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pressures</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
-    <span class="n">geom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometrys</span><span class="o">.</span><span class="n">almost_clone</span><span class="p">(</span><span class="n">Psurf</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span>
-                                      <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
-                                      <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">)</span>
+    <span class="n">vgeom</span> <span class="o">=</span> <span class="n">hybridP_geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+    <span class="n">vgeom</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pressures</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">Psurf</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+    <span class="n">geom</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">vgeom</span>
     <span class="n">d3pressure</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;computed&#39;</span><span class="p">:</span><span class="s1">&#39;pressure&#39;</span><span class="p">},</span>
                            <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
                            <span class="n">geometry</span><span class="o">=</span><span class="n">geom</span><span class="p">,</span>
@@ -500,8 +475,8 @@
         <span class="n">ql3D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qi3D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qr3D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qs3D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">qg3D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">Pdep3D</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">Phi_surf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    From a hybridP Vgeometry, a surface pressure (in Pa) H2D field,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    From a hybridP VGeometry, a surface pressure (in Pa) H2D field,</span>
 <span class="sd">    and temperature and specific humidity 3D fields,</span>
 <span class="sd">    compute a 3D field containing the altitude (in m) at each hybridP level</span>
 <span class="sd">    for each gridpoint.</span>
@@ -526,8 +501,8 @@
 
 <span class="sd">    :rtype: D3Field</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">D3Field</span><span class="p">,</span> <span class="n">H2DField</span>
-    <span class="kn">from</span> <span class="nn">bronx.meteo.conversion</span> <span class="k">import</span> <span class="n">q2R</span>
+    <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">D3Field</span><span class="p">,</span> <span class="n">H2DField</span>
+    <span class="kn">from</span> <span class="nn">bronx.meteo.conversion</span> <span class="kn">import</span> <span class="n">q2R</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t3D</span><span class="p">,</span> <span class="n">D3Field</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">q3D</span><span class="p">,</span> <span class="n">D3Field</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Phi_surf</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -567,7 +542,22 @@
     <span class="k">return</span> <span class="n">alt3D</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -581,15 +571,16 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.geometries.VGeometry</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

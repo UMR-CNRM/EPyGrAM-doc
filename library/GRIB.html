@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.formats.GRIB — Interface-Class to the GRIB format &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.formats.GRIB — Interface-Class to the GRIB format &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,8 +34,8 @@
         <li class="right" >
           <a href="netCDF.html" title="epygram.formats.netCDF — Interface-Class to the netCDF format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a></li> 
       </ul>
@@ -54,7 +54,7 @@ editions 1 and 2.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.GRIB.</span></span><span class="sig-name descname"><span class="pre">NamesGribDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concepts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['name',</span> <span class="pre">'shortName',</span> <span class="pre">'cfName',</span> <span class="pre">'cfVarName']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/GRIB.html#NamesGribDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.GRIB.NamesGribDef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../site/griberies.html#griberies.GribDef" title="griberies.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">griberies.GribDef</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="../extra/griberies.html#epygram.extra.griberies.GribDef" title="epygram.extra.griberies.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.extra.griberies.GribDef</span></code></a></p>
 <p>Handle <em>name</em> and <em>shortName</em> GRIB definitions.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.formats.GRIB.NamesGribDef.cfName">
@@ -142,7 +142,7 @@ editions 1 and 2.</p>
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘read’, ‘a’, ‘write’, ‘r’, ‘append’, ‘w’])</p></li>
+<li><p>Values: set([‘r’, ‘a’, ‘write’, ‘append’, ‘w’, ‘read’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -785,14 +785,14 @@ file to be written to.</p>
         <li class="right" >
           <a href="netCDF.html" title="epygram.formats.netCDF — Interface-Class to the netCDF format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

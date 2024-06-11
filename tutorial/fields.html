@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. Fields &#8212; epygram 1.4.17 documentation</title>
+    <title>3. Fields &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="resources.html" title="2. Resources"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Fields</a></li> 
       </ul>
@@ -324,18 +324,18 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span> <span class="c1">#initialisation of environment, for FA/LFI and spectrals transforms sub-libraries</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">true3d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CF</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S---CLOUD_FRACTI&#39;</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#Set-up of the view</span>
 <span class="gp">... </span><span class="n">offset</span> <span class="o">=</span> <span class="n">CF</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()[</span><span class="s1">&#39;ll&#39;</span><span class="p">]</span> <span class="c1">#We translate the domain</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hCoord</span> <span class="o">=</span> <span class="s1">&#39;ll&#39;</span> <span class="c1">#We use lat/lon on the horizontal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z_factor</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1">#0.1 horizontal degree of lat/lon is represented by the same length as one model level on the vertical</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ren</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">vtk_set_window</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">))</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CF</span><span class="o">.</span><span class="n">plot3DContour</span><span class="p">(</span><span class="n">ren</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;White&#39;</span><span class="p">,</span> <span class="n">hCoord</span><span class="o">=</span><span class="n">hCoord</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span> <span class="n">z_factor</span><span class="o">=</span><span class="n">z_factor</span><span class="p">)</span>
 <span class="go">((vtkRenderingOpenGL2Python.vtkOpenGLActor)0x7f899c230390, (vtkRenderingOpenGL2Python.vtkOpenGLPolyDataMapper)0x7f89b8750a78)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ren</span><span class="p">[</span><span class="s1">&#39;interactor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Start</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -409,13 +409,13 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
         <li class="right" >
           <a href="resources.html" title="2. Resources"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Fields</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

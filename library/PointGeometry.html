@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.geometries.PointGeometry — Point 0-D Geometry class &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.geometries.PointGeometry — Point 0-D Geometry class &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -15,9 +15,7 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="epygram.geometries.SpectralGeometry — Spectral Geometry class" href="SpectralGeometry.html" />
-    <link rel="prev" title="epygram.geometries.V1DGeometry — Vertical 1-D Geometry class" href="V1DGeometry.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,15 +26,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="SpectralGeometry.html" title="epygram.geometries.SpectralGeometry — Spectral Geometry class"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="V1DGeometry.html" title="epygram.geometries.V1DGeometry — Vertical 1-D Geometry class"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.PointGeometry</span></code> — Point 0-D Geometry class</a></li> 
       </ul>
     </div>  
@@ -46,98 +36,8 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-epygram.geometries.PointGeometry">
-<span id="epygram-geometries-pointgeometry-point-0-d-geometry-class"></span><h1><a class="reference internal" href="#module-epygram.geometries.PointGeometry" title="epygram.geometries.PointGeometry: Point 0-D Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.PointGeometry</span></code></a> — Point 0-D Geometry class<a class="headerlink" href="#module-epygram.geometries.PointGeometry" title="Permalink to this headline">¶</a></h1>
-<p>Contains the classes for Point geometry of fields.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.PointGeometry.</span></span><span class="sig-name descname"><span class="pre">PointGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/PointGeometry.html#PointGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="V1DGeometry.html#epygram.geometries.V1DGeometry.V1DGeometry" title="epygram.geometries.V1DGeometry.V1DGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry.V1DGeometry</span></code></a>, <a class="reference internal" href="H2DGeometry.html#epygram.geometries.H2DGeometry.H2DUnstructuredGeometry" title="epygram.geometries.H2DGeometry.H2DUnstructuredGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry.H2DUnstructuredGeometry</span></code></a></p>
-<p>Handles the geometry for a Geographical Point Field.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>info: Not documented</p></li>
-<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>dimensions</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles grid dimensions.</p></li>
-<li><p><strong>geoid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - To specify geoid shape.</p>
-<ul>
-<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(ellps = ‘WGS84’,)&gt;&gt;.</p></li>
-</ul>
-</li>
-<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
-<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
-<ul>
-<li><p>Optional. Default is None.</p></li>
-<li><p>Values: set([‘DDH:point’, ‘DDH:ij_point’, ‘DDH:globe’, ‘DDH:quadrilateral’, ‘DDH:zonal_bands’, ‘unstructured’, ‘DDH:rectangle’])</p></li>
-</ul>
-</li>
-<li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
-<ul>
-<li><p>Optional. Default is ‘center’.</p></li>
-<li><p>Values: set([‘center’])</p></li>
-</ul>
-</li>
-<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
-<ul>
-<li><p>Values: set([‘Point’])</p></li>
-</ul>
-</li>
-<li><p><strong>vcoordinate</strong> (<a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry" title="epygram.geometries.VGeometry.VGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry.VGeometry</span></code></a>) - rwx - Handles vertical geometry parameters.</p></li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.dimensions">
-<span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles grid dimensions (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.geoid">
-<span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.geoid" title="Permalink to this definition">¶</a></dt>
-<dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.grid">
-<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the horizontal grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.position_on_horizontal_grid">
-<span class="sig-name descname"><span class="pre">position_on_horizontal_grid</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.position_on_horizontal_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the horizontal (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.structure">
-<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of geometry (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.PointGeometry.PointGeometry.vcoordinate">
-<span class="sig-name descname"><span class="pre">vcoordinate</span></span><a class="headerlink" href="#epygram.geometries.PointGeometry.PointGeometry.vcoordinate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles vertical geometry parameters (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
+  <section id="epygram-geometries-pointgeometry-point-0-d-geometry-class">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.PointGeometry</span></code> — Point 0-D Geometry class<a class="headerlink" href="#epygram-geometries-pointgeometry-point-0-d-geometry-class" title="Permalink to this headline">¶</a></h1>
 </section>
 
 
@@ -147,12 +47,6 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="V1DGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry</span></code> — Vertical 1-D Geometry class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="SpectralGeometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -183,20 +77,12 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="SpectralGeometry.html" title="epygram.geometries.SpectralGeometry — Spectral Geometry class"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="V1DGeometry.html" title="epygram.geometries.V1DGeometry — Vertical 1-D Geometry class"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.PointGeometry</span></code> — Point 0-D Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

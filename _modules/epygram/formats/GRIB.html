@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats.GRIB &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.formats.GRIB &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
@@ -68,7 +68,7 @@
 <span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span>
 <span class="kn">from</span> <span class="nn">bronx.meteo.conversion</span> <span class="kn">import</span> <span class="n">q2R</span>
 <span class="kn">from</span> <span class="nn">bronx.meteo</span> <span class="kn">import</span> <span class="n">constants</span>
-<span class="kn">import</span> <span class="nn">griberies</span>
+<span class="kn">from</span> <span class="nn">epygram.extra</span> <span class="kn">import</span> <span class="n">griberies</span>
 
 <span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span>
@@ -76,7 +76,9 @@
 <span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Angle</span><span class="p">,</span> <span class="n">RecursiveObject</span><span class="p">,</span>
                           <span class="n">separation_line</span><span class="p">,</span> <span class="n">write_formatted_dict</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">H2DField</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.H2DGeometry</span> <span class="kn">import</span> <span class="n">gauss_latitudes</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="p">(</span><span class="n">VGeometry</span><span class="p">,</span> <span class="n">gauss_latitudes</span><span class="p">,</span>
+                                <span class="n">RegLLGeometry</span><span class="p">,</span> <span class="n">RotLLGeometry</span><span class="p">,</span>
+                                <span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="kn">import</span> <span class="n">pressure2altitude</span><span class="p">,</span> <span class="n">altitude2height</span><span class="p">,</span> <span class="n">height2altitude</span>
 <span class="kn">from</span> <span class="nn">epygram.geometries.SpectralGeometry</span> <span class="kn">import</span> <span class="p">(</span><span class="n">SpectralGeometry</span><span class="p">,</span>
                                                  <span class="n">gridpoint_dims_from_truncation</span><span class="p">,</span>
@@ -160,7 +162,7 @@
         <span class="k">return</span> <span class="n">install_dir</span>
 
     <span class="k">def</span> <span class="nf">init_env</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reset</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Ensure grib_api/eccodes variables are consistent with inner library.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensure grib_api/eccodes variables are consistent with inner library.&quot;&quot;&quot;</span>
         <span class="n">griberies</span><span class="o">.</span><span class="n">complete_grib_samples_paths</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">install_dir</span><span class="p">,</span>
                                               <span class="bp">self</span><span class="o">.</span><span class="n">api_name</span><span class="p">,</span>
                                               <span class="n">reset</span><span class="o">=</span><span class="n">reset</span><span class="p">)</span>
@@ -201,7 +203,7 @@
 
 
 <div class="viewcode-block" id="NamesGribDef"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.NamesGribDef">[docs]</a><span class="k">class</span> <span class="nc">NamesGribDef</span><span class="p">(</span><span class="n">griberies</span><span class="o">.</span><span class="n">GribDef</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle *name* and *shortName* GRIB definitions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle *name* and *shortName* GRIB definitions.&quot;&quot;&quot;</span>
 
     <span class="n">_non_GRIB_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;is_uerra&#39;</span><span class="p">]</span>
 
@@ -210,7 +212,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">NamesGribDef</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">actual_init</span><span class="p">,</span> <span class="n">concepts</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_actual_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read definition files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read definition files.&quot;&quot;&quot;</span>
         <span class="c1"># get definition paths, from env variable</span>
         <span class="n">defpaths</span> <span class="o">=</span> <span class="n">griberies</span><span class="o">.</span><span class="n">get_definition_paths</span><span class="p">()</span>
         <span class="c1"># and from gribapi/eccodes install</span>
@@ -235,7 +237,7 @@
              <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
              <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
              <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &#39;name&#39; equivalence lookup:</span>
 <span class="sd">          - if **fid** is a name, get the associated GRIB key/value pairs</span>
 <span class="sd">          - if **fid** is a set of GRIB key/value pairs, get the associated name(s)</span>
@@ -253,7 +255,7 @@
                   <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &#39;name&#39; equivalence lookup:</span>
 <span class="sd">          - if **fid** is a shortName, get the associated GRIB key/value pairs</span>
 <span class="sd">          - if **fid** is a set of GRIB key/value pairs, get the associated shortName(s)</span>
@@ -271,7 +273,7 @@
                <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &#39;name&#39; equivalence lookup:</span>
 <span class="sd">          - if **fid** is a cfName, get the associated GRIB key/value pairs</span>
 <span class="sd">          - if **fid** is a set of GRIB key/value pairs, get the associated cfName(s)</span>
@@ -289,7 +291,7 @@
                   <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">exact</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &#39;name&#39; equivalence lookup:</span>
 <span class="sd">          - if **fid** is a cfVarName, get the associated GRIB key/value pairs</span>
 <span class="sd">          - if **fid** is a set of GRIB key/value pairs, get the associated cfVarName(s)</span>
@@ -343,7 +345,7 @@
 
 
 <div class="viewcode-block" id="GRIBmessage"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage">[docs]</a><span class="k">class</span> <span class="nc">GRIBmessage</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class implementing a GRIB message as an object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -384,7 +386,7 @@
                               <span class="n">productDefinitionTemplateNumber</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                               <span class="n">scaleFactorOfFirstFixedSurface</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                               <span class="n">scaleFactorOfSecondFixedSurface</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get specific fid keys according to **productDefinitionTemplateNumber**</span>
 <span class="sd">        and **scaleFactorOfFirstFixedSurface**</span>
 <span class="sd">        and **scaleFactorOfSecondFixedSurface**.</span>
@@ -413,7 +415,7 @@
                      <span class="n">productDefinitionTemplateNumber</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                      <span class="n">scaleFactorOfFirstFixedSurface</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                      <span class="n">scaleFactorOfSecondFixedSurface</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get fid keys according to</span>
 <span class="sd">        **editionNumber** and **productDefinitionTemplateNumber**,</span>
 <span class="sd">        **scaleFactorOfFirstFixedSurface**</span>
@@ -442,7 +444,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_GRIB1_default_sample</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">required_packingType</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get default sample, according in order to:</span>
 <span class="sd">        1/ spectralness</span>
 <span class="sd">        2/ model levels</span>
@@ -469,7 +471,7 @@
                  <span class="n">other_GRIB_options</span><span class="o">=</span><span class="p">{},</span>
                  <span class="n">interpret_comment</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">set_misc_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize a GRIBmessage from either sources.</span>
 
 <span class="sd">        :param source: being a tuple of either form:\n</span>
@@ -565,7 +567,7 @@
     <span class="c1"># Low level methods --------------------------------------------------------</span>
 
     <span class="k">def</span> <span class="nf">_init_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">msg_position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize message from message in file, optionally with given position in file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize message from message in file, optionally with given position in file.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="c1"># if position specified, go to position of message</span>
         <span class="k">if</span> <span class="n">msg_position</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -591,7 +593,7 @@
                          <span class="c1"># GRIB2/new way</span>
                          <span class="n">interpret_comment</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                          <span class="n">set_misc_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize message from epygram field (and sample).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize message from epygram field (and sample).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">grib_edition</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">or</span> <span class="p">(</span><span class="n">grib_edition</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span>
                                      <span class="s1">&#39;GRIB2&#39;</span> <span class="ow">in</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">):</span>
             <span class="c1"># new way for GRIB2</span>
@@ -619,14 +621,14 @@
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;field.fid must have a &#39;GRIB1&#39; or &#39;GRIB2&#39; identifier&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_clone_from_sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sample</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clone a sample GRIB message.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clone a sample GRIB message.&quot;&quot;&quot;</span>
         <span class="n">sample_gid</span> <span class="o">=</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">new_from_samples</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
         <span class="n">gid</span> <span class="o">=</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">sample_gid</span><span class="p">)</span>
         <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">release</span><span class="p">(</span><span class="n">sample_gid</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gid</span>
 
     <span class="k">def</span> <span class="nf">_clone_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clone first GRIB message from file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clone first GRIB message from file.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">original_gid</span> <span class="o">=</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">any_new_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
             <span class="n">gid</span> <span class="o">=</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">original_gid</span><span class="p">)</span>
@@ -634,14 +636,14 @@
         <span class="k">return</span> <span class="n">gid</span>
 
 <div class="viewcode-block" id="GRIBmessage.write_to_file"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.write_to_file">[docs]</a>    <span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ofile</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        *ofile* being an open file-like object designing the physical GRIB</span>
 <span class="sd">        file to be written to.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gid</span><span class="p">,</span> <span class="n">ofile</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_readattribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">array</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Actual access to the attributes.</span>
 <span class="sd">        :param attribute: key to read</span>
 <span class="sd">        :param array: attribute is an array</span>
@@ -693,11 +695,11 @@
             <span class="nb">super</span><span class="p">(</span><span class="n">GRIBmessage</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="n">attribute</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_array_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Setter for array attributes.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Setter for array attributes.&quot;&quot;&quot;</span>
         <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">set_array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gid</span><span class="p">,</span> <span class="n">attribute</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GRIBmessage.get"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Same as dict.get(), but try to read attribute first.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Same as dict.get(), but try to read attribute first.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">InternalError</span><span class="p">):</span>
@@ -711,7 +713,7 @@
                    <span class="n">interpret_comment</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                    <span class="n">set_misc_metadata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                    <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set up a GRIB2 message from a field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up a GRIB2 message from a field.&quot;&quot;&quot;</span>
         <span class="c1"># clone from sample or file</span>
         <span class="k">if</span> <span class="n">sample</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">sample</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">suggested_GRIB2_sample</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">spectral</span><span class="p">)</span>
@@ -757,7 +759,7 @@
                     <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_sections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set k/v for sections of GRIB2, one by one.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set k/v for sections of GRIB2, one by one.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">H2DField</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;writing of non-H2DField.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_set_section0</span><span class="p">(</span><span class="n">field</span><span class="p">)</span>
@@ -772,7 +774,7 @@
         <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;discipline&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB2&#39;</span><span class="p">][</span><span class="s1">&#39;discipline&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_section1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set k/v for section 1.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set k/v for section 1.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;centre&#39;</span><span class="p">,</span> <span class="s1">&#39;subCentre&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;tablesVersion&#39;</span><span class="p">,</span> <span class="s1">&#39;localTablesVersion&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_from</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="n">other_GRIB_options</span><span class="p">,</span>  <span class="c1"># forcing k/v argument</span>
@@ -798,7 +800,7 @@
                               <span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_keyvalue</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>  <span class="c1"># if present in default</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_section3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set k/v for section 3.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set k/v for section 3.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_set_earth_geometry</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_set_spectral_geometry</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span>
@@ -808,7 +810,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_set_data_ordering</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_earth_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">geometry</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set earth geometry.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set earth geometry.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="s1">&#39;geoid&#39;</span><span class="p">):</span>
             <span class="n">shapeOfTheEarth</span> <span class="o">=</span> <span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_keyvalue</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;shapeOfTheEarth&#39;</span><span class="p">)</span>
             <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;geometry has no geoid: assume &#39;shapeOfTheEarth&#39; = </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shapeOfTheEarth</span><span class="p">))</span>
@@ -847,7 +849,7 @@
                             <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;scaledValueOfMinorAxisOfOblateSpheroidEarth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_horizontal_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set H2D horizontal geometry.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set H2D horizontal geometry.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;gridDefinitionTemplateNumber&#39;</span><span class="p">,]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_from</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="n">other_GRIB_options</span><span class="p">])</span>
         <span class="c1"># dimensions -----------------------------------------------------------</span>
@@ -946,7 +948,7 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;not yet.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_spectral_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set spectral geometry.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set spectral geometry.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">spectral_geometry</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;bi-fourier&#39;</span><span class="p">:</span>
             <span class="c1"># FIXME: update when spectral LAM accepted by WMO and implemented in grib_api</span>
             <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sh&#39;</span>  <span class="c1"># in bi-fourier case, this is a bypass</span>
@@ -964,7 +966,7 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;spectral_geometry.name == &#39;</span> <span class="o">+</span> <span class="n">spectral_geometry</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_data_ordering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set data ordering and coordinates of first/last gridpoints.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set data ordering and coordinates of first/last gridpoints.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;iScansNegatively&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;jScansPositively&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;jPointsAreConsecutive&#39;</span><span class="p">,</span>
@@ -1021,7 +1023,7 @@
                 <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">ordering_str</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_section4</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set k/v for section 4.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set k/v for section 4.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_set_product</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">)</span>
         <span class="n">template</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;productDefinitionTemplateNumber&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">template</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">):</span>  <span class="c1"># 32,33 == simulated satellite imagery</span>
@@ -1034,7 +1036,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_set_validity</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_product</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set product and process.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set product and process.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">cumulativeduration</span><span class="p">():</span>
             <span class="n">tpln</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB2&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;productDefinitionTemplateNumber&#39;</span><span class="p">,</span>
                                           <span class="n">other_GRIB_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;productDefinitionTemplateNumber&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -1053,7 +1055,7 @@
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_simulated_satellite_imagery</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">template_number</span><span class="p">,</span>
                                                <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set specific keys for simulated satellite imagery.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set specific keys for simulated satellite imagery.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">specific_fid_keys_for</span><span class="p">(</span><span class="n">template_number</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_from</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="n">other_GRIB_options</span><span class="p">,</span>
                               <span class="n">fid</span><span class="p">,</span>
@@ -1061,7 +1063,7 @@
                           <span class="n">fatal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># FIXME: known issue...</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_vertical_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">geometry</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set vertical geometry.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set vertical geometry.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;field has more than one level&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;scaleFactorOfFirstFixedSurface&#39;</span><span class="p">,</span> <span class="s1">&#39;scaleFactorOfSecondFixedSurface&#39;</span><span class="p">]:</span>
@@ -1093,7 +1095,7 @@
             <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;scaledValueOfSecondFixedSurface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">level</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;scaleFactorOfSecondFixedSurface&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set temporal validity.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set temporal validity.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;hoursAfterDataCutoff&#39;</span><span class="p">,</span>
                   <span class="s1">&#39;minutesAfterDataCutoff&#39;</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_from</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="n">other_GRIB_options</span><span class="p">,</span>
@@ -1157,7 +1159,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_untouch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_section5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set k/v for section 5.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set k/v for section 5.&quot;&quot;&quot;</span>
         <span class="n">order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;packingType&#39;</span><span class="p">,</span> <span class="s1">&#39;complexPacking&#39;</span><span class="p">,</span> <span class="s1">&#39;boustrophedonicOrdering&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;bitsPerValue&#39;</span><span class="p">]</span>
         <span class="n">packing</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">other_GRIB_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_keyvalue</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
@@ -1199,7 +1201,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_untouch</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_set_section6_7</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">other_GRIB_options</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set k/v for sections 6 and 7.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set k/v for sections 6 and 7.&quot;&quot;&quot;</span>
         <span class="c1"># bitmap</span>
         <span class="n">missingValue</span> <span class="o">=</span> <span class="n">other_GRIB_options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;missingValue&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">values</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1220,7 +1222,7 @@
                    <span class="n">packing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">sample</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">other_GRIB_options</span><span class="o">=</span><span class="p">{}):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build the GRIB message from the field, using a template.</span>
 
 <span class="sd">        :param field: a :class:`epygram.base.Field`.</span>
@@ -1321,13 +1323,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB1_set_fid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set GRIB1 fid k/v.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set GRIB1 fid k/v.&quot;&quot;&quot;</span>
         <span class="n">param_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;table2Version&#39;</span><span class="p">,</span> <span class="s1">&#39;indicatorOfParameter&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">param_list</span><span class="p">:</span>
             <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB1&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_GRIB1_set_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set validity k/v.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set validity k/v.&quot;&quot;&quot;</span>
         <span class="c1"># cutoff</span>
         <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;dataDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">getbasis</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntStr&#39;</span><span class="p">)[:</span><span class="mi">8</span><span class="p">])</span>
         <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;dataTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">getbasis</span><span class="p">(</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;IntStr&#39;</span><span class="p">)[</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span>
@@ -1351,7 +1353,7 @@
             <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;endStep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">term_in_seconds</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB1_set_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set geometry k/v.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set geometry k/v.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
             <span class="c1"># earth shape ------------------------------------------------------</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="s1">&#39;geoid&#39;</span><span class="p">):</span>
@@ -1554,7 +1556,7 @@
                 <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;this ordering: not yet.&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB1_set_packing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">packing</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specific method to set **packing** because the order of the elements is</span>
 <span class="sd">        important.</span>
 
@@ -1587,7 +1589,7 @@
 <div class="viewcode-block" id="GRIBmessage.as_field"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.as_field">[docs]</a>    <span class="k">def</span> <span class="nf">as_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">read_misc_metadata</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_metadata_to_embark</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make an epygram H2DField from message.</span>
 
 <span class="sd">        :param getdata: if *False*, only metadata are read, the field do not</span>
@@ -1616,7 +1618,7 @@
                 <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">,</span>
                 <span class="n">get_info_as_json</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        .. deprecated:: 1.3.9</span>
 
 <span class="sd">        Returns an :class:`epygram.base.Field` made out from the GRIB message.</span>
@@ -1670,7 +1672,7 @@
         <span class="k">return</span> <span class="n">field</span></div>
 
     <span class="k">def</span> <span class="nf">_read_earth_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read info about geoid.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read info about geoid.&quot;&quot;&quot;</span>
         <span class="n">geoid</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">default_geoid</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">geoid</span> <span class="o">=</span> <span class="n">griberies</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">pyproj_geoid_shapes</span><span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;shapeOfTheEarth&#39;</span><span class="p">]]</span>
@@ -1702,7 +1704,7 @@
         <span class="k">return</span> <span class="n">geoid</span>
 
     <span class="k">def</span> <span class="nf">_read_misc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">read_misc_metadata</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read specified additional keys.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read specified additional keys.&quot;&quot;&quot;</span>
         <span class="n">misc_metadata</span> <span class="o">=</span> <span class="n">FPDict</span><span class="p">({})</span>
         <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">read_misc_metadata</span><span class="p">:</span>
             <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
@@ -1711,7 +1713,7 @@
         <span class="k">return</span> <span class="n">misc_metadata</span>
 
     <span class="k">def</span> <span class="nf">_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a :class:`epygram.base.FieldValidity` object containing the</span>
 <span class="sd">        validity of the GRIB message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1721,34 +1723,34 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB1_read_validity</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_read_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a geometry object containing</span>
 <span class="sd">        the geometry information of the GRIB message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">geoid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_earth_geometry</span><span class="p">()</span>
         <span class="n">vcoordinate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_vertical_geometry</span><span class="p">()</span>
-        <span class="n">geometryname</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_horizontal_geometry</span><span class="p">()</span>
+        <span class="n">geometryname</span><span class="p">,</span> <span class="n">geometryclass</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_horizontal_geometry</span><span class="p">()</span>
         <span class="c1"># Make geometry object</span>
-        <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                           <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+        <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
                            <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
                            <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
                            <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
-                           <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
                            <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
                            <span class="n">geoid</span><span class="o">=</span><span class="n">geoid</span><span class="p">)</span>
-        <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">projection</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;projection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">projection</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geometryclass</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">geometry</span>
 
     <span class="k">def</span> <span class="nf">_read_vertical_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read vertical part of geometry.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read vertical part of geometry.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grib_edition</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB2_read_vertical_geometry</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_GRIB1_read_vertical_geometry</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_read_hybridP_levels</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read A and B coefficients of HybridPressure coordinate.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read A and B coefficients of HybridPressure coordinate.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_readattribute</span><span class="p">(</span><span class="s1">&#39;pv&#39;</span><span class="p">,</span> <span class="n">array</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="n">A_and_B</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;pv&#39;</span><span class="p">]</span>
@@ -1762,7 +1764,7 @@
                 <span class="s1">&#39;ABgrid_position&#39;</span><span class="p">:</span><span class="s1">&#39;flux&#39;</span><span class="p">}</span>
 
     <span class="k">def</span> <span class="nf">_read_horizontal_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read horizontal geometry.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read horizontal geometry.&quot;&quot;&quot;</span>
         <span class="c1"># rectangular grid dimensions</span>
         <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;sh&#39;</span> <span class="ow">and</span> <span class="s1">&#39;gg&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]:</span>
             <span class="n">dimensions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;Nx&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;Ni&#39;</span><span class="p">]),</span>
@@ -1777,6 +1779,7 @@
                 <span class="n">input_position</span> <span class="o">=</span> <span class="p">(</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
         <span class="c1"># ----------------------------------------------------------------------</span>
         <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;regular_ll&#39;</span><span class="p">:</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">RegLLGeometry</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;regular_lonlat&#39;</span>
             <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;longitudeOfFirstGridPointInDegrees&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                     <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;latitudeOfFirstGridPointInDegrees&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
@@ -1789,6 +1792,7 @@
             <span class="n">projection</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1"># ----------------------------------------------------------------------</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;rotated_ll&#39;</span><span class="p">:</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">RotLLGeometry</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;rotated_lonlat&#39;</span>
             <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;longitudeOfFirstGridPointInDegrees&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                     <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;latitudeOfFirstGridPointInDegrees&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
@@ -1802,6 +1806,7 @@
             <span class="n">projection</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="c1"># ----------------------------------------------------------------------</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;polar_stereographic&#39;</span><span class="p">,):</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span>
             <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;projectionCentreFlag&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">lat_0</span> <span class="o">=</span> <span class="mf">90.</span>
@@ -1833,8 +1838,9 @@
                     <span class="s1">&#39;input_position&#39;</span><span class="p">:</span><span class="n">input_position</span><span class="p">,</span>
                     <span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span>
         <span class="c1"># ----------------------------------------------------------------------</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;lambert&#39;</span><span class="p">,):</span>
-            <span class="n">geometryname</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;lambert&#39;</span><span class="p">,</span> <span class="s1">&#39;lambert_lam&#39;</span><span class="p">):</span>
+            <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;lambert&#39;</span>  <span class="c1"># self[&#39;gridType&#39;] # account for lambert_lam</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span>
             <span class="n">lon_0</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;LoVInDegrees&#39;</span><span class="p">]</span>
             <span class="n">lat_0</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;LaDInDegrees&#39;</span><span class="p">]</span>
             <span class="n">lat_1</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;Latin1InDegrees&#39;</span><span class="p">]</span>
@@ -1854,6 +1860,7 @@
                     <span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span>
         <span class="c1"># ----------------------------------------------------------------------</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;mercator&#39;</span><span class="p">,):</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span>
             <span class="n">lat_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;LaDInDegrees&#39;</span><span class="p">]</span>
             <span class="n">projection</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
@@ -1869,6 +1876,7 @@
                     <span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">}</span>
         <span class="c1"># ----------------------------------------------------------------------</span>
         <span class="k">elif</span> <span class="s1">&#39;gg&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]:</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">GaussGeometry</span>
             <span class="n">projection</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">latitudes</span> <span class="o">=</span> <span class="n">gauss_latitudes</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;Nj&#39;</span><span class="p">])</span>
             <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">FPList</span><span class="p">([</span><span class="n">Angle</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">latitudes</span><span class="p">])}</span>
@@ -1913,6 +1921,7 @@
                                         <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">latitudes</span><span class="p">]),</span>
                     <span class="s1">&#39;dilatation_coef&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">}</span>
             <span class="n">dimensions</span> <span class="o">=</span> <span class="n">gpdims</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">GaussGeometry</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;reduced_gauss&#39;</span>
             <span class="c1"># try to have roughly the same zonal resolution as on equator</span>
             <span class="n">lon_number_by_lat</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">latitudes</span><span class="p">))</span>
@@ -1923,10 +1932,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;gridType == </span><span class="si">{}</span><span class="s2"> : not yet !&quot;</span><span class="o">.</span>
                                       <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]))</span>
-        <span class="k">return</span> <span class="n">geometryname</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">projection</span>
+        <span class="k">return</span> <span class="n">geometryname</span><span class="p">,</span> <span class="n">geometryclass</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">projection</span>
 
     <span class="k">def</span> <span class="nf">_read_spectralgeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a SpectralGeometry object containing</span>
 <span class="sd">        the spectral geometry information of the GRIB message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1940,7 +1949,7 @@
         <span class="k">return</span> <span class="n">spgeom</span>
 
     <span class="k">def</span> <span class="nf">_read_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">geometry</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read data then reorder/reshape.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read data then reorder/reshape.&quot;&quot;&quot;</span>
         <span class="n">data1d</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;values&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;gauss&#39;</span> <span class="ow">in</span> <span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;gridType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;sh&#39;</span><span class="p">:</span>
@@ -1984,7 +1993,7 @@
         <span class="k">return</span> <span class="n">data</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read validity.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read validity.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># defaults</span>
             <span class="n">cum</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2037,7 +2046,7 @@
             <span class="k">return</span> <span class="n">validity</span>
 
     <span class="k">def</span> <span class="nf">_GRIB1_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a :class:`epygram.base.FieldValidity` object containing the</span>
 <span class="sd">        validity of the GRIB message.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2077,10 +2086,8 @@
         <span class="k">return</span> <span class="n">validity</span>
 
     <span class="k">def</span> <span class="nf">_GRIB2_read_vertical_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read vertical part of geometry in GRIB2.&quot;&quot;&quot;</span>
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
-            <span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-            <span class="n">position_on_grid</span><span class="o">=</span><span class="s1">&#39;mass&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read vertical part of geometry in GRIB2.&quot;&quot;&quot;</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">position_on_grid</span><span class="o">=</span><span class="s1">&#39;mass&#39;</span><span class="p">)</span>
         <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;typeOfFirstFixedSurface&#39;</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">255</span><span class="p">:</span>
             <span class="n">first_level</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;scaledValueOfFirstFixedSurface&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;scaleFactorOfFirstFixedSurface&#39;</span><span class="p">])</span>
@@ -2094,11 +2101,11 @@
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;bottomlevel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">second_level</span>
         <span class="k">if</span> <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">119</span><span class="p">:</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_hybridP_levels</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_GRIB1_read_vertical_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read vertical part of geometry in GRIB1.&quot;&quot;&quot;</span>
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">}</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read vertical part of geometry in GRIB1.&quot;&quot;&quot;</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;position_on_grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;mass&#39;</span>
         <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">onetotwo</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;indicatorOfTypeOfLevel&#39;</span><span class="p">],</span> <span class="mi">255</span><span class="p">)</span>
         <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;level&#39;</span><span class="p">]]</span>
@@ -2107,12 +2114,12 @@
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;bottomlevel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;bottomLevel&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">119</span><span class="p">:</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_hybridP_levels</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
 
     <span class="c1"># Utilities methods --------------------------------------------------------</span>
 
 <div class="viewcode-block" id="GRIBmessage.set_from"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.set_from">[docs]</a>    <span class="k">def</span> <span class="nf">set_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">series_of_dicts</span><span class="p">,</span> <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set key k from its value first found in one of **series_of_dicts**.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set key k from its value first found in one of **series_of_dicts**.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">series_of_dicts</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
@@ -2127,7 +2134,7 @@
                 <span class="k">break</span></div>
 
 <div class="viewcode-block" id="GRIBmessage.set_values"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.set_values">[docs]</a>    <span class="k">def</span> <span class="nf">set_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper to set **values** as a 1D if spectral, or 2D array if gridpoint,</span>
 <span class="sd">        with consistency with ordering parameters already set beforehand.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2167,7 +2174,7 @@
             <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_gid</span><span class="p">,</span> <span class="n">data1d</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="GRIBmessage.actual_fid_keys"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.actual_fid_keys">[docs]</a>    <span class="k">def</span> <span class="nf">actual_fid_keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Adjust fid keys to specific grib edition and templates.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust fid keys to specific grib edition and templates.&quot;&quot;&quot;</span>
         <span class="n">template</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">scaleFactorOfFirstFixedSurface</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">scaleFactorOfSecondFixedSurface</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2183,7 +2190,7 @@
                                  <span class="n">scaleFactorOfSecondFixedSurface</span><span class="o">=</span><span class="n">scaleFactorOfSecondFixedSurface</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="GRIBmessage.update"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">E</span><span class="p">,</span> <span class="o">**</span><span class="n">F</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        D.update([E, ]**F) -&gt; None. Update D from dict/iterable E and F.</span>
 <span class="sd">        If E present and has a .keys() method, does: for k in E: D[k] = E[k]</span>
 <span class="sd">        If E present and lacks .keys() method, does: for (k, v) in E: D[k] = v</span>
@@ -2199,7 +2206,7 @@
             <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">k</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="GRIBmessage.genfid"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.genfid">[docs]</a>    <span class="k">def</span> <span class="nf">genfid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generates and returns a GRIB-type epygram fid from the message.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates and returns a GRIB-type epygram fid from the message.&quot;&quot;&quot;</span>
         <span class="n">fid_keys</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actual_fid_keys</span><span class="p">())</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">onelevel</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;topLevel&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="p">[</span><span class="s1">&#39;bottomLevel&#39;</span><span class="p">]</span>
@@ -2219,7 +2226,7 @@
         <span class="k">return</span> <span class="n">fid</span></div>
 
 <div class="viewcode-block" id="GRIBmessage.readkeys"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.readkeys">[docs]</a>    <span class="k">def</span> <span class="nf">readkeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads and returns the available keys of the message.</span>
 
 <span class="sd">        :param namespace: the namespace of keys to be read, among:\n</span>
@@ -2238,7 +2245,7 @@
         <span class="k">return</span> <span class="n">namespace</span></div>
 
 <div class="viewcode-block" id="GRIBmessage.readmessage"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIBmessage.readmessage">[docs]</a>    <span class="k">def</span> <span class="nf">readmessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the meta-data of the message.</span>
 
 <span class="sd">        :param namespace: the namespace of keys to be read, among:\n</span>
@@ -2266,7 +2273,7 @@
 <span class="c1"># File containing a Collection of GRIB messages --------------------------------</span>
 
 <div class="viewcode-block" id="GRIB"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB">[docs]</a><span class="k">class</span> <span class="nc">GRIB</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class implementing all specificities for GRIB resource format.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing all specificities for GRIB resource format.&quot;&quot;&quot;</span>
 
     <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
@@ -2300,7 +2307,7 @@
             <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_fields</span><span class="p">(</span><span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GRIB.open"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens a GRIB and initializes some attributes.</span>
 
 <span class="sd">        :param openmode: optional, to open with a specific openmode, eventually</span>
@@ -2320,7 +2327,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="GRIB.close"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closes a GRIB.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_file&#39;</span><span class="p">):</span>
@@ -2340,12 +2347,12 @@
     <span class="nd">@property</span>
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">messages_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Counts the number of messages in file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Counts the number of messages in file.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">lowlevelgrib</span><span class="o">.</span><span class="n">count_in_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_file</span><span class="p">)</span>
 
 <div class="viewcode-block" id="GRIB.listfields"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.listfields">[docs]</a>    <span class="k">def</span> <span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">onlykey</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">select</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                    <span class="n">additional_keys</span><span class="o">=</span><span class="p">[]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list containing the GRIB identifiers of all the fields of the</span>
 <span class="sd">        resource.</span>
 
@@ -2378,7 +2385,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">additional_keys</span><span class="o">=</span><span class="p">[],</span> <span class="n">select_keys</span><span class="o">=</span><span class="p">[]):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list of GRIB-type fid of the fields inside the resource.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of GRIB-type fid of the fields inside the resource.&quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">gid_key_to_fid</span><span class="p">(</span><span class="n">gid</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
             <span class="c1"># bug in GRIB_API ? 1, 103 &amp; 105 =&gt; &#39;sfc&#39;</span>
             <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;typeOfFirstFixedSurface&#39;</span><span class="p">,</span>
@@ -2431,7 +2438,7 @@
         <span class="k">return</span> <span class="n">fidlist</span>
 
 <div class="viewcode-block" id="GRIB.split_UV"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.split_UV">[docs]</a>    <span class="k">def</span> <span class="nf">split_UV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldseed</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return two lists of fids corresponding respectively to U and V</span>
 <span class="sd">        components of wind, given a *fieldseed*.</span>
 <span class="sd">        Syntax example: &#39;shortName&#39;:&#39;u+v&#39;, or &#39;indicatorOfParameter&#39;:&#39;33+34&#39;</span>
@@ -2453,7 +2460,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">get_message_at_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the message at position *position*, from 0 (first message)</span>
 <span class="sd">        to messages_number-1 (last message).</span>
 <span class="sd">        Negative position starts from the end: -1 is last message.</span>
@@ -2464,7 +2471,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">iter_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterates sequentially on messages, returning messages.</span>
 
 <span class="sd">        :param headers_only: if False, read data from messages.</span>
@@ -2486,7 +2493,7 @@
         <span class="k">return</span> <span class="n">msg</span>
 
 <div class="viewcode-block" id="GRIB.iter_fields"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.iter_fields">[docs]</a>    <span class="k">def</span> <span class="nf">iter_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterates sequentially on messages, returning fields.</span>
 
 <span class="sd">        :param getdata: if False, do not read data from the messages.</span>
@@ -2502,7 +2509,7 @@
         <span class="k">return</span> <span class="n">fld</span></div>
 
 <div class="viewcode-block" id="GRIB.sortfields"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.sortfields">[docs]</a>    <span class="k">def</span> <span class="nf">sortfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sortingkey</span><span class="p">,</span> <span class="n">onlykey</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a sorted list of fields with regards to the given *sortingkey*</span>
 <span class="sd">        of their fid, as a dict of lists.</span>
 
@@ -2527,7 +2534,7 @@
         <span class="k">return</span> <span class="n">sortedfields</span></div>
 
 <div class="viewcode-block" id="GRIB.find_fields_in_resource"><a class="viewcode-back" href="../../../library/GRIB.html#epygram.formats.GRIB.GRIB.find_fields_in_resource">[docs]</a>    <span class="k">def</span> <span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of the fields from resource whose name match the given</span>
 <span class="sd">        seed.</span>
 
@@ -2574,7 +2581,7 @@
                   <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">,</span>
                   <span class="n">get_info_as_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">read_misc_metadata</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_metadata_to_embark</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds in GRIB the message that correspond to the *handgrip*,</span>
 <span class="sd">        and returns it as a :class:`epygram.base.Field`.</span>
 <span class="sd">        If several messages meet the requirements, raises error (use</span>
@@ -2624,7 +2631,7 @@
                    <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">,</span>
                    <span class="n">get_info_as_json</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">read_misc_metadata</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_metadata_to_embark</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds in GRIB the message(s) that correspond to the *handgrip*,</span>
 <span class="sd">        and returns it as a :class:`epygram.base.FieldSet` of</span>
 <span class="sd">        :class:`epygram.base.Field`.</span>
@@ -2691,7 +2698,7 @@
                    <span class="n">grib_edition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">other_GRIB_options</span><span class="o">=</span><span class="p">{},</span>
                    <span class="n">interpret_comment</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes a Field as a GRIBmessage into the GRIB resource.</span>
 
 <span class="sd">        :param field: a :class:`epygram.base.Field` instance</span>
@@ -2730,7 +2737,7 @@
                        <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
                        <span class="n">cheap_height</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a vertical profile from the GRIB resource, given a handgrip</span>
 <span class="sd">        and the geographic location (*lon*/*lat*) of the profile.</span>
 
@@ -2792,7 +2799,7 @@
                        <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span>
                        <span class="n">cheap_height</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">global_shift_center</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a vertical section from the GRIB resource, given its handgrip</span>
 <span class="sd">        and the geographic (lon/lat) coordinates of its ends.</span>
 <span class="sd">        The section is returned as a V2DField.</span>
@@ -2860,7 +2867,7 @@
                           <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="n">field3d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a subdomain from the GRIB resource, given its handgrip</span>
 <span class="sd">        and the geometry to use.</span>
 
@@ -2982,7 +2989,7 @@
              <span class="n">sortfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">details</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes in file a summary of the contents of the GRIB.</span>
 
 <span class="sd">        :param out: the output open file-like object</span>
@@ -3012,7 +3019,7 @@
               <span class="n">sortfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="n">details</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
               <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Actual what method.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Actual what method.&quot;&quot;&quot;</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### FORMAT: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;(For a more thorough insight into GRIB files, &quot;</span> <span class="o">+</span>
                   <span class="s2">&quot;use &#39;grib_dump&#39; or (even better) &#39;grib_dump -O&#39;)&quot;</span><span class="p">)</span>
@@ -3020,8 +3027,6 @@
 
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;one+list&#39;</span><span class="p">:</span>
             <span class="n">onefield</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_message_at_position</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">as_field</span><span class="p">(</span><span class="n">getdata</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-            <span class="n">g0</span> <span class="o">=</span> <span class="n">onefield</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">footprint_as_dict</span><span class="p">()</span>
-            <span class="n">g0</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">)</span>
             <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">iter_messages</span><span class="p">()</span>
                 <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3119,7 +3124,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
@@ -3127,7 +3132,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

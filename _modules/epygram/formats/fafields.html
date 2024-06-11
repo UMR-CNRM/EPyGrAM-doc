@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.fafields &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.formats.fafields &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,28 +25,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.fafields</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -64,19 +47,19 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">FA fields utilities</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">six</span>
 <span class="kn">import</span> <span class="nn">io</span>
 
-<span class="kn">import</span> <span class="nn">griberies</span>
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.extra</span> <span class="kn">import</span> <span class="n">griberies</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
 
 
 <div class="viewcode-block" id="FaGribDef"><a class="viewcode-back" href="../../../library/fafields.html#epygram.formats.FA.FaGribDef">[docs]</a><span class="k">class</span> <span class="nc">FaGribDef</span><span class="p">(</span><span class="n">griberies</span><span class="o">.</span><span class="n">GribDef</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handle FA-related GRIB definition files.</span>
 <span class="sd">    To add user files:</span>
 <span class="sd">    a) use env vars GRIBAPI|ECCODES_DEFINITION_PATH or</span>
@@ -87,7 +70,7 @@
     <span class="n">_official_rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">installdir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
     <span class="n">_non_GRIB_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;LSTCUM&#39;</span><span class="p">,</span> <span class="s1">&#39;FMULTM&#39;</span><span class="p">,</span> <span class="s1">&#39;FMULTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ZLMULT&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">concepts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span> <span class="s1">&#39;faModelName&#39;</span><span class="p">,</span> <span class="s1">&#39;faLevelName&#39;</span><span class="p">]):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FaGribDef</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">actual_init</span><span class="p">,</span> <span class="n">concepts</span><span class="p">)</span>
 
@@ -102,7 +85,7 @@
         <span class="k">return</span> <span class="n">dirs</span>
 
     <span class="k">def</span> <span class="nf">_actual_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read definition files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read definition files.&quot;&quot;&quot;</span>
         <span class="c1"># first, those specified by env var</span>
         <span class="n">defpaths</span> <span class="o">=</span> <span class="n">griberies</span><span class="o">.</span><span class="n">get_definition_paths</span><span class="p">()</span>
         <span class="c1"># then those embarked with epygram</span>
@@ -128,7 +111,7 @@
                 <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">fatal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert FA field name to GRIB fid, including vertical level identification.</span>
 
 <span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
@@ -180,7 +163,7 @@
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
     <span class="k">def</span> <span class="nf">GRIB2FA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gribfid</span><span class="p">,</span>
                 <span class="n">grib_edition</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Look for a unique matching field in tables.</span>
 <span class="sd">        ! WARNING ! the unicity might not be ensured depending on the version</span>
 <span class="sd">        of grib definitions files.</span>
@@ -200,7 +183,7 @@
                   <span class="n">grib_edition</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">,</span>
                   <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Look for all the fields which FA name contain **partial_fieldname**.</span>
 
 <span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
@@ -235,7 +218,7 @@
                     <span class="n">grib_edition</span><span class="o">=</span><span class="n">griberies</span><span class="o">.</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">,</span>
                     <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Look for all the fields which GRIB fid contain **partial_fid**.</span>
 
 <span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
@@ -248,7 +231,7 @@
                                     <span class="n">include_comments</span><span class="o">=</span><span class="n">include_comments</span><span class="p">,</span>
                                     <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="n">filter_non_GRIB_keys</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
                 <span class="n">fid</span> <span class="o">=</span> <span class="n">griberies</span><span class="o">.</span><span class="n">parse_GRIBstr_todict</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
@@ -265,14 +248,14 @@
 
 
 <div class="viewcode-block" id="SfxFldDesc_Mod"><a class="viewcode-back" href="../../../library/fafields.html#epygram.formats.FA.SfxFldDesc_Mod">[docs]</a><span class="k">class</span> <span class="nc">SfxFldDesc_Mod</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle fields catalog from sfxflddesc.F90 source file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle fields catalog from sfxflddesc.F90 source file.&quot;&quot;&quot;</span>
     <span class="n">_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&quot;\.(?P&lt;name&gt;[\w\d%]+)\.+(?P&lt;gridtype&gt;\d)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;type&gt;\w\d)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;comment&gt;.+)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;mask&gt;.</span><span class="si">{20}</span><span class="s1">)\.</span><span class="si">{2}</span><span class="s1">&quot;,? ?(&amp;|/)&#39;</span><span class="p">)</span>
     <span class="n">_unit</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(?P&lt;comment&gt;.*)\((?P&lt;unit&gt;.+)\)&#39;</span><span class="p">)</span>
     <span class="n">_fortran_sourcename</span> <span class="o">=</span> <span class="s1">&#39;sfxflddesc_mod.F90&#39;</span>
     <span class="n">type2nature</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">:</span><span class="s1">&#39;bool&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
                    <span class="s1">&#39;T&#39;</span><span class="p">:</span><span class="s1">&#39;int&#39;</span><span class="p">}</span>  <span class="c1"># FIXME: T: cf mode_write_surf_fa.F90</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">actual_init</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_actual_init</span><span class="p">()</span>
@@ -280,7 +263,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_actual_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Read official file and, if existing, user local file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read official file and, if existing, user local file.&quot;&quot;&quot;</span>
         <span class="c1"># official one</span>
         <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">installdir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">_fortran_sourcename</span><span class="p">)</span>
@@ -293,7 +276,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="SfxFldDesc_Mod.read"><a class="viewcode-back" href="../../../library/fafields.html#epygram.formats.FA.SfxFldDesc_Mod.read">[docs]</a>    <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse a sfxflddesc_mod.F90 file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse a sfxflddesc_mod.F90 file.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="n">io</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
@@ -316,12 +299,12 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;SFX.&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">info</span></div>
 
 <div class="viewcode-block" id="SfxFldDesc_Mod.update"><a class="viewcode-back" href="../../../library/fafields.html#epygram.formats.FA.SfxFldDesc_Mod.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Update with a dict of field {fieldname:{}, ...}.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update with a dict of field {fieldname:{}, ...}.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">field_dict</span><span class="p">)</span></div>
 
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
     <span class="k">def</span> <span class="nf">nature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return type of data in field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return type of data in field.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">type2nature</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">fieldname</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
@@ -332,7 +315,7 @@
 
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
     <span class="k">def</span> <span class="nf">dim</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return number of dimensions of field.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return number of dimensions of field.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">fieldname</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
@@ -342,7 +325,7 @@
                 <span class="k">return</span> <span class="n">default</span>
 
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
-    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">fieldname</span><span class="p">]</span>
 
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
@@ -351,7 +334,7 @@
 
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
     <span class="k">def</span> <span class="nf">is_metadata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;True if field is not a H2D field but metadata (Misc).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;True if field is not a H2D field but metadata (Misc).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">fieldname</span><span class="p">][</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">,</span> <span class="s1">&#39;X2&#39;</span><span class="p">):</span>
                 <span class="k">return</span> <span class="kc">False</span>
@@ -363,12 +346,12 @@
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="nd">@griberies</span><span class="o">.</span><span class="n">init_before</span>
-    <span class="k">def</span> <span class="nf">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span></div>
 
 
 <div class="viewcode-block" id="find_wind_pair"><a class="viewcode-back" href="../../../library/fafields.html#epygram.formats.FA.find_wind_pair">[docs]</a><span class="k">def</span> <span class="nf">find_wind_pair</span><span class="p">(</span><span class="n">fieldname</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;For a wind **fieldname**, find and return the pair.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For a wind **fieldname**, find and return the pair.&quot;&quot;&quot;</span>
     <span class="n">pairs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;U&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">:</span><span class="s1">&#39;U&#39;</span><span class="p">,</span>
              <span class="s1">&#39;ZONAL&#39;</span><span class="p">:</span><span class="s1">&#39;MERIDIEN&#39;</span><span class="p">,</span> <span class="s1">&#39;MERIDIEN&#39;</span><span class="p">:</span><span class="s1">&#39;ZONAL&#39;</span><span class="p">,</span> <span class="s1">&#39;MERID&#39;</span><span class="p">:</span><span class="s1">&#39;ZONAL&#39;</span><span class="p">}</span>
     <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;S\d+WIND\.(?P&lt;d&gt;[U,V])\.PHYS&#39;</span><span class="p">,</span>
@@ -392,7 +375,22 @@
         <span class="k">return</span> <span class="n">pair</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -406,15 +404,16 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.fafields</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

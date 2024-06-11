@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.geometries.AcademicGeometry — Academic Geometry class &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.geometries.GaussGeometry — Gauss Geometry class" href="GaussGeometry.html" />
+    <link rel="prev" title="epygram.geometries.UnstructuredGeometry — Unstructured Geometry class" href="UnstructuredGeometry.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="GaussGeometry.html" title="epygram.geometries.GaussGeometry — Gauss Geometry class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="UnstructuredGeometry.html" title="epygram.geometries.UnstructuredGeometry — Unstructured Geometry class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="epygram-geometries-academicgeometry-academic-geometry-class">
+<h1><a class="reference internal" href="#module-epygram.geometries.AcademicGeometry" title="epygram.geometries.AcademicGeometry: Academic Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code></a> — Academic Geometry class<a class="headerlink" href="#epygram-geometries-academicgeometry-academic-geometry-class" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-epygram.geometries.AcademicGeometry"></span><p>Contains the classes for 3D geometries of fields.</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.AcademicGeometry.</span></span><span class="sig-name descname"><span class="pre">AcademicGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry" title="epygram.geometries.AbstractGeometry.RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for an academic 3-Dimensions Field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of geometrical type of representation of points on the Globe.
+Name must be ‘academic’</p></li>
+<li><p><strong>grid</strong> – Handles description of the horizontal grid.</p></li>
+<li><p><strong>dimensions</strong> – Handles grid dimensions.</p></li>
+<li><p><strong>vcoordinate</strong> – Handles vertical geometry parameters.</p></li>
+<li><p><strong>position_on_horizontal_grid</strong> – <p>Position of points w/r to the horizontal.
+among: [‘upper-right’, ‘upper-left’,</p>
+<blockquote>
+<div><p>’lower-left’, ‘lower-right’,
+‘center-left’, ‘center-right’,
+‘lower-center’, ‘upper-center’,
+‘center’, ‘__unknown__’]</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>geoid</strong> – To specify geoid shape (of no meaning in this geometry).</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.azimuth">
+<span class="sig-name descname"><span class="pre">azimuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.azimuth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as plane_azimuth in this geometry.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.default_cartopy_CRS">
+<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Create a cartopy.crs appropriate to the Geometry.</p>
+<p>In this case, cartopy is not used but raw matplotlib,
+so returned CRS is None.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points along a straight line in the
+geometry.
+:param end1: must be a tuple (lon, lat) in degrees.
+:param end2: must be a tuple (lon, lat) in degrees.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.getcenter">
+<span class="sig-name descname"><span class="pre">getcenter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.getcenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coordinate of the grid center as a tuple
+(center_lon, center_lat).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.ij2ll">
+<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>This routine has a special meaning for this geometry. It returns the (i, j)
+position in the original grid (especially after a section extraction) with
+an offset of one (for old tools compatibility).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.ij2xy">
+<span class="sig-name descname"><span class="pre">ij2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.ij2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.ij2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(i,j)</em>, in the projection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that origin of coordinates in projection is the center of the C+I domain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.linspace">
+<span class="sig-name descname"><span class="pre">linspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.linspace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.linspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns evenly spaced points over the specified interval.
+Points are lined up in the geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>num</strong> – number of points, including point1 and point2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.ll2ij">
+<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
+in the 2D matrix of gridpoints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon</strong> – longitude of point in degrees</p></li>
+<li><p><strong>lat</strong> – latitude of point in degrees</p></li>
+<li><p><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Caution: the returned (<em>i,j</em>) are float.</p>
+<p>This routine has a special meaning for this geometry. It returns the (lon, lat)
+position in the original grid (especially after a section extraction) with
+an offset of one (for old tools compatibility).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.ll2xy">
+<span class="sig-name descname"><span class="pre">ll2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.ll2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.ll2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(lon, lat)</em> in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon</strong> – longitude of point in degrees</p></li>
+<li><p><strong>lat</strong> – latitude of point in degrees</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.make_section_geometry">
+<span class="sig-name descname"><span class="pre">make_section_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.make_section_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.make_section_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a academic Geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</p></li>
+<li><p><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</p></li>
+<li><p><strong>position</strong> – defines the position of data in the grid (defaults to ‘center’)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.plane_azimuth">
+<span class="sig-name descname"><span class="pre">plane_azimuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.plane_azimuth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.plane_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points in plane local referential
+geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.resolution_ij">
+<span class="sig-name descname"><span class="pre">resolution_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">__</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.resolution_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum of X and Y resolution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.resolution_ll">
+<span class="sig-name descname"><span class="pre">resolution_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">__</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.resolution_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the minimum of X and Y resolution.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.tolerant_equal">
+<span class="sig-name descname"><span class="pre">tolerant_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.tolerant_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test of equality by recursion on the object’s attributes,
+with a <strong>tolerance</strong>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.xy2ij">
+<span class="sig-name descname"><span class="pre">xy2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.xy2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.xy2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(x, y)</em>,
+in the 2D matrix of gridpoints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X coordinate of point in the academic projection</p></li>
+<li><p><strong>y</strong> – Y coordinate of point in the academic projection</p></li>
+<li><p><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Caution: (<em>i,j</em>) are float (the nearest grid point is the nearest
+integer).</p>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.AcademicGeometry.AcademicGeometry.xy2ll">
+<span class="sig-name descname"><span class="pre">xy2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AcademicGeometry.html#AcademicGeometry.xy2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AcademicGeometry.AcademicGeometry.xy2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(x, y)</em> in the 2D matrix
+of gridpoints*(i,j)*, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X coordinate of point in the academic projection</p></li>
+<li><p><strong>y</strong> – Y coordinate of point in the academic projection</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="UnstructuredGeometry.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="GaussGeometry.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/AcademicGeometry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="GaussGeometry.html" title="epygram.geometries.GaussGeometry — Gauss Geometry class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="UnstructuredGeometry.html" title="epygram.geometries.UnstructuredGeometry — Unstructured Geometry class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

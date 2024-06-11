@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>griberies — utilities around GRIB &#8212; epygram 1.4.17 documentation</title>
+    <title>griberies — utilities around GRIB &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="usevortex.html" title="usevortex — Proxies to reach resources using Vortex"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">External, side packages</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></li> 
       </ul>
@@ -45,213 +45,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-griberies">
-<span id="griberies-utilities-around-grib"></span><h1><a class="reference internal" href="#module-griberies" title="griberies: utilities around GRIB."><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code></a> — utilities around GRIB<a class="headerlink" href="#module-griberies" title="Permalink to this headline">¶</a></h1>
-<p>Contains utilities around GRIB format.</p>
+  <section id="griberies-utilities-around-grib">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB<a class="headerlink" href="#griberies-utilities-around-grib" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
-<dl class="py class">
-<dt class="sig sig-object py" id="griberies.GribDef">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">GribDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concepts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#GribDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.GribDef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="griberies.GribDef.known_names">
-<span class="sig-name descname"><span class="pre">known_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#GribDef.known_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.GribDef.known_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get sorted list of names for all concepts.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="griberies.GribDef.known_names_for_concept">
-<span class="sig-name descname"><span class="pre">known_names_for_concept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#GribDef.known_names_for_concept"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.GribDef.known_names_for_concept" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get sorted list of names for <strong>concept</strong>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="griberies.GribDef.known_values">
-<span class="sig-name descname"><span class="pre">known_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grib2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#GribDef.known_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.GribDef.known_values" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of all values present throughout the GribDef for all keys.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="griberies.GribDef.known_values_for">
-<span class="sig-name descname"><span class="pre">known_values_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#GribDef.known_values_for"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.GribDef.known_values_for" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get list of all values present throughout the GribDef for <strong>key</strong>.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="griberies.GribDef.read">
-<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#GribDef.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.GribDef.read" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read a grib def concept file, and update or register it.</p>
-</dd></dl>
-
-</dd></dl>
-
 <hr class="docutils" />
 <section id="functions">
 <h2>functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.complete_grib_paths">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">complete_grib_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#complete_grib_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.complete_grib_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Complete [GRIB|ECCODES]_SAMPLES_PATH and [GRIB|ECCODES]_DEFINITION_PATH
-according to <strong>rootdir</strong> installation path of GRIB API <strong>api_name</strong>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rootdir</strong> – the directory in which is installed the API</p></li>
-<li><p><strong>api_name</strong> – the name of the GRIB API, among (‘eccodes’, ‘grib_api’)</p></li>
-<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
-</ul>
-</dd>
-</dl>
-<p>Reconstructed path are <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/$api_name$/samples</span></code>
-and <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/$api_name$/definitions</span></code></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.complete_grib_samples_paths">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">complete_grib_samples_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#complete_grib_samples_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.complete_grib_samples_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Complete [GRIB|ECCODES]_SAMPLES_PATH according to <strong>rootdir</strong>
-installation path of GRIB API <strong>api_name</strong>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rootdir</strong> – the directory in which is installed the API</p></li>
-<li><p><strong>api_name</strong> – the name of the GRIB API, among (‘eccodes’, ‘grib_api’)</p></li>
-<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
-</ul>
-</dd>
-</dl>
-<p>Reconstructed path is <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/$api_name$/samples</span></code></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.complete_grib_definition_paths">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">complete_grib_definition_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#complete_grib_definition_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.complete_grib_definition_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Complete [GRIB|ECCODES]_DEFINITION_PATH according to <strong>rootdir</strong>
-installation path of GRIB API <strong>api_name</strong>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rootdir</strong> – the directory in which is installed the API</p></li>
-<li><p><strong>api_name</strong> – the name of the GRIB API, among (‘eccodes’, ‘grib_api’)</p></li>
-<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
-</ul>
-</dd>
-</dl>
-<p>Reconstructed path are <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/$api_name$/definitions</span></code></p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.set_definition_path">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">set_definition_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">api_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'eccodes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#set_definition_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.set_definition_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Set path to GRIB|ECCODES_DEFINITION_PATH.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>api_name</strong> – the name of the GRIB API, among (‘eccodes’, ‘grib_api’)</p></li>
-<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.get_samples_paths">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">get_samples_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#get_samples_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.get_samples_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the environment-variable-set path to samples</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.get_definition_paths">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">get_definition_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#get_definition_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.get_definition_paths" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get the environment-variable-set path to definitions</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.parse_GRIBstr_todict">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">parse_GRIBstr_todict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strfid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#parse_GRIBstr_todict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.parse_GRIBstr_todict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Parse and return a dict GRIB fid from a string.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="griberies.read_gribdef">
-<span class="sig-prename descclassname"><span class="pre">griberies.</span></span><span class="sig-name descname"><span class="pre">read_gribdef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/griberies.html#read_gribdef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#griberies.read_gribdef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Read a grib definition file and return it as a dict.</p>
-</dd></dl>
-
 </section>
 <hr class="docutils" />
 <section id="tables">
 <h2>tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h2>
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.tables.productionStatusOfProcessedData_dict">
-<span class="sig-prename descclassname"><span class="pre">griberies.tables.</span></span><span class="sig-name descname"><span class="pre">productionStatusOfProcessedData_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'dble':</span> <span class="pre">1,</span> <span class="pre">'oper':</span> <span class="pre">0,</span> <span class="pre">'research':</span> <span class="pre">2,</span> <span class="pre">'test':</span> <span class="pre">2,</span> <span class="pre">'unknown':</span> <span class="pre">255}</span></em><a class="headerlink" href="#griberies.tables.productionStatusOfProcessedData_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Aliases to <em>productionStatusOfProcessedData</em> numbers</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.tables.typeOfGeneratingProcess_dict">
-<span class="sig-prename descclassname"><span class="pre">griberies.tables.</span></span><span class="sig-name descname"><span class="pre">typeOfGeneratingProcess_dict</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Analysis':</span> <span class="pre">0,</span> <span class="pre">'Analysis</span> <span class="pre">error':</span> <span class="pre">7,</span> <span class="pre">'Bias</span> <span class="pre">corrected</span> <span class="pre">forecast':</span> <span class="pre">3,</span> <span class="pre">'Bias-corrected</span> <span class="pre">ensemble</span> <span class="pre">forecast':</span> <span class="pre">11,</span> <span class="pre">'Climatological':</span> <span class="pre">9,</span> <span class="pre">'Ensemble</span> <span class="pre">forecast':</span> <span class="pre">4,</span> <span class="pre">'Forecast':</span> <span class="pre">2,</span> <span class="pre">'Forecast</span> <span class="pre">error':</span> <span class="pre">6,</span> <span class="pre">'Hindcast':</span> <span class="pre">15,</span> <span class="pre">'Initialization':</span> <span class="pre">1,</span> <span class="pre">'Nowcast':</span> <span class="pre">14,</span> <span class="pre">'Observation':</span> <span class="pre">8,</span> <span class="pre">'Post-processed</span> <span class="pre">analysis':</span> <span class="pre">12,</span> <span class="pre">'Post-processed</span> <span class="pre">forecast':</span> <span class="pre">13,</span> <span class="pre">'Probability</span> <span class="pre">forecast':</span> <span class="pre">5,</span> <span class="pre">'Probability-weighted</span> <span class="pre">forecast':</span> <span class="pre">10,</span> <span class="pre">'unknown':</span> <span class="pre">255}</span></em><a class="headerlink" href="#griberies.tables.typeOfGeneratingProcess_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Aliases to <em>typeOfGeneratingProcess</em> numbers</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.tables.pyproj_geoid_shapes">
-<span class="sig-prename descclassname"><span class="pre">griberies.tables.</span></span><span class="sig-name descname"><span class="pre">pyproj_geoid_shapes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">{'a':</span> <span class="pre">6367470.0,</span> <span class="pre">'b':</span> <span class="pre">6367470.0},</span> <span class="pre">2:</span> <span class="pre">{'a':</span> <span class="pre">6378160.0,</span> <span class="pre">'rf':</span> <span class="pre">297.0},</span> <span class="pre">4:</span> <span class="pre">{'ellps':</span> <span class="pre">'GRS80'},</span> <span class="pre">5:</span> <span class="pre">{'ellps':</span> <span class="pre">'WGS84'},</span> <span class="pre">6:</span> <span class="pre">{'a':</span> <span class="pre">6371229.0,</span> <span class="pre">'b':</span> <span class="pre">6371229.0},</span> <span class="pre">8:</span> <span class="pre">{'a':</span> <span class="pre">6371200.0,</span> <span class="pre">'b':</span> <span class="pre">6371200.0},</span> <span class="pre">9:</span> <span class="pre">{'ellps':</span> <span class="pre">'airy'}}</span></em><a class="headerlink" href="#griberies.tables.pyproj_geoid_shapes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Geoid shapes for pyproj</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.tables.statistical_processes">
-<span class="sig-prename descclassname"><span class="pre">griberies.tables.</span></span><span class="sig-name descname"><span class="pre">statistical_processes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{0:</span> <span class="pre">'average',</span> <span class="pre">1:</span> <span class="pre">'accumulation',</span> <span class="pre">2:</span> <span class="pre">'maximum',</span> <span class="pre">3:</span> <span class="pre">'minimum',</span> <span class="pre">4:</span> <span class="pre">'difference',</span> <span class="pre">5:</span> <span class="pre">'rms',</span> <span class="pre">6:</span> <span class="pre">'stdev',</span> <span class="pre">7:</span> <span class="pre">'covariance',</span> <span class="pre">8:</span> <span class="pre">'-difference',</span> <span class="pre">9:</span> <span class="pre">'ratio',</span> <span class="pre">10:</span> <span class="pre">'summation',</span> <span class="pre">11:</span> <span class="pre">'standardized</span> <span class="pre">anomaly'}</span></em><a class="headerlink" href="#griberies.tables.statistical_processes" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of statistical process over a duration</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.tables.typeoffixedsurface2sample">
-<span class="sig-prename descclassname"><span class="pre">griberies.tables.</span></span><span class="sig-name descname"><span class="pre">typeoffixedsurface2sample</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{1:</span> <span class="pre">'sfc',</span> <span class="pre">100:</span> <span class="pre">'pl',</span> <span class="pre">119:</span> <span class="pre">'ml'}</span></em><a class="headerlink" href="#griberies.tables.typeoffixedsurface2sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>Equivalence between typeOf[First|Second]FixedSurface and abbreviation in samples</p>
-</dd></dl>
-
 </section>
 <hr class="docutils" />
 <section id="defaults">
 <h2>defaults<a class="headerlink" href="#defaults" title="Permalink to this headline">¶</a></h2>
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.defaults.GRIB2_keyvalue">
-<span class="sig-prename descclassname"><span class="pre">griberies.defaults.</span></span><span class="sig-name descname"><span class="pre">GRIB2_keyvalue</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{1:</span> <span class="pre">{'productionStatusOfProcessedData':</span> <span class="pre">2,</span> <span class="pre">'tablesVersion':</span> <span class="pre">15,</span> <span class="pre">'typeOfProcessedData':</span> <span class="pre">2},</span> <span class="pre">2:</span> <span class="pre">{},</span> <span class="pre">3:</span> <span class="pre">{'iScansNegatively':</span> <span class="pre">0,</span> <span class="pre">'jPointsAreConsecutive':</span> <span class="pre">0,</span> <span class="pre">'jScansPositively':</span> <span class="pre">0,</span> <span class="pre">'shapeOfTheEarth':</span> <span class="pre">6},</span> <span class="pre">4:</span> <span class="pre">{'NB':</span> <span class="pre">1,</span> <span class="pre">'generatingProcessIdentifier':</span> <span class="pre">255,</span> <span class="pre">'hoursAfterDataCutoff':</span> <span class="pre">None,</span> <span class="pre">'indicatorOfUnitForTimeIncrement':</span> <span class="pre">13,</span> <span class="pre">'indicatorOfUnitForTimeRange':</span> <span class="pre">13,</span> <span class="pre">'indicatorOfUnitOfTimeRange':</span> <span class="pre">13,</span> <span class="pre">'instrumentType':</span> <span class="pre">0,</span> <span class="pre">'minutesAfterDataCutoff':</span> <span class="pre">None,</span> <span class="pre">'satelliteNumber':</span> <span class="pre">0,</span> <span class="pre">'satelliteSeries':</span> <span class="pre">0,</span> <span class="pre">'scaleFactorOfCentralWaveNumber':</span> <span class="pre">0,</span> <span class="pre">'scaleFactorOfFirstFixedSurface':</span> <span class="pre">0,</span> <span class="pre">'scaleFactorOfSecondFixedSurface':</span> <span class="pre">0,</span> <span class="pre">'typeOfGeneratingProcess':</span> <span class="pre">2,</span> <span class="pre">'typeOfSecondFixedSurface':</span> <span class="pre">255},</span> <span class="pre">5:</span> <span class="pre">{'bitsPerValue':</span> <span class="pre">12,</span> <span class="pre">'packingType':</span> <span class="pre">'grid_second_order'}}</span></em><a class="headerlink" href="#griberies.defaults.GRIB2_keyvalue" title="Permalink to this definition">¶</a></dt>
-<dd><p>GRIB2 key/value defaults, ordered by section</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.defaults.GRIB2_metadata_to_embark">
-<span class="sig-prename descclassname"><span class="pre">griberies.defaults.</span></span><span class="sig-name descname"><span class="pre">GRIB2_metadata_to_embark</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['typeOfGeneratingProcess',</span> <span class="pre">'productionStatusOfProcessedData',</span> <span class="pre">'typeOfProcessedData',</span> <span class="pre">'generatingProcessIdentifier',</span> <span class="pre">'typeOfTimeIncrement',</span> <span class="pre">'indicatorOfUnitOfTimeRange',</span> <span class="pre">'indicatorOfUnitForTimeRange',</span> <span class="pre">'indicatorOfUnitForTimeIncrement',</span> <span class="pre">'hoursAfterDataCutoff',</span> <span class="pre">'minutesAfterDataCutoff',</span> <span class="pre">'timeIncrement',</span> <span class="pre">'bitsPerValue',</span> <span class="pre">'dataRepresentationTemplateNumber',</span> <span class="pre">'uvRelativeToGrid']</span></em><a class="headerlink" href="#griberies.defaults.GRIB2_metadata_to_embark" title="Permalink to this definition">¶</a></dt>
-<dd><p>metadata to embark in field.misc_metadata</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.defaults.GRIB1_sample">
-<span class="sig-prename descclassname"><span class="pre">griberies.defaults.</span></span><span class="sig-name descname"><span class="pre">GRIB1_sample</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GRIB1_grid_second_order'</span></em><a class="headerlink" href="#griberies.defaults.GRIB1_sample" title="Permalink to this definition">¶</a></dt>
-<dd><p>GRIB1 sample (from epygram)</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.defaults.GRIB1_packing">
-<span class="sig-prename descclassname"><span class="pre">griberies.defaults.</span></span><span class="sig-name descname"><span class="pre">GRIB1_packing</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'bitsPerValue':</span> <span class="pre">16,</span> <span class="pre">'packingType':</span> <span class="pre">'grid_second_order'}</span></em><a class="headerlink" href="#griberies.defaults.GRIB1_packing" title="Permalink to this definition">¶</a></dt>
-<dd><p>packing</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.defaults.GRIB1_ordering">
-<span class="sig-prename descclassname"><span class="pre">griberies.defaults.</span></span><span class="sig-name descname"><span class="pre">GRIB1_ordering</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'iScansNegatively':</span> <span class="pre">0,</span> <span class="pre">'jPointsAreConsecutive':</span> <span class="pre">0,</span> <span class="pre">'jScansPositively':</span> <span class="pre">0}</span></em><a class="headerlink" href="#griberies.defaults.GRIB1_ordering" title="Permalink to this definition">¶</a></dt>
-<dd><p>ordering</p>
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="griberies.defaults.GRIB1_keyvalue">
-<span class="sig-prename descclassname"><span class="pre">griberies.defaults.</span></span><span class="sig-name descname"><span class="pre">GRIB1_keyvalue</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'generatingProcessIdentifier':</span> <span class="pre">255}</span></em><a class="headerlink" href="#griberies.defaults.GRIB1_keyvalue" title="Permalink to this definition">¶</a></dt>
-<dd><p>GRIB1 key/value defaults, ordered by section</p>
-</dd></dl>
-
 </section>
 </section>
 
@@ -314,13 +121,13 @@ installation path of GRIB API <strong>api_name</strong>.</p>
         <li class="right" >
           <a href="usevortex.html" title="usevortex — Proxies to reach resources using Vortex"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >External, side packages</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

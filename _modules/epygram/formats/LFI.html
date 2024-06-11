@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.LFI &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.formats.LFI &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,28 +25,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.LFI</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -65,7 +48,7 @@
 <span class="sd">Contains the class to handle LFI format.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">os</span>
@@ -77,17 +60,18 @@
 <span class="kn">import</span> <span class="nn">six</span>
 
 <span class="kn">import</span> <span class="nn">footprints</span>
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
-<span class="kn">from</span> <span class="nn">bronx.datagrip.misc</span> <span class="k">import</span> <span class="n">read_dict_in_CSV</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="kn">from</span> <span class="nn">bronx.datagrip.misc</span> <span class="kn">import</span> <span class="n">read_dict_in_CSV</span>
 
-<span class="kn">from</span> <span class="nn">arpifs4py</span> <span class="k">import</span> <span class="n">wlfi</span>
+<span class="kn">from</span> <span class="nn">epygram.extra.falfilfa4py</span> <span class="kn">import</span> <span class="n">LFI</span> <span class="k">as</span> <span class="n">LFI4py</span>
 
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">Angle</span>
-<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">Field</span>
-<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="k">import</span> <span class="n">FileResource</span>
-<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span><span class="p">,</span> <span class="n">MiscField</span><span class="p">,</span> <span class="n">D3Field</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="k">import</span> <span class="n">hybridH2altitude</span><span class="p">,</span> <span class="n">hybridH2pressure</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">Angle</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="kn">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">H2DField</span><span class="p">,</span> <span class="n">MiscField</span><span class="p">,</span> <span class="n">D3Field</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">VGeometry</span><span class="p">,</span> <span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="n">AcademicGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="kn">import</span> <span class="n">hybridH2altitude</span><span class="p">,</span> <span class="n">hybridH2pressure</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;LFI&#39;</span><span class="p">]</span>
 
@@ -105,7 +89,7 @@
 
 
 <span class="k">def</span> <span class="nf">parse_LFIstr_totuple</span><span class="p">(</span><span class="n">strfid</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Parse and return a tuple LFI fid from a string.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse and return a tuple LFI fid from a string.&quot;&quot;&quot;</span>
     <span class="n">fid</span> <span class="o">=</span> <span class="n">strfid</span>
     <span class="k">if</span> <span class="n">fid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;LFI fid must begin with &#39;(&#39;&quot;</span><span class="p">)</span>
@@ -130,7 +114,7 @@
 
 
 <span class="k">def</span> <span class="nf">inquire_field_dict</span><span class="p">(</span><span class="n">fieldname</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the info contained in the LFI _field_dict for the requested field.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">fieldname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cache_inquire</span><span class="p">:</span>
@@ -156,7 +140,7 @@
 
 
 <span class="k">def</span> <span class="nf">_complete_generic_fid_from_fid</span><span class="p">(</span><span class="n">generic_fid</span><span class="p">,</span> <span class="n">fieldidentifier</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Complete a generic fid with information of fieldidentifier.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete a generic fid with information of fieldidentifier.&quot;&quot;&quot;</span>
     <span class="c1"># &#39;level&#39;</span>
     <span class="k">if</span> <span class="s1">&#39;level&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">generic_fid</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fieldidentifier</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
@@ -183,7 +167,7 @@
 
 
 <div class="viewcode-block" id="LFI"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI">[docs]</a><span class="k">class</span> <span class="nc">LFI</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class implementing all specificities for LFI resource format.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -218,12 +202,12 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_LFIsoft_init</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize the LFI software maximum dimensions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the LFI software maximum dimensions.&quot;&quot;&quot;</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_LFIsoftware_cst</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;JPXKRK&#39;</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_read_field_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fd_abspath</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reads the CSV fields dictionary of the format.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the CSV fields dictionary of the format.&quot;&quot;&quot;</span>
         <span class="n">field_dict</span><span class="p">,</span> <span class="n">file_priority</span> <span class="o">=</span> <span class="n">read_dict_in_CSV</span><span class="p">(</span><span class="n">fd_abspath</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">file_priority</span> <span class="o">==</span> <span class="s1">&#39;main&#39;</span><span class="p">:</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">_field_dict</span> <span class="o">=</span> <span class="n">field_dict</span>
@@ -247,7 +231,7 @@
                     <span class="n">field_dict</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cfd</span><span class="p">)</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">_field_dict</span> <span class="o">=</span> <span class="n">field_dict</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="kc">None</span>
@@ -277,7 +261,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_listLFInamesCache</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="LFI.open"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens a LFI with ifsaux&#39; LFIOUV, and initializes some attributes.</span>
 
 <span class="sd">        :param openmode: optional, to open with a specific openmode, eventually</span>
@@ -290,7 +274,7 @@
             <span class="c1"># LFI already exists</span>
             <span class="c1"># open, getting logical unit</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfiouv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;OLD&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfiouv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;OLD&#39;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
@@ -300,15 +284,15 @@
             <span class="c1"># open, getting logical unit</span>
             <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;This file already exist: &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfiouv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;NEW&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfiouv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;NEW&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">empty</span> <span class="o">=</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="LFI.close"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Closes a LFI with ifsaux&#39; LFIFER.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closes a LFI with ifsaux&#39; LFIFER.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfifer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="s1">&#39;KEEP&#39;</span><span class="p">)</span>
+                <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfifer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="s1">&#39;KEEP&#39;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;closing &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
@@ -320,7 +304,7 @@
 <span class="c1"># ABOUT FIELDS #</span>
 <span class="c1">################</span>
     <span class="k">def</span> <span class="nf">_get_generic_fid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldidentifier</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a generic fid from fieldidentifier (via Field Dict).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a generic fid from fieldidentifier (via Field Dict).&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span><span class="p">:</span>
             <span class="n">fieldname</span> <span class="o">=</span> <span class="n">fieldidentifier</span>
         <span class="k">else</span><span class="p">:</span>
@@ -337,7 +321,7 @@
         <span class="k">return</span> <span class="n">fid</span>
 
 <div class="viewcode-block" id="LFI.find_fields_in_resource"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.find_fields_in_resource">[docs]</a>    <span class="k">def</span> <span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fieldtype</span><span class="o">=</span><span class="p">[],</span> <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of the fields from resource whose identifier match the given seed.</span>
 
 <span class="sd">        :param seed: might be:\n</span>
@@ -397,7 +381,7 @@
         <span class="k">return</span> <span class="n">fieldslist</span></div>
 
 <div class="viewcode-block" id="LFI.listfields"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.listfields">[docs]</a>    <span class="k">def</span> <span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list containing the LFI identifiers of all the fields of the</span>
 <span class="sd">        resource.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -405,7 +389,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Actual listfields() method for LFI.</span>
 
 <span class="sd">        :param complete: - if True method returns a list of {&#39;LFI&#39;:LFI_fid,</span>
@@ -442,19 +426,19 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_listLFInames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;List of LFI article names contained in file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List of LFI article names contained in file.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listLFInamesCache</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">records_number</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfinaf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfipos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">)</span>  <span class="c1"># rewind</span>
+            <span class="n">records_number</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfinaf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfipos</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">)</span>  <span class="c1"># rewind</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_listLFInamesCache</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">records_number</span><span class="p">):</span>
-                <span class="n">fname</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wlficas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                <span class="n">fname</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlficas</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_listLFInamesCache</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listLFInamesCache</span>
 
 <div class="viewcode-block" id="LFI.sortfields"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.sortfields">[docs]</a>    <span class="k">def</span> <span class="nf">sortfields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a sorted list of fields with regards to their name and nature,</span>
 <span class="sd">        as a dict of lists.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -488,7 +472,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldidentifier</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads one field, given its identifier (tuple (LFI name, level)), and returns a Field instance.</span>
 <span class="sd">        Interface to Fortran routines from &#39;ifsaux&#39;.</span>
 
@@ -518,19 +502,16 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_read_validity</span><span class="p">()</span>
 
             <span class="c1"># Make geometry object</span>
-            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">field_info</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                               <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
                                <span class="n">grid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span>
                                <span class="n">dimensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">,</span>
                                <span class="n">geoid</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">LFI_default_geoid</span><span class="p">,</span>
-                               <span class="n">position_on_grid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">projection</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection</span>  <span class="c1"># Also used for academic geometries</span>
                                <span class="p">)</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="c1"># vertical geometry</span>
-                <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
+                <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
                                  <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                                  <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">),</span>
                                  <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">)}</span>
@@ -543,11 +524,11 @@
                 <span class="k">if</span> <span class="n">field_info</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;3D&#39;</span><span class="p">:</span>
                     <span class="n">kwargs_vcoord</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="c1"># Get data if requested or only metadata</span>
-        <span class="n">field_length</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfinfo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Record length</span>
+        <span class="n">field_length</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfinfo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Record length</span>
         <span class="k">if</span> <span class="n">field_length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;This record does not exist.&quot;</span><span class="p">)</span>
         <span class="n">lengthToRead</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">field_length</span><span class="p">,</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">LFI</span><span class="o">.</span><span class="n">_LFIsoftware_cst</span><span class="p">[</span><span class="s1">&#39;JPXKRK&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">getdata</span> <span class="k">else</span> <span class="n">field_length</span>  <span class="c1"># Length needed</span>
-        <span class="n">rawData</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfilec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">lengthToRead</span><span class="p">,</span> <span class="n">getdata</span><span class="p">)</span>  <span class="c1"># Reading</span>
+        <span class="n">rawData</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfilec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">lengthToRead</span><span class="p">,</span> <span class="n">getdata</span><span class="p">)</span>  <span class="c1"># Reading</span>
         <span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="o">=</span> <span class="n">gridIndicatorDict</span><span class="p">[</span><span class="n">rawData</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="n">gridIndicator</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;vertical&#39;</span><span class="p">:</span><span class="n">v</span><span class="p">,</span> <span class="s1">&#39;horizontal&#39;</span><span class="p">:</span><span class="n">h</span><span class="p">}</span>
         <span class="n">comment_length</span> <span class="o">=</span> <span class="n">rawData</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -562,9 +543,9 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compressed</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fieldname</span> <span class="o">!=</span> <span class="s1">&#39;LFI_COMPRESSED&#39;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_read_compression</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compressed</span><span class="p">:</span>
-                <span class="p">(</span><span class="n">lengthAfter</span><span class="p">,</span> <span class="n">compressionType</span><span class="p">)</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wget_compheader</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">lengthToRead</span><span class="p">)</span>
+                <span class="p">(</span><span class="n">lengthAfter</span><span class="p">,</span> <span class="n">compressionType</span><span class="p">)</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wget_compheader</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">lengthToRead</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">lengthAfter</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">data</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wdecompress_field</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">compressionType</span><span class="p">,</span> <span class="n">lengthAfter</span><span class="p">)</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wdecompress_field</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">data</span><span class="p">,</span> <span class="n">compressionType</span><span class="p">,</span> <span class="n">lengthAfter</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">field_info</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Misc&#39;</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">field_info</span><span class="p">[</span><span class="s1">&#39;dimension&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">field_info</span><span class="p">[</span><span class="s1">&#39;nature&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;int&#39;</span><span class="p">:</span>
@@ -648,8 +629,8 @@
                    <span class="p">}</span>
             <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridIndicator</span><span class="p">[</span><span class="s1">&#39;horizontal&#39;</span><span class="p">]</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;position_on_grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridIndicator</span><span class="p">[</span><span class="s1">&#39;vertical&#39;</span><span class="p">]</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
-            <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+            <span class="n">geometry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
             <span class="n">field</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span><span class="p">(</span><span class="n">fid</span><span class="o">=</span><span class="n">fid</span><span class="p">,</span>
                               <span class="n">structure</span><span class="o">=</span><span class="n">geometry</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
                               <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span> <span class="n">validity</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
@@ -685,7 +666,7 @@
         <span class="k">return</span> <span class="n">field</span>
 
 <div class="viewcode-block" id="LFI.readfields"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.readfields">[docs]</a>    <span class="k">def</span> <span class="nf">readfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requestedfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a :class:`epygram.base.FieldSet` containing requested fields read in the resource.</span>
 
 <span class="sd">        :param requestedfields: might be \n</span>
@@ -703,7 +684,7 @@
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">LFI</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfields</span><span class="p">(</span><span class="n">requestedfields</span><span class="p">,</span> <span class="n">getdata</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LFI.writefield"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.writefield">[docs]</a>    <span class="k">def</span> <span class="nf">writefield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write a field in the resource.</span>
 
 <span class="sd">        :param field: a :class:`epygram.base.Field` instance or :class:`epygram.H2DField`.</span>
@@ -716,7 +697,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">writefields</span><span class="p">(</span><span class="n">fieldset</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LFI.writefields"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.writefields">[docs]</a>    <span class="k">def</span> <span class="nf">writefields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write the fields of the *fieldset* in the resource.</span>
 
 <span class="sd">        :param fieldset: must be a :class:`epygram.base.FieldSet` instance.</span>
@@ -962,24 +943,24 @@
                 <span class="k">if</span> <span class="p">(</span><span class="s1">&#39;LFI_COMPRESSED&#39;</span> <span class="ow">in</span> <span class="n">specialValues</span> <span class="ow">and</span> <span class="n">specialValues</span><span class="p">[</span><span class="s1">&#39;LFI_COMPRESSED&#39;</span><span class="p">]</span> <span class="ow">and</span>
                    <span class="n">dataInt</span><span class="o">.</span><span class="n">size</span> <span class="o">%</span> <span class="p">((</span><span class="n">specialValues</span><span class="p">[</span><span class="s1">&#39;IMAX&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">specialValues</span><span class="p">[</span><span class="s1">&#39;JMAX&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span>
                    <span class="n">name</span> <span class="o">!=</span> <span class="s1">&#39;ZS&#39;</span> <span class="ow">and</span> <span class="s1">&#39;.DATIM&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">name</span><span class="p">):</span>
-                    <span class="p">(</span><span class="n">dataInt</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">=</span> <span class="n">wlfi</span><span class="o">.</span><span class="n">wcompress_field</span><span class="p">(</span><span class="n">dataInt</span><span class="p">,</span>
+                    <span class="p">(</span><span class="n">dataInt</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">=</span> <span class="n">LFI4py</span><span class="o">.</span><span class="n">wcompress_field</span><span class="p">(</span><span class="n">dataInt</span><span class="p">,</span>
                                                            <span class="n">specialValues</span><span class="p">[</span><span class="s1">&#39;IMAX&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
                                                            <span class="n">specialValues</span><span class="p">[</span><span class="s1">&#39;JMAX&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
                                                            <span class="n">dataInt</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
                     <span class="n">dataInt</span> <span class="o">=</span> <span class="n">dataInt</span><span class="p">[:</span><span class="n">size</span><span class="p">]</span>
                 <span class="n">dataToWrite</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">header</span><span class="p">,</span> <span class="n">dataInt</span><span class="p">))</span>
-                <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfiecr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataToWrite</span><span class="p">),</span> <span class="n">dataToWrite</span><span class="p">)</span>
+                <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfiecr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dataToWrite</span><span class="p">),</span> <span class="n">dataToWrite</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">empty</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="LFI.rename_field"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.rename_field">[docs]</a>    <span class="k">def</span> <span class="nf">rename_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">new_fid</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Renames a field &quot;in place&quot;.&quot;&quot;&quot;</span>
-        <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfiren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fid</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="n">fid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_fid</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="n">new_fid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Renames a field &quot;in place&quot;.&quot;&quot;&quot;</span>
+        <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfiren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fid</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="n">fid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">new_fid</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="n">new_fid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="LFI.delfield"><a class="viewcode-back" href="../../../library/LFI.html#epygram.formats.LFI.LFI.delfield">[docs]</a>    <span class="k">def</span> <span class="nf">delfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Deletes a field from file &quot;in place&quot;.&quot;&quot;&quot;</span>
-        <span class="n">wlfi</span><span class="o">.</span><span class="n">wlfisup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fid</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="n">fid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes a field from file &quot;in place&quot;.&quot;&quot;&quot;</span>
+        <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfisup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fid</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="n">fid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">extractprofile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -988,7 +969,7 @@
                        <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
                        <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">cheap_height</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a vertical profile from the LFI resource, given its fid</span>
 <span class="sd">        and the geographic location (*lon*/*lat*) of the profile.</span>
 
@@ -1000,8 +981,7 @@
 <span class="sd">        :param geometry: the geometry on which extract data. If None, it is built from</span>
 <span class="sd">          lon/lat.</span>
 <span class="sd">        :param vertical_coordinate: defines the requested vertical coordinate of the</span>
-<span class="sd">          V1DField (cf. :class:`epygram.geometries.V1DGeometry` coordinate</span>
-<span class="sd">          possible values).</span>
+<span class="sd">          V1DField (cf. :module:`epygram.geometries` coordinate possible values).</span>
 <span class="sd">        :param interpolation: defines the interpolation function used to compute</span>
 <span class="sd">          the profile at requested lon/lat from the fields grid:\n</span>
 <span class="sd">          - if &#39;nearest&#39; (default), extracts profile at the horizontal nearest neighboring gridpoint;</span>
@@ -1043,7 +1023,7 @@
                        <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span>
                        <span class="n">cheap_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">global_shift_center</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a vertical section from the LFI resource, given its fid</span>
 <span class="sd">        and the geographic (lon/lat) coordinates of its ends.</span>
 <span class="sd">        The section is returned as a V2DField.</span>
@@ -1061,8 +1041,7 @@
 <span class="sd">        :param resolution: defines the horizontal resolution to be given to the</span>
 <span class="sd">          field. If None, defaults to the horizontal resolution of the field.</span>
 <span class="sd">        :param vertical_coordinate: defines the requested vertical coordinate of the</span>
-<span class="sd">          V2DField (cf. :class:`epygram.geometries.V1DGeometry` coordinate</span>
-<span class="sd">          possible values).</span>
+<span class="sd">          V2DField (cf. :module:`epygram.geometries` coordinate possible values).</span>
 <span class="sd">        :param interpolation: defines the interpolation function used to compute</span>
 <span class="sd">          the profile points locations from the fields grid: \n</span>
 <span class="sd">          - if &#39;nearest&#39;, each horizontal point of the section is</span>
@@ -1105,7 +1084,7 @@
                           <span class="n">exclude_extralevels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                           <span class="n">cheap_height</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="n">global_shift_center</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a subdomain from the LFI resource, given its fid</span>
 <span class="sd">        and the geometry to use.</span>
 
@@ -1115,8 +1094,7 @@
 <span class="sd">        :param geometry: the geometry on which extract data.</span>
 <span class="sd">                         None to keep the geometry untouched.</span>
 <span class="sd">        :param vertical_coordinate: defines the requested vertical coordinate of the</span>
-<span class="sd">          V2DField (cf. :class:`epygram.geometries.V1DGeometry` coordinate</span>
-<span class="sd">          possible values).</span>
+<span class="sd">          V2DField (cf. :module:`epygram.geometries` coordinate possible values).</span>
 <span class="sd">        :param interpolation defines the interpolation function used to compute</span>
 <span class="sd">          the profile points locations from the fields grid: \n</span>
 <span class="sd">          - if &#39;nearest&#39;, each horizontal point of the section is</span>
@@ -1187,7 +1165,7 @@
              <span class="n">details</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
              <span class="n">sortfields</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
              <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes in file a summary of the contents of the LFI.</span>
 
 <span class="sd">        :param out: the output open file-like object</span>
@@ -1310,7 +1288,7 @@
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
 
             <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
-                <span class="sd">&quot;&quot;&quot;A solver adapted to this problem. Do not try to use it elsewhere!&quot;&quot;&quot;</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;A solver adapted to this problem. Do not try to use it elsewhere!&quot;&quot;&quot;</span>
                 <span class="n">x1</span> <span class="o">=</span> <span class="n">x0</span> <span class="o">+</span> <span class="mf">1.</span>
                 <span class="n">x2</span> <span class="o">=</span> <span class="n">x0</span>
                 <span class="n">y1</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span>
@@ -1327,7 +1305,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_read_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the geometry in the LFI articles.</span>
 <span class="sd">        Interface to Fortran routines from &#39;ifsaux&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1344,6 +1322,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">cartesian</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">cartesian</span><span class="p">:</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">AcademicGeometry</span>
             <span class="n">imax</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="s1">&#39;IMAX&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">())</span>
             <span class="n">jmax</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="s1">&#39;JMAX&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">())</span>
             <span class="n">xhat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="s1">&#39;XHAT&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
@@ -1381,14 +1360,14 @@
                           <span class="s1">&#39;reference_dX&#39;</span><span class="p">:</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
                           <span class="s1">&#39;reference_dY&#39;</span><span class="p">:</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]}</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;academic&#39;</span>
-            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
-                               <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
                                <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
                                <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
                                <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
                                <span class="n">geoid</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">LFI_default_geoid</span><span class="p">,</span>
                                <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span>
             <span class="n">lat0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="s1">&#39;LAT0&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
             <span class="n">lon0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="s1">&#39;LON0&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
             <span class="n">lat1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">s</span><span class="p">(</span><span class="s1">&#39;LATORI&#39;</span> <span class="k">if</span> <span class="s1">&#39;LATORI&#39;</span> <span class="ow">in</span> <span class="n">listnames</span> <span class="k">else</span> <span class="s1">&#39;LATOR&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
@@ -1448,8 +1427,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;lambert&#39;</span>
 
-            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
-                               <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+            <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
                                <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
                                <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
                                <span class="n">geoid</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">LFI_default_geoid</span><span class="p">,</span>
@@ -1467,24 +1445,22 @@
             <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;gridlevels&#39;</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">([(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">({</span><span class="s1">&#39;Ai&#39;</span><span class="p">:</span><span class="n">Ai</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;Bi&#39;</span><span class="p">:</span><span class="n">Bi</span><span class="p">[</span><span class="n">i</span><span class="p">]}))</span> <span class="k">for</span>
                                          <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Ai</span><span class="p">))]),</span>
                     <span class="s1">&#39;ABgrid_position&#39;</span><span class="p">:</span><span class="s1">&#39;flux&#39;</span><span class="p">}</span>
-            <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                             <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span><span class="mi">118</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">sleve</span> <span class="k">else</span> <span class="mi">255</span><span class="p">,</span>
+            <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span><span class="mi">118</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">sleve</span> <span class="k">else</span> <span class="mi">255</span><span class="p">,</span>
                              <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="s1">&#39;mass&#39;</span><span class="p">,</span>
                              <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="n">grid</span><span class="p">,</span>
                              <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Ai</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
                              <span class="p">}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                             <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
+            <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="mi">255</span><span class="p">,</span>
                              <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="s1">&#39;__unknown__&#39;</span><span class="p">,</span>
                              <span class="s1">&#39;levels&#39;</span><span class="p">:[</span><span class="mi">255</span><span class="p">]}</span>
         <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
-        <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">geometryclass</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reads the validity in the LFI articles.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the validity in the LFI articles.&quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span><span class="p">:</span>
@@ -1520,7 +1496,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_read_compression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reads the compression.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads the compression.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compressed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="s1">&#39;LFI_COMPRESSED&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_listLFInames</span><span class="p">():</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_compressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;LFI_COMPRESSED&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">true3d</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;LFI_COMPRESSED&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
@@ -1528,7 +1504,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_compressed</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_get_geometryValidity_from_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns special record needed to represent the geometry</span>
 <span class="sd">        and the validty of this field.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1622,7 +1598,22 @@
         <span class="k">return</span> <span class="n">specialFields</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1636,15 +1627,16 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.LFI</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

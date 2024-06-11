@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>4. Geometries &#8212; epygram 1.4.17 documentation</title>
+    <title>4. Geometries &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="fields.html" title="3. Fields"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">4. </span>Geometries</a></li> 
       </ul>
@@ -174,25 +174,25 @@ tiles from a map tiles server.</p>
 <span class="go">Vortex 1.4.0 loaded ( Friday 19. October 2018, at 14:40:31 )</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span> <span class="c1">#initialisation of environment, for FA/LFI and spectrals transforms sub-libraries</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#We need a geometry containing the altitude of the ground</span>
 <span class="gp">... </span><span class="n">zs</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;SPECSURFGEOPOTEN&#39;</span><span class="p">)</span> <span class="c1">#surface geopotential</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zs</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span> <span class="c1">#convert spectral data into grid points</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zs</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">zs</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span> <span class="o">/</span> <span class="mf">9.8</span><span class="p">)</span> <span class="c1">#Convert geopotential height into height</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zs</span><span class="o">.</span><span class="n">use_field_as_vcoord</span><span class="p">(</span><span class="n">zs</span><span class="p">,</span> <span class="mi">103</span><span class="p">)</span> <span class="c1">#We replace the vertical coordinate of the field by the height values</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">#Set-up of the view</span>
 <span class="gp">... </span><span class="n">offset</span> <span class="o">=</span> <span class="n">zs</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()[</span><span class="s1">&#39;ll&#39;</span><span class="p">]</span> <span class="c1">#We translate the domain</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hCoord</span> <span class="o">=</span> <span class="s1">&#39;ll&#39;</span> <span class="c1">#We use lat/lon on the horizontal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">z_factor</span> <span class="o">=</span> <span class="mf">0.0005</span> <span class="c1">#0.0005 horizontal degree of lat/lon is represented by the same length as one meter on the vertical</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ren</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">vtk_set_window</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">800</span><span class="p">))</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">zs</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">plot3DMaptiles</span><span class="p">(</span><span class="n">ren</span><span class="p">,</span>                                                   <span class="c1">#window to plot on</span>
 <span class="gp">... </span>                           <span class="s2">&quot;https://a.tile.openstreetmap.org/$</span><span class="si">{z}</span><span class="s2">/$</span><span class="si">{x}</span><span class="s2">/$</span><span class="si">{y}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="c1">#url of the map tiles server</span>
 <span class="gp">... </span>                           <span class="mi">2</span><span class="p">,</span>                                                     <span class="c1">#ratio between field and tiles resolutions</span>
 <span class="gp">... </span>                           <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span>                                <span class="c1">#interpolation method</span>
 <span class="gp">... </span>                           <span class="n">hCoord</span><span class="o">=</span><span class="n">hCoord</span><span class="p">,</span> <span class="n">z_factor</span><span class="o">=</span><span class="n">z_factor</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span>       <span class="c1">#helpful only on the first 3D plot</span>
-<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ren</span><span class="p">[</span><span class="s1">&#39;interactor&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">Start</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -262,13 +262,13 @@ tiles from a map tiles server.</p>
         <li class="right" >
           <a href="fields.html" title="3. Fields"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">4. </span>Geometries</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

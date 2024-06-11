@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.util &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.util &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -27,27 +25,12 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.util</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -64,7 +47,7 @@
 <span class="sd">Some useful utilities...</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
 <span class="kn">import</span> <span class="nn">six</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
@@ -74,23 +57,115 @@
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">hashlib</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">six.moves.urllib.request</span> <span class="k">import</span> <span class="n">urlopen</span>  <span class="c1"># @UnresolvedImport</span>
-<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="k">import</span> <span class="n">LooseVersion</span>
+<span class="kn">from</span> <span class="nn">six.moves.urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>  <span class="c1"># @UnresolvedImport</span>
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">LooseVersion</span>
 
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FootprintBase</span>
-<span class="kn">from</span> <span class="nn">bronx.graphics.colormapping</span> <span class="k">import</span> <span class="p">(</span><span class="n">add_cmap</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">FootprintBase</span>
+<span class="kn">from</span> <span class="nn">bronx.graphics.colormapping</span> <span class="kn">import</span> <span class="p">(</span><span class="n">add_cmap</span><span class="p">,</span>
                                          <span class="n">get_norm4colorscale</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">bronx.syntax.decorators</span> <span class="k">import</span> <span class="n">nicedeco</span>
-<span class="kn">from</span> <span class="nn">bronx.fancies</span> <span class="k">import</span> <span class="n">loggers</span>
+<span class="kn">from</span> <span class="nn">bronx.syntax.decorators</span> <span class="kn">import</span> <span class="n">nicedeco</span>
+<span class="kn">from</span> <span class="nn">bronx.fancies</span> <span class="kn">import</span> <span class="n">loggers</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
-<span class="kn">from</span> <span class="nn">.colormapping</span> <span class="k">import</span> <span class="n">register_colormap_from_json</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">.colormapping</span> <span class="kn">import</span> <span class="n">register_colormap_from_json</span>
 
 <span class="n">epylog</span> <span class="o">=</span> <span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
+<span class="k">class</span> <span class="nc">CheckAttribute</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_attr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">set_check</span><span class="p">,</span> <span class="n">error_message</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        :param set_check: function called each time the attribute is modified to check</span>
+<span class="sd">                          the validity of new value. This function takes two arguments:</span>
+<span class="sd">                            - the value to test</span>
+<span class="sd">                            - the extra parameter</span>
+<span class="sd">                          To enable pickle to be used, functions must be named (no lambda)</span>
+<span class="sd">                          and not local (nested functions).</span>
+<span class="sd">        :param error_message: message to display in assertion when value is not valid</span>
+<span class="sd">        :param extra: an argument to provide to the test function</span>
 
-<div class="viewcode-block" id="RecursiveObject"><a class="viewcode-back" href="../../library/util.html#epygram.util.RecursiveObject">[docs]</a><span class="k">class</span> <span class="nc">RecursiveObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The method adds a control on the authorised value of an attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;*name* must be a string&quot;</span>
+        <span class="k">assert</span> <span class="nb">callable</span><span class="p">(</span><span class="n">set_check</span><span class="p">),</span> <span class="s2">&quot;*set_check* must be callable&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">error_message</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span> <span class="s2">&quot;*error_message* must be a string&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_epyattr&#39;</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;_epyattr&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_epyattr</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">set_check</span><span class="p">,</span> <span class="n">error_message</span><span class="p">,</span> <span class="n">extra</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_attr_int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        The method adds a control to check if the attribute is an integer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_class</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_attr_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        The method adds a control to check if the attribute is a string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_class</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_attr_float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        The method adds a control to check if the attribute is a float</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_class</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_attr_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        The method adds a control to check if the attribute is a list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_class</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_attr_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        The method adds a control to check if the attribute is a dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_class</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_inlist</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span> <span class="k">return</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">values</span>
+    <span class="k">def</span> <span class="nf">add_attr_inlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">values</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        :param values: authorised values</span>
+<span class="sd">        The method adds a control to check if the attribute value is allowed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="nb">list</span><span class="p">),</span> <span class="s2">&quot;*values* must be a list&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inlist</span><span class="p">,</span>
+                             <span class="s2">&quot;*</span><span class="si">{name}</span><span class="s2">* (=</span><span class="si">{value}</span><span class="s2">) must be a among </span><span class="si">{values}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                                                                                   <span class="n">values</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">values</span><span class="p">),</span>
+                                                                                   <span class="n">value</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{value}</span><span class="s1">&#39;</span><span class="p">),</span>
+                             <span class="n">values</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_attr_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: name of the attribute</span>
+<span class="sd">        :param cls: authorised class</span>
+<span class="sd">        The method adds a control to check if the attribute is an instance of *cls*</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_attr</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">isinstance</span><span class="p">,</span>
+                             <span class="s2">&quot;*</span><span class="si">{name}</span><span class="s2">* must be a </span><span class="si">{clsc}</span><span class="s2"> instance (and not a </span><span class="si">{cls}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                                                                                           <span class="n">clsc</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+                                                                                           <span class="bp">cls</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{cls}</span><span class="s1">&#39;</span><span class="p">),</span>
+                             <span class="bp">cls</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_epyattr&#39;</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="s1">&#39;_epyattr&#39;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_epyattr</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_epyattr</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">0</span><span class="p">](</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_epyattr</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">2</span><span class="p">]),</span> \
+                   <span class="bp">self</span><span class="o">.</span><span class="n">_epyattr</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="RecursiveObject"><a class="viewcode-back" href="../../library/util.html#epygram.util.RecursiveObject">[docs]</a><span class="k">class</span> <span class="nc">RecursiveObject</span><span class="p">(</span><span class="n">CheckAttribute</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic abstract class implementing useful recursive properties:</span>
 
 <span class="sd">    - display of object: the *__str__* method returns str(attr) for each of the</span>
@@ -101,10 +176,10 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># ghost attributes are ignored when comparing 2 objects between them</span>
-    <span class="n">_ghost_attributes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_ghost_attributes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_epyattr&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_strItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">,</span> <span class="n">reclevel</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Recursive display of object attributes.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursive display of object attributes.&quot;&quot;&quot;</span>
 
         <span class="n">offset</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">rjust</span><span class="p">(</span><span class="n">reclevel</span> <span class="o">*</span> <span class="mi">4</span><span class="p">)</span>
         <span class="n">itemstring</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -114,7 +189,7 @@
                 <span class="k">if</span> <span class="n">attr</span> <span class="o">==</span> <span class="s1">&#39;_attributes&#39;</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                         <span class="n">itemstring</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strItem</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">attr</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">reclevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="n">attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;_puredict&#39;</span><span class="p">,</span> <span class="s1">&#39;_observer&#39;</span><span class="p">):</span>
+                <span class="k">elif</span> <span class="n">attr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;_puredict&#39;</span><span class="p">,</span> <span class="s1">&#39;_observer&#39;</span><span class="p">,</span> <span class="s1">&#39;_epyattr&#39;</span><span class="p">):</span>
                     <span class="n">itemstring</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">attr</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strItem</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">reclevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -128,7 +203,8 @@
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">RecursiveObject</span><span class="p">):</span>
             <span class="n">itemstring</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot; containing:&quot;</span>
             <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">item</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="n">itemstring</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">attr</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strItem</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">reclevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">attr</span> <span class="o">!=</span> <span class="s1">&#39;_epyattr&#39;</span><span class="p">:</span>
+                    <span class="n">itemstring</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="n">attr</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strItem</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">attr</span><span class="p">],</span> <span class="n">reclevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
                 <span class="n">itemstring</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">offset</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strItem</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">reclevel</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -136,26 +212,26 @@
             <span class="n">itemstring</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">itemstring</span>
 
-    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recursive display of object: displays each of its attributes</span>
 <span class="sd">        with indentation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_strItem</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test of equality by recursion on the object&#39;s attributes.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test of equality by recursion on the object&#39;s attributes.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerant_equal</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># known issue __eq__/__hash__ must be defined both or none, else inheritance is broken</span>
         <span class="k">return</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="RecursiveObject.tolerant_equal"><a class="viewcode-back" href="../../library/util.html#epygram.util.RecursiveObject.tolerant_equal">[docs]</a>    <span class="k">def</span> <span class="nf">tolerant_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">epsilon</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Test of equality by recursion on the object&#39;s attributes,</span>
 <span class="sd">        with a **tolerance**.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -181,15 +257,15 @@
         <span class="k">return</span> <span class="n">ok</span></div>
 
 <div class="viewcode-block" id="RecursiveObject.copy"><a class="viewcode-back" href="../../library/util.html#epygram.util.RecursiveObject.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a copy of the object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a copy of the object.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RecursiveObject.deepcopy"><a class="viewcode-back" href="../../library/util.html#epygram.util.RecursiveObject.deepcopy">[docs]</a>    <span class="k">def</span> <span class="nf">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a deepcopy of the object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a deepcopy of the object.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="RecursiveObject.recursive_diff"><a class="viewcode-back" href="../../library/util.html#epygram.util.RecursiveObject.recursive_diff">[docs]</a>    <span class="k">def</span> <span class="nf">recursive_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Recursively list what differs from **other**.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Recursively list what differs from **other**.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
             <span class="n">diff</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
@@ -206,7 +282,7 @@
 
 
 <span class="k">class</span> <span class="nc">Comparator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper to recursively compare objects.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper to recursively compare objects.&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_float_are_equal</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">float1</span><span class="p">,</span> <span class="n">float2</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">):</span>
@@ -268,7 +344,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">are_equal</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Checks equality of objects.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks equality of objects.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_float_are_equal</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -284,7 +360,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Inspect differences between objects.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Inspect differences between objects.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">are_equal</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">,</span> <span class="mf">1e-17</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">RecursiveObject</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj2</span><span class="p">,</span> <span class="n">RecursiveObject</span><span class="p">):</span>
                 <span class="k">return</span> <span class="n">obj1</span><span class="o">.</span><span class="n">recursive_diff</span><span class="p">(</span><span class="n">obj2</span><span class="p">)</span>
@@ -295,7 +371,7 @@
 
 
 <div class="viewcode-block" id="Angle"><a class="viewcode-back" href="../../library/util.html#epygram.util.Angle">[docs]</a><span class="k">class</span> <span class="nc">Angle</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class handles an angle.</span>
 <span class="sd">    It enables conversions of units, while saving the original unit and value</span>
 <span class="sd">    of the angle at its construction.</span>
@@ -310,8 +386,8 @@
     <span class="n">dms</span> <span class="o">=</span> <span class="s1">&#39;DMS&#39;</span>
     <span class="n">units</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">deg</span><span class="p">,</span> <span class="n">dms</span><span class="p">,</span> <span class="n">rad</span><span class="p">,</span> <span class="n">trig</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor.</span>
 <span class="sd">        &#39;unit&#39; argument must be among:</span>
 <span class="sd">        - &#39;degrees&#39;,</span>
@@ -336,25 +412,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_origin_unit</span> <span class="o">=</span> <span class="n">unit</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_origin_value</span> <span class="o">=</span> <span class="n">value</span>
 
-    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_origin_value</span><span class="p">)</span> <span class="o">+</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_origin_unit</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radians&#39;</span><span class="p">)</span> <span class="o">*</span> <span class="n">factor</span><span class="p">,</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radians&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">factor</span><span class="p">,</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Angle</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radians&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radians&#39;</span><span class="p">),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Angle</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Angle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radians&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;radians&#39;</span><span class="p">),</span> <span class="s1">&#39;radians&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Angle.get"><a class="viewcode-back" href="../../library/util.html#epygram.util.Angle.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the angle in the requested unit.</span>
 <span class="sd">        If no unit is supplied, the origin unit is used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -368,7 +444,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">unit</span><span class="p">]</span></div>
 
     <span class="k">def</span> <span class="nf">_compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the angle in the requested unit, from the original one.</span>
 <span class="sd">        See constructor for more details about units.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -451,7 +527,7 @@
                                       <span class="s2">&quot;) is not coded.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Angle.tolerant_equal"><a class="viewcode-back" href="../../library/util.html#epygram.util.Angle.tolerant_equal">[docs]</a>    <span class="k">def</span> <span class="nf">tolerant_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">epsilon</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Redefinition because of dynamism of buffering new computed values...</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Angle</span><span class="p">):</span>
@@ -473,14 +549,14 @@
 <span class="c1"># FUNCTIONS #</span>
 <span class="c1">#############</span>
 <span class="k">def</span> <span class="nf">is_scalar</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if argument is scalar</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 
 
 <span class="k">def</span> <span class="nf">as_numpy_array</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a numpy (ma) array</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
@@ -495,7 +571,7 @@
 
 
 <div class="viewcode-block" id="find_re_in_list"><a class="viewcode-back" href="../../library/util.html#epygram.util.find_re_in_list">[docs]</a><span class="k">def</span> <span class="nf">find_re_in_list</span><span class="p">(</span><span class="n">regexp</span><span class="p">,</span> <span class="n">a_list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds all elements from a list that match a regular expression.</span>
 <span class="sd">    The regexp and the different elements of the list must be of the same type:</span>
 
@@ -547,7 +623,7 @@
 
 
 <div class="viewcode-block" id="degrees_nearest_mod"><a class="viewcode-back" href="../../library/util.html#epygram.util.degrees_nearest_mod">[docs]</a><span class="k">def</span> <span class="nf">degrees_nearest_mod</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">ref</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the angle(s) **d** in the modulo nearest to **ref**.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the angle(s) **d** in the modulo nearest to **ref**.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">_</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
         <span class="n">scalar</span> <span class="o">=</span> <span class="kc">False</span>
@@ -571,7 +647,7 @@
 
 
 <div class="viewcode-block" id="positive_longitudes"><a class="viewcode-back" href="../../library/util.html#epygram.util.positive_longitudes">[docs]</a><span class="k">def</span> <span class="nf">positive_longitudes</span><span class="p">(</span><span class="n">lons</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns numpy array *lons* forced (modulo) in [0;360[.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns numpy array *lons* forced (modulo) in [0;360[.&quot;&quot;&quot;</span>
     <span class="n">positive</span> <span class="o">=</span> <span class="n">lons</span> <span class="o">+</span> <span class="mf">360.</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">lons</span> <span class="o">&gt;=</span> <span class="mf">0.</span>
     <span class="n">positive</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">lons</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
@@ -579,7 +655,7 @@
 
 
 <div class="viewcode-block" id="longitudes_between_minus180_180"><a class="viewcode-back" href="../../library/util.html#epygram.util.longitudes_between_minus180_180">[docs]</a><span class="k">def</span> <span class="nf">longitudes_between_minus180_180</span><span class="p">(</span><span class="n">lons</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns numpy array *lons* forced (modulo) in ]-180;180].&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns numpy array *lons* forced (modulo) in ]-180;180].&quot;&quot;&quot;</span>
     <span class="n">newlons</span> <span class="o">=</span> <span class="n">positive_longitudes</span><span class="p">(</span><span class="n">lons</span><span class="p">)</span>
     <span class="n">negative_lons</span> <span class="o">=</span> <span class="n">newlons</span> <span class="o">-</span> <span class="mf">360.</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">newlons</span> <span class="o">&gt;</span> <span class="mf">180.</span>
@@ -588,7 +664,7 @@
 
 
 <div class="viewcode-block" id="positive_longitude"><a class="viewcode-back" href="../../library/util.html#epygram.util.positive_longitude">[docs]</a><span class="k">def</span> <span class="nf">positive_longitude</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;degrees&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns *lon* shifted in [0;360[ or [0;2pi[ (depending on *unit*).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns *lon* shifted in [0;360[ or [0;2pi[ (depending on *unit*).&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">lon</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">unit</span> <span class="o">==</span> <span class="s1">&#39;degrees&#39;</span><span class="p">:</span>
             <span class="n">lon</span> <span class="o">+=</span> <span class="mf">360.</span>
@@ -600,7 +676,7 @@
 
 
 <span class="k">def</span> <span class="nf">get_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">authorize_cache</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subst</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get file from url into filename.</span>
 <span class="sd">    If authorize_cache is True and a directory is set for caching</span>
 <span class="sd">    in user preferences, file is first searched in cache directory,</span>
@@ -660,7 +736,7 @@
 
 
 <div class="viewcode-block" id="load_cmap"><a class="viewcode-back" href="../../library/util.html#epygram.util.load_cmap">[docs]</a><span class="k">def</span> <span class="nf">load_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reads and registers the epygram-or-user-colormap called *cmap*,</span>
 <span class="sd">    which must be either in config.epygram_colormaps or</span>
 <span class="sd">    config.usercolormaps.</span>
@@ -728,7 +804,7 @@
 
 <div class="viewcode-block" id="write_formatted_table"><a class="viewcode-back" href="../../library/util.html#epygram.util.write_formatted_table">[docs]</a><span class="k">def</span> <span class="nf">write_formatted_table</span><span class="p">(</span><span class="n">dest</span><span class="p">,</span> <span class="n">table</span><span class="p">,</span>
                           <span class="n">alignments</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;&lt;&#39;</span><span class="p">,</span> <span class="s1">&#39;^&#39;</span><span class="p">],</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">float_type</span><span class="o">=</span><span class="s1">&#39;E&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A table is meant to be :</span>
 <span class="sd">    &lt;str&gt; &lt;str&gt; &lt;str&gt; ...</span>
 <span class="sd">    &lt;str&gt; &lt;num&gt; &lt;num&gt; ...</span>
@@ -764,7 +840,7 @@
                              <span class="n">meridians</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
                              <span class="n">parallels</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span>
                              <span class="n">extent</span><span class="o">=</span><span class="s1">&#39;focus&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute meridians and parallels.</span>
 
 <span class="sd">    *meridians* and *parallels* enable to fine-tune the choice of lines to</span>
@@ -843,7 +919,7 @@
 
 
 <div class="viewcode-block" id="nearlyEqual"><a class="viewcode-back" href="../../library/util.html#epygram.util.nearlyEqual">[docs]</a><span class="k">def</span> <span class="nf">nearlyEqual</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">epsilon</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">epsilon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function to compare floats</span>
 <span class="sd">    http://floating-point-gui.de/errors/comparison/</span>
 <span class="sd">    Float.MIN_NORMAL was replaced by sys.float_info.min</span>
@@ -868,7 +944,7 @@
 
 
 <div class="viewcode-block" id="restrain_to_index_i_of_dim_d"><a class="viewcode-back" href="../../library/util.html#epygram.util.restrain_to_index_i_of_dim_d">[docs]</a><span class="k">def</span> <span class="nf">restrain_to_index_i_of_dim_d</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Of an array a[d1, d2, d3, ... dn], returns the array restricted to</span>
 <span class="sd">    index **i** of the dimension **d**.</span>
 
@@ -940,7 +1016,7 @@
 
 
 <div class="viewcode-block" id="datetimes2fieldvaliditylist"><a class="viewcode-back" href="../../library/util.html#epygram.util.datetimes2fieldvaliditylist">[docs]</a><span class="k">def</span> <span class="nf">datetimes2fieldvaliditylist</span><span class="p">(</span><span class="n">datetimes</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a FieldValidityList from a list of datetime.datetime instances</span>
 <span class="sd">    (or a single datetime.datetime).</span>
 
@@ -949,7 +1025,7 @@
 <span class="sd">                  - a single datetime.datetime</span>
 <span class="sd">                  - a list of the same length as datetimes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldValidityList</span>
+    <span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldValidityList</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">datetimes</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
         <span class="k">assert</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span> <span class="ow">or</span>
                 <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span>
@@ -975,7 +1051,7 @@
 
 
 <div class="viewcode-block" id="ifNone_emptydict"><a class="viewcode-back" href="../../library/util.html#epygram.util.ifNone_emptydict">[docs]</a><span class="k">def</span> <span class="nf">ifNone_emptydict</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transforms a None into a {}.</span>
 <span class="sd">    To be used as workaround for empty dicts in default values of methods.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -985,7 +1061,7 @@
 
 
 <div class="viewcode-block" id="fmtfid"><a class="viewcode-back" href="../../library/util.html#epygram.util.fmtfid">[docs]</a><span class="k">def</span> <span class="nf">fmtfid</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given a resource format name **fmt** and a (full) **fid**, returns the key</span>
 <span class="sd">    corresponding the actual format of the field in resource.</span>
 <span class="sd">    (Useful for distinguishing GRIB1/2)</span>
@@ -1001,7 +1077,7 @@
 
 
 <span class="k">def</span> <span class="nf">moveaxis</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calls numpy.moveaxis(), or if numpy version is too old, emulates for simple</span>
 <span class="sd">    cases.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1020,7 +1096,7 @@
 
 <span class="nd">@nicedeco</span>
 <span class="k">def</span> <span class="nf">call_before</span><span class="p">(</span><span class="n">mtd</span><span class="p">,</span> <span class="n">hook_mtd</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Decorator for methods: call method hook_mtd before actually calling method.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator for methods: call method hook_mtd before actually calling method.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">hooked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hook_mtd</span><span class="p">)()</span>
@@ -1030,7 +1106,7 @@
 
 
 <span class="k">def</span> <span class="nf">mpl_interactive_backend</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Return whether the matplotlib backend is an interactive one or not.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return whether the matplotlib backend is an interactive one or not.&quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">matplotlib</span>
     <span class="n">noninteractive_backends</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;agg&#39;</span><span class="p">,</span> <span class="s1">&#39;cairo&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;pgf&#39;</span><span class="p">,</span> <span class="s1">&#39;ps&#39;</span><span class="p">,</span> <span class="s1">&#39;svg&#39;</span><span class="p">,</span> <span class="s1">&#39;template&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">get_backend</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">noninteractive_backends</span><span class="p">:</span>
@@ -1039,7 +1115,22 @@
         <span class="k">return</span> <span class="kc">True</span>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1053,14 +1144,15 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.util</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

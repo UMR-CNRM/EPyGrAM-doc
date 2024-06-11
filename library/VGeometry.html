@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.geometries.VGeometry — Vertical Geometry class &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.geometries.VGeometry — Vertical Geometry class &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="epygram.geometries.V2DGeometry — Vertical 2-D Geometry class" href="V2DGeometry.html" />
-    <link rel="prev" title="epygram.geometries.H1DGeometry — Horizontal 1-D Geometry class" href="H1DGeometry.html" /> 
+    <link rel="next" title="epygram.geometries.SpectralGeometry — Spectral Geometry class" href="SpectralGeometry.html" />
+    <link rel="prev" title="epygram.geometries.RotLLGeometry — RotLL Geometry class" href="RotLLGeometry.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,13 +29,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="V2DGeometry.html" title="epygram.geometries.V2DGeometry — Vertical 2-D Geometry class"
+          <a href="SpectralGeometry.html" title="epygram.geometries.SpectralGeometry — Spectral Geometry class"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="H1DGeometry.html" title="epygram.geometries.H1DGeometry — Horizontal 1-D Geometry class"
+          <a href="RotLLGeometry.html" title="epygram.geometries.RotLLGeometry — RotLL Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a></li> 
       </ul>
@@ -52,8 +52,8 @@
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">VGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">VGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typeoffirstfixedsurface</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typeofsecondfixedsurface</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toplevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bottomlevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a></p>
 <p>Handles the vertical geometry for fields.</p>
 <p>Here, the grid defines the vertical position of each level
 between a bottom and a top positions.</p>
@@ -75,74 +75,24 @@ lengthy and other dimensions to represent the horizotal.</p></li>
 </ul>
 </div></blockquote>
 <p>It is not allowed to have a level varying in time and constant on the geographic domain.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>info: Not documented</p></li>
-<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>structure</strong> (<em>str</em>) – must be ‘V’</p></li>
+<li><p><strong>typeoffirstfixedsurface</strong> (<em>int</em>) – Type of horizontal level, as of GRIB2 norm
+(inspired from GRIB_API).</p></li>
+<li><p><strong>levels</strong> (<em>list</em>) – Effective levels on which data is available.</p></li>
+<li><p><strong>grid</strong> (<em>dict</em>) – Handles description of the vertical grid.</p></li>
+<li><p><strong>position_on_grid</strong> (<em>str</em>) – Position of points w/r to the vertical grid.
+(among [‘mass’, ‘flux’, ‘__unknown__’])</p></li>
 </ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the vertical grid.</p>
-<ul>
-<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</p></li>
-</ul>
-</li>
-<li><p><strong>levels</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - Effective levels on which data is available.</p></li>
-<li><p><strong>position_on_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the vertical grid.</p>
-<ul>
-<li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘__unknown__’, ‘flux’, ‘mass’])</p></li>
-</ul>
-</li>
-<li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.</p>
-<ul>
-<li><p>Values: set([‘V’])</p></li>
-</ul>
-</li>
-<li><p><strong>typeoffirstfixedsurface</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - Type of horizontal level, as of GRIB2 norm                       (inspired from GRIB_API).</p></li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.grid">
-<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles description of the vertical grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.levels">
-<span class="sig-name descname"><span class="pre">levels</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.levels" title="Permalink to this definition">¶</a></dt>
-<dd><p>Effective levels on which data is available (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.position_on_grid">
-<span class="sig-name descname"><span class="pre">position_on_grid</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.position_on_grid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Position of points w/r to the vertical grid (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.structure">
-<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.structure" title="Permalink to this definition">¶</a></dt>
-<dd><p>(see the documentation above for more details).</p>
-</dd></dl>
-
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.to_vgrid">
 <span class="sig-name descname"><span class="pre">to_vgrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#VGeometry.to_vgrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.to_vgrid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convert the VGeometry object to a <code class="xref py py-mod docutils literal notranslate"><span class="pre">vgrid</span></code> one.</p>
 <p>Other kwargs passed to HybridPressureVGrid() constructor.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.VGeometry.VGeometry.typeoffirstfixedsurface">
-<span class="sig-name descname"><span class="pre">typeoffirstfixedsurface</span></span><a class="headerlink" href="#epygram.geometries.VGeometry.VGeometry.typeoffirstfixedsurface" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type of horizontal level, as of GRIB2 norm                       (inspired from GRIB_API) (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -275,7 +225,7 @@ to compute half-levels from full-levels, or inverse: ‘geometric’ or
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field">
 <span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridP_coord_and_surfpressure_to_3D_pressure_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridP_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridposition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP_coord_and_surfpressure_to_3D_pressure_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>From a hybridP Vgeometry and a surface pressure (in Pa) H2D field,
+<dd><p>From a hybridP VGeometry and a surface pressure (in Pa) H2D field,
 compute a 3D field containing the pressure (in hPa) at each hybridP level
 for each gridpoint.</p>
 <dl class="field-list simple">
@@ -300,7 +250,7 @@ default the data position in the origin geometry is taken.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field">
 <span class="sig-prename descclassname"><span class="pre">epygram.geometries.VGeometry.</span></span><span class="sig-name descname"><span class="pre">hybridP_coord_to_3D_altitude_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hybridP_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Psurf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_mean</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t3D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q3D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ql3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qi3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qr3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qs3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qg3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Pdep3D</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi_surf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/VGeometry.html#hybridP_coord_to_3D_altitude_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field" title="Permalink to this definition">¶</a></dt>
-<dd><p>From a hybridP Vgeometry, a surface pressure (in Pa) H2D field,
+<dd><p>From a hybridP VGeometry, a surface pressure (in Pa) H2D field,
 and temperature and specific humidity 3D fields,
 compute a 3D field containing the altitude (in m) at each hybridP level
 for each gridpoint.</p>
@@ -350,11 +300,11 @@ to compute half-levels from full-levels, or inverse: ‘geometric’ or
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="H1DGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H1DGeometry</span></code> — Horizontal 1-D Geometry class</a></p>
+  <p class="topless"><a href="RotLLGeometry.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RotLLGeometry</span></code> — RotLL Geometry class</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="V2DGeometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.V2DGeometry</span></code> — Vertical 2-D Geometry class</a></p>
+  <p class="topless"><a href="SpectralGeometry.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -386,19 +336,19 @@ to compute half-levels from full-levels, or inverse: ‘geometric’ or
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="V2DGeometry.html" title="epygram.geometries.V2DGeometry — Vertical 2-D Geometry class"
+          <a href="SpectralGeometry.html" title="epygram.geometries.SpectralGeometry — Spectral Geometry class"
              >next</a> |</li>
         <li class="right" >
-          <a href="H1DGeometry.html" title="epygram.geometries.H1DGeometry — Horizontal 1-D Geometry class"
+          <a href="RotLLGeometry.html" title="epygram.geometries.RotLLGeometry — RotLL Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

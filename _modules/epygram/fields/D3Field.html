@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.fields.D3Field &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.fields.D3Field &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.D3Field</a></li> 
@@ -65,12 +65,12 @@
                           <span class="n">as_numpy_array</span><span class="p">,</span>
                           <span class="n">moveaxis</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">Field</span><span class="p">,</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">FieldValidityList</span><span class="p">,</span> <span class="n">Resource</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">D3Geometry</span><span class="p">,</span> <span class="n">SpectralGeometry</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.D3Geometry</span> <span class="kn">import</span> <span class="n">D3ProjectedGeometry</span><span class="p">,</span> <span class="n">D3RectangularGridGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">SpectralGeometry</span><span class="p">,</span> <span class="n">VGeometry</span><span class="p">,</span> <span class="n">ProjectedGeometry</span><span class="p">,</span> 
+                                <span class="n">RectangularGridGeometry</span><span class="p">,</span> <span class="n">RegLLGeometry</span><span class="p">,</span> <span class="n">UnstructuredGeometry</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="_D3CommonField"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField">[docs]</a><span class="k">class</span> <span class="nc">_D3CommonField</span><span class="p">(</span><span class="n">Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    3-Dimensions common field class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -86,14 +86,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spectral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if the field is spectral.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the field is spectral.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="o">!=</span> <span class="s1">&#39;__unknown__&#39;</span>
 
 <span class="c1">###########################</span>
 <span class="c1"># ABOUT VERTICAL GEOMETRY #</span>
 <span class="c1">###########################</span>
 <div class="viewcode-block" id="_D3CommonField.use_field_as_vcoord"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.use_field_as_vcoord">[docs]</a>    <span class="k">def</span> <span class="nf">use_field_as_vcoord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">force_kind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">validity_check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Use values from the field as vertical coordinates.</span>
 <span class="sd">        One example of use: field1 is a temperature field</span>
 <span class="sd">        extracted from a resource on hybrid levels whereas</span>
@@ -125,7 +125,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">as_vcoordinate</span><span class="p">(</span><span class="n">force_kind</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.as_vcoordinate"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.as_vcoordinate">[docs]</a>    <span class="k">def</span> <span class="nf">as_vcoordinate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">force_kind</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a VGeometry build from the values of field.</span>
 <span class="sd">        Field must have a &#39;generic&#39; fid allowing to</span>
 <span class="sd">        recognize the vertical coordinate type (except if</span>
@@ -170,12 +170,11 @@
                 <span class="c1"># if z dimension exist, z and t dimensions must be exchanged</span>
                 <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="n">vcoord</span><span class="p">,</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="n">vcoord</span><span class="p">,</span>
                          <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                          <span class="s1">&#39;levels&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels</span><span class="p">)</span>
                          <span class="p">}</span>
-        <span class="k">return</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span></div>
 
 <span class="c1">##############</span>
 <span class="c1"># ABOUT DATA #</span>
@@ -189,7 +188,7 @@
                     <span class="n">neighborinfo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">one</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the value of the field on point of coordinates</span>
 <span class="sd">        (*lon, lat, level*).</span>
 <span class="sd">        *lon* and *lat* may be list/numpy.array.</span>
@@ -265,7 +264,7 @@
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;each of lon, lat, k/level and validity must be scalar or have the same length as the others&quot;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">interpolation</span> <span class="o">==</span> <span class="s1">&#39;linear&#39;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">D3RectangularGridGeometry</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">RectangularGridGeometry</span><span class="p">):</span>
                 <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;bilinear&#39;</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;linear_spline&#39;</span>
@@ -327,7 +326,7 @@
 
             <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;bilinear&#39;</span><span class="p">:</span>
                 <span class="k">def</span> <span class="nf">simple_inter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-                    <span class="sd">&quot;&quot;&quot;Simple linear interpolant&quot;&quot;&quot;</span>
+<span class="w">                    </span><span class="sd">&quot;&quot;&quot;Simple linear interpolant&quot;&quot;&quot;</span>
                     <span class="k">return</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="n">q2</span>
 
                 <span class="k">if</span> <span class="s1">&#39;gauss&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
@@ -369,7 +368,7 @@
 
 
 <div class="viewcode-block" id="_D3CommonField.as_lists"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.as_lists">[docs]</a>    <span class="k">def</span> <span class="nf">as_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Export values as a dict of lists (in fact numpy arrays).</span>
 
 <span class="sd">        :param order: whether to flatten arrays in &#39;C&#39; (row-major) or</span>
@@ -400,7 +399,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.as_dicts"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.as_dicts">[docs]</a>    <span class="k">def</span> <span class="nf">as_dicts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Export values as a list of dicts.</span>
 
 <span class="sd">        :param subzone: defines the LAM subzone to be included, in LAM case,</span>
@@ -430,7 +429,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.as_points"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.as_points">[docs]</a>    <span class="k">def</span> <span class="nf">as_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Export values as a fieldset of points.</span>
 
 <span class="sd">        :param subzone: defines the LAM subzone to be included, in LAM case,</span>
@@ -440,29 +439,26 @@
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;as_points method needs a grid-point field, not a spectral one.&quot;</span><span class="p">)</span>
 
         <span class="n">field_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span>
-        <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
-        <span class="n">vcoord_builer</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
 
         <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
         <span class="n">data4d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
         <span class="n">levels4d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_levels</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">),</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">FieldSet</span><span class="p">()</span>
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">footprint_as_dict</span><span class="p">())</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data4d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="n">validity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="n">t</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data4d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
                 <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data4d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
                     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data4d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
-                        <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">levels4d</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]</span>
-                        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">vcoord_builer</span><span class="p">(</span><span class="o">**</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kwargs_vcoord</span><span class="p">))</span>
-                        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geom_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
-                                                <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
-                                                <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
-                                                <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:[</span><span class="n">lons</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]],</span>
-                                                      <span class="s1">&#39;latitudes&#39;</span><span class="p">:[</span><span class="n">lats</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]},</span>
-                                                <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
-                                                <span class="p">)</span>
+                        <span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="n">levels4d</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]</span>
+                        <span class="n">geometry</span> <span class="o">=</span> <span class="n">UnstructuredGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
+                                                        <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+                                                        <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                                        <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:[</span><span class="n">lons</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]],</span>
+                                                              <span class="s1">&#39;latitudes&#39;</span><span class="p">:[</span><span class="n">lats</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]]},</span>
+                                                        <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+                                                        <span class="p">)</span>
                         <span class="n">pointfield</span> <span class="o">=</span> <span class="n">field_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
                                                    <span class="n">fid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="p">)),</span>
                                                    <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
@@ -472,7 +468,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.as_profiles"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.as_profiles">[docs]</a>    <span class="k">def</span> <span class="nf">as_profiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Export values as a fieldset of profiles.</span>
 
 <span class="sd">        :param subzone: defines the LAM subzone to be included, in LAM case,</span>
@@ -482,31 +478,27 @@
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;as_profiles method needs a grid-point field, not a spectral one.&quot;</span><span class="p">)</span>
 
         <span class="n">field_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span>
-        <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
-        <span class="n">vcoord_builer</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
 
         <span class="n">lons4d</span><span class="p">,</span> <span class="n">lats4d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span> <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">data4d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
         <span class="n">levels4d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_levels</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">),</span> <span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">FieldSet</span><span class="p">()</span>
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">footprint_as_dict</span><span class="p">())</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data4d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]):</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data4d</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">3</span><span class="p">]):</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">levels4d</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">))]):</span>
-                    <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+                    <span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-                <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">vcoord_builer</span><span class="p">(</span><span class="o">**</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">kwargs_vcoord</span><span class="p">))</span>
-                <span class="n">geometry</span> <span class="o">=</span> <span class="n">geom_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V1D&#39;</span><span class="p">,</span>
-                                        <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
-                                        <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
-                                        <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:[</span><span class="n">lons4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()],</span>
-                                              <span class="s1">&#39;latitudes&#39;</span><span class="p">:[</span><span class="n">lats4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()],</span>
-                                              <span class="p">},</span>
-                                        <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
-                                        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;unstructured&#39;</span>
-                                        <span class="p">)</span>
+                    <span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="n">geometry</span> <span class="o">=</span> <span class="n">UnstructuredGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
+                                                <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+                                                <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                                <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:[</span><span class="n">lons4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()],</span>
+                                                      <span class="s1">&#39;latitudes&#39;</span><span class="p">:[</span><span class="n">lats4d</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()],</span>
+                                                      <span class="p">},</span>
+                                                <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                                                <span class="p">)</span>
                 <span class="n">profilefield</span> <span class="o">=</span> <span class="n">field_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V1D&#39;</span><span class="p">,</span>
                                              <span class="n">fid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="p">)),</span>
                                              <span class="n">geometry</span><span class="o">=</span><span class="n">geometry</span><span class="p">,</span>
@@ -516,7 +508,7 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.extract_physicallevels"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.extract_physicallevels">[docs]</a>    <span class="k">def</span> <span class="nf">extract_physicallevels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a new field excluding levels with no physical meaning.</span>
 
 <span class="sd">        :param getdata: if False returns a field without data</span>
@@ -555,7 +547,7 @@
                        <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">exclude_extralevels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a vertical profile from the field, given</span>
 <span class="sd">        the geographic location (*lon*/*lat*) of the profile.</span>
 
@@ -592,7 +584,7 @@
                        <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span>
                        <span class="n">exclude_extralevels</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a vertical section from the field, given</span>
 <span class="sd">        the geographic (lon/lat) coordinates of its ends.</span>
 <span class="sd">        The section is returned as a V2DField.</span>
@@ -630,7 +622,7 @@
                           <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
                           <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extracts a subdomain from a field, given a new geometry.</span>
 
 <span class="sd">        :param geometry: defines the geometry on which extract data</span>
@@ -657,8 +649,7 @@
 
         <span class="c1"># build vertical geometry</span>
         <span class="c1"># k_index: ordered list of the level indexes of self used to build the new field</span>
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
                          <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="o">==</span> <span class="mi">119</span><span class="p">:</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
@@ -686,38 +677,13 @@
                     <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;extract_subdomain cannot do vertical interpolations.&quot;</span><span class="p">)</span>
                 <span class="n">k_index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">level</span><span class="p">))</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span>
-        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
         <span class="c1"># build geometry</span>
-        <span class="n">structure</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">structure</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="c1"># We suppress the vertical dimension</span>
-            <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;3D&#39;</span><span class="p">:</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;V1D&#39;</span><span class="p">:</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;V2D&#39;</span><span class="p">:</span><span class="s1">&#39;H1D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;H1D&#39;</span><span class="p">:</span><span class="s1">&#39;H1D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;H2D&#39;</span><span class="p">:</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;Point&#39;</span><span class="p">:</span><span class="s1">&#39;Point&#39;</span><span class="p">}[</span><span class="n">structure</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c1"># We add the vertical dimension</span>
-            <span class="n">structure</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;H2D&#39;</span><span class="p">:</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;Point&#39;</span><span class="p">:</span><span class="s1">&#39;V1D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;H1D&#39;</span><span class="p">:</span><span class="s1">&#39;V2D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;3D&#39;</span><span class="p">:</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;V2D&#39;</span><span class="p">:</span><span class="s1">&#39;V2D&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;V1D&#39;</span><span class="p">:</span><span class="s1">&#39;V1D&#39;</span><span class="p">}[</span><span class="n">structure</span><span class="p">]</span>
-        <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="n">structure</span><span class="p">,</span>
-                       <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                       <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">),</span>  <span class="c1"># do not remove dict(), it is usefull for unstructured grid</span>
-                       <span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">),</span>
-                       <span class="s1">&#39;vcoordinate&#39;</span><span class="p">:</span> <span class="n">vcoordinate</span><span class="p">,</span>
-                       <span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">:</span> <span class="s1">&#39;center&#39;</span><span class="p">}</span>
-        <span class="k">if</span> <span class="n">geometry</span><span class="o">.</span><span class="n">projected_geometry</span> <span class="ow">or</span> <span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;academic&#39;</span><span class="p">:</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;projection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">:</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span>
-        <span class="k">if</span> <span class="n">geometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;__unknown__&#39;</span><span class="p">,</span> <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">]]:</span>
+        <span class="n">newgeometry</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+        <span class="n">newgeometry</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">vcoordinate</span>
+        <span class="n">newgeometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
+        <span class="k">if</span> <span class="n">geometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;__unknown__&#39;</span><span class="p">,</span> <span class="n">newgeometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;extract_subdomain cannot deal with position_on_horizontal_grid other than &#39;center&#39;&quot;</span><span class="p">)</span>
-        <span class="n">newgeometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">level</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">newgeometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">]):</span>
             <span class="c1"># level value is not constant on the domain, we must extract a subdomain.</span>
@@ -846,7 +812,7 @@
 
 
 <div class="viewcode-block" id="_D3CommonField.extract_zoom"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.extract_zoom">[docs]</a>    <span class="k">def</span> <span class="nf">extract_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">,</span> <span class="n">extra_10th</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract an unstructured field with the gridpoints contained in *zoom*.</span>
 
 <span class="sd">        :param zoom: a dict(lonmin=, lonmax=, latmin=, latmax=).</span>
@@ -856,8 +822,7 @@
         <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">,</span> \
                <span class="s2">&quot;spectral field: convert to gridpoint beforehand&quot;</span>
 
-        <span class="n">kwargs_zoomgeom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
-                           <span class="s1">&#39;vcoordinate&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+        <span class="n">kwargs_zoomgeom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
                            <span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span><span class="p">,</span>
                            <span class="s1">&#39;geoid&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;regular_lonlat&#39;</span><span class="p">:</span>
@@ -894,7 +859,8 @@
             <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;dimensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">imax</span> <span class="o">-</span> <span class="n">imin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
                                              <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">jmax</span> <span class="o">-</span> <span class="n">jmin</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
             <span class="n">lonmin</span><span class="p">,</span> <span class="n">latmin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">imin</span><span class="p">,</span> <span class="n">jmin</span><span class="p">)</span>
-            <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">RegLLGeometry</span>
+            <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;regular_lonlat&#39;</span>
             <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_position&#39;</span><span class="p">:(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
                                        <span class="s1">&#39;input_lon&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                                        <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">latmin</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
@@ -904,8 +870,8 @@
             <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
             <span class="n">lons</span> <span class="o">=</span> <span class="n">lons</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
             <span class="n">lats</span> <span class="o">=</span> <span class="n">lats</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-            <span class="n">zoomlons</span> <span class="o">=</span> <span class="n">FPList</span><span class="p">([])</span>
-            <span class="n">zoomlats</span> <span class="o">=</span> <span class="n">FPList</span><span class="p">([])</span>
+            <span class="n">zoomlons</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">zoomlats</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">flat_indexes</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lons</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">zoom</span><span class="p">[</span><span class="s1">&#39;lonmin&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lons</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">zoom</span><span class="p">[</span><span class="s1">&#39;lonmax&#39;</span><span class="p">]</span> <span class="ow">and</span> \
@@ -916,10 +882,11 @@
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">zoomlons</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;zoom not in domain.&quot;</span>
             <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;dimensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">zoomlons</span><span class="p">),</span>
                                              <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">UnstructuredGeometry</span>
             <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;unstructured&#39;</span>
             <span class="n">kwargs_zoomgeom</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:</span><span class="n">zoomlons</span><span class="p">,</span>
                                        <span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">zoomlats</span><span class="p">}</span>
-        <span class="n">zoom_geom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_zoomgeom</span><span class="p">)</span>
+        <span class="n">zoom_geom</span> <span class="o">=</span> <span class="n">geometryclass</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_zoomgeom</span><span class="p">)</span>
         <span class="c1"># Il serait mieux d&#39;utiliser</span>
         <span class="c1"># zoom_geom = self.geometry.make_zoom_geometry(zoom, extra_10th)</span>
         <span class="c1"># mais il faudrait s&#39;assurer d&#39;appliquer le global_shift_center de</span>
@@ -1005,7 +972,7 @@
                          <span class="n">first_j</span><span class="p">,</span> <span class="n">last_j</span><span class="p">,</span>
                          <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                          <span class="n">deepcopy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract a rectangular sub-array from the field, given the i,j index limits</span>
 <span class="sd">        of the sub-array, and return the extracted field.</span>
 <span class="sd">        If deepcopy is False, current field and returned field will share</span>
@@ -1057,7 +1024,7 @@
                           <span class="n">sample_x</span><span class="p">,</span> <span class="n">sample_y</span><span class="p">,</span> <span class="n">sample_z</span><span class="p">,</span>
                           <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                           <span class="n">deepcopy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extract a subsample from field by decreasing resolution.</span>
 <span class="sd">        </span>
 <span class="sd">        :param sample_x: take one over &lt;sample_x&gt; points in the x direction</span>
@@ -1118,7 +1085,7 @@
         <span class="k">return</span> <span class="n">newfield</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.shave"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.shave">[docs]</a>    <span class="k">def</span> <span class="nf">shave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">minval</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shave data: cut values greater (resp. lower) than **maxval** to</span>
 <span class="sd">        **maxval** (resp. **minval**).</span>
 
@@ -1153,7 +1120,7 @@
                  <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">sigma</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">with_uncert</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resample data (interpolate) on a **target geometry**, using pyresample.</span>
 
 <span class="sd">        :param weighting: among [&#39;nearest&#39;,</span>
@@ -1201,7 +1168,7 @@
                                             <span class="n">get_sample_from_neighbour_info</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;pyresample is not installed.</span>
-<span class="s2">                                 You can install it locally using:</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">                                 You can install it locally using:</span><span class="se">\n</span>
 <span class="s2">                                 &#39;pip install --user pyresample&#39;&quot;&quot;&quot;</span><span class="p">)</span>
         <span class="c1"># PART 0: computation of parameters for PARTS 1 &amp; 2</span>
         <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="n">target_geometry</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">,</span> <span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
@@ -1274,7 +1241,7 @@
                                      <span class="n">source_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>  <span class="c1"># z</span>
                                      <span class="n">target_geo</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># y</span>
                                      <span class="n">target_geo</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>  <span class="c1"># x</span>
-        <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">weighting</span><span class="p">):</span>  <span class="c1"># custom: weighting function</span>
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">weighting</span><span class="p">):</span>  <span class="c1"># custom: weighting function</span>
             <span class="n">weight_funcs</span> <span class="o">=</span> <span class="n">weighting</span>
             <span class="n">weighting</span> <span class="o">=</span> <span class="s1">&#39;custom&#39;</span>
         <span class="k">elif</span> <span class="n">weighting</span> <span class="o">==</span> <span class="s1">&#39;nearest&#39;</span><span class="p">:</span>
@@ -1331,7 +1298,7 @@
             <span class="k">return</span> <span class="n">newfield</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.resample_on_regularll"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.resample_on_regularll">[docs]</a>    <span class="k">def</span> <span class="nf">resample_on_regularll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">borders</span><span class="p">,</span> <span class="n">resolution_in_degrees</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resample data (interpolate) on a target geometry defined as a</span>
 <span class="sd">        regular lonlat grid of given resolution.</span>
 <span class="sd">        Wrapper to resample() method, building target geometry.</span>
@@ -1354,17 +1321,16 @@
                 <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">borders</span><span class="p">[</span><span class="s1">&#39;latmin&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                 <span class="s1">&#39;X_resolution&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">resolution_in_degrees</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                 <span class="s1">&#39;Y_resolution&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">resolution_in_degrees</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)}</span>
-        <span class="n">target_geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
-                                       <span class="n">name</span><span class="o">=</span><span class="s1">&#39;regular_lonlat&#39;</span><span class="p">,</span>
-                                       <span class="n">vcoordinate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
-                                       <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">Y</span><span class="p">},</span>
-                                       <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
-                                       <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
-                                       <span class="n">geoid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+        <span class="n">target_geometry</span> <span class="o">=</span> <span class="n">RegLLGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;regular_lonlat&#39;</span><span class="p">,</span>
+                                        <span class="n">vcoordinate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(),</span>
+                                        <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">X</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">Y</span><span class="p">},</span>
+                                        <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                                        <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                                        <span class="n">geoid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="n">target_geometry</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.extend"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">another_field_with_time_dimension</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extend the field with regard to time dimension with the field given as</span>
 <span class="sd">        argument.</span>
 
@@ -1379,7 +1345,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.remove_level"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.remove_level">[docs]</a>    <span class="k">def</span> <span class="nf">remove_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Remove one level from the current field</span>
 <span class="sd">        :param k: index of the level to remove</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1387,7 +1353,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.decumulate"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.decumulate">[docs]</a>    <span class="k">def</span> <span class="nf">decumulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Decumulate cumulated fields (for a field with temporal dimension !).</span>
 
 <span class="sd">        :param center: - if False, values at t are mean values between t-1 and t,</span>
@@ -1406,7 +1372,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.time_smooth"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.time_smooth">[docs]</a>    <span class="k">def</span> <span class="nf">time_smooth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Smooth data in time.</span>
 
 <span class="sd">        :param length: time span to average on</span>
@@ -1433,7 +1399,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.time_reduce"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.time_reduce">[docs]</a>    <span class="k">def</span> <span class="nf">time_reduce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reduce_function</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a time reduction of field,</span>
 <span class="sd">        i.e. apply the requested **reduce_function** on the time dimension of</span>
 <span class="sd">        the field. Replace data (and validity) in place.</span>
@@ -1459,7 +1425,7 @@
 <span class="c1">#  including suggestions/developments by users...]</span>
 
 <div class="viewcode-block" id="_D3CommonField.stats"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.stats">[docs]</a>    <span class="k">def</span> <span class="nf">stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes some basic statistics on the field, as a dict containing:</span>
 <span class="sd">        {&#39;min&#39;, &#39;max&#39;, &#39;mean&#39;, &#39;std&#39;, &#39;quadmean&#39;, &#39;nonzero&#39;}.</span>
 <span class="sd">        See each of these methods for details.</span>
@@ -1476,34 +1442,48 @@
                 <span class="s1">&#39;nonzero&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)}</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.min"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.min">[docs]</a>    <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the minimum value of data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the minimum value of data.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.max"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.max">[docs]</a>    <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the maximum value of data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the maximum value of data.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.mean"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.mean">[docs]</a>    <span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the mean value of data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the mean value of data.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.std"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.std">[docs]</a>    <span class="k">def</span> <span class="nf">std</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the standard deviation of data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the standard deviation of data.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.quadmean"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.quadmean">[docs]</a>    <span class="k">def</span> <span class="nf">quadmean</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the quadratic mean of data.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the quadratic mean of data.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">quadmean</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.nonzero"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.nonzero">[docs]</a>    <span class="k">def</span> <span class="nf">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the number of non-zero values (whose absolute</span>
 <span class="sd">        value &gt; config.epsilon).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="_D3CommonField.sgmean"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.sgmean">[docs]</a>    <span class="k">def</span> <span class="nf">sgmean</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an average of the field, weighted by the map factor at each point.&quot;&quot;&quot;</span>
+        <span class="n">map_factor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">map_factor_field</span><span class="p">()</span>  <span class="c1"># Extraction of the map_factor field from geometry object</span>
+        <span class="n">map_factor_data</span> <span class="o">=</span> <span class="n">map_factor</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+        <span class="n">nonmasked_value</span> <span class="o">=</span> <span class="n">map_factor_data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Number of longitude points for each (pseudo)latitude circle</span>
+
+        <span class="n">myfield_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+        <span class="n">myfield_data_norm</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">myfield_data</span><span class="p">,</span> <span class="n">map_factor_data</span><span class="p">)</span>  <span class="c1"># Global map factor normalisation</span>
+        <span class="n">myfield_data_norm_sumlat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">myfield_data_norm</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Sum over longitude for each latitude circle</span>
+        <span class="n">myfield_data_norm_sumlat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">myfield_data_norm_sumlat</span><span class="p">,</span> <span class="n">nonmasked_value</span><span class="p">)</span>  <span class="c1"># Normalisation by the number of longitude points for each latitude circle</span>
+        <span class="n">Nb_lat</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">myfield_data_norm_sumlat</span><span class="p">)</span>  <span class="c1"># Nb of latitude circles</span>
+        <span class="n">myfield_data_sgmean</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">myfield_data_norm_sumlat</span><span class="p">)</span> <span class="o">/</span> <span class="n">Nb_lat</span>  <span class="c1"># Sum over latitude normalised by the number of latitude circles</span>
+        <span class="k">return</span> <span class="n">myfield_data_sgmean</span></div>
+
 <div class="viewcode-block" id="_D3CommonField.dctspectrum"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.dctspectrum">[docs]</a>    <span class="k">def</span> <span class="nf">dctspectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">level_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">validity_index</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the DCT spectrum of the field, as a</span>
 <span class="sd">        :class:`epygram.spectra.Spectrum` instance.</span>
 
@@ -1558,7 +1538,7 @@
                   <span class="n">minmax_in_title</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="o">**</span><span class="n">hist_kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build an histogram of the field data.</span>
 
 <span class="sd">        :param subzone: LAM zone on which to compute the DCT,</span>
@@ -1700,7 +1680,7 @@
                      <span class="n">ylabel</span><span class="o">=</span><span class="s1">&#39;__auto__&#39;</span><span class="p">,</span>
                      <span class="n">bisect</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                      <span class="o">**</span><span class="n">scatter_kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a scatter plot of self data against other data.</span>
 
 <span class="sd">        :param fig: a preexisting figure on which to plot</span>
@@ -1745,7 +1725,7 @@
         <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.global_shift_center"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.global_shift_center">[docs]</a>    <span class="k">def</span> <span class="nf">global_shift_center</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">longitude_shift</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shifts the center of the geometry (and the data accordingly) by</span>
 <span class="sd">        *longitude_shift* (in degrees).</span>
 
@@ -1769,7 +1749,7 @@
              <span class="n">cumulativeduration</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
              <span class="n">arpifs_var_names</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
              <span class="n">fid</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes in file a summary of the field.</span>
 
 <span class="sd">        :param out: the output open file-like object.</span>
@@ -1797,7 +1777,7 @@
                 <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;fid &quot;</span> <span class="o">+</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">key</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="_D3CommonField.dump_to_nc"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field._D3CommonField.dump_to_nc">[docs]</a>    <span class="k">def</span> <span class="nf">dump_to_nc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">variablename</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fidkey</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dumps the field in a netCDF file.</span>
 
 <span class="sd">        :param filename: filename to dump in</span>
@@ -1828,7 +1808,7 @@
 <span class="c1">#############</span>
 
     <span class="k">def</span> <span class="nf">_check_operands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internal method to check compatibility of terms in operations on fields.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
@@ -1847,7 +1827,7 @@
             <span class="nb">super</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_check_operands</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Definition of addition, &#39;other&#39; being:</span>
 <span class="sd">        - a scalar (integer/float)</span>
 <span class="sd">        - another Field of the same subclass.</span>
@@ -1884,7 +1864,7 @@
         <span class="k">return</span> <span class="n">newfield</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Definition of multiplication, &#39;other&#39; being:</span>
 <span class="sd">        - a scalar (integer/float)</span>
 <span class="sd">        - another Field of the same subclass.</span>
@@ -1899,7 +1879,7 @@
         <span class="k">return</span> <span class="n">newfield</span>
 
     <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Definition of substraction, &#39;other&#39; being:</span>
 <span class="sd">        - a scalar (integer/float)</span>
 <span class="sd">        - another Field of the same subclass.</span>
@@ -1945,7 +1925,7 @@
         <span class="k">return</span> <span class="n">newfield</span>
 
     <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Definition of division, &#39;other&#39; being:</span>
 <span class="sd">        - a scalar (integer/float)</span>
 <span class="sd">        - another Field of the same subclass.</span>
@@ -1963,7 +1943,7 @@
     <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
 
     <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Definition of substraction, &#39;other&#39; being:</span>
 <span class="sd">        - a scalar (integer/float)</span>
 <span class="sd">        - another Field of the same subclass.</span>
@@ -1978,7 +1958,7 @@
         <span class="k">return</span> <span class="n">newfield</span>
 
     <span class="k">def</span> <span class="nf">__rdiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Definition of division, &#39;other&#39; being:</span>
 <span class="sd">        - a scalar (integer/float)</span>
 <span class="sd">        - another Field of the same subclass.</span>
@@ -1994,7 +1974,7 @@
 
 
 <div class="viewcode-block" id="D3Field"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field">[docs]</a><span class="k">class</span> <span class="nc">D3Field</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    3-Dimensions field class.</span>
 <span class="sd">    A field is defined by its identifier &#39;fid&#39;,</span>
 <span class="sd">    its data, its geometry (gridpoint and optionally spectral),</span>
@@ -2011,7 +1991,7 @@
             <span class="n">structure</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;3D&#39;</span><span class="p">])),</span>
             <span class="n">geometry</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="n">D3Geometry</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">Geometry</span><span class="p">,</span>
                 <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Geometry defining the position of the field gridpoints.&quot;</span><span class="p">),</span>
             <span class="n">validity</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="nb">type</span><span class="o">=</span><span class="n">FieldValidityList</span><span class="p">,</span>
@@ -2036,7 +2016,7 @@
 <span class="c1">##############</span>
 
 <div class="viewcode-block" id="D3Field.sp2gp"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.sp2gp">[docs]</a>    <span class="k">def</span> <span class="nf">sp2gp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transforms the spectral field into gridpoint, according to its spectral</span>
 <span class="sd">        geometry. Replaces data in place.</span>
 
@@ -2062,7 +2042,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">gpdata</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="D3Field.gp2sp"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.gp2sp">[docs]</a>    <span class="k">def</span> <span class="nf">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transforms the gridpoint field into spectral space, according to the</span>
 <span class="sd">        *spectral_geometry* mandatorily passed as argument. Replaces data in</span>
 <span class="sd">        place.</span>
@@ -2091,7 +2071,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">spdata</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_gpdims_for_spectral_transforms</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build a dictionary containing gridpoint dimensions for the call to</span>
 <span class="sd">        spectral transforms.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2111,7 +2091,7 @@
         <span class="k">return</span> <span class="n">gpdims</span>
 
 <div class="viewcode-block" id="D3Field.compute_xy_spderivatives"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.compute_xy_spderivatives">[docs]</a>    <span class="k">def</span> <span class="nf">compute_xy_spderivatives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the derivatives of field in spectral space, then come back in</span>
 <span class="sd">        gridpoint space.</span>
 <span class="sd">        Returns the two derivative fields.</span>
@@ -2152,7 +2132,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">field_dX</span><span class="p">,</span> <span class="n">field_dY</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="D3Field.getdata"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.getdata">[docs]</a>    <span class="k">def</span> <span class="nf">getdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d4</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the field data, with 3D shape if the field is not spectral,</span>
 <span class="sd">        2D if spectral.</span>
 
@@ -2186,7 +2166,7 @@
         <span class="k">return</span> <span class="n">data</span></div>
 
 <div class="viewcode-block" id="D3Field.setdata"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.setdata">[docs]</a>    <span class="k">def</span> <span class="nf">setdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets field data, checking *data* to have the good shape according to</span>
 <span class="sd">        geometry.</span>
 
@@ -2229,7 +2209,7 @@
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&#39;data&#39; shape has to be compatible with field shape: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">shp</span><span class="p">))</span>
                 <span class="k">raise</span>
-            <span class="sd">&quot;&quot;&quot;# find indexes corresponding to dimensions</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;# find indexes corresponding to dimensions</span>
 <span class="sd">            dimensions = 0</span>
 <span class="sd">            indexes = {&#39;t&#39;:0, &#39;z&#39;:1, &#39;y&#39;:2, &#39;x&#39;:3}</span>
 <span class="sd">            # t, z</span>
@@ -2304,7 +2284,7 @@
     <span class="n">data</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getdata</span><span class="p">,</span> <span class="n">setdata</span><span class="p">,</span> <span class="n">Field</span><span class="o">.</span><span class="n">deldata</span><span class="p">,</span> <span class="s2">&quot;Accessor to the field data.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="D3Field.select_subzone"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.select_subzone">[docs]</a>    <span class="k">def</span> <span class="nf">select_subzone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If a LAMzone defines the field, select only the *subzone* from it.</span>
 
 <span class="sd">        :param subzone: among (&#39;C&#39;, &#39;CI&#39;).</span>
@@ -2318,7 +2298,7 @@
 
 <div class="viewcode-block" id="D3Field.getvalue_ij"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.getvalue_ij">[docs]</a>    <span class="k">def</span> <span class="nf">getvalue_ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">one</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the value of the field on point of indices (*i, j, k, t*).</span>
 <span class="sd">        Take care (*i, j, k, t*) is python-indexing, ranging from 0 to</span>
 <span class="sd">        dimension-1.</span>
@@ -2366,7 +2346,7 @@
         <span class="k">return</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="D3Field.getlevel"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.getlevel">[docs]</a>    <span class="k">def</span> <span class="nf">getlevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a level of the field as a new field.</span>
 
 <span class="sd">        :param level: the requested level expressed in coordinate value (Pa, m...)</span>
@@ -2385,36 +2365,20 @@
             <span class="n">my_k</span> <span class="o">=</span> <span class="n">k</span>
             <span class="n">my_level</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">==</span> <span class="s1">&#39;3D&#39;</span><span class="p">:</span>
-            <span class="n">newstructure</span> <span class="o">=</span> <span class="s1">&#39;H2D&#39;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">==</span> <span class="s1">&#39;V2D&#39;</span><span class="p">:</span>
-            <span class="n">newstructure</span> <span class="o">=</span> <span class="s1">&#39;H1D&#39;</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">==</span> <span class="s1">&#39;V1D&#39;</span><span class="p">:</span>
-            <span class="n">newstructure</span> <span class="o">=</span> <span class="s1">&#39;Point&#39;</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;3D&#39;</span><span class="p">,</span> <span class="s1">&#39;V2D&#39;</span><span class="p">,</span> <span class="s1">&#39;V1D&#39;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;It&#39;s not possible to extract a level from a &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span> <span class="o">+</span> <span class="s2">&quot; field.&quot;</span><span class="p">)</span>
 
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span> <span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                         <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
                          <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">,</span>
                          <span class="s1">&#39;levels&#39;</span><span class="p">:[</span><span class="n">my_level</span><span class="p">]}</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">118</span><span class="p">,</span> <span class="mi">119</span><span class="p">):</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
-        <span class="n">newvcoordinate</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
-        <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="n">newstructure</span><span class="p">,</span>
-                       <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                       <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">),</span>
-                       <span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">),</span>
-                       <span class="s1">&#39;vcoordinate&#39;</span><span class="p">:</span> <span class="n">newvcoordinate</span><span class="p">,</span>
-                       <span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span><span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projected_geometry</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;academic&#39;</span><span class="p">:</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;projection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">:</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span>
-        <span class="n">newgeometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="n">newvcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="n">newgeometry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+        <span class="n">newgeometry</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">newvcoordinate</span>
         <span class="n">generic_fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;generic&#39;</span><span class="p">,</span> <span class="p">{})</span>
         <span class="n">generic_fid</span><span class="p">[</span><span class="s1">&#39;level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">my_level</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">my_level</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="k">else</span> <span class="n">my_k</span>  <span class="c1"># to avoid arrays in fid</span>
-        <span class="n">kwargs_field</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="n">newstructure</span><span class="p">,</span>
+        <span class="n">kwargs_field</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="n">newgeometry</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span>
                         <span class="s1">&#39;validity&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
                         <span class="s1">&#39;processtype&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">processtype</span><span class="p">,</span>
                         <span class="s1">&#39;geometry&#39;</span><span class="p">:</span><span class="n">newgeometry</span><span class="p">,</span>
@@ -2427,7 +2391,7 @@
         <span class="k">return</span> <span class="n">newfield</span></div>
 
 <div class="viewcode-block" id="D3Field.getvalidity"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.getvalidity">[docs]</a>    <span class="k">def</span> <span class="nf">getvalidity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_or_validity</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the field restrained to one of its temporal validity as a new</span>
 <span class="sd">        field.</span>
 
@@ -2453,14 +2417,12 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">newfield</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span><span class="p">)</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="c1"># levels are, at least, dependent on position</span>
             <span class="n">levels4d</span> <span class="o">=</span> <span class="n">newfield</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">get_levels</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">nb_validities</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="p">))</span>
-            <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">newfield</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">footprint_as_dict</span><span class="p">())</span>
-            <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
-            <span class="n">newfield</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+            <span class="n">newfield</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">levels</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">levels4d</span><span class="p">[</span><span class="n">index</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
 
         <span class="k">return</span> <span class="n">newfield</span></div>
 
 <div class="viewcode-block" id="D3Field.center"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.center">[docs]</a>    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs an averaging on data values to center the field on the grid (aka shuman)</span>
 <span class="sd">        and modify geometry.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2468,7 +2430,7 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">posSpl</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>  <span class="c1"># not center</span>
             <span class="n">posY</span><span class="p">,</span> <span class="n">posX</span> <span class="o">=</span> <span class="n">posSpl</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">posY</span> <span class="o">==</span> <span class="s1">&#39;lower&#39;</span> <span class="ow">or</span> <span class="n">posX</span> <span class="o">==</span> <span class="s1">&#39;left&#39;</span><span class="p">):</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">D3ProjectedGeometry</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">ProjectedGeometry</span><span class="p">):</span>
                     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Centering is not available with non-projected geometries&quot;</span><span class="p">)</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">d4</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># This test is useful if field has been retrieved with getdata=False</span>
@@ -2483,7 +2445,7 @@
 
 
 <div class="viewcode-block" id="D3VirtualField"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField">[docs]</a><span class="k">class</span> <span class="nc">D3VirtualField</span><span class="p">(</span><span class="n">_D3CommonField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    3-Dimensions Virtual field class.</span>
 
 <span class="sd">    Data is taken from other fields, either:</span>
@@ -2616,8 +2578,7 @@
                 <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;fields must have different fids&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_fidList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
 
-        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                             <span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
+        <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">typeoffirstfixedsurface</span><span class="p">,</span>
                              <span class="n">position_on_grid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">position_on_grid</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span>
@@ -2625,7 +2586,7 @@
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">levelList</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">kwargs_vcoord</span><span class="p">[</span><span class="s1">&#39;levels&#39;</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fidList</span> <span class="o">=</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">levelList</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fidList</span><span class="p">))))</span>  <span class="c1"># TOBECHECKED</span>
-        <span class="n">newvcoordinate</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="n">newvcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
 
         <span class="n">newstructure</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;3D&#39;</span><span class="p">:</span> <span class="s1">&#39;3D&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;H2D&#39;</span><span class="p">:</span> <span class="s1">&#39;3D&#39;</span><span class="p">,</span>
@@ -2636,18 +2597,8 @@
         <span class="k">assert</span> <span class="n">newstructure</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">,</span> \
                <span class="s2">&quot;Individual fields structure do not match the field strucuture&quot;</span>
 
-        <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="n">newstructure</span><span class="p">,</span>
-                       <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
-                       <span class="s1">&#39;grid&#39;</span><span class="p">:</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">),</span>
-                       <span class="s1">&#39;dimensions&#39;</span><span class="p">:</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">),</span>
-                       <span class="s1">&#39;vcoordinate&#39;</span><span class="p">:</span> <span class="n">newvcoordinate</span><span class="p">,</span>
-                       <span class="s1">&#39;position_on_horizontal_grid&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">position_on_horizontal_grid</span>
-                       <span class="p">}</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projected_geometry</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;academic&#39;</span><span class="p">:</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;projection&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projection</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">:</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_geometry</span><span class="o">.</span><span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">newvcoordinate</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_spgpOpList</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">as_real_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -2686,7 +2637,7 @@
 <span class="c1"># ABOUT DATA #</span>
 <span class="c1">##############</span>
 <div class="viewcode-block" id="D3VirtualField.sp2gp"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.sp2gp">[docs]</a>    <span class="k">def</span> <span class="nf">sp2gp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transforms the spectral field into gridpoint, according to its spectral</span>
 <span class="sd">        geometry. Replaces data in place.</span>
 
@@ -2701,7 +2652,7 @@
                 <span class="n">field</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="D3VirtualField.gp2sp"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.gp2sp">[docs]</a>    <span class="k">def</span> <span class="nf">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transforms the gridpoint field into spectral space, according to the</span>
 <span class="sd">        *spectral_geometry* mandatorily passed as argument. Replaces data in</span>
 <span class="sd">        place.</span>
@@ -2718,7 +2669,7 @@
                 <span class="n">field</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">spectral_geometry</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="D3VirtualField.getdata"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.getdata">[docs]</a>    <span class="k">def</span> <span class="nf">getdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">d4</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the field data, with 3D shape if the field is not spectral,</span>
 <span class="sd">        2D if spectral.</span>
 
@@ -2768,18 +2719,18 @@
         <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="D3VirtualField.setdata"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.setdata">[docs]</a>    <span class="k">def</span> <span class="nf">setdata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;setdata() not implemented on virtual fields.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;setdata() not implemented on virtual fields.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;setdata cannot be implemented on virtual fields&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="D3VirtualField.deldata"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.deldata">[docs]</a>    <span class="k">def</span> <span class="nf">deldata</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;deldata() not implemented on virtual fields.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;deldata() not implemented on virtual fields.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;deldata cannot be implemented on virtual fields&quot;</span><span class="p">)</span></div>
 
     <span class="n">data</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getdata</span><span class="p">)</span>
 
 <div class="viewcode-block" id="D3VirtualField.getvalue_ij"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.getvalue_ij">[docs]</a>    <span class="k">def</span> <span class="nf">getvalue_ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">one</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the value of the field on point of indices (*i, j, k, t*).</span>
 <span class="sd">        Take care (*i, j, k, t*) is python-indexing, ranging from 0 to</span>
 <span class="sd">        dimension-1.</span>
@@ -2842,7 +2793,7 @@
         <span class="k">return</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="D3VirtualField.getlevel"><a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3VirtualField.getlevel">[docs]</a>    <span class="k">def</span> <span class="nf">getlevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a level of the field as a new field.</span>
 
 <span class="sd">        :param level: the requested level expressed in coordinate value (Pa, m...)</span>
@@ -2912,14 +2863,14 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.D3Field</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.geometries.D3Geometry — 3-D Geometry class &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.geometries.D3Geometry — 3-D Geometry class &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="geometries_lib.html" title="epygram.geometries — Geometries"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code> — 3-D Geometry class</a></li> 
@@ -77,13 +77,13 @@ Abstract mother class.</p>
 <li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
 <li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
 <ul>
-<li><p>Values: set([‘rotated_lonlat’, ‘polar_stereographic’, ‘regular_lonlat’, ‘unstructured’, ‘lambert’, ‘rotated_reduced_gauss’, ‘reduced_gauss’, ‘regular_gauss’, ‘mercator’])</p></li>
+<li><p>Values: set([‘mercator’, ‘unstructured’, ‘reduced_gauss’, ‘regular_lonlat’, ‘regular_gauss’, ‘rotated_lonlat’, ‘lambert’, ‘rotated_reduced_gauss’, ‘polar_stereographic’])</p></li>
 </ul>
 </li>
 <li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
 <ul>
 <li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+<li><p>Values: set([‘lower-right’, ‘upper-left’, ‘__unknown__’, ‘upper-right’, ‘center-right’, ‘lower-center’, ‘center-left’, ‘center’, ‘upper-center’, ‘lower-left’])</p></li>
 </ul>
 </li>
 <li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
@@ -115,16 +115,6 @@ Abstract mother class.</p>
 <span class="sig-name descname"><span class="pre">cartoplot_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.cartoplot_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.cartoplot_geometry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Makes a simple plot of the geometry, using cartopy.
 For kwargs please refer to epygram.geometries.domain_making.output.cartoplot_rect_geometry</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.cartopy_CRS_reproject">
-<span class="sig-name descname"><span class="pre">cartopy_CRS_reproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.cartopy_CRS_reproject" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
-</div>
-<p>Reproject lons/lats onto a cartopy CRS projection coordinates.</p>
 </dd></dl>
 
 <dl class="py property">
@@ -266,27 +256,6 @@ field. If None, defaults to the horizontal resolution of the field.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.make_vtkGrid">
-<span class="sig-name descname"><span class="pre">make_vtkGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_vtkGrid" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>Makes an empty grid to use with vtk</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
-<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.make_zoom_geometry">
 <span class="sig-name descname"><span class="pre">make_zoom_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_10th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3Geometry.make_zoom_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.make_zoom_geometry" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an unstructured geometry with the points contained in <em>zoom</em>.</p>
@@ -305,149 +274,6 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.name">
 <span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of geometrical type of representation of points on                       the Globe (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.plot3DBluemarble">
-<span class="sig-name descname"><span class="pre">plot3DBluemarble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plot3DBluemarble" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>This method adds the NOAA’s bluemarble image to the vtk rendering system. The image
-is projected on the vertical coordinate of this geometry.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
-<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</p></li>
-<li><p><strong>interpolation</strong> – interpolation method to use to compute levels at each pixel</p></li>
-<li><p><strong>color_transform</strong> – <dl class="simple">
-<dt>if not None, must be a user-defined function with parameters</dt><dd><p>(rgb, alpha, (lons, lats)) with rgb an array representing
-the rgb values on each of the image points, alpha the alpha
-values on the same points and (lons, lats) a turple of the
-points coordinate. The function must return (rgb, alpha). This
-enables the color modification of the image.
-For example, the following function transforms the color
-into grey levels:</p>
-</dd>
-<dt>def grey(rgb, alpha, ll):</dt><dd><p>rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]
-return rgb, alpha</p>
-</dd>
-</dl>
-</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="simple">
-<dt>Image can be found here:</dt><dd><p><a class="reference external" href="https://sos.noaa.gov/datasets/blue-marble-without-clouds/">https://sos.noaa.gov/datasets/blue-marble-without-clouds/</a>
-<a class="reference external" href="ftp://public.sos.noaa.gov/land/blue_marble/earth_vegetation/4096.jpg">ftp://public.sos.noaa.gov/land/blue_marble/earth_vegetation/4096.jpg</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.plot3DMaptiles">
-<span class="sig-name descname"><span class="pre">plot3DMaptiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resol_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minzoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxzoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plot3DMaptiles" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>This method adds tiles image to the vtk rendering system. The image
-is projected on the vertical coordinate of this geometry.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
-<li><p><strong>url</strong> – url to get the map tiles to use
-ex: <a class="reference external" href="https://a.tile.openstreetmap.org">https://a.tile.openstreetmap.org</a>/${z}/${x}/${y}.png
-where ${z}, ${x} and ${y} are place holders for
-zoom, x and y position of the tile</p></li>
-<li><p><strong>resol_factor</strong> – how many times the tile resolution must be approximately
-better than the geometry resolution. A factor of 2 (resp. 1/2.)
-induce using the next (resp. preceding) zoom level.</p></li>
-<li><p><strong>minzoom/maxzoom</strong> – minimum and maximum zoom levels to use</p></li>
-<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</p></li>
-<li><p><strong>interpolation</strong> – interpolation method to use to compute levels at each pixel</p></li>
-<li><p><strong>color_transform</strong> – <dl class="simple">
-<dt>if not None, must be a user-defined function with parameters</dt><dd><p>(rgb, alpha, (lons, lats)) with rgb an array representing
-the rgb values on each of the image points, alpha the alpha
-values on the same points and (lons, lats) a turple of the
-points coordinate. The function must return (rgb, alpha). This
-enables the color modification of the image.
-For example, the following function transforms the color
-into grey levels:</p>
-</dd>
-<dt>def grey(rgb, alpha, ll):</dt><dd><p>rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]
-return rgb, alpha</p>
-</dd>
-</dl>
-</p></li>
-</ul>
-</dd>
-</dl>
-<p>Zoom computation is done supposing that each tile is made of 256 * 256 pixels.</p>
-<p>URL examples (these URLs have been found on internet but some are protected with
-copyrights and must not be used with this tool or kept in cache; please check
-before use):</p>
-<blockquote>
-<div><ul class="simple">
-<li><dl class="simple">
-<dt>osm: a (full?) list can be found on <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tile_servers">https://wiki.openstreetmap.org/wiki/Tile_servers</a></dt><dd><p>or <a class="reference external" href="https://wiki.openstreetmap.org/wiki/Tiles">https://wiki.openstreetmap.org/wiki/Tiles</a>
-The most common one is certainly: <a class="reference external" href="https://a.tile.openstreetmap.org">https://a.tile.openstreetmap.org</a>/${z}/${x}/${y}.png</p>
-</dd>
-</dl>
-</li>
-<li><p>google maps: it seems to be forbidden to use this tiles outside of google products.</p></li>
-</ul>
-</div></blockquote>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3Geometry.plot3DProjImage">
-<span class="sig-name descname"><span class="pre">plot3DProjImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3Geometry.plot3DProjImage" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
-</div>
-<p>This method adds an image to the vtk rendering system. The image is projected
-on the vertical coordinate of this geometry.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
-<li><p><strong>filename</strong> – path to an image file</p></li>
-<li><p><strong>geometry</strong> – projection associated to the geometry</p></li>
-<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
-the grid resp. for the C or C+I zone off the C+I+E zone.</p>
-<p>Default is no subzone, i.e. the whole field.</p>
-</p></li>
-<li><p><strong>interpolation</strong> – interpolation method to use to compute levels at each pixel</p></li>
-<li><p><strong>color_transform</strong> – <dl class="simple">
-<dt>if not None, must be a user-defined function with parameters</dt><dd><p>(rgb, alpha, (lons, lats)) with rgb an array representing
-the rgb values on each of the image points, alpha the alpha
-values on the same points and (lons, lats) a turple of the
-points coordinate. The function must return (rgb, alpha). This
-enables the color modification of the image.
-For example, the following function transforms the color
-into grey levels:</p>
-</dd>
-<dt>def grey(rgb, alpha, ll):</dt><dd><p>rgb[:, :, :] = rgb.mean(axis=2)[:, :, numpy.newaxis]
-return rgb, alpha</p>
-</dd>
-</dl>
-</p></li>
-</ul>
-</dd>
-</dl>
-<p>first_corner and last_corner describe the coverage of the image from the left edge
-of the leftmost pixel to the right edge of the rightmost pixel.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -561,13 +387,13 @@ Abstract.</p>
 <li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
 <li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
 <ul>
-<li><p>Values: set([‘lambert’, ‘rotated_lonlat’, ‘polar_stereographic’, ‘academic’, ‘regular_lonlat’, ‘unstructured’, ‘mercator’])</p></li>
+<li><p>Values: set([‘mercator’, ‘unstructured’, ‘rotated_lonlat’, ‘lambert’, ‘academic’, ‘polar_stereographic’, ‘regular_lonlat’])</p></li>
 </ul>
 </li>
 <li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
 <ul>
 <li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+<li><p>Values: set([‘lower-right’, ‘upper-left’, ‘__unknown__’, ‘upper-right’, ‘center-right’, ‘lower-center’, ‘center-left’, ‘center’, ‘upper-center’, ‘lower-left’])</p></li>
 </ul>
 </li>
 <li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
@@ -579,18 +405,6 @@ Abstract.</p>
 </ul>
 </div></blockquote>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.default_cartopy_CRS">
-<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
-</div>
-<p>Create a cartopy.crs appropriate to the Geometry.</p>
-<p>By default, a PlateCarree (if the domain gets close to a pole)
-or a Miller projection is returned.</p>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3RectangularGridGeometry.dimensions">
 <span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3RectangularGridGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
@@ -1208,7 +1022,7 @@ It’s the distance between this point and its closest neighbour.</p>
 <li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
 <ul>
 <li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+<li><p>Values: set([‘lower-right’, ‘upper-left’, ‘__unknown__’, ‘upper-right’, ‘center-right’, ‘lower-center’, ‘center-left’, ‘center’, ‘upper-center’, ‘lower-left’])</p></li>
 </ul>
 </li>
 <li><p><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</p></li>
@@ -1225,18 +1039,6 @@ It’s the distance between this point and its closest neighbour.</p>
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3AcademicGeometry.azimuth">
 <span class="sig-name descname"><span class="pre">azimuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/D3Geometry.html#D3AcademicGeometry.azimuth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.azimuth" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same as plane_azimuth in this geometry.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3AcademicGeometry.default_cartopy_CRS">
-<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3AcademicGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
-</div>
-<p>Create a cartopy.crs appropriate to the Geometry.</p>
-<p>In this case, cartopy is not used but raw matplotlib,
-so returned CRS is None.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1519,7 +1321,7 @@ domain.</p>
 <li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
 <ul>
 <li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+<li><p>Values: set([‘lower-right’, ‘upper-left’, ‘__unknown__’, ‘upper-right’, ‘center-right’, ‘lower-center’, ‘center-left’, ‘center’, ‘upper-center’, ‘lower-left’])</p></li>
 </ul>
 </li>
 <li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
@@ -1831,13 +1633,13 @@ domain.</p>
 <li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
 <li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
 <ul>
-<li><p>Values: set([‘lambert’, ‘space_view’, ‘polar_stereographic’, ‘mercator’])</p></li>
+<li><p>Values: set([‘mercator’, ‘space_view’, ‘polar_stereographic’, ‘lambert’])</p></li>
 </ul>
 </li>
 <li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
 <ul>
 <li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+<li><p>Values: set([‘lower-right’, ‘upper-left’, ‘__unknown__’, ‘upper-right’, ‘center-right’, ‘lower-center’, ‘center-left’, ‘center’, ‘upper-center’, ‘lower-left’])</p></li>
 </ul>
 </li>
 <li><p><strong>projection</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles projection information.</p></li>
@@ -1869,16 +1671,6 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3ProjectedGeometry.default_cartopy_CRS">
-<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
-</div>
-<p>Create a cartopy.crs appropriate to the Geometry.</p>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3ProjectedGeometry.dimensions">
 <span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
@@ -1904,25 +1696,6 @@ geometry.</p>
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3ProjectedGeometry.geoid">
 <span class="sig-name descname"><span class="pre">geoid</span></span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.geoid" title="Permalink to this definition">¶</a></dt>
 <dd><p>To specify geoid shape (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3ProjectedGeometry.get_cartopy_extent">
-<span class="sig-name descname"><span class="pre">get_cartopy_extent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3ProjectedGeometry.get_cartopy_extent" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
-</div>
-<p>Gets the extension of the geometry in the default crs
-:param subzone: defines the LAM subzone to be included, in LAM case,</p>
-<blockquote>
-<div><p>among: ‘C’, ‘CI’.</p>
-</div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>(xmin, xmax, ymin, ymax) as expected by matplotlib’s ax.set_extent</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -2273,13 +2046,13 @@ C+I domain.</p>
 <li><p><strong>grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Handles description of the horizontal grid.</p></li>
 <li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of geometrical type of representation of points on                       the Globe.</p>
 <ul>
-<li><p>Values: set([‘reduced_gauss’, ‘rotated_reduced_gauss’, ‘regular_gauss’])</p></li>
+<li><p>Values: set([‘rotated_reduced_gauss’, ‘regular_gauss’, ‘reduced_gauss’])</p></li>
 </ul>
 </li>
 <li><p><strong>position_on_horizontal_grid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Position of points w/r to the horizontal.</p>
 <ul>
 <li><p>Optional. Default is ‘__unknown__’.</p></li>
-<li><p>Values: set([‘center’, ‘upper-center’, ‘upper-left’, ‘lower-right’, ‘center-right’, ‘lower-center’, ‘__unknown__’, ‘upper-right’, ‘center-left’, ‘lower-left’])</p></li>
+<li><p>Values: set([‘lower-right’, ‘upper-left’, ‘__unknown__’, ‘upper-right’, ‘center-right’, ‘lower-center’, ‘center-left’, ‘center’, ‘upper-center’, ‘lower-left’])</p></li>
 </ul>
 </li>
 <li><p><strong>structure</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Type of geometry.</p>
@@ -2291,16 +2064,6 @@ C+I domain.</p>
 </ul>
 </div></blockquote>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3GaussGeometry.default_cartopy_CRS">
-<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
-<dd><div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
-</div>
-<p>Create a cartopy.crs appropriate to the Geometry.</p>
-</dd></dl>
-
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.geometries.D3Geometry.D3GaussGeometry.dimensions">
 <span class="sig-name descname"><span class="pre">dimensions</span></span><a class="headerlink" href="#epygram.geometries.D3Geometry.D3GaussGeometry.dimensions" title="Permalink to this definition">¶</a></dt>
@@ -2765,7 +2528,7 @@ at point position.</p>
         <li class="right" >
           <a href="geometries_lib.html" title="epygram.geometries — Geometries"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code> — 3-D Geometry class</a></li> 

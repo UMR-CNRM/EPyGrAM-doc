@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.geometries.domain_making.build &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.geometries.domain_making.build &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -27,28 +25,13 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.geometries.domain_making.build</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -65,25 +48,26 @@
 <span class="sd">Contains functions for building a LAM domain.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">from</span> <span class="nn">six.moves</span> <span class="k">import</span> <span class="nb">input</span>
+<span class="kn">from</span> <span class="nn">six.moves</span> <span class="kn">import</span> <span class="nb">input</span>
 
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FPDict</span>
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">FPDict</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
 
-<span class="kn">from</span> <span class="nn">.util</span> <span class="k">import</span> <span class="p">(</span><span class="n">Ezone_minimum_width</span><span class="p">,</span> <span class="n">maxdims_security_barrier</span><span class="p">,</span>
+<span class="kn">from</span> <span class="nn">.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Ezone_minimum_width</span><span class="p">,</span> <span class="n">maxdims_security_barrier</span><span class="p">,</span>
                    <span class="n">threshold_mercator_lambert</span><span class="p">,</span> <span class="n">threshold_pole_distance_lambert</span><span class="p">,</span>
                    <span class="n">vgeom</span><span class="p">,</span>
                    <span class="n">default_Iwidth</span><span class="p">,</span>
                    <span class="n">projections_g2p</span><span class="p">,</span> <span class="n">projections_g2s</span><span class="p">,</span>
                    <span class="n">projections_s2g</span><span class="p">,</span> <span class="n">projections_s2p</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">epylog</span>
-<span class="kn">from</span> <span class="nn">epygram.config</span> <span class="k">import</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">margin_points_within_Czone</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">Angle</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.SpectralGeometry</span> <span class="k">import</span> <span class="n">nearest_greater_FFT992compliant_int</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">epylog</span>
+<span class="kn">from</span> <span class="nn">epygram.config</span> <span class="kn">import</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">margin_points_within_Czone</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">Angle</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries.SpectralGeometry</span> <span class="kn">import</span> <span class="n">SpectralGeometry</span><span class="p">,</span> <span class="n">nearest_greater_FFT992compliant_int</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="n">RegLLGeometry</span>
 
 
 <div class="viewcode-block" id="build_geometry"><a class="viewcode-back" href="../../../../library/domain_making/build.html#epygram.geometries.domain_making.build.build_geometry">[docs]</a><span class="k">def</span> <span class="nf">build_geometry</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">,</span>
@@ -95,7 +79,7 @@
                    <span class="n">force_projection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">maximize_CI_in_E</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                    <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Build an *ad hoc* geometry from the input given parameters.</span>
 <span class="sd">    Beware only secant projection are available here.</span>
 
@@ -166,13 +150,12 @@
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">center_lat</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">threshold_mercator_lambert</span><span class="p">:</span>  <span class="c1"># lambert or polar stereographic</span>
         <span class="c1"># we make a &quot;first guess&quot; with Lambert Geometry, just to check the pole is not inside the domain</span>
         <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;lambert&#39;</span>
-        <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                                <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
-                                <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span>
-                                <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">dimensions</span><span class="p">),</span>
-                                <span class="n">projection</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">projection</span><span class="p">),</span>
-                                <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
-                                <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+                                     <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                                     <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                     <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+                                     <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
+                                     <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
 
         <span class="c1"># test if pole in lambert grid</span>
         <span class="n">pole_in_domain</span> <span class="o">=</span> <span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">point_is_inside_domain_ll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span> <span class="ow">or</span>
@@ -218,18 +201,17 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">reference_lat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">center_lat</span><span class="p">)</span>
     <span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">reference_lat</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
-    <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                            <span class="n">name</span><span class="o">=</span><span class="n">projname</span><span class="p">,</span>
-                            <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span>
-                            <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">dimensions</span><span class="p">),</span>
-                            <span class="n">projection</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">projection</span><span class="p">),</span>
-                            <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
-                            <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,)</span>
+    <span class="n">geometry</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">projname</span><span class="p">,</span>
+                                 <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                                 <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                 <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+                                 <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
+                                 <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,)</span>
     <span class="k">return</span> <span class="n">geometry</span></div>
 
 
 <div class="viewcode-block" id="build_CIE_field"><a class="viewcode-back" href="../../../../library/domain_making/build.html#epygram.geometries.domain_making.build.build_CIE_field">[docs]</a><span class="k">def</span> <span class="nf">build_CIE_field</span><span class="p">(</span><span class="n">geometry</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Build a field according to geometry, with constant values for each of the</span>
 <span class="sd">    C,I,E zones.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -247,7 +229,7 @@
 
 
 <div class="viewcode-block" id="build_lonlat_geometry"><a class="viewcode-back" href="../../../../library/domain_making/build.html#epygram.geometries.domain_making.build.build_lonlat_geometry">[docs]</a><span class="k">def</span> <span class="nf">build_lonlat_geometry</span><span class="p">(</span><span class="n">ll_boundaries</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Build a lonlat geometry given lon/lat boundaries and optionally</span>
 <span class="sd">    resolution in degrees.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -281,19 +263,18 @@
               <span class="s1">&#39;Y_resolution&#39;</span><span class="p">:</span><span class="n">Angle</span><span class="p">(</span><span class="n">yres</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
               <span class="p">}</span>
     <span class="n">lldims</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="n">xwidth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="n">ywidth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
-    <span class="n">llgeometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                              <span class="n">name</span><span class="o">=</span><span class="s1">&#39;regular_lonlat&#39;</span><span class="p">,</span>
-                              <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">llgrid</span><span class="p">),</span>
-                              <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">lldims</span><span class="p">),</span>
-                              <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
-                              <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+    <span class="n">llgeometry</span> <span class="o">=</span> <span class="n">RegLLGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;regular_lonlat&#39;</span><span class="p">,</span>
+                               <span class="n">grid</span><span class="o">=</span><span class="n">llgrid</span><span class="p">,</span>
+                               <span class="n">dimensions</span><span class="o">=</span><span class="n">lldims</span><span class="p">,</span>
+                               <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
+                               <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">llgeometry</span></div>
 
 
 <div class="viewcode-block" id="build_lonlat_field"><a class="viewcode-back" href="../../../../library/domain_making/build.html#epygram.geometries.domain_making.build.build_lonlat_field">[docs]</a><span class="k">def</span> <span class="nf">build_lonlat_field</span><span class="p">(</span><span class="n">ll_boundaries</span><span class="p">,</span>
                        <span class="n">fid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;lon/lat&#39;</span><span class="p">:</span><span class="s1">&#39;template&#39;</span><span class="p">},</span>
                        <span class="n">resolution</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Build a lonlat field empty except on the border, given lon/lat boundaries</span>
 <span class="sd">    and optionally resolution in degrees.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -309,7 +290,7 @@
                               <span class="n">force_projection</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">maximize_CI_in_E</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                               <span class="n">interactive</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Build an *ad hoc* geometry from the input given parameters.</span>
 <span class="sd">    Beware only secant projection are available here.</span>
 
@@ -414,13 +395,12 @@
                 <span class="p">}</span>
         <span class="c1"># first guess for lambert, to check that pole is not in domain</span>
         <span class="k">if</span> <span class="n">projname</span> <span class="o">==</span> <span class="s1">&#39;lambert&#39;</span><span class="p">:</span>
-            <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                                    <span class="n">name</span><span class="o">=</span><span class="n">projname</span><span class="p">,</span>
-                                    <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span>
-                                    <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">dimensions</span><span class="p">),</span>
-                                    <span class="n">projection</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">projection</span><span class="p">),</span>
-                                    <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
-                                    <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+            <span class="n">geometry</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">projname</span><span class="p">,</span>
+                                         <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                                         <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                         <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+                                         <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
+                                         <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
             <span class="n">pole_in_domain</span> <span class="o">=</span> <span class="p">(</span><span class="n">geometry</span><span class="o">.</span><span class="n">point_is_inside_domain_ll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span> <span class="ow">or</span> <span class="n">geometry</span><span class="o">.</span><span class="n">point_is_inside_domain_ll</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">pole_in_domain</span><span class="p">:</span>
                 <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Pole is inside Lambert domain =&gt; shifted to Polar Stereographic projection !&quot;</span><span class="p">)</span>
@@ -428,13 +408,12 @@
                 <span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">copysign</span><span class="p">(</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">center_lat</span><span class="p">),</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
 
         <span class="c1"># guess</span>
-        <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                                <span class="n">name</span><span class="o">=</span><span class="n">projname</span><span class="p">,</span>
-                                <span class="n">grid</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span>
-                                <span class="n">dimensions</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">dimensions</span><span class="p">),</span>
-                                <span class="n">projection</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">projection</span><span class="p">),</span>
-                                <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
-                                <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">projname</span><span class="p">,</span>
+                                     <span class="n">grid</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
+                                     <span class="n">dimensions</span><span class="o">=</span><span class="n">dimensions</span><span class="p">,</span>
+                                     <span class="n">projection</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span>
+                                     <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
+                                     <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
         <span class="c1"># test whether the lonlat corners are inside domain</span>
         <span class="n">points_to_test</span> <span class="o">=</span> <span class="p">[(</span><span class="n">lonmax</span><span class="p">,</span> <span class="n">latmax</span><span class="p">),</span> <span class="p">(</span><span class="n">lonmax</span><span class="p">,</span> <span class="n">latmin</span><span class="p">),</span>
                           <span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="n">latmax</span><span class="p">),</span> <span class="p">(</span><span class="n">lonmin</span><span class="p">,</span> <span class="n">latmin</span><span class="p">),</span>
@@ -465,11 +444,12 @@
 
 
 <div class="viewcode-block" id="build_geom_from_e923nam"><a class="viewcode-back" href="../../../../library/domain_making/build.html#epygram.geometries.domain_making.build.build_geom_from_e923nam">[docs]</a><span class="k">def</span> <span class="nf">build_geom_from_e923nam</span><span class="p">(</span><span class="n">nam</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Build geometry and spectral geometry objects, given e923-like namelist</span>
 <span class="sd">    blocks.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMCT0&#39;</span><span class="p">][</span><span class="s1">&#39;LRPLANE&#39;</span><span class="p">]:</span>
+        <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span>
         <span class="k">if</span> <span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;ELAT0&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">epsilon</span><span class="p">:</span>
             <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;mercator&#39;</span>
         <span class="k">elif</span> <span class="mf">90.</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;ELAT0&#39;</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">epsilon</span><span class="p">:</span>
@@ -496,34 +476,33 @@
                             <span class="n">X_Iwidth</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NBZONL&#39;</span><span class="p">],</span>
                             <span class="n">Y_Iwidth</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NBZONG&#39;</span><span class="p">]))</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">RegLLGeometry</span>
         <span class="n">geometryname</span> <span class="o">=</span> <span class="s1">&#39;regular_lonlat&#39;</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">grid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">input_lat</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;ELATC&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                       <span class="n">input_lon</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;ELONC&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                       <span class="n">input_position</span><span class="o">=</span><span class="p">((</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NDLON&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
                                       <span class="p">(</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NDGLG&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span>
-                      <span class="n">X_resolution</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;EDELX&#39;</span><span class="p">],</span>
-                      <span class="n">Y_resolution</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;EDELY&#39;</span><span class="p">],</span>
-                      <span class="n">LAMzone</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+                      <span class="n">X_resolution</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;EDELX&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                      <span class="n">Y_resolution</span><span class="o">=</span><span class="n">Angle</span><span class="p">(</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NEMGEO&#39;</span><span class="p">][</span><span class="s1">&#39;EDELY&#39;</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)),</span>
             <span class="n">dimensions</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NDLON&#39;</span><span class="p">],</span>
                             <span class="n">Y</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NDGLG&#39;</span><span class="p">]))</span>
-    <span class="n">geom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span>
-                        <span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
-                        <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
-                        <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
-                        <span class="o">**</span><span class="n">kwargs</span>
-                        <span class="p">)</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">geometryclass</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">geometryname</span><span class="p">,</span>
+                         <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vgeom</span><span class="p">,</span>
+                         <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+                         <span class="o">**</span><span class="n">kwargs</span>
+                         <span class="p">)</span>
     <span class="k">if</span> <span class="s1">&#39;NMSMAX&#39;</span> <span class="ow">in</span> <span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="s1">&#39;NSMAX&#39;</span> <span class="ow">in</span> <span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="n">spgeom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="n">space</span><span class="o">=</span><span class="s1">&#39;bi-fourier&#39;</span><span class="p">,</span>
-                              <span class="n">truncation</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">in_X</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NMSMAX&#39;</span><span class="p">],</span>
-                                              <span class="n">in_Y</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NSMAX&#39;</span><span class="p">]))</span>
+        <span class="n">spgeom</span> <span class="o">=</span> <span class="n">SpectralGeometry</span><span class="p">(</span><span class="n">space</span><span class="o">=</span><span class="s1">&#39;bi-fourier&#39;</span><span class="p">,</span>
+                                  <span class="n">truncation</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">in_X</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NMSMAX&#39;</span><span class="p">],</span>
+                                                  <span class="n">in_Y</span><span class="o">=</span><span class="n">nam</span><span class="p">[</span><span class="s1">&#39;NAMDIM&#39;</span><span class="p">][</span><span class="s1">&#39;NSMAX&#39;</span><span class="p">]))</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">spgeom</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">geom</span><span class="p">,</span> <span class="n">spgeom</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="compute_lonlat_included"><a class="viewcode-back" href="../../../../library/domain_making/build.html#epygram.geometries.domain_making.build.compute_lonlat_included">[docs]</a><span class="k">def</span> <span class="nf">compute_lonlat_included</span><span class="p">(</span><span class="n">geometry</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes a lon/lat domain included in the C zone of the model domain,</span>
 <span class="sd">    with a 1 gridpoint margin.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -536,7 +515,22 @@
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;lonmin&#39;</span><span class="p">:</span><span class="n">lonmin</span><span class="p">,</span> <span class="s1">&#39;lonmax&#39;</span><span class="p">:</span><span class="n">lonmax</span><span class="p">,</span> <span class="s1">&#39;latmin&#39;</span><span class="p">:</span><span class="n">latmin</span><span class="p">,</span> <span class="s1">&#39;latmax&#39;</span><span class="p">:</span><span class="n">latmax</span><span class="p">}</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -550,15 +544,16 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../../geometries.html" >epygram.geometries</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../../geometries.html" >epygram.geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.geometries.domain_making.build</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

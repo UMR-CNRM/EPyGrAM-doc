@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats.netCDF &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.formats.netCDF &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
@@ -69,6 +69,8 @@
 <span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">FieldValidityList</span>
 <span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="kn">import</span> <span class="n">FileResource</span>
 <span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">Angle</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="p">(</span><span class="n">VGeometry</span><span class="p">,</span> <span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">,</span> 
+                                <span class="n">RegLLGeometry</span><span class="p">,</span> <span class="n">AcademicGeometry</span><span class="p">,</span> <span class="n">UnstructuredGeometry</span><span class="p">)</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;netCDF&#39;</span><span class="p">]</span>
 
@@ -94,7 +96,7 @@
 
 
 <span class="k">def</span> <span class="nf">_default_numpy2json</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper to encode numpy arrays to json.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper to encode numpy arrays to json.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="o">.</span><span class="vm">__module__</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -108,7 +110,7 @@
 
 
 <div class="viewcode-block" id="netCDF"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF">[docs]</a><span class="k">class</span> <span class="nc">netCDF</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class implementing all specificities for netCDF (4) resource format.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing all specificities for netCDF (4) resource format.&quot;&quot;&quot;</span>
 
     <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
         <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
@@ -140,7 +142,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
 
 <div class="viewcode-block" id="netCDF.open"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens a netCDF and initializes some attributes.</span>
 
 <span class="sd">        :param openmode: optional, to open with a specific openmode, eventually</span>
@@ -153,17 +155,17 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">set_default_global_attributes</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="netCDF.close"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Closes a netCDF.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closes a netCDF.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_nc&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nc</span><span class="o">.</span><span class="n">_isopen</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_nc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="netCDF.variables_number"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.variables_number">[docs]</a>    <span class="k">def</span> <span class="nf">variables_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the number of variables in resource.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of variables in resource.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="netCDF.find_fields_in_resource"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.find_fields_in_resource">[docs]</a>    <span class="k">def</span> <span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of the fields from resource whose name match the given</span>
 <span class="sd">        seed.</span>
 
@@ -196,7 +198,7 @@
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">ncinfo_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get info about the field (dimensions and meta-data of the netCDF variable).</span>
 
 <span class="sd">        :param fid: netCDF field identifier</span>
@@ -215,7 +217,7 @@
                   <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">only</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">adhoc_behaviour</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads one field, given its netCDF name, and returns a Field instance.</span>
 
 <span class="sd">        :param fid: netCDF field identifier</span>
@@ -370,25 +372,11 @@
                                          <span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">variable_dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">())),</span>
                                          <span class="s2">&quot;=&gt; refine behaviour dimensions or&quot;</span><span class="p">,</span>
                                          <span class="s2">&quot;filter dimensions with &#39;only&#39;.&quot;</span><span class="p">]))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">D3</span><span class="p">:</span>
-                <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;3D&#39;</span>
-            <span class="k">elif</span> <span class="n">H2D</span><span class="p">:</span>
-                <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;H2D&#39;</span>
-            <span class="k">elif</span> <span class="n">V2D</span><span class="p">:</span>
-                <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;V2D&#39;</span>
-            <span class="k">elif</span> <span class="n">H1D</span><span class="p">:</span>
-                <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;H1D&#39;</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;H1D: not yet.&#39;</span><span class="p">)</span>  <span class="c1"># TODO:</span>
-            <span class="k">elif</span> <span class="n">V1D</span><span class="p">:</span>
-                <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;V1D&#39;</span>
-            <span class="k">elif</span> <span class="n">points</span><span class="p">:</span>
-                <span class="n">structure</span> <span class="o">=</span> <span class="s1">&#39;Point&#39;</span>
-            <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">structure</span>
+        <span class="k">elif</span> <span class="n">H1D</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;H1D: not yet.&#39;</span><span class="p">)</span>  <span class="c1"># TODO:</span>
 
         <span class="c1"># 3.2 vertical geometry (default)</span>
-        <span class="n">default_kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                                 <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span><span class="mi">255</span><span class="p">,</span>
+        <span class="n">default_kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span><span class="mi">255</span><span class="p">,</span>
                                  <span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span>
                                  <span class="s1">&#39;grid&#39;</span><span class="p">:{</span><span class="s1">&#39;gridlevels&#39;</span><span class="p">:</span> <span class="p">[]},</span>
                                  <span class="s1">&#39;levels&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">]}</span>
@@ -488,6 +476,7 @@
 
         <span class="c1"># 3.3.3 horizontal part</span>
         <span class="c1"># find grid in variables</span>
+        <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">UnstructuredGeometry</span> <span class="c1">#Default geometry</span>
         <span class="k">if</span> <span class="n">H2D</span> <span class="ow">or</span> <span class="n">D3</span><span class="p">:</span>
             <span class="k">def</span> <span class="nf">find_grid_in_variables</span><span class="p">():</span>
                 <span class="n">var_corresponding_to_X_grid</span> <span class="o">=</span> <span class="n">behaviour</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;X_grid&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -617,6 +606,7 @@
                     <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">grid_mapping</span><span class="p">,</span> <span class="s1">&#39;x_resolution&#39;</span><span class="p">)</span> <span class="ow">or</span>
                         <span class="ow">not</span> <span class="n">behaviour</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;grid_is_lonlat&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)):</span>
                         <span class="c1"># if resolution is either in grid_mapping attributes or in the grid itself</span>
+                        <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">ProjectedGeometry</span>
                         <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_proj_dict_inv</span><span class="p">[</span><span class="n">grid_mapping</span><span class="o">.</span><span class="n">grid_mapping_name</span><span class="p">]</span>
                         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">grid_mapping</span><span class="p">,</span> <span class="s1">&#39;x_resolution&#39;</span><span class="p">):</span>
                             <span class="n">Xresolution</span> <span class="o">=</span> <span class="n">grid_mapping</span><span class="o">.</span><span class="n">x_resolution</span>
@@ -780,6 +770,7 @@
                     <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">FPList</span><span class="p">([</span><span class="n">Angle</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">latitudes</span><span class="p">]),</span>
                             <span class="s1">&#39;dilatation_coef&#39;</span><span class="p">:</span><span class="mf">1.</span><span class="p">}</span>
                     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">grid_mapping</span><span class="p">,</span> <span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">):</span>
+                        <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">GaussGeometry</span>
                         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">grid_mapping</span><span class="o">.</span><span class="n">lon_number_by_lat</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
                             <span class="n">lon_number_by_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">grid_mapping</span><span class="o">.</span><span class="n">lon_number_by_lat</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]][:]</span>
                         <span class="k">else</span><span class="p">:</span>
@@ -818,6 +809,7 @@
                                  <span class="s1">&#39;resolution&#39;</span><span class="p">))</span> <span class="ow">and</span>
                         <span class="nb">len</span><span class="p">(</span><span class="n">Xgrid</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
                             <span class="c1"># then this is a regular lon lat</span>
+                            <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">RegLLGeometry</span>
                             <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;regular_lonlat&#39;</span>
                             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">variable</span><span class="o">.</span><span class="n">grid_mapping</span><span class="p">],</span>
                                        <span class="s1">&#39;x_resolution&#39;</span><span class="p">):</span>
@@ -856,6 +848,7 @@
                         <span class="n">y_regular</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">y_res</span> <span class="o">-</span> <span class="n">y_res</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">loose_epsilon</span><span class="p">)</span>
                         <span class="n">regll</span> <span class="o">=</span> <span class="n">x_regular</span> <span class="ow">and</span> <span class="n">y_regular</span>
                     <span class="k">if</span> <span class="n">regll</span><span class="p">:</span>
+                        <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">RegLLGeometry</span>
                         <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;regular_lonlat&#39;</span>
                         <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;input_lon&#39;</span><span class="p">:</span> <span class="n">Angle</span><span class="p">(</span><span class="n">Xgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                                 <span class="s1">&#39;input_lat&#39;</span><span class="p">:</span> <span class="n">Angle</span><span class="p">(</span><span class="n">Ygrid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
@@ -867,6 +860,7 @@
                                 <span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">Ygrid</span><span class="p">}</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># grid is not lon/lat and no other metadata available : Academic</span>
+                    <span class="n">geometryclass</span> <span class="o">=</span> <span class="n">AcademicGeometry</span>
                     <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;academic&#39;</span>
                     <span class="n">grid</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">:</span><span class="kc">None</span><span class="p">,</span>
                             <span class="s1">&#39;X_resolution&#39;</span><span class="p">:</span><span class="nb">abs</span><span class="p">(</span><span class="n">Xgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">Xgrid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]),</span>
@@ -898,15 +892,15 @@
                     <span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">lat</span><span class="p">}</span>
 
         <span class="c1"># 3.4 build geometry</span>
-        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
         <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grid</span>
         <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;dimensions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dimensions</span>
         <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;vcoordinate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vcoordinate</span>
-        <span class="n">geometry</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geometryclass</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
 
         <span class="c1"># 4. build field</span>
         <span class="n">field_kwargs</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geometry</span>
-        <span class="n">field_kwargs</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">]</span>
+        <span class="n">field_kwargs</span><span class="p">[</span><span class="s1">&#39;structure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">structure</span>
         <span class="n">comment</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">variable</span><span class="o">.</span><span class="n">ncattrs</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">a</span> <span class="o">!=</span> <span class="s1">&#39;validity&#39;</span><span class="p">:</span>
@@ -934,7 +928,12 @@
                 <span class="n">buffdata</span> <span class="o">=</span> <span class="n">variable</span>
                 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">only</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">d</span> <span class="o">=</span> <span class="n">variable</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-                    <span class="n">buffdata</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">restrain_to_index_i_of_dim_d</span><span class="p">(</span><span class="n">buffdata</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
+                        <span class="n">ibuff</span> <span class="o">=</span> <span class="p">[</span><span class="n">util</span><span class="o">.</span><span class="n">restrain_to_index_i_of_dim_d</span><span class="p">(</span><span class="n">buffdata</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span>
+                                 <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">stop</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">step</span><span class="p">)]</span>
+                        <span class="n">buffdata</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">ibuff</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">d</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">buffdata</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">restrain_to_index_i_of_dim_d</span><span class="p">(</span><span class="n">buffdata</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">buffdata</span> <span class="o">=</span> <span class="n">variable</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
             <span class="c1"># check there is no leftover unknown dimension</span>
@@ -1002,7 +1001,7 @@
                    <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">adhoc_behaviour</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                    <span class="n">fill_value</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">netCDF_default_variables_fill_value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write a field in resource.</span>
 
 <span class="sd">        :param field: the :class:`~epygram.base.Field` object to write</span>
@@ -1132,6 +1131,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">tgrid</span><span class="p">][:]</span> <span class="o">=</span> <span class="n">datetimes</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">tgrid</span><span class="p">]</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;seconds&#39;</span><span class="p">,</span> <span class="s1">&#39;since&#39;</span><span class="p">,</span> <span class="n">datetime0</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
+                <span class="n">units</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">tgrid</span><span class="p">]</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+                <span class="n">units_base</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">units</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]),</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%M:%S&#39;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getbasis</span><span class="p">()</span> <span class="o">!=</span> <span class="n">units_base</span><span class="p">:</span>
+                    <span class="n">basediff</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getbasis</span><span class="p">()</span> <span class="o">-</span> <span class="n">units_base</span>
+                    <span class="n">datetimes</span> <span class="o">=</span> <span class="p">[</span><span class="n">dt</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">basediff</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">())</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">datetimes</span><span class="p">]</span>
                 <span class="k">assert</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">tgrid</span><span class="p">][:]</span> <span class="o">==</span> <span class="n">datetimes</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">(),</span> \
                     <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span> <span class="n">tgrid</span><span class="p">,</span> <span class="s1">&#39;mismatch.&#39;</span><span class="p">])</span>
 
@@ -1388,18 +1392,18 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="p">[</span><span class="n">varname</span><span class="p">]</span><span class="o">.</span><span class="n">setncattr</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="netCDF.set_default_global_attributes"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.set_default_global_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">set_default_global_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set default global attributes (those from</span>
 <span class="sd">        config.netCDF_default_global_attributes).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_nc</span><span class="o">.</span><span class="n">setncatts</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">netCDF_default_global_attributes</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="netCDF.set_global_attributes"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.set_global_attributes">[docs]</a>    <span class="k">def</span> <span class="nf">set_global_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">attributes</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the given global attributes.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the given global attributes.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_nc</span><span class="o">.</span><span class="n">setncatts</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="netCDF.behave"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.behave">[docs]</a>    <span class="k">def</span> <span class="nf">behave</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set-up the given arguments in self.behaviour, for the purpose of</span>
 <span class="sd">        building fields from netCDF.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1407,7 +1411,7 @@
 
     <span class="c1"># adapted from http://schubert.atmos.colostate.edu/~cslocum/netcdf_example.html</span>
 <div class="viewcode-block" id="netCDF.ncdump"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.ncdump">[docs]</a>    <span class="k">def</span> <span class="nf">ncdump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Outputs dimensions, variables and their attribute information.</span>
 <span class="sd">        The information is similar to that of NCAR&#39;s ncdump utility.</span>
 
@@ -1432,7 +1436,7 @@
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stritem</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">print_ncattr</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Prints the NetCDF file attributes for a given key</span>
 
 <span class="sd">            Parameters</span>
@@ -1471,13 +1475,13 @@
         <span class="k">return</span> <span class="n">nc_attrs</span><span class="p">,</span> <span class="n">nc_dims</span><span class="p">,</span> <span class="n">nc_vars</span></div>
 
 <div class="viewcode-block" id="netCDF.what"><a class="viewcode-back" href="../../../library/netCDF.html#epygram.formats.netCDF.netCDF.what">[docs]</a>    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes in file a summary of the contents of the GRIB.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes in file a summary of the contents of the GRIB.&quot;&quot;&quot;</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;### FORMAT: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ncdump</span><span class="p">(</span><span class="n">out</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the fid list of the fields inside the resource.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the fid list of the fields inside the resource.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_variables</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
     <span class="nd">@property</span>
@@ -1520,7 +1524,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
@@ -1528,7 +1532,7 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

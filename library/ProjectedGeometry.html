@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>epygram.geometries.ProjectedGeometry — Projected Geometry class &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.geometries.UnstructuredGeometry — Unstructured Geometry class" href="UnstructuredGeometry.html" />
+    <link rel="prev" title="epygram.geometries.AbstractGeometry — Geometry class" href="Geometry.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="UnstructuredGeometry.html" title="epygram.geometries.UnstructuredGeometry — Unstructured Geometry class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="Geometry.html" title="epygram.geometries.AbstractGeometry — Geometry class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="epygram-geometries-projectedgeometry-projected-geometry-class">
+<h1><a class="reference internal" href="#module-epygram.geometries.ProjectedGeometry" title="epygram.geometries.ProjectedGeometry: Projected Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code></a> — Projected Geometry class<a class="headerlink" href="#epygram-geometries-projectedgeometry-projected-geometry-class" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-epygram.geometries.ProjectedGeometry"></span><p>Contains the classes for 3D geometries of fields.</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.ProjectedGeometry.</span></span><span class="sig-name descname"><span class="pre">ProjectedGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry" title="epygram.geometries.AbstractGeometry.RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.RectangularGridGeometry</span></code></a></p>
+<p>Handles the geometry for a Projected 3-Dimensions Field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – <p>Name of geometrical type of representation of points on the Globe.
+Name must be among [‘lambert’, ‘mercator’, ‘polar_stereographic’,</p>
+<blockquote>
+<div><p>’space_view’]</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>grid</strong> – Handles description of the horizontal grid.</p></li>
+<li><p><strong>dimensions</strong> – Handles grid dimensions.</p></li>
+<li><p><strong>vcoordinate</strong> – Handles vertical geometry parameters.</p></li>
+<li><p><strong>position_on_horizontal_grid</strong> – <p>Position of points w/r to the horizontal.
+among: [‘upper-right’, ‘upper-left’,</p>
+<blockquote>
+<div><p>’lower-left’, ‘lower-right’,
+‘center-left’, ‘center-right’,
+‘lower-center’, ‘upper-center’,
+‘center’, ‘__unknown__’]</p>
+</div></blockquote>
+</p></li>
+<li><p><strong>geoid</strong> – To specify geoid shape.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.compass_grid">
+<span class="sig-name descname"><span class="pre">compass_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.compass_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.compass_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the compass grid, i.e. the angle between Y-axis and North for each
+gridpoint.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
+the grid resp. for the C or C+I zone off the C+I+E zone.</p>
+<p>Default is no subzone, i.e. the whole field.</p>
+</p></li>
+<li><p><strong>position</strong> – position of lonlat grid with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.default_cartopy_CRS">
+<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Create a cartopy.crs appropriate to the Geometry.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the distance between two points along a straight line in the
+geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.get_cartopy_extent">
+<span class="sig-name descname"><span class="pre">get_cartopy_extent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.get_cartopy_extent" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
+</div>
+<p>Gets the extension of the geometry in the default crs
+:param subzone: defines the LAM subzone to be included, in LAM case,</p>
+<blockquote>
+<div><p>among: ‘C’, ‘CI’.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>(xmin, xmax, ymin, ymax) as expected by matplotlib’s ax.set_extent</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.getcenter">
+<span class="sig-name descname"><span class="pre">getcenter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.getcenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the coordinate of the grid center as a tuple of Angles
+(center_lon, center_lat).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2ll">
+<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2xy">
+<span class="sig-name descname"><span class="pre">ij2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.ij2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(i,j)</em>, in the projection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.linspace">
+<span class="sig-name descname"><span class="pre">linspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.linspace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.linspace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns evenly spaced points over the specified interval.
+Points are lined up in the geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>num</strong> – number of points, including point1 and point2.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2ij">
+<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
+in the 2D matrix of gridpoints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon</strong> – longitude of point in degrees</p></li>
+<li><p><strong>lat</strong> – latitude of point in degrees</p></li>
+<li><p><strong>position</strong> – lat lon position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Caution: (<em>i,j</em>) are float.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2xy">
+<span class="sig-name descname"><span class="pre">ll2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.ll2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2xy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (x, y) coordinates of point <em>(lon, lat)</em> in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon</strong> – longitude of point in degrees</p></li>
+<li><p><strong>lat</strong> – latitude of point in degrees</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.make_section_geometry">
+<span class="sig-name descname"><span class="pre">make_section_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.make_section_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.make_section_geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a projected Geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>points_number</strong> – defines the total number of horizontal points of the
+section (including ends). If None, defaults to a number computed from
+the <em>ends</em> and the <em>resolution</em>.</p></li>
+<li><p><strong>resolution</strong> – defines the horizontal resolution to be given to the
+field. If None, defaults to the horizontal resolution of the field.</p></li>
+<li><p><strong>position</strong> – defines the position of data in the grid (defaults to ‘center’)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor">
+<span class="sig-name descname"><span class="pre">map_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.map_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the map factor at the given latitude(s) <em>lat</em> in degrees.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor_field">
+<span class="sig-name descname"><span class="pre">map_factor_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.map_factor_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new field whose data is the map factor over the field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> – grid position with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area">
+<span class="sig-name descname"><span class="pre">mesh_area</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.mesh_area"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the area of a mesh/gridpoint, given its latitude.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area_field">
+<span class="sig-name descname"><span class="pre">mesh_area_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.mesh_area_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a new field whose data is the mesh area of gridpoints,
+i.e. X_resolution x Y_resolution / m^2, where m is the local map factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>position</strong> – grid position with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.plane_azimuth">
+<span class="sig-name descname"><span class="pre">plane_azimuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.plane_azimuth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.plane_azimuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points in plane local referential
+geometry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+<li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.reproject_wind_on_lonlat">
+<span class="sig-name descname"><span class="pre">reproject_wind_on_lonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_factor_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.reproject_wind_on_lonlat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.reproject_wind_on_lonlat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reprojects a wind vector (u, v) on the grid onto real
+axes, i.e. with components on true zonal/meridian axes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> – the u == zonal-on-the-grid component of wind</p></li>
+<li><p><strong>v</strong> – the v == meridian-on-the-grid component of wind</p></li>
+<li><p><strong>lon</strong> – longitudes of points in degrees, if u/v are not vectors
+on the whole grid</p></li>
+<li><p><strong>lat</strong> – latitudes of points in degrees, if u/v are not vectors
+on the whole grid</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>:param map_factor_correction:, applies a correction of magnitude due</dt><dd><p>to map factor.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>reverse</strong> – if True, apply the reverse reprojection.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ij">
+<span class="sig-name descname"><span class="pre">resolution_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.resolution_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the distance to the nearest point of (i,j) point.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
+<li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ll">
+<span class="sig-name descname"><span class="pre">resolution_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.resolution_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the local resolution at the nearest point of lon/lat.
+It’s the distance between this point and its closest neighbour.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon</strong> – longitude of the point in degrees</p></li>
+<li><p><strong>lat</strong> – latitude of the point in degrees</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.secant_projection">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">secant_projection</span></span><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.secant_projection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is the projection secant to the sphere ? (or tangent)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.select_subzone">
+<span class="sig-name descname"><span class="pre">select_subzone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.select_subzone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.select_subzone" title="Permalink to this definition">¶</a></dt>
+<dd><p>If a LAMzone defines the geometry, select only the <em>subzone</em> from it
+and return a new geometry object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>subzone</strong> – among (‘C’, ‘CI’).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.tolerant_equal">
+<span class="sig-name descname"><span class="pre">tolerant_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.tolerant_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test of equality by recursion on the object’s attributes,
+with a <strong>tolerance</strong>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ij">
+<span class="sig-name descname"><span class="pre">xy2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.xy2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ij" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (i, j) indexes of point <em>(x, y)</em>,
+in the 2D matrix of gridpoints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X coordinate of point in the projection</p></li>
+<li><p><strong>y</strong> – Y coordinate of point in the projection</p></li>
+<li><p><strong>position</strong> – position to return with respect to the model cell.
+Defaults to self.position_on_horizontal_grid.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Caution: (<em>i,j</em>) are float (the nearest grid point is the nearest
+integer).</p>
+<p>Note that origin of coordinates in projection is the center of the C+I
+domain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ll">
+<span class="sig-name descname"><span class="pre">xy2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/ProjectedGeometry.html#ProjectedGeometry.xy2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the (lon, lat) coordinates of point <em>(x, y)</em> in the 2D matrix
+of gridpoints*(i,j)*, in degrees.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – X coordinate of point in the projection</p></li>
+<li><p><strong>y</strong> – Y coordinate of point in the projection</p></li>
+</ul>
+</dd>
+</dl>
+<p>Note that origin of coordinates in projection is the center of the
+C+I domain.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="Geometry.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="UnstructuredGeometry.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/ProjectedGeometry.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="UnstructuredGeometry.html" title="epygram.geometries.UnstructuredGeometry — Unstructured Geometry class"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="Geometry.html" title="epygram.geometries.AbstractGeometry — Geometry class"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

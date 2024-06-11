@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.formats.GeoPoints &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.formats.GeoPoints &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,28 +25,13 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.GeoPoints</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -65,21 +48,20 @@
 <span class="sd">Contains the class for GeoPoints format.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">datetime</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="kn">import</span> <span class="nn">footprints</span>
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">FPList</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">FPList</span><span class="p">,</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
 
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
-<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="k">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span>
-<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="k">import</span> <span class="n">FileResource</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="k">import</span> <span class="n">PointGeometry</span><span class="p">,</span> <span class="n">VGeometry</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.H2DGeometry</span> <span class="k">import</span> <span class="n">H2DUnstructuredGeometry</span>
-<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="k">import</span> <span class="n">H2DField</span><span class="p">,</span> <span class="n">PointField</span><span class="p">,</span> <span class="n">D3Field</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span>
+<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="kn">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">UnstructuredGeometry</span><span class="p">,</span> <span class="n">VGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">H2DField</span><span class="p">,</span> <span class="n">PointField</span><span class="p">,</span> <span class="n">D3Field</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GeoPoints&#39;</span><span class="p">]</span>
 
@@ -87,7 +69,7 @@
 
 
 <div class="viewcode-block" id="GeoPoints"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints">[docs]</a><span class="k">class</span> <span class="nc">GeoPoints</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class implementing all specificities for GeoPoints resource format.</span>
 
 <span class="sd">    Format:</span>
@@ -131,7 +113,7 @@
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">GeoPoints</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmtdelayedopen</span><span class="p">:</span>
@@ -142,7 +124,7 @@
              <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">openmode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">other_attributes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Opens a GeoPoint.</span>
 
 <span class="sd">        :param parameter: name of the parameter in header (openmode=&#39;w&#39;).</span>
@@ -230,7 +212,7 @@
                              <span class="s2">&quot; Not open yet.&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="GeoPoints.close"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closes a GeoPoints.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_file&#39;</span><span class="p">):</span>
@@ -238,14 +220,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="GeoPoints.listfields"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.listfields">[docs]</a>    <span class="k">def</span> <span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list containing the LFI identifiers of all the fields of the resource.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">GeoPoints</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">listfields</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Actual listfields() method for GeoPoints.</span>
 
 <span class="sd">        :param complete: - if True method returns a list of {&#39;GeoPoints&#39;:GeoPoints_fid, &#39;generic&#39;:generic_fid}</span>
@@ -261,7 +243,7 @@
 <span class="c1">################</span>
 
 <div class="viewcode-block" id="GeoPoints.countpoints"><a class="viewcode-back" href="../../../library/GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.countpoints">[docs]</a>    <span class="k">def</span> <span class="nf">countpoints</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Counts and returns the number of points in the resource.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
@@ -287,7 +269,7 @@
                   <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span>
                   <span class="n">footprints_builder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                   <span class="n">as_points</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the GeoPoints.</span>
 
 <span class="sd">        :param parameter: is the name of the parameter to read</span>
@@ -342,31 +324,24 @@
 
         <span class="k">if</span> <span class="n">footprints_builder</span><span class="p">:</span>
             <span class="n">field_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">field</span>
-            <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
-            <span class="n">vcoord_builder</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">field_structure</span> <span class="o">==</span> <span class="s1">&#39;Point&#39;</span><span class="p">:</span>
                 <span class="n">field_builder</span> <span class="o">=</span> <span class="n">PointField</span>
-                <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">PointGeometry</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">field_builder</span> <span class="o">=</span> <span class="n">H2DField</span>
-                <span class="n">geom_builder</span> <span class="o">=</span> <span class="n">H2DUnstructuredGeometry</span>
-            <span class="n">vcoord_builder</span> <span class="o">=</span> <span class="n">VGeometry</span>
 
         <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
                                            <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">]]</span>
-        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">vcoord_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
-                                     <span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
-                                     <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">])</span>
-        <span class="n">geometry</span> <span class="o">=</span> <span class="n">geom_builder</span><span class="p">(</span><span class="n">structure</span><span class="o">=</span><span class="n">field_structure</span><span class="p">,</span>
-                                <span class="n">name</span><span class="o">=</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
-                                <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
-                                <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
-                                <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:</span><span class="n">longitudes</span><span class="p">,</span>
-                                      <span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">latitudes</span><span class="p">},</span>
-                                <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
-                                <span class="p">)</span>
+        <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="n">typeoffirstfixedsurface</span><span class="o">=</span><span class="mi">255</span><span class="p">,</span>
+                                <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">]</span> <span class="k">if</span> <span class="s1">&#39;LEVEL&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="k">else</span> <span class="n">specialValues_list</span><span class="p">[</span><span class="s1">&#39;LEVEL&#39;</span><span class="p">])</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">UnstructuredGeometry</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
+                                        <span class="n">dimensions</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">),</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
+                                        <span class="n">vcoordinate</span><span class="o">=</span><span class="n">vcoordinate</span><span class="p">,</span>
+                                        <span class="n">grid</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:</span><span class="n">longitudes</span><span class="p">,</span>
+                                              <span class="s1">&#39;latitudes&#39;</span><span class="p">:</span><span class="n">latitudes</span><span class="p">},</span>
+                                        <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;center&#39;</span>
+                                        <span class="p">)</span>
         <span class="k">if</span> <span class="s1">&#39;DATE&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span> <span class="ow">and</span> <span class="s1">&#39;TIME&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;TIME&#39;</span><span class="p">]:</span>
                 <span class="n">specialValues_cst</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
@@ -426,7 +401,7 @@
                    <span class="n">precision</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_precision</span><span class="p">,</span>
                    <span class="n">col_width</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_col_width</span><span class="p">,</span>
                    <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write a field in the resource.</span>
 
 <span class="sd">        :param field: a :class:`epygram.fields.D3Field` or a</span>
@@ -579,7 +554,7 @@
 <span class="c1">###########</span>
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes in file-like a summary of the contents of the GeoPoints.</span>
 
 <span class="sd">        :param out: the output open file-like object.</span>
@@ -597,7 +572,22 @@
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Structure of Points as a Field: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">structure</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -611,15 +601,16 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
-          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li> 
+          <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.GeoPoints</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

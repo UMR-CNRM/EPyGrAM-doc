@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.geometries — Geometries &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.geometries — Geometries &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="epygram.geometries.D3Geometry — 3-D Geometry class" href="D3Geometry.html" />
+    <link rel="next" title="epygram.geometries.AbstractGeometry — Geometry class" href="Geometry.html" />
     <link rel="prev" title="epygram" href="epygram.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -29,13 +29,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="D3Geometry.html" title="epygram.geometries.D3Geometry — 3-D Geometry class"
+          <a href="Geometry.html" title="epygram.geometries.AbstractGeometry — Geometry class"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="epygram.html" title="epygram"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></li> 
       </ul>
     </div>  
@@ -50,16 +50,17 @@
 <p>Contains all geometries classes.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="D3Geometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code> — 3-D Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="H2DGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H2DGeometry</span></code> — Horizontal 2-D Geometry classes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="H1DGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.H1DGeometry</span></code> — Horizontal 1-D Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Geometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ProjectedGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnstructuredGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="AcademicGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GaussGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RegLLGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RotLLGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RotLLGeometry</span></code> — RotLL Geometry class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="VGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="VGeometry.html#functions">Functions</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="V2DGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.V2DGeometry</span></code> — Vertical 2-D Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="V1DGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry</span></code> — Vertical 1-D Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="PointGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.PointGeometry</span></code> — Point 0-D Geometry class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="SpectralGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="domain_making.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="domain_making/ask.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></li>
@@ -88,19 +89,6 @@
 <dd><p>Build a surface vertical geometry.</p>
 </dd></dl>
 
-<hr class="docutils" />
-<dl class="py function">
-<dt class="sig sig-object py" id="epygram.geometries.build_geometry">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.</span></span><span class="sig-name descname"><span class="pre">build_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">help_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries.html#build_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.build_geometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Proxy to build geometry from scratch.
-All arguments are to be given to build geometry.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>help_on</strong> – name of the attribute to have some help on.</p>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 
 
@@ -114,8 +102,8 @@ All arguments are to be given to build geometry.</p>
   <p class="topless"><a href="epygram.html"
                         title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code></a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="D3Geometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry</span></code> — 3-D Geometry class</a></p>
+  <p class="topless"><a href="Geometry.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -147,18 +135,18 @@ All arguments are to be given to build geometry.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="D3Geometry.html" title="epygram.geometries.D3Geometry — 3-D Geometry class"
+          <a href="Geometry.html" title="epygram.geometries.AbstractGeometry — Geometry class"
              >next</a> |</li>
         <li class="right" >
           <a href="epygram.html" title="epygram"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

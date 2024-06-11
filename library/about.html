@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>About the package &#8212; epygram 1.4.17 documentation</title>
+    <title>About the package &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -15,9 +15,7 @@
     <script src="../_static/doctools.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Distribution" href="../distribution.html" />
-    <link rel="prev" title="Introduction" href="../introduction.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -28,13 +26,7 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../distribution.html" title="Distribution"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../introduction.html" title="Introduction"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">About the package</a></li> 
       </ul>
     </div>  
@@ -51,28 +43,14 @@
 <p><code class="docutils literal notranslate"><span class="pre">epygram</span></code> is a package of classes, designed to handle Meteorological Fields,
 and various resource Formats from which the Fields can be extracted.</p>
 <p>It is distributed along with a series of applicative tools using the package,
-that can be used ‘as is’, or can be taken as templates for building more complex
+that can be used as command line tools, or can be taken as templates for building more complex
 applications with the <code class="docutils literal notranslate"><span class="pre">epygram</span></code> package.</p>
-<p>The package uses extensively the <code class="docutils literal notranslate"><span class="pre">footprints</span></code> package (included in epygram
-distributions), designed by the VORTEX team (MF) in order (basically) to tackle
-once-for-all with Factories for families of similar classes. The basic idea
-behind this concept is that similar classes have a similar set of attributes,
-but with behavioral differences (values or name/number of attributes), viewed
-as their “footprint”.</p>
-<p>For the needs of the FA, LFI &amp; LFA formats and spectral transforms of fields
-from ARPEGE/ALADIN/AROME models, the <a class="reference internal" href="../site/arpifs4py.html#module-arpifs4py" title="arpifs4py: Interface functions to some **Arpege/IFS** functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arpifs4py</span></code></a> library is needed. It is also
-therein included, already compiled for Mageia4 platforms, and with necessary
-stuff for recompiling it on other platforms. Be aware to be recompiled, this
-library needs an <em>arpifs</em> pack pre-compiled with <em>gmkpack</em>, and <em>gribex</em>
-library.</p>
-<p>Complete dependencies to be found in <a class="reference internal" href="../dependancies.html#id1"><span class="std std-ref">Dependancies</span></a>.</p>
-<p>It is recalled that packages available on Pypi.org can be installed locally
-using: <code class="docutils literal notranslate"><span class="pre">pip[2|3]</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">&lt;packagename&gt;</span></code></p>
 <hr class="docutils" />
 </section>
 <section id="license">
 <span id="id1"></span><h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
-<p>Copyright Météo France (2014 - 2022), authors:</p>
+<p>Copyright Météo France (2014-)</p>
+<p>Authors:</p>
 <ul class="simple">
 <li><ol class="upperalpha simple">
 <li><p>Mary - Météo France, CNRM/GMAP/COOPE - <a class="reference external" href="mailto:alexandre&#46;mary&#37;&#52;&#48;meteo&#46;fr">alexandre<span>&#46;</span>mary<span>&#64;</span>meteo<span>&#46;</span>fr</a></p></li>
@@ -88,23 +66,7 @@ abiding by the rules of distribution of free software.  You can  use,
 modify and/ or redistribute the software under the terms of the CeCILL-C
 license as circulated by CEA, CNRS and INRIA at the following URL
 “<a class="reference external" href="http://www.cecill.info">http://www.cecill.info</a>”.</p>
-<p>As a counterpart to the access to the source code and  rights to copy,
-modify and redistribute granted by the license, users are provided only
-with a limited warranty  and the software’s author,  the holder of the
-economic rights,  and the successive licensors  have only  limited
-liability.</p>
-<p>In this respect, the user’s attention is drawn to the risks associated
-with loading,  using,  modifying and/or developing or reproducing the
-software by the user in light of its specific status of free software,
-that may mean  that it is complicated to manipulate,  and  that  also
-therefore means  that it is reserved for developers  and  experienced
-professionals having in-depth computer knowledge. Users are therefore
-encouraged to load and test the software’s suitability as regards their
-requirements in conditions enabling the security of their systems and/or
-data to be ensured and,  more generally, to use and operate it in the
-same conditions as regards security.</p>
-<p>The fact that you are presently reading this means that you have had
-knowledge of the CeCILL-C license and that you accept its terms.</p>
+<p>The license text is provided in the LICENSE.txt file of the package.</p>
 <hr class="docutils" />
 </section>
 </section>
@@ -125,12 +87,6 @@ knowledge of the CeCILL-C license and that you accept its terms.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../introduction.html"
-                        title="previous chapter">Introduction</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../distribution.html"
-                        title="next chapter">Distribution</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -161,18 +117,12 @@ knowledge of the CeCILL-C license and that you accept its terms.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="../distribution.html" title="Distribution"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../introduction.html" title="Introduction"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">About the package</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

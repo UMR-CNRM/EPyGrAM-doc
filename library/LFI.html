@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.formats.LFI — Interface-Class to the LFI format &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.formats.LFI — Interface-Class to the LFI format &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,8 +34,8 @@
         <li class="right" >
           <a href="DDHLFA.html" title="epygram.formats.DDHLFA — Interface-Class to the DDHLFA format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFI</span></code> — Interface-Class to the LFI format</a></li> 
       </ul>
@@ -90,7 +90,7 @@
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘read’, ‘a’, ‘write’, ‘r’, ‘append’, ‘w’])</p></li>
+<li><p>Values: set([‘r’, ‘a’, ‘write’, ‘append’, ‘w’, ‘read’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -135,8 +135,7 @@ and PARAMETER being the name of the parameter requested, as named in LFI.</p></l
 <li><p><strong>geometry</strong> – the geometry on which extract data.
 None to keep the geometry untouched.</p></li>
 <li><p><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
-V2DField (cf. <a class="reference internal" href="V1DGeometry.html#module-epygram.geometries.V1DGeometry" title="epygram.geometries.V1DGeometry: Vertical 1-D Geometry class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry</span></code></a> coordinate
-possible values).</p></li>
+V2DField (cf. <a href="#id1"><span class="problematic" id="id2">:module:`epygram.geometries`</span></a> coordinate possible values).</p></li>
 </ul>
 </dd>
 </dl>
@@ -181,8 +180,7 @@ and PARAMETER being the name of the parameter requested, as named in LFI.</p></l
 <li><p><strong>geometry</strong> – the geometry on which extract data. If None, it is built from
 lon/lat.</p></li>
 <li><p><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
-V1DField (cf. <a class="reference internal" href="V1DGeometry.html#module-epygram.geometries.V1DGeometry" title="epygram.geometries.V1DGeometry: Vertical 1-D Geometry class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry</span></code></a> coordinate
-possible values).</p></li>
+V1DField (cf. <a href="#id3"><span class="problematic" id="id4">:module:`epygram.geometries`</span></a> coordinate possible values).</p></li>
 <li><p><strong>interpolation</strong> – <p>defines the interpolation function used to compute
 the profile at requested lon/lat from the fields grid:</p>
 <ul>
@@ -196,7 +194,7 @@ and an external field on the same grid as self, to which the distance
 is computed within the 4 horizontally nearest points; e.g.
 {‘target_value’:4810, ‘external_field’:an_H2DField_with_same_geometry}.
 If so, the nearest point is selected with
-distance = <a href="#id1"><span class="problematic" id="id2">|target_value - external_field.data|</span></a></p></li>
+distance = <a href="#id7"><span class="problematic" id="id8">|target_value - external_field.data|</span></a></p></li>
 <li><p><strong>cheap_height</strong> – has no effect (compatibity with FA format)</p></li>
 </ul>
 </dd>
@@ -225,8 +223,7 @@ the <em>ends</em> and the <em>resolution</em>.</p></li>
 <li><p><strong>resolution</strong> – defines the horizontal resolution to be given to the
 field. If None, defaults to the horizontal resolution of the field.</p></li>
 <li><p><strong>vertical_coordinate</strong> – defines the requested vertical coordinate of the
-V2DField (cf. <a class="reference internal" href="V1DGeometry.html#module-epygram.geometries.V1DGeometry" title="epygram.geometries.V1DGeometry: Vertical 1-D Geometry class"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.V1DGeometry</span></code></a> coordinate
-possible values).</p></li>
+V2DField (cf. <a href="#id5"><span class="problematic" id="id6">:module:`epygram.geometries`</span></a> coordinate possible values).</p></li>
 <li><p><strong>interpolation</strong> – <p>defines the interpolation function used to compute
 the profile points locations from the fields grid:</p>
 <ul>
@@ -466,14 +463,14 @@ as a dict of lists.</p>
         <li class="right" >
           <a href="DDHLFA.html" title="epygram.formats.DDHLFA — Interface-Class to the DDHLFA format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFI</span></code> — Interface-Class to the LFI format</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

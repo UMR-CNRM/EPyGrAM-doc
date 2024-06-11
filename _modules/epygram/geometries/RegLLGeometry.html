@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.geometries.RegLLGeometry &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.geometries.RegLLGeometry</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.geometries.RegLLGeometry</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Contains the classes for 3D geometries of fields.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">footprints</span>
+
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">epygram.config</span> <span class="kn">import</span> <span class="n">rounding_decimal</span> <span class="k">as</span> <span class="n">_rd</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">degrees_nearest_mod</span><span class="p">,</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">write_formatted</span>
+
+<span class="kn">from</span> <span class="nn">.AbstractGeometry</span> <span class="kn">import</span> <span class="n">LLGeometry</span>
+
+<span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="RegLLGeometry"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry">[docs]</a><span class="k">class</span> <span class="nc">RegLLGeometry</span><span class="p">(</span><span class="n">LLGeometry</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handles the geometry for a Regular Lon/Lat 3-Dimensions Field.</span>
+
+<span class="sd">    TODO: Is this class really necessary. Maybe we could make only one class</span>
+<span class="sd">          with LLGeometry, RegLLGeometry and RotLLGEometry?</span>
+<span class="sd">          Is a RegLLGeometry equivalent to a RotLLGeometry with a null rotation angle?</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">vcoordinate</span><span class="p">,</span>
+                 <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;__unknown__&#39;</span><span class="p">,</span> <span class="n">geoid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param name: Name of geometrical type of representation of points on the Globe.</span>
+<span class="sd">                     Name must be &#39;regular_lonlat&#39;</span>
+<span class="sd">        :param grid: Handles description of the horizontal grid.</span>
+<span class="sd">        :param dimensions: Handles grid dimensions.</span>
+<span class="sd">        :param vcoordinate: Handles vertical geometry parameters.</span>
+<span class="sd">        :param position_on_horizontal_grid: Position of points w/r to the horizontal.</span>
+<span class="sd">                                            among: [&#39;upper-right&#39;, &#39;upper-left&#39;,</span>
+<span class="sd">                                                    &#39;lower-left&#39;, &#39;lower-right&#39;,</span>
+<span class="sd">                                                    &#39;center-left&#39;, &#39;center-right&#39;,</span>
+<span class="sd">                                                    &#39;lower-center&#39;, &#39;upper-center&#39;,</span>
+<span class="sd">                                                    &#39;center&#39;, &#39;__unknown__&#39;]</span>
+<span class="sd">        :param geoid: To specify geoid shape.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attr_inlist</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;regular_lonlat&#39;</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">RegLLGeometry</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">vcoordinate</span><span class="p">,</span>
+                                            <span class="n">position_on_horizontal_grid</span><span class="p">,</span> <span class="n">geoid</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>
+                                           <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">+</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">+</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">+</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">-</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">-</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">+</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                                             <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">-</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">-</span>
+                                           <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                                           <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">_rd</span><span class="p">),</span>
+                                     <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;this &#39;input_position&#39;: &quot;</span> <span class="o">+</span>
+                                      <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]))</span>
+
+        <span class="c1"># earth-round grids: wrap TODO:</span>
+        <span class="n">corners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">degrees_nearest_mod</span><span class="p">(</span><span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ur&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span>
+                   <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ur&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span>
+               <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">config</span><span class="o">.</span><span class="n">epsilon</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_earthround</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_earthround</span> <span class="o">=</span> <span class="kc">False</span>
+
+<div class="viewcode-block" id="RegLLGeometry.getcenter"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.getcenter">[docs]</a>    <span class="k">def</span> <span class="nf">getcenter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the coordinate of the grid center as a tuple of Angles</span>
+<span class="sd">        (center_lon, center_lat).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_consistency_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that the geometry is consistent.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;regular_lonlat&#39;</span><span class="p">:</span>
+            <span class="n">grid_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">,</span> <span class="s1">&#39;input_lat&#39;</span><span class="p">,</span> <span class="s1">&#39;input_position&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;X_resolution&#39;</span><span class="p">,</span> <span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">grid_keys</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;grid attribute must consist in keys: &quot;</span> <span class="o">+</span>
+                                   <span class="nb">str</span><span class="p">(</span><span class="n">grid_keys</span><span class="p">))</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">],</span> <span class="n">Angle</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">],</span> <span class="n">Angle</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span> <span class="n">Angle</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span> <span class="n">Angle</span><span class="p">)</span>
+            <span class="n">dimensions_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">dimensions_keys</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;dimensions attribute must consist in keys: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dimensions_keys</span><span class="p">))</span>
+
+<div class="viewcode-block" id="RegLLGeometry.ij2xy"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2xy">[docs]</a>    <span class="k">def</span> <span class="nf">ij2xy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the (x, y) coordinates of point *(i,j)*, in the projection.</span>
+
+<span class="sd">        :param i: X index of point in the 2D matrix of gridpoints</span>
+<span class="sd">        :param j: Y index of point in the 2D matrix of gridpoints</span>
+<span class="sd">        :param position: position to return with respect to the model cell.</span>
+<span class="sd">          Defaults to self.position_on_horizontal_grid.</span>
+
+<span class="sd">        Note that origin of coordinates in projection is the center of the C+I</span>
+<span class="sd">        domain.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">oi</span><span class="p">,</span> <span class="n">oj</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getoffset</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+        <span class="n">Xpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+        <span class="n">Ypoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+        <span class="n">Xresolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">Yresolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">Xorigin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">Yorigin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="c1"># origin of coordinates is the center of domain</span>
+        <span class="n">i0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Xpoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">j0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Ypoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Xorigin</span> <span class="o">+</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">i0</span> <span class="o">+</span> <span class="n">oi</span><span class="p">)</span> <span class="o">*</span> <span class="n">Xresolution</span><span class="p">,</span> <span class="n">_rd</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Yorigin</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">j0</span> <span class="o">+</span> <span class="n">oj</span><span class="p">)</span> <span class="o">*</span> <span class="n">Yresolution</span><span class="p">,</span> <span class="n">_rd</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegLLGeometry.xy2ij"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ij">[docs]</a>    <span class="k">def</span> <span class="nf">xy2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the (i, j) indexes of point *(x, y)*,</span>
+<span class="sd">        in the 2D matrix of gridpoints.</span>
+
+<span class="sd">        :param x: X coordinate of point in the projection</span>
+<span class="sd">        :param y: Y coordinate of point in the projection</span>
+<span class="sd">        :param position: position to return with respect to the model cell.</span>
+<span class="sd">          Defaults to self.position_on_horizontal_grid.</span>
+
+<span class="sd">        Caution: (*i,j*) are float (the nearest grid point is the nearest</span>
+<span class="sd">        integer).</span>
+
+<span class="sd">        Note that origin of coordinates in projection is the center of the C+I</span>
+<span class="sd">        domain.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+        <span class="p">(</span><span class="n">oi</span><span class="p">,</span> <span class="n">oj</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getoffset</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
+        <span class="n">Xpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+        <span class="n">Ypoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+        <span class="n">Xresolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">Yresolution</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">Xorigin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">Yorigin</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="c1"># origin of coordinates is the center of domain</span>
+        <span class="n">i0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Xpoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">j0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Ypoints</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i0</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">Xorigin</span><span class="p">)</span> <span class="o">/</span> <span class="n">Xresolution</span> <span class="o">-</span> <span class="n">oi</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">j0</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">Yorigin</span><span class="p">)</span> <span class="o">/</span> <span class="n">Yresolution</span> <span class="o">-</span> <span class="n">oj</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_earthround</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">ii</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">:</span>
+                    <span class="n">ii</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">ii</span> <span class="o">&gt;</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">:</span>
+                    <span class="n">ii</span> <span class="o">=</span> <span class="n">ii</span> <span class="o">-</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="n">i</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">ii</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegLLGeometry.ij2ll"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2ll">[docs]</a>    <span class="k">def</span> <span class="nf">ij2ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the (lon, lat) coordinates of point *(i,j)*, in degrees.</span>
+
+<span class="sd">        :param i: X index of point in the 2D matrix of gridpoints</span>
+<span class="sd">        :param j: Y index of point in the 2D matrix of gridpoints</span>
+<span class="sd">        :param position: lat lon position to return with respect to the model cell.</span>
+<span class="sd">          Defaults to self.position_on_horizontal_grid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ij2xy</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegLLGeometry.ll2ij"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2ij">[docs]</a>    <span class="k">def</span> <span class="nf">ll2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the (i, j) indexes of point *(lon, lat)* in degrees,</span>
+<span class="sd">        in the 2D matrix of gridpoints.</span>
+
+<span class="sd">        :param lon: longitude of point in degrees</span>
+<span class="sd">        :param lat: latitude of point in degrees</span>
+<span class="sd">        :param position: lat lon position to return with respect to the model cell.</span>
+<span class="sd">          Defaults to self.position_on_horizontal_grid.</span>
+
+<span class="sd">        Caution: (*i,j*) are float.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">degrees_nearest_mod</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xy2ij</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RegLLGeometry.ll2xy"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2xy">[docs]</a>    <span class="k">def</span> <span class="nf">ll2xy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the (x, y) coordinates of point *(lon, lat)* in degrees.</span>
+
+<span class="sd">        :param lon: longitude of point in degrees</span>
+<span class="sd">        :param lat: latitude of point in degrees</span>
+
+<span class="sd">        Note that origin of coordinates in projection is the center of the C+I</span>
+<span class="sd">        domain.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">lon</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">lat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ij2xy</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ll2ij</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="RegLLGeometry.xy2ll"><a class="viewcode-back" href="../../../library/RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ll">[docs]</a>    <span class="k">def</span> <span class="nf">xy2ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the (lon, lat) coordinates of point *(x, y)* in the 2D matrix</span>
+<span class="sd">        of gridpoints*(i,j)*, in degrees.</span>
+
+<span class="sd">        :param x: X coordinate of point in the projection</span>
+<span class="sd">        :param y: Y coordinate of point in the projection</span>
+
+<span class="sd">        Note that origin of coordinates in projection is the center of the C+I</span>
+<span class="sd">        domain.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">xy2ij</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span></div>
+
+    <span class="k">def</span> <span class="nf">_what_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">arpifs_var_names</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Writes in file a summary of the grid of the field.</span>
+
+<span class="sd">        :param out: the output open file-like object</span>
+<span class="sd">        :param arpifs_var_names: if True, prints the equivalent &#39;arpifs&#39; variable</span>
+<span class="sd">          names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span>
+        <span class="n">dimensions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span>
+        <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_lonlat_grid</span><span class="p">()</span>
+        <span class="n">corners</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gimme_corners_ll</span><span class="p">()</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Kind of Geometry&quot;</span><span class="p">,</span> <span class="s1">&#39;Regular Lon/Lat&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">arpifs_var_names</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39; (ELONC)&#39;</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Center Longitude in deg&quot;</span> <span class="o">+</span> <span class="n">varname</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arpifs_var_names</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39; (ELATC)&#39;</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Center Latitude in deg&quot;</span> <span class="o">+</span> <span class="n">varname</span><span class="p">,</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arpifs_var_names</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39; (EDELX)&#39;</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Resolution in X, in deg&quot;</span> <span class="o">+</span> <span class="n">varname</span><span class="p">,</span>
+                        <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arpifs_var_names</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39; (EDELY)&#39;</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Resolution in Y, in deg&quot;</span> <span class="o">+</span> <span class="n">varname</span><span class="p">,</span>
+                        <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arpifs_var_names</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39; (ELX)&#39;</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Domain width in X, in deg&quot;</span> <span class="o">+</span> <span class="n">varname</span><span class="p">,</span>
+                        <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                        <span class="p">(</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arpifs_var_names</span><span class="p">:</span>
+            <span class="n">varname</span> <span class="o">=</span> <span class="s1">&#39; (ELY)&#39;</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Domain width in Y, in deg&quot;</span> <span class="o">+</span> <span class="n">varname</span><span class="p">,</span>
+                        <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span> <span class="o">*</span>
+                        <span class="p">(</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Max Longitude in deg&quot;</span><span class="p">,</span> <span class="n">lons</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Min Longitude in deg&quot;</span><span class="p">,</span> <span class="n">lons</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Max Latitude in deg&quot;</span><span class="p">,</span> <span class="n">lats</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Min Latitude in deg&quot;</span><span class="p">,</span> <span class="n">lats</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Low-Left corner Longitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ll&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Low-Left corner Latitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ll&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Low-Right corner Longitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Low-Right corner Latitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;lr&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Upper-Left corner Longitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Upper-Left corner Latitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ul&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Upper-Right corner Longitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ur&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">write_formatted</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="s2">&quot;Upper-Right corner Latitude in deg&quot;</span><span class="p">,</span>
+                        <span class="n">corners</span><span class="p">[</span><span class="s1">&#39;ur&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.geometries.RegLLGeometry</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

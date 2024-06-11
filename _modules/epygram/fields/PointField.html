@@ -1,20 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>epygram.fields.PointField &#8212; epygram 1.4.16 documentation</title>
-    <link rel="stylesheet" href="../../../_static/sphinxdoc.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../../../_static/jquery.js"></script>
-    <script type="text/javascript" src="../../../_static/underscore.js"></script>
-    <script type="text/javascript" src="../../../_static/doctools.js"></script>
-    <script type="text/javascript" src="../../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.fields.PointField &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
@@ -27,27 +25,12 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.fields.PointField</a></li> 
       </ul>
-    </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../../../search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -64,21 +47,21 @@
 <span class="sd">Contains the class to for Point (0D == 1 value) fields.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="k">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
-<span class="kn">from</span> <span class="nn">bronx.graphics.axes</span> <span class="k">import</span> <span class="n">set_figax</span><span class="p">,</span> <span class="n">set_nice_time_axis</span>
+<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="kn">from</span> <span class="nn">bronx.graphics.axes</span> <span class="kn">import</span> <span class="n">set_figax</span><span class="p">,</span> <span class="n">set_nice_time_axis</span>
 
-<span class="kn">from</span> <span class="nn">.D3Field</span> <span class="k">import</span> <span class="n">D3Field</span>
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="k">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="k">import</span> <span class="n">PointGeometry</span><span class="p">,</span> <span class="n">VGeometry</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="k">import</span> <span class="n">ifNone_emptydict</span>
+<span class="kn">from</span> <span class="nn">.D3Field</span> <span class="kn">import</span> <span class="n">D3Field</span>
+<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span>
+<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">Geometry</span><span class="p">,</span> <span class="n">VGeometry</span><span class="p">,</span> <span class="n">UnstructuredGeometry</span>
+<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">ifNone_emptydict</span>
 
 
 <div class="viewcode-block" id="PointField"><a class="viewcode-back" href="../../../library/PointField.html#epygram.fields.PointField.PointField">[docs]</a><span class="k">class</span> <span class="nc">PointField</span><span class="p">(</span><span class="n">D3Field</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    0-Dimension (point) field class.</span>
 <span class="sd">    A field is defined by its identifier &#39;fid&#39;,</span>
 <span class="sd">    its data, its geometry, and its validity.</span>
@@ -90,7 +73,7 @@
             <span class="n">structure</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
                 <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">([</span><span class="s1">&#39;Point&#39;</span><span class="p">])),</span>
             <span class="n">geometry</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
-                <span class="nb">type</span><span class="o">=</span><span class="n">PointGeometry</span><span class="p">),</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">Geometry</span><span class="p">),</span>
         <span class="p">)</span>
     <span class="p">)</span>
 
@@ -104,7 +87,7 @@
                   <span class="n">plot_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">legend_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                   <span class="n">rcparams</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot a PointField if only it has a time dimension.</span>
 
 <span class="sd">        :param over: any existing figure and/or ax to be used for the</span>
@@ -128,7 +111,7 @@
 <span class="sd">                         defaults to [((&#39;font&#39;,), dict(family=&#39;serif&#39;)),]</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="k">import</span> <span class="n">dates</span>
+        <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">dates</span>
         <span class="k">if</span> <span class="n">rcparams</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">rcparams</span> <span class="o">=</span> <span class="p">[((</span><span class="s1">&#39;font&#39;</span><span class="p">,),</span> <span class="p">{</span><span class="s1">&#39;family&#39;</span><span class="p">:</span><span class="s1">&#39;serif&#39;</span><span class="p">}),]</span>
         <span class="k">for</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span> <span class="ow">in</span> <span class="n">rcparams</span><span class="p">:</span>
@@ -184,13 +167,15 @@
 <div class="viewcode-block" id="gimme_one_point"><a class="viewcode-back" href="../../../library/fields.html#epygram.fields.PointField.gimme_one_point">[docs]</a><span class="k">def</span> <span class="nf">gimme_one_point</span><span class="p">(</span><span class="n">longitude</span><span class="p">,</span> <span class="n">latitude</span><span class="p">,</span>
                     <span class="n">field_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">geometry_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                    <span class="n">vertical_geometry_args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+                    <span class="n">vertical_geometry_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">geometry_class</span><span class="o">=</span><span class="n">UnstructuredGeometry</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Builds an empty PointField at given (longitude, latitude).</span>
 
 <span class="sd">    :param field_args: to be passed to field constructor, e.g. a validity</span>
 <span class="sd">    :param geometry_args: to be passed to geometry constructor</span>
 <span class="sd">    :param vertical_geometry_args: to be passed to vertical_geometry constructor</span>
+<span class="sd">    :param geometry_class: geometry class tu use (default: UnstructuredGeometry)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">field_args</span> <span class="o">=</span> <span class="n">ifNone_emptydict</span><span class="p">(</span><span class="n">field_args</span><span class="p">)</span>
     <span class="n">geometry_args</span> <span class="o">=</span> <span class="n">ifNone_emptydict</span><span class="p">(</span><span class="n">geometry_args</span><span class="p">)</span>
@@ -199,20 +184,18 @@
     <span class="n">kwargs_vcoord</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;position_on_grid&#39;</span><span class="p">:</span><span class="s1">&#39;mass&#39;</span><span class="p">,</span>
                      <span class="s1">&#39;levels&#39;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span>
                      <span class="s1">&#39;grid&#39;</span><span class="p">:{</span><span class="s1">&#39;gridlevels&#39;</span><span class="p">:[]},</span>
-                     <span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span>
                      <span class="s1">&#39;typeoffirstfixedsurface&#39;</span><span class="p">:</span><span class="mi">255</span><span class="p">}</span>
     <span class="n">kwargs_vcoord</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">vertical_geometry_args</span><span class="p">)</span>
     <span class="n">vcoordinate</span> <span class="o">=</span> <span class="n">VGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_vcoord</span><span class="p">)</span>
 
-    <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
-                   <span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
+    <span class="n">kwargs_geom</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;unstructured&#39;</span><span class="p">,</span>
                    <span class="s1">&#39;grid&#39;</span><span class="p">:{</span><span class="s1">&#39;longitudes&#39;</span><span class="p">:[</span><span class="n">longitude</span><span class="p">],</span>
                            <span class="s1">&#39;latitudes&#39;</span><span class="p">:[</span><span class="n">latitude</span><span class="p">]},</span>
                    <span class="s1">&#39;dimensions&#39;</span><span class="p">:{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span>
                    <span class="s1">&#39;vcoordinate&#39;</span><span class="p">:</span><span class="n">vcoordinate</span><span class="p">,</span>
                    <span class="p">}</span>
     <span class="n">kwargs_geom</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">geometry_args</span><span class="p">)</span>
-    <span class="n">geom</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
+    <span class="n">geom</span> <span class="o">=</span> <span class="n">geometry_class</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span>
 
     <span class="n">kwargs_field</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;structure&#39;</span><span class="p">:</span><span class="s1">&#39;Point&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;geometry&#39;</span><span class="p">:</span><span class="n">geom</span><span class="p">,</span>
@@ -225,7 +208,22 @@
     <span class="k">return</span> <span class="n">field</span></div>
 </pre></div>
 
+            <div class="clearer"></div>
           </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -239,14 +237,15 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.16 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
-          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li> 
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.fields.PointField</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

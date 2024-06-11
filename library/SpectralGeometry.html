@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.geometries.SpectralGeometry — Spectral Geometry class &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.geometries.SpectralGeometry — Spectral Geometry class &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.domain_making — Domain creation" href="domain_making.html" />
-    <link rel="prev" title="epygram.geometries.PointGeometry — Point 0-D Geometry class" href="PointGeometry.html" /> 
+    <link rel="prev" title="epygram.geometries.VGeometry — Vertical Geometry class" href="VGeometry.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -32,10 +32,10 @@
           <a href="domain_making.html" title="epygram.geometries.domain_making — Domain creation"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="PointGeometry.html" title="epygram.geometries.PointGeometry — Point 0-D Geometry class"
+          <a href="VGeometry.html" title="epygram.geometries.VGeometry — Vertical Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></li> 
       </ul>
@@ -74,30 +74,18 @@ Gauss grids (has an impact on the gridpoint/spectral dimensions)</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.SpectralGeometry.SpectralGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.SpectralGeometry.</span></span><span class="sig-name descname"><span class="pre">SpectralGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/SpectralGeometry.html#SpectralGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.FootprintBase</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.SpectralGeometry.</span></span><span class="sig-name descname"><span class="pre">SpectralGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/SpectralGeometry.html#SpectralGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a></p>
 <p>Handles the spectral geometry and transforms for a H2DField.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>info: Not documented</p></li>
-<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>space</strong> – Name of spectral space.
+(among [‘legendre’, ‘bi-fourier’, ‘fourier’])</p></li>
+<li><p><strong>truncation</strong> – Handles the spectral truncation parameters.</p></li>
 </ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>space</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Name of spectral space.</p>
-<ul>
-<li><p>Values: set([‘legendre’, ‘fourier’, ‘bi-fourier’])</p></li>
-</ul>
-</li>
-<li><p><strong>truncation</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Handles the spectral truncation parameters.</p></li>
-</ul>
-</div></blockquote>
-</div>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.SpectralGeometry.SpectralGeometry.compute_xy_spderivatives">
 <span class="sig-name descname"><span class="pre">compute_xy_spderivatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpdims</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_coeff_order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'model'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/SpectralGeometry.html#SpectralGeometry.compute_xy_spderivatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry.compute_xy_spderivatives" title="Permalink to this definition">¶</a></dt>
@@ -122,7 +110,7 @@ cf. default and description in config.spectral_coeff_order</p></li>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.SpectralGeometry.SpectralGeometry.etrans_inq">
 <span class="sig-name descname"><span class="pre">etrans_inq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gpdims</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/SpectralGeometry.html#SpectralGeometry.etrans_inq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry.etrans_inq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrapper to arpifs4py ETRANS_INQ.</p>
+<dd><p>Wrapper to IAL’s ETRANS_INQ.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>gpdims</strong> (<em>dict</em>) – gridpoints dimensions</p>
@@ -180,27 +168,15 @@ cf. default and description in config.spectral_coeff_order</p></li>
 <p>Input and output data are both 1D.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.SpectralGeometry.SpectralGeometry.space">
-<span class="sig-name descname"><span class="pre">space</span></span><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry.space" title="Permalink to this definition">¶</a></dt>
-<dd><p>Name of spectral space (see the documentation above for more details).</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.SpectralGeometry.SpectralGeometry.trans_inq">
 <span class="sig-name descname"><span class="pre">trans_inq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gpdims</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/SpectralGeometry.html#SpectralGeometry.trans_inq"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry.trans_inq" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrapper to arpifs4py TRANS_INQ.</p>
+<dd><p>Wrapper to IAL’s TRANS_INQ.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>gpdims</strong> (<em>dict</em>) – gridpoints dimensions</p>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.geometries.SpectralGeometry.SpectralGeometry.truncation">
-<span class="sig-name descname"><span class="pre">truncation</span></span><a class="headerlink" href="#epygram.geometries.SpectralGeometry.SpectralGeometry.truncation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles the spectral truncation parameters (see the documentation above for more details).</p>
 </dd></dl>
 
 </dd></dl>
@@ -215,8 +191,8 @@ cf. default and description in config.spectral_coeff_order</p></li>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="PointGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.PointGeometry</span></code> — Point 0-D Geometry class</a></p>
+  <p class="topless"><a href="VGeometry.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="domain_making.html"
                         title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a></p>
@@ -254,16 +230,16 @@ cf. default and description in config.spectral_coeff_order</p></li>
           <a href="domain_making.html" title="epygram.geometries.domain_making — Domain creation"
              >next</a> |</li>
         <li class="right" >
-          <a href="PointGeometry.html" title="epygram.geometries.PointGeometry — Point 0-D Geometry class"
+          <a href="VGeometry.html" title="epygram.geometries.VGeometry — Vertical Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

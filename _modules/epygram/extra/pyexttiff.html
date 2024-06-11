@@ -1,0 +1,660 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.extra.pyexttiff &#8212; epygram 1.5.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.extra.pyexttiff</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.extra.pyexttiff</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module aims at reading tiff with private IFDs.</span>
+<span class="sd">It uses PIL for image reading.</span>
+
+<span class="sd">This module uses code from pylibtiff (https://pypi.python.org/pypi/libtiff, https://code.google.com/p/pylibtiff or https://github.com/hmeine/pylibtiff)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">unicode_literals</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">mmap</span>
+<span class="kn">import</span> <span class="nn">PIL.Image</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+
+<div class="viewcode-block" id="PyexttiffError"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.PyexttiffError">[docs]</a><span class="k">class</span> <span class="nc">PyexttiffError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Error handling for pyexttiff.&quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="TiffFile"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.TiffFile">[docs]</a><span class="k">class</span> <span class="nc">TiffFile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class allows the access to the entire tiff file (tags and images).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1">#see https://github.com/numpy/numpy/issues/2407 for the str workaround</span>
+    <span class="c1">#We will be able to suppress it when python2 with &quot;from __future__ import unicode_literals&quot; will not be used</span>
+    <span class="n">_rational</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;numer&#39;</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint32</span><span class="p">),</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;denom&#39;</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint32</span><span class="p">)])</span>
+    <span class="n">_srational</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">([(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;numer&#39;</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">),</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s1">&#39;denom&#39;</span><span class="p">),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">)])</span>
+
+    <span class="n">_type2name</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="s1">&#39;BYTE&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="s1">&#39;ASCII&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="s1">&#39;SHORT&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s1">&#39;LONG&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="s1">&#39;RATIONAL&#39;</span><span class="p">,</span>  <span class="c1"># two longs, lsm uses it for float64</span>
+                  <span class="mi">6</span><span class="p">:</span><span class="s1">&#39;SBYTE&#39;</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span><span class="s1">&#39;UNDEFINED&#39;</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="s1">&#39;SSHORT&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span><span class="s1">&#39;SLONG&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="s1">&#39;SRATIONAL&#39;</span><span class="p">,</span>
+                  <span class="mi">11</span><span class="p">:</span><span class="s1">&#39;FLOAT&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span><span class="s1">&#39;DOUBLE&#39;</span><span class="p">,</span>
+                  <span class="p">}</span>
+    <span class="n">_name2type</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">v</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_type2name</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">_name2type</span><span class="p">[</span><span class="s1">&#39;SHORT|LONG&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_name2type</span><span class="p">[</span><span class="s1">&#39;LONG&#39;</span><span class="p">]</span>
+    <span class="n">_name2type</span><span class="p">[</span><span class="s1">&#39;LONG|SHORT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_name2type</span><span class="p">[</span><span class="s1">&#39;LONG&#39;</span><span class="p">]</span>
+    <span class="n">_type2bytes</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span><span class="mi">8</span><span class="p">}</span>
+    <span class="n">_type2dtype</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint32</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="n">_rational</span><span class="p">,</span>
+                   <span class="mi">6</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">int8</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint8</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">int16</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span><span class="n">_srational</span><span class="p">,</span>
+                   <span class="mi">11</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span><span class="n">numpy</span><span class="o">.</span><span class="n">float64</span><span class="p">}</span>
+
+    <span class="k">class</span> <span class="nc">_LittleEndianNumpyDTypes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="n">uint8</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u1&#39;</span><span class="p">)</span>
+        <span class="n">uint16</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u2&#39;</span><span class="p">)</span>
+        <span class="n">uint32</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u4&#39;</span><span class="p">)</span>
+        <span class="n">uint64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;u8&#39;</span><span class="p">)</span>
+        <span class="n">int8</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;i1&#39;</span><span class="p">)</span>
+        <span class="n">int16</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;i2&#39;</span><span class="p">)</span>
+        <span class="n">int32</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;i4&#39;</span><span class="p">)</span>
+        <span class="n">int64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;i8&#39;</span><span class="p">)</span>
+        <span class="n">float32</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;f4&#39;</span><span class="p">)</span>
+        <span class="n">float64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;f8&#39;</span><span class="p">)</span>
+        <span class="n">complex64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;c8&#39;</span><span class="p">)</span>
+        <span class="n">complex128</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&lt;c16&#39;</span><span class="p">)</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">type2dt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&#39;&lt;&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_type2dtype</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="k">class</span> <span class="nc">_BigEndianNumpyDTypes</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="n">uint8</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u1&#39;</span><span class="p">)</span>
+        <span class="n">uint16</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u2&#39;</span><span class="p">)</span>
+        <span class="n">uint32</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u4&#39;</span><span class="p">)</span>
+        <span class="n">uint64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;u8&#39;</span><span class="p">)</span>
+        <span class="n">int8</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;i1&#39;</span><span class="p">)</span>
+        <span class="n">int16</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;i2&#39;</span><span class="p">)</span>
+        <span class="n">int32</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;i4&#39;</span><span class="p">)</span>
+        <span class="n">int64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;i8&#39;</span><span class="p">)</span>
+        <span class="n">float32</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;f4&#39;</span><span class="p">)</span>
+        <span class="n">float64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;f8&#39;</span><span class="p">)</span>
+        <span class="n">complex64</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;c8&#39;</span><span class="p">)</span>
+        <span class="n">complex128</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;&gt;c16&#39;</span><span class="p">)</span>
+
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">type2dt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">dict</span><span class="p">((</span><span class="n">k</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">newbyteorder</span><span class="p">(</span><span class="s1">&#39;&gt;&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_type2dtype</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">subIFDpaths</span><span class="o">=</span><span class="p">[],</span> <span class="n">method</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Opens a tiff file, reads header and IFDs.</span>
+<span class="sd">        *filename* is the filename containing the tiff</span>
+<span class="sd">        *subIFDpaths* is the list of tag path whose values are offset to private IFDs</span>
+<span class="sd">            a tag path is a tuple representing the path to a given tag which must represent an IFD</span>
+<span class="sd">            (34665) means that tag 34665 of any given public IFD is an offset to a private IFD</span>
+<span class="sd">            (32001, 521) means that tag 32001 of any given public IFD is an offset to a private IFD</span>
+<span class="sd">                           and that tag 521 of any private tag referenced by a 32001 public tag is also an offset to a private IFD</span>
+<span class="sd">        *method* is the method used to read data:</span>
+<span class="sd">            1: f=open(..., &#39;rb&#39;) ; numpy.frombuffer(f.read(), dtype=numpy.ubyte)</span>
+<span class="sd">            2: f=open(..., &#39;rb&#39;) ; numpy.ndarray(buffer=mmap(f), dtype=numpy.ubyte)</span>
+<span class="sd">            3: same as 2 but with modifications allowed - DANGEROUS</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_filename</span> <span class="o">=</span> <span class="n">filename</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_subIFDpaths</span> <span class="o">=</span> <span class="n">subIFDpaths</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="n">filename</span> <span class="o">+</span> <span class="s2">&quot; must exists.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Reading file</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">ubyte</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+            <span class="n">mm</span> <span class="o">=</span> <span class="n">mmap</span><span class="o">.</span><span class="n">mmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">prot</span><span class="o">=</span><span class="n">mmap</span><span class="o">.</span><span class="n">PROT_READ</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">size</span><span class="p">(),),</span> <span class="n">buffer</span><span class="o">=</span><span class="n">mm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">ubyte</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r+b&#39;</span><span class="p">)</span>
+            <span class="n">mm</span> <span class="o">=</span> <span class="n">mmap</span><span class="o">.</span><span class="n">mmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span><span class="o">.</span><span class="n">fileno</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">mm</span><span class="o">.</span><span class="n">size</span><span class="p">(),),</span> <span class="n">buffer</span><span class="o">=</span><span class="n">mm</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">ubyte</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s2">&quot;This method is unknown.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Decoding header - byte order</span>
+        <span class="n">byteorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uint16</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">byteorder</span> <span class="o">==</span> <span class="mh">0x4949</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">endian</span> <span class="o">=</span> <span class="s1">&#39;little&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_LittleEndianNumpyDTypes</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">byteorder</span> <span class="o">==</span> <span class="mh">0x4d4d</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">endian</span> <span class="o">=</span> <span class="s1">&#39;big&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_BigEndianNumpyDTypes</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;unrecognized byteorder: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">byteorder</span><span class="p">)))</span>
+
+        <span class="c1"># Decoding header - magic number</span>
+        <span class="n">magic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint16</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">magic</span> <span class="o">!=</span> <span class="mi">42</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;wrong magic number for TIFF file: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">magic</span><span class="p">))</span>
+
+        <span class="c1"># Decoding header - first IFD offset</span>
+        <span class="n">IFD0offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+        <span class="c1"># IFD reading</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IFDs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">IFD0offset</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">offset</span><span class="p">:</span>
+            <span class="n">ifd</span><span class="p">,</span> <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readIFD</span><span class="p">(</span><span class="n">offset</span><span class="p">,</span> <span class="p">(),</span> <span class="n">subIFDpaths</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ifd</span><span class="o">.</span><span class="n">has_image</span><span class="p">():</span>
+                <span class="n">num</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s2">&quot;Not sure about IFD that does not contain image.&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">IFDs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ifd</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_readIFD</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">subIFDpaths</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads recursively IFDs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ifd</span> <span class="o">=</span> <span class="n">IFD</span><span class="p">()</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint16</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">entryOffset</span> <span class="o">=</span> <span class="n">offset</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">12</span>
+            <span class="n">entrytag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint16</span><span class="p">(</span><span class="n">entryOffset</span><span class="p">)</span>
+            <span class="n">entrytype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint16</span><span class="p">(</span><span class="n">entryOffset</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">entrycount</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint32</span><span class="p">(</span><span class="n">entryOffset</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+            <span class="n">entrybytes</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_type2bytes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entrytype</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">entrycount</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">entrybytes</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">entryvalue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_values</span><span class="p">(</span><span class="n">entryOffset</span> <span class="o">+</span> <span class="mi">8</span><span class="p">,</span> <span class="n">entrytype</span><span class="p">,</span> <span class="n">entrycount</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">valueOffset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_int32</span><span class="p">(</span><span class="n">entryOffset</span> <span class="o">+</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="n">entryvalue</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_values</span><span class="p">(</span><span class="n">valueOffset</span><span class="p">,</span> <span class="n">entrytype</span><span class="p">,</span> <span class="n">entrycount</span><span class="p">)</span>
+            <span class="n">entrypath</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">entrytag</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">entrypath</span> <span class="ow">in</span> <span class="p">[</span><span class="n">mypath</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">entrypath</span><span class="p">)]</span> <span class="k">for</span> <span class="n">mypath</span> <span class="ow">in</span> <span class="n">subIFDpaths</span><span class="p">]:</span>
+                <span class="c1">#In the first version of this tool, entryvalue was an array at this stage</span>
+                <span class="c1">#This is corrected to suppress the numpy warning but code</span>
+                <span class="c1">#(by replacing entryvalue by entryvalue[0] in following statement)</span>
+                <span class="c1">#lacks comment and I&#39;m now unable to understand this part.</span>
+                <span class="c1">#If an error is raised by this line, it would be necessary</span>
+                <span class="c1">#to investigate more...</span>
+                <span class="k">assert</span> <span class="n">entryvalue</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">),</span> <span class="s2">&quot;Not as expected...&quot;</span>
+                
+                <span class="n">subifd</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readIFD</span><span class="p">(</span><span class="n">entryvalue</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">entrypath</span><span class="p">,</span> <span class="n">subIFDpaths</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="n">ifd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">IFDEntry</span><span class="p">(</span><span class="n">entrytag</span><span class="p">,</span> <span class="n">entrytype</span><span class="p">,</span> <span class="n">subifd</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ifd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">IFDEntry</span><span class="p">(</span><span class="n">entrytag</span><span class="p">,</span> <span class="n">entrytype</span><span class="p">,</span> <span class="n">entryvalue</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">path</span> <span class="o">==</span> <span class="p">()</span> <span class="ow">and</span> <span class="n">ifd</span><span class="o">.</span><span class="n">has_tag</span><span class="p">(</span><span class="mi">273</span><span class="p">):</span>
+            <span class="c1"># Raw data</span>
+            <span class="n">nbRows</span> <span class="o">=</span> <span class="n">ifd</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">257</span><span class="p">)</span>
+            <span class="n">offsetValues</span> <span class="o">=</span> <span class="n">ifd</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">273</span><span class="p">)</span>
+            <span class="n">nbRowsPerStrip</span> <span class="o">=</span> <span class="n">ifd</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">278</span><span class="p">)</span>
+            <span class="n">nbBytesPerStrip</span> <span class="o">=</span> <span class="n">ifd</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="mi">279</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">offsetValues</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">offsetValues</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">offsetValues</span><span class="p">])</span>
+                <span class="n">nbBytesPerStrip</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">nbBytesPerStrip</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">nbRows</span> <span class="o">/</span> <span class="n">nbRowsPerStrip</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">nbRows</span> <span class="o">%</span> <span class="n">nbRowsPerStrip</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">offsetValues</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s2">&quot;Total number of rows, strip numbers and number of rows per strips are not consistent.&quot;</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">offsetValues</span><span class="p">)):</span>
+                <span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_values</span><span class="p">(</span><span class="n">offsetValues</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nbBytesPerStrip</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">ifd</span><span class="o">.</span><span class="n">get_entry</span><span class="p">(</span><span class="mi">273</span><span class="p">)</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+            <span class="c1"># Image data</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_PILImage</span><span class="p">()</span>
+            <span class="n">im</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>  <span class="c1"># Sometimes must be called twice to return values...</span>
+            <span class="n">ifd</span><span class="o">.</span><span class="n">_image</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="n">nextIFD</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_uint32</span><span class="p">(</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">n</span> <span class="o">*</span> <span class="mi">12</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">ifd</span><span class="p">,</span> <span class="n">nextIFD</span><span class="p">)</span>
+
+<div class="viewcode-block" id="TiffFile.get_data"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.TiffFile.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the ndarray containing the data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span></div>
+
+<div class="viewcode-block" id="TiffFile.get_PILImage"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.TiffFile.get_PILImage">[docs]</a>    <span class="k">def</span> <span class="nf">get_PILImage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the PIL image object of the file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">meth</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">getbuffer</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">meth</span> <span class="o">=</span> <span class="nb">memoryview</span>
+        <span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">LooseVersion</span>
+        <span class="kn">import</span> <span class="nn">warnings</span>
+        <span class="k">if</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="n">PIL</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">LooseVersion</span><span class="p">(</span><span class="s1">&#39;5.4.1&#39;</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;You may have issues using an old version of PIL; please update it with &quot;</span> <span class="o">+</span> \
+                          <span class="s2">&quot;&#39;pip install --user --upgrade pillow&#39;. This warning is issued when version &quot;</span> <span class="o">+</span> \
+                          <span class="s2">&quot;of pillow is inferior to &#39;5.4.1&#39; but it may work, or not, with older versions...&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">six</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">meth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">())))</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_uint16</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">uint16</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">_get_uint32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">uint32</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">_get_int32</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">int32</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">_get_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">typ</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">itemsize</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">generic</span><span class="p">):</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="n">typ</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">typ</span><span class="p">()</span><span class="o">.</span><span class="n">itemsize</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+                <span class="n">ntyp</span> <span class="o">=</span> <span class="n">typ</span>
+                <span class="n">typ</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_name2type</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ntyp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+            <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span><span class="o">.</span><span class="n">type2dt</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">TiffFile</span><span class="o">.</span><span class="n">_type2bytes</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s1">&#39;_get_values: incomplete info for type=</span><span class="si">%r</span><span class="s1"> [</span><span class="si">%r</span><span class="s1">]: dtype=</span><span class="si">%s</span><span class="s1">, bytes=</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">ntyp</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_data</span><span class="p">()[</span><span class="n">offset</span><span class="p">:</span><span class="n">offset</span> <span class="o">+</span> <span class="n">size</span> <span class="o">*</span> <span class="n">count</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+<div class="viewcode-block" id="TiffFile.close"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.TiffFile.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Closes the file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_fileHandle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        __del__ method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IFD"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD">[docs]</a><span class="k">class</span> <span class="nc">IFD</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class represent an IFD.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation method of IFD class.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_image</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="IFD.has_tag"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.has_tag">[docs]</a>    <span class="k">def</span> <span class="nf">has_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns True if an entry fits the tag given</span>
+<span class="sd">        :param tag: tag to look for, as an integer or a name</span>
+<span class="sd">        :return: True if tag exists</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tagValues</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tagNames</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="IFD.get_entry"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.get_entry">[docs]</a>    <span class="k">def</span> <span class="nf">get_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the entry for a tag</span>
+<span class="sd">        :param tag: tag to look for, as an integer or a name</span>
+<span class="sd">        :return: the entry associated to the tag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s2">&quot;This tag doesn&#39;t exist in this IFD.&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">entry</span><span class="o">.</span><span class="n">get_tagValue</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">entry</span><span class="o">.</span><span class="n">get_tagName</span><span class="p">())</span> <span class="o">==</span> <span class="n">tag</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">entry</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="IFD.get_value"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.get_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">human</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value for a tag</span>
+<span class="sd">        :param tag: tag to look for, as an integer or a name</span>
+<span class="sd">        :param human: if True, value is modified:</span>
+<span class="sd">                        - value[0] is returned instead of value if array contains only one element</span>
+<span class="sd">                        - conversion in string is achieved for arrays representing strings</span>
+<span class="sd">        :return: the value associated to the tag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_tag</span><span class="p">(</span><span class="n">tag</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s2">&quot;This tag doesn&#39;t exist in this IFD.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_entry</span><span class="p">(</span><span class="n">tag</span><span class="p">)</span><span class="o">.</span><span class="n">get_value</span><span class="p">(</span><span class="n">human</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IFD.has_image"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.has_image">[docs]</a>    <span class="k">def</span> <span class="nf">has_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if one tag is an image&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="IFD.get_image"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.get_image">[docs]</a>    <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the image&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_image</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="n">PyexttiffError</span><span class="p">(</span><span class="s2">&quot;This IFD doesn&#39;t contain an image.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_image</span></div>
+
+<div class="viewcode-block" id="IFD.get_tagValues"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.get_tagValues">[docs]</a>    <span class="k">def</span> <span class="nf">get_tagValues</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the list of the tags as decimal values&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">entry</span><span class="o">.</span><span class="n">get_tagValue</span><span class="p">()</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="IFD.get_tagNames"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.get_tagNames">[docs]</a>    <span class="k">def</span> <span class="nf">get_tagNames</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the list of the tag names&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">entry</span><span class="o">.</span><span class="n">get_tagName</span><span class="p">()</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="IFD.as_dict"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFD.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="s1">&#39;value&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns a dictionary containing all entries.</span>
+<span class="sd">        :param keys: keys to use for the dictionary, among (&#39;value&#39;, &#39;name&#39;)</span>
+<span class="sd">        :return: the dictionary</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">keys</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="s2">&quot;keys must be in (&#39;value&#39;, &#39;name&#39;)&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">entry</span><span class="o">.</span><span class="n">get_tagValue</span><span class="p">()</span> <span class="k">if</span> <span class="n">keys</span> <span class="o">==</span> <span class="s1">&#39;value&#39;</span> <span class="k">else</span> <span class="n">entry</span><span class="o">.</span><span class="n">get_tagName</span><span class="p">:</span> <span class="n">entry</span><span class="o">.</span><span class="n">get_value</span><span class="p">()</span> <span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">}</span></div></div>
+
+<div class="viewcode-block" id="IFDEntry"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry">[docs]</a><span class="k">class</span> <span class="nc">IFDEntry</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class represent an IFD entry&quot;&quot;&quot;</span>
+
+    <span class="c1"># &lt;TagName&gt; &lt;Hex&gt; &lt;Type&gt; &lt;Number of values&gt;</span>
+    <span class="n">_tag_info</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"># standard tags:</span>
+<span class="s1">NewSubfileType FE LONG 1</span>
+<span class="s1">SubfileType FF SHORT 1</span>
+<span class="s1">ImageWidth 100 SHORT|LONG 1</span>
+<span class="s1">ImageLength 101 SHORT|LONG 1</span>
+<span class="s1">BitsPerSample 102 SHORT SamplesPerPixel</span>
+<span class="s1">Compression 103 SHORT 1</span>
+<span class="s1">  Uncompressed 1</span>
+<span class="s1">  CCITT1D 2</span>
+<span class="s1">  Group3Fax 3</span>
+<span class="s1">  Group4Fax 4</span>
+<span class="s1">  LZW 5</span>
+<span class="s1">  JPEG 6</span>
+<span class="s1">  PackBits 32773</span>
+<span class="s1">PhotometricInterpretation 106 SHORT 1</span>
+<span class="s1">  WhiteIsZero 0</span>
+<span class="s1">  BlackIsZero 1</span>
+<span class="s1">  RGB 2</span>
+<span class="s1">  RGBPalette 3</span>
+<span class="s1">  TransparencyMask 4</span>
+<span class="s1">  CMYK 5</span>
+<span class="s1">  YCbCr 6</span>
+<span class="s1">  CIELab 8</span>
+<span class="s1">Threshholding 107 SHORT 1</span>
+<span class="s1">CellWidth 108 SHORT 1</span>
+<span class="s1">CellLength 109 SHORT 1</span>
+<span class="s1">FillOrder 10A SHORT 1</span>
+<span class="s1">DocumentName 10D ASCII</span>
+<span class="s1">ImageDescription 10E ASCII</span>
+<span class="s1">Make 10F ASCII</span>
+<span class="s1">Model 110 ASCII</span>
+<span class="s1">StripOffsets 111 SHORT|LONG StripsPerImage</span>
+<span class="s1">Orientation 112 SHORT 1</span>
+<span class="s1">  TopLeft 1</span>
+<span class="s1">  TopRight 2</span>
+<span class="s1">  BottomRight 3</span>
+<span class="s1">  BottomLeft 4</span>
+<span class="s1">  LeftTop 5</span>
+<span class="s1">  RightTop 6</span>
+<span class="s1">  RightBottom 7</span>
+<span class="s1">  LeftBottom 8</span>
+<span class="s1">SamplesPerPixel 115 SHORT 1</span>
+<span class="s1">RowsPerStrip 116 SHORT|LONG 1</span>
+<span class="s1">StripByteCounts 117 LONG|SHORT StripsPerImage</span>
+<span class="s1">MinSampleValue 118 SHORT SamplesPerPixel</span>
+<span class="s1">MaxSampleValue 119 SHORT SamplesPerPixel</span>
+<span class="s1">XResolution 11A RATIONAL 1</span>
+<span class="s1">YResolution 11B RATIONAL 1</span>
+<span class="s1">PlanarConfiguration 11C SHORT 1</span>
+<span class="s1">  Chunky 1</span>
+<span class="s1">  Planar 2</span>
+<span class="s1">PageName 11D ASCII</span>
+<span class="s1">XPosition 11E DOUBLE</span>
+<span class="s1">YPosition 11F DOUBLE</span>
+<span class="s1">FreeOffsets 120 LONG</span>
+<span class="s1">FreeByteCounts 121 LONG</span>
+<span class="s1">GrayResponseUnit 122 SHORT 1</span>
+<span class="s1">GrayResponseCurve 123 SHORT 2**BitsPerSample</span>
+<span class="s1">T4Options 124 LONG 1</span>
+<span class="s1">T6Options 125 LONG 1</span>
+<span class="s1">ResolutionUnit 128 SHORT 1</span>
+<span class="s1">PageNumber 129 SHORT 2</span>
+<span class="s1">TransferFunction 12D SHORT (1|SamplesPerPixel)*2**BitsPerSample</span>
+<span class="s1">Software 131 ASCII</span>
+<span class="s1">DateTime 132 ASCII 20</span>
+<span class="s1">Artist 13B ASCII</span>
+<span class="s1">HostComputer 13C ASCII</span>
+<span class="s1">Predictor 13D SHORT 1</span>
+<span class="s1">WhitePoint 13E RATIONAL 2</span>
+<span class="s1">PrimaryChromaticities 13F RATIONAL 6</span>
+<span class="s1">ColorMap 140 SHORT 3*(2**BitsPerSample)</span>
+<span class="s1">HalftoneHints 141 SHORT 2</span>
+<span class="s1">TileWidth 142 SHORT|LONG 1</span>
+<span class="s1">TileLength 143 SHORT|LONG 1</span>
+<span class="s1">TileOffsets 144 LONG TilesPerImage</span>
+<span class="s1">TileByteCounts 145 SHORT|LONG TilesPerImage</span>
+<span class="s1">InkSet 14C SHORT 1</span>
+<span class="s1">InkNames 14D ASCII &lt;total number of chars in all ink name strings, including zeros&gt;</span>
+<span class="s1">NumberOfInks 14E SHORT 1</span>
+<span class="s1">DotRange 150 BYTE|SHORT 2|2*NumberOfInks</span>
+<span class="s1">TargetPrinter 151 ASCII any</span>
+<span class="s1">ExtraSamples 152 BYTE &lt;number of extra components per pixel&gt;</span>
+<span class="s1">SampleFormat 153 SHORT SamplesPerPixel</span>
+<span class="s1">SMinSampleValue 154 Any SamplesPerPixel</span>
+<span class="s1">SMaxSampleValue 155 Any SamplesPerPixel</span>
+<span class="s1">TransferRange 156 SHORT 6</span>
+<span class="s1">JPEGProc 200 SHORT 1</span>
+<span class="s1">JPEGInterchangeFormat 201 LONG 1</span>
+<span class="s1">JPEGInterchangeFormatLength 202 LONG 1</span>
+<span class="s1">JPEGRestartInterval 203 SHORT 1</span>
+<span class="s1">JPEGLosslessPredictos 205 SHORT SamplesPerPixel</span>
+<span class="s1">JPEGPointTransforms 206 SHORT SamplesPerPixel</span>
+<span class="s1">JPEGQTables 207 LONG SamplesPerPixel</span>
+<span class="s1">JPEGDCTables 208 LONG SamplesPerPixel</span>
+<span class="s1">JPEGACTables 209 LONG SamplesPerPixel</span>
+<span class="s1">YCbCrCoefficients 211 RATIONAL 3</span>
+<span class="s1">YCbCrSubSampling 212 SHORT 2</span>
+<span class="s1">YCbCrPositioning 213 SHORT 1</span>
+<span class="s1">ReferenceBlackWhite 214 LONG 2*SamplesPerPixel</span>
+<span class="s1">Copyright 8298 ASCII Any</span>
+
+<span class="s1"># non-standard tags:</span>
+<span class="s1">CZ_LSMInfo 866C CZ_LSM</span>
+
+<span class="s1"># EXIF tags, see http://www.awaresystems.be/imaging/tiff/tifftags/privateifd/exif.html</span>
+<span class="s1">EXIF_IFDOffset 8769 SHORT 1</span>
+<span class="s1">EXIF_ExposureTime 829a RATIONAL 1</span>
+<span class="s1">EXIF_FNumber 829d RATIONAL 1</span>
+<span class="s1">EXIF_ExposureProgram 8822 SHORT 1</span>
+<span class="s1">EXIF_SpectralSensitivity 8824 ASCII</span>
+<span class="s1">EXIF_ISOSpeedRatings 8827 SHORT 1</span>
+<span class="s1">EXIF_OECF 8828 UNDEFINED</span>
+<span class="s1">EXIF_ExifVersion 9000 UNDEFINED 4</span>
+<span class="s1">EXIF_DateTimeOriginal 9003 ASCII</span>
+<span class="s1">EXIF_DateTimeDigitized 9004 ASCII</span>
+<span class="s1">EXIF_ComponentsConfiguration 9101 UNDEFINED 4</span>
+<span class="s1">EXIF_CompressedBitsPerPixel 9102 RATIONAL 1</span>
+<span class="s1">EXIF_ShutterSpeedValue 9201 SRATIONAL 1</span>
+<span class="s1">EXIF_ApertureValue 9202 RATIONAL 1</span>
+<span class="s1">EXIF_BrightnessValue 9203 SRATIONAL 1</span>
+<span class="s1">EXIF_ExposureBiasValue 9204 SRATIONAL 1</span>
+<span class="s1">EXIF_MaxApertureValue 9205 RATIONAL 1</span>
+<span class="s1">EXIF_SubjectDistance 9206 RATIONAL 1</span>
+<span class="s1">EXIF_MeteringMode 9207 SHORT 1</span>
+<span class="s1">EXIF_LightSource 9208 SHORT 1</span>
+<span class="s1">EXIF_Flash 9209 SHORT 1</span>
+<span class="s1">EXIF_FocalLength 920a RATIONAL 1</span>
+<span class="s1">EXIF_SubjectArea 9214 SHORT 2|3|4</span>
+<span class="s1">EXIF_MakerNote 927c UNDEFINED</span>
+<span class="s1">EXIF_UserComment 9286 UNDEFINED</span>
+<span class="s1">EXIF_SubsecTime 9290 ASCII</span>
+<span class="s1">EXIF_SubsecTimeOriginal 9291 ASCII</span>
+<span class="s1">EXIF_SubsecTimeDigitized 9292 ASCII</span>
+<span class="s1">EXIF_FlashpixVersion a000 UNDEFINED 4</span>
+<span class="s1">EXIF_ColorSpace a001 SHORT 1</span>
+<span class="s1">EXIF_PixelXDimension a002 SHORT!LONG 1</span>
+<span class="s1">EXIF_PixelYDimension a003 SHORT!LONG 1</span>
+<span class="s1">EXIF_RelatedSoundFile a004 ASCII 13</span>
+<span class="s1">EXIF_FlashEnergy a20b RATIONAL 1</span>
+<span class="s1">EXIF_SpatialFrequencyResponse a20c UNDEFINED</span>
+<span class="s1">EXIF_FocalPlaneXResolution a20e RATIONAL 1</span>
+<span class="s1">EXIF_FocalPlaneYResolution a20f RATIONAL 1</span>
+<span class="s1">EXIF_FocalPlaneResolutionUnit a210 SHORT 1</span>
+<span class="s1">EXIF_SubjectLocation a214 SHORT 2</span>
+<span class="s1">EXIF_ExposureIndex a215 RATIONAL 1</span>
+<span class="s1">EXIF_SensingMethod a217 SHORT 1</span>
+<span class="s1">EXIF_FileSource a300 UNDEFINED 1</span>
+<span class="s1">EXIF_SceneType a301 UNDEFINED 1</span>
+<span class="s1">EXIF_CFAPattern a302 UNDEFINED</span>
+<span class="s1">EXIF_CustomRendered a401 SHORT 1</span>
+<span class="s1">EXIF_ExposureMode a402 SHORT 1</span>
+<span class="s1">EXIF_WhiteBalance a403 SHORT 1</span>
+<span class="s1">EXIF_DigitalZoomRatio a404 RATIONAL 1</span>
+<span class="s1">EXIF_FocalLengthIn35mmFilm a405 SHORT 1</span>
+<span class="s1">EXIF_SceneCaptureType a406 SHORT 1</span>
+<span class="s1">EXIF_GainControl a407 SHORT 1</span>
+<span class="s1">EXIF_Contrast a408 SHORT 1</span>
+<span class="s1">EXIF_Saturation a409 SHORT 1</span>
+<span class="s1">EXIF_Sharpness a40a SHORT 1</span>
+<span class="s1">EXIF_DeviceSettingDescription a40b UNDEFINED</span>
+<span class="s1">EXIF_SubjectDistanceRange a40c SHORT 1</span>
+<span class="s1">EXIF_ImageUniqueID a420 ASCII 33</span>
+
+<span class="s1">&#39;&#39;&#39;</span>
+    <span class="n">_tag_value2name</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_tag_name2value</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">_tag_value2type</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">_tag_info</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span> <span class="ow">or</span> <span class="n">line</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39; &#39;</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span> <span class="o">+</span> <span class="n">h</span><span class="p">)</span>
+            <span class="n">_tag_value2name</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">n</span>
+            <span class="n">_tag_value2type</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
+            <span class="n">_tag_name2value</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">h</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">entrytype</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        *tag* is the tag number of the entry</span>
+<span class="sd">        *entrytype* is the type of the entry</span>
+<span class="sd">        *value* is the value associated to the tag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tag</span> <span class="o">=</span> <span class="n">tag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="n">entrytype</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tag_value2name</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="s1">&#39;TAG</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">tag</span><span class="p">),))</span>
+
+<div class="viewcode-block" id="IFDEntry.is_image"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.is_image">[docs]</a>    <span class="k">def</span> <span class="nf">is_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if content in an image&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tagValue</span><span class="p">()</span> <span class="o">==</span> <span class="mi">273</span></div>
+
+<div class="viewcode-block" id="IFDEntry.is_IFD"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.is_IFD">[docs]</a>    <span class="k">def</span> <span class="nf">is_IFD</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if content is an IFD.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_value</span><span class="p">(),</span> <span class="n">IFD</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="IFDEntry.get_tagValue"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.get_tagValue">[docs]</a>    <span class="k">def</span> <span class="nf">get_tagValue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the tag&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tag</span></div>
+
+<div class="viewcode-block" id="IFDEntry.get_value"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.get_value">[docs]</a>    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">human</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the value</span>
+<span class="sd">        if human=True, value is modified:</span>
+<span class="sd">            - value[0] is returned instead of value if array contains only one element</span>
+<span class="sd">            - conversion in string is achieved for arrays representing strings</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span>
+        <span class="k">if</span> <span class="n">human</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span> <span class="c1">#ASCII</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="p">(</span><span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="s1">&#39;|S</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">nbytes</span> <span class="o">//</span> <span class="n">value</span><span class="o">.</span><span class="n">size</span><span class="p">))))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;UTF8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+<div class="viewcode-block" id="IFDEntry.get_tagName"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.get_tagName">[docs]</a>    <span class="k">def</span> <span class="nf">get_tagName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the tag name&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span></div>
+
+<div class="viewcode-block" id="IFDEntry.get_type"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.get_type">[docs]</a>    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the type of entry.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span></div>
+
+<div class="viewcode-block" id="IFDEntry.set_value"><a class="viewcode-back" href="../../../extra/pyexttiff.html#epygram.extra.pyexttiff.IFDEntry.set_value">[docs]</a>    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the value of the entry.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.extra.pyexttiff</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

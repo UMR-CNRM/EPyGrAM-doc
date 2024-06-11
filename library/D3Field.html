@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>epygram.fields.D3Field — 3-D Field class &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.fields.D3Field — 3-D Field class &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,8 +34,8 @@
         <li class="right" >
           <a href="fields.html" title="epygram.fields — Fields"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fields.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></li> 
       </ul>
@@ -808,6 +808,12 @@ Default figsize is config.plotsizes.</p></li>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.sgmean">
+<span class="sig-name descname"><span class="pre">sgmean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.sgmean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.sgmean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an average of the field, weighted by the map factor at each point.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.shave">
 <span class="sig-name descname"><span class="pre">shave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.shave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.shave" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shave data: cut values greater (resp. lower) than <strong>maxval</strong> to
@@ -1013,7 +1019,7 @@ in case it is spectral.</p>
 </ul>
 </li>
 <li><p><strong>fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - Not documented, sorry.</p></li>
-<li><p><strong>geometry</strong> (<a class="reference internal" href="D3Geometry.html#epygram.geometries.D3Geometry.D3Geometry" title="epygram.geometries.D3Geometry.D3Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.D3Geometry.D3Geometry</span></code></a>) - rxx - Geometry defining the position of the field gridpoints.</p></li>
+<li><p><strong>geometry</strong> (<a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry" title="epygram.geometries.AbstractGeometry.Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.Geometry</span></code></a>) - rxx - Geometry defining the position of the field gridpoints.</p></li>
 <li><p><strong>misc_metadata</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwd - Not documented, sorry.</p>
 <ul>
 <li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</p></li>
@@ -1041,7 +1047,7 @@ in case it is spectral.</p>
 </li>
 <li><p><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.</p>
 <ul>
-<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7ff17c58a230&gt;]&gt;&gt;.</p></li>
+<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x70dbf3c65720&gt;]&gt;&gt;.</p></li>
 </ul>
 </li>
 </ul>
@@ -1569,14 +1575,14 @@ geometry’s <em>sp2gp()</em> method.</p>
         <li class="right" >
           <a href="fields.html" title="epygram.fields — Fields"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> — Package</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fields.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

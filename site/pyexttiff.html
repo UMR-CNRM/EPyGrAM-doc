@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pyexttiff — Classes to read Tiff &#8212; epygram 1.4.17 documentation</title>
+    <title>pyexttiff — Classes to read Tiff &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="arpifs4py.html" title="arpifs4py — Interface functions to some Arpege/IFS functions"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">External, side packages</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyexttiff</span></code> — Classes to read Tiff</a></li> 
       </ul>
@@ -45,196 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-pyexttiff">
-<span id="pyexttiff-classes-to-read-tiff"></span><h1><a class="reference internal" href="#module-pyexttiff" title="pyexttiff: Classes to read Tiff"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyexttiff</span></code></a> — Classes to read Tiff<a class="headerlink" href="#module-pyexttiff" title="Permalink to this headline">¶</a></h1>
-<p>This module aims at reading tiff with private IFDs.
-It uses PIL for image reading.</p>
-<p>This module uses code from pylibtiff (<a class="reference external" href="https://pypi.python.org/pypi/libtiff">https://pypi.python.org/pypi/libtiff</a>, <a class="reference external" href="https://code.google.com/p/pylibtiff">https://code.google.com/p/pylibtiff</a> or <a class="reference external" href="https://github.com/hmeine/pylibtiff">https://github.com/hmeine/pylibtiff</a>)</p>
+  <section id="pyexttiff-classes-to-read-tiff">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyexttiff</span></code> — Classes to read Tiff<a class="headerlink" href="#pyexttiff-classes-to-read-tiff" title="Permalink to this headline">¶</a></h1>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="pyexttiff.PyexttiffError">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyexttiff.</span></span><span class="sig-name descname"><span class="pre">PyexttiffError</span></span><a class="reference internal" href="../_modules/pyexttiff.html#PyexttiffError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.PyexttiffError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Error handling for pyexttiff.</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="pyexttiff.TiffFile">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyexttiff.</span></span><span class="sig-name descname"><span class="pre">TiffFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subIFDpaths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#TiffFile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.TiffFile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This class allows the access to the entire tiff file (tags and images).</p>
-<p>Opens a tiff file, reads header and IFDs.
-<em>filename</em> is the filename containing the tiff
-<em>subIFDpaths</em> is the list of tag path whose values are offset to private IFDs</p>
-<blockquote>
-<div><p>a tag path is a tuple representing the path to a given tag which must represent an IFD
-(34665) means that tag 34665 of any given public IFD is an offset to a private IFD
-(32001, 521) means that tag 32001 of any given public IFD is an offset to a private IFD</p>
-<blockquote>
-<div><p>and that tag 521 of any private tag referenced by a 32001 public tag is also an offset to a private IFD</p>
-</div></blockquote>
-</div></blockquote>
-<dl class="simple">
-<dt><em>method</em> is the method used to read data:</dt><dd><p>1: f=open(…, ‘rb’) ; numpy.frombuffer(f.read(), dtype=numpy.ubyte)
-2: f=open(…, ‘rb’) ; numpy.ndarray(buffer=mmap(f), dtype=numpy.ubyte)
-3: same as 2 but with modifications allowed - DANGEROUS</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.TiffFile.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#TiffFile.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.TiffFile.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Closes the file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.TiffFile.get_PILImage">
-<span class="sig-name descname"><span class="pre">get_PILImage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#TiffFile.get_PILImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.TiffFile.get_PILImage" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the PIL image object of the file.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.TiffFile.get_data">
-<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#TiffFile.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.TiffFile.get_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the ndarray containing the data.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="pyexttiff.IFD">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyexttiff.</span></span><span class="sig-name descname"><span class="pre">IFD</span></span><a class="reference internal" href="../_modules/pyexttiff.html#IFD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></p>
-<p>This class represent an IFD.</p>
-<p>Initialisation method of IFD class.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.as_dict">
-<span class="sig-name descname"><span class="pre">as_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'value'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.as_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.as_dict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a dictionary containing all entries.
-:param keys: keys to use for the dictionary, among (‘value’, ‘name’)
-:return: the dictionary</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.get_entry">
-<span class="sig-name descname"><span class="pre">get_entry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.get_entry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.get_entry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the entry for a tag
-:param tag: tag to look for, as an integer or a name
-:return: the entry associated to the tag</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.get_image">
-<span class="sig-name descname"><span class="pre">get_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.get_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.get_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the image</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.get_tagNames">
-<span class="sig-name descname"><span class="pre">get_tagNames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.get_tagNames"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.get_tagNames" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of the tag names</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.get_tagValues">
-<span class="sig-name descname"><span class="pre">get_tagValues</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.get_tagValues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.get_tagValues" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of the tags as decimal values</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.get_value">
-<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">human</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.get_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value for a tag
-:param tag: tag to look for, as an integer or a name
-:param human: if True, value is modified:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>value[0] is returned instead of value if array contains only one element</p></li>
-<li><p>conversion in string is achieved for arrays representing strings</p></li>
-</ul>
-</div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>the value associated to the tag</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.has_image">
-<span class="sig-name descname"><span class="pre">has_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.has_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.has_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if one tag is an image</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFD.has_tag">
-<span class="sig-name descname"><span class="pre">has_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFD.has_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFD.has_tag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if an entry fits the tag given
-:param tag: tag to look for, as an integer or a name
-:return: True if tag exists</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyexttiff.</span></span><span class="sig-name descname"><span class="pre">IFDEntry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tag</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entrytype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This class represent an IFD entry</p>
-<p><em>tag</em> is the tag number of the entry
-<em>entrytype</em> is the type of the entry
-<em>value</em> is the value associated to the tag</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.get_tagName">
-<span class="sig-name descname"><span class="pre">get_tagName</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.get_tagName"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.get_tagName" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the tag name</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.get_tagValue">
-<span class="sig-name descname"><span class="pre">get_tagValue</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.get_tagValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.get_tagValue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the tag</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.get_type">
-<span class="sig-name descname"><span class="pre">get_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.get_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.get_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type of entry.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.get_value">
-<span class="sig-name descname"><span class="pre">get_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">human</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.get_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.get_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value
-if human=True, value is modified:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>value[0] is returned instead of value if array contains only one element</p></li>
-<li><p>conversion in string is achieved for arrays representing strings</p></li>
-</ul>
-</div></blockquote>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.is_IFD">
-<span class="sig-name descname"><span class="pre">is_IFD</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.is_IFD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.is_IFD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if content is an IFD.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.is_image">
-<span class="sig-name descname"><span class="pre">is_image</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.is_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.is_image" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns True if content in an image</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="pyexttiff.IFDEntry.set_value">
-<span class="sig-name descname"><span class="pre">set_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyexttiff.html#IFDEntry.set_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyexttiff.IFDEntry.set_value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the value of the entry.</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -295,13 +109,13 @@ if human=True, value is modified:</p>
         <li class="right" >
           <a href="arpifs4py.html" title="arpifs4py — Interface functions to some Arpege/IFS functions"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >External, side packages</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyexttiff</span></code> — Classes to read Tiff</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>

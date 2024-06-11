@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.geometries.D3Geometry &#8212; epygram 1.4.17 documentation</title>
+    <title>epygram.geometries.D3Geometry &#8212; epygram 1.4.18 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.18 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li>
@@ -769,14 +769,14 @@
             <span class="n">selectionE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">))</span>
             <span class="n">y1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y_Iwidth&#39;</span><span class="p">]</span>
             <span class="n">y2</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;Y_Iwidth&#39;</span><span class="p">]</span>
-            <span class="n">selectionI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">))</span>
+            <span class="n">selectionI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">y2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">y2</span><span class="p">))</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">datashape</span><span class="p">[</span><span class="s1">&#39;i&#39;</span><span class="p">]:</span>
             <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;X_CIoffset&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">x2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;X_CIoffset&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">]</span>
             <span class="n">selectionE</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">))</span>
             <span class="n">x1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X_Iwidth&#39;</span><span class="p">]</span>
             <span class="n">x2</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s1">&#39;X_Iwidth&#39;</span><span class="p">]</span>
-            <span class="n">selectionI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">))</span>
+            <span class="n">selectionI</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">x2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">x2</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;CIE&#39;</span><span class="p">:</span>
             <span class="c1"># remove E-zone</span>
@@ -4713,7 +4713,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.4.18 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li>

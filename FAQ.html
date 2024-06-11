@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>FAQ — Frequently Asked Questions &#8212; epygram 1.4.17 documentation</title>
+    <title>FAQ — Frequently Asked Questions &#8212; epygram 1.5.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="gallery/index.html" title="Gallery"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ — Frequently Asked Questions</a></li> 
       </ul>
     </div>  
@@ -48,35 +48,30 @@
 <h1>FAQ — Frequently Asked Questions<a class="headerlink" href="#faq-frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
 <hr class="docutils" />
 <ul>
-<li><p><strong>ecCodes does not seem to be found by Python</strong></p>
+<li><p><strong>I have weird errors (MPI?) when I try to read a FA file…</strong></p>
 <blockquote>
-<div><p>=&gt; (re-)install eccodes support for Python : <code class="docutils literal notranslate"><span class="pre">pip3</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">eccodes</span></code></p>
-<p>if that is not enough, reinstall epygram:</p>
-<ul class="simple">
-<li><p>clean any reference to <code class="docutils literal notranslate"><span class="pre">epygram</span></code> in your environment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">unset</span> <span class="pre">PYTHONPATH</span></code></p></li>
-<li><p>&#64; CNRM, reinstall epygram running <code class="docutils literal notranslate"><span class="pre">$EPYGRAM_INSTALL_DIR/_install/install_epygram.py</span> <span class="pre">-e</span></code></p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<hr class="docutils" />
-<ul>
-<li><p><strong>I have rather esoterical errors when I try to read a FA file…</strong></p>
-<blockquote>
-<div><p>=&gt; the <a class="reference internal" href="library/epygram.html#epygram.init_env" title="epygram.init_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">epygram.init_env()</span></code></a> may be initialized at the beginning of your
-script(s), to be sure the <a class="reference internal" href="site/arpifs4py.html#module-arpifs4py" title="arpifs4py: Interface functions to some **Arpege/IFS** functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arpifs4py</span></code></a> library do not use MPI, or uses
+<div><p>=&gt; the <a class="reference internal" href="library/epygram.html#epygram.init_env" title="epygram.init_env"><code class="xref py py-func docutils literal notranslate"><span class="pre">epygram.init_env()</span></code></a> should be called at the beginning of your
+script(s), to be sure the <code class="xref py py-mod docutils literal notranslate"><span class="pre">arpifs4py</span></code> library do not use MPI, or uses
 OpenMP with an initialized environment.</p>
 </div></blockquote>
 </li>
 </ul>
 <hr class="docutils" />
 <ul>
-<li><p><strong>There is a field in my Surfex FA file, recognized as MiscField by</strong> <code class="docutils literal notranslate"><span class="pre">epygram</span></code>
-<strong>whereas it is H2D, or vice-versa; how can I manage to read it ?</strong></p>
+<li><p><strong>I have weird ecCodes errors…</strong></p>
 <blockquote>
-<div><p>=&gt; edit <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/sfxflddesc_mod.F90</span></code>, and add your field in the
-manner of the examples given therein or in <code class="docutils literal notranslate"><span class="pre">$EPYGRAM_INSTALL_DIR/epygram/data/sfxflddesc_mod.F90</span></code>.
+<div><p>=&gt; check environment variables <code class="docutils literal notranslate"><span class="pre">$[ECCODES|GRIB]_[SAMPLES|DEFINITION]_PATH</span></code>
+and make sure they are consistent with your ecCodes install or unset them</p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p><strong>There is a field in my Surfex FA file, recognized as H2DField by</strong> <code class="docutils literal notranslate"><span class="pre">epygram</span></code>
+<strong>whereas it is a meta-data field; how can I manage to read it ?</strong></p>
+<blockquote>
+<div><p>=&gt; copy <code class="docutils literal notranslate"><span class="pre">$EPYGRAM_INSTALL_DIR/src/epygram/data/sfxflddesc_mod.F90</span></code> into <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/sfxflddesc_mod.F90</span></code>,
+and add your field in there in the manner of another meta-data field of the same kind
 And warn the <code class="docutils literal notranslate"><span class="pre">epygram</span></code> team about it, so that it will enter next version
 default <code class="docutils literal notranslate"><span class="pre">sfxflddesc_mod.F90</span></code>.</p>
 </div></blockquote>
@@ -86,7 +81,7 @@ default <code class="docutils literal notranslate"><span class="pre">sfxflddesc_
 <ul>
 <li><p><strong>I need to overwrite the faFieldName.def ecCodes definition file for FA fieldnames conversion to GRIB2 parameters:</strong></p>
 <blockquote>
-<div><p>=&gt; copy <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.0/</span></code> as <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.99/</span></code>,
+<div><p>=&gt; copy <code class="docutils literal notranslate"><span class="pre">$EPYGRAM_INSTALL_DIR/src/epygram/data/gribapi.def.??/</span></code> as <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.99/</span></code>,
 then edit <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/gribapi.def.99/grib2/localConcepts/lfpw/faFieldName.def</span></code>
 and set any field therein.</p>
 </div></blockquote>
@@ -106,7 +101,7 @@ and set any field therein.</p>
 <li><p>run your script on supercomputers using the alias
 <code class="docutils literal notranslate"><span class="pre">s1batch='sbatch</span> <span class="pre">-N</span> <span class="pre">1</span> <span class="pre">-p</span> <span class="pre">normal256</span> <span class="pre">--mem</span> <span class="pre">250000</span> <span class="pre">-t</span> <span class="pre">00:30:00'</span></code>
 e.g.: <code class="docutils literal notranslate"><span class="pre">s1batch</span> <span class="pre">myscript.py</span> <span class="pre">options</span> <span class="pre">-of</span> <span class="pre">-my</span> <span class="pre">--script</span></code></p></li>
-<li><p>use the <code class="docutils literal notranslate"><span class="pre">fa_sp2gp.py</span></code> tool on Bull (using the above alias) to convert your
+<li><p>use the <code class="docutils literal notranslate"><span class="pre">fa_sp2gp.py</span></code> tool on supercomputers (using the above alias) to convert your
 file to all-gridpoint then work in gridpoint space</p></li>
 </ul>
 </div></blockquote>
@@ -138,6 +133,15 @@ file to all-gridpoint then work in gridpoint space</p></li>
 <blockquote>
 <div><p>=&gt; values of <a class="reference internal" href="library/config.html#module-epygram.config" title="epygram.config: Configuration: parameters, options used throughout the package."><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code></a> can be modified in
 <code class="docutils literal notranslate"><span class="pre">$HOME/.epygram/userconfig.py</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<hr class="docutils" />
+<ul>
+<li><p><strong>How to modify the validity of a FA file ?</strong></p>
+<blockquote>
+<div><p>=&gt; e.g. to set the cumulativeduration to 0:
+<code class="docutils literal notranslate"><span class="pre">fa_resource.modify_validity(basis=fa_resource.validity.get(),</span> <span class="pre">cumulativeduration=datetime.timedelta(0))</span></code></p>
 </div></blockquote>
 </li>
 </ul>
@@ -194,12 +198,12 @@ file to all-gridpoint then work in gridpoint space</p></li>
         <li class="right" >
           <a href="gallery/index.html" title="Gallery"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.4.17 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.5.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">FAQ — Frequently Asked Questions</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2022, A.Mary, S.Riette.
+        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
       Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
