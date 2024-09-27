@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.fields.D3VectorField &#8212; epygram 1.5.0 documentation</title>
+    <title>epygram.fields.D3VectorField &#8212; epygram 1.5.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.D3VectorField</a></li> 
@@ -105,6 +105,69 @@
     <span class="n">v</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">psi</span><span class="o">.</span><span class="n">validity</span>
     <span class="k">return</span> <span class="n">make_vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
 
+<span class="k">def</span> <span class="nf">uv2psikhi</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute streamfunction **psi** and velocity potential **khi**</span>
+<span class="sd">    as a D3VectorField (or subclass) from wind (on the grid).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check space</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span> <span class="ow">and</span> <span class="n">v</span><span class="o">.</span><span class="n">spectral</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Wind must be in spectral space to compute psi/khi.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Compute voriticity / divergence</span>
+    <span class="n">uv</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">make_vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">vor</span><span class="p">,</span> <span class="n">div</span> <span class="o">=</span> <span class="n">uv</span><span class="o">.</span><span class="n">compute_vordiv</span><span class="p">()</span>
+    <span class="n">vor</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="p">)</span>
+    <span class="n">div</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">u</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projected_geometry</span><span class="p">:</span>
+        <span class="c1"># Prepare elliptic truncation</span>
+        <span class="n">M</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s2">&quot;in_X&quot;</span><span class="p">]</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s2">&quot;in_Y&quot;</span><span class="p">]</span>
+        <span class="n">ellips</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">ellips</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">N</span>
+        <span class="k">for</span> <span class="n">jm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">ellips</span><span class="p">[</span><span class="n">jm</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">M</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">M</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="p">(</span><span class="n">jm</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="mf">1.0e-10</span><span class="p">)</span>
+        <span class="n">ellips</span><span class="p">[</span><span class="n">M</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">nsefre</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">jm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">nsefre</span> <span class="o">+=</span> <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">ellips</span><span class="p">[</span><span class="n">jm</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">nsefre</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;Inconsistent elliptic truncation.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Prepare laplacian and inverse laplacian</span>
+        <span class="n">exwn</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s2">&quot;X_resolution&quot;</span><span class="p">]</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="p">]))</span>
+        <span class="n">eywn</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s2">&quot;Y_resolution&quot;</span><span class="p">]</span><span class="o">*</span><span class="nb">float</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s2">&quot;Y&quot;</span><span class="p">]))</span>
+        <span class="n">lapdir</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsefre</span><span class="p">)</span>
+        <span class="n">lapinv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsefre</span><span class="p">)</span>
+        <span class="n">inm</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">jm</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">M</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">jn</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">ellips</span><span class="p">[</span><span class="n">jm</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">jq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">jm</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">jn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">lapdir</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+                        <span class="n">lapinv</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+                    <span class="k">elif</span> <span class="n">jn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">lapdir</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="n">jm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">exwn</span><span class="o">**</span><span class="mi">2</span>
+                        <span class="n">lapinv</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">lapdir</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">lapdir</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">jm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">exwn</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="nb">float</span><span class="p">(</span><span class="n">jn</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">eywn</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+                        <span class="n">lapinv</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">lapdir</span><span class="p">[</span><span class="n">inm</span><span class="p">]</span>
+                    <span class="n">inm</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;uv2psikhi implemented for projected geometry only so far.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Apply inverse laplacian to compute stream function and velocity potential</span>
+    <span class="n">psi</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">khi</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="n">psi</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">vor</span><span class="o">.</span><span class="n">data</span><span class="o">*</span><span class="n">lapinv</span>
+    <span class="n">khi</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">div</span><span class="o">.</span><span class="n">data</span><span class="o">*</span><span class="n">lapinv</span>
+    <span class="n">psi</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+    <span class="n">khi</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+    <span class="n">psi</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s2">&quot;FA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s2">&quot;FA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;WIND.U.PHYS&quot;</span><span class="p">,</span><span class="s2">&quot;FONC.COURANT&quot;</span><span class="p">)</span>
+    <span class="n">khi</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s2">&quot;FA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s2">&quot;FA&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;WIND.U.PHYS&quot;</span><span class="p">,</span><span class="s2">&quot;POT.VITESSE&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">psi</span><span class="p">,</span> <span class="n">khi</span>
 
 <div class="viewcode-block" id="D3VectorField"><a class="viewcode-back" href="../../../library/D3VectorField.html#epygram.fields.D3VectorField.D3VectorField">[docs]</a><span class="k">class</span> <span class="nc">D3VectorField</span><span class="p">(</span><span class="n">Field</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -152,7 +215,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">spectral</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if the field is spectral.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">c</span><span class="o">.</span><span class="n">spectral</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -732,7 +795,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.D3VectorField</a></li> 

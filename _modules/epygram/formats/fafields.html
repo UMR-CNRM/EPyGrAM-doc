@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats.fafields &#8212; epygram 1.5.0 documentation</title>
+    <title>epygram.formats.fafields &#8212; epygram 1.5.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
     <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
@@ -66,7 +66,7 @@
 <span class="sd">    b) move it under {config.userlocaldir}/{FaGribDef.dirname}</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_re_dirname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;gribapi\.def\.[\d_]+&#39;</span><span class="p">)</span>
+    <span class="n">_re_dirname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;gribapi\.def\.[\d_]+&#39;</span><span class="p">)</span>
     <span class="n">_official_rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">installdir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
     <span class="n">_non_GRIB_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;LSTCUM&#39;</span><span class="p">,</span> <span class="s1">&#39;FMULTM&#39;</span><span class="p">,</span> <span class="s1">&#39;FMULTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ZLMULT&#39;</span><span class="p">)</span>
 
@@ -121,7 +121,7 @@
 <span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
 <span class="sd">            present in grib def of field</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">_re_altitude</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(?P&lt;ltype&gt;[A-W]+)(?P&lt;level&gt;\d+)(?P&lt;param&gt;.+)&#39;</span><span class="p">)</span>
+        <span class="n">_re_altitude</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?P&lt;ltype&gt;[A-W]+)(?P&lt;level&gt;\d+)(?P&lt;param&gt;.+)&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="s1">&#39;faFieldName&#39;</span><span class="p">]:</span>
             <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span> <span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span>
                                 <span class="n">grib_edition</span><span class="p">,</span> <span class="n">include_comments</span><span class="p">)</span>
@@ -249,8 +249,8 @@
 
 <div class="viewcode-block" id="SfxFldDesc_Mod"><a class="viewcode-back" href="../../../library/fafields.html#epygram.formats.FA.SfxFldDesc_Mod">[docs]</a><span class="k">class</span> <span class="nc">SfxFldDesc_Mod</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle fields catalog from sfxflddesc.F90 source file.&quot;&quot;&quot;</span>
-    <span class="n">_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;&quot;\.(?P&lt;name&gt;[\w\d%]+)\.+(?P&lt;gridtype&gt;\d)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;type&gt;\w\d)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;comment&gt;.+)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;mask&gt;.</span><span class="si">{20}</span><span class="s1">)\.</span><span class="si">{2}</span><span class="s1">&quot;,? ?(&amp;|/)&#39;</span><span class="p">)</span>
-    <span class="n">_unit</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;(?P&lt;comment&gt;.*)\((?P&lt;unit&gt;.+)\)&#39;</span><span class="p">)</span>
+    <span class="n">_pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;&quot;\.(?P&lt;name&gt;[\w\d%]+)\.+(?P&lt;gridtype&gt;\d)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;type&gt;\w\d)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;comment&gt;.+)\.</span><span class="si">{2}</span><span class="s1">(?P&lt;mask&gt;.</span><span class="si">{20}</span><span class="s1">)\.</span><span class="si">{2}</span><span class="s1">&quot;,? ?(&amp;|/)&#39;</span><span class="p">)</span>
+    <span class="n">_unit</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?P&lt;comment&gt;.*)\((?P&lt;unit&gt;.+)\)&#39;</span><span class="p">)</span>
     <span class="n">_fortran_sourcename</span> <span class="o">=</span> <span class="s1">&#39;sfxflddesc_mod.F90&#39;</span>
     <span class="n">type2nature</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;X&#39;</span><span class="p">:</span><span class="s1">&#39;float&#39;</span><span class="p">,</span> <span class="s1">&#39;L&#39;</span><span class="p">:</span><span class="s1">&#39;bool&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">:</span><span class="s1">&#39;str&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span><span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">:</span><span class="s1">&#39;float&#39;</span><span class="p">,</span>
                    <span class="s1">&#39;T&#39;</span><span class="p">:</span><span class="s1">&#39;int&#39;</span><span class="p">}</span>  <span class="c1"># FIXME: T: cf mode_write_surf_fa.F90</span>
@@ -354,11 +354,11 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;For a wind **fieldname**, find and return the pair.&quot;&quot;&quot;</span>
     <span class="n">pairs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;U&#39;</span><span class="p">:</span><span class="s1">&#39;V&#39;</span><span class="p">,</span> <span class="s1">&#39;V&#39;</span><span class="p">:</span><span class="s1">&#39;U&#39;</span><span class="p">,</span>
              <span class="s1">&#39;ZONAL&#39;</span><span class="p">:</span><span class="s1">&#39;MERIDIEN&#39;</span><span class="p">,</span> <span class="s1">&#39;MERIDIEN&#39;</span><span class="p">:</span><span class="s1">&#39;ZONAL&#39;</span><span class="p">,</span> <span class="s1">&#39;MERID&#39;</span><span class="p">:</span><span class="s1">&#39;ZONAL&#39;</span><span class="p">}</span>
-    <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;S\d+WIND\.(?P&lt;d&gt;[U,V])\.PHYS&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;[P,H,V]\d+VENT_(?P&lt;d&gt;(ZONAL)|(MERID)|(MERIDIEN))&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;CLSVENTNEUTRE.(?P&lt;d&gt;[U,V])&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;CLSVENT.(?P&lt;d&gt;(ZONAL)|(MERIDIEN))&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;CLS(?P&lt;d&gt;[U,V]).RAF.MOD.XFU&#39;</span><span class="p">]</span>
+    <span class="n">patterns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;S\d+WIND\.(?P&lt;d&gt;[U,V])\.PHYS&#39;</span><span class="p">,</span>
+                <span class="sa">r</span><span class="s1">&#39;[P,H,V]\d+VENT_(?P&lt;d&gt;(ZONAL)|(MERID)|(MERIDIEN))&#39;</span><span class="p">,</span>
+                <span class="sa">r</span><span class="s1">&#39;CLSVENTNEUTRE.(?P&lt;d&gt;[U,V])&#39;</span><span class="p">,</span>
+                <span class="sa">r</span><span class="s1">&#39;CLSVENT.(?P&lt;d&gt;(ZONAL)|(MERIDIEN))&#39;</span><span class="p">,</span>
+                <span class="sa">r</span><span class="s1">&#39;CLS(?P&lt;d&gt;[U,V]).RAF.MOD.XFU&#39;</span><span class="p">]</span>
     <span class="n">axes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;U&#39;</span><span class="p">:</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;ZONAL&#39;</span><span class="p">:</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
             <span class="s1">&#39;V&#39;</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;MERIDIEN&#39;</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;MERID&#39;</span><span class="p">:</span><span class="s1">&#39;y&#39;</span><span class="p">}</span>
     <span class="n">pair</span> <span class="o">=</span> <span class="kc">None</span>
@@ -404,7 +404,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>

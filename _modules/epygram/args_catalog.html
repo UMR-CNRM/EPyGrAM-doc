@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.args_catalog &#8212; epygram 1.5.0 documentation</title>
+    <title>epygram.args_catalog &#8212; epygram 1.5.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.args_catalog</a></li> 
@@ -338,18 +338,16 @@
         <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span>
         <span class="nb">dict</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;store graphical output in file in with specified format,</span><span class="se">\</span>
 <span class="s2">                   among (&#39;png&#39;, pdf). Pdf is kind of disadvised, for it is</span><span class="se">\</span>
-<span class="s2">                   very slow and produces much too big files...&quot;</span><span class="p">,</span>
-             <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">],</span>
-             <span class="n">default</span><span class="o">=</span><span class="n">_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default_graphical_output&#39;</span><span class="p">)</span>
-                     <span class="k">if</span> <span class="ow">not</span> <span class="n">util</span><span class="o">.</span><span class="n">mpl_interactive_backend</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)],</span>
+<span class="s2">                   very slow and produces much too big files. &#39;X&#39; to open GUI.&quot;</span><span class="p">,</span>
+             <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">],</span>
+             <span class="n">default</span><span class="o">=</span><span class="n">_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default_graphical_output&#39;</span><span class="p">))],</span>
     <span class="s1">&#39;outputfmt&#39;</span><span class="p">:[</span>
         <span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--outputfmt&#39;</span><span class="p">,</span>
         <span class="nb">dict</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;specify format for output file,</span><span class="se">\</span>
 <span class="s2">                   among (&#39;png&#39;, pdf). Pdf is kind of disadvised, for it is</span><span class="se">\</span>
-<span class="s2">                   very slow and produces much too big files...&quot;</span><span class="p">,</span>
-             <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">],</span>
-             <span class="n">default</span><span class="o">=</span><span class="n">_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default_graphical_output&#39;</span><span class="p">)</span>
-                     <span class="k">if</span> <span class="ow">not</span> <span class="n">util</span><span class="o">.</span><span class="n">mpl_interactive_backend</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span><span class="p">)],</span>
+<span class="s2">                   very slow and produces much too big files. &#39;X&#39; to open GUI.&quot;</span><span class="p">,</span>
+             <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;png&#39;</span><span class="p">,</span> <span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="s1">&#39;X&#39;</span><span class="p">],</span>
+             <span class="n">default</span><span class="o">=</span><span class="n">_defaults</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;default_graphical_output&#39;</span><span class="p">))],</span>
     <span class="s1">&#39;savefig&#39;</span><span class="p">:[</span>
         <span class="s1">&#39;--sf&#39;</span><span class="p">,</span> <span class="s1">&#39;--savefig&#39;</span><span class="p">,</span>
         <span class="nb">dict</span><span class="p">(</span><span class="n">help</span><span class="o">=</span><span class="s2">&quot;save figure in file.&quot;</span><span class="p">,</span>
@@ -1124,7 +1122,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.args_catalog</a></li> 

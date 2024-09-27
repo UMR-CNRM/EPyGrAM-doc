@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats &#8212; epygram 1.5.0 documentation</title>
+    <title>epygram.formats &#8212; epygram 1.5.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.formats</a></li> 
@@ -99,26 +99,13 @@
     <span class="k">return</span> <span class="n">available</span><span class="p">,</span> <span class="n">reason</span>
 
 
-<span class="c1"># Formats loading used to have to follow an order,</span>
-<span class="c1"># for common dynamic libraries of different versions.</span>
-<span class="c1"># Still necessary WHEN we do not use the same gribapi/eccodes</span>
-<span class="c1"># in falfilfa4py and GRIB interface</span>
-<span class="c1"># There is also known issues between netCDF and FA/GRIB on some platforms:</span>
-<span class="c1"># - GRIB and arpifs4py formats need to be loaded before netCDF/netCDF;</span>
-<span class="c1"># - netCDF crash later on if arpifs4py is loaded...</span>
-<span class="c1"># - HDF5 currently to be loaded before FA&amp;co</span>
+<span class="c1"># Formats loading may have to follow an order,</span>
+<span class="c1"># for common dynamic libraries of different versions. Order to be set in config.implemented_formats</span>
 
-<span class="c1"># _loaded_first_formats = [&#39;FA&#39;, &#39;LFI&#39;, &#39;DDHLFA&#39;, &#39;LFA&#39;, &#39;GRIB&#39;]</span>
-<span class="n">_loaded_first_formats</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;HDF5SAF&#39;</span><span class="p">,</span> <span class="s1">&#39;GRIB&#39;</span><span class="p">,</span> <span class="s1">&#39;FA&#39;</span><span class="p">,</span> <span class="s1">&#39;LFI&#39;</span><span class="p">,</span> <span class="s1">&#39;DDHLFA&#39;</span><span class="p">,</span> <span class="s1">&#39;LFA&#39;</span><span class="p">]</span>
-<span class="n">_formats_in_loading_order</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">implemented_formats</span><span class="p">)</span>
-<span class="c1"># set ordering</span>
-<span class="k">for</span> <span class="n">lff</span> <span class="ow">in</span> <span class="n">_loaded_first_formats</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-    <span class="k">if</span> <span class="n">lff</span> <span class="ow">in</span> <span class="n">_formats_in_loading_order</span><span class="p">:</span>
-        <span class="n">_formats_in_loading_order</span> <span class="o">=</span> <span class="p">[</span><span class="n">lff</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">f</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_formats_in_loading_order</span> <span class="k">if</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">lff</span><span class="p">]</span>
 <span class="c1">#: list of formats actually available at runtime</span>
 <span class="n">runtime_available_formats</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="c1"># import formats modules</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">_formats_in_loading_order</span><span class="p">:</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">implemented_formats</span><span class="p">:</span>
     <span class="n">_available</span><span class="p">,</span> <span class="n">_reason</span> <span class="o">=</span> <span class="n">available_format</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">_available</span><span class="p">:</span>
         <span class="n">runtime_available_formats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -254,7 +241,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.formats</a></li> 

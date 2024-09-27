@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>usevortex — Proxies to reach resources using Vortex &#8212; epygram 1.5.2 documentation</title>
+    <title>falfilfa4py — Interface functions to FA/LFI/LFA formats &#8212; epygram 1.5.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -16,8 +16,8 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="griberies — utilities around GRIB" href="griberies.html" />
-    <link rel="prev" title="pyexttiff — Classes to read Tiff" href="pyexttiff.html" /> 
+    <link rel="next" title="ialsptrans4py — Interface functions to IAL spectrals transforms" href="ialsptrans4py.html" />
+    <link rel="prev" title="epygram.extra : independant side packages, used by epygram" href="index.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,14 +29,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="griberies.html" title="griberies — utilities around GRIB"
+          <a href="ialsptrans4py.html" title="ialsptrans4py — Interface functions to IAL spectrals transforms"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="pyexttiff.html" title="pyexttiff — Classes to read Tiff"
+          <a href="index.html" title="epygram.extra : independant side packages, used by epygram"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">falfilfa4py</span></code> — Interface functions to FA/LFI/LFA formats</a></li> 
       </ul>
     </div>  
 
@@ -45,20 +45,16 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="usevortex-proxies-to-reach-resources-using-vortex">
-<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex<a class="headerlink" href="#usevortex-proxies-to-reach-resources-using-vortex" title="Permalink to this headline">¶</a></h1>
-<hr class="docutils" />
-<section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
-</section>
-<hr class="docutils" />
-<section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
-</section>
-<hr class="docutils" />
-<section id="shortcuts">
-<h2>Shortcuts<a class="headerlink" href="#shortcuts" title="Permalink to this headline">¶</a></h2>
-</section>
+  <section id="module-epygram.extra.falfilfa4py">
+<span id="falfilfa4py-interface-functions-to-fa-lfi-lfa-formats"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">falfilfa4py</span></code> — Interface functions to FA/LFI/LFA formats<a class="headerlink" href="#module-epygram.extra.falfilfa4py" title="Permalink to this headline">¶</a></h1>
+<p>falfilfa4py:</p>
+<p>Contains the interface routines to IO libraries for formats:
+- LFI
+- FA (overlay of LFI)
+- LFA (DDH format)</p>
+<p>Note that this is temporary between the former package arpifs4py and a direct python interface to fully externalised
+FA_LFI/LFA library.</p>
+<p>Actual .so library should be in one of the preinstalled paths or in a directory specified via LD_LIBRARY_PATH</p>
 </section>
 
 
@@ -68,26 +64,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a><ul>
-<li><a class="reference internal" href="#functions">Functions</a></li>
-<li><a class="reference internal" href="#classes">Classes</a></li>
-<li><a class="reference internal" href="#shortcuts">Shortcuts</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="pyexttiff.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyexttiff</span></code> — Classes to read Tiff</a></p>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter"><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="griberies.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></p>
+  <p class="topless"><a href="ialsptrans4py.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ialsptrans4py</span></code> — Interface functions to IAL spectrals transforms</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/extra/usevortex.rst.txt"
+      <li><a href="../_sources/extra/falfilfa4py.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -115,14 +101,14 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="griberies.html" title="griberies — utilities around GRIB"
+          <a href="ialsptrans4py.html" title="ialsptrans4py — Interface functions to IAL spectrals transforms"
              >next</a> |</li>
         <li class="right" >
-          <a href="pyexttiff.html" title="pyexttiff — Classes to read Tiff"
+          <a href="index.html" title="epygram.extra : independant side packages, used by epygram"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a></li> 
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">falfilfa4py</span></code> — Interface functions to FA/LFI/LFA formats</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
