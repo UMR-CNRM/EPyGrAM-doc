@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.RegLLGeometry — RegLL Geometry class &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.geometries.RegLLGeometry — RegLL Geometry class &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.RotLLGeometry — RotLL Geometry class" href="RotLLGeometry.html" />
     <link rel="prev" title="epygram.geometries.GaussGeometry — Gauss Geometry class" href="GaussGeometry.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="GaussGeometry.html" title="epygram.geometries.GaussGeometry — Gauss Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a></li> 
@@ -47,13 +45,13 @@
           <div class="body" role="main">
             
   <section id="epygram-geometries-regllgeometry-regll-geometry-class">
-<h1><a class="reference internal" href="#module-epygram.geometries.RegLLGeometry" title="epygram.geometries.RegLLGeometry: RegLL Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code></a> — RegLL Geometry class<a class="headerlink" href="#epygram-geometries-regllgeometry-regll-geometry-class" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-epygram.geometries.RegLLGeometry"></span><p>Contains the classes for 3D geometries of fields.</p>
+<h1><a class="reference internal" href="#module-epygram.geometries.RegLLGeometry" title="epygram.geometries.RegLLGeometry: RegLL Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code></a> — RegLL Geometry class<a class="headerlink" href="#epygram-geometries-regllgeometry-regll-geometry-class" title="Link to this heading">¶</a></h1>
+<p id="module-epygram.geometries.RegLLGeometry">Contains the classes for 3D geometries of fields.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.RegLLGeometry.</span></span><span class="sig-name descname"><span class="pre">RegLLGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.LLGeometry</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.RegLLGeometry.</span></span><span class="sig-name descname"><span class="pre">RegLLGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">LLGeometry</span></code></p>
 <p>Handles the geometry for a Regular Lon/Lat 3-Dimensions Field.</p>
 <dl class="simple">
 <dt>TODO: Is this class really necessary. Maybe we could make only one class</dt><dd><p>with LLGeometry, RegLLGeometry and RotLLGEometry?
@@ -61,7 +59,7 @@ Is a RegLLGeometry equivalent to a RotLLGeometry with a null rotation angle?</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – Name of geometrical type of representation of points on the Globe.
 Name must be ‘regular_lonlat’</p></li>
@@ -83,17 +81,17 @@ among: [‘upper-right’, ‘upper-left’,</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.getcenter">
-<span class="sig-name descname"><span class="pre">getcenter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.getcenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getcenter</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.getcenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.getcenter" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the coordinate of the grid center as a tuple of Angles
 (center_lon, center_lat).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.ij2ll">
-<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2ll" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -106,10 +104,10 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.ij2xy">
-<span class="sig-name descname"><span class="pre">ij2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ij2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2xy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ij2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ij2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2xy" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (x, y) coordinates of point <em>(i,j)</em>, in the projection.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -124,11 +122,11 @@ domain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.ll2ij">
-<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2ij" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
 in the 2D matrix of gridpoints.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees</p></li>
@@ -142,10 +140,10 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.ll2xy">
-<span class="sig-name descname"><span class="pre">ll2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ll2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2xy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ll2xy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.ll2xy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2xy" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (x, y) coordinates of point <em>(lon, lat)</em> in degrees.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees</p></li>
@@ -158,11 +156,11 @@ domain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ij">
-<span class="sig-name descname"><span class="pre">xy2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.xy2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">xy2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.xy2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ij" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (i, j) indexes of point <em>(x, y)</em>,
 in the 2D matrix of gridpoints.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> – X coordinate of point in the projection</p></li>
 <li><p><strong>y</strong> – Y coordinate of point in the projection</p></li>
@@ -179,11 +177,11 @@ domain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ll">
-<span class="sig-name descname"><span class="pre">xy2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.xy2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">xy2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/RegLLGeometry.html#RegLLGeometry.xy2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ll" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (lon, lat) coordinates of point <em>(x, y)</em> in the 2D matrix
 of gridpoints*(i,j)*, in degrees.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>x</strong> – X coordinate of point in the projection</p></li>
 <li><p><strong>y</strong> – Y coordinate of point in the projection</p></li>
@@ -203,14 +201,37 @@ domain.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="GaussGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="RotLLGeometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RotLLGeometry</span></code> — RotLL Geometry class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.getcenter()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ij2ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2xy"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ij2xy()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ll2ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2xy"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ll2xy()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ij"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.xy2ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ll"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.xy2ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="GaussGeometry.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="RotLLGeometry.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RotLLGeometry</span></code> — RotLL Geometry class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -218,7 +239,7 @@ domain.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -226,13 +247,13 @@ domain.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -247,15 +268,15 @@ domain.</p>
         <li class="right" >
           <a href="GaussGeometry.html" title="epygram.geometries.GaussGeometry — Gauss Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.domain_making.build — Build geometries &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <title>epygram.geometries.domain_making.build — Build geometries &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="epygram.geometries.domain_making.output — Output" href="output.html" />
     <link rel="prev" title="epygram.geometries.domain_making.ask — User Interface" href="ask.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="ask.html" title="epygram.geometries.domain_making.ask — User Interface"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../domain_making.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a> &#187;</li>
@@ -48,16 +46,16 @@
           <div class="body" role="main">
             
   <section id="module-epygram.geometries.domain_making.build">
-<span id="epygram-geometries-domain-making-build-build-geometries"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making.build" title="epygram.geometries.domain_making.build: Domain creation - Build geometries"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code></a> — Build geometries<a class="headerlink" href="#module-epygram.geometries.domain_making.build" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-geometries-domain-making-build-build-geometries"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making.build" title="epygram.geometries.domain_making.build: Domain creation - Build geometries"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code></a> — Build geometries<a class="headerlink" href="#module-epygram.geometries.domain_making.build" title="Link to this heading">¶</a></h1>
 <p>Contains functions for building a LAM domain.</p>
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.build_geometry">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xpoints_CI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ypoints_CI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_lat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximize_CI_in_E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center_lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Xpoints_CI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ypoints_CI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tilting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_lat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximize_CI_in_E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Build an <em>ad hoc</em> geometry from the input given parameters.
 Beware only secant projection are available here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>center_lon</strong> – longitude of the domain center</p></li>
 <li><p><strong>center_lat</strong> – latitude of the domain center</p></li>
@@ -81,32 +79,32 @@ to have a E-zone width of 11 points</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.build_CIE_field">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_CIE_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_CIE_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_CIE_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_CIE_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_CIE_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_CIE_field" title="Link to this definition">¶</a></dt>
 <dd><p>Build a field according to geometry, with constant values for each of the
 C,I,E zones.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.build_lonlat_geometry">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_lonlat_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll_boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_lonlat_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_lonlat_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_lonlat_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll_boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_lonlat_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_lonlat_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Build a lonlat geometry given lon/lat boundaries and optionally
 resolution in degrees.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.build_lonlat_field">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_lonlat_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll_boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'lon/lat':</span> <span class="pre">'template'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_lonlat_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_lonlat_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_lonlat_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ll_boundaries</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'lon/lat':</span> <span class="pre">'template'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_lonlat_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_lonlat_field" title="Link to this definition">¶</a></dt>
 <dd><p>Build a lonlat field empty except on the border, given lon/lat boundaries
 and optionally resolution in degrees.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.build_geometry_fromlonlat">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_geometry_fromlonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lonmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lonmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximize_CI_in_E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_geometry_fromlonlat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_geometry_fromlonlat" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_geometry_fromlonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lonmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lonmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latmin</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latmax</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iwidth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximize_CI_in_E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interactive</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_geometry_fromlonlat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_geometry_fromlonlat" title="Link to this definition">¶</a></dt>
 <dd><p>Build an <em>ad hoc</em> geometry from the input given parameters.
 Beware only secant projection are available here.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lonmin</strong> – minimum longitude of the domain</p></li>
 <li><p><strong>lonmax</strong> – maximum longitude of the domain</p></li>
@@ -126,14 +124,14 @@ to have a E-zone width of 11 points</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.build_geom_from_e923nam">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_geom_from_e923nam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_geom_from_e923nam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_geom_from_e923nam" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">build_geom_from_e923nam</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nam</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#build_geom_from_e923nam"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.build_geom_from_e923nam" title="Link to this definition">¶</a></dt>
 <dd><p>Build geometry and spectral geometry objects, given e923-like namelist
 blocks.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.build.compute_lonlat_included">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">compute_lonlat_included</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#compute_lonlat_included"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.compute_lonlat_included" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.build.</span></span><span class="sig-name descname"><span class="pre">compute_lonlat_included</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/build.html#compute_lonlat_included"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.build.compute_lonlat_included" title="Link to this definition">¶</a></dt>
 <dd><p>Computes a lon/lat domain included in the C zone of the model domain,
 with a 1 gridpoint margin.</p>
 </dd></dl>
@@ -145,14 +143,34 @@ with a 1 gridpoint margin.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="ask.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="output.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a></p>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.build_geometry"><code class="docutils literal notranslate"><span class="pre">build_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.build_CIE_field"><code class="docutils literal notranslate"><span class="pre">build_CIE_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.build_lonlat_geometry"><code class="docutils literal notranslate"><span class="pre">build_lonlat_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.build_lonlat_field"><code class="docutils literal notranslate"><span class="pre">build_lonlat_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.build_geometry_fromlonlat"><code class="docutils literal notranslate"><span class="pre">build_geometry_fromlonlat()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.build_geom_from_e923nam"><code class="docutils literal notranslate"><span class="pre">build_geom_from_e923nam()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.build.compute_lonlat_included"><code class="docutils literal notranslate"><span class="pre">compute_lonlat_included()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ask.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="output.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -160,7 +178,7 @@ with a 1 gridpoint margin.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
@@ -168,13 +186,13 @@ with a 1 gridpoint margin.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -189,7 +207,7 @@ with a 1 gridpoint margin.</p>
         <li class="right" >
           <a href="ask.html" title="epygram.geometries.domain_making.ask — User Interface"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../domain_making.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a> &#187;</li>
@@ -197,8 +215,8 @@ with a 1 gridpoint margin.</p>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

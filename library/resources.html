@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.resources — Real and virtual resources handling &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.resources — Real and virtual resources handling &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.config — Configuration: parameters, options" href="config.html" />
     <link rel="prev" title="epygram.formats.fafields — Utilities around FA fields" href="fafields.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="fafields.html" title="epygram.formats.fafields — Utilities around FA fields"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a></li> 
       </ul>
@@ -46,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="module-epygram.resources">
-<span id="epygram-resources-real-and-virtual-resources-handling"></span><h1><a class="reference internal" href="#module-epygram.resources" title="epygram.resources: Real and virtual resources handling"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code></a> — Real and virtual resources handling<a class="headerlink" href="#module-epygram.resources" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-resources-real-and-virtual-resources-handling"></span><h1><a class="reference internal" href="#module-epygram.resources" title="epygram.resources: Real and virtual resources handling"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code></a> — Real and virtual resources handling<a class="headerlink" href="#module-epygram.resources" title="Link to this heading">¶</a></h1>
 <p>Module contains:</p>
 <ul class="simple">
 <li><p>resource for data contained in file (FileResource).</p></li>
@@ -63,11 +61,11 @@ levels, emulates a resource that provide 3D fields</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.resources.open_and_close_resource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">open_and_close_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources.html#open_and_close_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.open_and_close_resource" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">open_and_close_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources.html#open_and_close_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.open_and_close_resource" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Context manager for automatically open/close resources.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>r</strong> – resource to open</p>
 </dd>
 </dl>
@@ -76,11 +74,11 @@ levels, emulates a resource that provide 3D fields</p></li>
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.resources.meta_resource">
-<span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">meta_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames_or_resources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">openmode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources.html#meta_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.meta_resource" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">meta_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames_or_resources</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">openmode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rtype</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources.html#meta_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.meta_resource" title="Link to this definition">¶</a></dt>
 <dd><p>Factory for meta resources, such as MultiValiditiesResource or
 CombineLevelsResource.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filenames_or_resources</strong> – can be either a filename or a list of,
 or a resource or a list of.</p></li>
@@ -100,8 +98,8 @@ or a resource or a list of.</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.resources.FileResource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">FileResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/FileResource.html#FileResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.FileResource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Resource</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">FileResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/FileResource.html#FileResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.FileResource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resource</span></code></a></p>
 <p>Generic abstract class implementing a Resource.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -128,7 +126,7 @@ or a resource or a list of.</p></li>
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘append’, ‘r’, ‘read’, ‘w’, ‘a’, ‘write’])</p></li>
+<li><p>Values: set([‘write’, ‘w’, ‘read’, ‘append’, ‘a’, ‘r’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -138,28 +136,28 @@ or a resource or a list of.</p></li>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.FileResource.filename">
-<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.resources.FileResource.filename" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.resources.FileResource.filename" title="Link to this definition">¶</a></dt>
 <dd><p>File name (absolute or relative) of the resource (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.FileResource.fmtdelayedopen">
-<span class="sig-name descname"><span class="pre">fmtdelayedopen</span></span><a class="headerlink" href="#epygram.resources.FileResource.fmtdelayedopen" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fmtdelayedopen</span></span><a class="headerlink" href="#epygram.resources.FileResource.fmtdelayedopen" title="Link to this definition">¶</a></dt>
 <dd><p>Opening of the resource delayed (not at time of construction) (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.FileResource.format">
-<span class="sig-name descname"><span class="pre">format</span></span><a class="headerlink" href="#epygram.resources.FileResource.format" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">format</span></span><a class="headerlink" href="#epygram.resources.FileResource.format" title="Link to this definition">¶</a></dt>
 <dd><p>Format of the resource (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.FileResource.open">
-<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/FileResource.html#FileResource.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.FileResource.open" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">openmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/FileResource.html#FileResource.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.FileResource.open" title="Link to this definition">¶</a></dt>
 <dd><p>Opens the resource properly.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>openmode</strong> – to open with a specific openmode, eventually different from</p>
 </dd>
 </dl>
@@ -168,7 +166,7 @@ or a resource or a list of.</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.FileResource.openmode">
-<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.resources.FileResource.openmode" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.resources.FileResource.openmode" title="Link to this definition">¶</a></dt>
 <dd><p>Opening mode (see the documentation above for more details).</p>
 </dd></dl>
 
@@ -177,8 +175,8 @@ or a resource or a list of.</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">MultiValiditiesResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Resource</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">MultiValiditiesResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resource</span></code></a></p>
 <p>Class implementing a MultiValiditiesResource.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -199,7 +197,7 @@ or a resource or a list of.</p></li>
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘append’, ‘r’, ‘read’, ‘w’, ‘a’, ‘write’])</p></li>
+<li><p>Values: set([‘write’, ‘w’, ‘read’, ‘append’, ‘a’, ‘r’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -210,73 +208,73 @@ or a resource or a list of.</p></li>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.close" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.close" title="Link to this definition">¶</a></dt>
 <dd><p>Closes all resources.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.extractprofile">
-<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.extractprofile" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.extractprofile" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts the profiles in the different resources and join the validities.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.extractsection">
-<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.extractsection" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.extractsection" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts the sections in the different resources and join the validities.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.find_fields_in_resource">
-<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.find_fields_in_resource" title="Link to this definition">¶</a></dt>
 <dd><p>Call to find_fields_in_resource</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.listfields">
-<span class="sig-name descname"><span class="pre">listfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.listfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.listfields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">listfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.listfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.listfields" title="Link to this definition">¶</a></dt>
 <dd><p>Call to listfields.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.name" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.openmode">
-<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.openmode" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.openmode" title="Link to this definition">¶</a></dt>
 <dd><p>Opening mode (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.readfield">
-<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.readfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.readfield" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.readfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.readfield" title="Link to this definition">¶</a></dt>
 <dd><p>Reads the field in the different resources and join the validities.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.resources">
-<span class="sig-name descname"><span class="pre">resources</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.resources" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resources</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.resources" title="Link to this definition">¶</a></dt>
 <dd><p>List of resources to join (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.sortfields">
-<span class="sig-name descname"><span class="pre">sortfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.sortfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.sortfields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sortfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.sortfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.sortfields" title="Link to this definition">¶</a></dt>
 <dd><p>Call to sortfields</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.spectral_geometry">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral_geometry</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.spectral_geometry" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral_geometry</span></span><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.spectral_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the spectral_geometry</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.MultiValiditiesResource.writefield">
-<span class="sig-name descname"><span class="pre">writefield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.writefield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.writefield" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">writefield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/MultiValiditiesResource.html#MultiValiditiesResource.writefield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.MultiValiditiesResource.writefield" title="Link to this definition">¶</a></dt>
 <dd><p>Write fields.</p>
 </dd></dl>
 
@@ -285,8 +283,8 @@ or a resource or a list of.</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">CombineLevelsResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Resource</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.resources.</span></span><span class="sig-name descname"><span class="pre">CombineLevelsResource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Resource" title="epygram.base.Resource"><code class="xref py py-class docutils literal notranslate"><span class="pre">Resource</span></code></a></p>
 <p>Class implementing a CombineLevelsResource.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -307,7 +305,7 @@ or a resource or a list of.</p></li>
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘append’, ‘r’, ‘read’, ‘w’, ‘a’, ‘write’])</p></li>
+<li><p>Values: set([‘write’, ‘w’, ‘read’, ‘append’, ‘a’, ‘r’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -323,29 +321,29 @@ or a resource or a list of.</p></li>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.close">
-<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.close" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.close" title="Link to this definition">¶</a></dt>
 <dd><p>Closes the low level resource.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.extractprofile">
-<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.extractprofile" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.extractprofile" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts profiles.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.extractsection">
-<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.extractsection" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.extractsection" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts sections.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.find_fields_in_resource">
-<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.find_fields_in_resource" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">find_fields_in_resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.find_fields_in_resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.find_fields_in_resource" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a list of the fields from resource whose name match the given
 seed.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>seed</strong> – might be a ‘handgrip’, i.e. a dict where you can store all
 requested keys,
@@ -361,34 +359,34 @@ the fields (for mimetism with other formats).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.listfields">
-<span class="sig-name descname"><span class="pre">listfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">onlykey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.listfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.listfields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">listfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">onlykey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">select</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complete</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.listfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.listfields" title="Link to this definition">¶</a></dt>
 <dd><p>Lists the available fields.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.name" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.open">
-<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.open" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">open</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.open"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.open" title="Link to this definition">¶</a></dt>
 <dd><p>Opens the low level resource</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.openmode">
-<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.openmode" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">openmode</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.openmode" title="Link to this definition">¶</a></dt>
 <dd><p>Opening mode (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.readfield">
-<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.readfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.readfield" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">readfield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.readfield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.readfield" title="Link to this definition">¶</a></dt>
 <dd><p>Read the field in the low level resource and join the levels.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handgrip</strong> – identification of the field</p></li>
 <li><p><strong>getdata</strong> – if False, do not read data but only metadata</p></li>
@@ -399,10 +397,10 @@ the fields (for mimetism with other formats).</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.readfields">
-<span class="sig-name descname"><span class="pre">readfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.readfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.readfields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">readfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">handgrip</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.readfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.readfields" title="Link to this definition">¶</a></dt>
 <dd><p>Read the field in the low level resource and join the levels.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handgrip</strong> – identification of the field</p></li>
 <li><p><strong>getdata</strong> – if False, do not read data but only metadata</p></li>
@@ -413,17 +411,17 @@ the fields (for mimetism with other formats).</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.resource">
-<span class="sig-name descname"><span class="pre">resource</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.resource" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resource</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.resource" title="Link to this definition">¶</a></dt>
 <dd><p>Low level resource (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.sortfields">
-<span class="sig-name descname"><span class="pre">sortfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sortingkey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onlykey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.sortfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.sortfields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sortfields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sortingkey</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">onlykey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.sortfields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.sortfields" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a sorted list of fields with regards to the given <em>sortingkey</em>
 of their fid, as a dict of lists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sortingkey</strong> – sorting key</p></li>
 <li><p><strong>onlykey</strong> – can be specified as a string or a tuple of strings,
@@ -435,19 +433,19 @@ so that only specified keys of the fid will returned.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.spectral_geometry">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral_geometry</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.spectral_geometry" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral_geometry</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.spectral_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the spectral_geometry</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.virtual">
-<span class="sig-name descname"><span class="pre">virtual</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.virtual" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">virtual</span></span><a class="headerlink" href="#epygram.resources.CombineLevelsResource.virtual" title="Link to this definition">¶</a></dt>
 <dd><p>Must readfield return a virtual field (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.resources.CombineLevelsResource.writefield">
-<span class="sig-name descname"><span class="pre">writefield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.writefield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.writefield" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">writefield</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/resources/CombineLevelsResource.html#CombineLevelsResource.writefield"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.resources.CombineLevelsResource.writefield" title="Link to this definition">¶</a></dt>
 <dd><p>Write fields.</p>
 </dd></dl>
 
@@ -460,14 +458,70 @@ so that only specified keys of the fid will returned.</p></li>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="fafields.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="config.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a><ul>
+<li><a class="reference internal" href="#epygram.resources.open_and_close_resource"><code class="docutils literal notranslate"><span class="pre">open_and_close_resource</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.meta_resource"><code class="docutils literal notranslate"><span class="pre">meta_resource()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.FileResource"><code class="docutils literal notranslate"><span class="pre">FileResource</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.resources.FileResource.filename"><code class="docutils literal notranslate"><span class="pre">FileResource.filename</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.FileResource.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">FileResource.fmtdelayedopen</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.FileResource.format"><code class="docutils literal notranslate"><span class="pre">FileResource.format</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.FileResource.open"><code class="docutils literal notranslate"><span class="pre">FileResource.open()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.FileResource.openmode"><code class="docutils literal notranslate"><span class="pre">FileResource.openmode</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.close"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.close()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.extractprofile"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.extractprofile()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.extractsection"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.extractsection()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.find_fields_in_resource()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.listfields"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.listfields()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.name"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.name</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.openmode"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.openmode</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.readfield"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.readfield()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.resources"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.resources</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.sortfields"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.sortfields()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.spectral_geometry</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.MultiValiditiesResource.writefield"><code class="docutils literal notranslate"><span class="pre">MultiValiditiesResource.writefield()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.close"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.close()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.extractprofile"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.extractprofile()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.extractsection"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.extractsection()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.find_fields_in_resource()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.listfields"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.listfields()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.name"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.name</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.open"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.open()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.openmode"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.openmode</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.readfield"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.readfield()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.readfields"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.readfields()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.resource"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.resource</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.sortfields"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.sortfields()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.spectral_geometry</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.virtual"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.virtual</span></code></a></li>
+<li><a class="reference internal" href="#epygram.resources.CombineLevelsResource.writefield"><code class="docutils literal notranslate"><span class="pre">CombineLevelsResource.writefield()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="fafields.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="config.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -475,7 +529,7 @@ so that only specified keys of the fid will returned.</p></li>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -483,13 +537,13 @@ so that only specified keys of the fid will returned.</p></li>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -504,14 +558,14 @@ so that only specified keys of the fid will returned.</p></li>
         <li class="right" >
           <a href="fafields.html" title="epygram.formats.fafields — Utilities around FA fields"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

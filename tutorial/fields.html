@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Fields &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>3. Fields &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Geometries" href="geometries_tuto.html" />
     <link rel="prev" title="2. Resources" href="resources.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="resources.html" title="2. Resources"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Fields</a></li> 
       </ul>
@@ -46,10 +44,10 @@
           <div class="body" role="main">
             
   <section id="fields">
-<h1><span class="section-number">3. </span>Fields<a class="headerlink" href="#fields" title="Permalink to this headline">¶</a></h1>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<h1><span class="section-number">3. </span>Fields<a class="headerlink" href="#fields" title="Link to this heading">¶</a></h1>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">field</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S058WIND.U.PHYS&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -74,7 +72,7 @@ field’s data</p></li>
 <p>In the following, we focus on H2DField, but all kind of fields behave similarly.</p>
 <hr class="docutils" />
 <section id="field-identifier-fid">
-<span id="tuto-fid"></span><h2><span class="section-number">3.1. </span>Field identifier (fid)<a class="headerlink" href="#field-identifier-fid" title="Permalink to this headline">¶</a></h2>
+<span id="tuto-fid"></span><h2><span class="section-number">3.1. </span>Field identifier (fid)<a class="headerlink" href="#field-identifier-fid" title="Link to this heading">¶</a></h2>
 <p>The fid of a field handle its <em>nature</em>, i.e. the physical parameter and the
 material (surface, soil, atmosphere) it represents (often with a detailed
 vertical location).
@@ -103,7 +101,7 @@ format…</p>
 <hr class="docutils" />
 </section>
 <section id="validity">
-<span id="tuto-validity"></span><h2><span class="section-number">3.2. </span>Validity<a class="headerlink" href="#validity" title="Permalink to this headline">¶</a></h2>
+<span id="tuto-validity"></span><h2><span class="section-number">3.2. </span>Validity<a class="headerlink" href="#validity" title="Link to this heading">¶</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">validity</span></code> attribute of a field is a list of
 <a class="reference internal" href="../library/base.html#epygram.base.FieldValidity" title="epygram.base.FieldValidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidity</span></code></a>, because a field can have a temporal dimension.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">getbasis</span><span class="p">()</span>
@@ -128,7 +126,7 @@ average and so on, is coded as GRIB2 norm
 </section>
 <hr class="docutils" />
 <section id="fields-useful-methods">
-<h2><span class="section-number">3.3. </span>Fields useful methods<a class="headerlink" href="#fields-useful-methods" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.3. </span>Fields useful methods<a class="headerlink" href="#fields-useful-methods" title="Link to this heading">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><em>Autocompletion, in interactive (i)Python session or smart editors,
@@ -136,7 +134,7 @@ may be an even better (than doc/tuto) way to explore the available methods
 of objects.</em></p>
 </div>
 <section id="spectralness">
-<span id="tuto-spectral"></span><h3><span class="section-number">3.3.1. </span>Spectralness<a class="headerlink" href="#spectralness" title="Permalink to this headline">¶</a></h3>
+<span id="tuto-spectral"></span><h3><span class="section-number">3.3.1. </span>Spectralness<a class="headerlink" href="#spectralness" title="Link to this heading">¶</a></h3>
 <p>Spectral transforms are done (“in place”) through the two methods
 <a class="reference internal" href="../library/D3Field.html#epygram.fields.D3Field.D3Field.sp2gp" title="epygram.fields.D3Field.D3Field.sp2gp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.sp2gp()</span></code></a> and
 <a class="reference internal" href="../library/D3Field.html#epygram.fields.D3Field.D3Field.gp2sp" title="epygram.fields.D3Field.D3Field.gp2sp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.gp2sp(a_sp_geom)</span></code></a>:</p>
@@ -161,7 +159,7 @@ spectral transforms routines.</p>
 </div>
 </section>
 <section id="data">
-<h3><span class="section-number">3.3.2. </span>Data<a class="headerlink" href="#data" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.3.2. </span>Data<a class="headerlink" href="#data" title="Link to this heading">¶</a></h3>
 <p>Some methods have been implemented to ease a comprehensive access to the data:</p>
 <ul>
 <li><p>basic statistics:</p>
@@ -231,7 +229,7 @@ with scalars or any <code class="xref py py-mod docutils literal notranslate"><s
 </ul>
 </section>
 <section id="operations-between-fields">
-<h3><span class="section-number">3.3.3. </span>Operations between fields<a class="headerlink" href="#operations-between-fields" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">3.3.3. </span>Operations between fields<a class="headerlink" href="#operations-between-fields" title="Link to this heading">¶</a></h3>
 <p>Operations between fields can be done in two ways:</p>
 <ul>
 <li><p>standard Python syntax; in case a new Field object is created,
@@ -258,7 +256,7 @@ basically on their dimensions.</p>
 </section>
 <hr class="docutils" />
 <section id="building-vector-fields">
-<h2><span class="section-number">3.4. </span>Building Vector Fields<a class="headerlink" href="#building-vector-fields" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.4. </span>Building Vector Fields<a class="headerlink" href="#building-vector-fields" title="Link to this heading">¶</a></h2>
 <p>Wind fields (for instance) can be re-assembled from their U/V components
 into <a class="reference internal" href="../library/H2DVectorField.html"><span class="doc">H2DVectorField</span></a> or
 <a class="reference internal" href="../library/D3VectorField.html"><span class="doc">D3VectorField</span></a> for more integrated functionalities
@@ -305,12 +303,12 @@ vectors:</p>
 </section>
 <hr class="docutils" />
 <section id="plots">
-<h2><span class="section-number">3.5. </span>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.5. </span>Plots<a class="headerlink" href="#plots" title="Link to this heading">¶</a></h2>
 <p>Cf. <em>Plots</em> sections of the <a class="reference internal" href="../gallery/index.html"><span class="doc">Gallery</span></a>.</p>
 </section>
 <hr class="docutils" />
 <section id="d-plots">
-<h2><span class="section-number">3.6. </span>3D Plots<a class="headerlink" href="#d-plots" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">3.6. </span>3D Plots<a class="headerlink" href="#d-plots" title="Link to this heading">¶</a></h2>
 <p>Fields can be plotted in a 3D view in three ways:</p>
 <ul class="simple">
 <li><p>contour with <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DContour()</span></code> method (which becomes a
@@ -320,10 +318,10 @@ classical contour plot if field is 2D, vertical or horizontal)</p></li>
 </ul>
 <p>A vector field can be plotted using <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DVector()</span></code> (to plot arrows)
 or <code class="xref py py-meth docutils literal notranslate"><span class="pre">Field.plot3DStream()</span></code> to plot (stream lines or tubes).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">vtk</span> <span class="c1">#We need to import vtk before epygram even if do not use it directly in the script</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">vtk</span> <span class="c1">#We need to import vtk before epygram even if do not use it directly in the script</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span> <span class="c1">#initialisation of environment, for FA/LFI and spectrals transforms sub-libraries</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">true3d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">true3d</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">CF</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S---CLOUD_FRACTI&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt;</span>
@@ -347,10 +345,11 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">3. Fields</a><ul>
 <li><a class="reference internal" href="#field-identifier-fid">3.1. Field identifier (fid)</a></li>
 <li><a class="reference internal" href="#validity">3.2. Validity</a></li>
@@ -367,12 +366,17 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="resources.html"
-                        title="previous chapter"><span class="section-number">2. </span>Resources</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="geometries_tuto.html"
-                        title="next chapter"><span class="section-number">4. </span>Geometries</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="resources.html"
+                          title="previous chapter"><span class="section-number">2. </span>Resources</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="geometries_tuto.html"
+                          title="next chapter"><span class="section-number">4. </span>Geometries</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -380,7 +384,7 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -388,13 +392,13 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -409,14 +413,14 @@ or <code class="xref py py-meth docutils literal notranslate"><span class="pre">
         <li class="right" >
           <a href="resources.html" title="2. Resources"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Fields</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

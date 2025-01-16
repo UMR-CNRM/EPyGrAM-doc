@@ -14,10 +14,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:43.859740Z",
-     "iopub.status.busy": "2024-05-15T16:21:43.854277Z",
-     "iopub.status.idle": "2024-05-15T16:21:44.218136Z",
-     "shell.execute_reply": "2024-05-15T16:21:44.218409Z"
+     "iopub.execute_input": "2025-01-13T11:34:00.159904Z",
+     "iopub.status.busy": "2025-01-13T11:34:00.158570Z",
+     "iopub.status.idle": "2025-01-13T11:34:00.688149Z",
+     "shell.execute_reply": "2025-01-13T11:34:00.687560Z"
     }
    },
    "outputs": [],
@@ -38,15 +38,15 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:44.222814Z",
-     "iopub.status.busy": "2024-05-15T16:21:44.222440Z",
-     "iopub.status.idle": "2024-05-15T16:21:44.985767Z",
-     "shell.execute_reply": "2024-05-15T16:21:44.985344Z"
+     "iopub.execute_input": "2025-01-13T11:34:00.690407Z",
+     "iopub.status.busy": "2025-01-13T11:34:00.690202Z",
+     "iopub.status.idle": "2025-01-13T11:34:02.897233Z",
+     "shell.execute_reply": "2025-01-13T11:34:02.896608Z"
     }
    },
    "outputs": [],
    "source": [
-    "r = epygram.formats.resource(os.path.join(INPUTS_DIR, 'ICMSHAROM+0022'), 'r')\n",
+    "r = epygram.open(os.path.join(INPUTS_DIR, 'ICMSHAROM+0022'), 'r')\n",
     "t59 = r.readfield('S059TEMPERATURE')\n",
     "spgeom = r.spectral_geometry\n",
     "t59.sp2gp()"
@@ -57,10 +57,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:44.988909Z",
-     "iopub.status.busy": "2024-05-15T16:21:44.988537Z",
-     "iopub.status.idle": "2024-05-15T16:21:45.189331Z",
-     "shell.execute_reply": "2024-05-15T16:21:45.189091Z"
+     "iopub.execute_input": "2025-01-13T11:34:02.899286Z",
+     "iopub.status.busy": "2025-01-13T11:34:02.899152Z",
+     "iopub.status.idle": "2025-01-13T11:34:03.086863Z",
+     "shell.execute_reply": "2025-01-13T11:34:03.086358Z"
     }
    },
    "outputs": [],
@@ -75,10 +75,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:45.193304Z",
-     "iopub.status.busy": "2024-05-15T16:21:45.193060Z",
-     "iopub.status.idle": "2024-05-15T16:21:45.377329Z",
-     "shell.execute_reply": "2024-05-15T16:21:45.377532Z"
+     "iopub.execute_input": "2025-01-13T11:34:03.089076Z",
+     "iopub.status.busy": "2025-01-13T11:34:03.088811Z",
+     "iopub.status.idle": "2025-01-13T11:34:03.213998Z",
+     "shell.execute_reply": "2025-01-13T11:34:03.213475Z"
     }
    },
    "outputs": [],
@@ -101,10 +101,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:45.401949Z",
-     "iopub.status.busy": "2024-05-15T16:21:45.396317Z",
-     "iopub.status.idle": "2024-05-15T16:21:45.893007Z",
-     "shell.execute_reply": "2024-05-15T16:21:45.893628Z"
+     "iopub.execute_input": "2025-01-13T11:34:03.215956Z",
+     "iopub.status.busy": "2025-01-13T11:34:03.215736Z",
+     "iopub.status.idle": "2025-01-13T11:34:03.678853Z",
+     "shell.execute_reply": "2025-01-13T11:34:03.678243Z"
     }
    },
    "outputs": [],

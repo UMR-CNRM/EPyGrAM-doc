@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Some examples &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <title>Some examples &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=34905f61" />
+    <script src="_static/documentation_options.js?v=51b770b3"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Tutorial" href="tutorial/index.html" />
     <link rel="prev" title="Distribution" href="distribution.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="distribution.html" title="Distribution"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Some examples</a></li> 
       </ul>
     </div>  
@@ -45,19 +43,19 @@
           <div class="body" role="main">
             
   <section id="some-examples">
-<h1>Some examples<a class="headerlink" href="#some-examples" title="Permalink to this headline">¶</a></h1>
+<h1>Some examples<a class="headerlink" href="#some-examples" title="Link to this heading">¶</a></h1>
 <p><em>These examples are meant to illustrate the relative simplicity of
 handling and use of the library, as well as a quick glance at its
 possibilities.</em></p>
 <p>For a more comprehensive introduction to the package, please refer to the <a class="reference internal" href="tutorial/index.html#tuto-index"><span class="std std-ref">Tutorial</span></a>.</p>
 <p>For more advanced examples, please refer to the <a class="reference internal" href="gallery/index.html#gallery-index"><span class="std std-ref">Gallery</span></a>.</p>
 <section id="about-resources">
-<h2>About Resources<a class="headerlink" href="#about-resources" title="Permalink to this headline">¶</a></h2>
+<h2>About Resources<a class="headerlink" href="#about-resources" title="Link to this heading">¶</a></h2>
 <ul>
 <li><p>Open a resource and list its contents:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And, get the list of its fields:</p>
@@ -88,25 +86,25 @@ possibilities.</em></p>
 <p>And many other features depending on the format…</p>
 <hr class="docutils" />
 <section id="fa-some-specific-features">
-<h3>FA: Some specific features<a class="headerlink" href="#fa-some-specific-features" title="Permalink to this headline">¶</a></h3>
+<h3>FA: Some specific features<a class="headerlink" href="#fa-some-specific-features" title="Link to this heading">¶</a></h3>
 <ul>
 <li><p>Open a new FA sharing its geometry and validity with an existing one:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">new_fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005_bis&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
-<span class="go">                                         fmt=&#39;FA&#39;,</span>
-<span class="go">                                         headername=fcst5.headername, validity=fcst5.validity)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005_bis&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+<span class="go">                             fmt=&#39;FA&#39;,</span>
+<span class="go">                             headername=fcst5.headername, validity=fcst5.validity)</span>
 </pre></div>
 </div>
 </li>
 <li><p>If you want it to be even more similar, also add arguments:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005_bis&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
-<span class="go">                                         fmt=&#39;FA&#39;,</span>
-<span class="go">                                         headername=fcst5.headername, validity=fcst5.validity,</span>
-<span class="go">                                         cdiden=fcst5.cdiden,</span>
-<span class="go">                                         default_compression=fcst5.default_compression,</span>
-<span class="go">                                         processtype=fcst5.processtype)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_fcst5</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;../ICMSHAROM+0005_bis&#39;</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+<span class="go">                             fmt=&#39;FA&#39;,</span>
+<span class="go">                             headername=fcst5.headername, validity=fcst5.validity,</span>
+<span class="go">                             cdiden=fcst5.cdiden,</span>
+<span class="go">                             default_compression=fcst5.default_compression,</span>
+<span class="go">                             processtype=fcst5.processtype)</span>
 </pre></div>
 </div>
 </li>
@@ -115,7 +113,7 @@ possibilities.</em></p>
 </section>
 <hr class="docutils" />
 <section id="about-fields">
-<h2>About Fields<a class="headerlink" href="#about-fields" title="Permalink to this headline">¶</a></h2>
+<h2>About Fields<a class="headerlink" href="#about-fields" title="Link to this heading">¶</a></h2>
 <ul>
 <li><p>Read a spectral field, convert it to gridpoint, modify values, and get back
 to spectral space:</p>
@@ -161,7 +159,7 @@ example…):</p>
 </div>
 </li>
 <li><p>Compute the windspeed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S030WIND.U.PHYS&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">fcst5</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S030WIND.V.PHYS&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">vectwind</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">make_vector_field</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
@@ -174,7 +172,7 @@ example…):</p>
 </section>
 <hr class="docutils" />
 <section id="about-geometry">
-<h2>About Geometry<a class="headerlink" href="#about-geometry" title="Permalink to this headline">¶</a></h2>
+<h2>About Geometry<a class="headerlink" href="#about-geometry" title="Link to this heading">¶</a></h2>
 <ul>
 <li><p>Get the lon/lat coordinates of the whole grid of a field, the corresponding
 max map factor, ask for the lower-right corner and checks whether a point is inside grid:</p>
@@ -203,10 +201,11 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Some examples</a><ul>
 <li><a class="reference internal" href="#about-resources">About Resources</a><ul>
 <li><a class="reference internal" href="#fa-some-specific-features">FA: Some specific features</a></li>
@@ -218,12 +217,17 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="distribution.html"
-                        title="previous chapter">Distribution</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="tutorial/index.html"
-                        title="next chapter">Tutorial</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="distribution.html"
+                          title="previous chapter">Distribution</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tutorial/index.html"
+                          title="next chapter">Tutorial</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -231,7 +235,7 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -239,13 +243,13 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -260,13 +264,13 @@ max map factor, ask for the lower-right corner and checks whether a point is ins
         <li class="right" >
           <a href="distribution.html" title="Distribution"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Some examples</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

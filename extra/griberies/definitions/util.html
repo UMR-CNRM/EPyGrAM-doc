@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>util — Utilities for GRIB definitions &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="names — Handling names definitions" href="names.html" />
+    <link rel="prev" title="definitions — utilities around GRIB definitions" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="names.html" title="names — Handling names definitions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="definitions — utilities around GRIB definitions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">definitions</span></code> — utilities around GRIB definitions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">util</span></code> — Utilities for GRIB definitions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.extra.griberies.definitions.util">
+<span id="util-utilities-for-grib-definitions"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">util</span></code> — Utilities for GRIB definitions<a class="headerlink" href="#module-epygram.extra.griberies.definitions.util" title="Link to this heading">¶</a></h1>
+<p>Contains utilities around GRIB definitions files.</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.util.GribDef">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.definitions.util.</span></span><span class="sig-name descname"><span class="pre">GribDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concepts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/epygram/extra/griberies/definitions/util.html#GribDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.definitions.util.GribDef" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.util.GribDef.known_names">
+<span class="sig-name descname"><span class="pre">known_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.extra.griberies.definitions.util.GribDef.known_names" title="Link to this definition">¶</a></dt>
+<dd><p>Get sorted list of names for all concepts.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.util.GribDef.known_names_for_concept">
+<span class="sig-name descname"><span class="pre">known_names_for_concept</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.extra.griberies.definitions.util.GribDef.known_names_for_concept" title="Link to this definition">¶</a></dt>
+<dd><p>Get sorted list of names for <strong>concept</strong>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.util.GribDef.known_values">
+<span class="sig-name descname"><span class="pre">known_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concept</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'grib2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/epygram/extra/griberies/definitions/util.html#GribDef.known_values"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.definitions.util.GribDef.known_values" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of all values present throughout the GribDef for all keys.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.util.GribDef.known_values_for">
+<span class="sig-name descname"><span class="pre">known_values_for</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.extra.griberies.definitions.util.GribDef.known_values_for" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of all values present throughout the GribDef for <strong>key</strong>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.util.GribDef.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_edition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/epygram/extra/griberies/definitions/util.html#GribDef.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.definitions.util.GribDef.read" title="Link to this definition">¶</a></dt>
+<dd><p>Read a grib def concept file, and update or register it.</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">util</span></code> — Utilities for GRIB definitions</a><ul>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.util.GribDef"><code class="docutils literal notranslate"><span class="pre">GribDef</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.util.GribDef.known_names"><code class="docutils literal notranslate"><span class="pre">GribDef.known_names()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.util.GribDef.known_names_for_concept"><code class="docutils literal notranslate"><span class="pre">GribDef.known_names_for_concept()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.util.GribDef.known_values"><code class="docutils literal notranslate"><span class="pre">GribDef.known_values()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.util.GribDef.known_values_for"><code class="docutils literal notranslate"><span class="pre">GribDef.known_values_for()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.util.GribDef.read"><code class="docutils literal notranslate"><span class="pre">GribDef.read()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">definitions</span></code> — utilities around GRIB definitions</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="names.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">names</span></code> — Handling names definitions</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/extra/griberies/definitions/util.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="names.html" title="names — Handling names definitions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="definitions — utilities around GRIB definitions"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">definitions</span></code> — utilities around GRIB definitions</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">util</span></code> — Utilities for GRIB definitions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

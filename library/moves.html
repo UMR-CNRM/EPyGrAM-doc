@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.moves — Moves &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.moves — Moves &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.base — Basic, non-specific classes" href="base.html" />
     <link rel="prev" title="epygram.util — Utilities" href="util.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="util.html" title="epygram.util — Utilities"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code> — Moves</a></li> 
       </ul>
@@ -46,17 +44,17 @@
           <div class="body" role="main">
             
   <section id="module-epygram.moves">
-<span id="epygram-moves-moves"></span><h1><a class="reference internal" href="#module-epygram.moves" title="epygram.moves: Moves"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code></a> — Moves<a class="headerlink" href="#module-epygram.moves" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-moves-moves"></span><h1><a class="reference internal" href="#module-epygram.moves" title="epygram.moves: Moves"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code></a> — Moves<a class="headerlink" href="#module-epygram.moves" title="Link to this heading">¶</a></h1>
 <p>Some moving utilities…</p>
 <section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.moves.cmap2json">
-<span class="sig-prename descclassname"><span class="pre">epygram.moves.</span></span><span class="sig-name descname"><span class="pre">cmap2json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/moves.html#cmap2json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.moves.cmap2json" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.moves.</span></span><span class="sig-name descname"><span class="pre">cmap2json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap_filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/moves.html#cmap2json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.moves.cmap2json" title="Link to this definition">¶</a></dt>
 <dd><p>Convert a .cmap colormap to json formatting, in the spirit of
 bronx.graphics.colormapping.get_ColormapHelper_fromfile()</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>cmap_filename</strong> – file to be processed. Must be named /path/to/{colormap}.cmap</p>
 </dd>
 </dl>
@@ -70,22 +68,31 @@ bronx.graphics.colormapping.get_ColormapHelper_fromfile()</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code> — Moves</a><ul>
-<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#epygram.moves.cmap2json"><code class="docutils literal notranslate"><span class="pre">cmap2json()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="util.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="base.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.base</span></code> — Basic, non-specific classes</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="util.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="base.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.base</span></code> — Basic, non-specific classes</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -93,7 +100,7 @@ bronx.graphics.colormapping.get_ColormapHelper_fromfile()</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -101,13 +108,13 @@ bronx.graphics.colormapping.get_ColormapHelper_fromfile()</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -122,14 +129,14 @@ bronx.graphics.colormapping.get_ColormapHelper_fromfile()</p>
         <li class="right" >
           <a href="util.html" title="epygram.util — Utilities"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code> — Moves</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

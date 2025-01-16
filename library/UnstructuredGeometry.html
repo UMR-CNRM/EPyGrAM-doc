@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.UnstructuredGeometry — Unstructured Geometry class &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.geometries.UnstructuredGeometry — Unstructured Geometry class &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.AcademicGeometry — Academic Geometry class" href="AcademicGeometry.html" />
     <link rel="prev" title="epygram.geometries.ProjectedGeometry — Projected Geometry class" href="ProjectedGeometry.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="ProjectedGeometry.html" title="epygram.geometries.ProjectedGeometry — Projected Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a></li> 
@@ -47,16 +45,16 @@
           <div class="body" role="main">
             
   <section id="epygram-geometries-unstructuredgeometry-unstructured-geometry-class">
-<h1><a class="reference internal" href="#module-epygram.geometries.UnstructuredGeometry" title="epygram.geometries.UnstructuredGeometry: Unstructured Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code></a> — Unstructured Geometry class<a class="headerlink" href="#epygram-geometries-unstructuredgeometry-unstructured-geometry-class" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-epygram.geometries.UnstructuredGeometry"></span><p>Contains the classes for 3D geometries of fields.</p>
+<h1><a class="reference internal" href="#module-epygram.geometries.UnstructuredGeometry" title="epygram.geometries.UnstructuredGeometry: Unstructured Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code></a> — Unstructured Geometry class<a class="headerlink" href="#epygram-geometries-unstructuredgeometry-unstructured-geometry-class" title="Link to this heading">¶</a></h1>
+<p id="module-epygram.geometries.UnstructuredGeometry">Contains the classes for 3D geometries of fields.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.UnstructuredGeometry.</span></span><span class="sig-name descname"><span class="pre">UnstructuredGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'center'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry" title="epygram.geometries.AbstractGeometry.RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.RectangularGridGeometry</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.UnstructuredGeometry.</span></span><span class="sig-name descname"><span class="pre">UnstructuredGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'center'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry" title="epygram.geometries.AbstractGeometry.RectangularGridGeometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">RectangularGridGeometry</span></code></a></p>
 <p>Handles the geometry for an unstructured 3-Dimensions Field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – Name of geometrical type of representation of points on the Globe.
 Name must be ‘unstructured’</p></li>
@@ -78,11 +76,11 @@ among: [‘upper-right’, ‘upper-left’,</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.get_lonlat_grid">
-<span class="sig-name descname"><span class="pre">get_lonlat_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_longitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.get_lonlat_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.get_lonlat_grid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_lonlat_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_longitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.get_lonlat_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.get_lonlat_grid" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a tuple of two tables containing one the longitude of each
 point, the other the latitude, with 2D shape.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
 the grid resp. for the C or C+I zone off the C+I+E zone.</p>
@@ -116,7 +114,7 @@ if ‘]-180,180]’, the longitudes will be in the ]-180, 180] interval</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.getcenter">
-<span class="sig-name descname"><span class="pre">getcenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.getcenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.getcenter" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getcenter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.getcenter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.getcenter" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the coordinate of the grid center as a tuple of Angles
 (center_lon, center_lat).</p>
 <p>Caution: this is computed as the raw average of all grid points.
@@ -125,10 +123,10 @@ A barycentric computation would be more adequate.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ij2ll">
-<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ij2ll" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -141,11 +139,11 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ll2ij">
-<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ll2ij" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (i, j) indexes of point <em>(lon, lat)</em> in degrees,
 in the 2D matrix of gridpoints.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees</p></li>
@@ -159,11 +157,11 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.nearest_points">
-<span class="sig-name descname"><span class="pre">nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.nearest_points" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.nearest_points" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the (i, j) position of the points needed to perform an
 interpolation. This is a list of (lon, lat) tuples.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees.</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees.</p></li>
@@ -180,7 +178,7 @@ distance = <a href="#id1"><span class="problematic" id="id2">|target_value - ext
 <li><p><strong>squeeze</strong> – True to suppress useless dimensions</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><p>general output form is [list, list, …, list]
 with as many list items as the length of lon/lat.
 Each list item is of the form [tuple, tuple, …, tuple]
@@ -207,10 +205,10 @@ with the entry point).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ij">
-<span class="sig-name descname"><span class="pre">resolution_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.resolution_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resolution_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.resolution_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the distance to the nearest point of (i,j) point.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -221,11 +219,11 @@ with the entry point).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ll">
-<span class="sig-name descname"><span class="pre">resolution_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.resolution_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resolution_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/UnstructuredGeometry.html#UnstructuredGeometry.resolution_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the local resolution at the nearest point of lon/lat.
 It’s the distance between this point and its closest neighbour.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees.</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees.</p></li>
@@ -243,14 +241,37 @@ It’s the distance between this point and its closest neighbour.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="ProjectedGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="AcademicGeometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.get_lonlat_grid"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.get_lonlat_grid()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.getcenter()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.ij2ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.ll2ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.nearest_points"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.nearest_points()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ij"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.resolution_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ll"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.resolution_ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="ProjectedGeometry.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="AcademicGeometry.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -258,7 +279,7 @@ It’s the distance between this point and its closest neighbour.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -266,13 +287,13 @@ It’s the distance between this point and its closest neighbour.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -287,15 +308,15 @@ It’s the distance between this point and its closest neighbour.</p>
         <li class="right" >
           <a href="ProjectedGeometry.html" title="epygram.geometries.ProjectedGeometry — Projected Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

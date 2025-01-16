@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.fields.H2DVectorField — Horizontal 2-D Vector Field class &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.fields.H2DVectorField — Horizontal 2-D Vector Field class &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.fields.D3VectorField — 3-D Vector Field class" href="D3VectorField.html" />
     <link rel="prev" title="epygram.fields.MiscField — Miscellaneous Field class" href="MiscField.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="MiscField.html" title="epygram.fields.MiscField — Miscellaneous Field class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fields.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a></li> 
@@ -47,13 +45,13 @@
           <div class="body" role="main">
             
   <section id="module-epygram.fields.H2DVectorField">
-<span id="epygram-fields-h2dvectorfield-horizontal-2-d-vector-field-class"></span><h1><a class="reference internal" href="#module-epygram.fields.H2DVectorField" title="epygram.fields.H2DVectorField: Horizontal 2-D Vector Field class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code></a> — Horizontal 2-D Vector Field class<a class="headerlink" href="#module-epygram.fields.H2DVectorField" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-fields-h2dvectorfield-horizontal-2-d-vector-field-class"></span><h1><a class="reference internal" href="#module-epygram.fields.H2DVectorField" title="epygram.fields.H2DVectorField: Horizontal 2-D Vector Field class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code></a> — Horizontal 2-D Vector Field class<a class="headerlink" href="#module-epygram.fields.H2DVectorField" title="Link to this heading">¶</a></h1>
 <p>Contains the class for a Horizontal 2D Vector field.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.H2DVectorField.</span></span><span class="sig-name descname"><span class="pre">H2DVectorField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/H2DVectorField.html#H2DVectorField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField" title="epygram.fields.D3VectorField.D3VectorField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField.D3VectorField</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.H2DVectorField.</span></span><span class="sig-name descname"><span class="pre">H2DVectorField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/H2DVectorField.html#H2DVectorField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField" title="epygram.fields.D3VectorField.D3VectorField"><code class="xref py py-class docutils literal notranslate"><span class="pre">D3VectorField</span></code></a></p>
 <p>Horizontal 2-Dimensions Vector field class.</p>
 <p>This is a wrapper to a list of H2DField(s), representing the components
 of a vector projected on its geometry (the grid axes).</p>
@@ -102,7 +100,7 @@ of a vector projected on its geometry (the grid axes).</p>
 </li>
 <li><p><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.</p>
 <ul>
-<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x74bef5577100&gt;]&gt;&gt;.</p></li>
+<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7da2ea934cd0&gt;]&gt;&gt;.</p></li>
 </ul>
 </li>
 <li><p><strong>vector</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - Intrinsic vectorial nature of the field.</p>
@@ -116,14 +114,14 @@ of a vector projected on its geometry (the grid axes).</p>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.cartoimage">
-<span class="sig-name descname"><span class="pre">cartoimage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">takeover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.cartoimage" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cartoimage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">takeover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">plot_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.cartoimage" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
 </div>
 <p>Project an image, with a number of options.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>takeover</strong> – give the user more access to the objects used in the
 plot, by returning a dict containing them instead of only fig/ax</p>
 </dd>
@@ -135,7 +133,7 @@ cf. H2DField.cartoplot() arguments.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.cartoplot">
-<span class="sig-name descname"><span class="pre">cartoplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_factor_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">components_are_projected_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_plot_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quiver'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_plot_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiverkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">takeover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">module_plot_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.cartoplot" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cartoplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_factor_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subsampling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">components_are_projected_on</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_plot_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quiver'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector_plot_kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quiverkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">takeover</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">module_plot_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.cartoplot" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
@@ -146,7 +144,7 @@ module of vector shall be passed as additional arguments,
 cf. H2DField.cartoplot() arguments.</p>
 <p>To deactivate module plotting, add <em>plot_method=None</em>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>map_factor_correction</strong> – if True, applies a correction of magnitude
 to vector due to map factor.</p></li>
@@ -167,7 +165,7 @@ to be passed to pyplot.quiverkey().</p></li>
 </dl>
 <p>Takeover:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>takeover</strong> – give the user more access to the objects used in the
 plot, by returning a dict containing them instead of only fig/ax</p>
 </dd>
@@ -176,55 +174,55 @@ plot, by returning a dict containing them instead of only fig/ax</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.comment">
-<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.comment" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.comment" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.components">
-<span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.components" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.components" title="Link to this definition">¶</a></dt>
 <dd><p>List of Fields that each compose a component of the vector (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.fid">
-<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.fid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.fid" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.misc_metadata">
-<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.misc_metadata" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.processtype">
-<span class="sig-name descname"><span class="pre">processtype</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.processtype" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">processtype</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.processtype" title="Link to this definition">¶</a></dt>
 <dd><p>Generating process (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.structure">
-<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.structure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.structure" title="Link to this definition">¶</a></dt>
 <dd><p>Type of Field geometry (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.units">
-<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.units" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.units" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.validity">
-<span class="sig-name descname"><span class="pre">validity</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.validity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">validity</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.validity" title="Link to this definition">¶</a></dt>
 <dd><p>Validity of the field (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.H2DVectorField.H2DVectorField.vector">
-<span class="sig-name descname"><span class="pre">vector</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.vector" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vector</span></span><a class="headerlink" href="#epygram.fields.H2DVectorField.H2DVectorField.vector" title="Link to this definition">¶</a></dt>
 <dd><p>Intrinsic vectorial nature of the field (see the documentation above for more details).</p>
 </dd></dl>
 
@@ -237,14 +235,41 @@ plot, by returning a dict containing them instead of only fig/ax</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="MiscField.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.MiscField</span></code> — Miscellaneous Field class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="D3VectorField.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code> — 3-D Vector Field class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a><ul>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField"><code class="docutils literal notranslate"><span class="pre">H2DVectorField</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.cartoimage"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.cartoimage()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.cartoplot"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.cartoplot()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.comment"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.comment</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.components"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.components</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.fid"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.fid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.misc_metadata</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.processtype"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.processtype</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.structure"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.structure</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.units"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.units</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.validity"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.validity</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.H2DVectorField.H2DVectorField.vector"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.vector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="MiscField.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.MiscField</span></code> — Miscellaneous Field class</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="D3VectorField.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code> — 3-D Vector Field class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -252,7 +277,7 @@ plot, by returning a dict containing them instead of only fig/ax</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -260,13 +285,13 @@ plot, by returning a dict containing them instead of only fig/ax</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -281,15 +306,15 @@ plot, by returning a dict containing them instead of only fig/ax</p>
         <li class="right" >
           <a href="MiscField.html" title="epygram.fields.MiscField — Miscellaneous Field class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fields.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

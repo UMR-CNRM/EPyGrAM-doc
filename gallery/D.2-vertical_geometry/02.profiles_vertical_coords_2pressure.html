@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Convert profiles vertical coordinate from Hybrid-Pressure to pressure &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <title>Convert profiles vertical coordinate from Hybrid-Pressure to pressure &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -27,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Convert profiles vertical coordinate from Hybrid-Pressure to pressure</a></li> 
       </ul>
     </div>  
@@ -38,8 +36,8 @@
           <div class="body" role="main">
             
   <section id="Convert-profiles-vertical-coordinate-from-Hybrid-Pressure-to-pressure">
-<h1>Convert profiles vertical coordinate from Hybrid-Pressure to pressure<a class="headerlink" href="#Convert-profiles-vertical-coordinate-from-Hybrid-Pressure-to-pressure" title="Permalink to this headline">¶</a></h1>
-<div class="nbinput nblast docutils container">
+<h1>Convert profiles vertical coordinate from Hybrid-Pressure to pressure<a class="headerlink" href="#Convert-profiles-vertical-coordinate-from-Hybrid-Pressure-to-pressure" title="Link to this heading">¶</a></h1>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -47,13 +45,21 @@
 <span class="c1"># for figures in notebook</span>
 
 <span class="c1"># import &amp; initialize epygram</span>
-<span class="kn">import</span> <span class="nn">epygram</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="n">INPUTS_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+# [2025/01/16-12:27:21][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
+</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -109,13 +115,13 @@
 </div>
 </div>
 <section id="and-now-on-a-Pressure-z-axis">
-<h2>and now on a Pressure z-axis<a class="headerlink" href="#and-now-on-a-Pressure-z-axis" title="Permalink to this headline">¶</a></h2>
+<h2>and now on a Pressure z-axis<a class="headerlink" href="#and-now-on-a-Pressure-z-axis" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for the conversion, we need Surface pressure</span>
-<span class="n">ps</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;SURFPRESSION&#39;</span><span class="p">)</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">resource</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;SURFPRESSION&#39;</span><span class="p">)</span>
 <span class="c1"># Ps is spectral and ln(Ps)</span>
 <span class="n">ps</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
 <span class="n">ps</span><span class="o">.</span><span class="n">operation</span><span class="p">(</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
@@ -126,7 +132,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="kn">import</span> <span class="n">hybridP2pressure</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">epygram.geometries.VGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">hybridP2pressure</span>
 
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">profiles</span><span class="p">:</span>
     <span class="n">ps_local</span> <span class="o">=</span> <span class="n">ps</span><span class="o">.</span><span class="n">getvalue_ll</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;longitudes&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
@@ -173,16 +179,18 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Convert profiles vertical coordinate from Hybrid-Pressure to pressure</a><ul>
 <li><a class="reference internal" href="#and-now-on-a-Pressure-z-axis">and now on a Pressure z-axis</a></li>
 </ul>
 </li>
 </ul>
 
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -190,7 +198,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
@@ -198,13 +206,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -213,13 +221,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Convert profiles vertical coordinate from Hybrid-Pressure to pressure</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

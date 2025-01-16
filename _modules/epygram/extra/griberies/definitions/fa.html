@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.extra.griberies.definitions.fa &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../griberies.html" accesskey="U">epygram.extra.griberies</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.extra.griberies.definitions.fa</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.extra.griberies.definitions.fa</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">FA Grib definitions</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">GribDef</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse_GRIBstr_todict</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..paths</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_definition_paths</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...util</span><span class="w"> </span><span class="kn">import</span> <span class="n">init_before</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+
+
+<div class="viewcode-block" id="FaGribDef">
+<a class="viewcode-back" href="../../../../../library/FA.html#epygram.extra.griberies.definitions.fa.FaGribDef">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FaGribDef</span><span class="p">(</span><span class="n">GribDef</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle FA-related GRIB definition files.</span>
+<span class="sd">    To add user files:</span>
+<span class="sd">    a) use env vars GRIBAPI|ECCODES_DEFINITION_PATH or</span>
+<span class="sd">    b) move it under {config.userlocaldir}/{FaGribDef.dirname}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_re_dirname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;gribapi\.def\.[\d_]+&#39;</span><span class="p">)</span>
+    <span class="n">_official_rootdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">installdir</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>  <span class="c1"># TODO: use data</span>
+    <span class="n">_non_GRIB_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;LSTCUM&#39;</span><span class="p">,</span> <span class="s1">&#39;FMULTM&#39;</span><span class="p">,</span> <span class="s1">&#39;FMULTE&#39;</span><span class="p">,</span> <span class="s1">&#39;ZLMULT&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actual_init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">concepts</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span> <span class="s1">&#39;faModelName&#39;</span><span class="p">,</span> <span class="s1">&#39;faLevelName&#39;</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FaGribDef</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">actual_init</span><span class="p">,</span> <span class="n">concepts</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_find_gribdefs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">root</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">root</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_re_dirname</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+                    <span class="n">d</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+                        <span class="n">dirs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">dirs</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_actual_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read definition files.&quot;&quot;&quot;</span>
+        <span class="c1"># first, those specified by env var</span>
+        <span class="n">defpaths</span> <span class="o">=</span> <span class="n">get_definition_paths</span><span class="p">()</span>
+        <span class="c1"># then those embarked with epygram</span>
+        <span class="n">defpaths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_gribdefs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_official_rootdir</span><span class="p">)</span> <span class="o">+</span> <span class="n">defpaths</span>
+        <span class="c1"># complete with local user definitions, if existing</span>
+        <span class="n">defpaths</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_find_gribdefs</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">userlocaldir</span><span class="p">)</span> <span class="o">+</span> <span class="n">defpaths</span>
+        <span class="c1"># read gribdef files</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">defpaths</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">grib_edition</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;grib1&#39;</span><span class="p">,</span> <span class="s1">&#39;grib2&#39;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">concept</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_concepts</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_read_localConcept</span><span class="p">(</span><span class="n">concept</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">grib_edition</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialized</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_localConcept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concept</span><span class="p">,</span> <span class="n">directory</span><span class="p">,</span>
+                           <span class="n">grib_edition</span><span class="o">=</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+        <span class="n">pathname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">directory</span><span class="p">,</span> <span class="n">grib_edition</span><span class="p">,</span> <span class="s1">&#39;localConcepts&#39;</span><span class="p">,</span> <span class="s1">&#39;lfpw&#39;</span><span class="p">,</span> <span class="n">concept</span> <span class="o">+</span> <span class="s1">&#39;.def&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pathname</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">pathname</span><span class="p">,</span> <span class="n">grib_edition</span><span class="p">)</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">FA2GRIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
+                <span class="n">grib_edition</span><span class="o">=</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">fatal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert FA field name to GRIB fid, including vertical level identification.</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param fatal: if True and fieldname is not retrieved, raise a ValueError;</span>
+<span class="sd">            else, return a default 255 fid</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_re_altitude</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(?P&lt;ltype&gt;[A-W]+)(?P&lt;level&gt;\d+)(?P&lt;param&gt;.+)&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="s1">&#39;faFieldName&#39;</span><span class="p">]:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span> <span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span>
+                                <span class="n">grib_edition</span><span class="p">,</span> <span class="n">include_comments</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">fieldname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="s1">&#39;faFieldName&#39;</span><span class="p">]:</span>  <span class="c1"># FIXME: ?</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="n">fieldname</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">),</span> <span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span>
+                                <span class="n">grib_edition</span><span class="p">,</span> <span class="n">include_comments</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rematch</span> <span class="o">=</span> <span class="n">_re_altitude</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rematch</span><span class="p">:</span>
+                <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="n">rematch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;ltype&#39;</span><span class="p">),</span> <span class="s1">&#39;faLevelName&#39;</span><span class="p">,</span>
+                                    <span class="n">grib_edition</span><span class="p">,</span> <span class="n">include_comments</span><span class="p">,</span>
+                                    <span class="n">fatal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">fid</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="n">rematch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;param&#39;</span><span class="p">),</span> <span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span>
+                                         <span class="n">grib_edition</span><span class="p">,</span> <span class="n">include_comments</span><span class="p">,</span>
+                                         <span class="n">fatal</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+                <span class="n">level</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">rematch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">level</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># formatting issue</span>
+                    <span class="n">level</span> <span class="o">=</span> <span class="mi">100000</span>
+                <span class="n">fid</span><span class="p">[</span><span class="s1">&#39;scaleFactorOfFirstFixedSurface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">fid</span><span class="p">[</span><span class="s1">&#39;scaledValueOfFirstFixedSurface&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">level</span>
+                <span class="k">if</span> <span class="n">rematch</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;ltype&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;P&#39;</span><span class="p">:</span>
+                    <span class="n">level</span> <span class="o">/=</span> <span class="mi">100</span>
+                <span class="n">fid</span><span class="p">[</span><span class="s1">&#39;level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">level</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">fatal</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;field not found: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fieldname</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_def</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span>
+                                        <span class="n">grib_edition</span><span class="p">,</span> <span class="n">include_comments</span><span class="p">)</span>
+                    <span class="n">fid</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;typeOfFirstFixedSurface&#39;</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">filter_non_GRIB_keys</span><span class="p">:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_non_GRIB_keys</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="c1"># productDefinitionTemplateNumber to distinguish between</span>
+        <span class="c1"># CLSTEMPERATURE and CLSMINI.TEMPERAT / CLSMAXI.TEMPERAT (for instance)</span>
+        <span class="k">if</span> <span class="s1">&#39;productDefinitionTemplateNumber&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fid</span><span class="p">:</span>
+            <span class="n">fid</span><span class="p">[</span><span class="s1">&#39;productDefinitionTemplateNumber&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">fid</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">GRIB2FA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gribfid</span><span class="p">,</span>
+                <span class="n">grib_edition</span><span class="o">=</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Look for a unique matching field in tables.</span>
+<span class="sd">        ! WARNING ! the unicity might not be ensured depending on the version</span>
+<span class="sd">        of grib definitions files.</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">matching_fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lookup_GRIB</span><span class="p">(</span><span class="n">gribfid</span><span class="p">,</span> <span class="n">grib_edition</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching_fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">matching_fields</span><span class="o">.</span><span class="n">keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching_fields</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No field matching *fid* was found in tables.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">matching_fields</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Several fields matching were found. Use method *lookup_GRIB* to refine.&quot;</span><span class="p">)</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lookup_FA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partial_fieldname</span><span class="p">,</span>
+                  <span class="n">grib_edition</span><span class="o">=</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                  <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Look for all the fields which FA name contain **partial_fieldname**.</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">try</span><span class="p">:</span>  <span class="c1"># first try to get it as an altitude one</span>
+            <span class="n">gribfid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FA2GRIB</span><span class="p">(</span><span class="n">partial_fieldname</span><span class="p">,</span>
+                                   <span class="n">grib_edition</span><span class="o">=</span><span class="n">grib_edition</span><span class="p">,</span>
+                                   <span class="n">include_comments</span><span class="o">=</span><span class="n">include_comments</span><span class="p">,</span>
+                                   <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="n">filter_non_GRIB_keys</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>  <span class="c1"># field was not found as such; might be partial =&gt; finally</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fields</span><span class="p">[</span><span class="n">partial_fieldname</span><span class="p">]</span> <span class="o">=</span> <span class="n">gribfid</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="n">gribfid</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="n">grib_edition</span><span class="p">][</span><span class="s1">&#39;faFieldName&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">partial_fieldname</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">fields</span><span class="p">[</span><span class="n">f</span><span class="p">]</span> <span class="o">=</span> <span class="n">gribfid</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">fields</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">include_comments</span><span class="p">:</span>
+                    <span class="n">fid</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;#comment&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">filter_non_GRIB_keys</span><span class="p">:</span>
+                    <span class="n">fields</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_non_GRIB_keys</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fields</span>
+
+    <span class="nd">@init_before</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lookup_GRIB</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">partial_fid</span><span class="p">,</span>
+                    <span class="n">grib_edition</span><span class="o">=</span><span class="n">GribDef</span><span class="o">.</span><span class="n">_default_grib_edition</span><span class="p">,</span>
+                    <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                    <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Look for all the fields which GRIB fid contain **partial_fid**.</span>
+
+<span class="sd">        :param grib_edition: among (&#39;grib1&#39;, &#39;grib2&#39;), the version of GRIB fid</span>
+<span class="sd">        :param include_comments: if a comment is present if grib def, bring it in fid</span>
+<span class="sd">        :param filter_non_GRIB_keys: filter out the non-GRIB keys that may be</span>
+<span class="sd">            present in grib def of field</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lookup_from_kv</span><span class="p">(</span><span class="n">partial_fid</span><span class="p">,</span> <span class="s1">&#39;faFieldName&#39;</span><span class="p">,</span>
+                                    <span class="n">grib_edition</span><span class="o">=</span><span class="n">grib_edition</span><span class="p">,</span>
+                                    <span class="n">include_comments</span><span class="o">=</span><span class="n">include_comments</span><span class="p">,</span>
+                                    <span class="n">filter_non_GRIB_keys</span><span class="o">=</span><span class="n">filter_non_GRIB_keys</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">fid</span> <span class="o">=</span> <span class="n">parse_GRIBstr_todict</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>  <span class="c1"># fid is a FA fieldname</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">FA2GRIB</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="n">ok</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ok</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># fid is a GRIB fid</span>
+            <span class="n">ok</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lookup_GRIB</span><span class="p">(</span><span class="n">fid</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">ok</span></div>
+
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../griberies.html" >epygram.extra.griberies</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.extra.griberies.definitions.fa</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

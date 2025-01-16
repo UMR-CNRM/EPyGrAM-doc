@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.GaussGeometry — Gauss Geometry class &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.geometries.GaussGeometry — Gauss Geometry class &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.RegLLGeometry — RegLL Geometry class" href="RegLLGeometry.html" />
     <link rel="prev" title="epygram.geometries.AcademicGeometry — Academic Geometry class" href="AcademicGeometry.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="AcademicGeometry.html" title="epygram.geometries.AcademicGeometry — Academic Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></li> 
@@ -47,16 +45,16 @@
           <div class="body" role="main">
             
   <section id="epygram-geometries-gaussgeometry-gauss-geometry-class">
-<h1><a class="reference internal" href="#module-epygram.geometries.GaussGeometry" title="epygram.geometries.GaussGeometry: Gauss Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code></a> — Gauss Geometry class<a class="headerlink" href="#epygram-geometries-gaussgeometry-gauss-geometry-class" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-epygram.geometries.GaussGeometry"></span><p>Contains the classes for 3D geometries of fields.</p>
+<h1><a class="reference internal" href="#module-epygram.geometries.GaussGeometry" title="epygram.geometries.GaussGeometry: Gauss Geometry class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code></a> — Gauss Geometry class<a class="headerlink" href="#epygram-geometries-gaussgeometry-gauss-geometry-class" title="Link to this heading">¶</a></h1>
+<p id="module-epygram.geometries.GaussGeometry">Contains the classes for 3D geometries of fields.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.GaussGeometry.</span></span><span class="sig-name descname"><span class="pre">GaussGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry" title="epygram.geometries.AbstractGeometry.Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.Geometry</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.GaussGeometry.</span></span><span class="sig-name descname"><span class="pre">GaussGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry" title="epygram.geometries.AbstractGeometry.Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Geometry</span></code></a></p>
 <p>Handles the geometry for a Global Gauss grid 3-Dimensions Field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> – Name of geometrical type of representation of points on the Globe.
 Name must be among [‘rotated_reduced_gauss’, ‘reduced_gauss’, ‘regular_gauss’</p></li>
@@ -78,7 +76,7 @@ among: [‘upper-right’, ‘upper-left’,</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.default_cartopy_CRS">
-<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.default_cartopy_CRS" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
@@ -88,10 +86,10 @@ among: [‘upper-right’, ‘upper-left’,</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ij">
-<span class="sig-name descname"><span class="pre">distance_to_nearest_neighbour_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.distance_to_nearest_neighbour_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">distance_to_nearest_neighbour_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.distance_to_nearest_neighbour_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the distance to the nearest point of (i,j) point</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -102,11 +100,11 @@ among: [‘upper-right’, ‘upper-left’,</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ll">
-<span class="sig-name descname"><span class="pre">distance_to_nearest_neighbour_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.distance_to_nearest_neighbour_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">distance_to_nearest_neighbour_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.distance_to_nearest_neighbour_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the local resolution at the nearest point of lon/lat.
 It’s the distance between this point and its closest neighbour.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of the point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of the point in degrees</p></li>
@@ -117,7 +115,7 @@ It’s the distance between this point and its closest neighbour.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.fill_maskedvalues">
-<span class="sig-name descname"><span class="pre">fill_maskedvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.fill_maskedvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.fill_maskedvalues" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fill_maskedvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.fill_maskedvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.fill_maskedvalues" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a copy of <em>data</em> with ‘real’ masked values (i.e. not those
 linked to reduced Gauss) filled with <em>fill_value</em>.
 <em>data</em> must be already 4D for simplicity reasons.</p>
@@ -125,10 +123,10 @@ linked to reduced Gauss) filled with <em>fill_value</em>.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.get_datashape">
-<span class="sig-name descname"><span class="pre">get_datashape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_dimZ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.get_datashape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.get_datashape" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_datashape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_dimZ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.get_datashape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.get_datashape" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the data shape according to the geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>force_dimZ</strong> – if supplied, force the Z dimension instead of that
 of the vertical geometry</p></li>
@@ -146,7 +144,7 @@ data shape</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.get_lonlat_grid">
-<span class="sig-name descname"><span class="pre">get_lonlat_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_longitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.get_lonlat_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.get_lonlat_grid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_lonlat_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_longitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.get_lonlat_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.get_lonlat_grid" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a tuple of two tables containing one the longitude of each
 point, the other the latitude, with 2D shape.</p>
 <p>Shape of 2D data in Gauss grids:</p>
@@ -158,7 +156,7 @@ Nj = number of longitudes for latitude j</p></li>
 </ul>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>position</strong> – position of lonlat grid with respect to the model cell.
 Defaults to self.position_on_horizontal_grid.</p></li>
@@ -181,13 +179,13 @@ if ‘]-180,180]’, the longitudes will be in the ]-180, 180] interval</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.gridpoints_number">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gridpoints_number</span></span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.gridpoints_number" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gridpoints_number</span></span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.gridpoints_number" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the number of gridpoints of the grid.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.horizontally_flattened">
-<span class="sig-name descname"><span class="pre">horizontally_flattened</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.horizontally_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.horizontally_flattened" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">horizontally_flattened</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.horizontally_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.horizontally_flattened" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a copy of <em>data</em> with horizontal dimensions flattened and
 compressed (cf. numpy.ma.masked_array.compressed).
 <em>data</em> must be 4D for simplicity reasons.</p>
@@ -195,10 +193,10 @@ compressed (cf. numpy.ma.masked_array.compressed).
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.ij2ll">
-<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.ij2ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ij2ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.ij2ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.ij2ll" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (lon, lat) coordinates of point <em>(i,j)</em>, in degrees.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -211,9 +209,9 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.isglobal">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isglobal</span></span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.isglobal" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isglobal</span></span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.isglobal" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if geometry is global</p>
 </dd>
 </dl>
@@ -221,11 +219,11 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.ll2ij">
-<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.ll2ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">ll2ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.ll2ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.ll2ij" title="Link to this definition">¶</a></dt>
 <dd><p>Return the (<em>i, j</em>) coordinates in the 2D matrix of gridpoints,
 of the gridpoint nearest to (<em>lon</em>, <em>lat</em>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees</p></li>
@@ -238,10 +236,10 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.map_factor">
-<span class="sig-name descname"><span class="pre">map_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.map_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.map_factor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">map_factor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.map_factor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.map_factor" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the map factor at the given longitude/latitude(s)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude in degrees</p></li>
 <li><p><strong>lat</strong> – latitude in degrees</p></li>
@@ -252,10 +250,10 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.map_factor_field">
-<span class="sig-name descname"><span class="pre">map_factor_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.map_factor_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.map_factor_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">map_factor_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.map_factor_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.map_factor_field" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a new field whose data is the map factor over the field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>position</strong> – grid position with respect to the model cell.
 Defaults to self.position_on_horizontal_grid.</p>
 </dd>
@@ -264,17 +262,17 @@ Defaults to self.position_on_horizontal_grid.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.meridian_resolution_j">
-<span class="sig-name descname"><span class="pre">meridian_resolution_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.meridian_resolution_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.meridian_resolution_j" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">meridian_resolution_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.meridian_resolution_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.meridian_resolution_j" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the average meridian resolution at longitude circle number <em>j</em>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.nearest_points">
-<span class="sig-name descname"><span class="pre">nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.nearest_points" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.nearest_points" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a list of the (i, j) position of the points needed to perform
 an interpolation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees.</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees.</p></li>
@@ -303,7 +301,7 @@ distance = <a href="#id1"><span class="problematic" id="id2">|target_value - ext
 <li><p><strong>squeeze</strong> – True to suppress useless dimensions</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><p>general output form is [list, list, …, list]
 with as many list items as the length of lon/lat.
 Each list item is of the form [tuple, tuple, …, tuple]
@@ -330,11 +328,11 @@ with the entry point).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ij">
-<span class="sig-name descname"><span class="pre">point_is_inside_domain_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.point_is_inside_domain_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">point_is_inside_domain_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.point_is_inside_domain_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns True if the point(s) of lon/lat coordinates is(are) inside the
 field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point in the 2D matrix of gridpoints</p></li>
 <li><p><strong>j</strong> – Y index of point in the 2D matrix of gridpoints</p></li>
@@ -346,12 +344,12 @@ field.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ll">
-<span class="sig-name descname"><span class="pre">point_is_inside_domain_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">__</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.point_is_inside_domain_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">point_is_inside_domain_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">_</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">__</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.point_is_inside_domain_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns True if the point(s) of lon/lat coordinates is(are) inside the
 field.
 This is always the case in Gauss grids, no real meaning.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of the point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of the point in degrees</p></li>
@@ -366,11 +364,11 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.reproject_wind_on_lonlat">
-<span class="sig-name descname"><span class="pre">reproject_wind_on_lonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_factor_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.reproject_wind_on_lonlat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.reproject_wind_on_lonlat" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reproject_wind_on_lonlat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">map_factor_correction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.reproject_wind_on_lonlat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.reproject_wind_on_lonlat" title="Link to this definition">¶</a></dt>
 <dd><p>Reprojects a wind vector (u, v) on rotated/stretched sphere onto real
 sphere, i.e. with components on true zonal/meridian axes.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>u</strong> – the u == zonal-on-the-grid component of wind</p></li>
 <li><p><strong>v</strong> – the v == meridian-on-the-grid component of wind</p></li>
@@ -387,11 +385,11 @@ to map factor.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.reshape_data">
-<span class="sig-name descname"><span class="pre">reshape_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.reshape_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.reshape_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reshape_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.reshape_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.reshape_data" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a 2D data (horizontal dimensions) reshaped from 1D,
 according to geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – the 1D data (or 3D with a T and Z dimensions,
 or 2D with either a T/Z dimension, to be specified),
@@ -411,10 +409,10 @@ dimension of data among (‘T’, ‘Z’)</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.resolution_field">
-<span class="sig-name descname"><span class="pre">resolution_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'meridian'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.resolution_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resolution_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'meridian'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.resolution_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a field whose values are the local resolution in m.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>direction</strong> – among (‘zonal’, ‘meridian’), direction in which
 the resolution is computed.</p>
 </dd>
@@ -423,24 +421,24 @@ the resolution is computed.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.resolution_field_from_stretching">
-<span class="sig-name descname"><span class="pre">resolution_field_from_stretching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field_from_stretching" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resolution_field_from_stretching</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field_from_stretching" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a field which values are the local resolution computed as the
 nominal resolution stretched locally by the map factor.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.resolution_j">
-<span class="sig-name descname"><span class="pre">resolution_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.resolution_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_j" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resolution_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.resolution_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_j" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the average meridian resolution at longitude circle number j.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.resolution_ll">
-<span class="sig-name descname"><span class="pre">resolution_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.resolution_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resolution_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.resolution_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the average meridian resolution (worst directional resolution)
 at point position.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of the point in degrees</p></li>
 <li><p><strong>lat</strong> – latitude of the point in degrees</p></li>
@@ -451,7 +449,7 @@ at point position.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.GaussGeometry.GaussGeometry.zonal_resolution_j">
-<span class="sig-name descname"><span class="pre">zonal_resolution_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.zonal_resolution_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.zonal_resolution_j" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">zonal_resolution_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/GaussGeometry.html#GaussGeometry.zonal_resolution_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.GaussGeometry.GaussGeometry.zonal_resolution_j" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the average zonal resolution at longitude circle number j.</p>
 </dd></dl>
 
@@ -464,14 +462,54 @@ at point position.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="AcademicGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="RegLLGeometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry"><code class="docutils literal notranslate"><span class="pre">GaussGeometry</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.default_cartopy_CRS"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.default_cartopy_CRS()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ij"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.distance_to_nearest_neighbour_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.distance_to_nearest_neighbour_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.fill_maskedvalues"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.fill_maskedvalues()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.get_datashape"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.get_datashape()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.get_lonlat_grid"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.get_lonlat_grid()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.gridpoints_number"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.gridpoints_number</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.horizontally_flattened"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.horizontally_flattened()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.ij2ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.isglobal"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.isglobal</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.ll2ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.map_factor"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.map_factor()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.map_factor_field"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.map_factor_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.meridian_resolution_j"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.meridian_resolution_j()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.nearest_points"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.nearest_points()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ij"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.point_is_inside_domain_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.point_is_inside_domain_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.reproject_wind_on_lonlat"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.reproject_wind_on_lonlat()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.reshape_data"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.reshape_data()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field_from_stretching"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_field_from_stretching()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_j"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_j()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.resolution_ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.GaussGeometry.GaussGeometry.zonal_resolution_j"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.zonal_resolution_j()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="AcademicGeometry.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="RegLLGeometry.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -479,7 +517,7 @@ at point position.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -487,13 +525,13 @@ at point position.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -508,15 +546,15 @@ at point position.</p>
         <li class="right" >
           <a href="AcademicGeometry.html" title="epygram.geometries.AcademicGeometry — Academic Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

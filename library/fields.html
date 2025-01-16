@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.fields — Fields &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.fields — Fields &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.fields.D3Field — 3-D Field class" href="D3Field.html" />
     <link rel="prev" title="epygram.geometries.domain_making.util — Tools" href="domain_making/util.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="domain_making/util.html" title="epygram.geometries.domain_making.util — Tools"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a></li> 
       </ul>
@@ -46,31 +44,323 @@
           <div class="body" role="main">
             
   <section id="module-epygram.fields">
-<span id="epygram-fields-fields"></span><h1><a class="reference internal" href="#module-epygram.fields" title="epygram.fields"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code></a> — Fields<a class="headerlink" href="#module-epygram.fields" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-fields-fields"></span><h1><a class="reference internal" href="#module-epygram.fields" title="epygram.fields"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code></a> — Fields<a class="headerlink" href="#module-epygram.fields" title="Link to this heading">¶</a></h1>
 <p>Contains all fields classes.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="D3Field.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="H2DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code> — Horizontal 2-D Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="H1DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H1DField</span></code> — Horizontal 1-D Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="V2DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.V2DField</span></code> — Vertical 2-D Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="V1DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code> — Vertical 1-D Field</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="V1DField.html#functions">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="D3Field.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField"><code class="docutils literal notranslate"><span class="pre">_D3CommonField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.as_dicts"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_dicts()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.as_lists"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_lists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.as_points"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.as_profiles"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_profiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.as_vcoordinate"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_vcoordinate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.as_vtkGrid"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_vtkGrid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.comment"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.dctspectrum"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.dctspectrum()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.decumulate"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.decumulate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.dump_to_nc"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.dump_to_nc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extend"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extend()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extract_physicallevels"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_physicallevels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extract_subarray"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_subarray()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_subdomain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extract_subsample"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_subsample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extract_zoom"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_zoom()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extractprofile"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extractprofile()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.extractsection"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extractsection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.fid"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.getvalue_ll"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.getvalue_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.global_shift_center"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.global_shift_center()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.histogram"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.histogram()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.max"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.max()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.mean"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.mean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.min"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.min()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.nonzero"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.nonzero()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.plot3DColor"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DColor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.plot3DContour"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DContour()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.plot3DOutline"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DOutline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.plot3DVolume"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DVolume()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.quadmean"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.quadmean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.remove_level"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.remove_level()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.resample"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.resample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.resample_on_regularll"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.resample_on_regularll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.scatter_with"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.scatter_with()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.sgmean"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.sgmean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.shave"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.shave()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.spectral"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.spectral</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.stats"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.stats()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.std"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.std()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.structure"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.time_reduce"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.time_reduce()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.time_smooth"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.time_smooth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.units"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.use_field_as_vcoord"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.use_field_as_vcoord()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.vtk_guess_param_from_field"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.vtk_guess_param_from_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field._D3CommonField.what"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.what()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="PointField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.PointField</span></code> — Point 0-D Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="MiscField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.MiscField</span></code> — Miscellaneous Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="H2DVectorField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="D3VectorField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code> — 3-D Vector Field class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field"><code class="docutils literal notranslate"><span class="pre">D3Field</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.center"><code class="docutils literal notranslate"><span class="pre">D3Field.center()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.comment"><code class="docutils literal notranslate"><span class="pre">D3Field.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.compute_xy_spderivatives"><code class="docutils literal notranslate"><span class="pre">D3Field.compute_xy_spderivatives()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.data"><code class="docutils literal notranslate"><span class="pre">D3Field.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.fid"><code class="docutils literal notranslate"><span class="pre">D3Field.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.geometry"><code class="docutils literal notranslate"><span class="pre">D3Field.geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.getdata"><code class="docutils literal notranslate"><span class="pre">D3Field.getdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.getlevel"><code class="docutils literal notranslate"><span class="pre">D3Field.getlevel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.getvalidity"><code class="docutils literal notranslate"><span class="pre">D3Field.getvalidity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.getvalue_ij"><code class="docutils literal notranslate"><span class="pre">D3Field.getvalue_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.gp2sp"><code class="docutils literal notranslate"><span class="pre">D3Field.gp2sp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.misc_metadata"><code class="docutils literal notranslate"><span class="pre">D3Field.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.processtype"><code class="docutils literal notranslate"><span class="pre">D3Field.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.select_subzone"><code class="docutils literal notranslate"><span class="pre">D3Field.select_subzone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.setdata"><code class="docutils literal notranslate"><span class="pre">D3Field.setdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.sp2gp"><code class="docutils literal notranslate"><span class="pre">D3Field.sp2gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">D3Field.spectral_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.structure"><code class="docutils literal notranslate"><span class="pre">D3Field.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.units"><code class="docutils literal notranslate"><span class="pre">D3Field.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3Field.validity"><code class="docutils literal notranslate"><span class="pre">D3Field.validity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField"><code class="docutils literal notranslate"><span class="pre">D3VirtualField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.comment"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.data"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.deldata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.deldata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.fid"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.fieldset"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.fieldset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.getdata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.getdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.getlevel"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.getlevel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.getvalue_ij"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.getvalue_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.gp2sp"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.gp2sp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.resource"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.resource</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.resource_fids"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.resource_fids</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.setdata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.setdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.sp2gp"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.sp2gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.structure"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3Field.html#epygram.fields.D3Field.D3VirtualField.units"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.units</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="H2DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code> — Horizontal 2-D Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField"><code class="docutils literal notranslate"><span class="pre">H2DField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.cartoplot"><code class="docutils literal notranslate"><span class="pre">H2DField.cartoplot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.cartoplot_background"><code class="docutils literal notranslate"><span class="pre">H2DField.cartoplot_background()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.cartoplot_fig_init"><code class="docutils literal notranslate"><span class="pre">H2DField.cartoplot_fig_init()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.comment"><code class="docutils literal notranslate"><span class="pre">H2DField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.extract_contour"><code class="docutils literal notranslate"><span class="pre">H2DField.extract_contour()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.extract_point"><code class="docutils literal notranslate"><span class="pre">H2DField.extract_point()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.fid"><code class="docutils literal notranslate"><span class="pre">H2DField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.geometry"><code class="docutils literal notranslate"><span class="pre">H2DField.geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.getlevel"><code class="docutils literal notranslate"><span class="pre">H2DField.getlevel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.indices_of_minmax_value"><code class="docutils literal notranslate"><span class="pre">H2DField.indices_of_minmax_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.lonlat_of_minmax_value"><code class="docutils literal notranslate"><span class="pre">H2DField.lonlat_of_minmax_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">H2DField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.morph_with_points"><code class="docutils literal notranslate"><span class="pre">H2DField.morph_with_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.processtype"><code class="docutils literal notranslate"><span class="pre">H2DField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">H2DField.spectral_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.spectrum"><code class="docutils literal notranslate"><span class="pre">H2DField.spectrum()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.structure"><code class="docutils literal notranslate"><span class="pre">H2DField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.units"><code class="docutils literal notranslate"><span class="pre">H2DField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DField.html#epygram.fields.H2DField.H2DField.validity"><code class="docutils literal notranslate"><span class="pre">H2DField.validity</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="H1DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H1DField</span></code> — Horizontal 1-D Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField"><code class="docutils literal notranslate"><span class="pre">H1DField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.comment"><code class="docutils literal notranslate"><span class="pre">H1DField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.fid"><code class="docutils literal notranslate"><span class="pre">H1DField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.geometry"><code class="docutils literal notranslate"><span class="pre">H1DField.geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.getlevel"><code class="docutils literal notranslate"><span class="pre">H1DField.getlevel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">H1DField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.plotanimation"><code class="docutils literal notranslate"><span class="pre">H1DField.plotanimation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.plotfield"><code class="docutils literal notranslate"><span class="pre">H1DField.plotfield()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.plothorizontalhovmoller"><code class="docutils literal notranslate"><span class="pre">H1DField.plothorizontalhovmoller()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.plottransects"><code class="docutils literal notranslate"><span class="pre">H1DField.plottransects()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.processtype"><code class="docutils literal notranslate"><span class="pre">H1DField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">H1DField.spectral_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.structure"><code class="docutils literal notranslate"><span class="pre">H1DField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.units"><code class="docutils literal notranslate"><span class="pre">H1DField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.H1DField.validity"><code class="docutils literal notranslate"><span class="pre">H1DField.validity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.plothorizontalhovmoller"><code class="docutils literal notranslate"><span class="pre">plothorizontalhovmoller()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.plottransects"><code class="docutils literal notranslate"><span class="pre">plottransects()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="H1DField.html#epygram.fields.H1DField.plotanimation"><code class="docutils literal notranslate"><span class="pre">plotanimation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="V2DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.V2DField</span></code> — Vertical 2-D Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField"><code class="docutils literal notranslate"><span class="pre">V2DField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.comment"><code class="docutils literal notranslate"><span class="pre">V2DField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.fid"><code class="docutils literal notranslate"><span class="pre">V2DField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.geometry"><code class="docutils literal notranslate"><span class="pre">V2DField.geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">V2DField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.processtype"><code class="docutils literal notranslate"><span class="pre">V2DField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">V2DField.spectral_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.structure"><code class="docutils literal notranslate"><span class="pre">V2DField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.units"><code class="docutils literal notranslate"><span class="pre">V2DField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V2DField.html#epygram.fields.V2DField.V2DField.validity"><code class="docutils literal notranslate"><span class="pre">V2DField.validity</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="V1DField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.V1DField</span></code> — Vertical 1-D Field</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField"><code class="docutils literal notranslate"><span class="pre">V1DCommonField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.comment"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.fid"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.plotanimation"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.plotanimation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.plotfield"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.plotfield()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.plotprofiles"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.plotprofiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.plotverticalhovmoller"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.plotverticalhovmoller()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.structure"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DCommonField.units"><code class="docutils literal notranslate"><span class="pre">V1DCommonField.units</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField"><code class="docutils literal notranslate"><span class="pre">V1DField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.comment"><code class="docutils literal notranslate"><span class="pre">V1DField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.fid"><code class="docutils literal notranslate"><span class="pre">V1DField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.geometry"><code class="docutils literal notranslate"><span class="pre">V1DField.geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">V1DField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.processtype"><code class="docutils literal notranslate"><span class="pre">V1DField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">V1DField.spectral_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.structure"><code class="docutils literal notranslate"><span class="pre">V1DField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.units"><code class="docutils literal notranslate"><span class="pre">V1DField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DField.validity"><code class="docutils literal notranslate"><span class="pre">V1DField.validity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.comment"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.fid"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.fieldset"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.fieldset</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.resource"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.resource</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.resource_fids"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.resource_fids</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.structure"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.V1DVirtualField.units"><code class="docutils literal notranslate"><span class="pre">V1DVirtualField.units</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="V1DField.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.plotprofiles"><code class="docutils literal notranslate"><span class="pre">plotprofiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.plotverticalhovmoller"><code class="docutils literal notranslate"><span class="pre">plotverticalhovmoller()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="V1DField.html#epygram.fields.V1DField.plotanimation"><code class="docutils literal notranslate"><span class="pre">plotanimation()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="PointField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.PointField</span></code> — Point 0-D Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="PointField.html#epygram.fields.PointField.gimme_one_point"><code class="docutils literal notranslate"><span class="pre">gimme_one_point()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField"><code class="docutils literal notranslate"><span class="pre">PointField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.comment"><code class="docutils literal notranslate"><span class="pre">PointField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.fid"><code class="docutils literal notranslate"><span class="pre">PointField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.geometry"><code class="docutils literal notranslate"><span class="pre">PointField.geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">PointField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.plotfield"><code class="docutils literal notranslate"><span class="pre">PointField.plotfield()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.processtype"><code class="docutils literal notranslate"><span class="pre">PointField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">PointField.spectral_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.structure"><code class="docutils literal notranslate"><span class="pre">PointField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.units"><code class="docutils literal notranslate"><span class="pre">PointField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="PointField.html#epygram.fields.PointField.PointField.validity"><code class="docutils literal notranslate"><span class="pre">PointField.validity</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MiscField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.MiscField</span></code> — Miscellaneous Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField"><code class="docutils literal notranslate"><span class="pre">MiscField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField.comment"><code class="docutils literal notranslate"><span class="pre">MiscField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField.datatype"><code class="docutils literal notranslate"><span class="pre">MiscField.datatype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField.fid"><code class="docutils literal notranslate"><span class="pre">MiscField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">MiscField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField.shape"><code class="docutils literal notranslate"><span class="pre">MiscField.shape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="MiscField.html#epygram.fields.MiscField.MiscField.units"><code class="docutils literal notranslate"><span class="pre">MiscField.units</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="H2DVectorField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DVectorField</span></code> — Horizontal 2-D Vector Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField"><code class="docutils literal notranslate"><span class="pre">H2DVectorField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.cartoimage"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.cartoimage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.cartoplot"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.cartoplot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.comment"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.components"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.components</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.fid"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.processtype"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.structure"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.units"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.validity"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.validity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="H2DVectorField.html#epygram.fields.H2DVectorField.H2DVectorField.vector"><code class="docutils literal notranslate"><span class="pre">H2DVectorField.vector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="D3VectorField.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3VectorField</span></code> — 3-D Vector Field class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.make_vector_field"><code class="docutils literal notranslate"><span class="pre">make_vector_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField"><code class="docutils literal notranslate"><span class="pre">D3VectorField</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.as_vtkGrid"><code class="docutils literal notranslate"><span class="pre">D3VectorField.as_vtkGrid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.attach_components"><code class="docutils literal notranslate"><span class="pre">D3VectorField.attach_components()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.center"><code class="docutils literal notranslate"><span class="pre">D3VectorField.center()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.comment"><code class="docutils literal notranslate"><span class="pre">D3VectorField.comment</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.components"><code class="docutils literal notranslate"><span class="pre">D3VectorField.components</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.compute_direction"><code class="docutils literal notranslate"><span class="pre">D3VectorField.compute_direction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.compute_vordiv"><code class="docutils literal notranslate"><span class="pre">D3VectorField.compute_vordiv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.data"><code class="docutils literal notranslate"><span class="pre">D3VectorField.data</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.deldata"><code class="docutils literal notranslate"><span class="pre">D3VectorField.deldata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_subarray"><code class="docutils literal notranslate"><span class="pre">D3VectorField.extract_subarray()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">D3VectorField.extract_subdomain()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_subsample"><code class="docutils literal notranslate"><span class="pre">D3VectorField.extract_subsample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.extract_zoom"><code class="docutils literal notranslate"><span class="pre">D3VectorField.extract_zoom()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.fid"><code class="docutils literal notranslate"><span class="pre">D3VectorField.fid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getdata"><code class="docutils literal notranslate"><span class="pre">D3VectorField.getdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getlevel"><code class="docutils literal notranslate"><span class="pre">D3VectorField.getlevel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getvalue_ij"><code class="docutils literal notranslate"><span class="pre">D3VectorField.getvalue_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.getvalue_ll"><code class="docutils literal notranslate"><span class="pre">D3VectorField.getvalue_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.global_shift_center"><code class="docutils literal notranslate"><span class="pre">D3VectorField.global_shift_center()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.gp2sp"><code class="docutils literal notranslate"><span class="pre">D3VectorField.gp2sp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.map_factorize"><code class="docutils literal notranslate"><span class="pre">D3VectorField.map_factorize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.max"><code class="docutils literal notranslate"><span class="pre">D3VectorField.max()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.mean"><code class="docutils literal notranslate"><span class="pre">D3VectorField.mean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.min"><code class="docutils literal notranslate"><span class="pre">D3VectorField.min()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">D3VectorField.misc_metadata</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.nonzero"><code class="docutils literal notranslate"><span class="pre">D3VectorField.nonzero()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.plot3DOutline"><code class="docutils literal notranslate"><span class="pre">D3VectorField.plot3DOutline()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.plot3DStream"><code class="docutils literal notranslate"><span class="pre">D3VectorField.plot3DStream()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.plot3DVector"><code class="docutils literal notranslate"><span class="pre">D3VectorField.plot3DVector()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.processtype"><code class="docutils literal notranslate"><span class="pre">D3VectorField.processtype</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.quadmean"><code class="docutils literal notranslate"><span class="pre">D3VectorField.quadmean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.remove_level"><code class="docutils literal notranslate"><span class="pre">D3VectorField.remove_level()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.reproject_wind_on_lonlat"><code class="docutils literal notranslate"><span class="pre">D3VectorField.reproject_wind_on_lonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.resample"><code class="docutils literal notranslate"><span class="pre">D3VectorField.resample()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.resample_on_regularll"><code class="docutils literal notranslate"><span class="pre">D3VectorField.resample_on_regularll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.select_subzone"><code class="docutils literal notranslate"><span class="pre">D3VectorField.select_subzone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.setdata"><code class="docutils literal notranslate"><span class="pre">D3VectorField.setdata()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.sp2gp"><code class="docutils literal notranslate"><span class="pre">D3VectorField.sp2gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.spectral"><code class="docutils literal notranslate"><span class="pre">D3VectorField.spectral</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.std"><code class="docutils literal notranslate"><span class="pre">D3VectorField.std()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.structure"><code class="docutils literal notranslate"><span class="pre">D3VectorField.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.to_module"><code class="docutils literal notranslate"><span class="pre">D3VectorField.to_module()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.units"><code class="docutils literal notranslate"><span class="pre">D3VectorField.units</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.use_field_as_vcoord"><code class="docutils literal notranslate"><span class="pre">D3VectorField.use_field_as_vcoord()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.validity"><code class="docutils literal notranslate"><span class="pre">D3VectorField.validity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.vector"><code class="docutils literal notranslate"><span class="pre">D3VectorField.vector</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.vtk_guess_param_from_field"><code class="docutils literal notranslate"><span class="pre">D3VectorField.vtk_guess_param_from_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="D3VectorField.html#epygram.fields.D3VectorField.D3VectorField.what"><code class="docutils literal notranslate"><span class="pre">D3VectorField.what()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.fields.gimme_one_point">
-<span class="sig-prename descclassname"><span class="pre">epygram.fields.</span></span><span class="sig-name descname"><span class="pre">gimme_one_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry_args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_class=&lt;class</span> <span class="pre">'epygram.geometries.UnstructuredGeometry.UnstructuredGeometry'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/PointField.html#gimme_one_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.gimme_one_point" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.fields.</span></span><span class="sig-name descname"><span class="pre">gimme_one_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latitude</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry_args=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_class=&lt;class</span> <span class="pre">'epygram.geometries.UnstructuredGeometry.UnstructuredGeometry'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/PointField.html#gimme_one_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.gimme_one_point" title="Link to this definition">¶</a></dt>
 <dd><p>Builds an empty PointField at given (longitude, latitude).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>field_args</strong> – to be passed to field constructor, e.g. a validity</p></li>
 <li><p><strong>geometry_args</strong> – to be passed to geometry constructor</p></li>
@@ -84,7 +374,7 @@
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.fields.make_vector_field">
-<span class="sig-prename descclassname"><span class="pre">epygram.fields.</span></span><span class="sig-name descname"><span class="pre">make_vector_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">components</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#make_vector_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.make_vector_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.fields.</span></span><span class="sig-name descname"><span class="pre">make_vector_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">components</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#make_vector_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.make_vector_field" title="Link to this definition">¶</a></dt>
 <dd><p>Creates a new <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3VectorField</span></code> or subclass from
 several <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.D3Field</span></code> or subclass representing
 the components of the vector in the field geometry.</p>
@@ -93,7 +383,7 @@ the components of the vector in the field geometry.</p>
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.fields.psikhi2uv">
-<span class="sig-prename descclassname"><span class="pre">epygram.fields.</span></span><span class="sig-name descname"><span class="pre">psikhi2uv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">khi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#psikhi2uv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.psikhi2uv" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.fields.</span></span><span class="sig-name descname"><span class="pre">psikhi2uv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">psi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">khi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3VectorField.html#psikhi2uv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.psikhi2uv" title="Link to this definition">¶</a></dt>
 <dd><p>Compute wind (on the grid) as a D3VectorField (or subclass)
 from streamfunction <strong>psi</strong> and velocity potential <strong>khi</strong>.</p>
 </dd></dl>
@@ -105,14 +395,30 @@ from streamfunction <strong>psi</strong> and velocity potential <strong>khi</str
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="domain_making/util.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="D3Field.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a><ul>
+<li><a class="reference internal" href="#epygram.fields.gimme_one_point"><code class="docutils literal notranslate"><span class="pre">gimme_one_point()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.make_vector_field"><code class="docutils literal notranslate"><span class="pre">make_vector_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.psikhi2uv"><code class="docutils literal notranslate"><span class="pre">psikhi2uv()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="domain_making/util.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="D3Field.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -120,7 +426,7 @@ from streamfunction <strong>psi</strong> and velocity potential <strong>khi</str
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -128,13 +434,13 @@ from streamfunction <strong>psi</strong> and velocity potential <strong>khi</str
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -149,14 +455,14 @@ from streamfunction <strong>psi</strong> and velocity potential <strong>khi</str
         <li class="right" >
           <a href="domain_making/util.html" title="epygram.geometries.domain_making.util — Tools"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

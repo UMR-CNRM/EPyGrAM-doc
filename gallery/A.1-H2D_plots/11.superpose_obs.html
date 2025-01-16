@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Superpose an observation point on a H2D plot &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <title>Superpose an observation point on a H2D plot &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -27,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Superpose an observation point on a H2D plot</a></li> 
       </ul>
     </div>  
@@ -38,8 +36,8 @@
           <div class="body" role="main">
             
   <section id="Superpose-an-observation-point-on-a-H2D-plot">
-<h1>Superpose an observation point on a H2D plot<a class="headerlink" href="#Superpose-an-observation-point-on-a-H2D-plot" title="Permalink to this headline">¶</a></h1>
-<div class="nbinput nblast docutils container">
+<h1>Superpose an observation point on a H2D plot<a class="headerlink" href="#Superpose-an-observation-point-on-a-H2D-plot" title="Link to this heading">¶</a></h1>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -47,19 +45,27 @@
 <span class="c1"># for figures in notebook</span>
 
 <span class="c1"># import &amp; initialize epygram</span>
-<span class="kn">import</span> <span class="nn">epygram</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="n">INPUTS_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+# [2025/01/16-12:23:52][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
+</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">INPUTS_DIR</span><span class="p">,</span> <span class="s1">&#39;grid.arome-forecast.guyane0025+0024:00.grib&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">INPUTS_DIR</span><span class="p">,</span> <span class="s1">&#39;grid.arome-forecast.guyane0025+0024:00.grib&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -75,7 +81,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
 <span class="n">lonlat_crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span>
 <span class="n">station</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">52.6</span><span class="p">,</span> <span class="mf">5.1</span><span class="p">)</span>
 <span class="n">value</span> <span class="o">=</span> <span class="mf">60.</span>
@@ -110,13 +116,13 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
 </div>
 </div>
 <section id="Now-if-we-want-the-color-of-the-obs-point-to-match-the-colormap-of-the-field:">
-<h2>Now if we want the color of the obs point to match the colormap of the field:<a class="headerlink" href="#Now-if-we-want-the-color-of-the-obs-point-to-match-the-colormap-of-the-field:" title="Permalink to this headline">¶</a></h2>
+<h2>Now if we want the color of the obs point to match the colormap of the field:<a class="headerlink" href="#Now-if-we-want-the-color-of-the-obs-point-to-match-the-colormap-of-the-field:" title="Link to this heading">¶</a></h2>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for that we need arrays</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="n">lons</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">station</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
 <span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">station</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
 <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">value</span><span class="p">])</span>
@@ -142,7 +148,7 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.collections.PathCollection at 0x70a134d68670&gt;
+&lt;matplotlib.collections.PathCollection at 0x7020c00ff3a0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -154,7 +160,7 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
 </div>
 </section>
 <section id="And-now-if-the-colormap-is-complex-and-needs-a-ColormapHelper-to-handle:">
-<h2>And now if the colormap is complex and needs a ColormapHelper to handle:<a class="headerlink" href="#And-now-if-the-colormap-is-complex-and-needs-a-ColormapHelper-to-handle:" title="Permalink to this headline">¶</a></h2>
+<h2>And now if the colormap is complex and needs a ColormapHelper to handle:<a class="headerlink" href="#And-now-if-the-colormap-is-complex-and-needs-a-ColormapHelper-to-handle:" title="Link to this heading">¶</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -173,7 +179,7 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.collections.PathCollection at 0x70a133d0cbe0&gt;
+&lt;matplotlib.collections.PathCollection at 0x7020a151af50&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -199,10 +205,11 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Superpose an observation point on a H2D plot</a><ul>
 <li><a class="reference internal" href="#Now-if-we-want-the-color-of-the-obs-point-to-match-the-colormap-of-the-field:">Now if we want the color of the obs point to match the colormap of the field:</a></li>
 <li><a class="reference internal" href="#And-now-if-the-colormap-is-complex-and-needs-a-ColormapHelper-to-handle:">And now if the colormap is complex and needs a ColormapHelper to handle:</a></li>
@@ -210,6 +217,7 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
 </li>
 </ul>
 
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -217,7 +225,7 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
@@ -225,13 +233,13 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -240,13 +248,13 @@ Text(-119538.84270720901, 567864.880456437, &#39; Kourou&#39;)
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Superpose an observation point on a H2D plot</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

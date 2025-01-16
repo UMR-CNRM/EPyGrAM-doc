@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.AbstractGeometry — Geometry class &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.geometries.AbstractGeometry — Geometry class &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.ProjectedGeometry — Projected Geometry class" href="ProjectedGeometry.html" />
     <link rel="prev" title="epygram.geometries — Geometries" href="geometries_lib.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="geometries_lib.html" title="epygram.geometries — Geometries"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></li> 
@@ -47,17 +45,17 @@
           <div class="body" role="main">
             
   <section id="epygram-geometries-abstractgeometry-geometry-class">
-<h1><a class="reference internal" href="#module-epygram.geometries.AbstractGeometry" title="epygram.geometries.AbstractGeometry: Abstract Geometry classes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code></a> — Geometry class<a class="headerlink" href="#epygram-geometries-abstractgeometry-geometry-class" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-epygram.geometries.AbstractGeometry"></span><p>Contains the classes for 3D geometries of fields.</p>
+<h1><a class="reference internal" href="#module-epygram.geometries.AbstractGeometry" title="epygram.geometries.AbstractGeometry: Abstract Geometry classes"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code></a> — Geometry class<a class="headerlink" href="#epygram-geometries-abstractgeometry-geometry-class" title="Link to this heading">¶</a></h1>
+<p id="module-epygram.geometries.AbstractGeometry">Contains the classes for 3D geometries of fields.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.AbstractGeometry.</span></span><span class="sig-name descname"><span class="pre">Geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.AbstractGeometry.</span></span><span class="sig-name descname"><span class="pre">Geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="util.html#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecursiveObject</span></code></a></p>
 <p>Handles the geometry for a 3-Dimensions Field.
 Abstract mother class.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>grid</strong> – Handles description of the horizontal grid.</p></li>
 <li><p><strong>dimensions</strong> – Handles grid dimensions.</p></li>
@@ -77,10 +75,10 @@ among: [‘upper-right’, ‘upper-left’,</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.azimuth">
-<span class="sig-name descname"><span class="pre">azimuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.azimuth" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">azimuth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.azimuth" title="Link to this definition">¶</a></dt>
 <dd><p>Initial bearing from <em>end1</em> to <em>end2</em> points following a Great Circle.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
 <li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
@@ -92,14 +90,14 @@ among: [‘upper-right’, ‘upper-left’,</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.cartoplot_geometry">
-<span class="sig-name descname"><span class="pre">cartoplot_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.cartoplot_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.cartoplot_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cartoplot_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.cartoplot_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.cartoplot_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Makes a simple plot of the geometry, using cartopy.
 For kwargs please refer to epygram.geometries.domain_making.output.cartoplot_rect_geometry</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.cartopy_CRS_reproject">
-<span class="sig-name descname"><span class="pre">cartopy_CRS_reproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.cartopy_CRS_reproject" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cartopy_CRS_reproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lats</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">projection</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.cartopy_CRS_reproject" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
@@ -109,16 +107,16 @@ For kwargs please refer to epygram.geometries.domain_making.output.cartoplot_rec
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.datashape">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">datashape</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.datashape" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">datashape</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.datashape" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the data shape requested by this geometry.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.distance">
-<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.distance" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.distance" title="Link to this definition">¶</a></dt>
 <dd><p>Computes the distance between two points along a Great Circle.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>end1</strong> – first point, must be a tuple (lon, lat) in degrees.</p></li>
 <li><p><strong>end2</strong> – second point, must be a tuple (lon, lat) in degrees.</p></li>
@@ -132,7 +130,7 @@ the other one must be a scalar tuple or a tuple of arrays with same dimensions.<
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.eq_Hgeom">
-<span class="sig-name descname"><span class="pre">eq_Hgeom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.eq_Hgeom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.eq_Hgeom" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">eq_Hgeom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.eq_Hgeom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.eq_Hgeom" title="Link to this definition">¶</a></dt>
 <dd><p>Tests if the horizontal part of the geometry is equal to
 the horizontal part of another geometry.
 :param: other: other geometry to use in the comparison</p>
@@ -140,10 +138,10 @@ the horizontal part of another geometry.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.get_levels">
-<span class="sig-name descname"><span class="pre">get_levels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.get_levels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.get_levels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_levels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.get_levels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.get_levels" title="Link to this definition">¶</a></dt>
 <dd><p>Returns an array containing the level for each data point.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>d4</strong> – <ul>
 <li><p>if True,  returned values are shaped in a 4 dimensions array</p></li>
@@ -163,11 +161,11 @@ method puts the time in first dimension.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.linspace">
-<span class="sig-name descname"><span class="pre">linspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.linspace" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">linspace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.linspace" title="Link to this definition">¶</a></dt>
 <dd><p>Returns evenly spaced points over the specified interval.
 Points are lined up along a Great Circle.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
 <li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
@@ -180,16 +178,16 @@ Points are lined up along a Great Circle.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_field">
-<span class="sig-name descname"><span class="pre">make_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_field" title="Link to this definition">¶</a></dt>
 <dd><p>Make a field out of the geometry.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_physicallevels_geometry">
-<span class="sig-name descname"><span class="pre">make_physicallevels_geometry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_physicallevels_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_physicallevels_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_physicallevels_geometry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_physicallevels_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_physicallevels_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a new geometry excluding levels with no physical meaning.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>getdata</strong> – if False returns a field without data</p>
 </dd>
 </dl>
@@ -197,22 +195,22 @@ Points are lined up along a Great Circle.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_point_geometry">
-<span class="sig-name descname"><span class="pre">make_point_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_point_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_point_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_point_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_point_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_point_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a Geometry at coordinates <em>(lon,lat)</em> in degrees.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_profile_geometry">
-<span class="sig-name descname"><span class="pre">make_profile_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_profile_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_profile_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_profile_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_profile_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_profile_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a V1DGeometry at coordinates <em>(lon,lat)</em> in degrees.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_section_geometry">
-<span class="sig-name descname"><span class="pre">make_section_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_section_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_section_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_section_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_section_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_section_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a Geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>end1</strong> – must be a tuple (lon, lat) in degrees.</p></li>
 <li><p><strong>end2</strong> – must be a tuple (lon, lat) in degrees.</p></li>
@@ -229,14 +227,14 @@ field. If None, defaults to the horizontal resolution of the field.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_vtkGrid">
-<span class="sig-name descname"><span class="pre">make_vtkGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_vtkGrid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_vtkGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_vtkGrid" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
 </div>
 <p>Makes an empty grid to use with vtk</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
 <li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
@@ -250,10 +248,10 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.make_zoom_geometry">
-<span class="sig-name descname"><span class="pre">make_zoom_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_10th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_zoom_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_zoom_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_zoom_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_10th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.make_zoom_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.make_zoom_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Returns an unstructured geometry with the points contained in <em>zoom</em>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>zoom</strong> – a dict(lonmin=, lonmax=, latmin=, latmax=).</p></li>
 <li><p><strong>extra_10th</strong> – if True, add 1/10th of the X/Y extension of the zoom
@@ -265,7 +263,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.plot3DBluemarble">
-<span class="sig-name descname"><span class="pre">plot3DBluemarble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DBluemarble" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DBluemarble</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DBluemarble" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -273,7 +271,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 <p>This method adds the NOAA’s bluemarble image to the vtk rendering system. The image
 is projected on the vertical coordinate of this geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
 <li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
@@ -307,7 +305,7 @@ return rgb, alpha</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.plot3DMaptiles">
-<span class="sig-name descname"><span class="pre">plot3DMaptiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resol_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minzoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxzoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DMaptiles" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DMaptiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resol_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minzoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxzoom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DMaptiles" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -315,7 +313,7 @@ return rgb, alpha</p>
 <p>This method adds tiles image to the vtk rendering system. The image
 is projected on the vertical coordinate of this geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
 <li><p><strong>url</strong> – url to get the map tiles to use
@@ -367,7 +365,7 @@ The most common one is certainly: <a class="reference external" href="https://a.
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.plot3DProjImage">
-<span class="sig-name descname"><span class="pre">plot3DProjImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DProjImage" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DProjImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_transform</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DProjImage" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -375,7 +373,7 @@ The most common one is certainly: <a class="reference external" href="https://a.
 <p>This method adds an image to the vtk rendering system. The image is projected
 on the vertical coordinate of this geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>rendering</strong> – a usevtk.Usevtk instance</p></li>
 <li><p><strong>filename</strong> – path to an image file</p></li>
@@ -408,10 +406,10 @@ of the leftmost pixel to the right edge of the rightmost pixel.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.plotgeometry">
-<span class="sig-name descname"><span class="pre">plotgeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plotlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cartopy'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.plotgeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plotgeometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plotgeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">plotlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cartopy'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.plotgeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.plotgeometry" title="Link to this definition">¶</a></dt>
 <dd><p>Makes a simple plot of the geometry, with a number of options.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>plotlib</strong> – library to be used for plotting: ‘basemap’ is DEPRECATED;
 ‘cartopy’ (default) is recommended !</p>
 </dd>
@@ -420,32 +418,32 @@ of the leftmost pixel to the right edge of the rightmost pixel.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.projected_geometry">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">projected_geometry</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.projected_geometry" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">projected_geometry</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.projected_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Is the geometry a projection ?</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.rectangular_grid">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rectangular_grid</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.rectangular_grid" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rectangular_grid</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.rectangular_grid" title="Link to this definition">¶</a></dt>
 <dd><p>Is the grid rectangular ?</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.structure">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.structure" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.structure" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the structure of the grid which depends on the prsent dimensions</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.vcoord_as_field">
-<span class="sig-name descname"><span class="pre">vcoord_as_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.vcoord_as_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.vcoord_as_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vcoord_as_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">surface_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.vcoord_as_field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.vcoord_as_field" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a field filled with the level values associated to a fake geometry
 :param validity: validities to associate with the returned field</p>
 <blockquote>
 <div><p>if None, we try without setting validity</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>surface_type</strong> – typeOfFirstFixedSurface to associate to the fake geometry</p></li>
 <li><p><strong>levels</strong> – list of values to use as the levels of the fake geometry
@@ -457,10 +455,10 @@ if None, levels will be replaced by a range</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.Geometry.what">
-<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arpifs_var_names=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_geometry=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.what" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arpifs_var_names=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectral_geometry=None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#Geometry.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.Geometry.what" title="Link to this definition">¶</a></dt>
 <dd><p>Writes in file a summary of the geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>out</strong> – the output open file-like object (duck-typing: <em>out</em>.write()
 only is needed).</p></li>
@@ -480,12 +478,12 @@ truncatures {‘in_X’:, ‘in_Y’:}  (LAM) or {‘max’:} (global).</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.AbstractGeometry.</span></span><span class="sig-name descname"><span class="pre">RectangularGridGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry" title="epygram.geometries.AbstractGeometry.Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry.Geometry</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.geometries.AbstractGeometry.</span></span><span class="sig-name descname"><span class="pre">RectangularGridGeometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vcoordinate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_on_horizontal_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__unknown__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry" title="epygram.geometries.AbstractGeometry.Geometry"><code class="xref py py-class docutils literal notranslate"><span class="pre">Geometry</span></code></a></p>
 <p>Handles the geometry for a rectangular 3-Dimensions Field.
 Abstract.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>grid</strong> – Handles description of the horizontal grid.</p></li>
 <li><p><strong>dimensions</strong> – Handles grid dimensions.</p></li>
@@ -505,7 +503,7 @@ among: [‘upper-right’, ‘upper-left’,</p>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.default_cartopy_CRS">
-<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.default_cartopy_CRS" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">default_cartopy_CRS</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.default_cartopy_CRS" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_cartopy</strong> (config.activate_plugins)</p>
@@ -517,10 +515,10 @@ or a Miller projection is returned.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.extract_subzone">
-<span class="sig-name descname"><span class="pre">extract_subzone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.extract_subzone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.extract_subzone" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extract_subzone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.extract_subzone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.extract_subzone" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts the subzone C or CI from a LAM field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – the data values with shape concording with geometry.</p></li>
 <li><p><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM grids only,
@@ -532,16 +530,16 @@ extracts the data resp. from the C or C+I zone off the C+I(+E) zone.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.fill_maskedvalues">
-<span class="sig-name descname"><span class="pre">fill_maskedvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.fill_maskedvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.fill_maskedvalues" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fill_maskedvalues</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.fill_maskedvalues"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.fill_maskedvalues" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a copy of <em>data</em> with masked values filled with <em>fill_value</em>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_datashape">
-<span class="sig-name descname"><span class="pre">get_datashape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_dimZ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.get_datashape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_datashape" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_datashape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimT</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_dimZ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.get_datashape"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_datashape" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the data shape according to the geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>force_dimZ</strong> – if supplied, force the Z dimension instead of that
 of the vertical geometry</p></li>
@@ -561,11 +559,11 @@ data is resp. on the C or C+I zone off the C+I(+E) zone.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_lonlat_grid">
-<span class="sig-name descname"><span class="pre">get_lonlat_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_longitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.get_lonlat_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_lonlat_grid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_lonlat_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_validities</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_longitudes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.get_lonlat_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_lonlat_grid" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a tuple of two tables containing one the longitude of each
 point, the other the latitude, with 2D shape.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
 the grid resp. for the C or C+I zone off the C+I+E zone.</p>
@@ -596,13 +594,13 @@ if ‘]-180,180]’, the longitudes will be in the ]-180, 180] interval</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ij">
-<span class="sig-name descname"><span class="pre">gimme_corners_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.gimme_corners_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gimme_corners_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.gimme_corners_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the indices (i, j) of the four corners of a rectangular grid,
 as a dict(corner=(i, j)) with corner in:</p>
 <p>ll = lower-left / lr = lower-right / ur = upper-right / ul = upper-left.</p>
 <p>(0, 0) is always the lower-left corner of the grid.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – for LAM fields, returns the corners of the subzone.</p>
 </dd>
 </dl>
@@ -610,12 +608,12 @@ as a dict(corner=(i, j)) with corner in:</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ll">
-<span class="sig-name descname"><span class="pre">gimme_corners_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.gimme_corners_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gimme_corners_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.gimme_corners_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the lon/lat of the four corners of a rectangular grid,
 as a dict(corner=(lon, lat)) with corner in:</p>
 <p>ll = lower-left / lr = lower-right / ur = upper-right / ul = upper-left.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – for LAM grids, returns the corners of the subzone.</p></li>
 <li><p><strong>position</strong> – position of corners with respect to the model cell.
@@ -627,10 +625,10 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.gridpoints_number">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gridpoints_number</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gridpoints_number" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gridpoints_number</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gridpoints_number" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the number of gridpoints of the grid.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
 the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 <p>Default is no subzone, i.e. the whole field.</p>
@@ -641,16 +639,16 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.horizontally_flattened">
-<span class="sig-name descname"><span class="pre">horizontally_flattened</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.horizontally_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.horizontally_flattened" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">horizontally_flattened</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.horizontally_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.horizontally_flattened" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a copy of <em>data</em> with horizontal dimensions flattened.
 <em>data</em> must be 4D for simplicity reasons.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.isglobal">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isglobal</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.isglobal" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">isglobal</span></span><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.isglobal" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>True if geometry is global</p>
 </dd>
 </dl>
@@ -658,14 +656,14 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subarray_geometry">
-<span class="sig-name descname"><span class="pre">make_subarray_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.make_subarray_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subarray_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_subarray_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_j</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.make_subarray_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subarray_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Make a modified geometry consisting in a subarray of the grid, defined
 by the indexes given as argument.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subsample_geometry">
-<span class="sig-name descname"><span class="pre">make_subsample_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.make_subsample_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subsample_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">make_subsample_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.make_subsample_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subsample_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Make a sample geometry by decreasing resolution.
 :param sample_x: take one over &lt;sample_x&gt; points in the x direction
 :param sample_y: same for the y direction
@@ -676,16 +674,16 @@ retain in subsample. Use select_zone beforehand to suppress these points.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.minmax_ll">
-<span class="sig-name descname"><span class="pre">minmax_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.minmax_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.minmax_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">minmax_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.minmax_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.minmax_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Return min/max of lon/lat.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.nearest_points">
-<span class="sig-name descname"><span class="pre">nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.nearest_points" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nearest_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">squeeze</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.nearest_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.nearest_points" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the (i, j) positions of the nearest points.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point in degrees.</p></li>
 <li><p><strong>lat</strong> – latitude of point in degrees.</p></li>
@@ -715,7 +713,7 @@ Only valid with request={‘n’:’1’}</p></li>
 <li><p><strong>squeeze</strong> – True to suppress useless dimensions</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><p>general output form is [list, list, …, list]
 with as many list items as the length of lon/lat.
 Each list item is of the form [tuple, tuple, …, tuple]
@@ -746,11 +744,11 @@ position (hence the second and forth also share the j position).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ij">
-<span class="sig-name descname"><span class="pre">point_is_inside_domain_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.point_is_inside_domain_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">point_is_inside_domain_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.point_is_inside_domain_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns True if the point(s) of i/j coordinates is(are) inside the
 field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – X index of point</p></li>
 <li><p><strong>j</strong> – Y index of point.</p></li>
@@ -764,11 +762,11 @@ from the border. The -0.1 default is a safety for precision errors.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ll">
-<span class="sig-name descname"><span class="pre">point_is_inside_domain_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.point_is_inside_domain_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">point_is_inside_domain_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">margin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.point_is_inside_domain_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns True if the point(s) of lon/lat coordinates is(are) inside the
 field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – longitude of point(s) in degrees.</p></li>
 <li><p><strong>lat</strong> – latitude of point(s) in degrees.</p></li>
@@ -784,11 +782,11 @@ Defaults to self.position_on_horizontal_grid.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.geometries.AbstractGeometry.RectangularGridGeometry.reshape_data">
-<span class="sig-name descname"><span class="pre">reshape_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.reshape_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.reshape_data" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reshape_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries/AbstractGeometry.html#RectangularGridGeometry.reshape_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.reshape_data" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a 2D data (horizontal dimensions) reshaped from 1D,
 according to geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> – the 1D data (or 3D with a T and Z dimensions,
 or 2D with either a T/Z dimension, to be specified),
@@ -817,14 +815,74 @@ data is resp. on the C or C+I zone off the C+I(+E) zone.</p></li>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="geometries_lib.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="ProjectedGeometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry"><code class="docutils literal notranslate"><span class="pre">Geometry</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.azimuth"><code class="docutils literal notranslate"><span class="pre">Geometry.azimuth()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.cartoplot_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.cartoplot_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.cartopy_CRS_reproject"><code class="docutils literal notranslate"><span class="pre">Geometry.cartopy_CRS_reproject()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.datashape"><code class="docutils literal notranslate"><span class="pre">Geometry.datashape</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.distance"><code class="docutils literal notranslate"><span class="pre">Geometry.distance()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.eq_Hgeom"><code class="docutils literal notranslate"><span class="pre">Geometry.eq_Hgeom()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.get_levels"><code class="docutils literal notranslate"><span class="pre">Geometry.get_levels()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.linspace"><code class="docutils literal notranslate"><span class="pre">Geometry.linspace()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_field"><code class="docutils literal notranslate"><span class="pre">Geometry.make_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_physicallevels_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_physicallevels_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_point_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_point_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_profile_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_profile_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_section_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_section_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_vtkGrid"><code class="docutils literal notranslate"><span class="pre">Geometry.make_vtkGrid()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.make_zoom_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_zoom_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DBluemarble"><code class="docutils literal notranslate"><span class="pre">Geometry.plot3DBluemarble()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DMaptiles"><code class="docutils literal notranslate"><span class="pre">Geometry.plot3DMaptiles()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.plot3DProjImage"><code class="docutils literal notranslate"><span class="pre">Geometry.plot3DProjImage()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.plotgeometry"><code class="docutils literal notranslate"><span class="pre">Geometry.plotgeometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.projected_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.projected_geometry</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.rectangular_grid"><code class="docutils literal notranslate"><span class="pre">Geometry.rectangular_grid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.structure"><code class="docutils literal notranslate"><span class="pre">Geometry.structure</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.vcoord_as_field"><code class="docutils literal notranslate"><span class="pre">Geometry.vcoord_as_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.Geometry.what"><code class="docutils literal notranslate"><span class="pre">Geometry.what()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.default_cartopy_CRS"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.default_cartopy_CRS()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.extract_subzone"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.extract_subzone()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.fill_maskedvalues"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.fill_maskedvalues()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_datashape"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.get_datashape()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_lonlat_grid"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.get_lonlat_grid()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ij"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.gimme_corners_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ll"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.gimme_corners_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gridpoints_number"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.gridpoints_number</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.horizontally_flattened"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.horizontally_flattened()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.isglobal"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.isglobal</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subarray_geometry"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.make_subarray_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subsample_geometry"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.make_subsample_geometry()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.minmax_ll"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.minmax_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.nearest_points"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.nearest_points()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ij"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.point_is_inside_domain_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ll"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.point_is_inside_domain_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.AbstractGeometry.RectangularGridGeometry.reshape_data"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.reshape_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="geometries_lib.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="ProjectedGeometry.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -832,7 +890,7 @@ data is resp. on the C or C+I zone off the C+I(+E) zone.</p></li>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -840,13 +898,13 @@ data is resp. on the C or C+I zone off the C+I(+E) zone.</p></li>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -861,15 +919,15 @@ data is resp. on the C or C+I zone off the C+I(+E) zone.</p></li>
         <li class="right" >
           <a href="geometries_lib.html" title="epygram.geometries — Geometries"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

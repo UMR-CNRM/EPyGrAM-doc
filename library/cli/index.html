@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>epygram.cli — Command-line interface &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="epygram.cli.args_catalog — Catalog of command-line arguments" href="args_catalog.html" />
+    <link rel="prev" title="epygram.spectra — Class and functions for spectra" href="../spectra.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="args_catalog.html" title="epygram.cli.args_catalog — Catalog of command-line arguments"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../spectra.html" title="epygram.spectra — Class and functions for spectra"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.cli</span></code> — Command-line interface</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.cli">
+<span id="epygram-cli-command-line-interface"></span><h1><a class="reference internal" href="#module-epygram.cli" title="epygram.cli"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.cli</span></code></a> — Command-line interface<a class="headerlink" href="#module-epygram.cli" title="Link to this heading">¶</a></h1>
+<p>EPyGrAM Command-Line Interface</p>
+<hr class="docutils" />
+<section id="args-catalog">
+<h2>Args catalog:<a class="headerlink" href="#args-catalog" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="args_catalog.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.cli.args_catalog</span></code> — Catalog of command-line arguments</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="args_catalog.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="args_catalog.html#catalogs">Catalogs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+</section>
+<section id="sub-commands">
+<span id="subcommands"></span><h2>Sub-commands:<a class="headerlink" href="#sub-commands" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartoplot</span></code></p>
+<p id="module-epygram.cli.cartoplot">An EPyGrAM tool for simple plots of meteorological fields from a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">convert</span></code></p>
+<p id="module-epygram.cli.convert">An EPyGrAM tool for converting file formats. Spectral fields are converted into gridpoints.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ddhlfa_plot</span></code></p>
+<p id="module-epygram.cli.ddhlfa_plot">An EPyGrAM tool for simple plots of meteorological fields from a DDHLFA.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delfield</span></code></p>
+<p id="module-epygram.cli.delfield">An EPyGrAM tool for removing field(s) from a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">domain_maker</span></code></p>
+<p id="module-epygram.cli.domain_maker">An interactive EPyGrAM tool for defining a LAM domain, visualize it, and generate the needed namelist blocks.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fa_sp2gp</span></code></p>
+<p id="module-epygram.cli.fa_sp2gp">An EPyGrAM tool for transforming spectral fields from a FA to gridpoint.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">histogram</span></code></p>
+<p id="module-epygram.cli.histogram">An EPyGrAM tool for making histograms of meteorological fields from a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">movefield</span></code></p>
+<p id="module-epygram.cli.movefield">An EPyGrAM tool for moving field(s) from a resource to another (fields are not removed from the source file).</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot3d</span></code></p>
+<p id="module-epygram.cli.plot3d">An EPyGrAM tool for simple 3d plots of meteorological fields from a resource using <cite>vtk</cite>.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">point</span></code></p>
+<p id="module-epygram.cli.point">An EPyGrAM tool for extracting from a resource the value of meteorological fields on a geographical point.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profile</span></code></p>
+<p id="module-epygram.cli.profile">An EPyGrAM tool for extracting (and plotting) vertical profiles of meteorological fields from a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_epyweb</span></code></p>
+<p id="module-epygram.cli.run_epyweb">A web interface for plotting with epygram and vortex.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">section</span></code></p>
+<p id="module-epygram.cli.section">An EPyGrAM tool for extracting (and plotting) vertical sections of meteorological fields from a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spectrum</span></code></p>
+<p id="module-epygram.cli.spectrum">An EPyGrAM tool for computing DCT spectrum of meteorological fields (or difference of fields) from a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stats</span></code></p>
+<p id="module-epygram.cli.stats">An EPyGrAM tool for computing basic statistics on meteorological fields.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">what</span></code></p>
+<p id="module-epygram.cli.what">An EPyGrAM tool for asking what’s inside a resource.</p>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">what_the_grib</span></code></p>
+<p id="module-epygram.cli.what_the_grib">An interface to ask GRIB definitions.</p>
+</li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.cli</span></code> — Command-line interface</a><ul>
+<li><a class="reference internal" href="#args-catalog">Args catalog:</a></li>
+<li><a class="reference internal" href="#sub-commands">Sub-commands:</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../spectra.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.spectra</span></code> — Class and functions for spectra</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="args_catalog.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.cli.args_catalog</span></code> — Catalog of command-line arguments</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/library/cli/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="args_catalog.html" title="epygram.cli.args_catalog — Catalog of command-line arguments"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../spectra.html" title="epygram.spectra — Class and functions for spectra"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.cli</span></code> — Command-line interface</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

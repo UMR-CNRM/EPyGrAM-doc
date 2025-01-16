@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Resources &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>2. Resources &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. Fields" href="fields.html" />
     <link rel="prev" title="1. Introduction" href="introduction_tuto.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="introduction_tuto.html" title="1. Introduction"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Resources</a></li> 
       </ul>
@@ -46,17 +44,17 @@
           <div class="body" role="main">
             
   <section id="resources">
-<h1><span class="section-number">2. </span>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2. </span>Resources<a class="headerlink" href="#resources" title="Link to this heading">¶</a></h1>
 <p>What are the different formats implemented in my configuration ?
 (some may be deactivated in config for simpler installation)</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">epygram</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">epygram</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">implemented_formats</span>
 <span class="go">[&#39;netCDF&#39;, &#39;GRIB&#39;, &#39;GeoPoints&#39;, &#39;TIFFMF&#39;, &#39;FA&#39;, &#39;LFI&#39;, &#39;DDHLFA&#39;, &#39;LFA&#39;]</span>
 </pre></div>
 </div>
 <p>There is a <em>proxy</em> to open an existing resource without making an explicit reference to its format, e.g.:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_resource</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_resource</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>(where ‘r’ stands for ‘read’ opening mode and ‘ICMSHAROM+0042’ is the filename
@@ -67,7 +65,7 @@ that you may find useful (?)</p>
 </pre></div>
 </div>
 <p>For opening a new resource in writing mode, specifying the format is though necessary:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_resource</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042_new&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a_resource</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042_new&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>All resources of different formats share a set of common methods, such as
@@ -76,9 +74,9 @@ similarly: <code class="xref py py-meth docutils literal notranslate"><span clas
 <code class="xref py py-class docutils literal notranslate"><span class="pre">Fields</span></code>.</p>
 <hr class="docutils" />
 <section id="explore-resources">
-<h2><span class="section-number">2.1. </span>Explore resources<a class="headerlink" href="#explore-resources" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1. </span>Explore resources<a class="headerlink" href="#explore-resources" title="Link to this heading">¶</a></h2>
 <p>Let’s open an historic FA file from AROME and explore it.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span><span class="o">.</span><span class="n">format</span>
 <span class="go">&#39;FA&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -120,7 +118,7 @@ similarly: <code class="xref py py-meth docutils literal notranslate"><span clas
 </pre></div>
 </div>
 <section id="some-fa-additional-properties">
-<h3><span class="section-number">2.1.1. </span>Some FA additional properties<a class="headerlink" href="#some-fa-additional-properties" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">2.1.1. </span>Some FA additional properties<a class="headerlink" href="#some-fa-additional-properties" title="Link to this heading">¶</a></h3>
 <p>The case of FA is a bit specific in that the temporal and geometric metadata is
 common to the whole resource and shared by all fields.
 Therefore, the resource “has a geometry”:</p>
@@ -203,12 +201,12 @@ e.g.:</p>
 </section>
 <hr class="docutils" />
 <section id="field-identifier-fid">
-<h2><span class="section-number">2.2. </span>Field identifier (<strong>fid</strong>)<a class="headerlink" href="#field-identifier-fid" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.2. </span>Field identifier (<strong>fid</strong>)<a class="headerlink" href="#field-identifier-fid" title="Link to this heading">¶</a></h2>
 <p>FA fields are identified by a character string name. Other formats may identify
 fields differently, for instance GRIB with a set of <strong>key:value</strong> pairs.</p>
 <p>As an example for GRIB, the <a class="reference internal" href="../library/GRIB.html#epygram.formats.GRIB.GRIB.listfields" title="epygram.formats.GRIB.GRIB.listfields"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB.GRIB.listfields</span></code></a> method
 returns a list of dicts:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;GRIDHSTFRANGP0025+0003&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;GRIDHSTFRANGP0025+0003&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">format</span>
 <span class="go">&#39;GRIB&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span>
@@ -224,11 +222,11 @@ detailed in section <a class="reference internal" href="fields.html#tuto-fid"><s
 </section>
 <hr class="docutils" />
 <section id="juggling-with-resources">
-<h2><span class="section-number">2.3. </span>Juggling with resources<a class="headerlink" href="#juggling-with-resources" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.3. </span>Juggling with resources<a class="headerlink" href="#juggling-with-resources" title="Link to this heading">¶</a></h2>
 <p>Transferring a field from one resource to another is almost as simple as
 telling it:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dest_r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042_bis&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">source_r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dest_r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;ICMSHAROM+0042_bis&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">source_r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;SURFTEMPERATURE&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 <span class="go">&lt;class &#39;epygram.fields.H2DField.H2DField&#39;&gt;</span>
@@ -240,7 +238,7 @@ telling it:</p>
 </section>
 <hr class="docutils" />
 <section id="resource-modifiers">
-<h2><span class="section-number">2.4. </span>Resource modifiers<a class="headerlink" href="#resource-modifiers" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.4. </span>Resource modifiers<a class="headerlink" href="#resource-modifiers" title="Link to this heading">¶</a></h2>
 <p>Sometimes, fields in a resource does not take the appropriate form.
 For example, 3D plots require 3D fields; animations require fields with
 time evolution; complex treatments can require to work on a subdomain;
@@ -264,8 +262,8 @@ in the resource or computes it from potential temperature.</p></li>
 <p>All this modifiers should work in a pipeline if needed (one can compute
 diagnostics on a multivalidities resource for example).</p>
 <p>Here are some examples to build a resource modifier:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">footprints</span><span class="w"> </span><span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rDiag</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">resource_modificator</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Diagnostics&#39;</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="n">r</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r3d</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">resource_modificator</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;CombineLevels&#39;</span><span class="p">,</span> <span class="n">resource</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r_time</span> <span class="o">=</span> <span class="n">fpx</span><span class="o">.</span><span class="n">resource_modificator</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;MultiValidities&#39;</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="p">[</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
@@ -280,10 +278,11 @@ diagnostics on a multivalidities resource for example).</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">2. Resources</a><ul>
 <li><a class="reference internal" href="#explore-resources">2.1. Explore resources</a><ul>
 <li><a class="reference internal" href="#some-fa-additional-properties">2.1.1. Some FA additional properties</a></li>
@@ -296,12 +295,17 @@ diagnostics on a multivalidities resource for example).</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="introduction_tuto.html"
-                        title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="fields.html"
-                        title="next chapter"><span class="section-number">3. </span>Fields</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="introduction_tuto.html"
+                          title="previous chapter"><span class="section-number">1. </span>Introduction</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="fields.html"
+                          title="next chapter"><span class="section-number">3. </span>Fields</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -309,7 +313,7 @@ diagnostics on a multivalidities resource for example).</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -317,13 +321,13 @@ diagnostics on a multivalidities resource for example).</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -338,14 +342,14 @@ diagnostics on a multivalidities resource for example).</p>
         <li class="right" >
           <a href="introduction_tuto.html" title="1. Introduction"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" >Tutorial</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">2. </span>Resources</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

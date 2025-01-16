@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.domain_making.output — Output &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <title>epygram.geometries.domain_making.output — Output &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="epygram.geometries.domain_making.util — Tools" href="util.html" />
     <link rel="prev" title="epygram.geometries.domain_making.build — Build geometries" href="build.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="build.html" title="epygram.geometries.domain_making.build — Build geometries"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../domain_making.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a> &#187;</li>
@@ -48,15 +46,15 @@
           <div class="body" role="main">
             
   <section id="module-epygram.geometries.domain_making.output">
-<span id="epygram-geometries-domain-making-output-output"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making.output" title="epygram.geometries.domain_making.output: Domain creation - Output"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code></a> — Output<a class="headerlink" href="#module-epygram.geometries.domain_making.output" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-geometries-domain-making-output-output"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making.output" title="epygram.geometries.domain_making.output: Domain creation - Output"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code></a> — Output<a class="headerlink" href="#module-epygram.geometries.domain_making.output" title="Link to this heading">¶</a></h1>
 <p>Contains functions for outing a LAM domain to namelists, plot, summary.</p>
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.output.lam_geom2namelists">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">lam_geom2namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orography_subtruncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quadratic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ezone_in_pgd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iwidth_in_pgd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#lam_geom2namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.lam_geom2namelists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">lam_geom2namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orography_subtruncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quadratic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ezone_in_pgd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Iwidth_in_pgd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#lam_geom2namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.lam_geom2namelists" title="Link to this definition">¶</a></dt>
 <dd><p>From the geometry, build the namelist blocks for the necessary namelists.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>truncation</strong> – the kind of truncation of spectral geometry
 to generate, among (‘linear’, ‘quadratic’, ‘cubic’).</p></li>
@@ -69,17 +67,17 @@ be generated.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.output.regll_geom2namelists">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">regll_geom2namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__YOUR_DOM_NAME__'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#regll_geom2namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.regll_geom2namelists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">regll_geom2namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__YOUR_DOM_NAME__'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#regll_geom2namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.regll_geom2namelists" title="Link to this definition">¶</a></dt>
 <dd><p>From the regular LonLat geometry, build the namelist blocks for the
 necessary namelists.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.output.write_namelists">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">write_namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namelists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'geoblocks'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#write_namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.write_namelists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">write_namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namelists</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'geoblocks'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#write_namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.write_namelists" title="Link to this definition">¶</a></dt>
 <dd><p>Write out namelists blocks.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>namelists</strong> – dict of NamelistSet (from bronx.datagrip.namelist)</p></li>
 <li><p><strong>out</strong> – <p>if given as a str: write all in one file,
@@ -98,10 +96,10 @@ or if None following syntax: “prefix.namelist.suffix”.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.output.write_geometry_as_namelists">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">write_geometry_as_namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allinone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orography_subtruncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quadratic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#write_geometry_as_namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.write_geometry_as_namelists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">write_geometry_as_namelists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allinone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">truncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orography_subtruncation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'quadratic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#write_geometry_as_namelists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.write_geometry_as_namelists" title="Link to this definition">¶</a></dt>
 <dd><p>Write out namelists blocks from a geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>allinone</strong> – if True, write all in one file, else in separate files.</p></li>
 <li><p><strong>truncation</strong> – the kind of truncation of spectral geometry
@@ -115,10 +113,10 @@ be generated.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.output.summary">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.summary" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.summary" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a summary of geometry as a character string.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>geometry</strong> – a Geometry instance</p>
 </dd>
 </dl>
@@ -126,10 +124,10 @@ be generated.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.domain_making.output.plot_geometry">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">plot_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lonlat_included</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">departments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cartopy'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#plot_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.plot_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.domain_making.output.</span></span><span class="sig-name descname"><span class="pre">plot_geometry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lonlat_included</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">departments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plotlib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cartopy'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/geometries/domain_making/output.html#plot_geometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.domain_making.output.plot_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Plot the built geometry, along with lonlat included domain if given.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lonlat_included</strong> – parameters of the lonlat domain to plot</p></li>
 <li><p><strong>out</strong> – filename (.png) if not None (else interactive pyplot.show())</p></li>
@@ -148,14 +146,33 @@ of countries).</p></li>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="build.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="util.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a></p>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.output.lam_geom2namelists"><code class="docutils literal notranslate"><span class="pre">lam_geom2namelists()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.output.regll_geom2namelists"><code class="docutils literal notranslate"><span class="pre">regll_geom2namelists()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.output.write_namelists"><code class="docutils literal notranslate"><span class="pre">write_namelists()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.output.write_geometry_as_namelists"><code class="docutils literal notranslate"><span class="pre">write_geometry_as_namelists()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.output.summary"><code class="docutils literal notranslate"><span class="pre">summary()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.domain_making.output.plot_geometry"><code class="docutils literal notranslate"><span class="pre">plot_geometry()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="build.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="util.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -163,7 +180,7 @@ of countries).</p></li>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
@@ -171,13 +188,13 @@ of countries).</p></li>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -192,7 +209,7 @@ of countries).</p></li>
         <li class="right" >
           <a href="build.html" title="epygram.geometries.domain_making.build — Build geometries"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../domain_making.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a> &#187;</li>
@@ -200,8 +217,8 @@ of countries).</p></li>
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

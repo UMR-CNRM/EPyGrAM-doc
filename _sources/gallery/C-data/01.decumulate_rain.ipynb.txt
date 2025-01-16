@@ -14,10 +14,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:40.948085Z",
-     "iopub.status.busy": "2024-05-15T16:21:40.947190Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.316044Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.315758Z"
+     "iopub.execute_input": "2025-01-13T11:33:57.057763Z",
+     "iopub.status.busy": "2025-01-13T11:33:57.057271Z",
+     "iopub.status.idle": "2025-01-13T11:33:57.598080Z",
+     "shell.execute_reply": "2025-01-13T11:33:57.597590Z"
     }
    },
    "outputs": [],
@@ -39,17 +39,17 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:41.321303Z",
-     "iopub.status.busy": "2024-05-15T16:21:41.320977Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.325947Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.326135Z"
+     "iopub.execute_input": "2025-01-13T11:33:57.600240Z",
+     "iopub.status.busy": "2025-01-13T11:33:57.600027Z",
+     "iopub.status.idle": "2025-01-13T11:33:57.926233Z",
+     "shell.execute_reply": "2025-01-13T11:33:57.925865Z"
     }
    },
    "outputs": [],
    "source": [
     "paths = [os.path.join(INPUTS_DIR, 'grid.arome-forecast.guyane0025+00{:02}:00.grib'.format(i))\n",
     "         for i in (0, 12, 24)]\n",
-    "resources = [epygram.formats.resource(p, 'r') for p in paths]"
+    "resources = [epygram.open(p, 'r') for p in paths]"
    ]
   },
   {
@@ -57,10 +57,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:41.330433Z",
-     "iopub.status.busy": "2024-05-15T16:21:41.330123Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.598245Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.598020Z"
+     "iopub.execute_input": "2025-01-13T11:33:57.928295Z",
+     "iopub.status.busy": "2025-01-13T11:33:57.928116Z",
+     "iopub.status.idle": "2025-01-13T11:33:58.256439Z",
+     "shell.execute_reply": "2025-01-13T11:33:58.255842Z"
     }
    },
    "outputs": [],
@@ -74,10 +74,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:41.600545Z",
-     "iopub.status.busy": "2024-05-15T16:21:41.600280Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.603675Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.603916Z"
+     "iopub.execute_input": "2025-01-13T11:33:58.258613Z",
+     "iopub.status.busy": "2025-01-13T11:33:58.258461Z",
+     "iopub.status.idle": "2025-01-13T11:33:58.262645Z",
+     "shell.execute_reply": "2025-01-13T11:33:58.262183Z"
     }
    },
    "outputs": [],
@@ -91,10 +91,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:41.607601Z",
-     "iopub.status.busy": "2024-05-15T16:21:41.607337Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.608321Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.608521Z"
+     "iopub.execute_input": "2025-01-13T11:33:58.264347Z",
+     "iopub.status.busy": "2025-01-13T11:33:58.264196Z",
+     "iopub.status.idle": "2025-01-13T11:33:58.267030Z",
+     "shell.execute_reply": "2025-01-13T11:33:58.266657Z"
     }
    },
    "outputs": [],
@@ -110,10 +110,10 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:41.611280Z",
-     "iopub.status.busy": "2024-05-15T16:21:41.610952Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.613605Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.613390Z"
+     "iopub.execute_input": "2025-01-13T11:33:58.268852Z",
+     "iopub.status.busy": "2025-01-13T11:33:58.268568Z",
+     "iopub.status.idle": "2025-01-13T11:33:58.271830Z",
+     "shell.execute_reply": "2025-01-13T11:33:58.271450Z"
     }
    },
    "outputs": [],
@@ -126,15 +126,15 @@
    "execution_count": null,
    "metadata": {
     "execution": {
-     "iopub.execute_input": "2024-05-15T16:21:41.616431Z",
-     "iopub.status.busy": "2024-05-15T16:21:41.616186Z",
-     "iopub.status.idle": "2024-05-15T16:21:41.699520Z",
-     "shell.execute_reply": "2024-05-15T16:21:41.699268Z"
+     "iopub.execute_input": "2025-01-13T11:33:58.273374Z",
+     "iopub.status.busy": "2025-01-13T11:33:58.273184Z",
+     "iopub.status.idle": "2025-01-13T11:33:58.334959Z",
+     "shell.execute_reply": "2025-01-13T11:33:58.334458Z"
     }
    },
    "outputs": [],
    "source": [
-    "rain_series = epygram.formats.resource(os.path.join(OUTPUTS_DIR,'rain_series.grib'), 'w', fmt='GRIB')\n",
+    "rain_series = epygram.open(os.path.join(OUTPUTS_DIR,'rain_series.grib'), 'w', fmt='GRIB')\n",
     "for r in rain:\n",
     "    print(r.validity[0])\n",
     "    rain_series.writefield(r)\n",

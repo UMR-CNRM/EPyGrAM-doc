@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries.domain_making — Domain creation &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.geometries.domain_making — Domain creation &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.domain_making.ask — User Interface" href="domain_making/ask.html" />
     <link rel="prev" title="epygram.geometries.SpectralGeometry — Spectral Geometry class" href="SpectralGeometry.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="SpectralGeometry.html" title="epygram.geometries.SpectralGeometry — Spectral Geometry class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a></li> 
@@ -47,17 +45,48 @@
           <div class="body" role="main">
             
   <section id="module-epygram.geometries.domain_making">
-<span id="epygram-geometries-domain-making-domain-creation"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making" title="epygram.geometries.domain_making: Domain creation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code></a> — Domain creation<a class="headerlink" href="#module-epygram.geometries.domain_making" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-geometries-domain-making-domain-creation"></span><h1><a class="reference internal" href="#module-epygram.geometries.domain_making" title="epygram.geometries.domain_making: Domain creation"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code></a> — Domain creation<a class="headerlink" href="#module-epygram.geometries.domain_making" title="Link to this heading">¶</a></h1>
 <p>Contains functions for building a LAM domain.</p>
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="domain_making/ask.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domain_making/build.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a></li>
-<li class="toctree-l1"><a class="reference internal" href="domain_making/output.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="domain_making/ask.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/ask.html#epygram.geometries.domain_making.ask.ask_and_build_geometry"><code class="docutils literal notranslate"><span class="pre">ask_and_build_geometry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/ask.html#epygram.geometries.domain_making.ask.ask_lonlat"><code class="docutils literal notranslate"><span class="pre">ask_lonlat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/ask.html#epygram.geometries.domain_making.ask.ask_lonlat_and_build_geometry"><code class="docutils literal notranslate"><span class="pre">ask_lonlat_and_build_geometry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="domain_making/build.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_geometry"><code class="docutils literal notranslate"><span class="pre">build_geometry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_CIE_field"><code class="docutils literal notranslate"><span class="pre">build_CIE_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_lonlat_geometry"><code class="docutils literal notranslate"><span class="pre">build_lonlat_geometry()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_lonlat_field"><code class="docutils literal notranslate"><span class="pre">build_lonlat_field()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_geometry_fromlonlat"><code class="docutils literal notranslate"><span class="pre">build_geometry_fromlonlat()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_geom_from_e923nam"><code class="docutils literal notranslate"><span class="pre">build_geom_from_e923nam()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.compute_lonlat_included"><code class="docutils literal notranslate"><span class="pre">compute_lonlat_included()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="domain_making/output.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.lam_geom2namelists"><code class="docutils literal notranslate"><span class="pre">lam_geom2namelists()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.regll_geom2namelists"><code class="docutils literal notranslate"><span class="pre">regll_geom2namelists()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.write_namelists"><code class="docutils literal notranslate"><span class="pre">write_namelists()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.write_geometry_as_namelists"><code class="docutils literal notranslate"><span class="pre">write_geometry_as_namelists()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.summary"><code class="docutils literal notranslate"><span class="pre">summary()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.plot_geometry"><code class="docutils literal notranslate"><span class="pre">plot_geometry()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="domain_making/util.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="domain_making/util.html#parameters">Parameters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="domain_making/util.html#functions">Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/util.html#parameters">Parameters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#epygram.geometries.domain_making.util.Ezone_minimum_width"><code class="docutils literal notranslate"><span class="pre">Ezone_minimum_width</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#epygram.geometries.domain_making.util.threshold_mercator_lambert"><code class="docutils literal notranslate"><span class="pre">threshold_mercator_lambert</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#epygram.geometries.domain_making.util.threshold_pole_distance_lambert"><code class="docutils literal notranslate"><span class="pre">threshold_pole_distance_lambert</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#epygram.geometries.domain_making.util.default_Izone_width_in_m"><code class="docutils literal notranslate"><span class="pre">default_Izone_width_in_m</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/util.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#epygram.geometries.domain_making.util.default_Iwidth"><code class="docutils literal notranslate"><span class="pre">default_Iwidth()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -69,14 +98,18 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="SpectralGeometry.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="domain_making/ask.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="SpectralGeometry.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="domain_making/ask.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -84,7 +117,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -92,13 +125,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -113,15 +146,15 @@
         <li class="right" >
           <a href="SpectralGeometry.html" title="epygram.geometries.SpectralGeometry — Spectral Geometry class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="geometries_lib.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

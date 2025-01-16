@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.config — Configuration: parameters, options &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.config — Configuration: parameters, options &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.util — Utilities" href="util.html" />
     <link rel="prev" title="epygram.resources — Real and virtual resources handling" href="resources.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></li> 
       </ul>
@@ -46,73 +44,73 @@
           <div class="body" role="main">
             
   <section id="module-epygram.config">
-<span id="epygram-config-configuration-parameters-options"></span><h1><a class="reference internal" href="#module-epygram.config" title="epygram.config: Configuration: parameters, options used throughout the package."><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code></a> — Configuration: parameters, options<a class="headerlink" href="#module-epygram.config" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-config-configuration-parameters-options"></span><h1><a class="reference internal" href="#module-epygram.config" title="epygram.config: Configuration: parameters, options used throughout the package."><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code></a> — Configuration: parameters, options<a class="headerlink" href="#module-epygram.config" title="Link to this heading">¶</a></h1>
 <p>The module is used throughout the package to share constant parameters.</p>
 <p>The standard default parameters lie below. They can be overwritten by
 the user in the User config file <code class="docutils literal notranslate"><span class="pre">userconfig.py</span></code> to be found under
 <a class="reference internal" href="#epygram.config.userlocaldir" title="epygram.config.userlocaldir"><code class="xref py py-attr docutils literal notranslate"><span class="pre">userlocaldir</span></code></a>.</p>
 <hr class="docutils" />
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.installdir">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">installdir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram'</span></em><a class="headerlink" href="#epygram.config.installdir" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">installdir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram'</span></em><a class="headerlink" href="#epygram.config.installdir" title="Link to this definition">¶</a></dt>
 <dd><p>Directory of epygram package install</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.userlocaldir">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">userlocaldir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/home/mary/.epygram'</span></em><a class="headerlink" href="#epygram.config.userlocaldir" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">userlocaldir</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/home/mary/.epygram'</span></em><a class="headerlink" href="#epygram.config.userlocaldir" title="Link to this definition">¶</a></dt>
 <dd><p>User customization directory</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.epygram_colormaps">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">epygram_colormaps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'aspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/aspect.json',</span> <span class="pre">'gaspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/gaspect.json',</span> <span class="pre">'ptype':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype.json',</span> <span class="pre">'ptype0':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype0.json',</span> <span class="pre">'radar':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/radar.json',</span> <span class="pre">'rr1h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr1h.json',</span> <span class="pre">'rr24h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr24h.json',</span> <span class="pre">'rr6h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr6h.json'}</span></em><a class="headerlink" href="#epygram.config.epygram_colormaps" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">epygram_colormaps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'aspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/aspect.json',</span> <span class="pre">'gaspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/gaspect.json',</span> <span class="pre">'ptype':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype.json',</span> <span class="pre">'ptype0':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype0.json',</span> <span class="pre">'radar':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/radar.json',</span> <span class="pre">'rr1h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr1h.json',</span> <span class="pre">'rr24h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr24h.json',</span> <span class="pre">'rr6h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr6h.json'}</span></em><a class="headerlink" href="#epygram.config.epygram_colormaps" title="Link to this definition">¶</a></dt>
 <dd><p>epygram Colormaps</p>
 </dd></dl>
 
 </section>
 <hr class="docutils" />
 <section id="parameters">
-<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h2>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.default_Ptop">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_Ptop</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#epygram.config.default_Ptop" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_Ptop</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#epygram.config.default_Ptop" title="Link to this definition">¶</a></dt>
 <dd><p>Ptop: pressure &#64; summit of atmosphere. For vertical coordinates conversions.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.epsilon">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">epsilon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.220446049250313e-16</span></em><a class="headerlink" href="#epygram.config.epsilon" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">epsilon</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2.220446049250313e-16</span></em><a class="headerlink" href="#epygram.config.epsilon" title="Link to this definition">¶</a></dt>
 <dd><p>Epsilon</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.KNUMMAXRESOL">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">KNUMMAXRESOL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#epygram.config.KNUMMAXRESOL" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">KNUMMAXRESOL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></em><a class="headerlink" href="#epygram.config.KNUMMAXRESOL" title="Link to this definition">¶</a></dt>
 <dd><p>Maximum number of truncations handled (setup spectral transforms)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.plotsizes">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">plotsizes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(16.0,</span> <span class="pre">12.0)</span></em><a class="headerlink" href="#epygram.config.plotsizes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">plotsizes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(16.0,</span> <span class="pre">12.0)</span></em><a class="headerlink" href="#epygram.config.plotsizes" title="Link to this definition">¶</a></dt>
 <dd><p>Plots sizes (in inches)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.default_graphical_output">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_graphical_output</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'png'</span></em><a class="headerlink" href="#epygram.config.default_graphical_output" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_graphical_output</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'png'</span></em><a class="headerlink" href="#epygram.config.default_graphical_output" title="Link to this definition">¶</a></dt>
 <dd><p>Default output for apptools</p>
 </dd></dl>
 
 </section>
 <hr class="docutils" />
 <section id="formats-specifications">
-<h2>Formats Specifications<a class="headerlink" href="#formats-specifications" title="Permalink to this headline">¶</a></h2>
+<h2>Formats Specifications<a class="headerlink" href="#formats-specifications" title="Link to this heading">¶</a></h2>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.implemented_formats">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">implemented_formats</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['netCDFMNH',</span> <span class="pre">'netCDF',</span> <span class="pre">'GRIB',</span> <span class="pre">'GeoPoints',</span> <span class="pre">'TIFFMF',</span> <span class="pre">'HDF5SAF',</span> <span class="pre">'FA',</span> <span class="pre">'LFI',</span> <span class="pre">'DDHLFA',</span> <span class="pre">'LFA']</span></em><a class="headerlink" href="#epygram.config.implemented_formats" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">implemented_formats</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['netCDFMNH',</span> <span class="pre">'netCDF',</span> <span class="pre">'GRIB',</span> <span class="pre">'GeoPoints',</span> <span class="pre">'TIFFMF',</span> <span class="pre">'HDF5SAF',</span> <span class="pre">'FA',</span> <span class="pre">'LFI',</span> <span class="pre">'DDHLFA',</span> <span class="pre">'LFA']</span></em><a class="headerlink" href="#epygram.config.implemented_formats" title="Link to this definition">¶</a></dt>
 <dd><p>List of implemented/activated formats
 for the formats_factory, the list is ordered by specificity for those of the
 same family (e.g. FA before LFI, DDHLFA before LFA…)
@@ -122,161 +120,161 @@ In loading order to deal with sub-libraries compatibilities (e.g. h5py after net
 </dd></dl>
 
 <section id="fa">
-<h3>FA<a class="headerlink" href="#fa" title="Permalink to this headline">¶</a></h3>
+<h3>FA<a class="headerlink" href="#fa" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_default_compression">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'KDMOPL':</span> <span class="pre">0,</span> <span class="pre">'KNBCSP':</span> <span class="pre">16,</span> <span class="pre">'KNBPDG':</span> <span class="pre">16,</span> <span class="pre">'KNGRIB':</span> <span class="pre">2,</span> <span class="pre">'KPUILA':</span> <span class="pre">0,</span> <span class="pre">'KSTRON':</span> <span class="pre">0}</span></em><a class="headerlink" href="#epygram.config.FA_default_compression" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'KDMOPL':</span> <span class="pre">0,</span> <span class="pre">'KNBCSP':</span> <span class="pre">16,</span> <span class="pre">'KNBPDG':</span> <span class="pre">16,</span> <span class="pre">'KNGRIB':</span> <span class="pre">2,</span> <span class="pre">'KPUILA':</span> <span class="pre">0,</span> <span class="pre">'KSTRON':</span> <span class="pre">0}</span></em><a class="headerlink" href="#epygram.config.FA_default_compression" title="Link to this definition">¶</a></dt>
 <dd><p>FA default compression parameters</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_default_reference_pressure">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_reference_pressure</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">101325.0</span></em><a class="headerlink" href="#epygram.config.FA_default_reference_pressure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_reference_pressure</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">101325.0</span></em><a class="headerlink" href="#epygram.config.FA_default_reference_pressure" title="Link to this definition">¶</a></dt>
 <dd><p>Default reference pressure coefficient for converting hybrid A coefficients
 in FA</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_default_geoid">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_geoid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'a':</span> <span class="pre">6371229.0,</span> <span class="pre">'b':</span> <span class="pre">6371229.0}</span></em><a class="headerlink" href="#epygram.config.FA_default_geoid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_geoid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'a':</span> <span class="pre">6371229.0,</span> <span class="pre">'b':</span> <span class="pre">6371229.0}</span></em><a class="headerlink" href="#epygram.config.FA_default_geoid" title="Link to this definition">¶</a></dt>
 <dd><p>geoid of FA files in pyproj syntax</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_field_dictionaries_csv">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_field_dictionaries_csv</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'default':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/Field_Dict_FA.csv',</span> <span class="pre">'user':</span> <span class="pre">'/home/mary/.epygram/user_Field_Dict_FA.csv'}</span></em><a class="headerlink" href="#epygram.config.FA_field_dictionaries_csv" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_field_dictionaries_csv</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'default':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/Field_Dict_FA.csv',</span> <span class="pre">'user':</span> <span class="pre">'/home/mary/.epygram/user_Field_Dict_FA.csv'}</span></em><a class="headerlink" href="#epygram.config.FA_field_dictionaries_csv" title="Link to this definition">¶</a></dt>
 <dd><p>FA field dictionaries</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_fandax">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_fandax</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.FA_fandax" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_fandax</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.FA_fandax" title="Link to this definition">¶</a></dt>
 <dd><p>FA (write) date &amp; time precision: use FANDAR (minute) or FANDAX (second,
 cy40t1 onwards)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_buffered_gauss_grid">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_buffered_gauss_grid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.FA_buffered_gauss_grid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_buffered_gauss_grid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.FA_buffered_gauss_grid" title="Link to this definition">¶</a></dt>
 <dd><p>To avoid re-computing lons/lats of Gauss Grids from FA each time needed:
 makes ARPEGE profiles and section extraction times acceptable (&lt; 1min).</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_allow_MOCAGE_multivalidities">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_allow_MOCAGE_multivalidities</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.FA_allow_MOCAGE_multivalidities" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_allow_MOCAGE_multivalidities</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.FA_allow_MOCAGE_multivalidities" title="Link to this definition">¶</a></dt>
 <dd><p>Allow MOCAGE fields to have multiple validities in file; in which case the
 term is decoded from the fid[2:4]</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_max_encoding">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_max_encoding</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#epygram.config.FA_max_encoding" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_max_encoding</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#epygram.config.FA_max_encoding" title="Link to this definition">¶</a></dt>
 <dd><p>Maximum recommended encoding for FA (KNBPDG)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_mute_FA4py">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_mute_FA4py</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.FA_mute_FA4py" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_mute_FA4py</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.FA_mute_FA4py" title="Link to this definition">¶</a></dt>
 <dd><p>Mute messages from FAIPAR in FA4py</p>
 </dd></dl>
 
 </section>
 <section id="lfa">
-<h3>LFA<a class="headerlink" href="#lfa" title="Permalink to this headline">¶</a></h3>
+<h3>LFA<a class="headerlink" href="#lfa" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.LFA_max_num_fields">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFA_max_num_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000</span></em><a class="headerlink" href="#epygram.config.LFA_max_num_fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFA_max_num_fields</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1000</span></em><a class="headerlink" href="#epygram.config.LFA_max_num_fields" title="Link to this definition">¶</a></dt>
 <dd><p>LFA maximum number of fields</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.LFA_maxstrlen">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFA_maxstrlen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">200</span></em><a class="headerlink" href="#epygram.config.LFA_maxstrlen" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFA_maxstrlen</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">200</span></em><a class="headerlink" href="#epygram.config.LFA_maxstrlen" title="Link to this definition">¶</a></dt>
 <dd><p>LFA maximum length of strings (as in most LFA useage)</p>
 </dd></dl>
 
 </section>
 <section id="geopoints">
-<h3>GeoPoints<a class="headerlink" href="#geopoints" title="Permalink to this headline">¶</a></h3>
+<h3>GeoPoints<a class="headerlink" href="#geopoints" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GeoPoints_lonlat_precision">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GeoPoints_lonlat_precision</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#epygram.config.GeoPoints_lonlat_precision" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GeoPoints_lonlat_precision</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#epygram.config.GeoPoints_lonlat_precision" title="Link to this definition">¶</a></dt>
 <dd><p>GeoPoints write precision for lon/lat</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GeoPoints_precision">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GeoPoints_precision</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#epygram.config.GeoPoints_precision" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GeoPoints_precision</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#epygram.config.GeoPoints_precision" title="Link to this definition">¶</a></dt>
 <dd><p>GeoPoints write precision for other floats</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GeoPoints_col_width">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GeoPoints_col_width</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#epygram.config.GeoPoints_col_width" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GeoPoints_col_width</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#epygram.config.GeoPoints_col_width" title="Link to this definition">¶</a></dt>
 <dd><p>GeoPoints write width of columns</p>
 </dd></dl>
 
 </section>
 <section id="grib">
-<h3>GRIB<a class="headerlink" href="#grib" title="Permalink to this headline">¶</a></h3>
+<h3>GRIB<a class="headerlink" href="#grib" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_lowlevel_api">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_lowlevel_api</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'eccodes'</span></em><a class="headerlink" href="#epygram.config.GRIB_lowlevel_api" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_lowlevel_api</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'eccodes'</span></em><a class="headerlink" href="#epygram.config.GRIB_lowlevel_api" title="Link to this definition">¶</a></dt>
 <dd><p>GRIB lowlevel API library to be used, among (‘eccodes’, ‘grib_api’, ‘gribapi’)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_default_centre">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_default_centre</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">85</span></em><a class="headerlink" href="#epygram.config.GRIB_default_centre" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_default_centre</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">85</span></em><a class="headerlink" href="#epygram.config.GRIB_default_centre" title="Link to this definition">¶</a></dt>
 <dd><p>GRIB default production centre – write mode</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_epygram_samples_path">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_epygram_samples_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/grib_samples'</span></em><a class="headerlink" href="#epygram.config.GRIB_epygram_samples_path" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_epygram_samples_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/grib_samples'</span></em><a class="headerlink" href="#epygram.config.GRIB_epygram_samples_path" title="Link to this definition">¶</a></dt>
 <dd><p>GRIB samples from epygram (treated as clone from file)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.satellites_local_GRIB2">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">satellites_local_GRIB2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'GOES11':</span> <span class="pre">195,</span> <span class="pre">'GOES12':</span> <span class="pre">196,</span> <span class="pre">'METEOSAT7':</span> <span class="pre">192,</span> <span class="pre">'METEOSAT8':</span> <span class="pre">193,</span> <span class="pre">'METEOSAT9':</span> <span class="pre">194,</span> <span class="pre">'MTSAT1':</span> <span class="pre">197}</span></em><a class="headerlink" href="#epygram.config.satellites_local_GRIB2" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">satellites_local_GRIB2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'GOES11':</span> <span class="pre">195,</span> <span class="pre">'GOES12':</span> <span class="pre">196,</span> <span class="pre">'METEOSAT7':</span> <span class="pre">192,</span> <span class="pre">'METEOSAT8':</span> <span class="pre">193,</span> <span class="pre">'METEOSAT9':</span> <span class="pre">194,</span> <span class="pre">'MTSAT1':</span> <span class="pre">197}</span></em><a class="headerlink" href="#epygram.config.satellites_local_GRIB2" title="Link to this definition">¶</a></dt>
 <dd><p>satellites local GRIB2 encoding</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.sensors_local_GRIB2">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">sensors_local_GRIB2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'IMAGER':</span> <span class="pre">194,</span> <span class="pre">'MVIRI':</span> <span class="pre">192,</span> <span class="pre">'SEVIRI':</span> <span class="pre">193}</span></em><a class="headerlink" href="#epygram.config.sensors_local_GRIB2" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">sensors_local_GRIB2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'IMAGER':</span> <span class="pre">194,</span> <span class="pre">'MVIRI':</span> <span class="pre">192,</span> <span class="pre">'SEVIRI':</span> <span class="pre">193}</span></em><a class="headerlink" href="#epygram.config.sensors_local_GRIB2" title="Link to this definition">¶</a></dt>
 <dd><p>sensors local GRIB2 encoding</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_packing_fatal">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_packing_fatal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.GRIB_packing_fatal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_packing_fatal</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.GRIB_packing_fatal" title="Link to this definition">¶</a></dt>
 <dd><p>GRIB: errors while setting packing are fatal</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_ignore_validity_decoding_errors">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_ignore_validity_decoding_errors</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.GRIB_ignore_validity_decoding_errors" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_ignore_validity_decoding_errors</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.GRIB_ignore_validity_decoding_errors" title="Link to this definition">¶</a></dt>
 <dd><p>GRIB: ignore errors while trying to decode validity</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_max_bitspervalue">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_max_bitspervalue</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#epygram.config.GRIB_max_bitspervalue" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_max_bitspervalue</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></em><a class="headerlink" href="#epygram.config.GRIB_max_bitspervalue" title="Link to this definition">¶</a></dt>
 <dd><p>Maximum recommended encoding for GRIB (bitsPerValue)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_force_bitspervalue">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_force_bitspervalue</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.GRIB_force_bitspervalue" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_force_bitspervalue</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.GRIB_force_bitspervalue" title="Link to this definition">¶</a></dt>
 <dd><p>Force bitspervalue to GRIB_max_bitspervalue if requested higher</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.GRIB_safe_indexes">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_safe_indexes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/tmp'</span></em><a class="headerlink" href="#epygram.config.GRIB_safe_indexes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">GRIB_safe_indexes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/tmp'</span></em><a class="headerlink" href="#epygram.config.GRIB_safe_indexes" title="Link to this definition">¶</a></dt>
 <dd><p>Use temporary links to workaround a bug in grib indexes
 set either a directory to use for that purpose (e.g. /tmp) or
 False not to use this option</p>
@@ -284,43 +282,43 @@ False not to use this option</p>
 
 </section>
 <section id="lfi">
-<h3>LFI<a class="headerlink" href="#lfi" title="Permalink to this headline">¶</a></h3>
+<h3>LFI<a class="headerlink" href="#lfi" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.LFI_field_dictionaries_csv">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFI_field_dictionaries_csv</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'default':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/Field_Dict_LFI.csv',</span> <span class="pre">'user':</span> <span class="pre">'/home/mary/.epygram/user_Field_Dict_LFI.csv'}</span></em><a class="headerlink" href="#epygram.config.LFI_field_dictionaries_csv" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFI_field_dictionaries_csv</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'default':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/Field_Dict_LFI.csv',</span> <span class="pre">'user':</span> <span class="pre">'/home/mary/.epygram/user_Field_Dict_LFI.csv'}</span></em><a class="headerlink" href="#epygram.config.LFI_field_dictionaries_csv" title="Link to this definition">¶</a></dt>
 <dd><p>LFI field dictionaries</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.LFI_default_geoid">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFI_default_geoid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'a':</span> <span class="pre">6371229.0,</span> <span class="pre">'b':</span> <span class="pre">6371229.0}</span></em><a class="headerlink" href="#epygram.config.LFI_default_geoid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">LFI_default_geoid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'a':</span> <span class="pre">6371229.0,</span> <span class="pre">'b':</span> <span class="pre">6371229.0}</span></em><a class="headerlink" href="#epygram.config.LFI_default_geoid" title="Link to this definition">¶</a></dt>
 <dd><p>geoid of LFI files in pyproj syntax</p>
 </dd></dl>
 
 </section>
 <section id="netcdf">
-<h3>netCDF<a class="headerlink" href="#netcdf" title="Permalink to this headline">¶</a></h3>
+<h3>netCDF<a class="headerlink" href="#netcdf" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_standard_dimensions">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_standard_dimensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['N_dimension',</span> <span class="pre">'T_dimension',</span> <span class="pre">'X_dimension',</span> <span class="pre">'Y_dimension',</span> <span class="pre">'Z_dimension']</span></em><a class="headerlink" href="#epygram.config.netCDF_standard_dimensions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_standard_dimensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['N_dimension',</span> <span class="pre">'T_dimension',</span> <span class="pre">'X_dimension',</span> <span class="pre">'Y_dimension',</span> <span class="pre">'Z_dimension']</span></em><a class="headerlink" href="#epygram.config.netCDF_standard_dimensions" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF standard dimensions</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_usualnames_for_standard_dimensions">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_usualnames_for_standard_dimensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'N_dimension':</span> <span class="pre">('N',</span> <span class="pre">'n',</span> <span class="pre">'transect',</span> <span class="pre">'obs',</span> <span class="pre">'profile',</span> <span class="pre">'Number_of_points',</span> <span class="pre">'gridpoints_number'),</span> <span class="pre">'T_dimension':</span> <span class="pre">('time',</span> <span class="pre">'T',</span> <span class="pre">'t',</span> <span class="pre">'validity',</span> <span class="pre">'time_counter'),</span> <span class="pre">'X_dimension':</span> <span class="pre">('X',</span> <span class="pre">'x',</span> <span class="pre">'xx',</span> <span class="pre">'nx',</span> <span class="pre">'LON',</span> <span class="pre">'lon',</span> <span class="pre">'Nbre_lon',</span> <span class="pre">'longitude',</span> <span class="pre">'max_lon_number'),</span> <span class="pre">'Y_dimension':</span> <span class="pre">('Y',</span> <span class="pre">'y',</span> <span class="pre">'yy',</span> <span class="pre">'ny',</span> <span class="pre">'LAT',</span> <span class="pre">'lat',</span> <span class="pre">'Nbre_lat',</span> <span class="pre">'latitude',</span> <span class="pre">'lat_number'),</span> <span class="pre">'Z_dimension':</span> <span class="pre">('Z',</span> <span class="pre">'z',</span> <span class="pre">'zz',</span> <span class="pre">'nz',</span> <span class="pre">'level',</span> <span class="pre">'nlev',</span> <span class="pre">'nlevp1',</span> <span class="pre">'pressure',</span> <span class="pre">'hybrid-pressure',</span> <span class="pre">'height',</span> <span class="pre">'altitude',</span> <span class="pre">'depth')}</span></em><a class="headerlink" href="#epygram.config.netCDF_usualnames_for_standard_dimensions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_usualnames_for_standard_dimensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'N_dimension':</span> <span class="pre">('N',</span> <span class="pre">'n',</span> <span class="pre">'transect',</span> <span class="pre">'obs',</span> <span class="pre">'profile',</span> <span class="pre">'Number_of_points',</span> <span class="pre">'gridpoints_number'),</span> <span class="pre">'T_dimension':</span> <span class="pre">('time',</span> <span class="pre">'T',</span> <span class="pre">'t',</span> <span class="pre">'validity',</span> <span class="pre">'time_counter'),</span> <span class="pre">'X_dimension':</span> <span class="pre">('X',</span> <span class="pre">'x',</span> <span class="pre">'xx',</span> <span class="pre">'nx',</span> <span class="pre">'LON',</span> <span class="pre">'lon',</span> <span class="pre">'Nbre_lon',</span> <span class="pre">'longitude',</span> <span class="pre">'max_lon_number'),</span> <span class="pre">'Y_dimension':</span> <span class="pre">('Y',</span> <span class="pre">'y',</span> <span class="pre">'yy',</span> <span class="pre">'ny',</span> <span class="pre">'LAT',</span> <span class="pre">'lat',</span> <span class="pre">'Nbre_lat',</span> <span class="pre">'latitude',</span> <span class="pre">'lat_number'),</span> <span class="pre">'Z_dimension':</span> <span class="pre">('Z',</span> <span class="pre">'z',</span> <span class="pre">'zz',</span> <span class="pre">'nz',</span> <span class="pre">'level',</span> <span class="pre">'nlev',</span> <span class="pre">'nlevp1',</span> <span class="pre">'pressure',</span> <span class="pre">'hybrid-pressure',</span> <span class="pre">'height',</span> <span class="pre">'altitude',</span> <span class="pre">'depth')}</span></em><a class="headerlink" href="#epygram.config.netCDF_usualnames_for_standard_dimensions" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF usual names for standard dimensions</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_usualnames_for_lonlat_grids">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_usualnames_for_lonlat_grids</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'X':</span> <span class="pre">['LON',</span> <span class="pre">'lon',</span> <span class="pre">'lons',</span> <span class="pre">'longitude',</span> <span class="pre">'longitudes'],</span> <span class="pre">'Y':</span> <span class="pre">['LAT',</span> <span class="pre">'lat',</span> <span class="pre">'lats',</span> <span class="pre">'latitude',</span> <span class="pre">'latitudes']}</span></em><a class="headerlink" href="#epygram.config.netCDF_usualnames_for_lonlat_grids" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_usualnames_for_lonlat_grids</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'X':</span> <span class="pre">['LON',</span> <span class="pre">'lon',</span> <span class="pre">'lons',</span> <span class="pre">'longitude',</span> <span class="pre">'longitudes'],</span> <span class="pre">'Y':</span> <span class="pre">['LAT',</span> <span class="pre">'lat',</span> <span class="pre">'lats',</span> <span class="pre">'latitude',</span> <span class="pre">'latitudes']}</span></em><a class="headerlink" href="#epygram.config.netCDF_usualnames_for_lonlat_grids" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF usual names for storing lon, lat grids</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_behaviour">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_behaviour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'H1D_is_H2D_unstructured':</span> <span class="pre">False,</span> <span class="pre">'flatten_horizontal_grids':</span> <span class="pre">False,</span> <span class="pre">'reverse_Yaxis':</span> <span class="pre">False,</span> <span class="pre">'write_lonlat_grid':</span> <span class="pre">True}</span></em><a class="headerlink" href="#epygram.config.netCDF_default_behaviour" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_behaviour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'H1D_is_H2D_unstructured':</span> <span class="pre">False,</span> <span class="pre">'flatten_horizontal_grids':</span> <span class="pre">False,</span> <span class="pre">'reverse_Yaxis':</span> <span class="pre">False,</span> <span class="pre">'write_lonlat_grid':</span> <span class="pre">True}</span></em><a class="headerlink" href="#epygram.config.netCDF_default_behaviour" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF default behaviour
 the behaviour can be updated with specific netCDF_usualnames_for_standard_dimensions,
 e.g. ‘X_dimension’:’nb_lon’
@@ -329,37 +327,37 @@ and eventual according grid, e.g. ‘X_grid’:’longitudes’</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_compression">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#epygram.config.netCDF_default_compression" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#epygram.config.netCDF_default_compression" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF default compression</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_replace_dot_in_variable_names">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_replace_dot_in_variable_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.'</span></em><a class="headerlink" href="#epygram.config.netCDF_replace_dot_in_variable_names" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_replace_dot_in_variable_names</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'.'</span></em><a class="headerlink" href="#epygram.config.netCDF_replace_dot_in_variable_names" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF, replace dots in variable names by…</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_global_attributes">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_global_attributes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'made_with':</span> <span class="pre">'epygram-1.5.2'}</span></em><a class="headerlink" href="#epygram.config.netCDF_default_global_attributes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_global_attributes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'made_with':</span> <span class="pre">'epygram-2.0.0'}</span></em><a class="headerlink" href="#epygram.config.netCDF_default_global_attributes" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF default standard global attributes</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_variables_dtype">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_variables_dtype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'f8'</span></em><a class="headerlink" href="#epygram.config.netCDF_default_variables_dtype" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_variables_dtype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'f8'</span></em><a class="headerlink" href="#epygram.config.netCDF_default_variables_dtype" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF variables data type</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_metavariables_dtype">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_metavariables_dtype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'f8'</span></em><a class="headerlink" href="#epygram.config.netCDF_default_metavariables_dtype" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_metavariables_dtype</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'f8'</span></em><a class="headerlink" href="#epygram.config.netCDF_default_metavariables_dtype" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF metavariables data type</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_variables_fill_value">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_variables_fill_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-999999.9</span></em><a class="headerlink" href="#epygram.config.netCDF_default_variables_fill_value" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_variables_fill_value</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-999999.9</span></em><a class="headerlink" href="#epygram.config.netCDF_default_variables_fill_value" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF variables fill value.
 None will make netCDF ignore existence of a _FillValue</p>
 </dd></dl>
@@ -367,66 +365,66 @@ None will make netCDF ignore existence of a _FillValue</p>
 </section>
 </section>
 <section id="options">
-<h2>Options<a class="headerlink" href="#options" title="Permalink to this headline">¶</a></h2>
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading">¶</a></h2>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.default_geoid">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_geoid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ellps':</span> <span class="pre">'WGS84'}</span></em><a class="headerlink" href="#epygram.config.default_geoid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_geoid</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ellps':</span> <span class="pre">'WGS84'}</span></em><a class="headerlink" href="#epygram.config.default_geoid" title="Link to this definition">¶</a></dt>
 <dd><p>A classical default geoid for <em>pyproj</em></p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.protect_unhappy_writes">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">protect_unhappy_writes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.protect_unhappy_writes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">protect_unhappy_writes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.protect_unhappy_writes" title="Link to this definition">¶</a></dt>
 <dd><p>Protect unhappy writes: ask before opening a new file on an existing path</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.mask_outside">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">mask_outside</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e+19</span></em><a class="headerlink" href="#epygram.config.mask_outside" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">mask_outside</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e+19</span></em><a class="headerlink" href="#epygram.config.mask_outside" title="Link to this definition">¶</a></dt>
 <dd><p>Threshold on field absolute values to mask meaningless field values</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.pyproj_invalid_values">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">pyproj_invalid_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e+30</span></em><a class="headerlink" href="#epygram.config.pyproj_invalid_values" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">pyproj_invalid_values</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1e+30</span></em><a class="headerlink" href="#epygram.config.pyproj_invalid_values" title="Link to this definition">¶</a></dt>
 <dd><p>pyproj coordinates invalid values</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.hide_footprints_warnings">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">hide_footprints_warnings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.hide_footprints_warnings" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">hide_footprints_warnings</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#epygram.config.hide_footprints_warnings" title="Link to this definition">¶</a></dt>
 <dd><p>To hide footprints warnings…</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.prevent_swapping_legendre">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">prevent_swapping_legendre</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.75</span></em><a class="headerlink" href="#epygram.config.prevent_swapping_legendre" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">prevent_swapping_legendre</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.75</span></em><a class="headerlink" href="#epygram.config.prevent_swapping_legendre" title="Link to this definition">¶</a></dt>
 <dd><p>To raise an error if the memory needed for Legendre transforms exceeds
 this percentage of the available memory.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.footprints_proxy_as_builder">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">footprints_proxy_as_builder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.footprints_proxy_as_builder" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">footprints_proxy_as_builder</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.footprints_proxy_as_builder" title="Link to this definition">¶</a></dt>
 <dd><p>Use footprints.proxy builder to generate a field.
 True: more flexible, False: faster</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.vector_symbol">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">vector_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'barbs'</span></em><a class="headerlink" href="#epygram.config.vector_symbol" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">vector_symbol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'barbs'</span></em><a class="headerlink" href="#epygram.config.vector_symbol" title="Link to this definition">¶</a></dt>
 <dd><p>Vector graphical symbol</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.default_figures_dpi">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_figures_dpi</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">150</span></em><a class="headerlink" href="#epygram.config.default_figures_dpi" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_figures_dpi</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">150</span></em><a class="headerlink" href="#epygram.config.default_figures_dpi" title="Link to this definition">¶</a></dt>
 <dd><p>Default quality for figures</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.spectral_coeff_order">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">spectral_coeff_order</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'model'</span></em><a class="headerlink" href="#epygram.config.spectral_coeff_order" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">spectral_coeff_order</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'model'</span></em><a class="headerlink" href="#epygram.config.spectral_coeff_order" title="Link to this definition">¶</a></dt>
 <dd><p>ordering of spectral coefficients, with regards to arpifs spaces:
 ‘model’ or ‘FA’.
 =&gt; ‘model’: read/write by wfacilo/wfaieno,</p>
@@ -437,44 +435,44 @@ True: more flexible, False: faster</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.init_at_import">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">init_at_import</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.init_at_import" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">init_at_import</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.init_at_import" title="Link to this definition">¶</a></dt>
 <dd><p>To call epygram.init_env() automatically at import
 ! Should not be True if using Vortex !</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.silent_guess_format">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">silent_guess_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.silent_guess_format" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">silent_guess_format</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#epygram.config.silent_guess_format" title="Link to this definition">¶</a></dt>
 <dd><p>hide messages when guessing format
 True is dangerous, causes troubles in logging</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.margin_points_within_Czone">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">margin_points_within_Czone</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#epygram.config.margin_points_within_Czone" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">margin_points_within_Czone</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#epygram.config.margin_points_within_Czone" title="Link to this definition">¶</a></dt>
 <dd><p>Number or margin within C-zone to generate a lonlat-included domain</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.default_rcparams">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_rcparams</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(('font',),</span> <span class="pre">{'family':</span> <span class="pre">'serif'})]</span></em><a class="headerlink" href="#epygram.config.default_rcparams" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">default_rcparams</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(('font',),</span> <span class="pre">{'family':</span> <span class="pre">'serif'})]</span></em><a class="headerlink" href="#epygram.config.default_rcparams" title="Link to this definition">¶</a></dt>
 <dd><p>Defaults for matplotlib rcparams</p>
 </dd></dl>
 
 </section>
 <hr class="docutils" />
 <section id="colormaps">
-<h2>Colormaps<a class="headerlink" href="#colormaps" title="Permalink to this headline">¶</a></h2>
+<h2>Colormaps<a class="headerlink" href="#colormaps" title="Link to this heading">¶</a></h2>
 <p>See <a class="reference internal" href="../cmaps.html#epy-colormaps"><span class="std std-ref">Colormaps</span></a> for illustration of the EPyGrAM colormaps.</p>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.colormaps">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">colormaps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'aspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/aspect.json',</span> <span class="pre">'gaspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/gaspect.json',</span> <span class="pre">'ptype':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype.json',</span> <span class="pre">'ptype0':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype0.json',</span> <span class="pre">'radar':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/radar.json',</span> <span class="pre">'rr1h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr1h.json',</span> <span class="pre">'rr24h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr24h.json',</span> <span class="pre">'rr6h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr6h.json'}</span></em><a class="headerlink" href="#epygram.config.colormaps" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">colormaps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'aspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/aspect.json',</span> <span class="pre">'gaspect':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/gaspect.json',</span> <span class="pre">'ptype':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype.json',</span> <span class="pre">'ptype0':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/ptype0.json',</span> <span class="pre">'radar':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/radar.json',</span> <span class="pre">'rr1h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr1h.json',</span> <span class="pre">'rr24h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr24h.json',</span> <span class="pre">'rr6h':</span> <span class="pre">'/home/mary/repositories/EPyGrAM/src/epygram/data/colormaps/rr6h.json'}</span></em><a class="headerlink" href="#epygram.config.colormaps" title="Link to this definition">¶</a></dt>
 <dd><p>colormaps gathers epygram and user colormaps</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.usercolormaps">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">usercolormaps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#epygram.config.usercolormaps" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">usercolormaps</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#epygram.config.usercolormaps" title="Link to this definition">¶</a></dt>
 <dd><p>In userconfig, this should be a dict whose keys are the colormap name and
 values the source absolute path of the colormap definition;
 e.g. {‘aspect’, ‘/home/mary/.epygram/aspect.json’}.</p>
@@ -488,34 +486,121 @@ e.g. {‘aspect’, ‘/home/mary/.epygram/aspect.json’}.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#parameters">Parameters</a></li>
-<li><a class="reference internal" href="#formats-specifications">Formats Specifications</a><ul>
-<li><a class="reference internal" href="#fa">FA</a></li>
-<li><a class="reference internal" href="#lfa">LFA</a></li>
-<li><a class="reference internal" href="#geopoints">GeoPoints</a></li>
-<li><a class="reference internal" href="#grib">GRIB</a></li>
-<li><a class="reference internal" href="#lfi">LFI</a></li>
-<li><a class="reference internal" href="#netcdf">netCDF</a></li>
+<li><a class="reference internal" href="#installation">Installation</a><ul>
+<li><a class="reference internal" href="#epygram.config.installdir"><code class="docutils literal notranslate"><span class="pre">installdir</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.userlocaldir"><code class="docutils literal notranslate"><span class="pre">userlocaldir</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.epygram_colormaps"><code class="docutils literal notranslate"><span class="pre">epygram_colormaps</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#options">Options</a></li>
-<li><a class="reference internal" href="#colormaps">Colormaps</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a><ul>
+<li><a class="reference internal" href="#epygram.config.default_Ptop"><code class="docutils literal notranslate"><span class="pre">default_Ptop</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.epsilon"><code class="docutils literal notranslate"><span class="pre">epsilon</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.KNUMMAXRESOL"><code class="docutils literal notranslate"><span class="pre">KNUMMAXRESOL</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.plotsizes"><code class="docutils literal notranslate"><span class="pre">plotsizes</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.default_graphical_output"><code class="docutils literal notranslate"><span class="pre">default_graphical_output</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#formats-specifications">Formats Specifications</a><ul>
+<li><a class="reference internal" href="#epygram.config.implemented_formats"><code class="docutils literal notranslate"><span class="pre">implemented_formats</span></code></a></li>
+<li><a class="reference internal" href="#fa">FA</a><ul>
+<li><a class="reference internal" href="#epygram.config.FA_default_compression"><code class="docutils literal notranslate"><span class="pre">FA_default_compression</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_default_reference_pressure"><code class="docutils literal notranslate"><span class="pre">FA_default_reference_pressure</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_default_geoid"><code class="docutils literal notranslate"><span class="pre">FA_default_geoid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_field_dictionaries_csv"><code class="docutils literal notranslate"><span class="pre">FA_field_dictionaries_csv</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_fandax"><code class="docutils literal notranslate"><span class="pre">FA_fandax</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_buffered_gauss_grid"><code class="docutils literal notranslate"><span class="pre">FA_buffered_gauss_grid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_allow_MOCAGE_multivalidities"><code class="docutils literal notranslate"><span class="pre">FA_allow_MOCAGE_multivalidities</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_max_encoding"><code class="docutils literal notranslate"><span class="pre">FA_max_encoding</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.FA_mute_FA4py"><code class="docutils literal notranslate"><span class="pre">FA_mute_FA4py</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lfa">LFA</a><ul>
+<li><a class="reference internal" href="#epygram.config.LFA_max_num_fields"><code class="docutils literal notranslate"><span class="pre">LFA_max_num_fields</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.LFA_maxstrlen"><code class="docutils literal notranslate"><span class="pre">LFA_maxstrlen</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#geopoints">GeoPoints</a><ul>
+<li><a class="reference internal" href="#epygram.config.GeoPoints_lonlat_precision"><code class="docutils literal notranslate"><span class="pre">GeoPoints_lonlat_precision</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GeoPoints_precision"><code class="docutils literal notranslate"><span class="pre">GeoPoints_precision</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GeoPoints_col_width"><code class="docutils literal notranslate"><span class="pre">GeoPoints_col_width</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grib">GRIB</a><ul>
+<li><a class="reference internal" href="#epygram.config.GRIB_lowlevel_api"><code class="docutils literal notranslate"><span class="pre">GRIB_lowlevel_api</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_default_centre"><code class="docutils literal notranslate"><span class="pre">GRIB_default_centre</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_epygram_samples_path"><code class="docutils literal notranslate"><span class="pre">GRIB_epygram_samples_path</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.satellites_local_GRIB2"><code class="docutils literal notranslate"><span class="pre">satellites_local_GRIB2</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.sensors_local_GRIB2"><code class="docutils literal notranslate"><span class="pre">sensors_local_GRIB2</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_packing_fatal"><code class="docutils literal notranslate"><span class="pre">GRIB_packing_fatal</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_ignore_validity_decoding_errors"><code class="docutils literal notranslate"><span class="pre">GRIB_ignore_validity_decoding_errors</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_max_bitspervalue"><code class="docutils literal notranslate"><span class="pre">GRIB_max_bitspervalue</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_force_bitspervalue"><code class="docutils literal notranslate"><span class="pre">GRIB_force_bitspervalue</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.GRIB_safe_indexes"><code class="docutils literal notranslate"><span class="pre">GRIB_safe_indexes</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lfi">LFI</a><ul>
+<li><a class="reference internal" href="#epygram.config.LFI_field_dictionaries_csv"><code class="docutils literal notranslate"><span class="pre">LFI_field_dictionaries_csv</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.LFI_default_geoid"><code class="docutils literal notranslate"><span class="pre">LFI_default_geoid</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#netcdf">netCDF</a><ul>
+<li><a class="reference internal" href="#epygram.config.netCDF_standard_dimensions"><code class="docutils literal notranslate"><span class="pre">netCDF_standard_dimensions</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_usualnames_for_standard_dimensions"><code class="docutils literal notranslate"><span class="pre">netCDF_usualnames_for_standard_dimensions</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_usualnames_for_lonlat_grids"><code class="docutils literal notranslate"><span class="pre">netCDF_usualnames_for_lonlat_grids</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_default_behaviour"><code class="docutils literal notranslate"><span class="pre">netCDF_default_behaviour</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_default_compression"><code class="docutils literal notranslate"><span class="pre">netCDF_default_compression</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_replace_dot_in_variable_names"><code class="docutils literal notranslate"><span class="pre">netCDF_replace_dot_in_variable_names</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_default_global_attributes"><code class="docutils literal notranslate"><span class="pre">netCDF_default_global_attributes</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_default_variables_dtype"><code class="docutils literal notranslate"><span class="pre">netCDF_default_variables_dtype</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_default_metavariables_dtype"><code class="docutils literal notranslate"><span class="pre">netCDF_default_metavariables_dtype</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.netCDF_default_variables_fill_value"><code class="docutils literal notranslate"><span class="pre">netCDF_default_variables_fill_value</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#options">Options</a><ul>
+<li><a class="reference internal" href="#epygram.config.default_geoid"><code class="docutils literal notranslate"><span class="pre">default_geoid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.protect_unhappy_writes"><code class="docutils literal notranslate"><span class="pre">protect_unhappy_writes</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.mask_outside"><code class="docutils literal notranslate"><span class="pre">mask_outside</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.pyproj_invalid_values"><code class="docutils literal notranslate"><span class="pre">pyproj_invalid_values</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.hide_footprints_warnings"><code class="docutils literal notranslate"><span class="pre">hide_footprints_warnings</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.prevent_swapping_legendre"><code class="docutils literal notranslate"><span class="pre">prevent_swapping_legendre</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.footprints_proxy_as_builder"><code class="docutils literal notranslate"><span class="pre">footprints_proxy_as_builder</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.vector_symbol"><code class="docutils literal notranslate"><span class="pre">vector_symbol</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.default_figures_dpi"><code class="docutils literal notranslate"><span class="pre">default_figures_dpi</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.spectral_coeff_order"><code class="docutils literal notranslate"><span class="pre">spectral_coeff_order</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.init_at_import"><code class="docutils literal notranslate"><span class="pre">init_at_import</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.silent_guess_format"><code class="docutils literal notranslate"><span class="pre">silent_guess_format</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.margin_points_within_Czone"><code class="docutils literal notranslate"><span class="pre">margin_points_within_Czone</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.default_rcparams"><code class="docutils literal notranslate"><span class="pre">default_rcparams</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#colormaps">Colormaps</a><ul>
+<li><a class="reference internal" href="#epygram.config.colormaps"><code class="docutils literal notranslate"><span class="pre">colormaps</span></code></a></li>
+<li><a class="reference internal" href="#epygram.config.usercolormaps"><code class="docutils literal notranslate"><span class="pre">usercolormaps</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="resources.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="util.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="resources.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="util.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -523,7 +608,7 @@ e.g. {‘aspect’, ‘/home/mary/.epygram/aspect.json’}.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -531,13 +616,13 @@ e.g. {‘aspect’, ‘/home/mary/.epygram/aspect.json’}.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -552,14 +637,14 @@ e.g. {‘aspect’, ‘/home/mary/.epygram/aspect.json’}.</p>
         <li class="right" >
           <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

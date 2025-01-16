@@ -1,24 +1,22 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <title>Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -27,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate</a></li> 
       </ul>
     </div>  
@@ -38,28 +36,36 @@
           <div class="body" role="main">
             
   <section id="Plot-the-z/p-characteristics-of-a-Hybrid-Pressure-vertical-coordinate">
-<h1>Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate<a class="headerlink" href="#Plot-the-z/p-characteristics-of-a-Hybrid-Pressure-vertical-coordinate" title="Permalink to this headline">¶</a></h1>
+<h1>Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate<a class="headerlink" href="#Plot-the-z/p-characteristics-of-a-Hybrid-Pressure-vertical-coordinate" title="Link to this heading">¶</a></h1>
 <section id="(cf.-package-pyvgrid-from-project-vgrid-and-its-command-line-tool-mkvgrid.py-to-build-new-vertical-coordinates)">
-<h2>(cf. package <code class="docutils literal notranslate"><span class="pre">pyvgrid</span></code> from project <code class="docutils literal notranslate"><span class="pre">vgrid</span></code> and its command-line tool <code class="docutils literal notranslate"><span class="pre">mkvgrid.py</span></code> to build new vertical coordinates)<a class="headerlink" href="#(cf.-package-pyvgrid-from-project-vgrid-and-its-command-line-tool-mkvgrid.py-to-build-new-vertical-coordinates)" title="Permalink to this headline">¶</a></h2>
-<div class="nbinput nblast docutils container">
+<h2>(cf. package <code class="docutils literal notranslate"><span class="pre">pyvgrid</span></code> from project <code class="docutils literal notranslate"><span class="pre">vgrid</span></code> and its command-line tool <code class="docutils literal notranslate"><span class="pre">mkvgrid.py</span></code> to build new vertical coordinates)<a class="headerlink" href="#(cf.-package-pyvgrid-from-project-vgrid-and-its-command-line-tool-mkvgrid.py-to-build-new-vertical-coordinates)" title="Link to this heading">¶</a></h2>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import &amp; initialize epygram</span>
-<span class="kn">import</span> <span class="nn">epygram</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">epygram</span>
 <span class="n">epygram</span><span class="o">.</span><span class="n">init_env</span><span class="p">()</span>
 
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="n">INPUTS_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+# [2025/01/16-12:27:32][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
+</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># open resource in read mode</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">formats</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">INPUTS_DIR</span><span class="p">,</span> <span class="s1">&#39;ICMSHAROM+0022&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">epygram</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">INPUTS_DIR</span><span class="p">,</span> <span class="s1">&#39;ICMSHAROM+0022&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
 <span class="n">hybridP_geo</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="s1">&#39;S058TEMPERATURE&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span>
 </pre></div>
 </div>
@@ -68,7 +74,7 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vmean</span> <span class="o">=</span> <span class="s2">&quot;LAPRXPK=False&quot;</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vmean</span> <span class="o">=</span> <span class="s2">&quot;LAPRXPK=False&quot;</span>  <span class="c1"># or &#39;geometric&#39; or &#39;arithmetic&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -81,7 +87,7 @@
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
@@ -89,14 +95,6 @@
 <span class="n">fig</span> <span class="o">=</span> <span class="n">vg</span><span class="o">.</span><span class="n">bokeh_plot_y_vs_x</span><span class="p">(</span><span class="s1">&#39;level&#39;</span><span class="p">,</span> <span class="s1">&#39;pthickness&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-# [2024/09/27-14:29:31][numexpr.utils][_init_num_threads:0147][INFO]: Note: NumExpr detected 16 cores but &#34;NUMEXPR_MAX_THREADS&#34; not set, so enforcing safe limit of 8.
-</pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -110,6 +108,30 @@
 </div>
 </div>
 <p><img alt="title" src="../../_images/vgrid.png" /></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">vg</span><span class="o">.</span><span class="n">write_AB_to_namelist</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+None
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
@@ -118,16 +140,18 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate</a><ul>
 <li><a class="reference internal" href="#(cf.-package-pyvgrid-from-project-vgrid-and-its-command-line-tool-mkvgrid.py-to-build-new-vertical-coordinates)">(cf. package <code class="docutils literal notranslate"><span class="pre">pyvgrid</span></code> from project <code class="docutils literal notranslate"><span class="pre">vgrid</span></code> and its command-line tool <code class="docutils literal notranslate"><span class="pre">mkvgrid.py</span></code> to build new vertical coordinates)</a></li>
 </ul>
 </li>
 </ul>
 
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -135,7 +159,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
@@ -143,13 +167,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -158,13 +182,13 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

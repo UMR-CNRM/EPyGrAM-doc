@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.geometries — Geometries &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.geometries — Geometries &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.geometries.AbstractGeometry — Geometry class" href="Geometry.html" />
     <link rel="prev" title="epygram" href="epygram.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="epygram.html" title="epygram"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></li> 
       </ul>
@@ -46,26 +44,240 @@
           <div class="body" role="main">
             
   <section id="module-epygram.geometries">
-<span id="epygram-geometries-geometries"></span><h1><a class="reference internal" href="#module-epygram.geometries" title="epygram.geometries"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code></a> — Geometries<a class="headerlink" href="#module-epygram.geometries" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-geometries-geometries"></span><h1><a class="reference internal" href="#module-epygram.geometries" title="epygram.geometries"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code></a> — Geometries<a class="headerlink" href="#module-epygram.geometries" title="Link to this heading">¶</a></h1>
 <p>Contains all geometries classes.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Geometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ProjectedGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="UnstructuredGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="AcademicGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="GaussGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RegLLGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="RotLLGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RotLLGeometry</span></code> — RotLL Geometry class</a></li>
-<li class="toctree-l1"><a class="reference internal" href="VGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="VGeometry.html#functions">Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Geometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry"><code class="docutils literal notranslate"><span class="pre">Geometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.azimuth"><code class="docutils literal notranslate"><span class="pre">Geometry.azimuth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.cartoplot_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.cartoplot_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.cartopy_CRS_reproject"><code class="docutils literal notranslate"><span class="pre">Geometry.cartopy_CRS_reproject()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.datashape"><code class="docutils literal notranslate"><span class="pre">Geometry.datashape</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.distance"><code class="docutils literal notranslate"><span class="pre">Geometry.distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.eq_Hgeom"><code class="docutils literal notranslate"><span class="pre">Geometry.eq_Hgeom()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.get_levels"><code class="docutils literal notranslate"><span class="pre">Geometry.get_levels()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.linspace"><code class="docutils literal notranslate"><span class="pre">Geometry.linspace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_field"><code class="docutils literal notranslate"><span class="pre">Geometry.make_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_physicallevels_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_physicallevels_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_point_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_point_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_profile_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_profile_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_section_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_section_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_vtkGrid"><code class="docutils literal notranslate"><span class="pre">Geometry.make_vtkGrid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.make_zoom_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.make_zoom_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.plot3DBluemarble"><code class="docutils literal notranslate"><span class="pre">Geometry.plot3DBluemarble()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.plot3DMaptiles"><code class="docutils literal notranslate"><span class="pre">Geometry.plot3DMaptiles()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.plot3DProjImage"><code class="docutils literal notranslate"><span class="pre">Geometry.plot3DProjImage()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.plotgeometry"><code class="docutils literal notranslate"><span class="pre">Geometry.plotgeometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.projected_geometry"><code class="docutils literal notranslate"><span class="pre">Geometry.projected_geometry</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.rectangular_grid"><code class="docutils literal notranslate"><span class="pre">Geometry.rectangular_grid</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.structure"><code class="docutils literal notranslate"><span class="pre">Geometry.structure</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.vcoord_as_field"><code class="docutils literal notranslate"><span class="pre">Geometry.vcoord_as_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.Geometry.what"><code class="docutils literal notranslate"><span class="pre">Geometry.what()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="SpectralGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.default_cartopy_CRS"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.default_cartopy_CRS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.extract_subzone"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.extract_subzone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.fill_maskedvalues"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.fill_maskedvalues()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_datashape"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.get_datashape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.get_lonlat_grid"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.get_lonlat_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ij"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.gimme_corners_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gimme_corners_ll"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.gimme_corners_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.gridpoints_number"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.gridpoints_number</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.horizontally_flattened"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.horizontally_flattened()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.isglobal"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.isglobal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subarray_geometry"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.make_subarray_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.make_subsample_geometry"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.make_subsample_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.minmax_ll"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.minmax_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.nearest_points"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.nearest_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ij"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.point_is_inside_domain_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.point_is_inside_domain_ll"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.point_is_inside_domain_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="Geometry.html#epygram.geometries.AbstractGeometry.RectangularGridGeometry.reshape_data"><code class="docutils literal notranslate"><span class="pre">RectangularGridGeometry.reshape_data()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ProjectedGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.ProjectedGeometry</span></code> — Projected Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.compass_grid"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.compass_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.default_cartopy_CRS"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.default_cartopy_CRS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.distance"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.get_cartopy_extent"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.get_cartopy_extent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.getcenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.ij2ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2xy"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.ij2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.linspace"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.linspace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.ll2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2xy"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.ll2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.make_section_geometry"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.make_section_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.map_factor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor_field"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.map_factor_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.mesh_area()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area_field"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.mesh_area_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.plane_azimuth"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.plane_azimuth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.reproject_wind_on_lonlat"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.reproject_wind_on_lonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ij"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.resolution_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ll"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.resolution_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.secant_projection"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.secant_projection</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.select_subzone"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.select_subzone()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.tolerant_equal"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.tolerant_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ij"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.xy2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ll"><code class="docutils literal notranslate"><span class="pre">ProjectedGeometry.xy2ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UnstructuredGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.UnstructuredGeometry</span></code> — Unstructured Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.get_lonlat_grid"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.get_lonlat_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.getcenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.ij2ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.ll2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.nearest_points"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.nearest_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ij"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.resolution_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="UnstructuredGeometry.html#epygram.geometries.UnstructuredGeometry.UnstructuredGeometry.resolution_ll"><code class="docutils literal notranslate"><span class="pre">UnstructuredGeometry.resolution_ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="AcademicGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AcademicGeometry</span></code> — Academic Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.azimuth"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.azimuth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.default_cartopy_CRS"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.default_cartopy_CRS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.distance"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.distance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.getcenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.ij2ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.ij2xy"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.ij2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.linspace"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.linspace()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.ll2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.ll2xy"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.ll2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.make_section_geometry"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.make_section_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.plane_azimuth"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.plane_azimuth()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.resolution_ij"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.resolution_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.resolution_ll"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.resolution_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.tolerant_equal"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.tolerant_equal()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.xy2ij"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.xy2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="AcademicGeometry.html#epygram.geometries.AcademicGeometry.AcademicGeometry.xy2ll"><code class="docutils literal notranslate"><span class="pre">AcademicGeometry.xy2ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="GaussGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.GaussGeometry</span></code> — Gauss Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry"><code class="docutils literal notranslate"><span class="pre">GaussGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.default_cartopy_CRS"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.default_cartopy_CRS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ij"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.distance_to_nearest_neighbour_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.distance_to_nearest_neighbour_ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.distance_to_nearest_neighbour_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.fill_maskedvalues"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.fill_maskedvalues()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.get_datashape"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.get_datashape()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.get_lonlat_grid"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.get_lonlat_grid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.gridpoints_number"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.gridpoints_number</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.horizontally_flattened"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.horizontally_flattened()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.ij2ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.isglobal"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.isglobal</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.ll2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.map_factor"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.map_factor()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.map_factor_field"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.map_factor_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.meridian_resolution_j"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.meridian_resolution_j()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.nearest_points"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.nearest_points()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ij"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.point_is_inside_domain_ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.point_is_inside_domain_ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.point_is_inside_domain_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.reproject_wind_on_lonlat"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.reproject_wind_on_lonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.reshape_data"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.reshape_data()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.resolution_field_from_stretching"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_field_from_stretching()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.resolution_j"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_j()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.resolution_ll"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.resolution_ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="GaussGeometry.html#epygram.geometries.GaussGeometry.GaussGeometry.zonal_resolution_j"><code class="docutils literal notranslate"><span class="pre">GaussGeometry.zonal_resolution_j()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RegLLGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RegLLGeometry</span></code> — RegLL Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.getcenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ij2ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ij2xy"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ij2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ll2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.ll2xy"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.ll2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ij"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.xy2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RegLLGeometry.html#epygram.geometries.RegLLGeometry.RegLLGeometry.xy2ll"><code class="docutils literal notranslate"><span class="pre">RegLLGeometry.xy2ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="RotLLGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.RotLLGeometry</span></code> — RotLL Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.getcenter"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.getcenter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.ij2ll"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.ij2ll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.ij2xy"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.ij2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.ll2ij"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.ll2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.ll2xy"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.ll2xy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.xy2ij"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.xy2ij()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="RotLLGeometry.html#epygram.geometries.RotLLGeometry.RotLLGeometry.xy2ll"><code class="docutils literal notranslate"><span class="pre">RotLLGeometry.xy2ll()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="VGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.VGeometry</span></code> — Vertical Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry"><code class="docutils literal notranslate"><span class="pre">VGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry.to_vgrid"><code class="docutils literal notranslate"><span class="pre">VGeometry.to_vgrid()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.VGeometry.what"><code class="docutils literal notranslate"><span class="pre">VGeometry.what()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="VGeometry.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.hybridP2pressure"><code class="docutils literal notranslate"><span class="pre">hybridP2pressure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.hybridH2pressure"><code class="docutils literal notranslate"><span class="pre">hybridH2pressure()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.hybridP2altitude"><code class="docutils literal notranslate"><span class="pre">hybridP2altitude()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.hybridH2altitude"><code class="docutils literal notranslate"><span class="pre">hybridH2altitude()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.pressure2altitude"><code class="docutils literal notranslate"><span class="pre">pressure2altitude()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.hybridP_coord_and_surfpressure_to_3D_pressure_field"><code class="docutils literal notranslate"><span class="pre">hybridP_coord_and_surfpressure_to_3D_pressure_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="VGeometry.html#epygram.geometries.VGeometry.hybridP_coord_to_3D_altitude_field"><code class="docutils literal notranslate"><span class="pre">hybridP_coord_to_3D_altitude_field()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SpectralGeometry.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.SpectralGeometry</span></code> — Spectral Geometry class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.truncation_from_gridpoint_dims"><code class="docutils literal notranslate"><span class="pre">truncation_from_gridpoint_dims()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.compute_xy_spderivatives"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.compute_xy_spderivatives()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.ectrans4py"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.ectrans4py()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.etrans_inq"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.etrans_inq()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.gp2sp"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.gp2sp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.legendre_known_spectraldata_size"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.legendre_known_spectraldata_size()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.needed_memory"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.needed_memory</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.sp2gp"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.sp2gp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.trans_inq"><code class="docutils literal notranslate"><span class="pre">SpectralGeometry.trans_inq()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="domain_making.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making</span></code> — Domain creation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="domain_making/ask.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a></li>
-<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a></li>
-<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/ask.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.ask</span></code> — User Interface</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/ask.html#epygram.geometries.domain_making.ask.ask_and_build_geometry"><code class="docutils literal notranslate"><span class="pre">ask_and_build_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/ask.html#epygram.geometries.domain_making.ask.ask_lonlat"><code class="docutils literal notranslate"><span class="pre">ask_lonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/ask.html#epygram.geometries.domain_making.ask.ask_lonlat_and_build_geometry"><code class="docutils literal notranslate"><span class="pre">ask_lonlat_and_build_geometry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/build.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.build</span></code> — Build geometries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_geometry"><code class="docutils literal notranslate"><span class="pre">build_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_CIE_field"><code class="docutils literal notranslate"><span class="pre">build_CIE_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_lonlat_geometry"><code class="docutils literal notranslate"><span class="pre">build_lonlat_geometry()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_lonlat_field"><code class="docutils literal notranslate"><span class="pre">build_lonlat_field()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_geometry_fromlonlat"><code class="docutils literal notranslate"><span class="pre">build_geometry_fromlonlat()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.build_geom_from_e923nam"><code class="docutils literal notranslate"><span class="pre">build_geom_from_e923nam()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/build.html#epygram.geometries.domain_making.build.compute_lonlat_included"><code class="docutils literal notranslate"><span class="pre">compute_lonlat_included()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="domain_making/output.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.output</span></code> — Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.lam_geom2namelists"><code class="docutils literal notranslate"><span class="pre">lam_geom2namelists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.regll_geom2namelists"><code class="docutils literal notranslate"><span class="pre">regll_geom2namelists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.write_namelists"><code class="docutils literal notranslate"><span class="pre">write_namelists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.write_geometry_as_namelists"><code class="docutils literal notranslate"><span class="pre">write_geometry_as_namelists()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.summary"><code class="docutils literal notranslate"><span class="pre">summary()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="domain_making/output.html#epygram.geometries.domain_making.output.plot_geometry"><code class="docutils literal notranslate"><span class="pre">plot_geometry()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="domain_making/util.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.domain_making.util</span></code> — Tools</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#parameters">Parameters</a></li>
 <li class="toctree-l3"><a class="reference internal" href="domain_making/util.html#functions">Functions</a></li>
@@ -78,14 +290,14 @@
 <hr class="docutils" />
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.geometries.vertical_coordinates">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.</span></span><span class="sig-name descname"><span class="pre">vertical_coordinates</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Altitude':</span> <span class="pre">102,</span> <span class="pre">'Height':</span> <span class="pre">103,</span> <span class="pre">'HybridH':</span> <span class="pre">118,</span> <span class="pre">'HybridP':</span> <span class="pre">119,</span> <span class="pre">'PV':</span> <span class="pre">109,</span> <span class="pre">'Pressure':</span> <span class="pre">100}</span></em><a class="headerlink" href="#epygram.geometries.vertical_coordinates" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.</span></span><span class="sig-name descname"><span class="pre">vertical_coordinates</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Altitude':</span> <span class="pre">102,</span> <span class="pre">'Height':</span> <span class="pre">103,</span> <span class="pre">'HybridH':</span> <span class="pre">118,</span> <span class="pre">'HybridP':</span> <span class="pre">119,</span> <span class="pre">'PV':</span> <span class="pre">109,</span> <span class="pre">'Pressure':</span> <span class="pre">100}</span></em><a class="headerlink" href="#epygram.geometries.vertical_coordinates" title="Link to this definition">¶</a></dt>
 <dd><p>Mapping of vertical coordinates</p>
 </dd></dl>
 
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.geometries.build_surf_VGeometry">
-<span class="sig-prename descclassname"><span class="pre">epygram.geometries.</span></span><span class="sig-name descname"><span class="pre">build_surf_VGeometry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries.html#build_surf_VGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.build_surf_VGeometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.geometries.</span></span><span class="sig-name descname"><span class="pre">build_surf_VGeometry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/geometries.html#build_surf_VGeometry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.geometries.build_surf_VGeometry" title="Link to this definition">¶</a></dt>
 <dd><p>Build a surface vertical geometry.</p>
 </dd></dl>
 
@@ -96,14 +308,29 @@
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="epygram.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code></a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="Geometry.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a><ul>
+<li><a class="reference internal" href="#epygram.geometries.vertical_coordinates"><code class="docutils literal notranslate"><span class="pre">vertical_coordinates</span></code></a></li>
+<li><a class="reference internal" href="#epygram.geometries.build_surf_VGeometry"><code class="docutils literal notranslate"><span class="pre">build_surf_VGeometry()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="epygram.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="Geometry.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries.AbstractGeometry</span></code> — Geometry class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -111,7 +338,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -119,13 +346,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -140,14 +367,14 @@
         <li class="right" >
           <a href="epygram.html" title="epygram"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.geometries</span></code> — Geometries</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

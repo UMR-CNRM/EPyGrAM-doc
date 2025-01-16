@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.fields.D3Field — 3-D Field class &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.fields.D3Field — 3-D Field class &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.fields.H2DField — Horizontal 2-D Field class" href="H2DField.html" />
     <link rel="prev" title="epygram.fields — Fields" href="fields.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="fields.html" title="epygram.fields — Fields"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fields.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></li> 
@@ -47,13 +45,13 @@
           <div class="body" role="main">
             
   <section id="module-epygram.fields.D3Field">
-<span id="epygram-fields-d3field-3-d-field-class"></span><h1><a class="reference internal" href="#module-epygram.fields.D3Field" title="epygram.fields.D3Field: 3-D Field class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code></a> — 3-D Field class<a class="headerlink" href="#module-epygram.fields.D3Field" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-fields-d3field-3-d-field-class"></span><h1><a class="reference internal" href="#module-epygram.fields.D3Field" title="epygram.fields.D3Field: 3-D Field class"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code></a> — 3-D Field class<a class="headerlink" href="#module-epygram.fields.D3Field" title="Link to this heading">¶</a></h1>
 <p>Contains the class that handle a Horizontal 2D field.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3Field.</span></span><span class="sig-name descname"><span class="pre">_D3CommonField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.Field</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3Field.</span></span><span class="sig-name descname"><span class="pre">_D3CommonField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="base.html#epygram.base.Field" title="epygram.base.Field"><code class="xref py py-class docutils literal notranslate"><span class="pre">Field</span></code></a></p>
 <p>3-Dimensions common field class.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -94,10 +92,10 @@
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.as_dicts">
-<span class="sig-name descname"><span class="pre">as_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_dicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_dicts" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">as_dicts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_dicts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_dicts" title="Link to this definition">¶</a></dt>
 <dd><p>Export values as a list of dicts.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – defines the LAM subzone to be included, in LAM case,
 among: ‘C’, ‘CI’.</p>
 </dd>
@@ -106,10 +104,10 @@ among: ‘C’, ‘CI’.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.as_lists">
-<span class="sig-name descname"><span class="pre">as_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_lists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_lists" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">as_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_lists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_lists" title="Link to this definition">¶</a></dt>
 <dd><p>Export values as a dict of lists (in fact numpy arrays).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>order</strong> – whether to flatten arrays in ‘C’ (row-major) or
 ‘F’ (Fortran, column-major) order.</p></li>
@@ -122,10 +120,10 @@ among: ‘C’, ‘CI’.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.as_points">
-<span class="sig-name descname"><span class="pre">as_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_points" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">as_points</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_points" title="Link to this definition">¶</a></dt>
 <dd><p>Export values as a fieldset of points.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – defines the LAM subzone to be included, in LAM case,
 among: ‘C’, ‘CI’.</p>
 </dd>
@@ -134,10 +132,10 @@ among: ‘C’, ‘CI’.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.as_profiles">
-<span class="sig-name descname"><span class="pre">as_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_profiles" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">as_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_profiles" title="Link to this definition">¶</a></dt>
 <dd><p>Export values as a fieldset of profiles.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – defines the LAM subzone to be included, in LAM case,
 among: ‘C’, ‘CI’.</p>
 </dd>
@@ -146,13 +144,13 @@ among: ‘C’, ‘CI’.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.as_vcoordinate">
-<span class="sig-name descname"><span class="pre">as_vcoordinate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_vcoordinate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_vcoordinate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">as_vcoordinate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.as_vcoordinate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_vcoordinate" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a VGeometry build from the values of field.
 Field must have a ‘generic’ fid allowing to
 recognize the vertical coordinate type (except if
 force_kind is set)</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>force_kind</strong> – if not None, is used as the vertical
 coordinate kind instead of trying to
 guess it from the fid</p>
@@ -162,7 +160,7 @@ guess it from the fid</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.as_vtkGrid">
-<span class="sig-name descname"><span class="pre">as_vtkGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scalar'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'XML'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ZLib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_vtkGrid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">as_vtkGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scalar'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'XML'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ZLib'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression_level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.as_vtkGrid" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -189,7 +187,7 @@ If the field is 3D, thickness are approximately computed</p>
 </ul>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – <p>optional, among (‘C’, ‘CI’), for LAM grids only, returns
 the grid resp. for the C or C+I zone off the C+I+E zone.</p>
@@ -212,17 +210,17 @@ the result is the function is the last filter used.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.comment">
-<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.comment" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.comment" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.dctspectrum">
-<span class="sig-name descname"><span class="pre">dctspectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.dctspectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.dctspectrum" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dctspectrum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.dctspectrum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.dctspectrum" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the DCT spectrum of the field, as a
 <a class="reference internal" href="spectra.html#epygram.spectra.Spectrum" title="epygram.spectra.Spectrum"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.spectra.Spectrum</span></code></a> instance.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – LAM zone on which to compute the DCT,
 among (None, ‘C’, ‘CI’, ‘CIE’). Defaults to ‘C’.</p></li>
@@ -235,10 +233,10 @@ among (None, ‘C’, ‘CI’, ‘CIE’). Defaults to ‘C’.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.decumulate">
-<span class="sig-name descname"><span class="pre">decumulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.decumulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.decumulate" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">decumulate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">center</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.decumulate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.decumulate" title="Link to this definition">¶</a></dt>
 <dd><p>Decumulate cumulated fields (for a field with temporal dimension !).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>center</strong> – <ul class="simple">
 <li><p>if False, values at t are mean values between t-1 and t,
 except at t=0 where it remains untouched.</p></li>
@@ -253,10 +251,10 @@ and t=last where it remains the same.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.dump_to_nc">
-<span class="sig-name descname"><span class="pre">dump_to_nc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variablename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fidkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.dump_to_nc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.dump_to_nc" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dump_to_nc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variablename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fidkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.dump_to_nc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.dump_to_nc" title="Link to this definition">¶</a></dt>
 <dd><p>Dumps the field in a netCDF file.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>filename</strong> – filename to dump in</p></li>
 <li><p><strong>variablename</strong> – variable name in netCDF</p></li>
@@ -269,7 +267,7 @@ defaults to ‘netCDF’</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extend">
-<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">another_field_with_time_dimension</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extend" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">another_field_with_time_dimension</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extend" title="Link to this definition">¶</a></dt>
 <dd><p>Extend the field with regard to time dimension with the field given as
 argument.</p>
 <p>Be careful no check is done for consistency between the two fields
@@ -278,10 +276,10 @@ geometry (except that dimensions match) nor their validities.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extract_physicallevels">
-<span class="sig-name descname"><span class="pre">extract_physicallevels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_physicallevels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_physicallevels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extract_physicallevels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_physicallevels"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_physicallevels" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a new field excluding levels with no physical meaning.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>getdata</strong> – if False returns a field without data</p>
 </dd>
 </dl>
@@ -289,7 +287,7 @@ geometry (except that dimensions match) nor their validities.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extract_subarray">
-<span class="sig-name descname"><span class="pre">extract_subarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepcopy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_subarray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_subarray" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extract_subarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_j</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepcopy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_subarray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_subarray" title="Link to this definition">¶</a></dt>
 <dd><p>Extract a rectangular sub-array from the field, given the i,j index limits
 of the sub-array, and return the extracted field.
 If deepcopy is False, current field and returned field will share
@@ -298,10 +296,10 @@ some attributes (like validity).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extract_subdomain">
-<span class="sig-name descname"><span class="pre">extract_subdomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_subdomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_subdomain" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extract_subdomain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_subdomain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_subdomain" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts a subdomain from a field, given a new geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>geometry</strong> – defines the geometry on which extract data</p></li>
 <li><p><strong>interpolation</strong> – <dl class="simple">
@@ -330,10 +328,10 @@ distance = abs(target_value - external_field.data)</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extract_subsample">
-<span class="sig-name descname"><span class="pre">extract_subsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepcopy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_subsample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_subsample" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extract_subsample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deepcopy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_subsample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_subsample" title="Link to this definition">¶</a></dt>
 <dd><p>Extract a subsample from field by decreasing resolution.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>sample_x</strong> – take one over &lt;sample_x&gt; points in the x direction</p></li>
 <li><p><strong>sample_y</strong> – same for the y direction</p></li>
@@ -351,10 +349,10 @@ localize on the grid center (use center method before if not).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extract_zoom">
-<span class="sig-name descname"><span class="pre">extract_zoom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_10th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_zoom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_zoom" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extract_zoom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">zoom</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_10th</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extract_zoom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extract_zoom" title="Link to this definition">¶</a></dt>
 <dd><p>Extract an unstructured field with the gridpoints contained in <em>zoom</em>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>zoom</strong> – a dict(lonmin=, lonmax=, latmin=, latmax=).</p></li>
 <li><p><strong>extra_10th</strong> – if True, add 1/10th of the X/Y extension of the zoom
@@ -366,11 +364,11 @@ localize on the grid center (use center method before if not).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extractprofile">
-<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_extralevels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extractprofile" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extractprofile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_extralevels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extractprofile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extractprofile" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts a vertical profile from the field, given
 the geographic location (<em>lon</em>/<em>lat</em>) of the profile.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lon</strong> – the longitude of the desired point.</p></li>
 <li><p><strong>lat</strong> – the latitude of the desired point.
@@ -399,12 +397,12 @@ suppressed.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.extractsection">
-<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_extralevels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extractsection" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">extractsection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_extralevels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">getdata</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.extractsection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.extractsection" title="Link to this definition">¶</a></dt>
 <dd><p>Extracts a vertical section from the field, given
 the geographic (lon/lat) coordinates of its ends.
 The section is returned as a V2DField.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>end1</strong> – must be a tuple (lon, lat).</p></li>
 <li><p><strong>end2</strong> – must be a tuple (lon, lat).</p></li>
@@ -434,18 +432,18 @@ suppressed.</p></li>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.fid">
-<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.fid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.fid" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.getvalue_ll">
-<span class="sig-name descname"><span class="pre">getvalue_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighborinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.getvalue_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.getvalue_ll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getvalue_ll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interpolation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighborinfo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">external_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.getvalue_ll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.getvalue_ll" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the value of the field on point of coordinates
 (<em>lon, lat, level</em>).
 <em>lon</em> and <em>lat</em> may be list/numpy.array.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>interpolation</strong> – <p>if:</p>
 <ul>
@@ -484,11 +482,11 @@ is a spline interpolation on the lat/lon domain.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.global_shift_center">
-<span class="sig-name descname"><span class="pre">global_shift_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude_shift</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.global_shift_center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.global_shift_center" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">global_shift_center</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">longitude_shift</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.global_shift_center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.global_shift_center" title="Link to this definition">¶</a></dt>
 <dd><p>Shifts the center of the geometry (and the data accordingly) by
 <em>longitude_shift</em> (in degrees).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>longitude_shift</strong> – has to be a multiple of the grid’s resolution
 in longitude.</p>
 </dd>
@@ -498,10 +496,10 @@ in longitude.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.histogram">
-<span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_n_bins_patches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">together_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_hist_on_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minmax_in_title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hist_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.histogram" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">histogram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">over</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_n_bins_patches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">together_with</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">center_hist_on_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minmax_in_title</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hist_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.histogram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.histogram" title="Link to this definition">¶</a></dt>
 <dd><p>Build an histogram of the field data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – LAM zone on which to compute the DCT,
 among (None, ‘C’, ‘CI’, ‘CIE’).</p></li>
@@ -533,38 +531,38 @@ Default figsize is config.plotsizes.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.max">
-<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.max" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.max" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the maximum value of data.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.mean">
-<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.mean" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.mean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.mean" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the mean value of data.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.min">
-<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.min" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.min" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the minimum value of data.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.misc_metadata">
-<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.misc_metadata" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.nonzero">
-<span class="sig-name descname"><span class="pre">nonzero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.nonzero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.nonzero" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">nonzero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.nonzero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.nonzero" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the number of non-zero values (whose absolute
 value &gt; config.epsilon).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.plot3DColor">
-<span class="sig-name descname"><span class="pre">plot3DColor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DColor" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DColor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DColor" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -580,7 +578,7 @@ value &gt; config.epsilon).</p>
 <p>Default is no subzone, i.e. the whole field.</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>actor, mapper, colorbaractor</p>
 </dd>
 </dl>
@@ -588,7 +586,7 @@ value &gt; config.epsilon).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.plot3DContour">
-<span class="sig-name descname"><span class="pre">plot3DContour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DContour" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DContour</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">levels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">smoothing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DContour" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -601,7 +599,7 @@ value &gt; config.epsilon).</p>
 <div><p>for coloring the contour lines</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>opacity</strong> – opacity value for the contour lines</p></li>
 <li><p><strong>smoothing</strong> – <p>None to prevent smoothing
@@ -626,7 +624,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>actor, mapper, colorbaractor</p>
 </dd>
 </dl>
@@ -634,7 +632,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.plot3DOutline">
-<span class="sig-name descname"><span class="pre">plot3DOutline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DOutline" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DOutline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DOutline" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -648,7 +646,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 <p>Default is no subzone, i.e. the whole field.</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>actor, mapper, None</p>
 </dd>
 </dl>
@@ -656,7 +654,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.plot3DVolume">
-<span class="sig-name descname"><span class="pre">plot3DVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OpenGLProjectedTetrahedra'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DVolume" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">plot3DVolume</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rendering</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opacity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'OpenGLProjectedTetrahedra'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colorbar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.plot3DVolume" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -668,7 +666,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 <div><p>minval and/or maxval can be replace by None value</p>
 </div></blockquote>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>color</strong> – a vtk.vtkColorTransferFunction object or None to describe the color</p></li>
 <li><p><strong>opacity</strong> – a vtk.vtkPiecewiseFunction object or None to describe the alpha channel</p></li>
@@ -680,7 +678,7 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>actor, mapper, colorbaractor</p>
 </dd>
 </dl>
@@ -688,23 +686,23 @@ the grid resp. for the C or C+I zone off the C+I+E zone.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.quadmean">
-<span class="sig-name descname"><span class="pre">quadmean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.quadmean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.quadmean" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">quadmean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.quadmean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.quadmean" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the quadratic mean of data.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.remove_level">
-<span class="sig-name descname"><span class="pre">remove_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.remove_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.remove_level" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">remove_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.remove_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.remove_level" title="Link to this definition">¶</a></dt>
 <dd><p>Remove one level from the current field
 :param k: index of the level to remove</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.resample">
-<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbour_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_of_influence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nprocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_uncert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.resample" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_geometry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weighting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbour_info</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radius_of_influence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nprocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">segments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_uncert</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.resample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.resample" title="Link to this definition">¶</a></dt>
 <dd><p>Resample data (interpolate) on a <strong>target geometry</strong>, using pyresample.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>weighting</strong> – <p>among [‘nearest’,
 ‘gauss’ (in which case sigma can be specified,</p>
@@ -732,7 +730,7 @@ neighbour_info=True)</p></li>
 </dl>
 <p>Options from pyresample, neighbouring:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>radius_of_influence</strong> – Cut off distance in meters, default value
 computed from geometry</p></li>
@@ -750,7 +748,7 @@ If set to None an estimate will be calculated</p></li>
 </dl>
 <p>Options from pyresample, resampling:</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fill_value</strong> – Set undetermined pixels to this value.
 If fill_value is None a masked array is returned
@@ -767,12 +765,12 @@ fields)</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.resample_on_regularll">
-<span class="sig-name descname"><span class="pre">resample_on_regularll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution_in_degrees</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.resample_on_regularll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.resample_on_regularll" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resample_on_regularll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">borders</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution_in_degrees</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.resample_on_regularll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.resample_on_regularll" title="Link to this definition">¶</a></dt>
 <dd><p>Resample data (interpolate) on a target geometry defined as a
 regular lonlat grid of given resolution.
 Wrapper to resample() method, building target geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>borders</strong> (<em>dict</em>) – dict(lonmin=, latmin=, lonmax=, latmax=)</p></li>
 <li><p><strong>resolution_in_degrees</strong> – resolution of the lonlat grid in degrees.
@@ -786,10 +784,10 @@ and latmax-latmin.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.scatter_with">
-<span class="sig-name descname"><span class="pre">scatter_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_outside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e+19</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fidkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__auto__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__auto__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bisect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">scatter_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.scatter_with"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.scatter_with" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">scatter_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_outside</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e+19</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fidkey</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__auto__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__auto__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bisect</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">scatter_kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.scatter_with"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.scatter_with" title="Link to this definition">¶</a></dt>
 <dd><p>Make a scatter plot of self data against other data.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fig</strong> – a preexisting figure on which to plot</p></li>
 <li><p><strong>ax</strong> – a preexisting axis on which to plot</p></li>
@@ -809,17 +807,17 @@ Default figsize is config.plotsizes.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.sgmean">
-<span class="sig-name descname"><span class="pre">sgmean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.sgmean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.sgmean" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sgmean</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.sgmean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.sgmean" title="Link to this definition">¶</a></dt>
 <dd><p>Returns an average of the field, weighted by the map factor at each point.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.shave">
-<span class="sig-name descname"><span class="pre">shave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.shave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.shave" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">shave</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">minval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.shave"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.shave" title="Link to this definition">¶</a></dt>
 <dd><p>Shave data: cut values greater (resp. lower) than <strong>maxval</strong> to
 <strong>maxval</strong> (resp. <strong>minval</strong>).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>maxval</strong> – upper threshold</p></li>
 <li><p><strong>minval</strong> – lower threshold</p></li>
@@ -830,18 +828,18 @@ Default figsize is config.plotsizes.</p></li>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.spectral">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.spectral" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">spectral</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.spectral" title="Link to this definition">¶</a></dt>
 <dd><p>Returns True if the field is spectral.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.stats">
-<span class="sig-name descname"><span class="pre">stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.stats" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">stats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.stats" title="Link to this definition">¶</a></dt>
 <dd><p>Computes some basic statistics on the field, as a dict containing:
 {‘min’, ‘max’, ‘mean’, ‘std’, ‘quadmean’, ‘nonzero’}.
 See each of these methods for details.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM fields only, plots
 the data resp. on the C or C+I zone.
 Default is no subzone, i.e. the whole field.</p>
@@ -851,24 +849,24 @@ Default is no subzone, i.e. the whole field.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.std">
-<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.std" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">std</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.std"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.std" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the standard deviation of data.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.structure">
-<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.structure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.structure" title="Link to this definition">¶</a></dt>
 <dd><p>Type of Field geometry (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.time_reduce">
-<span class="sig-name descname"><span class="pre">time_reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reduce_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.time_reduce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.time_reduce" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">time_reduce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reduce_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.time_reduce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.time_reduce" title="Link to this definition">¶</a></dt>
 <dd><p>Make a time reduction of field,
 i.e. apply the requested <strong>reduce_function</strong> on the time dimension of
 the field. Replace data (and validity) in place.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>reduce_function</strong> – must be a numpy.ndarray method,
 e.g. ‘mean’, ‘sum’, ‘min’, ‘max’, …</p>
 </dd>
@@ -877,10 +875,10 @@ e.g. ‘mean’, ‘sum’, ‘min’, ‘max’, …</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.time_smooth">
-<span class="sig-name descname"><span class="pre">time_smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'center'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.time_smooth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.time_smooth" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">time_smooth</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">length</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'center'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.time_smooth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.time_smooth" title="Link to this definition">¶</a></dt>
 <dd><p>Smooth data in time.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>length</strong> – time span to average on</p></li>
 <li><p><strong>window</strong> – <p>replace data[t] by:</p>
@@ -897,13 +895,13 @@ e.g. ‘mean’, ‘sum’, ‘min’, ‘max’, …</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.units">
-<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.units" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.units" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.use_field_as_vcoord">
-<span class="sig-name descname"><span class="pre">use_field_as_vcoord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.use_field_as_vcoord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.use_field_as_vcoord" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">use_field_as_vcoord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity_check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.use_field_as_vcoord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.use_field_as_vcoord" title="Link to this definition">¶</a></dt>
 <dd><p>Use values from the field as vertical coordinates.
 One example of use: field1 is a temperature field
 extracted from a resource on hybrid levels whereas
@@ -912,7 +910,7 @@ grid. field1.use_field_as_vcoord(field2) transforms
 the vertical coordinate of field1 to obtain a field
 on pressure levels.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>field</strong> – must be a field on the same geometry and
 validity as self that we will use to replace
@@ -932,7 +930,7 @@ parameter are the same</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.vtk_guess_param_from_field">
-<span class="sig-name descname"><span class="pre">vtk_guess_param_from_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverseZ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hCoord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.vtk_guess_param_from_field" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">vtk_guess_param_from_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">reverseZ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_factor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hCoord</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geoid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.vtk_guess_param_from_field" title="Link to this definition">¶</a></dt>
 <dd><div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Requires plugin: <strong>with_vtk</strong> (config.activate_plugins)</p>
@@ -948,10 +946,10 @@ parameter are the same</p></li>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>geoid</strong> (<em>reverseZ</em><em>, </em><em>z_factor</em><em>, </em><em>hCoord</em><em>, </em><em>offset</em><em>,</em>) – if set,           this value are not guessed</p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>dictionary holding all the values</p>
 </dd>
 </dl>
@@ -969,10 +967,10 @@ parameter are the same</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field._D3CommonField.what">
-<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulativeduration=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arpifs_var_names=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.what" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">what</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out=&lt;_io.TextIOWrapper</span> <span class="pre">name='&lt;stdout&gt;'</span> <span class="pre">mode='w'</span> <span class="pre">encoding='utf-8'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validity=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_geometry=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulativeduration=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">arpifs_var_names=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#_D3CommonField.what"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field._D3CommonField.what" title="Link to this definition">¶</a></dt>
 <dd><p>Writes in file a summary of the field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>out</strong> – the output open file-like object.</p></li>
 <li><p><strong>vertical_geometry</strong> – if True, writes the validity of the field.</p></li>
@@ -992,8 +990,8 @@ variable names.</p></li>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3Field.</span></span><span class="sig-name descname"><span class="pre">D3Field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.fields.D3Field._D3CommonField" title="epygram.fields.D3Field._D3CommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.D3Field._D3CommonField</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3Field.</span></span><span class="sig-name descname"><span class="pre">D3Field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.fields.D3Field._D3CommonField" title="epygram.fields.D3Field._D3CommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">_D3CommonField</span></code></a></p>
 <p>3-Dimensions field class.
 A field is defined by its identifier ‘fid’,
 its data, its geometry (gridpoint and optionally spectral),
@@ -1047,7 +1045,7 @@ in case it is spectral.</p>
 </li>
 <li><p><strong>validity</strong> (<a class="reference internal" href="base.html#epygram.base.FieldValidityList" title="epygram.base.FieldValidityList"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidityList</span></code></a>) - rwx - Validity of the field.</p>
 <ul>
-<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x74bef5524c40&gt;]&gt;&gt;.</p></li>
+<li><p>Optional. Default is FieldValidityList::&lt;&lt;as_list:: [FieldValidity::&lt;epygram.base.FieldValidity object at 0x7da2eb3f0e20&gt;]&gt;&gt;.</p></li>
 </ul>
 </li>
 </ul>
@@ -1056,20 +1054,20 @@ in case it is spectral.</p>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.center">
-<span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.center" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">center</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.center"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.center" title="Link to this definition">¶</a></dt>
 <dd><p>Performs an averaging on data values to center the field on the grid (aka shuman)
 and modify geometry.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.comment">
-<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.comment" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.comment" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.compute_xy_spderivatives">
-<span class="sig-name descname"><span class="pre">compute_xy_spderivatives</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.compute_xy_spderivatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.compute_xy_spderivatives" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">compute_xy_spderivatives</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.compute_xy_spderivatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.compute_xy_spderivatives" title="Link to this definition">¶</a></dt>
 <dd><p>Compute the derivatives of field in spectral space, then come back in
 gridpoint space.
 Returns the two derivative fields.</p>
@@ -1079,29 +1077,29 @@ in the spectral geometry’s <em>compute_xy_spderivatives()</em> method.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.data" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.data" title="Link to this definition">¶</a></dt>
 <dd><p>Accessor to the field data.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.fid">
-<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.fid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.fid" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.geometry">
-<span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.geometry" title="Link to this definition">¶</a></dt>
 <dd><p>Geometry defining the position of the field gridpoints (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.getdata">
-<span class="sig-name descname"><span class="pre">getdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getdata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getdata" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the field data, with 3D shape if the field is not spectral,
 2D if spectral.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM fields only,
 returns the data resp. on the C or C+I zone.
@@ -1133,10 +1131,10 @@ Nj = number of longitudes for latitude j</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.getlevel">
-<span class="sig-name descname"><span class="pre">getlevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getlevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getlevel" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getlevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getlevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getlevel" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a level of the field as a new field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> – the requested level expressed in coordinate value (Pa, m…)</p></li>
 <li><p><strong>k</strong> – the index of the requested level</p></li>
@@ -1147,11 +1145,11 @@ Nj = number of longitudes for latitude j</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.getvalidity">
-<span class="sig-name descname"><span class="pre">getvalidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_or_validity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getvalidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getvalidity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getvalidity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_or_validity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getvalidity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getvalidity" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the field restrained to one of its temporal validity as a new
 field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>index_or_validity</strong> – can be either a
 <a class="reference internal" href="base.html#epygram.base.FieldValidity" title="epygram.base.FieldValidity"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.base.FieldValidity</span></code></a> instance
 or the index of the requested validity in the
@@ -1162,12 +1160,12 @@ field’s FieldValidityList.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.getvalue_ij">
-<span class="sig-name descname"><span class="pre">getvalue_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getvalue_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getvalue_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getvalue_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.getvalue_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.getvalue_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the value of the field on point of indices (<em>i, j, k, t</em>).
 Take care (<em>i, j, k, t</em>) is python-indexing, ranging from 0 to
 dimension-1.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – the index in X direction</p></li>
 <li><p><strong>j</strong> – the index in Y direction</p></li>
@@ -1182,12 +1180,12 @@ dimension-1.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.gp2sp">
-<span class="sig-name descname"><span class="pre">gp2sp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectral_geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.gp2sp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.gp2sp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gp2sp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectral_geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.gp2sp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.gp2sp" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms the gridpoint field into spectral space, according to the
 <em>spectral_geometry</em> mandatorily passed as argument. Replaces data in
 place.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>spectral_geometry</strong> – instance of SpectralGeometry, actually
 containing spectral transform subroutine (in
 in its own <em>gp2sp()</em> method).</p>
@@ -1197,22 +1195,22 @@ in its own <em>gp2sp()</em> method).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.misc_metadata">
-<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.misc_metadata" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.processtype">
-<span class="sig-name descname"><span class="pre">processtype</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.processtype" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">processtype</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.processtype" title="Link to this definition">¶</a></dt>
 <dd><p>Generating process (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.select_subzone">
-<span class="sig-name descname"><span class="pre">select_subzone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.select_subzone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.select_subzone" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_subzone</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.select_subzone"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.select_subzone" title="Link to this definition">¶</a></dt>
 <dd><p>If a LAMzone defines the field, select only the <em>subzone</em> from it.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>subzone</strong> – among (‘C’, ‘CI’).</p>
 </dd>
 </dl>
@@ -1221,11 +1219,11 @@ in its own <em>gp2sp()</em> method).</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.setdata">
-<span class="sig-name descname"><span class="pre">setdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.setdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.setdata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.setdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.setdata" title="Link to this definition">¶</a></dt>
 <dd><p>Sets field data, checking <em>data</em> to have the good shape according to
 geometry.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>data</strong> – dimensions should in any case be ordered in a subset of</p>
 </dd>
 </dl>
@@ -1238,7 +1236,7 @@ the above dimensions ordering is respected.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.sp2gp">
-<span class="sig-name descname"><span class="pre">sp2gp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.sp2gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.sp2gp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sp2gp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3Field.sp2gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3Field.sp2gp" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms the spectral field into gridpoint, according to its spectral
 geometry. Replaces data in place.</p>
 <p>The spectral transform subroutine is actually included in the spectral
@@ -1247,25 +1245,25 @@ geometry’s <em>sp2gp()</em> method.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.spectral_geometry">
-<span class="sig-name descname"><span class="pre">spectral_geometry</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.spectral_geometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">spectral_geometry</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.spectral_geometry" title="Link to this definition">¶</a></dt>
 <dd><p>For a spectral field, its spectral geometry handles                       spectral transforms and dimensions (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.structure">
-<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.structure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.structure" title="Link to this definition">¶</a></dt>
 <dd><p>Type of Field geometry (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.units">
-<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.units" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.units" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3Field.validity">
-<span class="sig-name descname"><span class="pre">validity</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.validity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">validity</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3Field.validity" title="Link to this definition">¶</a></dt>
 <dd><p>Validity of the field (see the documentation above for more details).</p>
 </dd></dl>
 
@@ -1274,8 +1272,8 @@ geometry’s <em>sp2gp()</em> method.</p>
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3Field.</span></span><span class="sig-name descname"><span class="pre">D3VirtualField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.fields.D3Field._D3CommonField" title="epygram.fields.D3Field._D3CommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.fields.D3Field._D3CommonField</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.fields.D3Field.</span></span><span class="sig-name descname"><span class="pre">D3VirtualField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.fields.D3Field._D3CommonField" title="epygram.fields.D3Field._D3CommonField"><code class="xref py py-class docutils literal notranslate"><span class="pre">_D3CommonField</span></code></a></p>
 <p>3-Dimensions Virtual field class.</p>
 <p>Data is taken from other fields, either:
 - a given <em>fieldset</em>
@@ -1334,17 +1332,17 @@ geometry’s <em>sp2gp()</em> method.</p>
 <p>Constructor. See its footprint for arguments.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.comment">
-<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.comment" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">comment</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.comment" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.data">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.data" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.data" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the field data, with 3D shape if the field is not spectral,
 2D if spectral.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM fields only,
 returns the data resp. on the C or C+I zone.
@@ -1376,29 +1374,29 @@ Nj = number of longitudes for latitude j</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.deldata">
-<span class="sig-name descname"><span class="pre">deldata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.deldata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.deldata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deldata</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.deldata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.deldata" title="Link to this definition">¶</a></dt>
 <dd><p>deldata() not implemented on virtual fields.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.fid">
-<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.fid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fid</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.fid" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.fieldset">
-<span class="sig-name descname"><span class="pre">fieldset</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.fieldset" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fieldset</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.fieldset" title="Link to this definition">¶</a></dt>
 <dd><p>Set of real fields that can compose the Virtual Field (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.getdata">
-<span class="sig-name descname"><span class="pre">getdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.getdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.getdata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subzone</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d4</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.getdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.getdata" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the field data, with 3D shape if the field is not spectral,
 2D if spectral.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>subzone</strong> – optional, among (‘C’, ‘CI’), for LAM fields only,
 returns the data resp. on the C or C+I zone.
@@ -1430,10 +1428,10 @@ Nj = number of longitudes for latitude j</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.getlevel">
-<span class="sig-name descname"><span class="pre">getlevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.getlevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.getlevel" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getlevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.getlevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.getlevel" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a level of the field as a new field.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>level</strong> – the requested level expressed in coordinate value (Pa, m…)</p></li>
 <li><p><strong>k</strong> – the index of the requested level</p></li>
@@ -1444,12 +1442,12 @@ Nj = number of longitudes for latitude j</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.getvalue_ij">
-<span class="sig-name descname"><span class="pre">getvalue_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.getvalue_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.getvalue_ij" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">getvalue_ij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.getvalue_ij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.getvalue_ij" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the value of the field on point of indices (<em>i, j, k, t</em>).
 Take care (<em>i, j, k, t</em>) is python-indexing, ranging from 0 to
 dimension-1.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>i</strong> – the index in X direction</p></li>
 <li><p><strong>j</strong> – the index in Y direction</p></li>
@@ -1464,12 +1462,12 @@ dimension-1.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.gp2sp">
-<span class="sig-name descname"><span class="pre">gp2sp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectral_geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.gp2sp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.gp2sp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gp2sp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectral_geometry</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.gp2sp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.gp2sp" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms the gridpoint field into spectral space, according to the
 <em>spectral_geometry</em> mandatorily passed as argument. Replaces data in
 place.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>spectral_geometry</strong> – instance of SpectralGeometry, actually
 containing spectral transform subroutine (in
 in its own <em>gp2sp()</em> method).</p>
@@ -1479,31 +1477,31 @@ in its own <em>gp2sp()</em> method).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.misc_metadata">
-<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.misc_metadata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">misc_metadata</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.misc_metadata" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.resource">
-<span class="sig-name descname"><span class="pre">resource</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.resource" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resource</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.resource" title="Link to this definition">¶</a></dt>
 <dd><p>Resource in which is stored the fields defined by                       resource_fids (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.resource_fids">
-<span class="sig-name descname"><span class="pre">resource_fids</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.resource_fids" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">resource_fids</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.resource_fids" title="Link to this definition">¶</a></dt>
 <dd><p>Definition of the fields in resource that compose the                       virtual field (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.setdata">
-<span class="sig-name descname"><span class="pre">setdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.setdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.setdata" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">setdata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.setdata"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.setdata" title="Link to this definition">¶</a></dt>
 <dd><p>setdata() not implemented on virtual fields.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.sp2gp">
-<span class="sig-name descname"><span class="pre">sp2gp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.sp2gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.sp2gp" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sp2gp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/fields/D3Field.html#D3VirtualField.sp2gp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.sp2gp" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms the spectral field into gridpoint, according to its spectral
 geometry. Replaces data in place.</p>
 <p>The spectral transform subroutine is actually included in the spectral
@@ -1512,13 +1510,13 @@ geometry’s <em>sp2gp()</em> method.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.structure">
-<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.structure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">structure</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.structure" title="Link to this definition">¶</a></dt>
 <dd><p>Type of Field geometry (see the documentation above for more details).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="epygram.fields.D3Field.D3VirtualField.units">
-<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.units" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">units</span></span><a class="headerlink" href="#epygram.fields.D3Field.D3VirtualField.units" title="Link to this definition">¶</a></dt>
 <dd><p>(see the documentation above for more details).</p>
 </dd></dl>
 
@@ -1531,14 +1529,120 @@ geometry’s <em>sp2gp()</em> method.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="fields.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="H2DField.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code> — Horizontal 2-D Field class</a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a><ul>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField"><code class="docutils literal notranslate"><span class="pre">_D3CommonField</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.as_dicts"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_dicts()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.as_lists"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_lists()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.as_points"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_points()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.as_profiles"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_profiles()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.as_vcoordinate"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_vcoordinate()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.as_vtkGrid"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.as_vtkGrid()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.comment"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.comment</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.dctspectrum"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.dctspectrum()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.decumulate"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.decumulate()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.dump_to_nc"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.dump_to_nc()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extend"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extend()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extract_physicallevels"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_physicallevels()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extract_subarray"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_subarray()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_subdomain()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extract_subsample"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_subsample()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extract_zoom"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extract_zoom()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extractprofile"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extractprofile()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.extractsection"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.extractsection()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.fid"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.fid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.getvalue_ll"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.getvalue_ll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.global_shift_center"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.global_shift_center()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.histogram"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.histogram()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.max"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.max()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.mean"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.mean()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.min"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.min()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.misc_metadata</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.nonzero"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.nonzero()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.plot3DColor"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DColor()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.plot3DContour"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DContour()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.plot3DOutline"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DOutline()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.plot3DVolume"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.plot3DVolume()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.quadmean"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.quadmean()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.remove_level"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.remove_level()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.resample"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.resample()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.resample_on_regularll"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.resample_on_regularll()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.scatter_with"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.scatter_with()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.sgmean"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.sgmean()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.shave"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.shave()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.spectral"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.spectral</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.stats"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.stats()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.std"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.std()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.structure"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.structure</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.time_reduce"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.time_reduce()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.time_smooth"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.time_smooth()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.units"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.units</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.use_field_as_vcoord"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.use_field_as_vcoord()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.vtk_guess_param_from_field"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.vtk_guess_param_from_field()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field._D3CommonField.what"><code class="docutils literal notranslate"><span class="pre">_D3CommonField.what()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field"><code class="docutils literal notranslate"><span class="pre">D3Field</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.center"><code class="docutils literal notranslate"><span class="pre">D3Field.center()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.comment"><code class="docutils literal notranslate"><span class="pre">D3Field.comment</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.compute_xy_spderivatives"><code class="docutils literal notranslate"><span class="pre">D3Field.compute_xy_spderivatives()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.data"><code class="docutils literal notranslate"><span class="pre">D3Field.data</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.fid"><code class="docutils literal notranslate"><span class="pre">D3Field.fid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.geometry"><code class="docutils literal notranslate"><span class="pre">D3Field.geometry</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.getdata"><code class="docutils literal notranslate"><span class="pre">D3Field.getdata()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.getlevel"><code class="docutils literal notranslate"><span class="pre">D3Field.getlevel()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.getvalidity"><code class="docutils literal notranslate"><span class="pre">D3Field.getvalidity()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.getvalue_ij"><code class="docutils literal notranslate"><span class="pre">D3Field.getvalue_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.gp2sp"><code class="docutils literal notranslate"><span class="pre">D3Field.gp2sp()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.misc_metadata"><code class="docutils literal notranslate"><span class="pre">D3Field.misc_metadata</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.processtype"><code class="docutils literal notranslate"><span class="pre">D3Field.processtype</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.select_subzone"><code class="docutils literal notranslate"><span class="pre">D3Field.select_subzone()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.setdata"><code class="docutils literal notranslate"><span class="pre">D3Field.setdata()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.sp2gp"><code class="docutils literal notranslate"><span class="pre">D3Field.sp2gp()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.spectral_geometry"><code class="docutils literal notranslate"><span class="pre">D3Field.spectral_geometry</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.structure"><code class="docutils literal notranslate"><span class="pre">D3Field.structure</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.units"><code class="docutils literal notranslate"><span class="pre">D3Field.units</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3Field.validity"><code class="docutils literal notranslate"><span class="pre">D3Field.validity</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField"><code class="docutils literal notranslate"><span class="pre">D3VirtualField</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.comment"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.comment</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.data"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.data</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.deldata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.deldata()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.fid"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.fid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.fieldset"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.fieldset</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.getdata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.getdata()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.getlevel"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.getlevel()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.getvalue_ij"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.getvalue_ij()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.gp2sp"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.gp2sp()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.misc_metadata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.misc_metadata</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.resource"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.resource</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.resource_fids"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.resource_fids</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.setdata"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.setdata()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.sp2gp"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.sp2gp()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.structure"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.structure</span></code></a></li>
+<li><a class="reference internal" href="#epygram.fields.D3Field.D3VirtualField.units"><code class="docutils literal notranslate"><span class="pre">D3VirtualField.units</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="fields.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="H2DField.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.H2DField</span></code> — Horizontal 2-D Field class</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -1546,7 +1650,7 @@ geometry’s <em>sp2gp()</em> method.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -1554,13 +1658,13 @@ geometry’s <em>sp2gp()</em> method.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1575,15 +1679,15 @@ geometry’s <em>sp2gp()</em> method.</p>
         <li class="right" >
           <a href="fields.html" title="epygram.fields — Fields"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="fields.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields</span></code> — Fields</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.fields.D3Field</span></code> — 3-D Field class</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

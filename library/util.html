@@ -1,25 +1,23 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.util — Utilities &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <title>epygram.util — Utilities &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="epygram.moves — Moves" href="moves.html" />
     <link rel="prev" title="epygram.config — Configuration: parameters, options" href="config.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -34,7 +32,7 @@
         <li class="right" >
           <a href="config.html" title="epygram.config — Configuration: parameters, options"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a></li> 
       </ul>
@@ -46,13 +44,13 @@
           <div class="body" role="main">
             
   <section id="module-epygram.util">
-<span id="epygram-util-utilities"></span><h1><a class="reference internal" href="#module-epygram.util" title="epygram.util: Utilities"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code></a> — Utilities<a class="headerlink" href="#module-epygram.util" title="Permalink to this headline">¶</a></h1>
+<span id="epygram-util-utilities"></span><h1><a class="reference internal" href="#module-epygram.util" title="epygram.util: Utilities"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code></a> — Utilities<a class="headerlink" href="#module-epygram.util" title="Link to this heading">¶</a></h1>
 <p>Some useful utilities…</p>
 <section id="functions">
-<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.find_re_in_list">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">find_re_in_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regexp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#find_re_in_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.find_re_in_list" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">find_re_in_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">regexp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#find_re_in_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.find_re_in_list" title="Link to this definition">¶</a></dt>
 <dd><p>Finds all elements from a list that match a regular expression.
 The regexp and the different elements of the list must be of the same type:</p>
 <ul class="simple">
@@ -64,31 +62,31 @@ The regexp and the different elements of the list must be of the same type:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.degrees_nearest_mod">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">degrees_nearest_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#degrees_nearest_mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.degrees_nearest_mod" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">degrees_nearest_mod</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ref</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#degrees_nearest_mod"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.degrees_nearest_mod" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the angle(s) <strong>d</strong> in the modulo nearest to <strong>ref</strong>.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.positive_longitudes">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">positive_longitudes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#positive_longitudes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.positive_longitudes" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">positive_longitudes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#positive_longitudes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.positive_longitudes" title="Link to this definition">¶</a></dt>
 <dd><p>Returns numpy array <em>lons</em> forced (modulo) in [0;360[.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.longitudes_between_minus180_180">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">longitudes_between_minus180_180</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#longitudes_between_minus180_180"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.longitudes_between_minus180_180" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">longitudes_between_minus180_180</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lons</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#longitudes_between_minus180_180"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.longitudes_between_minus180_180" title="Link to this definition">¶</a></dt>
 <dd><p>Returns numpy array <em>lons</em> forced (modulo) in ]-180;180].</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.positive_longitude">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">positive_longitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'degrees'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#positive_longitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.positive_longitude" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">positive_longitude</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lon</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'degrees'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#positive_longitude"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.positive_longitude" title="Link to this definition">¶</a></dt>
 <dd><p>Returns <em>lon</em> shifted in [0;360[ or [0;2pi[ (depending on <em>unit</em>).</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.load_cmap">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">load_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#load_cmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.load_cmap" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">load_cmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmap</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#load_cmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.load_cmap" title="Link to this definition">¶</a></dt>
 <dd><p>Reads and registers the epygram-or-user-colormap called <em>cmap</em>,
 which must be either in config.epygram_colormaps or
 config.usercolormaps.</p>
@@ -97,22 +95,22 @@ config.usercolormaps.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.write_formatted">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&lt;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'&lt;'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.write_formatted_fields">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted_fields" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">firstcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondcolumn_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted_fields"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted_fields" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.write_formatted_dict">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_function=&lt;built-in</span> <span class="pre">function</span> <span class="pre">sorted&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted_dict" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort_function=&lt;built-in</span> <span class="pre">function</span> <span class="pre">sorted&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted_dict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted_dict" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.write_formatted_table">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alignments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['&lt;',</span> <span class="pre">'^']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted_table" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">write_formatted_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dest</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alignments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['&lt;',</span> <span class="pre">'^']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'E'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#write_formatted_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.write_formatted_table" title="Link to this definition">¶</a></dt>
 <dd><p>A table is meant to be :
 &lt;str&gt; &lt;str&gt; &lt;str&gt; …
 &lt;str&gt; &lt;num&gt; &lt;num&gt; …</p>
@@ -123,7 +121,7 @@ config.usercolormaps.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.nearlyEqual">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">nearlyEqual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#nearlyEqual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.nearlyEqual" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">nearlyEqual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#nearlyEqual"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.nearlyEqual" title="Link to this definition">¶</a></dt>
 <dd><p>Function to compare floats
 <a class="reference external" href="http://floating-point-gui.de/errors/comparison/">http://floating-point-gui.de/errors/comparison/</a>
 Float.MIN_NORMAL was replaced by sys.float_info.min
@@ -132,17 +130,17 @@ Float.MAX_VALUE was replaced by sys.float_info.max</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.nearlyEqualArray">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">nearlyEqualArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.util.nearlyEqualArray" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">nearlyEqualArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.util.nearlyEqualArray" title="Link to this definition">¶</a></dt>
 <dd><p>Vector version of nearlyEqual().</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.restrain_to_index_i_of_dim_d">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">restrain_to_index_i_of_dim_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#restrain_to_index_i_of_dim_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.restrain_to_index_i_of_dim_d" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">restrain_to_index_i_of_dim_d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#restrain_to_index_i_of_dim_d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.restrain_to_index_i_of_dim_d" title="Link to this definition">¶</a></dt>
 <dd><p>Of an array a[d1, d2, d3, … dn], returns the array restricted to
 index <strong>i</strong> of the dimension <strong>d</strong>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> – the input array</p></li>
 <li><p><strong>i</strong> – index in dimension <strong>d</strong></p></li>
@@ -163,11 +161,11 @@ not work when accessing netCDF variable (for which it was necessary):</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.datetimes2fieldvaliditylist">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">datetimes2fieldvaliditylist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datetimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#datetimes2fieldvaliditylist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.datetimes2fieldvaliditylist" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">datetimes2fieldvaliditylist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">datetimes</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#datetimes2fieldvaliditylist"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.datetimes2fieldvaliditylist" title="Link to this definition">¶</a></dt>
 <dd><p>Return a FieldValidityList from a list of datetime.datetime instances
 (or a single datetime.datetime).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>basis</strong> – can be either
 - None (default): basis = validity
 - a single datetime.datetime
@@ -178,14 +176,14 @@ not work when accessing netCDF variable (for which it was necessary):</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.ifNone_emptydict">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">ifNone_emptydict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#ifNone_emptydict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.ifNone_emptydict" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">ifNone_emptydict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#ifNone_emptydict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.ifNone_emptydict" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms a None into a {}.
 To be used as workaround for empty dicts in default values of methods.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.util.fmtfid">
-<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">fmtfid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#fmtfid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.fmtfid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">fmtfid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#fmtfid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.fmtfid" title="Link to this definition">¶</a></dt>
 <dd><p>Given a resource format name <strong>fmt</strong> and a (full) <strong>fid</strong>, returns the key
 corresponding the actual format of the field in resource.
 (Useful for distinguishing GRIB1/2)</p>
@@ -194,11 +192,11 @@ corresponding the actual format of the field in resource.
 </section>
 <hr class="docutils" />
 <section id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.util.RecursiveObject">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">RecursiveObject</span></span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.CheckAttribute</span></code></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">RecursiveObject</span></span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">CheckAttribute</span></code></p>
 <p>Generic abstract class implementing useful recursive properties:</p>
 <ul class="simple">
 <li><p>display of object: the <em>__str__</em> method returns str(attr) for each of the
@@ -208,25 +206,25 @@ same attributes and <em>a.attr == b.attr</em> for each attribute.</p></li>
 </ul>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.RecursiveObject.copy">
-<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.copy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.copy" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a copy of the object.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.RecursiveObject.deepcopy">
-<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.deepcopy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.deepcopy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">deepcopy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.deepcopy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.deepcopy" title="Link to this definition">¶</a></dt>
 <dd><p>Returns a deepcopy of the object.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.RecursiveObject.recursive_diff">
-<span class="sig-name descname"><span class="pre">recursive_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.recursive_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.recursive_diff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">recursive_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.recursive_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.recursive_diff" title="Link to this definition">¶</a></dt>
 <dd><p>Recursively list what differs from <strong>other</strong>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.RecursiveObject.tolerant_equal">
-<span class="sig-name descname"><span class="pre">tolerant_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.tolerant_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tolerant_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#RecursiveObject.tolerant_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.RecursiveObject.tolerant_equal" title="Link to this definition">¶</a></dt>
 <dd><p>Test of equality by recursion on the object’s attributes,
 with a <strong>tolerance</strong>.</p>
 </dd></dl>
@@ -235,8 +233,8 @@ with a <strong>tolerance</strong>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.util.Angle">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">Angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">epygram.util.RecursiveObject</span></code></a></p>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.util.</span></span><span class="sig-name descname"><span class="pre">Angle</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.util.RecursiveObject" title="epygram.util.RecursiveObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">RecursiveObject</span></code></a></p>
 <p>This class handles an angle.
 It enables conversions of units, while saving the original unit and value
 of the angle at its construction.</p>
@@ -252,20 +250,20 @@ of the angle at its construction.</p>
 - ‘cos_sin’ - in which case, value is a tuple (cos, sin).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.Angle.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle.get" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle.get" title="Link to this definition">¶</a></dt>
 <dd><p>Returns the angle in the requested unit.
 If no unit is supplied, the origin unit is used.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.Angle.recursive_diff">
-<span class="sig-name descname"><span class="pre">recursive_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle.recursive_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle.recursive_diff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">recursive_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle.recursive_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle.recursive_diff" title="Link to this definition">¶</a></dt>
 <dd><p>Recursively list what differs from <strong>other</strong>.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.util.Angle.tolerant_equal">
-<span class="sig-name descname"><span class="pre">tolerant_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle.tolerant_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle.tolerant_equal" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tolerant_equal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.220446049250313e-16</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/util.html#Angle.tolerant_equal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.util.Angle.tolerant_equal" title="Link to this definition">¶</a></dt>
 <dd><p>Redefinition because of dynamism of buffering new computed values…</p>
 </dd></dl>
 
@@ -279,23 +277,62 @@ If no unit is supplied, the origin unit is used.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a><ul>
-<li><a class="reference internal" href="#functions">Functions</a></li>
-<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#epygram.util.find_re_in_list"><code class="docutils literal notranslate"><span class="pre">find_re_in_list()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.degrees_nearest_mod"><code class="docutils literal notranslate"><span class="pre">degrees_nearest_mod()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.positive_longitudes"><code class="docutils literal notranslate"><span class="pre">positive_longitudes()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.longitudes_between_minus180_180"><code class="docutils literal notranslate"><span class="pre">longitudes_between_minus180_180()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.positive_longitude"><code class="docutils literal notranslate"><span class="pre">positive_longitude()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.load_cmap"><code class="docutils literal notranslate"><span class="pre">load_cmap()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.write_formatted"><code class="docutils literal notranslate"><span class="pre">write_formatted()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.write_formatted_fields"><code class="docutils literal notranslate"><span class="pre">write_formatted_fields()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.write_formatted_dict"><code class="docutils literal notranslate"><span class="pre">write_formatted_dict()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.write_formatted_table"><code class="docutils literal notranslate"><span class="pre">write_formatted_table()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.nearlyEqual"><code class="docutils literal notranslate"><span class="pre">nearlyEqual()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.nearlyEqualArray"><code class="docutils literal notranslate"><span class="pre">nearlyEqualArray()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.restrain_to_index_i_of_dim_d"><code class="docutils literal notranslate"><span class="pre">restrain_to_index_i_of_dim_d()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.datetimes2fieldvaliditylist"><code class="docutils literal notranslate"><span class="pre">datetimes2fieldvaliditylist()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.ifNone_emptydict"><code class="docutils literal notranslate"><span class="pre">ifNone_emptydict()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.fmtfid"><code class="docutils literal notranslate"><span class="pre">fmtfid()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#classes">Classes</a><ul>
+<li><a class="reference internal" href="#epygram.util.RecursiveObject"><code class="docutils literal notranslate"><span class="pre">RecursiveObject</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.util.RecursiveObject.copy"><code class="docutils literal notranslate"><span class="pre">RecursiveObject.copy()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.RecursiveObject.deepcopy"><code class="docutils literal notranslate"><span class="pre">RecursiveObject.deepcopy()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.RecursiveObject.recursive_diff"><code class="docutils literal notranslate"><span class="pre">RecursiveObject.recursive_diff()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.RecursiveObject.tolerant_equal"><code class="docutils literal notranslate"><span class="pre">RecursiveObject.tolerant_equal()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.util.Angle"><code class="docutils literal notranslate"><span class="pre">Angle</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.util.Angle.get"><code class="docutils literal notranslate"><span class="pre">Angle.get()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.Angle.recursive_diff"><code class="docutils literal notranslate"><span class="pre">Angle.recursive_diff()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.util.Angle.tolerant_equal"><code class="docutils literal notranslate"><span class="pre">Angle.tolerant_equal()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="config.html"
-                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="moves.html"
-                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code> — Moves</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="config.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="moves.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.moves</span></code> — Moves</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -303,7 +340,7 @@ If no unit is supplied, the origin unit is used.</p>
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -311,13 +348,13 @@ If no unit is supplied, the origin unit is used.</p>
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -332,14 +369,14 @@ If no unit is supplied, the origin unit is used.</p>
         <li class="right" >
           <a href="config.html" title="epygram.config — Configuration: parameters, options"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.util</span></code> — Utilities</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

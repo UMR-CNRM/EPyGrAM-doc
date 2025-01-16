@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>griberies — utilities around GRIB &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="defaults — default values for GRIB" href="defaults.html" />
+    <link rel="prev" title="usevortex — Proxies to reach resources using Vortex" href="../usevortex.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="defaults.html" title="defaults — default values for GRIB"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../usevortex.html" title="usevortex — Proxies to reach resources using Vortex"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.extra.griberies">
+<span id="griberies-utilities-around-grib"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB<a class="headerlink" href="#module-epygram.extra.griberies" title="Link to this heading">¶</a></h1>
+<p>Contains utilities around GRIB format.</p>
+<hr class="docutils" />
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="defaults.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">defaults</span></code> — default values for GRIB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#epygram.extra.griberies.defaults.GRIB2_keyvalue"><code class="docutils literal notranslate"><span class="pre">GRIB2_keyvalue</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#epygram.extra.griberies.defaults.GRIB2_metadata_to_embark"><code class="docutils literal notranslate"><span class="pre">GRIB2_metadata_to_embark</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#epygram.extra.griberies.defaults.GRIB1_sample"><code class="docutils literal notranslate"><span class="pre">GRIB1_sample</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#epygram.extra.griberies.defaults.GRIB1_packing"><code class="docutils literal notranslate"><span class="pre">GRIB1_packing</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#epygram.extra.griberies.defaults.GRIB1_ordering"><code class="docutils literal notranslate"><span class="pre">GRIB1_ordering</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="defaults.html#epygram.extra.griberies.defaults.GRIB1_keyvalue"><code class="docutils literal notranslate"><span class="pre">GRIB1_keyvalue</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="paths.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">paths</span></code> — utilities around GRIB paths</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paths.html#functions">functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tables.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tables</span></code> — utilities around GRIB tables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#epygram.extra.griberies.tables.productionStatusOfProcessedData_dict"><code class="docutils literal notranslate"><span class="pre">productionStatusOfProcessedData_dict</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#epygram.extra.griberies.tables.typeOfGeneratingProcess_dict"><code class="docutils literal notranslate"><span class="pre">typeOfGeneratingProcess_dict</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#epygram.extra.griberies.tables.pyproj_geoid_shapes"><code class="docutils literal notranslate"><span class="pre">pyproj_geoid_shapes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#epygram.extra.griberies.tables.statistical_processes"><code class="docutils literal notranslate"><span class="pre">statistical_processes</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tables.html#epygram.extra.griberies.tables.typeoffixedsurface2sample"><code class="docutils literal notranslate"><span class="pre">typeoffixedsurface2sample</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="definitions/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">definitions</span></code> — utilities around GRIB definitions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="definitions/util.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">util</span></code> — Utilities for GRIB definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="definitions/names.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">names</span></code> — Handling names definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="definitions/fa.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">fa</span></code> — Handling FA grib definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">concepts</span></code> — utilities around GRIB concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#epygram.extra.griberies.concepts.Concept"><code class="docutils literal notranslate"><span class="pre">Concept</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr class="docutils" />
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.extra.griberies.parse_GRIBstr_todict">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.</span></span><span class="sig-name descname"><span class="pre">parse_GRIBstr_todict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">strfid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/extra/griberies.html#parse_GRIBstr_todict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.parse_GRIBstr_todict" title="Link to this definition">¶</a></dt>
+<dd><p>Parse and return a dict GRIB fid from a string.</p>
+</dd></dl>
+
+<hr class="docutils" />
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a><ul>
+<li><a class="reference internal" href="#epygram.extra.griberies.parse_GRIBstr_todict"><code class="docutils literal notranslate"><span class="pre">parse_GRIBstr_todict()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../usevortex.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="defaults.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">defaults</span></code> — default values for GRIB</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/extra/griberies/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="defaults.html" title="defaults — default values for GRIB"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../usevortex.html" title="usevortex — Proxies to reach resources using Vortex"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

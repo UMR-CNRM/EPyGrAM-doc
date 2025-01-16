@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>paths — utilities around GRIB paths &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="tables — utilities around GRIB tables" href="tables.html" />
+    <link rel="prev" title="defaults — default values for GRIB" href="defaults.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tables.html" title="tables — utilities around GRIB tables"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="defaults.html" title="defaults — default values for GRIB"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">paths</span></code> — utilities around GRIB paths</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.extra.griberies.paths">
+<span id="paths-utilities-around-grib-paths"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">paths</span></code> — utilities around GRIB paths<a class="headerlink" href="#module-epygram.extra.griberies.paths" title="Link to this heading">¶</a></h1>
+<p>Contains utilities around GRIB paths.</p>
+<hr class="docutils" />
+<section id="functions">
+<h2>functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.extra.griberies.paths.complete_grib_paths">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.paths.</span></span><span class="sig-name descname"><span class="pre">complete_grib_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/extra/griberies/paths.html#complete_grib_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.paths.complete_grib_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Complete ECCODES_SAMPLES_PATH and ECCODES_DEFINITION_PATH
+according to <strong>rootdir</strong> installation path of ECCODES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootdir</strong> – the directory in which is installed the API</p></li>
+<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
+</ul>
+</dd>
+</dl>
+<p>Reconstructed path are <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/eccodes/samples</span></code>
+and <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/eccodes/definitions</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.extra.griberies.paths.complete_grib_samples_paths">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.paths.</span></span><span class="sig-name descname"><span class="pre">complete_grib_samples_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/extra/griberies/paths.html#complete_grib_samples_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.paths.complete_grib_samples_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Complete ECCODES_SAMPLES_PATH according to <strong>rootdir</strong>
+installation path of ECCODES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootdir</strong> – the directory in which is installed the API</p></li>
+<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
+</ul>
+</dd>
+</dl>
+<p>Reconstructed path is <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/eccodes/samples</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.extra.griberies.paths.complete_grib_definition_paths">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.paths.</span></span><span class="sig-name descname"><span class="pre">complete_grib_definition_paths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rootdir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/extra/griberies/paths.html#complete_grib_definition_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.paths.complete_grib_definition_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Complete ECCODES_DEFINITION_PATH according to <strong>rootdir</strong>
+installation path of ECCODES.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rootdir</strong> – the directory in which is installed the API</p></li>
+<li><p><strong>reset</strong> – ignore predefined values of the variables</p></li>
+</ul>
+</dd>
+</dl>
+<p>Reconstructed path are <code class="docutils literal notranslate"><span class="pre">$rootdir$/share/eccodes/definitions</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.extra.griberies.paths.get_samples_paths">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.paths.</span></span><span class="sig-name descname"><span class="pre">get_samples_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/extra/griberies/paths.html#get_samples_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.paths.get_samples_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Get the environment-variable-set path to samples</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.extra.griberies.paths.get_definition_paths">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.paths.</span></span><span class="sig-name descname"><span class="pre">get_definition_paths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/epygram/extra/griberies/paths.html#get_definition_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.griberies.paths.get_definition_paths" title="Link to this definition">¶</a></dt>
+<dd><p>Get the environment-variable-set path to definitions</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">paths</span></code> — utilities around GRIB paths</a><ul>
+<li><a class="reference internal" href="#functions">functions</a><ul>
+<li><a class="reference internal" href="#epygram.extra.griberies.paths.complete_grib_paths"><code class="docutils literal notranslate"><span class="pre">complete_grib_paths()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.paths.complete_grib_samples_paths"><code class="docutils literal notranslate"><span class="pre">complete_grib_samples_paths()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.paths.complete_grib_definition_paths"><code class="docutils literal notranslate"><span class="pre">complete_grib_definition_paths()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.paths.get_samples_paths"><code class="docutils literal notranslate"><span class="pre">get_samples_paths()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.extra.griberies.paths.get_definition_paths"><code class="docutils literal notranslate"><span class="pre">get_definition_paths()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="defaults.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">defaults</span></code> — default values for GRIB</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tables.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">tables</span></code> — utilities around GRIB tables</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/extra/griberies/paths.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tables.html" title="tables — utilities around GRIB tables"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="defaults.html" title="defaults — default values for GRIB"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">paths</span></code> — utilities around GRIB paths</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
