@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.formats.conversion.converters &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.conversion.converters</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.formats.conversion.converters</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Converters: workers taylored to write in a dedicated format.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">footprints</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">footprints</span><span class="w"> </span><span class="kn">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">taylorism</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bronx.fancies.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">printstatus</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">...</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...extra</span><span class="w"> </span><span class="kn">import</span> <span class="n">griberies</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">convert</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Griber&#39;</span><span class="p">,</span> <span class="s1">&#39;NetCDFWriter&#39;</span><span class="p">,</span> <span class="s1">&#39;GeoPointsWriter&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Converter">
+<a class="viewcode-back" href="../../../../library/converters.html#epygram.formats.conversion.converters.Converter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Converter</span><span class="p">(</span><span class="n">taylorism</span><span class="o">.</span><span class="n">Worker</span><span class="p">):</span>
+
+    <span class="n">_abstract</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Converts a file into another format.&quot;</span><span class="p">,</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">output_format_suffix</span><span class="o">=</span><span class="nb">dict</span><span class="p">(),</span>
+            <span class="n">filename</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s1">&#39;name of the file to be processed&#39;</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">fieldseed</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to select only a part of the fields in resource.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPList</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">subzone</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to extract a subzone of LAM fields, in case, among (&#39;C&#39;, &#39;CI&#39;).&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">progressmode</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to print either progress &#39;percentage&#39; of job, </span><span class="se">\</span>
+<span class="s2">                      or field fids (&#39;verbose&#39;).&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># GRIB2 writer #</span>
+<span class="c1">################</span>
+<div class="viewcode-block" id="Griber">
+<a class="viewcode-back" href="../../../../library/converters.html#epygram.formats.conversion.converters.Griber">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Griber</span><span class="p">(</span><span class="n">Converter</span><span class="p">):</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Converts a file into GRIB2, with some MF operations rules to </span><span class="se">\</span>
+<span class="s2">              define &#39;generatingProcessIdentifier&#39;.&quot;</span><span class="p">,</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">output_format_suffix</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;grb&#39;</span><span class="p">,</span> <span class="p">]),</span>
+            <span class="n">suite</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to specify grib_api&#39;s &#39;productionStatusOfProcessedData&#39;. </span><span class="se">\</span>
+<span class="s2">                      Among (&#39;oper&#39;, &#39;dble&#39;, &#39;test&#39;, &#39;research&#39;, &#39;unknown&#39;).&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;research&#39;</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">griberies</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">productionStatusOfProcessedData_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">typeofgeneratingprocess</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;cf. epygram.extra.griberies.tables.typeOfGeneratingProcess_dict.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;Forecast&#39;</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="nb">set</span><span class="p">(</span><span class="n">griberies</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">typeOfGeneratingProcess_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">default_packing</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to specify default packing of fields in GRIB target.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">FPDict</span><span class="p">(</span><span class="n">griberies</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">GRIB2_keyvalue</span><span class="p">[</span><span class="mi">5</span><span class="p">]),</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">specific_packing</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to specify packing of specific fields, with regards to </span><span class="se">\</span>
+<span class="s2">                      their name.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">FPDict</span><span class="p">({}),</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">other_grib_options</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;to specify other GRIB options (key/value pairs).&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPDict</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">FPDict</span><span class="p">({}),</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_write_kwargs_for_GRIB</span><span class="p">(</span><span class="n">input_resource</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">write_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">packing</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;specific_packing&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">input_resource</span><span class="o">.</span><span class="n">format</span><span class="p">],</span>
+                                                     <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;default_packing&#39;</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">input_resource</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;FA&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+                    <span class="n">packing</span><span class="p">[</span><span class="s1">&#39;bitsPerValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_resource</span><span class="o">.</span><span class="n">fieldscompression</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">input_resource</span><span class="o">.</span><span class="n">format</span><span class="p">]][</span><span class="s1">&#39;KNBCSP&#39;</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">input_resource</span><span class="o">.</span><span class="n">fieldscompression</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">input_resource</span><span class="o">.</span><span class="n">format</span><span class="p">]][</span><span class="s1">&#39;KNGRIB&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># compressed field</span>
+                        <span class="n">packing</span><span class="p">[</span><span class="s1">&#39;bitsPerValue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_resource</span><span class="o">.</span><span class="n">fieldscompression</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">input_resource</span><span class="o">.</span><span class="n">format</span><span class="p">]][</span><span class="s1">&#39;KNBPDG&#39;</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># not compressed field : no packing !</span>
+                        <span class="n">packing</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;packingType&#39;</span><span class="p">:</span><span class="s1">&#39;grid_ieee&#39;</span><span class="p">}</span>
+                <span class="k">if</span> <span class="n">packing</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bitsPerValue&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">packing</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;bitsPerValue&#39;</span><span class="p">)</span>
+            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;packing&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">packing</span>
+            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;other_GRIB_options&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;other_GRIB_options&#39;</span><span class="p">,</span> <span class="p">{})</span>
+            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;grib_edition&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="k">return</span> <span class="n">write_kwargs</span>
+
+        <span class="c1"># generate additional keys</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">typeofgeneratingprocess</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">typeOfGeneratingProcess</span> <span class="o">=</span> <span class="n">griberies</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">typeOfGeneratingProcess_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">typeofgeneratingprocess</span><span class="p">]</span>
+        <span class="n">other_GRIB_options</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;generatingProcessIdentifier&#39;</span><span class="p">:</span><span class="mi">255</span><span class="p">,</span>
+                              <span class="s1">&#39;productionStatusOfProcessedData&#39;</span><span class="p">:</span><span class="n">griberies</span><span class="o">.</span><span class="n">tables</span><span class="o">.</span><span class="n">productionStatusOfProcessedData_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">suite</span><span class="p">],</span>
+                              <span class="s1">&#39;typeOfGeneratingProcess&#39;</span><span class="p">:</span><span class="n">typeOfGeneratingProcess</span><span class="p">}</span>
+        <span class="n">other_GRIB_options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">other_grib_options</span><span class="p">)</span>
+        <span class="c1"># convert</span>
+        <span class="n">done</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">output_format_suffix</span><span class="p">,</span>
+                       <span class="n">get_write_kwargs_for_GRIB</span><span class="p">,</span>
+                       <span class="n">fieldseed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldseed</span><span class="p">,</span>
+                       <span class="n">subzone</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subzone</span><span class="p">,</span>
+                       <span class="n">progressmode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">progressmode</span><span class="p">,</span>
+                       <span class="c1"># format specific</span>
+                       <span class="n">default_packing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">default_packing</span><span class="p">,</span>
+                       <span class="n">specific_packing</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">specific_packing</span><span class="p">,</span>
+                       <span class="n">other_GRIB_options</span><span class="o">=</span><span class="n">other_GRIB_options</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">done</span></div>
+
+
+
+<span class="c1"># netCDF writer #</span>
+<span class="c1">#################</span>
+<div class="viewcode-block" id="NetCDFWriter">
+<a class="viewcode-back" href="../../../../library/converters.html#epygram.formats.conversion.converters.NetCDFWriter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">NetCDFWriter</span><span class="p">(</span><span class="n">Converter</span><span class="p">):</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Converts a file into netCDF4.&quot;</span><span class="p">,</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">output_format_suffix</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nc&#39;</span><span class="p">,</span> <span class="p">]),</span>
+            <span class="n">grib_short_fid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;condense GRIB fid as string, in case converting a GRIB file.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">compression</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;compression level to compress fields in netCDF. </span><span class="se">\</span>
+<span class="s2">                      Ranges from 0 to 9. 0 is no compression, 1 is low-but-fast </span><span class="se">\</span>
+<span class="s2">                      compression, 9 is high-but-slow compression. </span><span class="se">\</span>
+<span class="s2">                      Default is 4.&quot;</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">netCDF_default_compression</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">flatten_horizontal_grids</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;flatten 2D horizontal grids to 1D.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_write_kwargs_for_netCDF</span><span class="p">(</span><span class="n">input_resource</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">write_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;compression&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;compression&#39;</span><span class="p">]</span>
+            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;adhoc_behaviour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;flatten_horizontal_grids&#39;</span><span class="p">:</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;flatten_horizontal_grids&#39;</span><span class="p">]}</span>
+            <span class="k">return</span> <span class="n">write_kwargs</span>
+
+        <span class="n">done</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">output_format_suffix</span><span class="p">,</span>
+                       <span class="n">get_write_kwargs_for_netCDF</span><span class="p">,</span>
+                       <span class="n">fieldseed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldseed</span><span class="p">,</span>
+                       <span class="n">subzone</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subzone</span><span class="p">,</span>
+                       <span class="n">progressmode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">progressmode</span><span class="p">,</span>
+                       <span class="c1"># format specific</span>
+                       <span class="n">grib_short_fid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grib_short_fid</span><span class="p">,</span>  <span class="c1"># TODO: use griberies cfName ?</span>
+                       <span class="n">compression</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">compression</span><span class="p">,</span>
+                       <span class="n">flatten_horizontal_grids</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">flatten_horizontal_grids</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">done</span></div>
+
+
+
+<span class="c1"># GeoPoints writer #</span>
+<span class="c1">####################</span>
+<div class="viewcode-block" id="GeoPointsWriter">
+<a class="viewcode-back" href="../../../../library/converters.html#epygram.formats.conversion.converters.GeoPointsWriter">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GeoPointsWriter</span><span class="p">(</span><span class="n">Converter</span><span class="p">):</span>
+
+    <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">info</span><span class="o">=</span><span class="s2">&quot;Converts a file into GeoPoints.&quot;</span><span class="p">,</span>
+        <span class="n">attr</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">output_format_suffix</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;geo&#39;</span><span class="p">,</span> <span class="p">]),</span>
+            <span class="n">grib_short_fid</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;condense GRIB fid as string, in case converting a GRIB file.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">order</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;for a rectangular H2DField, whether to flatten 2D arrays </span><span class="se">\</span>
+<span class="s2">                      in &#39;C&#39; (row-major) or &#39;F&#39; (Fortran, column-major) order.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">lonlat_precision</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;number of digits for output lon/lat values.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_lonlat_precision</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">precision</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;number of digits for output fields values.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">GeoPoints_precision</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">llv</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;lat/lon/value mode == simplified GeoPoints.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">columns</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;simplified GeoPoints, specify columns to be written.&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="n">FPList</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">access</span><span class="o">=</span><span class="s1">&#39;rwx&#39;</span><span class="p">),</span>
+            <span class="n">no_header</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">info</span><span class="o">=</span><span class="s2">&quot;If True, do not write header (openmode=&#39;w&#39;).&quot;</span><span class="p">,</span>
+                <span class="n">optional</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span>
+                <span class="n">default</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">get_write_kwargs_for_GeoPoints</span><span class="p">(</span><span class="n">input_resource</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">write_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;order&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;lonlat_precision&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;llprecision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;lonlat_precision&#39;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">&#39;precision&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+                <span class="n">write_kwargs</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">write_kwargs</span>
+
+        <span class="n">done</span> <span class="o">=</span> <span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span>
+                       <span class="bp">self</span><span class="o">.</span><span class="n">output_format_suffix</span><span class="p">,</span>
+                       <span class="n">get_write_kwargs_for_GeoPoints</span><span class="p">,</span>
+                       <span class="n">fieldseed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldseed</span><span class="p">,</span>
+                       <span class="n">subzone</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">subzone</span><span class="p">,</span>
+                       <span class="n">grib_short_fid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grib_short_fid</span><span class="p">,</span>
+                       <span class="n">progressmode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">progressmode</span><span class="p">,</span>
+                       <span class="c1"># format specific</span>
+                       <span class="n">order</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">,</span>
+                       <span class="n">precision</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="p">,</span>
+                       <span class="n">lonlat_precision</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">lonlat_precision</span><span class="p">,</span>
+                       <span class="n">llv</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">llv</span><span class="p">,</span>
+                       <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+                       <span class="n">no_header</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_header</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">done</span></div>
+
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../formats.html" >epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.conversion.converters</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

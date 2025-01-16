@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>epygram.formats.conversion.functions — Formats conversion functions (API) &#8212; epygram 2.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.formats.conversion.converters — Format-specific conversion Taylorism Workers" href="converters.html" />
+    <link rel="prev" title="epygram.formats.conversion — Utilities for conversion between formats" href="conversion.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="converters.html" title="epygram.formats.conversion.converters — Format-specific conversion Taylorism Workers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="conversion.html" title="epygram.formats.conversion — Utilities for conversion between formats"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="conversion.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.functions</span></code> — Formats conversion functions (API)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.formats.conversion.functions">
+<span id="epygram-formats-conversion-functions-formats-conversion-functions-api"></span><h1><a class="reference internal" href="#module-epygram.formats.conversion.functions" title="epygram.formats.conversion.functions"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.functions</span></code></a> — Formats conversion functions (API)<a class="headerlink" href="#module-epygram.formats.conversion.functions" title="Link to this heading">¶</a></h1>
+<p>Conversion functions (API).</p>
+<hr class="docutils" />
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.formats.conversion.functions.fid_converter">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.functions.</span></span><span class="sig-name descname"><span class="pre">fid_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_short_fid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/functions.html#fid_converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.functions.fid_converter" title="Link to this definition">¶</a></dt>
+<dd><p>Creates and returns the fid in format <em>target_fmt</em> from an <em>initial_fid</em> in
+<em>initial_fmt</em>.</p>
+<p><em>grib_short_fid</em> condense GRIB fid in string.</p>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.formats.conversion.functions.convert">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.functions.</span></span><span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format_suffix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_write_kwargs=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fieldseed=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subzone=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grib_short_fid=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progressmode=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/functions.html#convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.functions.convert" title="Link to this definition">¶</a></dt>
+<dd><p>Conversion function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filename</strong> – name of the file to be processed.</p></li>
+<li><p><strong>output_format_suffix</strong> – among ‘grb’ (GRIB2), ‘nc’ (netCDF4), ‘geo’ (GeoPoints)</p></li>
+<li><p><strong>get_write_kwargs</strong> – function that gives the necessary write options</p></li>
+<li><p><strong>fieldseed</strong> – either a fid or a list of fid, used as a seed for
+generating the list of fields to be processed.</p></li>
+<li><p><strong>subzone</strong> – LAM zone among (‘C’, ‘CI’, None).</p></li>
+<li><p><strong>grib_short_fid</strong> – condense GRIB fid as string, in case converting a GRIB
+file.</p></li>
+<li><p><strong>progressmode</strong> – among (‘verbose’, ‘percentage’, None)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="simple">
+<dt>Other kwargs are specific to output formats, and passed to</dt><dd><p>get_write_kwargs(), wherein they can be handled whatever for…</p>
+</dd>
+</dl>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.formats.conversion.functions.batch_convert">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.functions.</span></span><span class="sig-name descname"><span class="pre">batch_convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filenames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_format_suffix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threads_number</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progressmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/functions.html#batch_convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.functions.batch_convert" title="Link to this definition">¶</a></dt>
+<dd><p>Converts a series of files to <em>output_format_suffix</em> in batch.</p>
+<p>Mandatory arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>filenames</strong> – name(s) of the files to be processed</p></li>
+<li><p><strong>output_format_suffix</strong> – among ‘grb’ (GRIB2), ‘nc’ (netCDF4), ‘geo’ (GeoPoints)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Technical named (optional) arguments:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>threads_number</strong> – parallelisation of files processing</p></li>
+<li><p><strong>progressmode</strong> – among (‘verbose’, ‘percentage’, None)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Other named arguments depend on the output format, and are defined in the
+Workers footprints attributes !</p>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.functions</span></code> — Formats conversion functions (API)</a><ul>
+<li><a class="reference internal" href="#epygram.formats.conversion.functions.fid_converter"><code class="docutils literal notranslate"><span class="pre">fid_converter()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.functions.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.functions.batch_convert"><code class="docutils literal notranslate"><span class="pre">batch_convert()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="conversion.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="converters.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.converters</span></code> — Format-specific conversion Taylorism Workers</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/conversion_functions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="converters.html" title="epygram.formats.conversion.converters — Format-specific conversion Taylorism Workers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="conversion.html" title="epygram.formats.conversion — Utilities for conversion between formats"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="conversion.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.functions</span></code> — Formats conversion functions (API)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

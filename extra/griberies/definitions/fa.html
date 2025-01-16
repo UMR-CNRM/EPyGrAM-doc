@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>fa — Handling FA grib definitions &#8212; epygram 2.0.0 documentation</title>
+    <title>fa — Handling FA grib definitions &#8212; epygram 2.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=f5cff4aa"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="names.html" title="names — Handling names definitions"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">definitions</span></code> — utilities around GRIB definitions</a> &#187;</li>
@@ -55,7 +55,7 @@
 <dd><p>Bases: <a class="reference internal" href="util.html#epygram.extra.griberies.definitions.util.GribDef" title="epygram.extra.griberies.definitions.util.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">GribDef</span></code></a></p>
 <p>Handle FA-related GRIB definition files.
 To add user files:
-a) use env vars GRIBAPI|ECCODES_DEFINITION_PATH or
+a) use env var ECCODES_DEFINITION_PATH or
 b) move it under {config.userlocaldir}/{FaGribDef.dirname}</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.extra.griberies.definitions.fa.FaGribDef.FA2GRIB">
@@ -123,6 +123,15 @@ present in grib def of field</p></li>
 </dd></dl>
 
 <hr class="docutils" />
+<dl class="py data">
+<dt class="sig sig-object py" id="epygram.extra.griberies.definitions.fa.fagribdef">
+<span class="sig-prename descclassname"><span class="pre">epygram.extra.griberies.definitions.fa.</span></span><span class="sig-name descname"><span class="pre">fagribdef</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;epygram.extra.griberies.definitions.fa.FaGribDef</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#epygram.extra.griberies.definitions.fa.fagribdef" title="Link to this definition">¶</a></dt>
+<dd><p>Handle FA-related GRIB definition files.
+To add user files:
+a) use env var ECCODES_DEFINITION_PATH or
+b) move it under {config.userlocaldir}/{FaGribDef.dirname}</p>
+</dd></dl>
+
 </section>
 
 
@@ -143,6 +152,7 @@ present in grib def of field</p></li>
 <li><a class="reference internal" href="#epygram.extra.griberies.definitions.fa.FaGribDef.lookup_GRIB"><code class="docutils literal notranslate"><span class="pre">FaGribDef.lookup_GRIB()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#epygram.extra.griberies.definitions.fa.fagribdef"><code class="docutils literal notranslate"><span class="pre">fagribdef</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -194,7 +204,7 @@ present in grib def of field</p></li>
         <li class="right" >
           <a href="names.html" title="names — Handling names definitions"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">griberies</span></code> — utilities around GRIB</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">definitions</span></code> — utilities around GRIB definitions</a> &#187;</li>

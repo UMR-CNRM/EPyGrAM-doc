@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.formats.FA — Interface-Class to the FA format &#8212; epygram 2.0.0 documentation</title>
+    <title>epygram.formats.FA — Interface-Class to the FA format &#8212; epygram 2.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="formats.html" title="epygram.formats — Formats"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a></li> 
@@ -47,87 +47,6 @@
   <section id="module-epygram.formats.FA">
 <span id="epygram-formats-fa-interface-class-to-the-fa-format"></span><h1><a class="reference internal" href="#module-epygram.formats.FA" title="epygram.formats.FA: Interface-Class to the FA format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code></a> — Interface-Class to the FA format<a class="headerlink" href="#module-epygram.formats.FA" title="Link to this heading">¶</a></h1>
 <p>Contains the class for FA format.</p>
-<hr class="docutils" />
-<dl class="py function">
-<dt class="sig sig-object py" id="epygram.formats.FA.get_generic_fid">
-<span class="sig-prename descclassname"><span class="pre">epygram.formats.FA.</span></span><span class="sig-name descname"><span class="pre">get_generic_fid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#get_generic_fid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.FA.get_generic_fid" title="Link to this definition">¶</a></dt>
-<dd><p>Return a generic fid from <strong>fieldname</strong> (via FaGribDef).</p>
-</dd></dl>
-
-<hr class="docutils" />
-<dl class="py class">
-<dt class="sig sig-object py" id="epygram.formats.FA.FaGribDef">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.FA.</span></span><span class="sig-name descname"><span class="pre">FaGribDef</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actual_init</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concepts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['faFieldName',</span> <span class="pre">'faModelName',</span> <span class="pre">'faLevelName']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/extra/griberies/definitions/fa.html#FaGribDef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.FA.FaGribDef" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="../extra/griberies/definitions/util.html#epygram.extra.griberies.definitions.util.GribDef" title="epygram.extra.griberies.definitions.util.GribDef"><code class="xref py py-class docutils literal notranslate"><span class="pre">GribDef</span></code></a></p>
-<p>Handle FA-related GRIB definition files.
-To add user files:
-a) use env vars GRIBAPI|ECCODES_DEFINITION_PATH or
-b) move it under {config.userlocaldir}/{FaGribDef.dirname}</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.formats.FA.FaGribDef.FA2GRIB">
-<span class="sig-name descname"><span class="pre">FA2GRIB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.FA2GRIB" title="Link to this definition">¶</a></dt>
-<dd><p>Convert FA field name to GRIB fid, including vertical level identification.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</p></li>
-<li><p><strong>include_comments</strong> – if a comment is present if grib def, bring it in fid</p></li>
-<li><p><strong>fatal</strong> – if True and fieldname is not retrieved, raise a ValueError;
-else, return a default 255 fid</p></li>
-<li><p><strong>filter_non_GRIB_keys</strong> – filter out the non-GRIB keys that may be
-present in grib def of field</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.formats.FA.FaGribDef.GRIB2FA">
-<span class="sig-name descname"><span class="pre">GRIB2FA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.GRIB2FA" title="Link to this definition">¶</a></dt>
-<dd><p>Look for a unique matching field in tables.
-! WARNING ! the unicity might not be ensured depending on the version
-of grib definitions files.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.formats.FA.FaGribDef.lookup_FA">
-<span class="sig-name descname"><span class="pre">lookup_FA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.lookup_FA" title="Link to this definition">¶</a></dt>
-<dd><p>Look for all the fields which FA name contain <strong>partial_fieldname</strong>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</p></li>
-<li><p><strong>include_comments</strong> – if a comment is present if grib def, bring it in fid</p></li>
-<li><p><strong>filter_non_GRIB_keys</strong> – filter out the non-GRIB keys that may be
-present in grib def of field</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="epygram.formats.FA.FaGribDef.lookup_GRIB">
-<span class="sig-name descname"><span class="pre">lookup_GRIB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FaGribDef.lookup_GRIB" title="Link to this definition">¶</a></dt>
-<dd><p>Look for all the fields which GRIB fid contain <strong>partial_fid</strong>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>grib_edition</strong> – among (‘grib1’, ‘grib2’), the version of GRIB fid</p></li>
-<li><p><strong>include_comments</strong> – if a comment is present if grib def, bring it in fid</p></li>
-<li><p><strong>filter_non_GRIB_keys</strong> – filter out the non-GRIB keys that may be
-present in grib def of field</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 <hr class="docutils" />
 <dl class="py class">
 <dt class="sig sig-object py" id="epygram.formats.FA.FA">
@@ -175,7 +94,7 @@ present in grib def of field</p></li>
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘write’, ‘w’, ‘read’, ‘append’, ‘a’, ‘r’])</p></li>
+<li><p>Values: set([‘write’, ‘a’, ‘read’, ‘append’, ‘r’, ‘w’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -425,8 +344,8 @@ resource.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="epygram.formats.FA.FA.modify_validity">
 <span class="sig-name descname"><span class="pre">modify_validity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/FA.html#FA.modify_validity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.FA.FA.modify_validity" title="Link to this definition">¶</a></dt>
-<dd><p>Modify the validity of the resource in place.</p>
-<p>All <a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs to be passed to self.validity.set(<a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs)</p>
+<dd><p>Modify the validity of the resource in place.
+All <strong>kwargs</strong> to be passed to self.validity.set(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs)</p>
 </dd></dl>
 
 <dl class="py method">
@@ -603,14 +522,6 @@ parameters for field compression (in case of a
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a><ul>
-<li><a class="reference internal" href="#epygram.formats.FA.get_generic_fid"><code class="docutils literal notranslate"><span class="pre">get_generic_fid()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.formats.FA.FaGribDef"><code class="docutils literal notranslate"><span class="pre">FaGribDef</span></code></a><ul>
-<li><a class="reference internal" href="#epygram.formats.FA.FaGribDef.FA2GRIB"><code class="docutils literal notranslate"><span class="pre">FaGribDef.FA2GRIB()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.formats.FA.FaGribDef.GRIB2FA"><code class="docutils literal notranslate"><span class="pre">FaGribDef.GRIB2FA()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.formats.FA.FaGribDef.lookup_FA"><code class="docutils literal notranslate"><span class="pre">FaGribDef.lookup_FA()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.formats.FA.FaGribDef.lookup_GRIB"><code class="docutils literal notranslate"><span class="pre">FaGribDef.lookup_GRIB()</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA"><code class="docutils literal notranslate"><span class="pre">FA</span></code></a><ul>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.cdiden"><code class="docutils literal notranslate"><span class="pre">FA.cdiden</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.close"><code class="docutils literal notranslate"><span class="pre">FA.close()</span></code></a></li>
@@ -693,7 +604,7 @@ parameters for field compression (in case of a
         <li class="right" >
           <a href="formats.html" title="epygram.formats — Formats"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a></li> 

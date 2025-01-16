@@ -5,16 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.formats.fafields — Utilities around FA fields &#8212; epygram 2.0.0 documentation</title>
+    <title>epygram.formats.fafields — Utilities around FA fields &#8212; epygram 2.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="epygram.resources — Real and virtual resources handling" href="resources.html" />
+    <link rel="next" title="epygram.formats.conversion — Utilities for conversion between formats" href="conversion.html" />
     <link rel="prev" title="epygram.formats.GRIB — Interface-Class to the GRIB format" href="GRIB.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="Related">
@@ -27,12 +27,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
+          <a href="conversion.html" title="epygram.formats.conversion — Utilities for conversion between formats"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="GRIB.html" title="epygram.formats.GRIB — Interface-Class to the GRIB format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></li> 
@@ -45,13 +45,19 @@
           <div class="body" role="main">
             
   <section id="module-epygram.formats.fafields">
-<span id="epygram-formats-fafields-utilities-around-fa-fields"></span><h1><a class="reference internal" href="#module-epygram.formats.fafields" title="epygram.formats.fafields: Utilities around FA fields"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code></a> — Utilities around FA fields<a class="headerlink" href="#module-epygram.formats.fafields" title="Link to this heading">¶</a></h1>
+<span id="epygram-formats-fafields-utilities-around-fa-fields"></span><h1><a class="reference internal" href="#module-epygram.formats.fafields" title="epygram.formats.fafields"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code></a> — Utilities around FA fields<a class="headerlink" href="#module-epygram.formats.fafields" title="Link to this heading">¶</a></h1>
 <p>FA fields utilities</p>
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.formats.fafields.find_wind_pair">
 <span class="sig-prename descclassname"><span class="pre">epygram.formats.fafields.</span></span><span class="sig-name descname"><span class="pre">find_wind_pair</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/fafields.html#find_wind_pair"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.fafields.find_wind_pair" title="Link to this definition">¶</a></dt>
 <dd><p>For a wind <strong>fieldname</strong>, find and return the pair.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.formats.fafields.get_generic_fid">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.fafields.</span></span><span class="sig-name descname"><span class="pre">get_generic_fid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fieldname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/fafields.html#get_generic_fid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.fafields.get_generic_fid" title="Link to this definition">¶</a></dt>
+<dd><p>Return a generic fid from <strong>fieldname</strong> (via FaGribDef).</p>
 </dd></dl>
 
 <hr class="docutils" />
@@ -92,6 +98,13 @@
 
 </dd></dl>
 
+<hr class="docutils" />
+<dl class="py data">
+<dt class="sig sig-object py" id="epygram.formats.fafields.sfxflddesc">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.fafields.</span></span><span class="sig-name descname"><span class="pre">sfxflddesc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;epygram.formats.fafields.SfxFldDesc_Mod</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#epygram.formats.fafields.sfxflddesc" title="Link to this definition">¶</a></dt>
+<dd><p>Handle fields catalog from sfxflddesc.F90 source file.</p>
+</dd></dl>
+
 </section>
 
 
@@ -106,6 +119,7 @@
     <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a><ul>
 <li><a class="reference internal" href="#epygram.formats.fafields.find_wind_pair"><code class="docutils literal notranslate"><span class="pre">find_wind_pair()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.fafields.get_generic_fid"><code class="docutils literal notranslate"><span class="pre">get_generic_fid()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.fafields.SfxFldDesc_Mod"><code class="docutils literal notranslate"><span class="pre">SfxFldDesc_Mod</span></code></a><ul>
 <li><a class="reference internal" href="#epygram.formats.fafields.SfxFldDesc_Mod.dim"><code class="docutils literal notranslate"><span class="pre">SfxFldDesc_Mod.dim()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.fafields.SfxFldDesc_Mod.is_metadata"><code class="docutils literal notranslate"><span class="pre">SfxFldDesc_Mod.is_metadata()</span></code></a></li>
@@ -114,6 +128,7 @@
 <li><a class="reference internal" href="#epygram.formats.fafields.SfxFldDesc_Mod.update"><code class="docutils literal notranslate"><span class="pre">SfxFldDesc_Mod.update()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#epygram.formats.fafields.sfxflddesc"><code class="docutils literal notranslate"><span class="pre">sfxflddesc</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -126,8 +141,8 @@
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="resources.html"
-                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a></p>
+    <p class="topless"><a href="conversion.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -160,12 +175,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
+          <a href="conversion.html" title="epygram.formats.conversion — Utilities for conversion between formats"
              >next</a> |</li>
         <li class="right" >
           <a href="GRIB.html" title="epygram.formats.GRIB — Interface-Class to the GRIB format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></li> 

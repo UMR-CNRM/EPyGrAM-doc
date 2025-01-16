@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>epygram.formats.conversion.functions &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.conversion.functions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for epygram.formats.conversion.functions</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Copyright (c) Météo France (2014-)</span>
+<span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
+<span class="c1"># http://www.cecill.info</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Conversion functions (API).</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">footprints</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bronx.fancies.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">printstatus</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">..</span><span class="w"> </span><span class="kn">import</span> <span class="n">resource</span> <span class="k">as</span> <span class="n">eopen</span>
+
+<span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">fmt_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;grb&#39;</span><span class="p">:</span><span class="s1">&#39;GRIB&#39;</span><span class="p">,</span> <span class="s1">&#39;nc&#39;</span><span class="p">:</span><span class="s1">&#39;netCDF&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">:</span><span class="s1">&#39;GeoPoints&#39;</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="fid_converter">
+<a class="viewcode-back" href="../../../../library/conversion_functions.html#epygram.formats.conversion.functions.fid_converter">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">fid_converter</span><span class="p">(</span><span class="n">initial_fid</span><span class="p">,</span>
+                  <span class="n">initial_fmt</span><span class="p">,</span>
+                  <span class="n">target_fmt</span><span class="p">,</span>
+                  <span class="n">grib_short_fid</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates and returns the fid in format *target_fmt* from an *initial_fid* in</span>
+<span class="sd">    *initial_fmt*.</span>
+
+<span class="sd">    *grib_short_fid* condense GRIB fid in string.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">initial_fmt</span> <span class="o">==</span> <span class="s1">&#39;generic&#39;</span> <span class="ow">and</span> <span class="n">target_fmt</span> <span class="o">==</span> <span class="s1">&#39;GRIB2&#39;</span><span class="p">:</span>
+        <span class="n">target_fid</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">initial_fid</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">initial_fmt</span> <span class="o">==</span> <span class="s1">&#39;GRIB&#39;</span> <span class="ow">and</span> <span class="n">target_fmt</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;netCDF&#39;</span><span class="p">,</span> <span class="s1">&#39;GeoPoints&#39;</span><span class="p">):</span>
+        <span class="c1"># TODO: ? this is very basic !</span>
+        <span class="k">if</span> <span class="n">grib_short_fid</span><span class="p">:</span>
+            <span class="n">target_fid</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">initial_fid</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+                                   <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">initial_fid</span><span class="o">.</span><span class="n">keys</span><span class="p">())])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target_fid</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">initial_fid</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;{&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">            FIXME: doesn&#39;t work</span>
+<span class="sd">            try:</span>
+<span class="sd">                from .GRIB import namesgribdef</span>
+<span class="sd">                fid = copy.copy(initial_fid)</span>
+<span class="sd">                fid.pop(&#39;name&#39;, None)</span>
+<span class="sd">                fid.pop(&#39;shortName&#39;, None)</span>
+<span class="sd">                fid.pop(&#39;editionNumber&#39;, None)</span>
+<span class="sd">                fid.pop(&#39;tablesVersion&#39;, None)</span>
+<span class="sd">                cfVarName = namesgribdef.cfVarName(fid,</span>
+<span class="sd">                                                   &#39;grib{}&#39;.format(initial_fid[&#39;editionNumber&#39;]))</span>
+<span class="sd">                if len(cfVarName) == 1:</span>
+<span class="sd">                    target_fid = list(cfVarName.keys())[0]</span>
+<span class="sd">            except Exception:</span>
+<span class="sd">                pass&quot;&quot;&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;this kind of conversion.&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">target_fid</span></div>
+
+
+
+<div class="viewcode-block" id="convert">
+<a class="viewcode-back" href="../../../../library/conversion_functions.html#epygram.formats.conversion.functions.convert">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">convert</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span>
+            <span class="n">output_format_suffix</span><span class="p">,</span>
+            <span class="n">get_write_kwargs</span><span class="o">=</span><span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:{},</span>
+            <span class="n">fieldseed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">grib_short_fid</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">progressmode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Conversion function.</span>
+
+<span class="sd">    :param filename: name of the file to be processed.</span>
+<span class="sd">    :param output_format_suffix: among &#39;grb&#39; (GRIB2), &#39;nc&#39; (netCDF4), &#39;geo&#39; (GeoPoints)</span>
+<span class="sd">    :param get_write_kwargs: function that gives the necessary write options</span>
+<span class="sd">    :param fieldseed: either a fid or a list of fid, used as a seed for</span>
+<span class="sd">                   generating the list of fields to be processed.</span>
+<span class="sd">    :param subzone: LAM zone among (&#39;C&#39;, &#39;CI&#39;, None).</span>
+<span class="sd">    :param grib_short_fid: condense GRIB fid as string, in case converting a GRIB</span>
+<span class="sd">                        file.</span>
+<span class="sd">    :param progressmode: among (&#39;verbose&#39;, &#39;percentage&#39;, None)</span>
+
+<span class="sd">    Other kwargs are specific to output formats, and passed to</span>
+<span class="sd">                     get_write_kwargs(), wherein they can be handled whatever for...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">output_format_suffix</span> <span class="o">==</span> <span class="s1">&#39;geo&#39;</span><span class="p">:</span>
+        <span class="n">one_output_file</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">one_output_file</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">resource</span> <span class="o">=</span> <span class="n">eopen</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">one_output_file</span><span class="p">:</span>
+        <span class="n">output_resource</span> <span class="o">=</span> <span class="n">eopen</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">filename</span><span class="p">,</span> <span class="n">output_format_suffix</span><span class="p">]),</span>
+                                <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                                <span class="n">fmt</span><span class="o">=</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">])</span>
+    <span class="c1"># warnings about formats</span>
+    <span class="k">if</span> <span class="n">resource</span><span class="o">.</span><span class="n">format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;GRIB&#39;</span><span class="p">,</span> <span class="s1">&#39;FA&#39;</span><span class="p">):</span>
+        <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;tool NOT TESTED with format&quot;</span><span class="p">,</span>
+                                 <span class="n">resource</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="s2">&quot;!&quot;</span><span class="p">]))</span>
+    <span class="k">if</span> <span class="n">output_format_suffix</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;grb&#39;</span><span class="p">,</span> <span class="s1">&#39;nc&#39;</span><span class="p">,</span> <span class="s1">&#39;geo&#39;</span><span class="p">):</span>
+        <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;tool NOT TESTED with output format&quot;</span><span class="p">,</span>
+                                 <span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">],</span> <span class="s2">&quot;!&quot;</span><span class="p">]))</span>
+    <span class="n">fidlist</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">find_fields_in_resource</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">fieldseed</span><span class="p">,</span> <span class="n">fieldtype</span><span class="o">=</span><span class="s1">&#39;H2D&#39;</span><span class="p">)</span>
+    <span class="n">numfields</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fidlist</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">progressmode</span> <span class="o">==</span> <span class="s1">&#39;percentage&#39;</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">printstatus</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">numfields</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># loop over fields</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">fidlist</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">progressmode</span> <span class="o">==</span> <span class="s1">&#39;verbose&#39;</span><span class="p">:</span>
+            <span class="n">epylog</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">readfield</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="n">subzone</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># options for write</span>
+        <span class="n">write_kwargs</span> <span class="o">=</span> <span class="n">get_write_kwargs</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">subzone</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">select_subzone</span><span class="p">(</span><span class="n">subzone</span><span class="p">)</span>
+        <span class="c1"># output fid</span>
+        <span class="k">if</span> <span class="n">resource</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;GRIB&#39;</span><span class="p">:</span>
+            <span class="n">grib_edition</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;editionNumber&#39;</span><span class="p">]</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">grib_edition</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fid</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">resource</span><span class="o">.</span><span class="n">format</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">output_format_suffix</span> <span class="o">==</span> <span class="s1">&#39;grb&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;generic&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;how to convert this fid to GRIB2 ?&quot;</span><span class="p">)</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fid_converter</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;generic&#39;</span><span class="p">],</span> <span class="s1">&#39;generic&#39;</span><span class="p">,</span> <span class="s1">&#39;GRIB2&#39;</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">all</span><span class="p">([</span><span class="n">k</span> <span class="ow">in</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="s1">&#39;GRIB2&#39;</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;discipline&#39;</span><span class="p">,</span> <span class="s1">&#39;parameterCategory&#39;</span><span class="p">,</span> <span class="s1">&#39;parameterNumber&#39;</span><span class="p">)]),</span> \
+                   <span class="s2">&quot;missing key(s) among (&#39;discipline&#39;, &#39;parameterCategory&#39;, &#39;parameterNumber&#39;)&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">]]</span> <span class="o">=</span> <span class="n">fid_converter</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span>
+                                                                          <span class="n">resource</span><span class="o">.</span><span class="n">format</span><span class="p">,</span>
+                                                                          <span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">],</span>
+                                                                          <span class="n">grib_short_fid</span><span class="o">=</span><span class="n">grib_short_fid</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+                <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">resource</span><span class="o">.</span><span class="n">format</span><span class="p">])</span>
+        <span class="c1"># now write field !</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">one_output_file</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">output_format_suffix</span> <span class="o">==</span> <span class="s1">&#39;geo&#39;</span><span class="p">:</span>
+                <span class="n">output_resource</span> <span class="o">=</span> <span class="n">eopen</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">filename</span><span class="p">,</span>
+                                                  <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">]],</span>
+                                                  <span class="n">output_format_suffix</span><span class="p">]),</span>
+                                        <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                                        <span class="n">fmt</span><span class="o">=</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">],</span>
+                                        <span class="n">other_attributes</span><span class="o">=</span><span class="p">({</span><span class="s1">&#39;FORMAT&#39;</span><span class="p">:</span><span class="s1">&#39;XYV&#39;</span><span class="p">}</span> <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;llv&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">),</span>
+                                        <span class="n">columns</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;columns&#39;</span><span class="p">),</span>
+                                        <span class="n">no_header</span><span class="o">=</span><span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;no_header&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+                                        <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">output_resource</span> <span class="o">=</span> <span class="n">eopen</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">filename</span><span class="p">,</span>
+                                                  <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">]],</span>
+                                                  <span class="n">output_format_suffix</span><span class="p">]),</span>
+                                        <span class="n">openmode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span>
+                                        <span class="n">fmt</span><span class="o">=</span><span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">])</span>
+        <span class="n">output_resource</span><span class="o">.</span><span class="n">writefield</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="o">**</span><span class="n">write_kwargs</span><span class="p">)</span>
+        <span class="c1"># print progress if requested</span>
+        <span class="k">if</span> <span class="n">progressmode</span> <span class="o">==</span> <span class="s1">&#39;percentage&#39;</span><span class="p">:</span>
+            <span class="n">printstatus</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">numfields</span><span class="p">)</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="k">return</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span>
+                     <span class="nb">str</span><span class="p">(</span><span class="n">numfields</span><span class="p">),</span> <span class="s2">&quot;fields successfully converted from&quot;</span><span class="p">,</span>
+                     <span class="n">resource</span><span class="o">.</span><span class="n">format</span><span class="p">,</span> <span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="n">fmt_dict</span><span class="p">[</span><span class="n">output_format_suffix</span><span class="p">],</span>
+                     <span class="s2">&quot;in&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span><span class="p">),</span> <span class="s2">&quot;s.&quot;</span><span class="p">])</span></div>
+
+
+
+<div class="viewcode-block" id="batch_convert">
+<a class="viewcode-back" href="../../../../library/conversion_functions.html#epygram.formats.conversion.functions.batch_convert">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_convert</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span>
+                  <span class="n">output_format_suffix</span><span class="p">,</span>
+                  <span class="n">threads_number</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                  <span class="n">progressmode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                  <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts a series of files to *output_format_suffix* in batch.</span>
+
+<span class="sd">    Mandatory arguments:</span>
+
+<span class="sd">    :param filenames: name(s) of the files to be processed</span>
+<span class="sd">    :param output_format_suffix: among &#39;grb&#39; (GRIB2), &#39;nc&#39; (netCDF4), &#39;geo&#39; (GeoPoints)</span>
+
+<span class="sd">    Technical named (optional) arguments:</span>
+
+<span class="sd">    :param threads_number: parallelisation of files processing</span>
+<span class="sd">    :param progressmode: among (&#39;verbose&#39;, &#39;percentage&#39;, None)</span>
+
+<span class="sd">    Other named arguments depend on the output format, and are defined in the</span>
+<span class="sd">    Workers footprints attributes !</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">taylorism</span>
+    <span class="c1"># build a dummy Converter of the right type</span>
+    <span class="n">dummy_converter</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">proxy</span><span class="o">.</span><span class="n">worker</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">output_format_suffix</span><span class="o">=</span><span class="n">output_format_suffix</span><span class="p">)</span>
+    <span class="n">instructions_keys</span> <span class="o">=</span> <span class="n">dummy_converter</span><span class="o">.</span><span class="n">footprint_attributes</span>
+    <span class="k">del</span> <span class="n">dummy_converter</span>
+    <span class="c1"># build instructions</span>
+    <span class="n">common_instructions</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">instructions_keys</span><span class="p">}</span>
+    <span class="c1"># standard instructions for converters</span>
+    <span class="n">common_instructions</span><span class="p">[</span><span class="s1">&#39;output_format_suffix&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">output_format_suffix</span>
+    <span class="k">if</span> <span class="n">threads_number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">common_instructions</span><span class="p">[</span><span class="s1">&#39;progressmode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">progressmode</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">filenames</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span><span class="n">filenames</span><span class="p">]</span>
+    <span class="n">individual_instructions</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;filename&#39;</span><span class="p">:</span><span class="n">filenames</span><span class="p">}</span>
+
+    <span class="c1"># run !</span>
+    <span class="n">taylorism</span><span class="o">.</span><span class="n">batch_main</span><span class="p">(</span><span class="n">common_instructions</span><span class="p">,</span> <span class="n">individual_instructions</span><span class="p">,</span>
+                         <span class="n">scheduler</span><span class="o">=</span><span class="n">footprints</span><span class="o">.</span><span class="n">proxy</span><span class="o">.</span><span class="n">scheduler</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="s1">&#39;threads&#39;</span><span class="p">,</span> <span class="n">max_threads</span><span class="o">=</span><span class="n">threads_number</span><span class="p">),</span>
+                         <span class="n">verbose</span><span class="o">=</span><span class="p">(</span><span class="n">progressmode</span> <span class="o">==</span> <span class="s1">&#39;verbose&#39;</span><span class="p">))</span></div>
+
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../../epygram.html" >epygram</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../../formats.html" >epygram.formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">epygram.formats.conversion.functions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>

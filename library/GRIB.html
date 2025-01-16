@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.formats.GRIB — Interface-Class to the GRIB format &#8212; epygram 2.0.0 documentation</title>
+    <title>epygram.formats.GRIB — Interface-Class to the GRIB format &#8212; epygram 2.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="netCDF.html" title="epygram.formats.netCDF — Interface-Class to the netCDF format"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a></li> 
@@ -45,7 +45,7 @@
           <div class="body" role="main">
             
   <section id="module-epygram.formats.GRIB">
-<span id="epygram-formats-grib-interface-class-to-the-grib-format"></span><h1><a class="reference internal" href="#module-epygram.formats.GRIB" title="epygram.formats.GRIB: Interface-Class to the GRIB format"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code></a> — Interface-Class to the GRIB format<a class="headerlink" href="#module-epygram.formats.GRIB" title="Link to this heading">¶</a></h1>
+<span id="epygram-formats-grib-interface-class-to-the-grib-format"></span><h1><a class="reference internal" href="#module-epygram.formats.GRIB" title="epygram.formats.GRIB"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code></a> — Interface-Class to the GRIB format<a class="headerlink" href="#module-epygram.formats.GRIB" title="Link to this heading">¶</a></h1>
 <p>Contains classes for GRIB resource and GRIB individual message,
 editions 1 and 2.</p>
 <hr class="docutils" />
@@ -80,7 +80,7 @@ editions 1 and 2.</p>
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘write’, ‘w’, ‘read’, ‘append’, ‘a’, ‘r’])</p></li>
+<li><p>Values: set([‘write’, ‘a’, ‘read’, ‘append’, ‘r’, ‘w’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -163,7 +163,7 @@ and an external field on the same grid as self, to which the distance
 is computed within the 4 horizontally nearest points; e.g.
 {‘target_value’:4810, ‘external_field’:an_H2DField_with_same_geometry}.
 If so, the nearest point is selected with
-distance = <a href="#id1"><span class="problematic" id="id2">|target_value - external_field.data|</span></a></p></li>
+distance = abs(target_value - external_field.data)</p></li>
 </ul>
 </dd>
 </dl>
@@ -776,7 +776,7 @@ file to be written to.</p>
         <li class="right" >
           <a href="netCDF.html" title="epygram.formats.netCDF — Interface-Class to the netCDF format"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a></li> 

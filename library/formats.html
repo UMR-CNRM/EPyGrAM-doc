@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.formats — Formats &#8212; epygram 2.0.0 documentation</title>
+    <title>epygram.formats — Formats &#8212; epygram 2.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="D3VectorField.html" title="epygram.fields.D3VectorField — 3-D Vector Field class"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a></li> 
       </ul>
@@ -44,232 +44,53 @@
           <div class="body" role="main">
             
   <section id="module-epygram.formats">
-<span id="epygram-formats-formats"></span><h1><a class="reference internal" href="#module-epygram.formats" title="epygram.formats: juggling with formats"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code></a> — Formats<a class="headerlink" href="#module-epygram.formats" title="Link to this heading">¶</a></h1>
+<span id="epygram-formats-formats"></span><h1><a class="reference internal" href="#module-epygram.formats" title="epygram.formats"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code></a> — Formats<a class="headerlink" href="#module-epygram.formats" title="Link to this heading">¶</a></h1>
 <p>Module contains:</p>
 <ul class="simple">
 <li><p>all formats classes.</p></li>
 <li><p>utilities to play with resource formats:</p>
 <ul>
 <li><p>guess the format of an existing resource in a given container;</p></li>
-<li><p>create a Resource instance with a generic function,
-eventually (if already existing) without knowing its format <em>a priori</em>;</p></li>
-<li><p>FA field names recognition</p></li>
+<li><p>open a Resource instance with a generic function (potentially guessing its format if in read mode);</p></li>
+<li><p>FA fields utilities</p></li>
+<li><p>conversion utilities</p></li>
 </ul>
 </li>
 </ul>
+<hr class="docutils" />
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="FA.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="FA.html#epygram.formats.FA.get_generic_fid"><code class="docutils literal notranslate"><span class="pre">get_generic_fid()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="FA.html#epygram.formats.FA.FaGribDef"><code class="docutils literal notranslate"><span class="pre">FaGribDef</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FaGribDef.FA2GRIB"><code class="docutils literal notranslate"><span class="pre">FaGribDef.FA2GRIB()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FaGribDef.GRIB2FA"><code class="docutils literal notranslate"><span class="pre">FaGribDef.GRIB2FA()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FaGribDef.lookup_FA"><code class="docutils literal notranslate"><span class="pre">FaGribDef.lookup_FA()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FaGribDef.lookup_GRIB"><code class="docutils literal notranslate"><span class="pre">FaGribDef.lookup_GRIB()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="FA.html#epygram.formats.FA.FA"><code class="docutils literal notranslate"><span class="pre">FA</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.cdiden"><code class="docutils literal notranslate"><span class="pre">FA.cdiden</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.close"><code class="docutils literal notranslate"><span class="pre">FA.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.default_compression"><code class="docutils literal notranslate"><span class="pre">FA.default_compression</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.delfield"><code class="docutils literal notranslate"><span class="pre">FA.delfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">FA.extract_subdomain()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.extractprofile"><code class="docutils literal notranslate"><span class="pre">FA.extractprofile()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.extractsection"><code class="docutils literal notranslate"><span class="pre">FA.extractsection()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.field_type"><code class="docutils literal notranslate"><span class="pre">FA.field_type()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.fieldencoding"><code class="docutils literal notranslate"><span class="pre">FA.fieldencoding()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.filename"><code class="docutils literal notranslate"><span class="pre">FA.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">FA.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">FA.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.format"><code class="docutils literal notranslate"><span class="pre">FA.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.headername"><code class="docutils literal notranslate"><span class="pre">FA.headername</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.listfields"><code class="docutils literal notranslate"><span class="pre">FA.listfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.modify_validity"><code class="docutils literal notranslate"><span class="pre">FA.modify_validity()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.open"><code class="docutils literal notranslate"><span class="pre">FA.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.openmode"><code class="docutils literal notranslate"><span class="pre">FA.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.processtype"><code class="docutils literal notranslate"><span class="pre">FA.processtype</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.readfield"><code class="docutils literal notranslate"><span class="pre">FA.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.readfields"><code class="docutils literal notranslate"><span class="pre">FA.readfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.rename_field"><code class="docutils literal notranslate"><span class="pre">FA.rename_field()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.sortfields"><code class="docutils literal notranslate"><span class="pre">FA.sortfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.split_UV"><code class="docutils literal notranslate"><span class="pre">FA.split_UV()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.validity"><code class="docutils literal notranslate"><span class="pre">FA.validity</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.what"><code class="docutils literal notranslate"><span class="pre">FA.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.writefield"><code class="docutils literal notranslate"><span class="pre">FA.writefield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="FA.html#epygram.formats.FA.FA.writefields"><code class="docutils literal notranslate"><span class="pre">FA.writefields()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="FA.html#epygram.formats.FA.FA"><code class="docutils literal notranslate"><span class="pre">FA</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="LFA.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFA</span></code> — Interface-Class to the LFA format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA"><code class="docutils literal notranslate"><span class="pre">LFA</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.close"><code class="docutils literal notranslate"><span class="pre">LFA.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.filename"><code class="docutils literal notranslate"><span class="pre">LFA.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">LFA.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">LFA.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.format"><code class="docutils literal notranslate"><span class="pre">LFA.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.listfields"><code class="docutils literal notranslate"><span class="pre">LFA.listfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.open"><code class="docutils literal notranslate"><span class="pre">LFA.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.openmode"><code class="docutils literal notranslate"><span class="pre">LFA.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.readfield"><code class="docutils literal notranslate"><span class="pre">LFA.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.what"><code class="docutils literal notranslate"><span class="pre">LFA.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA.writefield"><code class="docutils literal notranslate"><span class="pre">LFA.writefield()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="LFA.html#epygram.formats.LFA.LFA"><code class="docutils literal notranslate"><span class="pre">LFA</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="DDHLFA.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.DDHLFA</span></code> — Interface-Class to the DDHLFA format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA"><code class="docutils literal notranslate"><span class="pre">DDHLFA</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.domains"><code class="docutils literal notranslate"><span class="pre">DDHLFA.domains</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.filename"><code class="docutils literal notranslate"><span class="pre">DDHLFA.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">DDHLFA.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">DDHLFA.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.format"><code class="docutils literal notranslate"><span class="pre">DDHLFA.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.levels"><code class="docutils literal notranslate"><span class="pre">DDHLFA.levels</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.open"><code class="docutils literal notranslate"><span class="pre">DDHLFA.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.openmode"><code class="docutils literal notranslate"><span class="pre">DDHLFA.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.readfield"><code class="docutils literal notranslate"><span class="pre">DDHLFA.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.readfields"><code class="docutils literal notranslate"><span class="pre">DDHLFA.readfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.validity"><code class="docutils literal notranslate"><span class="pre">DDHLFA.validity</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.what"><code class="docutils literal notranslate"><span class="pre">DDHLFA.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA.xpid"><code class="docutils literal notranslate"><span class="pre">DDHLFA.xpid</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="DDHLFA.html#epygram.formats.DDHLFA.DDHLFA"><code class="docutils literal notranslate"><span class="pre">DDHLFA</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="LFI.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.LFI</span></code> — Interface-Class to the LFI format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI"><code class="docutils literal notranslate"><span class="pre">LFI</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.close"><code class="docutils literal notranslate"><span class="pre">LFI.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.compressed"><code class="docutils literal notranslate"><span class="pre">LFI.compressed</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.delfield"><code class="docutils literal notranslate"><span class="pre">LFI.delfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">LFI.extract_subdomain()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.extractprofile"><code class="docutils literal notranslate"><span class="pre">LFI.extractprofile()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.extractsection"><code class="docutils literal notranslate"><span class="pre">LFI.extractsection()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.filename"><code class="docutils literal notranslate"><span class="pre">LFI.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">LFI.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">LFI.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.format"><code class="docutils literal notranslate"><span class="pre">LFI.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.listfields"><code class="docutils literal notranslate"><span class="pre">LFI.listfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.moveOnMass"><code class="docutils literal notranslate"><span class="pre">LFI.moveOnMass</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.open"><code class="docutils literal notranslate"><span class="pre">LFI.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.openmode"><code class="docutils literal notranslate"><span class="pre">LFI.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.readfield"><code class="docutils literal notranslate"><span class="pre">LFI.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.readfields"><code class="docutils literal notranslate"><span class="pre">LFI.readfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.rename_field"><code class="docutils literal notranslate"><span class="pre">LFI.rename_field()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.sortfields"><code class="docutils literal notranslate"><span class="pre">LFI.sortfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.true3d"><code class="docutils literal notranslate"><span class="pre">LFI.true3d</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.what"><code class="docutils literal notranslate"><span class="pre">LFI.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.writefield"><code class="docutils literal notranslate"><span class="pre">LFI.writefield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI.writefields"><code class="docutils literal notranslate"><span class="pre">LFI.writefields()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="LFI.html#epygram.formats.LFI.LFI"><code class="docutils literal notranslate"><span class="pre">LFI</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="GeoPoints.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GeoPoints</span></code> — Interface-Class to the GeoPoints format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints"><code class="docutils literal notranslate"><span class="pre">GeoPoints</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.close"><code class="docutils literal notranslate"><span class="pre">GeoPoints.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.columns"><code class="docutils literal notranslate"><span class="pre">GeoPoints.columns</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.countpoints"><code class="docutils literal notranslate"><span class="pre">GeoPoints.countpoints()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.filename"><code class="docutils literal notranslate"><span class="pre">GeoPoints.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">GeoPoints.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.format"><code class="docutils literal notranslate"><span class="pre">GeoPoints.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.listfields"><code class="docutils literal notranslate"><span class="pre">GeoPoints.listfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.no_header"><code class="docutils literal notranslate"><span class="pre">GeoPoints.no_header</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.open"><code class="docutils literal notranslate"><span class="pre">GeoPoints.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.openmode"><code class="docutils literal notranslate"><span class="pre">GeoPoints.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.other_attributes"><code class="docutils literal notranslate"><span class="pre">GeoPoints.other_attributes</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.parameter"><code class="docutils literal notranslate"><span class="pre">GeoPoints.parameter</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.readfield"><code class="docutils literal notranslate"><span class="pre">GeoPoints.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.what"><code class="docutils literal notranslate"><span class="pre">GeoPoints.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints.writefield"><code class="docutils literal notranslate"><span class="pre">GeoPoints.writefield()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="GeoPoints.html#epygram.formats.GeoPoints.GeoPoints"><code class="docutils literal notranslate"><span class="pre">GeoPoints</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="TIFFMF.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.TIFFMF</span></code> — Interface-Class to the TIFFMF format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF"><code class="docutils literal notranslate"><span class="pre">TIFFMF</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.close"><code class="docutils literal notranslate"><span class="pre">TIFFMF.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.filename"><code class="docutils literal notranslate"><span class="pre">TIFFMF.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">TIFFMF.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">TIFFMF.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.format"><code class="docutils literal notranslate"><span class="pre">TIFFMF.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.listfields"><code class="docutils literal notranslate"><span class="pre">TIFFMF.listfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.open"><code class="docutils literal notranslate"><span class="pre">TIFFMF.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.openmode"><code class="docutils literal notranslate"><span class="pre">TIFFMF.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.readfield"><code class="docutils literal notranslate"><span class="pre">TIFFMF.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.readfields"><code class="docutils literal notranslate"><span class="pre">TIFFMF.readfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.sortfields"><code class="docutils literal notranslate"><span class="pre">TIFFMF.sortfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.what"><code class="docutils literal notranslate"><span class="pre">TIFFMF.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.writefield"><code class="docutils literal notranslate"><span class="pre">TIFFMF.writefield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF.writefields"><code class="docutils literal notranslate"><span class="pre">TIFFMF.writefields()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="TIFFMF.html#epygram.formats.TIFFMF.TIFFMF"><code class="docutils literal notranslate"><span class="pre">TIFFMF</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="netCDF.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.netCDF</span></code> — Interface-Class to the netCDF format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF"><code class="docutils literal notranslate"><span class="pre">netCDF</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.behave"><code class="docutils literal notranslate"><span class="pre">netCDF.behave()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.behaviour"><code class="docutils literal notranslate"><span class="pre">netCDF.behaviour</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.close"><code class="docutils literal notranslate"><span class="pre">netCDF.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.filename"><code class="docutils literal notranslate"><span class="pre">netCDF.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">netCDF.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">netCDF.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.format"><code class="docutils literal notranslate"><span class="pre">netCDF.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.ncdump"><code class="docutils literal notranslate"><span class="pre">netCDF.ncdump()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.ncinfo_field"><code class="docutils literal notranslate"><span class="pre">netCDF.ncinfo_field()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.open"><code class="docutils literal notranslate"><span class="pre">netCDF.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.openmode"><code class="docutils literal notranslate"><span class="pre">netCDF.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.readfield"><code class="docutils literal notranslate"><span class="pre">netCDF.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.set_default_global_attributes"><code class="docutils literal notranslate"><span class="pre">netCDF.set_default_global_attributes()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.set_global_attributes"><code class="docutils literal notranslate"><span class="pre">netCDF.set_global_attributes()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.variables_number"><code class="docutils literal notranslate"><span class="pre">netCDF.variables_number()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.what"><code class="docutils literal notranslate"><span class="pre">netCDF.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF.writefield"><code class="docutils literal notranslate"><span class="pre">netCDF.writefield()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="netCDF.html#epygram.formats.netCDF.netCDF"><code class="docutils literal notranslate"><span class="pre">netCDF</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="GRIB.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.GRIB</span></code> — Interface-Class to the GRIB format</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB"><code class="docutils literal notranslate"><span class="pre">GRIB</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.close"><code class="docutils literal notranslate"><span class="pre">GRIB.close()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">GRIB.extract_subdomain()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.extractprofile"><code class="docutils literal notranslate"><span class="pre">GRIB.extractprofile()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.extractsection"><code class="docutils literal notranslate"><span class="pre">GRIB.extractsection()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.filename"><code class="docutils literal notranslate"><span class="pre">GRIB.filename</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.find_fields_in_resource"><code class="docutils literal notranslate"><span class="pre">GRIB.find_fields_in_resource()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.fmtdelayedopen"><code class="docutils literal notranslate"><span class="pre">GRIB.fmtdelayedopen</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.format"><code class="docutils literal notranslate"><span class="pre">GRIB.format</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.get_message_at_position"><code class="docutils literal notranslate"><span class="pre">GRIB.get_message_at_position()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.iter_fields"><code class="docutils literal notranslate"><span class="pre">GRIB.iter_fields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.iter_messages"><code class="docutils literal notranslate"><span class="pre">GRIB.iter_messages()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.listfields"><code class="docutils literal notranslate"><span class="pre">GRIB.listfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.messages_number"><code class="docutils literal notranslate"><span class="pre">GRIB.messages_number</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.open"><code class="docutils literal notranslate"><span class="pre">GRIB.open()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.openmode"><code class="docutils literal notranslate"><span class="pre">GRIB.openmode</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.readfield"><code class="docutils literal notranslate"><span class="pre">GRIB.readfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.readfields"><code class="docutils literal notranslate"><span class="pre">GRIB.readfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.sortfields"><code class="docutils literal notranslate"><span class="pre">GRIB.sortfields()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.split_UV"><code class="docutils literal notranslate"><span class="pre">GRIB.split_UV()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.what"><code class="docutils literal notranslate"><span class="pre">GRIB.what()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB.writefield"><code class="docutils literal notranslate"><span class="pre">GRIB.writefield()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage"><code class="docutils literal notranslate"><span class="pre">GRIBmessage</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.actual_fid_keys"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.actual_fid_keys()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.as_field"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.as_field()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.asfield"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.asfield()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.fid_keys_for"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.fid_keys_for()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.genfid"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.genfid()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.get"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.get()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.readkeys"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.readkeys()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.readmessage"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.readmessage()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.set_from"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.set_from()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.set_values"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.set_values()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.specific_fid_keys_for"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.specific_fid_keys_for()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.update"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.update()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage.write_to_file"><code class="docutils literal notranslate"><span class="pre">GRIBmessage.write_to_file()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIB"><code class="docutils literal notranslate"><span class="pre">GRIB</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="GRIB.html#epygram.formats.GRIB.GRIBmessage"><code class="docutils literal notranslate"><span class="pre">GRIBmessage</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -277,14 +98,20 @@ eventually (if already existing) without knowing its format <em>a priori</em>;</
 <hr class="docutils" />
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="fafields.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="fafields.html#epygram.formats.fafields.find_wind_pair"><code class="docutils literal notranslate"><span class="pre">find_wind_pair()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="fafields.html#epygram.formats.fafields.SfxFldDesc_Mod"><code class="docutils literal notranslate"><span class="pre">SfxFldDesc_Mod</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="fafields.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.fafields</span></code> — Utilities around FA fields</a></li>
+<li class="toctree-l1"><a class="reference internal" href="conversion.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a></li>
 </ul>
 </div>
 <hr class="docutils" />
+<dl class="py data">
+<dt class="sig sig-object py" id="epygram.formats.runtime_available_formats">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.</span></span><span class="sig-name descname"><span class="pre">runtime_available_formats</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['netCDFMNH',</span> <span class="pre">'netCDF',</span> <span class="pre">'GRIB',</span> <span class="pre">'GeoPoints',</span> <span class="pre">'TIFFMF',</span> <span class="pre">'FA',</span> <span class="pre">'LFI',</span> <span class="pre">'DDHLFA',</span> <span class="pre">'LFA']</span></em><a class="headerlink" href="#epygram.formats.runtime_available_formats" title="Link to this definition">¶</a></dt>
+<dd><p>list of formats actually available at runtime</p>
+</dd></dl>
+
+<hr class="docutils" />
+<section id="functions">
+<h2>Functions:<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.formats.guess">
 <span class="sig-prename descclassname"><span class="pre">epygram.formats.</span></span><span class="sig-name descname"><span class="pre">guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats.html#guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.guess" title="Link to this definition">¶</a></dt>
@@ -292,7 +119,6 @@ eventually (if already existing) without knowing its format <em>a priori</em>;</
 <strong>filename</strong>, if succeeded.</p>
 </dd></dl>
 
-<hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.formats.resource">
 <span class="sig-prename descclassname"><span class="pre">epygram.formats.</span></span><span class="sig-name descname"><span class="pre">resource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">openmode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats.html#resource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.resource" title="Link to this definition">¶</a></dt>
@@ -311,6 +137,13 @@ optional and can be guessed from the existing resource</p></li>
 <p>Other kwargs are passed to the resource constructor.</p>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="epygram.formats.available_format">
+<span class="sig-prename descclassname"><span class="pre">epygram.formats.</span></span><span class="sig-name descname"><span class="pre">available_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats.html#available_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.available_format" title="Link to this definition">¶</a></dt>
+<dd><p>Check availability of low-level libraries for activating format.</p>
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -324,8 +157,13 @@ optional and can be guessed from the existing resource</p></li>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a><ul>
+<li><a class="reference internal" href="#epygram.formats.runtime_available_formats"><code class="docutils literal notranslate"><span class="pre">runtime_available_formats</span></code></a></li>
+<li><a class="reference internal" href="#functions">Functions:</a><ul>
 <li><a class="reference internal" href="#epygram.formats.guess"><code class="docutils literal notranslate"><span class="pre">guess()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.resource"><code class="docutils literal notranslate"><span class="pre">resource()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.available_format"><code class="docutils literal notranslate"><span class="pre">available_format()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -377,7 +215,7 @@ optional and can be guessed from the existing resource</p></li>
         <li class="right" >
           <a href="D3VectorField.html" title="epygram.fields.D3VectorField — 3-D Vector Field class"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a></li> 
       </ul>

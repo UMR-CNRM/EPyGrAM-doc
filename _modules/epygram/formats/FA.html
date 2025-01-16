@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats.FA &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
+    <title>epygram.formats.FA &#8212; epygram 2.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -25,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
@@ -47,65 +45,48 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Contains the class for FA format.</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
 
-<span class="kn">import</span> <span class="nn">datetime</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">import</span> <span class="nn">six</span>
-<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
 
-<span class="kn">import</span> <span class="nn">footprints</span>
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
-<span class="kn">from</span> <span class="nn">bronx.meteo.conversion</span> <span class="kn">import</span> <span class="n">q2R</span>
-<span class="kn">from</span> <span class="nn">bronx.syntax.arrays</span> <span class="kn">import</span> <span class="n">stretch_array</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">footprints</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">footprints</span><span class="w"> </span><span class="kn">import</span> <span class="n">FPDict</span><span class="p">,</span> <span class="n">FPList</span><span class="p">,</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bronx.meteo.conversion</span><span class="w"> </span><span class="kn">import</span> <span class="n">q2R</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bronx.syntax.arrays</span><span class="w"> </span><span class="kn">import</span> <span class="n">stretch_array</span>
 
-<span class="kn">from</span> <span class="nn">epygram.extra.falfilfa4py</span> <span class="kn">import</span> <span class="n">FA</span> <span class="k">as</span> <span class="n">FA4py</span>
-<span class="kn">from</span> <span class="nn">epygram.extra.falfilfa4py</span> <span class="kn">import</span> <span class="n">LFI</span> <span class="k">as</span> <span class="n">LFI4py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">falfilfa4py</span><span class="w"> </span><span class="kn">import</span> <span class="n">FA</span> <span class="k">as</span> <span class="n">FA4py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">falfilfa4py</span><span class="w"> </span><span class="kn">import</span> <span class="n">LFI</span> <span class="k">as</span> <span class="n">LFI4py</span>
 
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">separation_line</span><span class="p">,</span> <span class="n">write_formatted_fields</span>
-<span class="kn">from</span> <span class="nn">epygram.base</span> <span class="kn">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">FieldValidityList</span>
-<span class="kn">from</span> <span class="nn">epygram.resources</span> <span class="kn">import</span> <span class="n">FileResource</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">SpectralGeometry</span><span class="p">,</span> <span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">util</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">Angle</span><span class="p">,</span> <span class="n">separation_line</span><span class="p">,</span> <span class="n">write_formatted_fields</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">FieldSet</span><span class="p">,</span> <span class="n">FieldValidity</span><span class="p">,</span> <span class="n">FieldValidityList</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.resources</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileResource</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.geometries</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">Geometry</span><span class="p">,</span> <span class="n">SpectralGeometry</span><span class="p">,</span> <span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">,</span>
                                 <span class="n">RegLLGeometry</span><span class="p">,</span> <span class="n">VGeometry</span><span class="p">,</span> <span class="n">AcademicGeometry</span><span class="p">,</span> <span class="n">truncation_from_gridpoint_dims</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries.VGeometry</span> <span class="kn">import</span> <span class="p">(</span><span class="n">hybridP2pressure</span><span class="p">,</span> <span class="n">hybridP2altitude</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.geometries.VGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">hybridP2pressure</span><span class="p">,</span> <span class="n">hybridP2altitude</span><span class="p">,</span>
                                           <span class="n">pressure2altitude</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">epygram.fields</span> <span class="kn">import</span> <span class="n">MiscField</span><span class="p">,</span> <span class="n">H2DField</span>
-<span class="kn">from</span> <span class="nn">epygram.formats.fafields</span> <span class="kn">import</span> <span class="n">FaGribDef</span><span class="p">,</span> <span class="n">SfxFldDesc_Mod</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.fields</span><span class="w"> </span><span class="kn">import</span> <span class="n">MiscField</span><span class="p">,</span> <span class="n">H2DField</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.formats.fafields</span><span class="w"> </span><span class="kn">import</span> <span class="n">SfxFldDesc_Mod</span><span class="p">,</span> <span class="n">get_generic_fid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.extra.griberies.definitions.fa</span><span class="w"> </span><span class="kn">import</span> <span class="n">fagribdef</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="get_generic_fid"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.get_generic_fid">[docs]</a><span class="k">def</span> <span class="nf">get_generic_fid</span><span class="p">(</span><span class="n">fieldname</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a generic fid from **fieldname** (via FaGribDef).&quot;&quot;&quot;</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">fid</span> <span class="o">=</span> <span class="n">FA</span><span class="o">.</span><span class="n">gribdef</span><span class="o">.</span><span class="n">FA2GRIB</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span>
-                                 <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                 <span class="n">fatal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># not found</span>
-        <span class="k">if</span> <span class="n">FA</span><span class="o">.</span><span class="n">sfxflddesc</span><span class="o">.</span><span class="n">is_metadata</span><span class="p">(</span><span class="n">fieldname</span><span class="p">):</span>
-            <span class="k">raise</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">fid</span> <span class="o">=</span> <span class="n">FA</span><span class="o">.</span><span class="n">gribdef</span><span class="o">.</span><span class="n">FA2GRIB</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span>
-                                     <span class="n">include_comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                     <span class="n">fatal</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">fid</span></div>
-
-
-<span class="k">def</span> <span class="nf">_gen_headername</span><span class="p">():</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_gen_headername</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a random headername for the FA software.&quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">uuid</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">uuid</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">:</span><span class="mi">16</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">_create_header_from_geometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_create_header_from_geometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a header and returns its name, from a geometry and (preferably)</span>
 <span class="sd">    a SpectralGeometry.</span>
@@ -297,7 +278,9 @@
     <span class="k">return</span> <span class="n">headername</span>
 
 
-<div class="viewcode-block" id="FA"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA">[docs]</a><span class="k">class</span> <span class="nc">FA</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
+<div class="viewcode-block" id="FA">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FA</span><span class="p">(</span><span class="n">FileResource</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class implementing all specificities for FA resource format.&quot;&quot;&quot;</span>
 
     <span class="n">_footprint</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
@@ -337,17 +320,19 @@
     <span class="c1"># reference pressure coefficient for converting hybrid A coefficients in FA</span>
     <span class="n">reference_pressure</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">FA_default_reference_pressure</span>
     <span class="c1"># FA fields dicts</span>
-    <span class="n">gribdef</span> <span class="o">=</span> <span class="n">FaGribDef</span><span class="p">(</span><span class="n">actual_init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">gribdef</span> <span class="o">=</span> <span class="n">fagribdef</span>
     <span class="n">sfxflddesc</span> <span class="o">=</span> <span class="n">SfxFldDesc_Mod</span><span class="p">(</span><span class="n">actual_init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_FAsoft_init</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_FAsoft_init</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the FA software maximum dimensions.&quot;&quot;&quot;</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_FAsoftware_cst</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="s1">&#39;JPXPAH&#39;</span><span class="p">,</span> <span class="s1">&#39;JPXIND&#39;</span><span class="p">,</span> <span class="s1">&#39;JPXGEO&#39;</span><span class="p">,</span> <span class="s1">&#39;JPXNIV&#39;</span><span class="p">),</span>
                                        <span class="n">FA4py</span><span class="o">.</span><span class="n">get_facst</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="FA.field_type"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.field_type">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">field_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+<div class="viewcode-block" id="FA.field_type">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.field_type">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get field type, either &#39;H2D&#39; or the meta-data types registered in</span>
 <span class="sd">        cls.sfxflddesc</span>
@@ -363,7 +348,8 @@
                     <span class="n">ftype</span> <span class="o">=</span> <span class="s1">&#39;?&#39;</span>
         <span class="k">return</span> <span class="n">ftype</span></div>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="c1"># Initialization of FA software (if necessary):</span>
@@ -374,7 +360,9 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">fmtdelayedopen</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
 
-<div class="viewcode-block" id="FA.open"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.open">[docs]</a>    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+<div class="viewcode-block" id="FA.open">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.open">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
              <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">spectral_geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">validity</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -468,7 +456,10 @@
                 <span class="c1"># geometry taken in the first field to be written in resource</span>
                 <span class="k">pass</span></div>
 
-<div class="viewcode-block" id="FA.close"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.close">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.close">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Closes a FA with ifsaux&#39; FAIRME.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
@@ -477,10 +468,13 @@
                 <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;closing &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">isopen</span> <span class="o">=</span> <span class="kc">False</span></div>
 
+
 <span class="c1">################</span>
 <span class="c1"># ABOUT FIELDS #</span>
 <span class="c1">################</span>
-<div class="viewcode-block" id="FA.find_fields_in_resource"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.find_fields_in_resource">[docs]</a>    <span class="k">def</span> <span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fieldtype</span><span class="o">=</span><span class="p">[],</span> <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="FA.find_fields_in_resource">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.find_fields_in_resource">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">find_fields_in_resource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fieldtype</span><span class="o">=</span><span class="p">[],</span> <span class="n">generic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of the fields from resource whose name match the given</span>
 <span class="sd">        seed.</span>
@@ -505,7 +499,7 @@
                 <span class="k">if</span> <span class="n">fieldtypeslist</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span>\
                    <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
                     <span class="n">fieldslist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">six</span><span class="o">.</span><span class="n">string_types</span><span class="p">):</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">seed</span><span class="p">),</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">())))</span>
             <span class="k">if</span> <span class="n">h</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_find_re_in_list</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cache_find_re_in_list</span><span class="p">[</span><span class="n">h</span><span class="p">]</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">find_re_in_list</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">())</span>
@@ -535,15 +529,19 @@
 
         <span class="k">return</span> <span class="n">fieldslist</span></div>
 
-<div class="viewcode-block" id="FA.listfields"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.listfields">[docs]</a>    <span class="k">def</span> <span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.listfields">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.listfields">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list containing the FA identifiers of all the fields of the</span>
 <span class="sd">        resource.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">FA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">listfields</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
+
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_listfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">complete</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Actual listfields() method for FA.</span>
 
@@ -567,7 +565,7 @@
                 <span class="n">f</span><span class="p">[</span><span class="s1">&#39;generic&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hook_generic_fids</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;FA&#39;</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;generic&#39;</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">fieldslist</span>
 
-    <span class="k">def</span> <span class="nf">_hook_generic_fids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">generic_fid</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_hook_generic_fids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fid</span><span class="p">,</span> <span class="n">generic_fid</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fid</span> <span class="o">==</span> <span class="s1">&#39;SURFPRESSION&#39;</span><span class="p">:</span>
             <span class="c1"># ! hint: SURFPRESSION might be ln(sp) or sp.</span>
             <span class="c1"># One way to discriminate is spectralness: spectral SURFPRESSION must be ln(sp)</span>
@@ -575,7 +573,9 @@
                 <span class="n">generic_fid</span><span class="p">[</span><span class="s1">&#39;parameterNumber&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">25</span>  <span class="c1"># sp = 0 // ln(sp) = 25</span>
         <span class="k">return</span> <span class="n">generic_fid</span>
 
-<div class="viewcode-block" id="FA.split_UV"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.split_UV">[docs]</a>    <span class="k">def</span> <span class="nf">split_UV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldseed</span><span class="p">):</span>
+<div class="viewcode-block" id="FA.split_UV">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.split_UV">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">split_UV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldseed</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return two lists of fids corresponding respectively to U and V</span>
 <span class="sd">        components of wind, given a *fieldseed*.</span>
@@ -602,7 +602,10 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">Ufid</span><span class="p">),</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Vfid</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="FA.sortfields"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.sortfields">[docs]</a>    <span class="k">def</span> <span class="nf">sortfields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.sortfields">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.sortfields">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sortfields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a sorted list of fields with regards to their name and nature,</span>
 <span class="sd">        as a dict of lists.</span>
@@ -661,8 +664,9 @@
 
         <span class="k">return</span> <span class="n">outlists</span></div>
 
+
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">fieldencoding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">update_fieldscompression</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fieldencoding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">update_fieldscompression</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a dict containing info about how the field **fieldname**</span>
 <span class="sd">        is encoded: spectralness and compression. Interface to ifsaux&#39; FANION.</span>
@@ -698,7 +702,7 @@
         <span class="k">return</span> <span class="n">encoding</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
                   <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -717,17 +721,16 @@
         <span class="k">assert</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">(),</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;field&quot;</span><span class="p">,</span>
                                                          <span class="nb">str</span><span class="p">(</span><span class="n">fieldname</span><span class="p">),</span>
                                                          <span class="s2">&quot;not found in resource.&quot;</span><span class="p">])</span>
-        <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readH2DField</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span>
                                        <span class="n">getdata</span><span class="o">=</span><span class="n">getdata</span><span class="p">,</span>
                                        <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">footprints_proxy_as_builder</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">epygramError</span><span class="p">:</span>
-            <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;! Tried to read field &#39;</span><span class="si">{}</span><span class="s2">&#39; as H2D and failed: try as MiscField&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fieldname</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readMiscField</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="n">getdata</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">field</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">_readH2DField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_readH2DField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
                       <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                       <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -856,7 +859,7 @@
 
         <span class="k">return</span> <span class="n">field</span>
 
-    <span class="k">def</span> <span class="nf">_readMiscField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_readMiscField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads one metadata field, given its FA name, and returns a MiscField instance.</span>
 <span class="sd">        Interface to Fortran routine FALAIS.</span>
@@ -908,7 +911,9 @@
             <span class="n">field</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">dataOut</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">field</span>
 
-<div class="viewcode-block" id="FA.readfields"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.readfields">[docs]</a>    <span class="k">def</span> <span class="nf">readfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requestedfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="FA.readfields">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.readfields">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">readfields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requestedfields</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a :class:`epygram.base.FieldSet` containing requested fields</span>
 <span class="sd">        read in the resource.</span>
@@ -928,7 +933,10 @@
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">FA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">readfields</span><span class="p">(</span><span class="n">requestedfields</span><span class="p">,</span> <span class="n">getdata</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FA.writefield"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.writefield">[docs]</a>    <span class="k">def</span> <span class="nf">writefield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.writefield">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.writefield">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">writefield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write a field in the resource.</span>
 
@@ -1072,7 +1080,10 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">empty</span> <span class="o">=</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="FA.writefields"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.writefields">[docs]</a>    <span class="k">def</span> <span class="nf">writefields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldset</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.writefields">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.writefields">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">writefields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldset</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write the fields of the *fieldset* in the resource.</span>
 
@@ -1106,25 +1117,34 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">(</span><span class="n">FA</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">writefields</span><span class="p">(</span><span class="n">fieldset</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FA.rename_field"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.rename_field">[docs]</a>    <span class="k">def</span> <span class="nf">rename_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">new_name</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.rename_field">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.rename_field">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">rename_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">new_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Renames a field &quot;in place&quot;.&quot;&quot;&quot;</span>
         <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfiren</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span> <span class="n">new_name</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FA.delfield"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.delfield">[docs]</a>    <span class="k">def</span> <span class="nf">delfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.delfield">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.delfield">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Deletes a field from file &quot;in place&quot;.&quot;&quot;&quot;</span>
         <span class="n">LFI4py</span><span class="o">.</span><span class="n">wlfisup</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="FA.modify_validity"><a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.modify_validity">[docs]</a>    <span class="k">def</span> <span class="nf">modify_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+<div class="viewcode-block" id="FA.modify_validity">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.modify_validity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">modify_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Modify the validity of the resource in place.</span>
-
-<span class="sd">        All **kwargs to be passed to self.validity.set(**kwargs)</span>
+<span class="sd">        All **kwargs** to be passed to self.validity.set(**kwargs)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_validity</span><span class="p">()</span></div>
 
+
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">extractprofile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudoname</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extractprofile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudoname</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">vertical_coordinate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
@@ -1203,7 +1223,7 @@
         <span class="k">return</span> <span class="n">profile</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">extractsection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudoname</span><span class="p">,</span> <span class="n">end1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extractsection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudoname</span><span class="p">,</span> <span class="n">end1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">end2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">points_number</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">resolution</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1274,7 +1294,7 @@
         <span class="k">return</span> <span class="n">section</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">extract_subdomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_subdomain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                           <span class="n">pseudoname</span><span class="p">,</span>
                           <span class="n">geometry</span><span class="p">,</span>
                           <span class="n">vertical_coordinate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1423,7 +1443,7 @@
 
         <span class="k">return</span> <span class="n">subdomain</span>
 
-    <span class="k">def</span> <span class="nf">_mk_3dvirtuelfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudoname</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_mk_3dvirtuelfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pseudoname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a D3VirtualField from pseudoname.&quot;&quot;&quot;</span>
         <span class="n">fidlist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_fields_in_resource</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">pseudoname</span><span class="p">,</span>
                                                <span class="n">fieldtype</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;H2D&#39;</span><span class="p">,</span> <span class="s1">&#39;3D&#39;</span><span class="p">],</span>
@@ -1456,7 +1476,7 @@
 <span class="c1">###########</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">what</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
              <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span>
              <span class="n">details</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">sortfields</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1545,7 +1565,7 @@
 
 <span class="c1"># the FA WAY #</span>
 <span class="c1">##############</span>
-    <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;FA&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Write the &quot;header&quot; of the resource in **out**.</span>
 <span class="sd">        :param mode: - if &#39;LFI&#39;, writes the header as the corresponding LFI</span>
@@ -1557,7 +1577,7 @@
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;LFI&#39;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s1">&#39;that does not work yet ! Soon...&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="kn">from</span> <span class="nn">epygram.formats</span> <span class="kn">import</span> <span class="n">resource</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">epygram.formats</span><span class="w"> </span><span class="kn">import</span> <span class="n">resource</span>
             <span class="n">lfi</span> <span class="o">=</span> <span class="n">resource</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">abspath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;LFI&#39;</span><span class="p">)</span>
             <span class="n">_level</span> <span class="o">=</span> <span class="n">epylog</span><span class="o">.</span><span class="n">getEffectiveLevel</span><span class="p">()</span>
             <span class="n">epylog</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="s1">&#39;WARNING&#39;</span><span class="p">)</span>
@@ -1599,7 +1619,7 @@
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;KDATEF</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">KDATEF</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_field_type_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_field_type_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return type of the field, based on FANION or FA field dict.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">exist</span> <span class="o">=</span> <span class="n">FA4py</span><span class="o">.</span><span class="n">wfanion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span>
@@ -1613,7 +1633,7 @@
             <span class="n">ftype</span> <span class="o">=</span> <span class="s1">&#39;H2D&#39;</span>  <span class="c1"># because fanion fails or answers False for meta-fields</span>
         <span class="k">return</span> <span class="n">ftype</span>
 
-    <span class="k">def</span> <span class="nf">_raw_header_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_raw_header_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">vars_from_facies</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;KTYPTR&#39;</span><span class="p">,</span> <span class="s1">&#39;PSLAPO&#39;</span><span class="p">,</span> <span class="s1">&#39;PCLOPO&#39;</span><span class="p">,</span> <span class="s1">&#39;PSLOPO&#39;</span><span class="p">,</span>
                             <span class="s1">&#39;PCODIL&#39;</span><span class="p">,</span> <span class="s1">&#39;KTRONC&#39;</span><span class="p">,</span>
                             <span class="s1">&#39;KNLATI&#39;</span><span class="p">,</span> <span class="s1">&#39;KNXLON&#39;</span><span class="p">,</span> <span class="s1">&#39;KNLOPA&#39;</span><span class="p">,</span> <span class="s1">&#39;KNOZPA&#39;</span><span class="p">,</span> <span class="s1">&#39;PSINLA&#39;</span><span class="p">,</span>
@@ -1626,7 +1646,7 @@
                                        <span class="bp">self</span><span class="o">.</span><span class="n">headername</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
         <span class="k">return</span> <span class="n">zvars</span>
 
-    <span class="k">def</span> <span class="nf">_raw_header_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header_vars</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_raw_header_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">header_vars</span><span class="p">):</span>
         <span class="n">h</span> <span class="o">=</span> <span class="n">header_vars</span>
         <span class="n">FA4py</span><span class="o">.</span><span class="n">wfacade</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">headername</span><span class="p">,</span>
                       <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KTYPTR&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PSLAPO&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PCLOPO&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PSLOPO&#39;</span><span class="p">],</span>
@@ -1638,7 +1658,7 @@
                       <span class="n">h</span><span class="p">[</span><span class="s1">&#39;KNIVER&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PREFER&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PAHYBR&#39;</span><span class="p">],</span> <span class="n">h</span><span class="p">[</span><span class="s1">&#39;PBHYBR&#39;</span><span class="p">],</span>
                       <span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_read_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the geometry in the FA header.</span>
 <span class="sd">        Interface to Fortran routines from &#39;ifsaux&#39;.</span>
@@ -1824,7 +1844,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reads the validity in the FA header.</span>
 <span class="sd">        Interface to Fortran routines from &#39;ifsaux&#39;.</span>
@@ -1861,7 +1881,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">validity</span> <span class="o">=</span> <span class="n">FieldValidity</span><span class="p">(</span><span class="n">basis</span><span class="o">=</span><span class="n">basis</span><span class="p">,</span> <span class="n">term</span><span class="o">=</span><span class="n">term</span><span class="p">,</span> <span class="n">cumulativeduration</span><span class="o">=</span><span class="n">cumulativeduration</span><span class="p">)</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">_set_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">termunit</span><span class="o">=</span><span class="s1">&#39;hours&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">termunit</span><span class="o">=</span><span class="s1">&#39;hours&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets date, hour and the processtype in the resource.</span>
 <span class="sd">        :param termunit: unit of term, among (&#39;hours, &#39;days&#39;,)</span>
@@ -1918,7 +1938,7 @@
             <span class="n">FA4py</span><span class="o">.</span><span class="n">wfandax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span> <span class="n">KDATEF</span><span class="p">)</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">_getrunningcompression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_getrunningcompression</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the current compression parameters of the FA (at time of writing).</span>
 <span class="sd">        Interface to ifsaux&#39; FAVEUR.</span>
@@ -1930,7 +1950,7 @@
         <span class="k">return</span> <span class="n">comp</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
-    <span class="k">def</span> <span class="nf">_setrunningcompression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setrunningcompression</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets the compression parameters of the FA.</span>
 <span class="sd">        Interface to FAGOTE (cf. FAGOTE documentation for significance of</span>
@@ -1953,15 +1973,16 @@
                       <span class="n">comp</span><span class="p">[</span><span class="s1">&#39;KSTRON&#39;</span><span class="p">],</span>
                       <span class="n">comp</span><span class="p">[</span><span class="s1">&#39;KPUILA&#39;</span><span class="p">],</span>
                       <span class="n">comp</span><span class="p">[</span><span class="s1">&#39;KDMOPL&#39;</span><span class="p">])</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
@@ -1969,13 +1990,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -1984,7 +2005,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>
@@ -1992,8 +2013,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

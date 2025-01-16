@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>epygram.formats.conversion.converters — Format-specific conversion Taylorism Workers &#8212; epygram 2.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="epygram.resources — Real and virtual resources handling" href="resources.html" />
+    <link rel="prev" title="epygram.formats.conversion.functions — Formats conversion functions (API)" href="conversion_functions.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="conversion_functions.html" title="epygram.formats.conversion.functions — Formats conversion functions (API)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="conversion.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.converters</span></code> — Format-specific conversion Taylorism Workers</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-epygram.formats.conversion.converters">
+<span id="epygram-formats-conversion-converters-format-specific-conversion-taylorism-workers"></span><h1><a class="reference internal" href="#module-epygram.formats.conversion.converters" title="epygram.formats.conversion.converters"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.converters</span></code></a> — Format-specific conversion Taylorism Workers<a class="headerlink" href="#module-epygram.formats.conversion.converters" title="Link to this heading">¶</a></h1>
+<p>Converters: workers taylored to write in a dedicated format.</p>
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.converters.</span></span><span class="sig-name descname"><span class="pre">Converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/converters.html#Converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.converters.Converter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Worker</span></code></p>
+<p>Not documented yet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Converts a file into another format.</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>expected_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - How long the worker is expected to run (in s).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>fieldseed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rwx - to select only a part of the fields in resource.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - name of the file to be processed</p></li>
+<li><p><strong>memory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - Memory that should be used by the worker (in MiB).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Name of the worker.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>output_format_suffix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.</p></li>
+<li><p><strong>progressmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - to print either progress ‘percentage’ of job,                       or field fids (‘verbose’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_hooks</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of callbacks before starting effective task work.</p>
+<ul>
+<li><p>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_ticket</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - The slot number given by the scheduler (optional).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>subzone</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.expected_time">
+<span class="sig-name descname"><span class="pre">expected_time</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.expected_time" title="Link to this definition">¶</a></dt>
+<dd><p>How long the worker is expected to run (in s) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.fieldseed">
+<span class="sig-name descname"><span class="pre">fieldseed</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.fieldseed" title="Link to this definition">¶</a></dt>
+<dd><p>to select only a part of the fields in resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.filename" title="Link to this definition">¶</a></dt>
+<dd><p>name of the file to be processed (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.memory">
+<span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.memory" title="Link to this definition">¶</a></dt>
+<dd><p>Memory that should be used by the worker (in MiB) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the worker (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.output_format_suffix">
+<span class="sig-name descname"><span class="pre">output_format_suffix</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.output_format_suffix" title="Link to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.progressmode">
+<span class="sig-name descname"><span class="pre">progressmode</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.progressmode" title="Link to this definition">¶</a></dt>
+<dd><p>to print either progress ‘percentage’ of job,                       or field fids (‘verbose’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.scheduler_hooks">
+<span class="sig-name descname"><span class="pre">scheduler_hooks</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.scheduler_hooks" title="Link to this definition">¶</a></dt>
+<dd><p>List of callbacks before starting effective task work (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.scheduler_ticket">
+<span class="sig-name descname"><span class="pre">scheduler_ticket</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.scheduler_ticket" title="Link to this definition">¶</a></dt>
+<dd><p>The slot number given by the scheduler (optional) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Converter.subzone">
+<span class="sig-name descname"><span class="pre">subzone</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Converter.subzone" title="Link to this definition">¶</a></dt>
+<dd><p>to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’) (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.converters.</span></span><span class="sig-name descname"><span class="pre">Griber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/converters.html#Griber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.converters.Griber" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.formats.conversion.converters.Converter" title="epygram.formats.conversion.converters.Converter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Converter</span></code></a></p>
+<p>Not documented yet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Converts a file into GRIB2, with some MF operations rules to               define ‘generatingProcessIdentifier’.</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>default_packing</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - to specify default packing of fields in GRIB target.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict(bitsPerValue = 12, packingType = ‘grid_second_order’,)&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>expected_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - How long the worker is expected to run (in s).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>fieldseed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rwx - to select only a part of the fields in resource.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - name of the file to be processed</p></li>
+<li><p><strong>memory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - Memory that should be used by the worker (in MiB).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Name of the worker.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>other_grib_options</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - to specify other GRIB options (key/value pairs).</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>output_format_suffix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.</p>
+<ul>
+<li><p>Values: set([‘grb’])</p></li>
+</ul>
+</li>
+<li><p><strong>progressmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - to print either progress ‘percentage’ of job,                       or field fids (‘verbose’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_hooks</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of callbacks before starting effective task work.</p>
+<ul>
+<li><p>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_ticket</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - The slot number given by the scheduler (optional).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>specific_packing</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rwx - to specify packing of specific fields, with regards to                       their name.</p>
+<ul>
+<li><p>Optional. Default is FPDict::&lt;&lt;as_dict:: dict()&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>subzone</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>suite</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - to specify grib_api’s ‘productionStatusOfProcessedData’.                       Among (‘oper’, ‘dble’, ‘test’, ‘research’, ‘unknown’).</p>
+<ul>
+<li><p>Optional. Default is ‘research’.</p></li>
+<li><p>Values: set([‘test’, ‘dble’, ‘oper’, ‘research’, ‘unknown’])</p></li>
+</ul>
+</li>
+<li><p><strong>typeofgeneratingprocess</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - cf. epygram.extra.griberies.tables.typeOfGeneratingProcess_dict.</p>
+<ul>
+<li><p>Optional. Default is ‘Forecast’.</p></li>
+<li><p>Values: set([‘Post-processed analysis’, ‘Analysis’, ‘Bias-corrected ensemble forecast’, ‘Forecast’, ‘Hindcast’, ‘Observation’, ‘unknown’, ‘Probability forecast’, ‘Nowcast’, ‘Bias corrected forecast’, ‘Probability-weighted forecast’, ‘Forecast error’, ‘Ensemble forecast’, ‘Climatological’, ‘Initialization’, ‘Post-processed forecast’, ‘Analysis error’])</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.default_packing">
+<span class="sig-name descname"><span class="pre">default_packing</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.default_packing" title="Link to this definition">¶</a></dt>
+<dd><p>to specify default packing of fields in GRIB target (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.expected_time">
+<span class="sig-name descname"><span class="pre">expected_time</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.expected_time" title="Link to this definition">¶</a></dt>
+<dd><p>How long the worker is expected to run (in s) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.fieldseed">
+<span class="sig-name descname"><span class="pre">fieldseed</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.fieldseed" title="Link to this definition">¶</a></dt>
+<dd><p>to select only a part of the fields in resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.filename" title="Link to this definition">¶</a></dt>
+<dd><p>name of the file to be processed (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.memory">
+<span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.memory" title="Link to this definition">¶</a></dt>
+<dd><p>Memory that should be used by the worker (in MiB) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the worker (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.other_grib_options">
+<span class="sig-name descname"><span class="pre">other_grib_options</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.other_grib_options" title="Link to this definition">¶</a></dt>
+<dd><p>to specify other GRIB options (key/value pairs) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.output_format_suffix">
+<span class="sig-name descname"><span class="pre">output_format_suffix</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.output_format_suffix" title="Link to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.progressmode">
+<span class="sig-name descname"><span class="pre">progressmode</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.progressmode" title="Link to this definition">¶</a></dt>
+<dd><p>to print either progress ‘percentage’ of job,                       or field fids (‘verbose’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.scheduler_hooks">
+<span class="sig-name descname"><span class="pre">scheduler_hooks</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.scheduler_hooks" title="Link to this definition">¶</a></dt>
+<dd><p>List of callbacks before starting effective task work (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.scheduler_ticket">
+<span class="sig-name descname"><span class="pre">scheduler_ticket</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.scheduler_ticket" title="Link to this definition">¶</a></dt>
+<dd><p>The slot number given by the scheduler (optional) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.specific_packing">
+<span class="sig-name descname"><span class="pre">specific_packing</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.specific_packing" title="Link to this definition">¶</a></dt>
+<dd><p>to specify packing of specific fields, with regards to                       their name (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.subzone">
+<span class="sig-name descname"><span class="pre">subzone</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.subzone" title="Link to this definition">¶</a></dt>
+<dd><p>to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.suite">
+<span class="sig-name descname"><span class="pre">suite</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.suite" title="Link to this definition">¶</a></dt>
+<dd><p>to specify grib_api’s ‘productionStatusOfProcessedData’.                       Among (‘oper’, ‘dble’, ‘test’, ‘research’, ‘unknown’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.Griber.typeofgeneratingprocess">
+<span class="sig-name descname"><span class="pre">typeofgeneratingprocess</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.Griber.typeofgeneratingprocess" title="Link to this definition">¶</a></dt>
+<dd><p>cf. epygram.extra.griberies.tables.typeOfGeneratingProcess_dict (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.converters.</span></span><span class="sig-name descname"><span class="pre">NetCDFWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/converters.html#NetCDFWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.formats.conversion.converters.Converter" title="epygram.formats.conversion.converters.Converter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Converter</span></code></a></p>
+<p>Not documented yet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Converts a file into netCDF4.</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>compression</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rwx - compression level to compress fields in netCDF.                       Ranges from 0 to 9. 0 is no compression, 1 is low-but-fast                       compression, 9 is high-but-slow compression.                       Default is 4.</p>
+<ul>
+<li><p>Optional. Default is 4.</p></li>
+</ul>
+</li>
+<li><p><strong>expected_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - How long the worker is expected to run (in s).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>fieldseed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rwx - to select only a part of the fields in resource.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - name of the file to be processed</p></li>
+<li><p><strong>flatten_horizontal_grids</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - flatten 2D horizontal grids to 1D.</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>grib_short_fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rwx - condense GRIB fid as string, in case converting a GRIB file.</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>memory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - Memory that should be used by the worker (in MiB).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Name of the worker.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>output_format_suffix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.</p>
+<ul>
+<li><p>Values: set([‘nc’])</p></li>
+</ul>
+</li>
+<li><p><strong>progressmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - to print either progress ‘percentage’ of job,                       or field fids (‘verbose’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_hooks</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of callbacks before starting effective task work.</p>
+<ul>
+<li><p>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_ticket</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - The slot number given by the scheduler (optional).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>subzone</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.compression">
+<span class="sig-name descname"><span class="pre">compression</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.compression" title="Link to this definition">¶</a></dt>
+<dd><p>compression level to compress fields in netCDF.                       Ranges from 0 to 9. 0 is no compression, 1 is low-but-fast                       compression, 9 is high-but-slow compression.                       Default is 4 (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.expected_time">
+<span class="sig-name descname"><span class="pre">expected_time</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.expected_time" title="Link to this definition">¶</a></dt>
+<dd><p>How long the worker is expected to run (in s) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.fieldseed">
+<span class="sig-name descname"><span class="pre">fieldseed</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.fieldseed" title="Link to this definition">¶</a></dt>
+<dd><p>to select only a part of the fields in resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.filename" title="Link to this definition">¶</a></dt>
+<dd><p>name of the file to be processed (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.flatten_horizontal_grids">
+<span class="sig-name descname"><span class="pre">flatten_horizontal_grids</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.flatten_horizontal_grids" title="Link to this definition">¶</a></dt>
+<dd><p>flatten 2D horizontal grids to 1D (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.grib_short_fid">
+<span class="sig-name descname"><span class="pre">grib_short_fid</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.grib_short_fid" title="Link to this definition">¶</a></dt>
+<dd><p>condense GRIB fid as string, in case converting a GRIB file (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.memory">
+<span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.memory" title="Link to this definition">¶</a></dt>
+<dd><p>Memory that should be used by the worker (in MiB) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the worker (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.output_format_suffix">
+<span class="sig-name descname"><span class="pre">output_format_suffix</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.output_format_suffix" title="Link to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.progressmode">
+<span class="sig-name descname"><span class="pre">progressmode</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.progressmode" title="Link to this definition">¶</a></dt>
+<dd><p>to print either progress ‘percentage’ of job,                       or field fids (‘verbose’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.scheduler_hooks">
+<span class="sig-name descname"><span class="pre">scheduler_hooks</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.scheduler_hooks" title="Link to this definition">¶</a></dt>
+<dd><p>List of callbacks before starting effective task work (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.scheduler_ticket">
+<span class="sig-name descname"><span class="pre">scheduler_ticket</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.scheduler_ticket" title="Link to this definition">¶</a></dt>
+<dd><p>The slot number given by the scheduler (optional) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.NetCDFWriter.subzone">
+<span class="sig-name descname"><span class="pre">subzone</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.NetCDFWriter.subzone" title="Link to this definition">¶</a></dt>
+<dd><p>to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’) (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="py class">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.formats.conversion.converters.</span></span><span class="sig-name descname"><span class="pre">GeoPointsWriter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/formats/conversion/converters.html#GeoPointsWriter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#epygram.formats.conversion.converters.Converter" title="epygram.formats.conversion.converters.Converter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Converter</span></code></a></p>
+<p>Not documented yet.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This class is managed by footprint.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>info: Converts a file into GeoPoints.</p></li>
+<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
+</ul>
+</div></blockquote>
+<p>Automatic parameters from the footprint:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>columns</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rwx - simplified GeoPoints, specify columns to be written.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>expected_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - How long the worker is expected to run (in s).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>fieldseed</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rwx - to select only a part of the fields in resource.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>filename</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - name of the file to be processed</p></li>
+<li><p><strong>grib_short_fid</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rwx - condense GRIB fid as string, in case converting a GRIB file.</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>llv</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rwx - lat/lon/value mode == simplified GeoPoints.</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>lonlat_precision</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rwx - number of digits for output lon/lat values.</p>
+<ul>
+<li><p>Optional. Default is 4.</p></li>
+</ul>
+</li>
+<li><p><strong>memory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - Memory that should be used by the worker (in MiB).</p>
+<ul>
+<li><p>Optional. Default is 0.0.</p></li>
+</ul>
+</li>
+<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Name of the worker.</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>no_header</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.bool</span></code>) - rxx - If True, do not write header (openmode=’w’).</p>
+<ul>
+<li><p>Optional. Default is False.</p></li>
+</ul>
+</li>
+<li><p><strong>order</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - for a rectangular H2DField, whether to flatten 2D arrays                       in ‘C’ (row-major) or ‘F’ (Fortran, column-major) order.</p>
+<ul>
+<li><p>Optional. Default is ‘C’.</p></li>
+</ul>
+</li>
+<li><p><strong>output_format_suffix</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Not documented, sorry.</p>
+<ul>
+<li><p>Values: set([‘geo’])</p></li>
+</ul>
+</li>
+<li><p><strong>precision</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rwx - number of digits for output fields values.</p>
+<ul>
+<li><p>Optional. Default is 6.</p></li>
+</ul>
+</li>
+<li><p><strong>progressmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - to print either progress ‘percentage’ of job,                       or field fids (‘verbose’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_hooks</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of callbacks before starting effective task work.</p>
+<ul>
+<li><p>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</p></li>
+</ul>
+</li>
+<li><p><strong>scheduler_ticket</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - The slot number given by the scheduler (optional).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+<li><p><strong>subzone</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’).</p>
+<ul>
+<li><p>Optional. Default is None.</p></li>
+</ul>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.columns">
+<span class="sig-name descname"><span class="pre">columns</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.columns" title="Link to this definition">¶</a></dt>
+<dd><p>simplified GeoPoints, specify columns to be written (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.expected_time">
+<span class="sig-name descname"><span class="pre">expected_time</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.expected_time" title="Link to this definition">¶</a></dt>
+<dd><p>How long the worker is expected to run (in s) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.fieldseed">
+<span class="sig-name descname"><span class="pre">fieldseed</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.fieldseed" title="Link to this definition">¶</a></dt>
+<dd><p>to select only a part of the fields in resource (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.filename">
+<span class="sig-name descname"><span class="pre">filename</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.filename" title="Link to this definition">¶</a></dt>
+<dd><p>name of the file to be processed (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.grib_short_fid">
+<span class="sig-name descname"><span class="pre">grib_short_fid</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.grib_short_fid" title="Link to this definition">¶</a></dt>
+<dd><p>condense GRIB fid as string, in case converting a GRIB file (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.llv">
+<span class="sig-name descname"><span class="pre">llv</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.llv" title="Link to this definition">¶</a></dt>
+<dd><p>lat/lon/value mode == simplified GeoPoints (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.lonlat_precision">
+<span class="sig-name descname"><span class="pre">lonlat_precision</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.lonlat_precision" title="Link to this definition">¶</a></dt>
+<dd><p>number of digits for output lon/lat values (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.memory">
+<span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.memory" title="Link to this definition">¶</a></dt>
+<dd><p>Memory that should be used by the worker (in MiB) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the worker (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.no_header">
+<span class="sig-name descname"><span class="pre">no_header</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.no_header" title="Link to this definition">¶</a></dt>
+<dd><p>If True, do not write header (openmode=’w’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.order">
+<span class="sig-name descname"><span class="pre">order</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.order" title="Link to this definition">¶</a></dt>
+<dd><p>for a rectangular H2DField, whether to flatten 2D arrays                       in ‘C’ (row-major) or ‘F’ (Fortran, column-major) order (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.output_format_suffix">
+<span class="sig-name descname"><span class="pre">output_format_suffix</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.output_format_suffix" title="Link to this definition">¶</a></dt>
+<dd><p>(see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.precision">
+<span class="sig-name descname"><span class="pre">precision</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.precision" title="Link to this definition">¶</a></dt>
+<dd><p>number of digits for output fields values (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.progressmode">
+<span class="sig-name descname"><span class="pre">progressmode</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.progressmode" title="Link to this definition">¶</a></dt>
+<dd><p>to print either progress ‘percentage’ of job,                       or field fids (‘verbose’) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.scheduler_hooks">
+<span class="sig-name descname"><span class="pre">scheduler_hooks</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.scheduler_hooks" title="Link to this definition">¶</a></dt>
+<dd><p>List of callbacks before starting effective task work (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.scheduler_ticket">
+<span class="sig-name descname"><span class="pre">scheduler_ticket</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.scheduler_ticket" title="Link to this definition">¶</a></dt>
+<dd><p>The slot number given by the scheduler (optional) (see the documentation above for more details).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="epygram.formats.conversion.converters.GeoPointsWriter.subzone">
+<span class="sig-name descname"><span class="pre">subzone</span></span><a class="headerlink" href="#epygram.formats.conversion.converters.GeoPointsWriter.subzone" title="Link to this definition">¶</a></dt>
+<dd><p>to extract a subzone of LAM fields, in case, among (‘C’, ‘CI’) (see the documentation above for more details).</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.converters</span></code> — Format-specific conversion Taylorism Workers</a><ul>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter"><code class="docutils literal notranslate"><span class="pre">Converter</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.expected_time"><code class="docutils literal notranslate"><span class="pre">Converter.expected_time</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.fieldseed"><code class="docutils literal notranslate"><span class="pre">Converter.fieldseed</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.filename"><code class="docutils literal notranslate"><span class="pre">Converter.filename</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.memory"><code class="docutils literal notranslate"><span class="pre">Converter.memory</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.name"><code class="docutils literal notranslate"><span class="pre">Converter.name</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.output_format_suffix"><code class="docutils literal notranslate"><span class="pre">Converter.output_format_suffix</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.progressmode"><code class="docutils literal notranslate"><span class="pre">Converter.progressmode</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.scheduler_hooks"><code class="docutils literal notranslate"><span class="pre">Converter.scheduler_hooks</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.scheduler_ticket"><code class="docutils literal notranslate"><span class="pre">Converter.scheduler_ticket</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Converter.subzone"><code class="docutils literal notranslate"><span class="pre">Converter.subzone</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber"><code class="docutils literal notranslate"><span class="pre">Griber</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.default_packing"><code class="docutils literal notranslate"><span class="pre">Griber.default_packing</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.expected_time"><code class="docutils literal notranslate"><span class="pre">Griber.expected_time</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.fieldseed"><code class="docutils literal notranslate"><span class="pre">Griber.fieldseed</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.filename"><code class="docutils literal notranslate"><span class="pre">Griber.filename</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.memory"><code class="docutils literal notranslate"><span class="pre">Griber.memory</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.name"><code class="docutils literal notranslate"><span class="pre">Griber.name</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.other_grib_options"><code class="docutils literal notranslate"><span class="pre">Griber.other_grib_options</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.output_format_suffix"><code class="docutils literal notranslate"><span class="pre">Griber.output_format_suffix</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.progressmode"><code class="docutils literal notranslate"><span class="pre">Griber.progressmode</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.scheduler_hooks"><code class="docutils literal notranslate"><span class="pre">Griber.scheduler_hooks</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.scheduler_ticket"><code class="docutils literal notranslate"><span class="pre">Griber.scheduler_ticket</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.specific_packing"><code class="docutils literal notranslate"><span class="pre">Griber.specific_packing</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.subzone"><code class="docutils literal notranslate"><span class="pre">Griber.subzone</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.suite"><code class="docutils literal notranslate"><span class="pre">Griber.suite</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.Griber.typeofgeneratingprocess"><code class="docutils literal notranslate"><span class="pre">Griber.typeofgeneratingprocess</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.compression"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.compression</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.expected_time"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.expected_time</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.fieldseed"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.fieldseed</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.filename"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.filename</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.flatten_horizontal_grids"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.flatten_horizontal_grids</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.grib_short_fid"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.grib_short_fid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.memory"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.memory</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.name"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.name</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.output_format_suffix"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.output_format_suffix</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.progressmode"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.progressmode</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.scheduler_hooks"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.scheduler_hooks</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.scheduler_ticket"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.scheduler_ticket</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.NetCDFWriter.subzone"><code class="docutils literal notranslate"><span class="pre">NetCDFWriter.subzone</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter</span></code></a><ul>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.columns"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.columns</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.expected_time"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.expected_time</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.fieldseed"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.fieldseed</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.filename"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.filename</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.grib_short_fid"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.grib_short_fid</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.llv"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.llv</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.lonlat_precision"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.lonlat_precision</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.memory"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.memory</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.name"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.name</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.no_header"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.no_header</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.order"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.order</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.output_format_suffix"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.output_format_suffix</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.precision"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.precision</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.progressmode"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.progressmode</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.scheduler_hooks"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.scheduler_hooks</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.scheduler_ticket"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.scheduler_ticket</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.conversion.converters.GeoPointsWriter.subzone"><code class="docutils literal notranslate"><span class="pre">GeoPointsWriter.subzone</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="conversion_functions.html"
+                          title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.functions</span></code> — Formats conversion functions (API)</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="resources.html"
+                          title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.resources</span></code> — Real and virtual resources handling</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/library/converters.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="conversion_functions.html" title="epygram.formats.conversion.functions — Formats conversion functions (API)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="conversion.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion</span></code> — Utilities for conversion between formats</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.conversion.converters</span></code> — Format-specific conversion Taylorism Workers</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    </div>
+  </body>
+</html>
