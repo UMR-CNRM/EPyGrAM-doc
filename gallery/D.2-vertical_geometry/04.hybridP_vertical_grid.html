@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate &#8212; epygram 2.0.1 documentation</title>
+    <title>Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate &#8212; epygram 2.0.4 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
     <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
-    <script src="../../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../../_static/documentation_options.js?v=adc66a14"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -25,7 +25,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate</a></li> 
       </ul>
     </div>  
@@ -57,7 +57,7 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-# [2025/01/16-17:43:10][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
+# [2025/04/08-18:13:34][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -107,7 +107,7 @@
 </pre></div>
 </div>
 </div>
-<p><img alt="title" src="../../_images/vgrid.png" /></p>
+<img alt="title" src="../../_images/vgrid.png" />
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -116,12 +116,83 @@
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-None
+ICMSHAROM+0022.NAMVV1
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+--- Logging error ---
+Traceback (most recent call last):
+  File &#34;/usr/lib/python3.12/logging/__init__.py&#34;, line 1160, in emit
+    msg = self.format(record)
+          ^^^^^^^^^^^^^^^^^^^
+  File &#34;/usr/lib/python3.12/logging/__init__.py&#34;, line 999, in format
+    return fmt.format(record)
+           ^^^^^^^^^^^^^^^^^^
+  File &#34;/usr/lib/python3.12/logging/__init__.py&#34;, line 703, in format
+    record.message = record.getMessage()
+                     ^^^^^^^^^^^^^^^^^^^
+  File &#34;/usr/lib/python3.12/logging/__init__.py&#34;, line 392, in getMessage
+    msg = msg % self.args
+          ~~~~^~~~~~~~~~~
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File &#34;&lt;frozen runpy&gt;&#34;, line 198, in _run_module_as_main
+  File &#34;&lt;frozen runpy&gt;&#34;, line 88, in _run_code
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel_launcher.py&#34;, line 18, in &lt;module&gt;
+    app.launch_new_instance()
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/traitlets/config/application.py&#34;, line 1075, in launch_instance
+    app.start()
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/kernelapp.py&#34;, line 739, in start
+    self.io_loop.start()
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/tornado/platform/asyncio.py&#34;, line 205, in start
+    self.asyncio_loop.run_forever()
+  File &#34;/usr/lib/python3.12/asyncio/base_events.py&#34;, line 641, in run_forever
+    self._run_once()
+  File &#34;/usr/lib/python3.12/asyncio/base_events.py&#34;, line 1987, in _run_once
+    handle._run()
+  File &#34;/usr/lib/python3.12/asyncio/events.py&#34;, line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/kernelbase.py&#34;, line 545, in dispatch_queue
+    await self.process_one()
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/kernelbase.py&#34;, line 534, in process_one
+    await dispatch(*args)
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/kernelbase.py&#34;, line 437, in dispatch_shell
+    await result
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/ipkernel.py&#34;, line 362, in execute_request
+    await super().execute_request(stream, ident, parent)
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/kernelbase.py&#34;, line 778, in execute_request
+    reply_content = await reply_content
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/ipkernel.py&#34;, line 449, in do_execute
+    res = shell.run_cell(
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/ipykernel/zmqshell.py&#34;, line 549, in run_cell
+    return super().run_cell(*args, **kwargs)
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/interactiveshell.py&#34;, line 3075, in run_cell
+    result = self._run_cell(
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/interactiveshell.py&#34;, line 3130, in _run_cell
+    result = runner(coro)
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/async_helpers.py&#34;, line 128, in _pseudo_sync_runner
+    coro.send(None)
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/interactiveshell.py&#34;, line 3334, in run_cell_async
+    has_raised = await self.run_ast_nodes(code_ast.body, cell_name,
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/interactiveshell.py&#34;, line 3517, in run_ast_nodes
+    if await self.run_code(code, result, async_=asy):
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/interactiveshell.py&#34;, line 3577, in run_code
+    exec(code_obj, self.user_global_ns, self.user_ns)
+  File &#34;/tmp/ipykernel_5788/3414190791.py&#34;, line 1, in &lt;module&gt;
+    print(vg.write_AB_to_namelist())
+  File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/pyvgrid/hybridpressurevgrid.py&#34;, line 282, in write_AB_to_namelist
+    logger.info(&#34;A/B coefficients written to namelist file:&#34;,fname)
+Message: &#39;A/B coefficients written to namelist file:&#39;
+Arguments: (&#39;ICMSHAROM+0022.NAMVV1&#39;,)
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -182,7 +253,7 @@ None
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Plot the z/p characteristics of a Hybrid-Pressure vertical coordinate</a></li> 
       </ul>
     </div>

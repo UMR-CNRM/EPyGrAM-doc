@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.config — Configuration: parameters, options &#8212; epygram 2.0.1 documentation</title>
+    <title>epygram.config — Configuration: parameters, options &#8212; epygram 2.0.4 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../_static/documentation_options.js?v=adc66a14"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></li> 
       </ul>
@@ -110,20 +110,21 @@ the user in the User config file <code class="docutils literal notranslate"><spa
 <h2>Formats Specifications<a class="headerlink" href="#formats-specifications" title="Link to this heading">¶</a></h2>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.implemented_formats">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">implemented_formats</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['netCDFMNH',</span> <span class="pre">'netCDF',</span> <span class="pre">'GRIB',</span> <span class="pre">'GeoPoints',</span> <span class="pre">'TIFFMF',</span> <span class="pre">'HDF5SAF',</span> <span class="pre">'FA',</span> <span class="pre">'LFI',</span> <span class="pre">'DDHLFA',</span> <span class="pre">'LFA']</span></em><a class="headerlink" href="#epygram.config.implemented_formats" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">implemented_formats</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['netCDFSAF',</span> <span class="pre">'netCDFMNH',</span> <span class="pre">'netCDF',</span> <span class="pre">'GRIB',</span> <span class="pre">'GeoPoints',</span> <span class="pre">'TIFFMF',</span> <span class="pre">'HDF5SAF',</span> <span class="pre">'FA',</span> <span class="pre">'LFI',</span> <span class="pre">'DDHLFA',</span> <span class="pre">'LFA']</span></em><a class="headerlink" href="#epygram.config.implemented_formats" title="Link to this definition">¶</a></dt>
 <dd><p>List of implemented/activated formats
 for the formats_factory, the list is ordered by specificity for those of the
 same family (e.g. FA before LFI, DDHLFA before LFA…)
 Removing one of these (in userconfig file) may allow an incomplete install
 of epygram, disabling one format.
-In loading order to deal with sub-libraries compatibilities (e.g. h5py after netCDF4, cf. <a class="reference external" href="https://github.com/Unidata/netcdf4-python/issues/1343">https://github.com/Unidata/netcdf4-python/issues/1343</a>)</p>
+In loading order to deal with sub-libraries compatibilities (e.g. h5py after
+netCDF4, cf. <a class="reference external" href="https://github.com/Unidata/netcdf4-python/issues/1343">https://github.com/Unidata/netcdf4-python/issues/1343</a>)</p>
 </dd></dl>
 
 <section id="fa">
 <h3>FA<a class="headerlink" href="#fa" title="Link to this heading">¶</a></h3>
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.FA_default_compression">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'KDMOPL':</span> <span class="pre">0,</span> <span class="pre">'KNBCSP':</span> <span class="pre">16,</span> <span class="pre">'KNBPDG':</span> <span class="pre">16,</span> <span class="pre">'KNGRIB':</span> <span class="pre">2,</span> <span class="pre">'KPUILA':</span> <span class="pre">0,</span> <span class="pre">'KSTRON':</span> <span class="pre">0}</span></em><a class="headerlink" href="#epygram.config.FA_default_compression" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">FA_default_compression</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'KDMOPL':</span> <span class="pre">0,</span> <span class="pre">'KNBCSP':</span> <span class="pre">16,</span> <span class="pre">'KNBPDG':</span> <span class="pre">16,</span> <span class="pre">'KNGRIB':</span> <span class="pre">123,</span> <span class="pre">'KPUILA':</span> <span class="pre">0,</span> <span class="pre">'KSTRON':</span> <span class="pre">0}</span></em><a class="headerlink" href="#epygram.config.FA_default_compression" title="Link to this definition">¶</a></dt>
 <dd><p>FA default compression parameters</p>
 </dd></dl>
 
@@ -339,7 +340,7 @@ and eventual according grid, e.g. ‘X_grid’:’longitudes’</p>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="epygram.config.netCDF_default_global_attributes">
-<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_global_attributes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'made_with':</span> <span class="pre">'epygram-2.0.1'}</span></em><a class="headerlink" href="#epygram.config.netCDF_default_global_attributes" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.config.</span></span><span class="sig-name descname"><span class="pre">netCDF_default_global_attributes</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'made_with':</span> <span class="pre">'epygram-2.0.4'}</span></em><a class="headerlink" href="#epygram.config.netCDF_default_global_attributes" title="Link to this definition">¶</a></dt>
 <dd><p>netCDF default standard global attributes</p>
 </dd></dl>
 
@@ -637,7 +638,7 @@ e.g. {‘aspect’, ‘/home/mary/.epygram/aspect.json’}.</p>
         <li class="right" >
           <a href="resources.html" title="epygram.resources — Real and virtual resources handling"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.config</span></code> — Configuration: parameters, options</a></li> 
       </ul>

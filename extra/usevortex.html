@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>usevortex — Proxies to reach resources using Vortex &#8212; epygram 2.0.1 documentation</title>
+    <title>usevortex — Proxies to reach resources using Vortex &#8212; epygram 2.0.4 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=f5cff4aa"></script>
+    <script src="../_static/documentation_options.js?v=adc66a14"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -28,7 +28,7 @@
         <li class="right" >
           <a href="griberies/concepts.html" title="concepts — utilities around GRIB concepts"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a></li> 
       </ul>
@@ -39,288 +39,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="module-epygram.extra.usevortex">
-<span id="usevortex-proxies-to-reach-resources-using-vortex"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex<a class="headerlink" href="#module-epygram.extra.usevortex" title="Link to this heading">¶</a></h1>
-<p>Contains proxies to reach resources using Vortex.</p>
-<p>Of course, this module need to have a proper Vortex installation !</p>
+  <section id="usevortex-proxies-to-reach-resources-using-vortex">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex<a class="headerlink" href="#usevortex-proxies-to-reach-resources-using-vortex" title="Link to this heading">¶</a></h1>
 <hr class="docutils" />
 <section id="functions">
 <h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.set_defaults">
-<span class="sig-prename descclassname"><span class="pre">epygram.extra.usevortex.</span></span><span class="sig-name descname"><span class="pre">set_defaults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">defaults</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/extra/usevortex.html#set_defaults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.usevortex.set_defaults" title="Link to this definition">¶</a></dt>
-<dd><p>Set defaults key/value pairs for get_resource().</p>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.quiet_get">
-<span class="sig-prename descclassname"><span class="pre">epygram.extra.usevortex.</span></span><span class="sig-name descname"><span class="pre">quiet_get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loggers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['vortex.data.stores',</span> <span class="pre">'vortex.data.handlers',</span> <span class="pre">'vortex.tools.net']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/extra/usevortex.html#quiet_get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.usevortex.quiet_get" title="Link to this definition">¶</a></dt>
-<dd><p>Shut off some loggers (set level to ERROR) while executing action,
-then restore initial level.</p>
-<p>Example of use:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">quiet_get</span><span class="p">():</span>
-    <span class="n">get_resources</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.get_resources">
-<span class="sig-prename descclassname"><span class="pre">epygram.extra.usevortex.</span></span><span class="sig-name descname"><span class="pre">get_resources</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">getmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'epygram'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uselocalcache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">description</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/extra/usevortex.html#get_resources"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.usevortex.get_resources" title="Link to this definition">¶</a></dt>
-<dd><p>Get resources, given their description.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>getmode</strong> – <p>controls the action and returned object:</p>
-<ul>
-<li><p>’check’ return True only if the description is complete</p></li>
-<li><p>’epygram’ return the epygram resources</p></li>
-<li><p>’locate’ return the physical resolved location of the
-resource</p></li>
-<li><p>’exist’ return the physical resolved location of the
-resource and its existence</p></li>
-<li><p>’fetch’ fetches the resource in local, as filename <em>local</em></p></li>
-<li><p>’vortex’ return the vortex data handler of the resource</p></li>
-<li><p>’prestaging’ puts a prestaging request for the resolved
-resources, on the archive system</p></li>
-</ul>
-</p></li>
-<li><p><strong>uselocalcache</strong> – if True, store resources in a local cache (not
-automatically cleaned, take care) defined either (and by
-priority order) in $MTOOL_STEP_CACHE, $MTOOLDIR, $FTDIR,
-$WORKDIR, $TMPDIR.</p></li>
-</ul>
-</dd>
-</dl>
-<p>Examples:</p>
-<ul class="simple">
-<li><p>for the analysis of AROME-france from experiment 864G on 2015/08/15/00,
-description will look like:</p>
-<ul>
-<li><p>experiment=’864G’,  # the experiment id</p></li>
-<li><p>model=’arome’,</p></li>
-<li><p>block=’analysis’,  # the OLIVE block</p></li>
-<li><p>kind=’analysis’,  # the kind of resource</p></li>
-<li><p>date=’2015081500’,  # the initial date and time</p></li>
-<li><p>geometry=’franmgsp’,  # the name of the model domain</p></li>
-<li><p>local=’analysis_[experiment]’,  # the local filename of the resource, once fetched.</p></li>
-</ul>
-</li>
-<li><p>for the model state at term 18h of ALADIN-reunion oper, production
-cutoff, on 2015/08/15/00,
-description will look like:</p>
-<ul>
-<li><p>suite=’oper’,  # the suite // ‘dble’ = e-suite</p></li>
-<li><p>kind=’historic’,  # model state</p></li>
-<li><p>date=’2015081500’,  # the initial date and time</p></li>
-<li><p>term=18,  # the forecast term</p></li>
-<li><p>geometry=’reunionsp’,  # the name of the model domain</p></li>
-<li><p>local=’ICMSHALAD_[term]’,  # the local filename of the resource, once fetched.</p></li>
-<li><p>cutoff=’prod’,  # type of cutoff</p></li>
-<li><p>vapp=’aladin’,  # type of application in operations namespace</p></li>
-<li><p>vconf=’reunion’,  # name of config in operation namespace</p></li>
-<li><p>model=’aladin’,  # name of the model</p></li>
-</ul>
-</li>
-<li><p>for the GRIB post-processed output on MASCA025 BDAP domain at terms
-22-&gt;24h of ALADIN-reunion oper, production cutoff, on 2015/08/15/00,
-description will look like:</p>
-<ul>
-<li><p>suite=’oper’,  # the suite // ‘dble’ = e-suite</p></li>
-<li><p>kind=’gridpoint’,  # model state</p></li>
-<li><p>date=’2015081500’,  # the initial date and time</p></li>
-<li><p>term=[22,23,24],  # the forecast terms</p></li>
-<li><p>geometry=’masca025’,  # the name of the post-processing domain</p></li>
-<li><p>local=’[geometry]_[term].grb’,  # the local filename of the resource, once fetched.</p></li>
-<li><p>nativefmt=’grib’  # to fetch the gribs and not the FA post-processed files</p></li>
-<li><p>cutoff=’prod’,  # type of cutoff</p></li>
-<li><p>origin=’hst’,  # origin of post-processed files: historic</p></li>
-<li><p>vapp=’aladin’,  # type of application in operations namespace</p></li>
-<li><p>vconf=’reunion’,  # name of config in operation namespace</p></li>
-<li><p>model=’aladin’,  # name of the model</p></li>
-</ul>
-</li>
-</ul>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.extractor">
-<span class="sig-prename descclassname"><span class="pre">epygram.extra.usevortex.</span></span><span class="sig-name descname"><span class="pre">extractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vortex_description</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_cutoff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">points_fields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">profiles_FAfields</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">everycutoff_in_hours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">24</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">everyterm_in_hours</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_coordinate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extraction_options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_local_cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prestaging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/mary/repositories/EPyGrAM/docs/source'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progressmode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nc_global_attributes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'history':</span> <span class="pre">'Extracted</span> <span class="pre">on</span> <span class="pre">2025-01-16</span> <span class="pre">using</span> <span class="pre">epygram.',</span> <span class="pre">'institution':</span> <span class="pre">'Météo</span> <span class="pre">France'}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/extra/usevortex.html#extractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.usevortex.extractor" title="Link to this definition">¶</a></dt>
-<dd><p>Extract temporal series of points (and profiles for FA historical files) to
-netCDF files.</p>
-<dl class="simple">
-<dt>Series are either:</dt><dd><ul class="simple">
-<li><p>one series == one file per cutoff if <strong>start_term* != **end_term</strong></p></li>
-<li><p>one series == one file containing all cutoffs if <strong>start_term* == **end_term</strong></p></li>
-</ul>
-</dd>
-</dl>
-<p>Shall be extended to series of profiles for other formats later on.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>vortex_description</strong> – <p>vortex description of the resources,
-incl. providers, excepted dates/terms
-Example:
-{‘model’:’arome’,</p>
-<blockquote>
-<div><p>’vapp’:’arome’,
-‘vconf’:’3dvarfr’,
-‘kind’:’historic’,
-‘suite’:’oper’,
-‘geometry’:’franmgsp’,
-‘cutoff’:’prod’,
-#’namespace’:’oper.archive.fr’,
-#’experiment’:’86U8’,
-#’block’:’forecast’,
-#’nativefmt’:’fa’,
-#’member’:8,}</p>
-</div></blockquote>
-</p></li>
-<li><p><strong>coords</strong> – either a list of lon/lat coordinates or a dict of,
-in which case key would be a “name of the point”,
-used in output filename</p></li>
-<li><p><strong>start_cutoff</strong> – first cutoff of the series (datetime.datetime instance)</p></li>
-<li><p><strong>end_cutoff</strong> – last cutoff of the series</p></li>
-<li><p><strong>start_term</strong> – first term of the series (datetime.datetime instance)</p></li>
-<li><p><strong>end_term</strong> – last term of the series</p></li>
-<li><p><strong>points_fields</strong> – <p>dictionnary of fields to extract with options, e.g.:</p>
-<dl>
-<dt>{fid1:{‘nc_name’:nc_fid1,</dt><dd><blockquote>
-<div><dl class="simple">
-<dt>’nc_attributes’:{‘unit’:…,</dt><dd><p>’comment’:…,
-},</p>
-</dd>
-</dl>
-<p>’decumulate’:True,
-‘operation’:(‘-‘,273.15) or (‘exp’,),
-‘reproject_wind_on_lonlat’:False,
-},</p>
-</div></blockquote>
-<p>fid2:…
-}</p>
-</dd>
-</dl>
-<ul>
-<li><p>’decumulate’ can be absent==False, True,
-or ‘center’ for centered decumulation
-(cf. D3Field.decumulate for more details);</p></li>
-<li><p>’operation’ is done after decumulation, if both
-present</p></li>
-<li><p>’reproject_wind_on_lonlat: FA only: reproject winds
-on lonlat axes (True by default)</p></li>
-</ul>
-</p></li>
-<li><p><strong>profiles_FAfields</strong> – like points_fields but for profiles,
-but only for FA historic resources !
-fids supposed to be ‘S*PARAMETER’</p></li>
-<li><p><strong>everycutoff_in_hours</strong> – step between 2 cutoffs</p></li>
-<li><p><strong>everyterm_in_hours</strong> – step between 2 terms</p></li>
-<li><p><strong>vertical_coordinate</strong> – vertical coordinate requested for profiles,
-among (‘pressure’, ‘height’, ‘altitude’, None)</p></li>
-<li><p><strong>extraction_options</strong> – options to FA.extractprofile() and
-H2DField.extract_point()
-concerning interpolation, as dict…</p></li>
-<li><p><strong>use_local_cache</strong> – use a local Vortex cache, in which files are stored</p></li>
-<li><p><strong>prestaging</strong> – triggers prestaging for the requested resources (Hendrix)</p></li>
-<li><p><strong>outdir</strong> – directory in which to store output files</p></li>
-<li><p><strong>progressmode</strong> – sets the verbosity of the task among
-(None, ‘percentage’, ‘verbose’)</p></li>
-<li><p><strong>nc_global_attributes</strong> – given as a dict. Defaults are above in
-module variable default_nc_global_attributes</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
 </section>
 <hr class="docutils" />
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">epygram.extra.usevortex.</span></span><span class="sig-name descname"><span class="pre">Extractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram/extra/usevortex.html#Extractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.extra.usevortex.Extractor" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Worker</span></code></p>
-<p>Independant extractor.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This class is managed by footprint.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>info: Run extractor().</p></li>
-<li><p>priority: PriorityLevel::DEFAULT (rank=1)</p></li>
-</ul>
-</div></blockquote>
-<p>Automatic parameters from the footprint:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>directives</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPDict</span></code>) - rxx - Contains all arguments to extractor(…).</p></li>
-<li><p><strong>expected_time</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - How long the worker is expected to run (in s).</p>
-<ul>
-<li><p>Optional. Default is 0.0.</p></li>
-</ul>
-</li>
-<li><p><strong>memory</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.float</span></code>) - rxx - Memory that should be used by the worker (in MiB).</p>
-<ul>
-<li><p>Optional. Default is 0.0.</p></li>
-</ul>
-</li>
-<li><p><strong>name</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rwx - Name of the worker.</p>
-<ul>
-<li><p>Optional. Default is None.</p></li>
-</ul>
-</li>
-<li><p><strong>scheduler_hooks</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">footprints.stdtypes.FPList</span></code>) - rxx - List of callbacks before starting effective task work.</p>
-<ul>
-<li><p>Optional. Default is FPList::&lt;&lt;as_list:: []&gt;&gt;.</p></li>
-</ul>
-</li>
-<li><p><strong>scheduler_ticket</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.int</span></code>) - rxx - The slot number given by the scheduler (optional).</p>
-<ul>
-<li><p>Optional. Default is None.</p></li>
-</ul>
-</li>
-</ul>
-</div></blockquote>
-</div>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor.directives">
-<span class="sig-name descname"><span class="pre">directives</span></span><a class="headerlink" href="#epygram.extra.usevortex.Extractor.directives" title="Link to this definition">¶</a></dt>
-<dd><p>Contains all arguments to extractor(…) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor.expected_time">
-<span class="sig-name descname"><span class="pre">expected_time</span></span><a class="headerlink" href="#epygram.extra.usevortex.Extractor.expected_time" title="Link to this definition">¶</a></dt>
-<dd><p>How long the worker is expected to run (in s) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor.memory">
-<span class="sig-name descname"><span class="pre">memory</span></span><a class="headerlink" href="#epygram.extra.usevortex.Extractor.memory" title="Link to this definition">¶</a></dt>
-<dd><p>Memory that should be used by the worker (in MiB) (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#epygram.extra.usevortex.Extractor.name" title="Link to this definition">¶</a></dt>
-<dd><p>Name of the worker (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor.scheduler_hooks">
-<span class="sig-name descname"><span class="pre">scheduler_hooks</span></span><a class="headerlink" href="#epygram.extra.usevortex.Extractor.scheduler_hooks" title="Link to this definition">¶</a></dt>
-<dd><p>List of callbacks before starting effective task work (see the documentation above for more details).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="epygram.extra.usevortex.Extractor.scheduler_ticket">
-<span class="sig-name descname"><span class="pre">scheduler_ticket</span></span><a class="headerlink" href="#epygram.extra.usevortex.Extractor.scheduler_ticket" title="Link to this definition">¶</a></dt>
-<dd><p>The slot number given by the scheduler (optional) (see the documentation above for more details).</p>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -335,25 +62,8 @@ module variable default_nc_global_attributes</p></li>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a><ul>
-<li><a class="reference internal" href="#functions">Functions</a><ul>
-<li><a class="reference internal" href="#epygram.extra.usevortex.set_defaults"><code class="docutils literal notranslate"><span class="pre">set_defaults()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.quiet_get"><code class="docutils literal notranslate"><span class="pre">quiet_get()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.get_resources"><code class="docutils literal notranslate"><span class="pre">get_resources()</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.extractor"><code class="docutils literal notranslate"><span class="pre">extractor()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#classes">Classes</a><ul>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor"><code class="docutils literal notranslate"><span class="pre">Extractor</span></code></a><ul>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor.directives"><code class="docutils literal notranslate"><span class="pre">Extractor.directives</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor.expected_time"><code class="docutils literal notranslate"><span class="pre">Extractor.expected_time</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor.memory"><code class="docutils literal notranslate"><span class="pre">Extractor.memory</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor.name"><code class="docutils literal notranslate"><span class="pre">Extractor.name</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor.scheduler_hooks"><code class="docutils literal notranslate"><span class="pre">Extractor.scheduler_hooks</span></code></a></li>
-<li><a class="reference internal" href="#epygram.extra.usevortex.Extractor.scheduler_ticket"><code class="docutils literal notranslate"><span class="pre">Extractor.scheduler_ticket</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
 </ul>
 </li>
 </ul>
@@ -397,7 +107,7 @@ module variable default_nc_global_attributes</p></li>
         <li class="right" >
           <a href="griberies/concepts.html" title="concepts — utilities around GRIB concepts"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.1 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="docutils literal notranslate"><span class="pre">epygram.extra</span></code> : independant side packages, used by epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">usevortex</span></code> — Proxies to reach resources using Vortex</a></li> 
       </ul>
