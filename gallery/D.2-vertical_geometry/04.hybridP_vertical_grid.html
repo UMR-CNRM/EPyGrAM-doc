@@ -57,7 +57,8 @@
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-# [2025/04/08-18:13:34][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
+# [2025/04/09-10:51:21][epygram.formats][&lt;module&gt;:0072][INFO]: Format: HDF5SAF is deactivated at runtime (Error: No module named &#39;h5py&#39;). Please deactivate from config.implemented_formats or fix error.
+# [2025/04/09-10:51:21][falfilfa4py][init_env:0087][WARNING]: ECCODES_DEFINITION_PATH env var is defined: may result in unexpected issues if not consistent with linked eccodes library
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -187,7 +188,7 @@ Call stack:
     if await self.run_code(code, result, async_=asy):
   File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/IPython/core/interactiveshell.py&#34;, line 3577, in run_code
     exec(code_obj, self.user_global_ns, self.user_ns)
-  File &#34;/tmp/ipykernel_5788/3414190791.py&#34;, line 1, in &lt;module&gt;
+  File &#34;/tmp/ipykernel_57620/3414190791.py&#34;, line 1, in &lt;module&gt;
     print(vg.write_AB_to_namelist())
   File &#34;/home/mary/venvs/epygram/lib/python3.12/site-packages/pyvgrid/hybridpressurevgrid.py&#34;, line 282, in write_AB_to_namelist
     logger.info(&#34;A/B coefficients written to namelist file:&#34;,fname)
