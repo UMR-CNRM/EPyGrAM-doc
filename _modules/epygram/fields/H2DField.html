@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.fields.H2DField &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
+    <title>epygram.fields.H2DField &#8212; epygram 2.0.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../_static/documentation_options.js?v=adc66a14"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -25,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.H2DField</a></li> 
@@ -47,22 +45,24 @@
 <span class="sd">Contains the class that handle a Horizontal 2D field.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">unravel_index</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">footprints</span>
 
-<span class="kn">import</span> <span class="nn">footprints</span>
-
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">epygramError</span>
-<span class="kn">from</span> <span class="nn">epygram.geometries</span> <span class="kn">import</span> <span class="n">Geometry</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">gimme_one_point</span>
-<span class="kn">from</span> <span class="nn">.D3Field</span> <span class="kn">import</span> <span class="n">D3Field</span>
-<span class="kn">from</span> <span class="nn">.PointField</span> <span class="kn">import</span> <span class="n">PointField</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram</span><span class="w"> </span><span class="kn">import</span> <span class="n">epygramError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.geometries</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussGeometry</span><span class="p">,</span> <span class="n">Geometry</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">epygram.spectra</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">esp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">gimme_one_point</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.D3Field</span><span class="w"> </span><span class="kn">import</span> <span class="n">D3Field</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.PointField</span><span class="w"> </span><span class="kn">import</span> <span class="n">PointField</span>
 
 <span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="H2DField"><a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField">[docs]</a><span class="k">class</span> <span class="nc">H2DField</span><span class="p">(</span><span class="n">D3Field</span><span class="p">):</span>
+<div class="viewcode-block" id="H2DField">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">H2DField</span><span class="p">(</span><span class="n">D3Field</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Horizontal 2-Dimensions field class.</span>
 <span class="sd">    A field is defined by its identifier &#39;fid&#39;,</span>
@@ -84,7 +84,7 @@
         <span class="p">)</span>
     <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_check_operands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_operands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internal method to check compatibility of terms in operations on fields.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -113,7 +113,9 @@
 <span class="c1">##############</span>
 <span class="c1"># ABOUT DATA #</span>
 <span class="c1">##############</span>
-<div class="viewcode-block" id="H2DField.getlevel"><a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.getlevel">[docs]</a>    <span class="k">def</span> <span class="nf">getlevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="H2DField.getlevel">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.getlevel">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getlevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns self. Useless but for compatibility reasons.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">level</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;You must give k or level.&quot;</span><span class="p">)</span>
@@ -124,7 +126,10 @@
                 <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;The requested level does not exist.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
-<div class="viewcode-block" id="H2DField.extract_point"><a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.extract_point">[docs]</a>    <span class="k">def</span> <span class="nf">extract_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span>
+
+<div class="viewcode-block" id="H2DField.extract_point">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.extract_point">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span>
                       <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
                       <span class="n">external_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -144,14 +149,17 @@
         <span class="n">pt</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pt</span></div>
 
-<div class="viewcode-block" id="H2DField.extract_contour"><a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.extract_contour">[docs]</a>    <span class="k">def</span> <span class="nf">extract_contour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">level</span><span class="p">):</span>
+
+<div class="viewcode-block" id="H2DField.extract_contour">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.extract_contour">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_contour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">level</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the intersection of the plan **level** and the H2Dfield: the result is a list of (lon,lat) point list.</span>
 <span class="sd">        The length of the first list is the number of disjoint lines.</span>
 <span class="sd">        This function relies on the contourpy library which is expected to be installed by the user.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">contourpy</span> <span class="kn">import</span> <span class="n">contour_generator</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">contourpy</span><span class="w"> </span><span class="kn">import</span> <span class="n">contour_generator</span>
         <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ModuleNotFoundError</span><span class="p">(</span><span class="s1">&#39;To use *extract_contour* method, you must have `contourpy` installed: &#39;</span> <span class="o">+</span>
                                       <span class="s1">&#39;pip3 install --user contourpy&#39;</span><span class="p">)</span>
@@ -166,6 +174,80 @@
             <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">lines</span></div>
 
+
+<div class="viewcode-block" id="H2DField.indices_of_minmax_value">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.indices_of_minmax_value">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">indices_of_minmax_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_or_max</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return indices of the point of min or max value of the field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>  <span class="c1">#.squeeze()</span>
+        <span class="k">if</span> <span class="n">min_or_max</span> <span class="o">==</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">unravel_index</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">argmin</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">min_or_max</span> <span class="o">==</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">unravel_index</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">argmax</span><span class="p">(),</span> <span class="n">d</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;min_or_max&#39; argument must be &#39;min&#39; or &#39;max&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">indices</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="H2DField.lonlat_of_minmax_value">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.lonlat_of_minmax_value">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">lonlat_of_minmax_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">min_or_max</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return lon/lat coordinates of the point of min or max value of the field.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1">#if len(self.validity) &gt; 1:</span>
+        <span class="c1">#    raise NotImplementedError(&quot;Method &#39;index_of_minmax_value&#39; for multi-temporal fields&quot;)</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices_of_minmax_value</span><span class="p">(</span><span class="n">min_or_max</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">indices</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="H2DField.spectrum">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.spectrum">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get energy spectrum of the field, performing transforms to spectral or grid point</span>
+<span class="sd">        space if required. Implemented for global non-stretched Gauss grid (spectrum directly</span>
+<span class="sd">        computed from spectral coefficients), and for projected geometries (using the</span>
+<span class="sd">        Discrete Cosine Transform).</span>
+
+<span class="sd">        :param fname: str, name of field for Spectrum object</span>
+<span class="sd">        :param spectral_geometry: optional, spectral geometry object for a global field</span>
+<span class="sd">        in grid-point space.</span>
+<span class="sd">        :param subzone: str, optional, subzone for a projected field.</span>
+<span class="sd">        :param verbose: bool, optional, verbosity flag</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s2">&quot;dilatation_coef&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;cannot compute spectra on stretched Gaussian grids&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">spectral_geometry</span><span class="p">,</span> <span class="s2">&quot;Need spectral geometry to convert field in gp space!&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gp2sp</span><span class="p">(</span><span class="n">spectral_geometry</span><span class="p">)</span>
+            <span class="n">variances</span> <span class="o">=</span> <span class="n">esp</span><span class="o">.</span><span class="n">global_spectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">earth_circumference</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">pi</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">geoid</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000</span>
+            <span class="n">resolution</span> <span class="o">=</span> <span class="n">earth_circumference</span> <span class="o">/</span> <span class="p">(</span><span class="n">variances</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">spectrum</span> <span class="o">=</span>  <span class="n">esp</span><span class="o">.</span><span class="n">Spectrum</span><span class="p">(</span><span class="n">variances</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+                                     <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span>
+                                     <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">,</span>
+                                     <span class="n">mean2</span><span class="o">=</span><span class="n">variances</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">spectrum</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">projected_geometry</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;cannot compute spectra on regular_lonlat grids.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sp2gp</span><span class="p">()</span>
+            <span class="n">variances</span> <span class="o">=</span> <span class="n">esp</span><span class="o">.</span><span class="n">dctspectrum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">),</span>
+                                        <span class="n">log</span><span class="o">=</span><span class="n">epylog</span><span class="p">,</span>
+                                        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">)</span>
+            <span class="n">spectrum</span> <span class="o">=</span> <span class="n">esp</span><span class="o">.</span><span class="n">Spectrum</span><span class="p">(</span><span class="n">variances</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+                                    <span class="n">name</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">fname</span><span class="p">),</span>
+                                    <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1000.</span><span class="p">,</span>
+                                    <span class="n">mean2</span><span class="o">=</span><span class="n">variances</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">spectrum</span></div>
+
+
+
 <span class="c1">###################</span>
 <span class="c1"># PRE-APPLICATIVE #</span>
 <span class="c1">###################</span>
@@ -173,7 +255,9 @@
 <span class="c1"># [so that, subject to continuation through updated versions,</span>
 <span class="c1">#  including suggestions/developments by users...]</span>
 
-<div class="viewcode-block" id="H2DField.morph_with_points"><a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.morph_with_points">[docs]</a>    <span class="k">def</span> <span class="nf">morph_with_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span>
+<div class="viewcode-block" id="H2DField.morph_with_points">
+<a class="viewcode-back" href="../../../library/H2DField.html#epygram.fields.H2DField.H2DField.morph_with_points">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">morph_with_points</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span>
                           <span class="n">alpha</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
                           <span class="n">morphing</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
                           <span class="n">increment</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -231,16 +315,18 @@
                             <span class="n">local_alpha</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">distance</span> <span class="o">**</span> <span class="mf">2.</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">sigma</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">local_alpha</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">local_alpha</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;morphing: &quot;</span> <span class="o">+</span> <span class="n">morphing</span> <span class="o">+</span> <span class="s2">&quot; :not yet.&quot;</span><span class="p">)</span></div></div>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;morphing: &quot;</span> <span class="o">+</span> <span class="n">morphing</span> <span class="o">+</span> <span class="s2">&quot; :not yet.&quot;</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
@@ -248,13 +334,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -263,15 +349,15 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.H2DField</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

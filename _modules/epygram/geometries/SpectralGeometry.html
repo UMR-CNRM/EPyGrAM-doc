@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.geometries.SpectralGeometry &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
+    <title>epygram.geometries.SpectralGeometry &#8212; epygram 2.0.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../_static/documentation_options.js?v=adc66a14"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -25,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li>
@@ -48,20 +46,18 @@
 <span class="sd">Contains the class that handles spectral parameters and spectral transforms.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bronx.system</span><span class="w"> </span><span class="kn">import</span> <span class="n">memory</span>
 
-<span class="kn">from</span> <span class="nn">bronx.system</span> <span class="kn">import</span> <span class="n">memory</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">epylog</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveObject</span>
 
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">config</span><span class="p">,</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">epylog</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">RecursiveObject</span>
-
-<span class="n">transforms_lib_init_env_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">ectrans4py_init_env_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">nearest_greater_FFT992compliant_int</span><span class="p">(</span><span class="n">guess</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">nearest_greater_FFT992compliant_int</span><span class="p">(</span><span class="n">guess</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the first integer *n* greater than *guess* that satisfies</span>
 <span class="sd">    n = 2^(1+i) x 3^j x 5^k, with (i,j,k) being positive integers.</span>
@@ -83,7 +79,9 @@
     <span class="k">return</span> <span class="n">result</span>
 
 
-<div class="viewcode-block" id="truncation_from_gridpoint_dims"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.truncation_from_gridpoint_dims">[docs]</a><span class="k">def</span> <span class="nf">truncation_from_gridpoint_dims</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">stretching_coef</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+<div class="viewcode-block" id="truncation_from_gridpoint_dims">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.truncation_from_gridpoint_dims">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">truncation_from_gridpoint_dims</span><span class="p">(</span><span class="n">dimensions</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">stretching_coef</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute truncation from gridpoint dimensions, according to the kind of</span>
 <span class="sd">    **grid**.</span>
@@ -116,7 +114,8 @@
     <span class="k">return</span> <span class="n">truncation</span></div>
 
 
-<span class="k">def</span> <span class="nf">_guess_compliant_lonlat</span><span class="p">(</span><span class="n">nlon</span><span class="p">):</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_guess_compliant_lonlat</span><span class="p">(</span><span class="n">nlon</span><span class="p">):</span>
     <span class="n">nlon</span> <span class="o">=</span> <span class="n">nearest_greater_FFT992compliant_int</span><span class="p">(</span><span class="n">nlon</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">nlon</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">nlat</span> <span class="o">=</span> <span class="n">nlon</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span>
@@ -125,7 +124,7 @@
     <span class="k">return</span> <span class="n">nlon</span><span class="p">,</span> <span class="n">nlat</span>
 
 
-<span class="k">def</span> <span class="nf">gridpoint_dims_from_truncation</span><span class="p">(</span><span class="n">truncation</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">stretching_coef</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gridpoint_dims_from_truncation</span><span class="p">(</span><span class="n">truncation</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">stretching_coef</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute truncation from gridpoint dimensions, according to the kind of</span>
 <span class="sd">    **grid**.</span>
@@ -161,7 +160,7 @@
     <span class="k">return</span> <span class="n">dimensions</span>
 
 
-<span class="k">def</span> <span class="nf">complete_gridpoint_dimensions</span><span class="p">(</span><span class="n">longitudes</span><span class="p">,</span> <span class="n">latitudes</span><span class="p">,</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">complete_gridpoint_dimensions</span><span class="p">(</span><span class="n">longitudes</span><span class="p">,</span> <span class="n">latitudes</span><span class="p">,</span>
                                   <span class="n">truncation</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">stretching_coef</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Complete missing gridpoint dimensions from guessing values.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">latitudes</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">longitudes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -180,14 +179,16 @@
     <span class="k">return</span> <span class="n">longitudes</span><span class="p">,</span> <span class="n">latitudes</span>
 
 
-<div class="viewcode-block" id="SpectralGeometry"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry">[docs]</a><span class="k">class</span> <span class="nc">SpectralGeometry</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">):</span>
+<div class="viewcode-block" id="SpectralGeometry">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SpectralGeometry</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the spectral geometry and transforms for a H2DField.&quot;&quot;&quot;</span>
 
     <span class="c1"># in order to avoid calling etrans_inq for large truncations</span>
     <span class="n">_usual_SPdatasize_for_global_trunc</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;triangular&#39;</span><span class="p">:{</span><span class="mi">1198</span><span class="p">:</span><span class="mi">719400</span><span class="p">,</span>
                                                         <span class="mi">1798</span><span class="p">:</span><span class="mi">1619100</span><span class="p">}}</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">truncation</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">truncation</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param space: Name of spectral space.</span>
 <span class="sd">                      (among [&#39;legendre&#39;, &#39;bi-fourier&#39;, &#39;fourier&#39;])</span>
@@ -207,20 +208,22 @@
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;MemInfo for os.name==</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_total_system_memory</span> <span class="o">=</span> <span class="n">meminfo</span><span class="o">.</span><span class="n">system_RAM</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">&#39;MiB&#39;</span><span class="p">)</span>
 
+<div class="viewcode-block" id="SpectralGeometry.ectrans4py">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.ectrans4py">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_translib</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ectrans4py</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Accessor to the inner transforms library, not imported before the first</span>
-<span class="sd">        call.</span>
+<span class="sd">        Accessor to the ectrans4py library, not imported before the first call.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;_transforms_lib&#39;</span><span class="p">):</span>
-            <span class="kn">from</span> <span class="nn">epygram.extra</span> <span class="kn">import</span> <span class="n">ialsptrans4py</span>
-            <span class="bp">cls</span><span class="o">.</span><span class="n">_transforms_lib</span> <span class="o">=</span> <span class="n">ialsptrans4py</span>
-            <span class="k">if</span> <span class="n">transforms_lib_init_env_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;trigger&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
-                <span class="n">ialsptrans4py</span><span class="o">.</span><span class="n">init_env</span><span class="p">(</span><span class="o">**</span><span class="n">transforms_lib_init_env_kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_transforms_lib</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;_ectrans4py&#39;</span><span class="p">):</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">ectrans4py</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_ectrans4py</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_ectrans4py</span> <span class="o">=</span> <span class="n">_ectrans4py</span>
+            <span class="k">if</span> <span class="n">ectrans4py_init_env_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;trigger&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">_ectrans4py</span><span class="o">.</span><span class="n">init_env</span><span class="p">(</span><span class="o">**</span><span class="n">ectrans4py_init_env_kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_ectrans4py</span></div>
 
-    <span class="k">def</span> <span class="nf">_prevent_swapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_prevent_swapping</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;legendre&#39;</span> <span class="ow">and</span>
             <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">needed_memory</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">**</span> <span class="mf">2.</span><span class="p">)</span> <span class="o">&gt;=</span>
              <span class="n">config</span><span class="o">.</span><span class="n">prevent_swapping_legendre</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_total_system_memory</span><span class="p">)):</span>
@@ -231,17 +234,22 @@
 <span class="s1">                                SWAPPING prevented !&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">needed_mem_in_mb</span><span class="p">,</span>
                                                              <span class="n">total_mem_in_mb</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">_prevent_limited_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_prevent_limited_stack</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;legendre&#39;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1200</span><span class="p">):</span>
             <span class="n">epylog</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Caution: large Legendre truncation may need very large stacksize !&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SpectralGeometry.legendre_known_spectraldata_size"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.legendre_known_spectraldata_size">[docs]</a>    <span class="k">def</span> <span class="nf">legendre_known_spectraldata_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="SpectralGeometry.legendre_known_spectraldata_size">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.legendre_known_spectraldata_size">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">legendre_known_spectraldata_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;In order to avoid calling trans_inq for large truncations.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_usual_SPdatasize_for_global_trunc</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_usual_SPdatasize_for_global_trunc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;shape&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span> <span class="kc">None</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SpectralGeometry.trans_inq"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.trans_inq">[docs]</a>    <span class="k">def</span> <span class="nf">trans_inq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SpectralGeometry.trans_inq">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.trans_inq">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trans_inq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper to IAL&#39;s TRANS_INQ.</span>
 
@@ -249,13 +257,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_swapping</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_limited_stack</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_trans_inq</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
-                                            <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
-                                            <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                            <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                            <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">trans_inq4py</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
+                                              <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
+                                              <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                              <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                              <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SpectralGeometry.etrans_inq"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.etrans_inq">[docs]</a>    <span class="k">def</span> <span class="nf">etrans_inq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SpectralGeometry.etrans_inq">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.etrans_inq">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">etrans_inq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper to IAL&#39;s ETRANS_INQ.</span>
 
@@ -263,25 +274,28 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_swapping</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_limited_stack</span><span class="p">()</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_etrans_inq</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
-                                             <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
-                                             <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
-                                             <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
-                                             <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
-                                             <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
-                                             <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                             <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
-                                             <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">etrans_inq4py</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
+                                               <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
+                                               <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
+                                               <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
+                                               <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
+                                               <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
+                                               <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                               <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
+                                               <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">])</span></div>
+
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">needed_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">needed_memory</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Memory needed for transforms, in bytes.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;legendre&#39;</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">8</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;space:&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SpectralGeometry.sp2gp"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.sp2gp">[docs]</a>    <span class="k">def</span> <span class="nf">sp2gp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">,</span>
+<div class="viewcode-block" id="SpectralGeometry.sp2gp">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.sp2gp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sp2gp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">,</span>
               <span class="n">spectral_coeff_order</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">spectral_coeff_order</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Makes the transform of the spectral data contained in *data* (assumed</span>
@@ -298,43 +312,46 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_swapping</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_limited_stack</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;bi-fourier&#39;</span><span class="p">:</span>
-            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_spec2gpt_lam</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
-                                                     <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                                     <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
-                                                     <span class="kc">False</span><span class="p">,</span>  <span class="c1"># no derivatives</span>
-                                                     <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span>
-                                                     <span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">sp2gp_lam4py</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
+                                                    <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                                    <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                                    <span class="kc">False</span><span class="p">,</span>  <span class="c1"># no derivatives</span>
+                                                    <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span>
+                                                    <span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;legendre&#39;</span><span class="p">:</span>
-            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_spec2gpt_gauss</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
-                                                       <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
-                                                       <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                                       <span class="nb">sum</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
-                                                       <span class="kc">False</span><span class="p">,</span>  <span class="c1"># no derivatives</span>
-                                                       <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
-                                                       <span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">sp2gp_gauss4py</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
+                                                      <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
+                                                      <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                                      <span class="nb">sum</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                                      <span class="kc">False</span><span class="p">,</span>  <span class="c1"># no derivatives</span>
+                                                      <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                                                      <span class="n">data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;fourier&#39;</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_spec2gpt_fft1d</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
-                                                           <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
-                                                           <span class="n">data</span><span class="p">,</span>
-                                                           <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">])</span>
+                <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">sp2gp_fft1d4py</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                                          <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
+                                                          <span class="n">data</span><span class="p">,</span>
+                                                          <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">gpdata</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;unknown spectral space:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gpdata</span></div>
 
-<div class="viewcode-block" id="SpectralGeometry.gp2sp"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.gp2sp">[docs]</a>    <span class="k">def</span> <span class="nf">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SpectralGeometry.gp2sp">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.gp2sp">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">gp2sp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">,</span>
               <span class="n">spectral_coeff_order</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">spectral_coeff_order</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Makes the transform of the gridpoint data contained in *data*</span>
@@ -352,30 +369,30 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_limited_stack</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;bi-fourier&#39;</span><span class="p">:</span>
             <span class="n">SPdatasize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">etrans_inq</span><span class="p">(</span><span class="n">gpdims</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">spdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_gpt2spec_lam</span><span class="p">(</span><span class="n">SPdatasize</span><span class="p">,</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
-                                                     <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span>
-                                                     <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
-                                                     <span class="n">data</span><span class="p">)</span>
+            <span class="n">spdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">gp2sp_lam4py</span><span class="p">(</span><span class="n">SPdatasize</span><span class="p">,</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
+                                                    <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span>
+                                                    <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                                                    <span class="n">data</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;legendre&#39;</span><span class="p">:</span>
             <span class="n">SPdatasize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trans_inq</span><span class="p">(</span><span class="n">gpdims</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">SPdatasize</span> <span class="o">*=</span> <span class="mi">2</span>  <span class="c1"># complex coefficients</span>
-            <span class="n">spdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_gpt2spec_gauss</span><span class="p">(</span><span class="n">SPdatasize</span><span class="p">,</span>
-                                                       <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
-                                                       <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
-                                                       <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                                       <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
-                                                       <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
-                                                       <span class="n">data</span><span class="p">)</span>
+            <span class="n">spdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">gp2sp_gauss4py</span><span class="p">(</span><span class="n">SPdatasize</span><span class="p">,</span>
+                                                      <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
+                                                      <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
+                                                      <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                                      <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                                      <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                                                      <span class="n">data</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;fourier&#39;</span><span class="p">:</span>
             <span class="c1"># 1D case</span>
             <span class="n">SPdatasize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">etrans_inq</span><span class="p">(</span><span class="n">gpdims</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
@@ -389,7 +406,10 @@
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;unknown spectral space:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">spdata</span></div>
 
-<div class="viewcode-block" id="SpectralGeometry.compute_xy_spderivatives"><a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.compute_xy_spderivatives">[docs]</a>    <span class="k">def</span> <span class="nf">compute_xy_spderivatives</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SpectralGeometry.compute_xy_spderivatives">
+<a class="viewcode-back" href="../../../library/SpectralGeometry.html#epygram.geometries.SpectralGeometry.SpectralGeometry.compute_xy_spderivatives">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_xy_spderivatives</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">gpdims</span><span class="p">,</span>
                                  <span class="n">spectral_coeff_order</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">spectral_coeff_order</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the derivatives of the spectral data contained in *data* in</span>
@@ -409,46 +429,48 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_swapping</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_prevent_limited_stack</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;bi-fourier&#39;</span><span class="p">:</span>
-            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_spec2gpt_lam</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
-                                                     <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                                     <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
-                                                     <span class="kc">True</span><span class="p">,</span>  <span class="c1"># derivatives</span>
-                                                     <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
-                                                     <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span>
-                                                     <span class="n">data</span><span class="p">)</span>
+            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">sp2gp_lam4py</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_CIzone&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_CIzone&#39;</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_X&#39;</span><span class="p">],</span>
+                                                    <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;in_Y&#39;</span><span class="p">],</span>
+                                                    <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                                    <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                                    <span class="kc">True</span><span class="p">,</span>  <span class="c1"># derivatives</span>
+                                                    <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">],</span>
+                                                    <span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">],</span>
+                                                    <span class="n">data</span><span class="p">)</span>
             <span class="n">gpdata</span> <span class="o">=</span> <span class="p">(</span><span class="n">gpdata</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">gpdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;legendre&#39;</span><span class="p">:</span>
-            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translib</span><span class="p">()</span><span class="o">.</span><span class="n">w_spec2gpt_gauss</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
-                                                       <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
-                                                       <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
-                                                       <span class="nb">sum</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
-                                                       <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
-                                                       <span class="kc">True</span><span class="p">,</span>  <span class="c1"># derivatives</span>
-                                                       <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
-                                                       <span class="n">data</span><span class="p">)</span>
+            <span class="n">gpdata</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ectrans4py</span><span class="p">()</span><span class="o">.</span><span class="n">sp2gp_gauss4py</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lat_number&#39;</span><span class="p">],</span>
+                                                      <span class="bp">self</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">],</span>
+                                                      <span class="n">config</span><span class="o">.</span><span class="n">KNUMMAXRESOL</span><span class="p">,</span>
+                                                      <span class="nb">sum</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="nb">len</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">gpdims</span><span class="p">[</span><span class="s1">&#39;lon_number_by_lat&#39;</span><span class="p">]),</span>
+                                                      <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">),</span>
+                                                      <span class="kc">True</span><span class="p">,</span>  <span class="c1"># derivatives</span>
+                                                      <span class="n">spectral_coeff_order</span> <span class="o">!=</span> <span class="s1">&#39;model&#39;</span><span class="p">,</span>
+                                                      <span class="n">data</span><span class="p">)</span>
             <span class="n">gpdata</span> <span class="o">=</span> <span class="p">(</span><span class="n">gpdata</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">gpdata</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">==</span> <span class="s1">&#39;fourier&#39;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;fourier(1D): not yet !&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;unknown spectral space:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">space</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">gpdata</span></div></div>
+        <span class="k">return</span> <span class="n">gpdata</span></div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
@@ -456,13 +478,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -471,7 +493,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li>
@@ -479,8 +501,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

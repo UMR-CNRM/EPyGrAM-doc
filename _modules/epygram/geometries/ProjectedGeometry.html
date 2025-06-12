@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.geometries.ProjectedGeometry &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css" />
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/jquery.js"></script>
-    <script src="../../../_static/underscore.js"></script>
-    <script src="../../../_static/doctools.js"></script>
+    <title>epygram.geometries.ProjectedGeometry &#8212; epygram 2.0.4 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../../_static/documentation_options.js?v=adc66a14"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -25,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../geometries.html" accesskey="U">epygram.geometries</a> &#187;</li>
@@ -44,44 +42,43 @@
 <span class="c1"># Copyright (c) Météo France (2014-)</span>
 <span class="c1"># This software is governed by the CeCILL-C license under French law.</span>
 <span class="c1"># http://www.cecill.info</span>
-
-
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Contains the classes for 3D geometries of fields.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">footprints</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">footprints</span><span class="w"> </span><span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
 
-<span class="kn">import</span> <span class="nn">footprints</span>
-<span class="kn">from</span> <span class="nn">footprints</span> <span class="kn">import</span> <span class="n">proxy</span> <span class="k">as</span> <span class="n">fpx</span>
-
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">epygram.config</span> <span class="kn">import</span> <span class="n">rounding_decimal</span> <span class="k">as</span> <span class="n">_rd</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="p">(</span><span class="n">degrees_nearest_mod</span><span class="p">,</span> <span class="n">Angle</span><span class="p">,</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram</span><span class="w"> </span><span class="kn">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">rounding_decimal</span> <span class="k">as</span> <span class="n">_rd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.util</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">degrees_nearest_mod</span><span class="p">,</span> <span class="n">Angle</span><span class="p">,</span>
                           <span class="n">write_formatted</span><span class="p">,</span>
                           <span class="n">as_numpy_array</span><span class="p">,</span>
                           <span class="n">is_scalar</span><span class="p">,</span> <span class="n">Comparator</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">.VGeometry</span> <span class="kn">import</span> <span class="n">VGeometry</span>
-<span class="kn">from</span> <span class="nn">.AbstractGeometry</span> <span class="kn">import</span> <span class="n">RectangularGridGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.VGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">VGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.AbstractGeometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">RectangularGridGeometry</span>
 
 <span class="n">epylog</span> <span class="o">=</span> <span class="n">footprints</span><span class="o">.</span><span class="n">loggers</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 
 
-<div class="viewcode-block" id="ProjectedGeometry"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry">[docs]</a><span class="k">class</span> <span class="nc">ProjectedGeometry</span><span class="p">(</span><span class="n">RectangularGridGeometry</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectedGeometry">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ProjectedGeometry</span><span class="p">(</span><span class="n">RectangularGridGeometry</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handles the geometry for a Projected 3-Dimensions Field.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">_ghost_attributes</span> <span class="o">=</span> <span class="n">RectangularGridGeometry</span><span class="o">.</span><span class="n">_ghost_attributes</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;_proj&#39;</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">vcoordinate</span><span class="p">,</span> <span class="n">projection</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">grid</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">vcoordinate</span><span class="p">,</span> <span class="n">projection</span><span class="p">,</span>
                  <span class="n">position_on_horizontal_grid</span><span class="o">=</span><span class="s1">&#39;__unknown__&#39;</span><span class="p">,</span> <span class="n">geoid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param name: Name of geometrical type of representation of points on the Globe.</span>
@@ -108,12 +105,18 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">ProjectedGeometry</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">dimensions</span><span class="p">,</span> <span class="n">vcoordinate</span><span class="p">,</span>
                                                       <span class="n">position_on_horizontal_grid</span><span class="p">,</span> <span class="n">geoid</span><span class="p">)</span>
 
-        <span class="kn">import</span> <span class="nn">pyproj</span>
+    <span class="nd">@property</span>
+    <span class="nd">@lru_cache</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_proj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns (proj, K, center_lon, center_lat)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">pyproj</span>
 
-        <span class="k">def</span> <span class="nf">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">center</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">center</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">center</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_position&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span>
+                <span class="n">_center_lon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span>
+                <span class="n">_center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lat&#39;</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># x1, y1: coordinates in non rotated proj of input point</span>
                 <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;input_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)),</span>
@@ -132,8 +135,9 @@
                 <span class="n">xc</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">dx</span>
                 <span class="n">yc</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">dy</span>
                 <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">xc</span><span class="p">,</span> <span class="n">yc</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+                <span class="n">_center_lon</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+                <span class="n">_center_lat</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">center_lat</span><span class="p">,</span> <span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">_center_lon</span><span class="p">,</span> <span class="n">_center_lat</span>
 
         <span class="n">projdict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lambert&#39;</span><span class="p">:</span><span class="s1">&#39;lcc&#39;</span><span class="p">,</span>
                     <span class="s1">&#39;mercator&#39;</span><span class="p">:</span><span class="s1">&#39;merc&#39;</span><span class="p">,</span>
@@ -163,25 +167,26 @@
                 <span class="n">m2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat_2</span><span class="p">))</span>
                 <span class="n">t1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">4.</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat_1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
                 <span class="n">t2</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">tan</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">4.</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat_2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_K</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m2</span><span class="p">))</span> <span class="o">/</span> \
-                          <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
+                <span class="n">_K</span> <span class="o">=</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">m2</span><span class="p">))</span> <span class="o">/</span> \
+                     <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t2</span><span class="p">))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">lat_1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
                 <span class="n">lat_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_K</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cos_sin&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">_K</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cos_sin&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
             <span class="n">p</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
                             <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                             <span class="n">lat_1</span><span class="o">=</span><span class="n">lat_1</span><span class="p">,</span> <span class="n">lat_2</span><span class="o">=</span><span class="n">lat_2</span><span class="p">,</span>
                             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
-            <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
-            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                       <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
-                                     <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                                     <span class="n">lat_1</span><span class="o">=</span><span class="n">lat_1</span><span class="p">,</span> <span class="n">lat_2</span><span class="o">=</span><span class="n">lat_2</span><span class="p">,</span>
-                                     <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
-                                     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+            <span class="n">_center_lon</span><span class="p">,</span> <span class="n">_center_lat</span> <span class="o">=</span> <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
+            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                       <span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+            <span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
+                                <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                                <span class="n">lat_1</span><span class="o">=</span><span class="n">lat_1</span><span class="p">,</span> <span class="n">lat_2</span><span class="o">=</span><span class="n">lat_2</span><span class="p">,</span>
+                                <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
+                                <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;mercator&#39;</span><span class="p">:</span>
+            <span class="n">_K</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">secant_projection</span><span class="p">:</span>
                 <span class="n">lat_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;secant_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -190,15 +195,16 @@
                             <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                             <span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span>
                             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
-            <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
-            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                       <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
-                                     <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                                     <span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span>
-                                     <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
-                                     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+            <span class="n">_center_lon</span><span class="p">,</span> <span class="n">_center_lat</span> <span class="o">=</span> <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
+            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                       <span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+            <span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
+                                <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                                <span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span>
+                                <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
+                                <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;polar_stereographic&#39;</span><span class="p">:</span>
+            <span class="n">_K</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">lat_0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">secant_projection</span><span class="p">:</span>
                 <span class="n">lat_ts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;secant_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
@@ -208,15 +214,16 @@
                             <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
                             <span class="n">lat_0</span><span class="o">=</span><span class="n">lat_0</span><span class="p">,</span> <span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span>
                             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
-            <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
-            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                       <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
-                                     <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                                     <span class="n">lat_0</span><span class="o">=</span><span class="n">lat_0</span><span class="p">,</span> <span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span>
-                                     <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
-                                     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+            <span class="n">_center_lon</span><span class="p">,</span> <span class="n">_center_lat</span> <span class="o">=</span> <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
+            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                       <span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+            <span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
+                                <span class="n">lon_0</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                                <span class="n">lat_0</span><span class="o">=</span><span class="n">lat_0</span><span class="p">,</span> <span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span>
+                                <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
+                                <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;space_view&#39;</span><span class="p">:</span>
+            <span class="n">_K</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="n">latSat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;satellite_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
             <span class="n">lonSat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;satellite_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
             <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;satellite_height&#39;</span><span class="p">]</span>  <span class="c1"># Height above ellipsoid</span>
@@ -226,24 +233,52 @@
                             <span class="n">h</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
                             <span class="n">lon_0</span><span class="o">=</span><span class="n">lonSat</span><span class="p">,</span>
                             <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
-            <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
-            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
-                       <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
-                                     <span class="n">h</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
-                                     <span class="n">lon_0</span><span class="o">=</span><span class="n">lonSat</span><span class="p">,</span>
-                                     <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
-                                     <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
+            <span class="n">_center_lon</span><span class="p">,</span> <span class="n">_center_lat</span> <span class="o">=</span> <span class="n">compute_center_proj</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">centerPoint</span><span class="p">)</span>
+            <span class="n">x0</span><span class="p">,</span> <span class="n">y0</span> <span class="o">=</span> <span class="n">p</span><span class="p">(</span><span class="n">_center_lon</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">),</span>
+                       <span class="n">_center_lat</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span>
+            <span class="n">_proj</span> <span class="o">=</span> <span class="n">pyproj</span><span class="o">.</span><span class="n">Proj</span><span class="p">(</span><span class="n">proj</span><span class="o">=</span><span class="n">proj</span><span class="p">,</span>
+                                <span class="n">h</span><span class="o">=</span><span class="n">height</span><span class="p">,</span>
+                                <span class="n">lon_0</span><span class="o">=</span><span class="n">lonSat</span><span class="p">,</span>
+                                <span class="n">x_0</span><span class="o">=-</span><span class="n">x0</span><span class="p">,</span> <span class="n">y_0</span><span class="o">=-</span><span class="n">y0</span><span class="p">,</span>
+                                <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">geoid</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;projection: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 
+        <span class="k">return</span> <span class="p">(</span><span class="n">_proj</span><span class="p">,</span> <span class="n">_K</span><span class="p">,</span> <span class="n">_center_lon</span><span class="p">,</span> <span class="n">_center_lat</span><span class="p">)</span>
+
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">secant_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_center_lon</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the center&#39;s longitude&quot;&quot;&quot;</span>
+        <span class="n">proj</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_proj</span>
+        <span class="k">return</span> <span class="n">center_lon</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_center_lat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the center&#39;s latitude&quot;&quot;&quot;</span>
+        <span class="n">proj</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_proj</span>
+        <span class="k">return</span> <span class="n">center_lat</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_K</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the K parameter&quot;&quot;&quot;</span>
+        <span class="n">proj</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_proj</span>
+        <span class="k">return</span> <span class="n">K</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_proj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the projection&quot;&quot;&quot;</span>
+        <span class="n">proj</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_proj</span>
+        <span class="k">return</span> <span class="n">proj</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">secant_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; Is the projection secant to the sphere ? (or tangent)&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="s1">&#39;secant_lat&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span> <span class="ow">or</span>
                 <span class="s1">&#39;secant_lat1&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">)</span>
 
-<div class="viewcode-block" id="ProjectedGeometry.tolerant_equal"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.tolerant_equal">[docs]</a>    <span class="k">def</span> <span class="nf">tolerant_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">epsilon</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectedGeometry.tolerant_equal">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.tolerant_equal">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tolerant_equal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">epsilon</span><span class="p">):</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
             <span class="c1"># create copies of inner objects to filter some ghost attributes</span>
             <span class="n">almost_self</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
@@ -262,7 +297,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-    <span class="k">def</span> <span class="nf">_rotate_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_rotate_axis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Internal method used to rotate x/y coordinates to handle rotated geometries.</span>
 
@@ -282,7 +318,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s1">&#39;Wrong direction of rotation.&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_consistency_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_consistency_check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check that the geometry is consistent.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;lambert&#39;</span><span class="p">:</span>
             <span class="n">sets_of_keys</span> <span class="o">=</span> <span class="p">([</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">,</span> <span class="s1">&#39;reference_lat&#39;</span><span class="p">,</span>
@@ -338,7 +374,9 @@
         <span class="c1"># if self.projection[&#39;rotation&#39;].get(&#39;degrees&#39;) != 0.0:</span>
         <span class="c1">#    epylog.warning(&#39;*rotation* != 0. may not have been thoroughly tested...&#39;)  # TOBECHECKED: here and there, ...</span>
 
-<div class="viewcode-block" id="ProjectedGeometry.select_subzone"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.select_subzone">[docs]</a>    <span class="k">def</span> <span class="nf">select_subzone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="p">):</span>
+<div class="viewcode-block" id="ProjectedGeometry.select_subzone">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.select_subzone">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">select_subzone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        If a LAMzone defines the geometry, select only the *subzone* from it</span>
 <span class="sd">        and return a new geometry object.</span>
@@ -377,14 +415,20 @@
 
         <span class="k">return</span> <span class="n">newgeom</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.getcenter"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.getcenter">[docs]</a>    <span class="k">def</span> <span class="nf">getcenter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.getcenter">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.getcenter">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">getcenter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the coordinate of the grid center as a tuple of Angles</span>
 <span class="sd">        (center_lon, center_lat).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_center_lon</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_center_lat</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.ij2xy"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2xy">[docs]</a>    <span class="k">def</span> <span class="nf">ij2xy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.ij2xy">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2xy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ij2xy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the (x, y) coordinates of point *(i,j)*, in the projection.</span>
 
@@ -418,7 +462,10 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">Yorigin</span> <span class="o">+</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">j0</span> <span class="o">+</span> <span class="n">oj</span><span class="p">)</span> <span class="o">*</span> <span class="n">Yresolution</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.xy2ij"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ij">[docs]</a>    <span class="k">def</span> <span class="nf">xy2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.xy2ij">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ij">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">xy2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the (i, j) indexes of point *(x, y)*,</span>
 <span class="sd">        in the 2D matrix of gridpoints.</span>
@@ -456,7 +503,10 @@
         <span class="n">j</span> <span class="o">=</span> <span class="n">j0</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">Yorigin</span><span class="p">)</span> <span class="o">/</span> <span class="n">Yresolution</span> <span class="o">-</span> <span class="n">oj</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.ll2xy"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2xy">[docs]</a>    <span class="k">def</span> <span class="nf">ll2xy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.ll2xy">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2xy">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ll2xy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the (x, y) coordinates of point *(lon, lat)* in degrees.</span>
 
@@ -474,7 +524,10 @@
         <span class="n">xy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proj</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rotate_axis</span><span class="p">(</span><span class="o">*</span><span class="n">xy</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;ll2xy&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.xy2ll"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ll">[docs]</a>    <span class="k">def</span> <span class="nf">xy2ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.xy2ll">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.xy2ll">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">xy2ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the (lon, lat) coordinates of point *(x, y)* in the 2D matrix</span>
 <span class="sd">        of gridpoints*(i,j)*, in degrees.</span>
@@ -497,6 +550,9 @@
         <span class="n">lons</span><span class="p">,</span> <span class="n">lats</span> <span class="o">=</span> <span class="n">as_numpy_array</span><span class="p">(</span><span class="n">lons</span><span class="p">),</span> <span class="n">as_numpy_array</span><span class="p">(</span><span class="n">lats</span><span class="p">)</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">lons</span> <span class="o">==</span> <span class="n">config</span><span class="o">.</span><span class="n">pyproj_invalid_values</span><span class="p">,</span>
                                 <span class="n">lats</span> <span class="o">==</span> <span class="n">config</span><span class="o">.</span><span class="n">pyproj_invalid_values</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span>
+                                <span class="n">numpy</span><span class="o">.</span><span class="n">logical_or</span><span class="p">(</span><span class="n">lons</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+                                                 <span class="n">lats</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">inf</span><span class="p">))</span>
         <span class="n">lons</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">lons</span><span class="p">)</span>
         <span class="n">lats</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">lons_is_scalar</span><span class="p">:</span>
@@ -506,7 +562,10 @@
         <span class="n">ll</span> <span class="o">=</span> <span class="p">(</span><span class="n">lons</span><span class="p">,</span> <span class="n">lats</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ll</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.ij2ll"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2ll">[docs]</a>    <span class="k">def</span> <span class="nf">ij2ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.ij2ll">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ij2ll">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ij2ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the (lon, lat) coordinates of point *(i,j)*, in degrees.</span>
 
@@ -517,7 +576,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xy2ll</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ij2xy</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">position</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.ll2ij"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2ij">[docs]</a>    <span class="k">def</span> <span class="nf">ll2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.ll2ij">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.ll2ij">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">ll2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the (i, j) indexes of point *(lon, lat)* in degrees,</span>
 <span class="sd">        in the 2D matrix of gridpoints.</span>
@@ -531,7 +593,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xy2ij</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ll2xy</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">),</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.map_factor"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor">[docs]</a>    <span class="k">def</span> <span class="nf">map_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.map_factor">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">map_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the map factor at the given latitude(s) *lat* in degrees.&quot;&quot;&quot;</span>
         <span class="n">lat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;mercator&#39;</span><span class="p">:</span>
@@ -559,7 +624,10 @@
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;projection &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot; not implemented.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">m</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.map_factor_field"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor_field">[docs]</a>    <span class="k">def</span> <span class="nf">map_factor_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.map_factor_field">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.map_factor_field">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">map_factor_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a new field whose data is the map factor over the field.</span>
 
@@ -581,13 +649,19 @@
         <span class="n">f</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">f</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.mesh_area"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area">[docs]</a>    <span class="k">def</span> <span class="nf">mesh_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.mesh_area">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mesh_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the area of a mesh/gridpoint, given its latitude.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;X_resolution&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;Y_resolution&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">map_factor</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.mesh_area_field"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area_field">[docs]</a>    <span class="k">def</span> <span class="nf">mesh_area_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.mesh_area_field">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.mesh_area_field">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mesh_area_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a new field whose data is the mesh area of gridpoints,</span>
 <span class="sd">        i.e. X_resolution x Y_resolution / m^2, where m is the local map factor.</span>
@@ -602,7 +676,10 @@
         <span class="n">m</span><span class="o">.</span><span class="n">units</span> <span class="o">=</span> <span class="s1">&#39;m^2&#39;</span>
         <span class="k">return</span> <span class="n">m</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.linspace"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.linspace">[docs]</a>    <span class="k">def</span> <span class="nf">linspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.linspace">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.linspace">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">linspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns evenly spaced points over the specified interval.</span>
 <span class="sd">        Points are lined up in the geometry.</span>
@@ -619,7 +696,10 @@
                                <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">num</span><span class="p">)))</span>
         <span class="k">return</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xy2ll</span><span class="p">(</span><span class="o">*</span><span class="n">xy</span><span class="p">),</span> <span class="mi">8</span><span class="p">))</span> <span class="k">for</span> <span class="n">xy</span> <span class="ow">in</span> <span class="n">xy_linspace</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.distance"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.distance">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.distance">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the distance between two points along a straight line in the</span>
 <span class="sd">        geometry.</span>
@@ -636,7 +716,10 @@
         <span class="n">mean_map_factor</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">map_factor</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">_</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)])</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">mean_map_factor</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.resolution_ll"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ll">[docs]</a>    <span class="k">def</span> <span class="nf">resolution_ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.resolution_ll">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ll">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resolution_ll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the local resolution at the nearest point of lon/lat.</span>
 <span class="sd">        It&#39;s the distance between this point and its closest neighbour.</span>
@@ -646,7 +729,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution_ij</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ll2ij</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.resolution_ij"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ij">[docs]</a>    <span class="k">def</span> <span class="nf">resolution_ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.resolution_ij">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.resolution_ij">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">resolution_ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the distance to the nearest point of (i,j) point.</span>
 
@@ -663,7 +749,10 @@
                                           <span class="bp">self</span><span class="o">.</span><span class="n">ij2ll</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">))</span>
                             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">points_list</span><span class="p">])</span><span class="o">.</span><span class="n">min</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.plane_azimuth"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.plane_azimuth">[docs]</a>    <span class="k">def</span> <span class="nf">plane_azimuth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.plane_azimuth">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.plane_azimuth">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plane_azimuth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initial bearing from *end1* to *end2* points in plane local referential</span>
 <span class="sd">        geometry.</span>
@@ -676,7 +765,10 @@
         <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;rotation&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">))</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">+</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.</span> <span class="o">-</span> <span class="mf">180.</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.make_section_geometry"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.make_section_geometry">[docs]</a>    <span class="k">def</span> <span class="nf">make_section_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">,</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.make_section_geometry">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.make_section_geometry">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_section_geometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">end1</span><span class="p">,</span> <span class="n">end2</span><span class="p">,</span>
                               <span class="n">points_number</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">resolution</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -735,7 +827,10 @@
             <span class="n">kwargs_geom</span><span class="p">[</span><span class="s1">&#39;geoid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geoid</span>
         <span class="k">return</span> <span class="n">ProjectedGeometry</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs_geom</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.compass_grid"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.compass_grid">[docs]</a>    <span class="k">def</span> <span class="nf">compass_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.compass_grid">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.compass_grid">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compass_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subzone</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the compass grid, i.e. the angle between Y-axis and North for each</span>
 <span class="sd">        gridpoint.</span>
@@ -758,11 +853,15 @@
             <span class="n">k</span> <span class="o">=</span> <span class="mf">0.</span>
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;polar_stereographic&#39;</span><span class="p">:</span>
             <span class="n">k</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cos_sin&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">theta</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">lons</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">))</span> <span class="o">-</span> \
-                <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rotation&#39;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">deviation</span> <span class="o">=</span> <span class="n">lons</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">[</span><span class="s1">&#39;reference_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
+        <span class="n">deviation</span> <span class="o">=</span> <span class="p">((</span><span class="n">deviation</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span><span class="p">)</span> <span class="o">-</span> <span class="mi">180</span>  <span class="c1"># Between -180 and 180</span>
+        <span class="n">theta</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">deviation</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;rotation&#39;</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;degrees&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">theta</span></div>
 
-<div class="viewcode-block" id="ProjectedGeometry.reproject_wind_on_lonlat"><a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.reproject_wind_on_lonlat">[docs]</a>    <span class="k">def</span> <span class="nf">reproject_wind_on_lonlat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span>
+
+<div class="viewcode-block" id="ProjectedGeometry.reproject_wind_on_lonlat">
+<a class="viewcode-back" href="../../../library/ProjectedGeometry.html#epygram.geometries.ProjectedGeometry.ProjectedGeometry.reproject_wind_on_lonlat">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reproject_wind_on_lonlat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span>
                                  <span class="n">lon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                  <span class="n">map_factor_correction</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                  <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -814,7 +913,8 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="n">ru</span><span class="p">,</span> <span class="n">rv</span><span class="p">)</span></div>
 
-    <span class="k">def</span> <span class="nf">_what_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">arpifs_var_names</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_what_projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">arpifs_var_names</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes in file a summary of the projection of the field&#39;s grid.</span>
 
@@ -957,15 +1057,16 @@
 <span class="sd">    def __hash__(self):</span>
 <span class="sd">        # known issue __eq__/__hash__ must be defined both or none, else inheritance is broken</span>
 <span class="sd">        return super(ProjectedGeometry, self).__hash__()&quot;&quot;&quot;</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../../search.html" method="get">
@@ -973,13 +1074,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -988,7 +1089,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.4 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../geometries.html" >epygram.geometries</a> &#187;</li>
@@ -996,8 +1097,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>

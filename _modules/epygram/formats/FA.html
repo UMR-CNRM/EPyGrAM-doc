@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats.FA &#8212; epygram 2.0.0 documentation</title>
+    <title>epygram.formats.FA &#8212; epygram 2.0.5 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../../../_static/documentation_options.js?v=51b770b3"></script>
+    <script src="../../../_static/documentation_options.js?v=09beee0d"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -23,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
@@ -329,10 +329,10 @@
         <span class="bp">cls</span><span class="o">.</span><span class="n">_FAsoftware_cst</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">((</span><span class="s1">&#39;JPXPAH&#39;</span><span class="p">,</span> <span class="s1">&#39;JPXIND&#39;</span><span class="p">,</span> <span class="s1">&#39;JPXGEO&#39;</span><span class="p">,</span> <span class="s1">&#39;JPXNIV&#39;</span><span class="p">),</span>
                                        <span class="n">FA4py</span><span class="o">.</span><span class="n">get_facst</span><span class="p">()))</span>
 
-<div class="viewcode-block" id="FA.field_type">
-<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.field_type">[docs]</a>
+<div class="viewcode-block" id="FA.field_type_from_sfxflddesc">
+<a class="viewcode-back" href="../../../library/FA.html#epygram.formats.FA.FA.field_type_from_sfxflddesc">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">field_type</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field_type_from_sfxflddesc</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get field type, either &#39;H2D&#39; or the meta-data types registered in</span>
 <span class="sd">        cls.sfxflddesc</span>
@@ -673,23 +673,11 @@
 <span class="sd">        If **update_fieldscompression**, store compression info in attribute</span>
 <span class="sd">        fieldscompression.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="p">(</span><span class="n">LDCOSP</span><span class="p">,</span>
-             <span class="n">KNGRIB</span><span class="p">,</span>
-             <span class="n">KNBITS</span><span class="p">,</span>
-             <span class="n">KSTRON</span><span class="p">,</span>
-             <span class="n">KPUILA</span><span class="p">)</span> <span class="o">=</span> <span class="n">FA4py</span><span class="o">.</span><span class="n">wfanion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span>
-                                     <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span>
-                                     <span class="mi">0</span><span class="p">,</span>
-                                     <span class="n">fieldname</span><span class="p">[</span><span class="mi">4</span><span class="p">:])[</span><span class="mi">1</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s1">&#39;falfilfa4py: Error code -93 was raised&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="ow">or</span> \
-               <span class="s1">&#39;falfilfa4py: Error code -91 was raised&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="n">fieldname</span> <span class="o">+</span> <span class="s1">&#39;: seems like you try to read a MiscField as a H2DField...&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">e</span>
-        <span class="n">encoding</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;spectral&#39;</span><span class="p">:</span><span class="n">LDCOSP</span><span class="p">,</span> <span class="s1">&#39;KNGRIB&#39;</span><span class="p">:</span><span class="n">KNGRIB</span><span class="p">,</span> <span class="s1">&#39;KNBITS&#39;</span><span class="p">:</span><span class="n">KNBITS</span><span class="p">,</span>
-                    <span class="s1">&#39;KSTRON&#39;</span><span class="p">:</span><span class="n">KSTRON</span><span class="p">,</span> <span class="s1">&#39;KPUILA&#39;</span><span class="p">:</span><span class="n">KPUILA</span><span class="p">}</span>
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fanion</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">encoding</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;exists&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Field is unknown in file: </span><span class="si">{</span><span class="n">fieldname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">encoding</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;ftype&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Field is not H2D: </span><span class="si">{</span><span class="n">fieldname</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">update_fieldscompression</span><span class="p">:</span>
             <span class="c1"># Save compression in FA</span>
             <span class="n">compression</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;KNGRIB&#39;</span><span class="p">:</span><span class="n">encoding</span><span class="p">[</span><span class="s1">&#39;KNGRIB&#39;</span><span class="p">],</span>
@@ -698,7 +686,6 @@
                            <span class="s1">&#39;KSTRON&#39;</span><span class="p">:</span><span class="n">encoding</span><span class="p">[</span><span class="s1">&#39;KSTRON&#39;</span><span class="p">],</span>
                            <span class="s1">&#39;KPUILA&#39;</span><span class="p">:</span><span class="n">encoding</span><span class="p">[</span><span class="s1">&#39;KPUILA&#39;</span><span class="p">]}</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fieldscompression</span><span class="p">[</span><span class="n">fieldname</span><span class="p">]</span> <span class="o">=</span> <span class="n">compression</span>
-
         <span class="k">return</span> <span class="n">encoding</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
@@ -1028,6 +1015,11 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">cumulativeduration</span><span class="o">=</span><span class="n">field</span><span class="o">.</span><span class="n">validity</span><span class="o">.</span><span class="n">cumulativeduration</span><span class="p">())</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_set_validity</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">compression</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s1">&#39;KNGRIB&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">compression</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral</span><span class="p">:</span>
+                        <span class="n">compression</span><span class="p">[</span><span class="s1">&#39;KNGRIB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">FA_default_KNGRIB_spectral</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">compression</span><span class="p">[</span><span class="s1">&#39;KNGRIB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">FA_default_compression</span><span class="p">[</span><span class="s1">&#39;KNGRIB&#39;</span><span class="p">]</span>
                 <span class="n">modified_compression</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">elif</span> <span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">]</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldscompression</span><span class="p">:</span>
                 <span class="n">compression</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldscompression</span><span class="p">[</span><span class="n">field</span><span class="o">.</span><span class="n">fid</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">]]</span>
@@ -1619,19 +1611,34 @@
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;KDATEF</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">KDATEF</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_field_type_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return type of the field, based on FANION or FA field dict.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fanion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Smart interface to FANION, returning info on the field.&quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">exist</span> <span class="o">=</span> <span class="n">FA4py</span><span class="o">.</span><span class="n">wfanion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span>
-                                  <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span>
-                                  <span class="mi">0</span><span class="p">,</span>
-                                  <span class="n">fieldname</span><span class="p">[</span><span class="mi">4</span><span class="p">:])[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
-            <span class="n">exist</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">ftype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">exist</span> <span class="ow">and</span> <span class="n">ftype</span> <span class="o">==</span> <span class="s1">&#39;?&#39;</span><span class="p">:</span>
-            <span class="n">ftype</span> <span class="o">=</span> <span class="s1">&#39;H2D&#39;</span>  <span class="c1"># because fanion fails or answers False for meta-fields</span>
-        <span class="k">return</span> <span class="n">ftype</span>
+            <span class="p">(</span><span class="n">exists</span><span class="p">,</span>
+             <span class="n">spectral</span><span class="p">,</span>
+             <span class="n">KNGRIB</span><span class="p">,</span>
+             <span class="n">KNBITS</span><span class="p">,</span>
+             <span class="n">KSTRON</span><span class="p">,</span>
+             <span class="n">KPUILA</span><span class="p">)</span> <span class="o">=</span> <span class="n">FA4py</span><span class="o">.</span><span class="n">wfanion</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit</span><span class="p">,</span>
+                                     <span class="n">fieldname</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span>
+                                     <span class="mi">0</span><span class="p">,</span>
+                                     <span class="n">fieldname</span><span class="p">[</span><span class="mi">4</span><span class="p">:])[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">RuntimeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;Error code -93 was raised&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="ow">or</span> \
+               <span class="s1">&#39;Error code -91 was raised&#39;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+                <span class="c1"># fanion raises an error but it is actually an existing meta-data field</span>
+                <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;exists&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;ftype&#39;</span><span class="p">:</span><span class="s1">&#39;Misc&#39;</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;exists&#39;</span><span class="p">:</span><span class="n">exists</span><span class="p">,</span> <span class="s1">&#39;spectral&#39;</span><span class="p">:</span><span class="n">spectral</span><span class="p">,</span> <span class="s1">&#39;ftype&#39;</span><span class="p">:</span><span class="s1">&#39;H2D&#39;</span> <span class="k">if</span> <span class="n">exists</span> <span class="k">else</span> <span class="s1">&#39;?&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;KNGRIB&#39;</span><span class="p">:</span><span class="n">KNGRIB</span><span class="p">,</span> <span class="s1">&#39;KNBITS&#39;</span><span class="p">:</span><span class="n">KNBITS</span><span class="p">,</span> <span class="s1">&#39;KSTRON&#39;</span><span class="p">:</span><span class="n">KSTRON</span><span class="p">,</span> <span class="s1">&#39;KPUILA&#39;</span><span class="p">:</span><span class="n">KPUILA</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">field_info</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_field_type_from_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return type of the field, based on FANION&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fanion</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)[</span><span class="s1">&#39;ftype&#39;</span><span class="p">]</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_raw_header_get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">vars_from_facies</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;KTYPTR&#39;</span><span class="p">,</span> <span class="s1">&#39;PSLAPO&#39;</span><span class="p">,</span> <span class="s1">&#39;PCLOPO&#39;</span><span class="p">,</span> <span class="s1">&#39;PSLOPO&#39;</span><span class="p">,</span>
@@ -2005,7 +2012,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>

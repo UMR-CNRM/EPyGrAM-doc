@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.spectra &#8212; epygram 1.5.2 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css" />
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
+    <title>epygram.spectra &#8212; epygram 2.0.5 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinxdoc.css?v=34905f61" />
+    <script src="../../_static/documentation_options.js?v=09beee0d"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -25,7 +23,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.spectra</a></li> 
@@ -49,26 +47,93 @@
 <span class="sd">- a class to handle variance spectrum;</span>
 <span class="sd">- a function to compute DCT spectrum from a 2D field;</span>
 <span class="sd">- a function to sort spectra with regards to their name;</span>
-<span class="sd">- a function to plot a series of spectra.</span>
-<span class="sd">- a function to read a dumped spectrum.</span>
+<span class="sd">- a function to plot a series of spectra;</span>
+<span class="sd">- a function to read a dumped spectrum;</span>
+<span class="sd">- a function to create a spectral geometry, e.g., for GRIBs.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">unicode_literals</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bronx.graphics.axes</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_figax</span>
 
-<span class="kn">from</span> <span class="nn">bronx.graphics.axes</span> <span class="kn">import</span> <span class="n">set_figax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">copy</span>
-
-<span class="kn">from</span> <span class="nn">epygram</span> <span class="kn">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
-<span class="kn">from</span> <span class="nn">epygram.util</span> <span class="kn">import</span> <span class="n">RecursiveObject</span><span class="p">,</span> <span class="n">write_formatted_table</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram</span><span class="w"> </span><span class="kn">import</span> <span class="n">epygramError</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.geometries</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussGeometry</span><span class="p">,</span> <span class="n">SpectralGeometry</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">epygram.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">RecursiveObject</span><span class="p">,</span> <span class="n">write_formatted_table</span>
 
 
 <span class="n">_file_id</span> <span class="o">=</span> <span class="s1">&#39;epygram.spectra.Spectrum&#39;</span>
 <span class="n">_file_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="s1">&#39;lambda&#39;</span><span class="p">,</span> <span class="s1">&#39;variance&#39;</span><span class="p">]</span>
 
+<span class="k">def</span><span class="w"> </span><span class="nf">nlonlat_to_nsmax</span><span class="p">(</span><span class="n">nlon</span><span class="p">,</span> <span class="n">nlat</span><span class="p">,</span> <span class="n">stretching</span><span class="p">,</span> <span class="n">trunctype</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Relationship between grid-point space and spectral space.</span>
+<span class="sd">    nlat is the number of latitudes, nlon is the maximum number of longitudes.</span>
+<span class="sd">    trunc_type should be one of &quot;linear&quot;, &quot;quadratic&quot; or &quot;cubic&quot;</span>
+<span class="sd">    Returns the maximum total dimensionless wavenumber.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">trunctype2ratio</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;linear&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;quadratic&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;cubic&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">trunctype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">trunctype2ratio</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;trunc_type should be one of &#39;linear&#39;, &#39;quadratic&#39; or &#39;cubic&#39;&quot;</span><span class="p">)</span>
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">trunctype2ratio</span><span class="p">[</span><span class="n">trunctype</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">stretching</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">nlon</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">ratio</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">nlon</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">nlat</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="n">ratio</span><span class="p">))</span>
 
-<div class="viewcode-block" id="read_Spectrum"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.read_Spectrum">[docs]</a><span class="k">def</span> <span class="nf">read_Spectrum</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_spectral_geometry</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">trunctype</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a SpectralGeometry object consistent with the input grid-point</span>
+<span class="sd">    geometry and with the required truncation type.</span>
+<span class="sd">    This is only implemented for Gaussiand grids, with a triangular truncation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">trunctype</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="s2">&quot;quadratic&quot;</span><span class="p">,</span> <span class="s2">&quot;cubic&quot;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;trunctype should be either &#39;linear&#39;, &#39;quadratic&#39; or &#39;cubic&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
+            <span class="s2">&quot;No meaningful spectral transform implemented for &quot;</span> <span class="o">+</span> <span class="n">geometry</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Build spectral geometry assuming </span><span class="si">{</span><span class="n">trunctype</span><span class="si">}</span><span class="s2"> and triangular truncation.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">stretching</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s2">&quot;dilatation_coef&quot;</span><span class="p">]</span>
+    <span class="n">nlat</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s2">&quot;lat_number&quot;</span><span class="p">]</span>
+    <span class="n">nlon</span> <span class="o">=</span> <span class="n">geometry</span><span class="o">.</span><span class="n">dimensions</span><span class="p">[</span><span class="s2">&quot;max_lon_number&quot;</span><span class="p">]</span>
+    <span class="n">truncation</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="nb">max</span><span class="o">=</span><span class="n">nlonlat_to_nsmax</span><span class="p">(</span><span class="n">nlon</span><span class="p">,</span> <span class="n">nlat</span><span class="p">,</span> <span class="n">stretching</span><span class="p">,</span> <span class="n">trunctype</span><span class="p">),</span>
+        <span class="n">shape</span><span class="o">=</span><span class="s2">&quot;triangular&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">spectral_geometry</span> <span class="o">=</span> <span class="n">SpectralGeometry</span><span class="p">(</span><span class="s2">&quot;legendre&quot;</span><span class="p">,</span> <span class="n">truncation</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Built spectral geometry:&quot;</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">spectral_geometry</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_spectral_geometry</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the SpectralGeometry object of the field or resource.</span>
+<span class="sd">    If the field has no spectral geometry, return the spectral geometry of the resource.</span>
+<span class="sd">    If the resource has no spectral geometry, returns None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">spectral_geometry</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral_geometry</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">spectral_geometry</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral_geometry</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="s2">&quot;spectral_geometry&quot;</span><span class="p">):</span>
+        <span class="n">spectral_geometry</span> <span class="o">=</span> <span class="n">resource</span><span class="o">.</span><span class="n">spectral_geometry</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Spectral geometry is&quot;</span><span class="p">,</span> <span class="n">spectral_geometry</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">spectral_geometry</span>
+
+
+<div class="viewcode-block" id="read_Spectrum">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.read_Spectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">read_Spectrum</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a Spectrum written in file and return it.&quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_file</span><span class="p">:</span>
         <span class="n">init_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
@@ -98,7 +163,10 @@
         <span class="k">return</span> <span class="n">Spectrum</span><span class="p">(</span><span class="n">variances</span><span class="p">,</span> <span class="o">**</span><span class="n">init_kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Spectrum"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum">[docs]</a><span class="k">class</span> <span class="nc">Spectrum</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Spectrum">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Spectrum</span><span class="p">(</span><span class="n">RecursiveObject</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A spectrum can be seen as a quantification of a signal&#39;s variance with</span>
 <span class="sd">    regards to scale.</span>
@@ -111,7 +179,7 @@
 <span class="sd">        Using the Discrete Cosine Transform (DCT)&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variances</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variances</span><span class="p">,</span>
                  <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">resolution</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">mean2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -135,18 +203,20 @@
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">wavenumbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wavenumbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the wavenumbers of the spectrum.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variances</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">wavelengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wavelengths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the wavelengths of the spectrum.&quot;&quot;&quot;</span>
         <span class="n">K</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variances</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">resolution</span> <span class="o">*</span> <span class="n">K</span> <span class="o">/</span> <span class="n">k</span>
                             <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wavenumbers</span><span class="p">])</span>
 
-<div class="viewcode-block" id="Spectrum.write"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
+<div class="viewcode-block" id="Spectrum.write">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum.write">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes the spectrum with formatted output in *out*.</span>
 
@@ -166,14 +236,20 @@
             <span class="n">table</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">wn</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">wl</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">var</span><span class="p">[</span><span class="n">k</span><span class="p">]])</span>
         <span class="n">write_formatted_table</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">table</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Spectrum.dump"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum.dump">[docs]</a>    <span class="k">def</span> <span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Spectrum.dump">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum.dump">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">dump</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Writes the spectrum with formatted output in *filename*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">_file</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">_file</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Spectrum.plotspectrum"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum.plotspectrum">[docs]</a>    <span class="k">def</span> <span class="nf">plotspectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+
+<div class="viewcode-block" id="Spectrum.plotspectrum">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.Spectrum.plotspectrum">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">plotspectrum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                      <span class="n">together_with</span><span class="o">=</span><span class="p">[],</span>
                      <span class="n">over</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                      <span class="n">slopes</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;exp&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;offset&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span><span class="s1">&#39;-3&#39;</span><span class="p">},</span>
@@ -181,7 +257,8 @@
                      <span class="n">zoom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                      <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;SI&#39;</span><span class="p">,</span>
                      <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                     <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                     <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">takeover</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Plot the spectrum.</span>
 
@@ -201,9 +278,10 @@
                            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
                            <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span></div>
 
+
 <span class="c1">##########</span>
 <span class="c1"># internal</span>
-    <span class="k">def</span> <span class="nf">_check_operands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check_operands</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check compatibility of both spectra.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Spectrum</span><span class="p">):</span>
             <span class="k">assert</span> <span class="nb">all</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variances</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">variances</span><span class="p">),</span>
@@ -226,7 +304,7 @@
 
         <span class="k">return</span> <span class="p">(</span><span class="n">othermean2</span><span class="p">,</span> <span class="n">othername</span><span class="p">,</span> <span class="n">otherval</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="p">(</span><span class="n">othermean2</span><span class="p">,</span> <span class="n">othername</span><span class="p">,</span> <span class="n">otherval</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_operands</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">mean2</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean2</span><span class="p">,</span> <span class="n">othermean2</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean2</span> <span class="o">+</span> <span class="n">othermean2</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="n">othername</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">othername</span><span class="p">)</span>
@@ -235,7 +313,7 @@
                         <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
                         <span class="n">mean2</span><span class="o">=</span><span class="n">mean2</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="p">(</span><span class="n">othermean2</span><span class="p">,</span> <span class="n">othername</span><span class="p">,</span> <span class="n">otherval</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_operands</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">mean2</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean2</span><span class="p">,</span> <span class="n">othermean2</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean2</span> <span class="o">-</span> <span class="n">othermean2</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="n">othername</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">othername</span><span class="p">)</span>
@@ -244,7 +322,7 @@
                         <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
                         <span class="n">mean2</span><span class="o">=</span><span class="n">mean2</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="p">(</span><span class="n">othermean2</span><span class="p">,</span> <span class="n">othername</span><span class="p">,</span> <span class="n">otherval</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_operands</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">mean2</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean2</span><span class="p">,</span> <span class="n">othermean2</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean2</span> <span class="o">*</span> <span class="n">othermean2</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="n">othername</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">othername</span><span class="p">)</span>
@@ -253,7 +331,7 @@
                         <span class="n">resolution</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">resolution</span><span class="p">,</span>
                         <span class="n">mean2</span><span class="o">=</span><span class="n">mean2</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="p">(</span><span class="n">othermean2</span><span class="p">,</span> <span class="n">othername</span><span class="p">,</span> <span class="n">otherval</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_operands</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">mean2</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mean2</span><span class="p">,</span> <span class="n">othermean2</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">mean2</span> <span class="o">/</span> <span class="n">othermean2</span>
         <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="n">othername</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">othername</span><span class="p">)</span>
@@ -263,9 +341,12 @@
                         <span class="n">mean2</span><span class="o">=</span><span class="n">mean2</span><span class="p">)</span></div>
 
 
+
 <span class="c1"># FUNCTIONS FOR SPECTRA #</span>
 <span class="c1">#########################</span>
-<div class="viewcode-block" id="sort"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.sort">[docs]</a><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="n">spectra</span><span class="p">):</span>
+<div class="viewcode-block" id="sort">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.sort">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">sort</span><span class="p">(</span><span class="n">spectra</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Sort a list of spectra with regards to their name. &quot;&quot;&quot;</span>
     <span class="n">untied_spectra</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">spectra</span><span class="p">)</span>
     <span class="n">sortedspectra</span> <span class="o">=</span> <span class="p">[]</span>
@@ -277,7 +358,10 @@
     <span class="k">return</span> <span class="n">sortedspectra</span></div>
 
 
-<div class="viewcode-block" id="dctspectrum"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.dctspectrum">[docs]</a><span class="k">def</span> <span class="nf">dctspectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="dctspectrum">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.dctspectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">dctspectrum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function *dctspectrum* takes a 2D-array as argument and returns its 1D</span>
 <span class="sd">    DCT ellipse spectrum.</span>
@@ -291,7 +375,7 @@
 <span class="sd">    :param log: an optional logging.Logger instance to which print info</span>
 <span class="sd">                in *verbose* case.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">scipy.fftpack</span> <span class="k">as</span> <span class="nn">tfm</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.fftpack</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfm</span>
 
     <span class="c1"># compute transform</span>
     <span class="k">if</span> <span class="n">log</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">verbose</span><span class="p">:</span>
@@ -329,14 +413,53 @@
     <span class="k">return</span> <span class="n">variance</span></div>
 
 
-<div class="viewcode-block" id="plotspectra"><a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.plotspectra">[docs]</a><span class="k">def</span> <span class="nf">plotspectra</span><span class="p">(</span><span class="n">spectra</span><span class="p">,</span>
+
+<div class="viewcode-block" id="global_spectrum">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.global_spectrum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">global_spectrum</span><span class="p">(</span><span class="n">field</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return variance spectrum of a global spectral field on a GaussGeometry,</span>
+<span class="sd">    from its spectral coefficients.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">isglobal</span>
+    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="p">,</span> <span class="n">GaussGeometry</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s2">&quot;shape&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;triangular&quot;</span>
+    <span class="k">assert</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">getdata</span><span class="p">()</span>
+    <span class="n">nsmax</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">spectral_geometry</span><span class="o">.</span><span class="n">truncation</span><span class="p">[</span><span class="s2">&quot;max&quot;</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="p">(</span><span class="n">nsmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">nsmax</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">variances</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nsmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">jdata</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Loop on zonal wavenumber m</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nsmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Loop on total wavenumber n</span>
+        <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nsmax</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">squaredmodule</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">jdata</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">jdata</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">variances</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="n">squaredmodule</span>
+                <span class="c1"># Check that coefficient (m, n) == (0, n) is its own complex conjugate,</span>
+                <span class="c1"># i.e. it has zero imaginary part</span>
+                <span class="k">assert</span> <span class="n">data</span><span class="p">[</span><span class="n">jdata</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Coefficient (-m, n) is the complex conjugate of (m, n).</span>
+                <span class="c1"># It is not stored so (m, n) should be counted twice.</span>
+                <span class="n">variances</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">squaredmodule</span>
+            <span class="n">jdata</span> <span class="o">+=</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">variances</span></div>
+
+
+
+<div class="viewcode-block" id="plotspectra">
+<a class="viewcode-back" href="../../library/spectra.html#epygram.spectra.plotspectra">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">plotspectra</span><span class="p">(</span><span class="n">spectra</span><span class="p">,</span>
                 <span class="n">over</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
                 <span class="n">slopes</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;exp&#39;</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;offset&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span><span class="s1">&#39;-3&#39;</span><span class="p">},</span>
                         <span class="p">{</span><span class="s1">&#39;exp&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">5.</span> <span class="o">/</span> <span class="mf">3.</span><span class="p">,</span> <span class="s1">&#39;offset&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">:</span><span class="s1">&#39;-5/3&#39;</span><span class="p">}],</span>
                 <span class="n">zoom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;SI&#39;</span><span class="p">,</span>
                 <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                <span class="n">figsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">takeover</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    To plot a series of spectra.</span>
 
@@ -359,13 +482,16 @@
 <span class="sd">    :param title: title for the plot</span>
 <span class="sd">    :param figsize: figure sizes in inches, e.g. (5, 8.5).</span>
 <span class="sd">                    Default figsize is config.plotsizes.</span>
+<span class="sd">    :param takeover: give the user more access to the objects used in the</span>
+<span class="sd">                     plot, by returning a dict containing them instead of only fig/ax</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">family</span><span class="o">=</span><span class="s1">&#39;serif&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">figsize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">figsize</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">plotsizes</span>
 
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">set_figax</span><span class="p">(</span><span class="o">*</span><span class="n">over</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fig&#39;</span><span class="p">:</span><span class="n">fig</span><span class="p">,</span> <span class="s1">&#39;ax&#39;</span><span class="p">:</span><span class="n">ax</span><span class="p">}</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spectra</span><span class="p">,</span> <span class="n">Spectrum</span><span class="p">):</span>
         <span class="n">spectra</span> <span class="o">=</span> <span class="p">[</span><span class="n">spectra</span><span class="p">]</span>
@@ -403,6 +529,7 @@
     <span class="n">x_intercept</span> <span class="o">=</span> <span class="n">spectra</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">y_intercept</span> <span class="o">=</span> <span class="n">spectra</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">variances</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;slopes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">slope</span> <span class="ow">in</span> <span class="n">slopes</span><span class="p">:</span>
         <span class="c1"># a slope is defined by y = A * k**-s and we plot it with</span>
         <span class="c1"># two points y1, y2</span>
@@ -416,33 +543,38 @@
         <span class="n">A</span> <span class="o">=</span> <span class="n">y_intercept</span> <span class="o">*</span> <span class="n">x_intercept</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="n">s</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span>
         <span class="n">y1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">**</span> <span class="n">s</span>
         <span class="n">y2</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">x2</span> <span class="o">**</span> <span class="n">s</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.7&#39;</span><span class="p">,</span>
-                <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyles</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">linestyles</span><span class="p">)],</span>
-                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$k^{&#39;</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="s1">&#39;}$&#39;</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">],</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span> <span class="n">y2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;0.7&#39;</span><span class="p">,</span>
+                       <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyles</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">linestyles</span><span class="p">)],</span>
+                       <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$k^{&#39;</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="s1">&#39;}$&#39;</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;slopes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># plot spectra</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;spectra&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">spectra</span><span class="p">:</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">variances</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)],</span>
-                <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyles</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">wavelengths</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">variances</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)],</span>
+                       <span class="n">linestyle</span><span class="o">=</span><span class="n">linestyles</span><span class="p">[</span><span class="n">i</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">colors</span><span class="p">)],</span> <span class="n">label</span><span class="o">=</span><span class="n">s</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;spectra&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="c1"># legend</span>
     <span class="n">legend</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower left&#39;</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">[</span><span class="s1">&#39;legend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">legend</span>
     <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">legend</span><span class="o">.</span><span class="n">get_texts</span><span class="p">():</span>
         <span class="n">label</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="s1">&#39;medium&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">result</span> <span class="k">if</span> <span class="n">takeover</span> <span class="k">else</span> <span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../../search.html" method="get">
@@ -450,13 +582,13 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -465,15 +597,15 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 1.5.2 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.spectra</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    &#169; Copyright 2014 --- 2024, A.Mary, S.Riette.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     </div>
   </body>
 </html>
