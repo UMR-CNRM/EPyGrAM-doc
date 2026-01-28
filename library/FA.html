@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram.formats.FA — Interface-Class to the FA format &#8212; epygram 2.0.5 documentation</title>
+    <title>epygram.formats.FA — Interface-Class to the FA format &#8212; epygram 2.0.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=09beee0d"></script>
+    <script src="../_static/documentation_options.js?v=722443bc"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="formats.html" title="epygram.formats — Formats"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a></li> 
@@ -94,7 +94,7 @@
 </li>
 <li><p><strong>openmode</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">builtins.str</span></code>) - rxx - Opening mode.</p>
 <ul>
-<li><p>Values: set([‘append’, ‘write’, ‘a’, ‘w’, ‘r’, ‘read’])</p></li>
+<li><p>Values: set([‘read’, ‘write’, ‘a’, ‘w’, ‘append’, ‘r’])</p></li>
 <li><p>Remap: dict(append = ‘a’, read = ‘r’, write = ‘w’,)</p></li>
 </ul>
 </li>
@@ -270,6 +270,12 @@ to be shifted to a [-180,180] grid, for instance (with -180 argument).</p></li>
 </ul>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="epygram.formats.FA.FA.field_type">
+<span class="sig-name descname"><span class="pre">field_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#epygram.formats.FA.FA.field_type" title="Link to this definition">¶</a></dt>
+<dd><p>Return type of the field, based on FANION and/or sfxflddesc_mod</p>
 </dd></dl>
 
 <dl class="py method">
@@ -530,6 +536,7 @@ parameters for field compression (in case of a
 <li><a class="reference internal" href="#epygram.formats.FA.FA.extract_subdomain"><code class="docutils literal notranslate"><span class="pre">FA.extract_subdomain()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.extractprofile"><code class="docutils literal notranslate"><span class="pre">FA.extractprofile()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.extractsection"><code class="docutils literal notranslate"><span class="pre">FA.extractsection()</span></code></a></li>
+<li><a class="reference internal" href="#epygram.formats.FA.FA.field_type"><code class="docutils literal notranslate"><span class="pre">FA.field_type()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.field_type_from_sfxflddesc"><code class="docutils literal notranslate"><span class="pre">FA.field_type_from_sfxflddesc()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.fieldencoding"><code class="docutils literal notranslate"><span class="pre">FA.fieldencoding()</span></code></a></li>
 <li><a class="reference internal" href="#epygram.formats.FA.FA.filename"><code class="docutils literal notranslate"><span class="pre">FA.filename</span></code></a></li>
@@ -604,7 +611,7 @@ parameters for field compression (in case of a
         <li class="right" >
           <a href="formats.html" title="epygram.formats — Formats"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="formats.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats</span></code> — Formats</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram.formats.FA</span></code> — Interface-Class to the FA format</a></li> 

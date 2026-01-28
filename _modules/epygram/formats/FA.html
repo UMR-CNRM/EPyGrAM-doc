@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.formats.FA &#8212; epygram 2.0.5 documentation</title>
+    <title>epygram.formats.FA &#8212; epygram 2.0.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../../../_static/documentation_options.js?v=09beee0d"></script>
+    <script src="../../../_static/documentation_options.js?v=722443bc"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -23,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" accesskey="U">epygram.formats</a> &#187;</li>
@@ -344,8 +344,7 @@
                 <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">sfxflddesc</span><span class="o">.</span><span class="n">is_metadata</span><span class="p">(</span><span class="n">fieldname</span><span class="p">):</span>
                     <span class="n">ftype</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">sfxflddesc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">sfxflddesc</span><span class="o">.</span><span class="n">is_metadata</span><span class="p">(</span><span class="n">fieldname</span><span class="p">):</span>
-                    <span class="n">ftype</span> <span class="o">=</span> <span class="s1">&#39;?&#39;</span>
+                <span class="n">ftype</span> <span class="o">=</span> <span class="s1">&#39;?&#39;</span>
         <span class="k">return</span> <span class="n">ftype</span></div>
 
 
@@ -497,7 +496,7 @@
             <span class="n">tmplist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tmplist</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">fieldtypeslist</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span>\
-                   <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
                     <span class="n">fieldslist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">seed</span><span class="p">),</span> <span class="nb">hash</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">())))</span>
@@ -506,7 +505,7 @@
             <span class="n">tmplist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_find_re_in_list</span><span class="p">[</span><span class="n">h</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tmplist</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">fieldtypeslist</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span>\
-                   <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
                     <span class="n">fieldslist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
             <span class="n">tmplist</span> <span class="o">=</span> <span class="p">[]</span>
@@ -517,7 +516,7 @@
                 <span class="n">tmplist</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache_find_re_in_list</span><span class="p">[</span><span class="n">h</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">tmplist</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">fieldtypeslist</span> <span class="o">==</span> <span class="p">[]</span> <span class="ow">or</span>\
-                   <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
+                   <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="ow">in</span> <span class="n">fieldtypeslist</span><span class="p">:</span>
                     <span class="n">fieldslist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">fieldslist</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;no field matching: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span> <span class="o">+</span>
@@ -624,7 +623,7 @@
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">():</span>
             <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gribdef</span><span class="o">.</span><span class="n">FA2GRIB</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
             <span class="c1"># separate H2D from Misc</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
                 <span class="c1"># separate 3D from 2D</span>
                 <span class="k">if</span> <span class="n">info</span><span class="p">[</span><span class="s1">&#39;typeOfFirstFixedSurface&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">119</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">20</span><span class="p">):</span>
                     <span class="n">re_ok</span> <span class="o">=</span> <span class="n">re_3D</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -689,6 +688,17 @@
         <span class="k">return</span> <span class="n">encoding</span>
 
     <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return type of the field, based on FANION and/or sfxflddesc_mod&quot;&quot;&quot;</span>
+        <span class="n">from_fanion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span>
+        <span class="n">from_sfxflddesc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_type_from_sfxflddesc</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">from_sfxflddesc</span> <span class="o">==</span> <span class="s2">&quot;?&quot;</span><span class="p">:</span>
+            <span class="c1"># unknown to sfxflddesc, we believe fanion</span>
+            <span class="k">return</span> <span class="n">from_fanion</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">from_sfxflddesc</span>
+
+    <span class="nd">@FileResource</span><span class="o">.</span><span class="n">_openbeforedelayed</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">readfield</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fieldname</span><span class="p">,</span>
                   <span class="n">getdata</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                   <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">footprints_proxy_as_builder</span><span class="p">):</span>
@@ -708,7 +718,7 @@
         <span class="k">assert</span> <span class="n">fieldname</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">(),</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s2">&quot;field&quot;</span><span class="p">,</span>
                                                          <span class="nb">str</span><span class="p">(</span><span class="n">fieldname</span><span class="p">),</span>
                                                          <span class="s2">&quot;not found in resource.&quot;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">fieldname</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
             <span class="n">field</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_readH2DField</span><span class="p">(</span><span class="n">fieldname</span><span class="p">,</span>
                                        <span class="n">getdata</span><span class="o">=</span><span class="n">getdata</span><span class="p">,</span>
                                        <span class="n">footprints_proxy_as_builder</span><span class="o">=</span><span class="n">footprints_proxy_as_builder</span><span class="p">)</span>
@@ -995,9 +1005,9 @@
                 <span class="n">levels</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;gridlevels&#39;</span><span class="p">])</span>
                 <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;gridlevels&#39;</span><span class="p">]</span>
                 <span class="n">f</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">vcoordinate</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="s1">&#39;gridlevels&#39;</span><span class="p">]</span>
-                <span class="n">diffmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Ai&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Ai&#39;</span><span class="p">]</span>
+                <span class="n">diffmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Ai&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Ai&#39;</span><span class="p">])</span>
                                            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">levels</span><span class="p">)])</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
-                              <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Bi&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Bi&#39;</span><span class="p">]</span>
+                              <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Bi&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Bi&#39;</span><span class="p">])</span>
                                            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">levels</span><span class="p">)])</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">diffmax</span> <span class="o">=</span> <span class="mf">0.</span>
@@ -1483,7 +1493,7 @@
 <span class="sd">        :param sortfields: **True** if the fields have to be sorted by type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">():</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
                 <span class="n">first_H2DField</span> <span class="o">=</span> <span class="n">f</span>
                 <span class="k">break</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listfields</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1538,7 +1548,7 @@
                                    <span class="n">compressionline</span><span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">separation_line</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">listoffields</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">details</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_field_type_from_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">details</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_type</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="s1">&#39;H2D&#39;</span><span class="p">:</span>
                 <span class="n">encoding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fieldencoding</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">details</span> <span class="o">==</span> <span class="s1">&#39;spectral&#39;</span><span class="p">:</span>
                     <span class="n">write_formatted_fields</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="p">[</span><span class="s1">&#39;spectral&#39;</span><span class="p">])</span>
@@ -2012,7 +2022,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
           <li class="nav-item nav-item-3"><a href="../formats.html" >epygram.formats</a> &#187;</li>

@@ -5,10 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>epygram &#8212; epygram 2.0.5 documentation</title>
+    <title>epygram &#8212; epygram 2.0.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../_static/documentation_options.js?v=09beee0d"></script>
+    <script src="../_static/documentation_options.js?v=722443bc"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="index.html" title="epygram main package"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" accesskey="U"><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code></a></li> 
       </ul>
@@ -55,7 +55,7 @@
 <hr class="docutils" />
 <dl class="py function">
 <dt class="sig sig-object py" id="epygram.init_env">
-<span class="sig-prename descclassname"><span class="pre">epygram.</span></span><span class="sig-name descname"><span class="pre">init_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omp_num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_mpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lfi_C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mute_FA4py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unlimited_stack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_consistent_GRIB_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_gribenv_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram.html#init_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.init_env" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">epygram.</span></span><span class="sig-name descname"><span class="pre">init_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omp_num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_mpi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lfi_C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mute_FA4py</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unlimited_stack</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensure_consistent_GRIB_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_gribenv_paths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fa_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{'JPXTRO':</span> <span class="pre">10000}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/epygram.html#init_env"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#epygram.init_env" title="Link to this definition">¶</a></dt>
 <dd><p>A function to modify execution environment (to be called early in
 execution).</p>
 <dl class="field-list simple">
@@ -71,6 +71,7 @@ paths to be consistent with inner library</p></li>
 <li><p><strong>ignore_gribenv_paths</strong> – ignore predefined values of the variables
 GRIB_SAMPLES_PATH and GRIB_DEFINITION_PATH
 (or equivalent ECCODES variables)</p></li>
+<li><p><strong>fa_limits</strong> – FA limits</p></li>
 </ul>
 </dd>
 </dl>
@@ -170,7 +171,7 @@ optional and can be guessed from the existing resource</p></li>
         <li class="right" >
           <a href="index.html" title="epygram main package"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="index.html" ><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code> main package</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><code class="xref py py-mod docutils literal notranslate"><span class="pre">epygram</span></code></a></li> 
       </ul>

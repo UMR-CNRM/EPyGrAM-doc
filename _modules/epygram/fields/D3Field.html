@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>epygram.fields.D3Field &#8212; epygram 2.0.5 documentation</title>
+    <title>epygram.fields.D3Field &#8212; epygram 2.0.8 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sphinxdoc.css?v=34905f61" />
-    <script src="../../../_static/documentation_options.js?v=09beee0d"></script>
+    <script src="../../../_static/documentation_options.js?v=722443bc"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -23,7 +23,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" accesskey="U">epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.D3Field</a></li> 
@@ -2259,7 +2259,8 @@
 <span class="sd">        :param subzone: optional, among (&#39;C&#39;, &#39;CI&#39;), for LAM fields only,</span>
 <span class="sd">                        returns the data resp. on the C or C+I zone.</span>
 <span class="sd">                        Default is no subzone, i.e. the whole field.</span>
-<span class="sd">        :param d4: - if True,  returned values are shaped in a 4 dimensions array</span>
+<span class="sd">        :param d4: - if True,  returned values are shaped in a 4 dimensions</span>
+<span class="sd">                     array</span>
 <span class="sd">                   - if False, shape of returned values is determined with</span>
 <span class="sd">                     respect to geometry.</span>
 
@@ -2279,7 +2280,8 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">extract_subzone</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">subzone</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span><span class="s2">&quot;*subzone* cannot be provided for this field.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">epygramError</span><span class="p">(</span>
+                    <span class="s2">&quot;*subzone* cannot be provided for this field.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">d4</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
 
@@ -2405,7 +2407,8 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">D3Field</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
-    <span class="n">data</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getdata</span><span class="p">,</span> <span class="n">setdata</span><span class="p">,</span> <span class="n">Field</span><span class="o">.</span><span class="n">deldata</span><span class="p">,</span> <span class="s2">&quot;Accessor to the field data.&quot;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getdata</span><span class="p">,</span> <span class="n">setdata</span><span class="p">,</span> <span class="n">Field</span><span class="o">.</span><span class="n">deldata</span><span class="p">,</span>
+                    <span class="s2">&quot;Accessor to the field data.&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="D3Field.select_subzone">
 <a class="viewcode-back" href="../../../library/D3Field.html#epygram.fields.D3Field.D3Field.select_subzone">[docs]</a>
@@ -2419,7 +2422,8 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;LAMzone&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">subzone</span><span class="o">=</span><span class="n">subzone</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">select_subzone</span><span class="p">(</span><span class="n">subzone</span><span class="p">)</span>
+            <span class="n">geom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">select_subzone</span><span class="p">(</span><span class="n">subzone</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_attributes</span><span class="p">[</span><span class="s1">&#39;geometry&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">geom</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setdata</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></div>
 
 
@@ -3027,7 +3031,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.5 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">epygram 2.0.8 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../epygram.html" >epygram</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">epygram.fields.D3Field</a></li> 
